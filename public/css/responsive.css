@@ -1,0 +1,60 @@
+@media only screen and (max-width: 768px) {
+	.hidden_desktop {
+	    display: block;
+	}
+	.hidden_mobile{
+		display: none;
+	}
+	.panel_content {
+	    width: calc(100% - 30px);
+	}
+	#all_orders {
+    	overflow-x: auto;
+	}
+	.panel_sidebar {
+	    position: fixed;
+	    width: 0;
+	    z-index: 23;
+	    background-color: #00000040;
+	    height: 100%;
+	    top: 0;
+	    left: 0;
+	    visibility: hidden;
+	    opacity: 0;
+	}
+	.panel_sidebar.active{
+		width: 100%;
+		visibility: visible;
+		opacity: 1;
+	}
+	.admin_bar {
+	    min-height: 100vh;
+	    max-width: 200px;
+	    background-color: #fff;
+	}
+}
+@media only screen and (max-width: 767px) {
+	.full-width {
+	    flex-wrap: wrap;
+	}
+	.order-form .full-width {
+	    flex-wrap: unset;
+	    justify-content: space-between;
+	}
+	.order-form .full-width .columns{
+		padding: 0 10px;
+	}
+	.columns {
+	    width: 100% !important;
+	    margin: 0 !important;
+	}
+}
+@media only screen and (max-width: 480px) {
+	.order-form .full-width {
+	    flex-wrap: wrap;
+	    justify-content: space-between;
+	}
+	.order-form .full-width .columns{
+		padding: 5px 0;
+	}
+}

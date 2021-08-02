@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    padding: 1rem;
+}
+
+.masonry-with-columns {
+    columns: 6 200px;
+}
+.masonry-with-columns div.mansory-item {
+    margin: 0 1rem 1rem 0;
+    display: inline-block;
+    width: 100%;
+}
+
+.dropdown-menu {
+    width: 1000px;
+}
