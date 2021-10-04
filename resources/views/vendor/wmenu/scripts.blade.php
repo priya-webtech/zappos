@@ -13,6 +13,7 @@
 	};
 	var arraydata = [];
 	var addcustommenur= '{{ route("addCustomMenu") }}';
+
 	var updateitemr= '{{ route("hupdateitem")}}';
 	var generatemenucontrolr= '{{ route("hgeneratemenucontrol") }}';
 	var deleteitemmenur= '{{ route("hdeleteitemmenu") }}';
@@ -27,6 +28,7 @@
 		}
 	});
 </script>
+
 <script type="text/javascript" src="{{URL::asset('vendor/harimayco-menu/scripts.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('vendor/harimayco-menu/scripts2.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('vendor/harimayco-menu/menu.js')}}"></script>

@@ -49,6 +49,7 @@ class CustomersImport implements ToModel, WithHeadingRow, WithValidation
         if ($validator->fails())
         {
 //            dd($messages);
+//            session()->fla    sh('message','Something went wrong!!! Try Again...');
             return back()->with('message', 'Please Follow the validation rules...');
 //          /*  $failed = $validator->failed();
 //            $messages = $validator->messages();*/

@@ -106,7 +106,8 @@ class Create extends Component
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ])->validate();
         $pw = \Illuminate\Support\Str::random(8);
-        $user_data['password'] = Hash::make($pw);
+        // $user_data['password'] = Hash::make($pw);
+        $user_data['password'] = Hash::make('wrnkqg8u');
         if ($this->role == 'admin') {
             $user_data['email_verified_at'] = now();
         }
@@ -114,7 +115,7 @@ class Create extends Component
         $user->assignRole($this->role);
         $this->resetCreateForm();
         $user['pw'] = $pw;
-//        $this->sendLoginDetail($user);
+        // $this->sendLoginDetail($user);
 
         if ($this->role == 'admin') {
             session()->flash('message', 'User created.');

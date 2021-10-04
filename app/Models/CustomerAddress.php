@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class CustomerAddress extends Model
 {
     use HasFactory;
-
+    
     protected $table = "customer_address";
 
-    protected $fillable = ['id','user_id', 'company', 'address', 'apartment', 'city', 'country', 'postal_code',  'address_type', 'is_billing_address'];
+    protected $fillable = ['id','user_id', 'first_name', 'last_name', 'company', 'address', 'apartment', 'city', 'country', 'mobile_no', 'postal_code', 'address_type', 'is_billing_address'];
+
+
 }

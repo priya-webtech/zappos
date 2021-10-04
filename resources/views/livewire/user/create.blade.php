@@ -45,7 +45,7 @@
                                 <!-- Phone Number -->
                                 <div class="row field_style1 mb-2">
                                     <label>Phone Number</label>
-                                    <x-jet-input id="mobile_number" class="block mt-1 w-full" type="text" name="mobile_number" wire:model="mobile_number" :value="old('mobile_number')" required autofocus autocomplete="mobile_number" />
+                                    <x-jet-input id="mobile_number" class="block mt-1 w-full" type="number" name="mobile_number" wire:model="mobile_number" :value="old('mobile_number')" required autofocus autocomplete="mobile_number" />
                                     @error('mobile_number') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>

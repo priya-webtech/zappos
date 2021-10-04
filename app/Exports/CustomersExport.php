@@ -29,8 +29,7 @@ class CustomersExport implements FromCollection, WithHeadings, ShouldAutoSize, W
     */
     public function collection()
     {
-
-        $users =  DB::table('users')
+         $users =  DB::table('users')
             ->join('model_has_roles as roles', 'users.id', '=', 'roles.model_id')
             ->join('customer_detail as detail', 'users.id', '=', 'detail.user_id')
             ->join('customer_address as address', 'users.id', '=', 'address.user_id')

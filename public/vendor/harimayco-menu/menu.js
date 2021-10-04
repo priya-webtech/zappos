@@ -66,6 +66,7 @@ function addcustommenu() {
     });
 }
 
+
 function updateitem(id = 0) {
     if (id) {
         var label = $('#idlabelmenu_' + id).val();

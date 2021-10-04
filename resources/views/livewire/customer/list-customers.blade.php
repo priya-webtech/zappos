@@ -1,3 +1,4 @@
+<div>
 <x-admin-layout>
     <div wire:key="alert">
         @if (session()->has('message'))
@@ -6,7 +7,9 @@
             </div>
         @endif
     </div>
+
 <section class="full-width flex-wrap admin-full-width list-customers">
+
     <div class="page_header d-flex align-item-center justify-content-space-between full-width mb-2">
 
         <h4 class="mb-0 fw-5">Customers</h4>
@@ -283,122 +286,127 @@
 
             <div class="table-loader">
 
-                <div class="loading-overlay" wire:loading.flex>
+            <div class="loading-overlay" wire:loading.flex>
 
-                    <div class="page-loading"></div>
+                <div class="page-loading"></div>
 
-                </div>
+            </div>
 
-                <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th">
+            <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th">
 
-                    <tr>
+                <tr>
 
-                        <th>
+                    <th>
 
-                            <div class="row"><label><input type="checkbox" class="checked_all" name="customer_all"></label>
-                            </div>
+                        <div class="row all-select-checkbox"><label><input type="checkbox" class="checked_all" name="customer_all"></label></div>
 
-                        </th>
+                    </th>
 
-                        <th class="fw-6">
-                             <span class="all-customer-list">
-                                Showing {{count($users)}} of {{count($customers)}} customers
+                    <th class="fw-6">
+                        <span class="all-customer-list">
+                            Showing {{($users->currentPage()-1) * $users->perPage()+(count($users) ? 1:0)}} - {{($users->currentPage()-1)*$users->perPage()+count($users)}} of {{count($customers)}} customers
+                        </span>
+                        <div class="select-customers" style="display:none">
+                            <span class="button-group">
+                                <button class="secondary all-customer-select">
+                                     <input type="checkbox" class="checked_all_clone" name="customer_all">
+                                    <span><span class="selected_count"></span> selected</span>
+                                </button>
+                                <button class="secondary select-customer-edit">
+                                    Edit customers
+                                </button>
+                                <button class="secondary select-customer-more-actions">
+                                    More actions
+                                    <svg viewBox="0 0 20 20" class=" Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg>
+                                </button>
                             </span>
-                            <div class="select-customers" style="display:none">
-                                <span class="button-group">
-                                    <button class="secondary all-customer-select">
-                                        <input type="checkbox" class=" checked_all_clone" name="customer_all">
-                                        <span><span class="selected_count"></span> selected</span>
-                                    </button>
-                                    <button class="secondary select-customer-edit">
-                                        Edit customers
-                                    </button>
-                                    <button class="secondary select-customer-more-actions">
-                                        More actions
-                                        <svg viewBox="0 0 20 20" class=" Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg>
-                                    </button>
-                                </span>
-                            </div>
-                        </th>
+                        </div>
+                    </th>
 
-                        <th class="order-filed"></th>
+                    <th class="order-filed"></th>
 
-                        <th class="order-filed"></th>
+                    <th class="order-filed"></th>
 
-                        <th class="order-filed"></th>
+                    <th class="order-filed"></th>
 
-                        <th class="sort-by-field">
+                    <th class="sort-by-field">
 
-                            <label>Sort by</label>
+                        <label>Sort by</label>
 
-                            <select class="resizeselect" wire:ignore wire:model="sort_by">
+                        <select class="resizeselect" wire:ignore wire:model="sort_by">
 
-                                <option value="UPDATED_AT+desc">Last update (newest first)</option>
+                            <option value="UPDATED_AT+desc">Last update (newest first)</option>
 
-                                <option value="UPDATED_AT+asc">Last update (oldest first)</option>
+                            <option value="UPDATED_AT+asc">Last update (oldest first)</option>
 
-                                <option value="TOTAL_SPENT+desc">Amount spent (high to low)</option>
+                            <option value="TOTAL_SPENT+desc">Amount spent (high to low)</option>
 
-                                <option value="TOTAL_SPENT+asc">Amount spent (low to high)</option>
+                            <option value="TOTAL_SPENT+asc">Amount spent (low to high)</option>
 
-                                <option value="ORDERS_COUNT+desc">Total orders (high to low)</option>
+                            <option value="ORDERS_COUNT+desc">Total orders (high to low)</option>
 
-                                <option value="ORDERS_COUNT+asc">Total orders (low to high)</option>
+                            <option value="ORDERS_COUNT+asc">Total orders (low to high)</option>
 
-                                <option value="LAST_ORDER_DATE+desc">Last order date (newest first)</option>
+                            <option value="LAST_ORDER_DATE+desc">Last order date (newest first)</option>
 
-                                <option value="LAST_ORDER_DATE+asc">Last order date (oldest first)</option>
+                            <option value="LAST_ORDER_DATE+asc">Last order date (oldest first)</option>
 
-                                <option value="CREATED_AT+desc">Date added as a customer (newest first)</option>
+                            <option value="CREATED_AT+desc">Date added as a customer (newest first)</option>
 
-                                <option value="CREATED_AT+asc">Date added as a customer (oldest first)</option>
+                            <option value="CREATED_AT+asc">Date added as a customer (oldest first)</option>
 
-                            </select>
+                        </select>
 
-                        </th>
+                    </th>
 
-                    </tr>
+                </tr>
 
-                    <span>
-                        @foreach($users as $customer)
+                <span>@foreach($users as $customer)
 
-                            <tr>
+                        <tr>
 
                             <td>
 
                                 <div class="row"><label><input type="checkbox" class="checkbox" name="customer" value="{{$customer->id}}"></label></div>
 
+
                             </td>
 
-                                <td><a href="{{route('customer.detail', $customer->uuid)}}"
-                                       class="tc-black fw-6">{{$customer->first_name}} {{$customer->last_name}}</a>
-                                       <br>{{$customer->uuid}}
+                             <td><a href="{{route('customer.details', $customer->uuid)}}"
+                                   class="tc-black fw-6">{{$customer->first_name}} {{$customer->last_name}}</a>
+                                   <br>{{$customer->uuid}}
                                 <br>@if(!empty($customer->address) && count($customer->address) > 0){{$customer->address[0]->city}}, {{$customer->address[0]->country}}@endif
-                                    <br>@if(!empty($customer->detail->note))<span class="table-note"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M11.379 0a1.5 1.5 0 0 1 1.06.44l4.122 4.12A1.5 1.5 0 0 1 17 5.622V18.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 3 18.5v-17A1.5 1.5 0 0 1 4.5 0h6.879zM6 5h4v2H6V5zm8 4v2H6V9h8zm-8 6v-2h7v2H6z"></path></svg>{{$customer->detail->note}}</span>@endif
+                                <br>@if(!empty($customer->detail->note))<span class="table-note"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M11.379 0a1.5 1.5 0 0 1 1.06.44l4.122 4.12A1.5 1.5 0 0 1 17 5.622V18.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 3 18.5v-17A1.5 1.5 0 0 1 4.5 0h6.879zM6 5h4v2H6V5zm8 4v2H6V9h8zm-8 6v-2h7v2H6z"></path></svg>{{$customer->detail->note}}</span>@endif
                             </td>
-                                <td class="subscribed-label">@if(!empty($customer->detail) && $customer->detail->agreed_to_receive_marketing_mails == 'yes')
 
-                                        <p class="tag green order-filed"> Subscribed </p>@endif</td>
+                            <td class="subscribed-label">@if(!empty($customer->detail) && $customer->detail->agreed_to_receive_marketing_mails == 'yes')
 
-                                <td><p class="order-filed">0 orders</p></td>
+                                    <p class="tag green order-filed"> Subscribed </p>@endif</td>
 
-                                <td><p class="spent-filed">US$0.00 spent</p></td>
+                            <td><p class="order-filed">0 orders</p></td>
+
+                            <td><p class="spent-filed">US$0.00 spent</p></td>
 
                         </tr>
 
-                        @endforeach
-                    </span>
+                    @endforeach</span>
 
-                </table>
+            </table>
 
-                <hr>
-
+            <div class="pd-pagination-sec">
+                <select wire:model="perPage">
+                    <option value="9999999">All</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
                 <div class="pagination">
 
-                    {{$users->links() }}
+    			 {{$users->links() }}
 
                 </div>
-
+            </div>
             </div>
 
         </div>
@@ -517,11 +525,11 @@
 
                         @if(!empty($filter) && isset($filter[1]))
 
-                                <span class="tag grey fs-13 mt-1 mb-1 open"
+                            <span class="tag grey fs-13 mt-1 mb-1 open"
 
-                                      wire:ignore.self>{{$filter[1]}}</span>
+                                  wire:ignore.self>{{$filter[1]}}</span>
 
-                            @endif
+                        @endif
 
                         </span>
 
@@ -529,7 +537,7 @@
 
 
 
-
+                  
 
                     <ul class="filter_tagged_with" wire:ignore.self>
 
@@ -571,17 +579,17 @@
 
                         @if(!empty($filter) && isset($filter[2]))
 
-                                <span class="tag grey fs-13 mt-1 mb-1 open"
+                            <span class="tag grey fs-13 mt-1 mb-1 open"
 
-                                      wire:ignore.self>{{$filter[2]}}</span>
+                                  wire:ignore.self>{{$filter[2]}}</span>
 
-                            @endif
+                        @endif
 
                         </span>
 
                     </label>
 
-
+                    
 
                     <ul class="filter_customer_account_status" style="list-style-type: none" wire:ignore.self>
 
@@ -643,17 +651,17 @@
 
                         @if(!empty($filter) && isset($filter[3]))
 
-                                <span class="tag grey fs-13 mt-1 mb-1 open"
+                            <span class="tag grey fs-13 mt-1 mb-1 open"
 
-                                      wire:ignore.self>{{$filter[3]}}</span>
+                                  wire:ignore.self>{{$filter[3]}}</span>
 
-                            @endif
+                        @endif
 
                         </span>
 
                     </label>
 
-
+                    
 
                     <ul class="filter_customer_language" style="list-style-type: none" wire:ignore.self>
 
@@ -705,17 +713,17 @@
 
                         @if(!empty($filter) && isset($filter[4]))
 
-                                <span class="tag grey fs-13 mt-1 mb-1 open"
+                            <span class="tag grey fs-13 mt-1 mb-1 open"
 
-                                      wire:ignore.self>{{$filter[4]}}</span>
+                                  wire:ignore.self>{{$filter[4]}}</span>
 
-                            @endif
+                        @endif
 
                         </span>
 
                     </label>
 
-
+                    
 
                     <ul class="filter_amount_spent" style="list-style-type: none" wire:ignore.self>
 
@@ -777,17 +785,17 @@
 
                         @if(!empty($filter) && isset($filter[5]))
 
-                                <span class="tag grey fs-13 mt-1 mb-1 open"
+                            <span class="tag grey fs-13 mt-1 mb-1 open"
 
-                                      wire:ignore.self>{{$filter[5]}}</span>
+                                  wire:ignore.self>{{$filter[5]}}</span>
 
-                            @endif
+                        @endif
 
                         </span>
 
                     </label>
 
-
+                    
 
                     <ul class="filter_number_of_orders" style="list-style-type: none" wire:ignore.self>
 
@@ -849,17 +857,17 @@
 
                         @if(!empty($filter) && isset($filter[6]))
 
-                                <span class="tag grey fs-13 mt-1 mb-1 open"
+                            <span class="tag grey fs-13 mt-1 mb-1 open"
 
-                                      wire:ignore.self>{{$filter[6]}}</span>
+                                  wire:ignore.self>{{$filter[6]}}</span>
 
-                            @endif
+                        @endif
 
                         </span>
 
                     </label>
 
-
+                    
 
                     <ul class="filter_date_of_order" style="list-style-type: none" wire:ignore.self>
 
@@ -923,17 +931,17 @@
 
                         @if(!empty($filter) && isset($filter[7]))
 
-                                <span class="tag grey fs-13 mt-1 mb-1 open"
+                            <span class="tag grey fs-13 mt-1 mb-1 open"
 
-                                      wire:ignore.self>{{$filter[7]}}</span>
+                                  wire:ignore.self>{{$filter[7]}}</span>
 
-                            @endif
+                        @endif
 
                         </span>
 
                     </label>
 
-
+                    
 
                     <ul class="filter_date_added_as_customer" style="list-style-type: none" wire:ignore.self>
 
@@ -995,17 +1003,17 @@
 
                         @if(!empty($filter) && isset($filter[8]))
 
-                                <span class="tag grey fs-13 mt-1 mb-1 open"
+                            <span class="tag grey fs-13 mt-1 mb-1 open"
 
-                                      wire:ignore.self>{{$filter[8]}}</span>
+                                  wire:ignore.self>{{$filter[8]}}</span>
 
-                            @endif
+                        @endif
 
                         </span>
 
                     </label>
 
-
+                    
 
                     <ul class="filter_abandoned_checkout" style="list-style-type: none" wire:ignore.self>
 
@@ -1071,17 +1079,17 @@
 
                         @if(!empty($filter) && isset($filter[9]))
 
-                                <span class="tag grey fs-13 mt-1 mb-1 open"
+                            <span class="tag grey fs-13 mt-1 mb-1 open"
 
-                                      wire:ignore.self>{{$filter[9]}}</span>
+                                  wire:ignore.self>{{$filter[9]}}</span>
 
-                            @endif
+                        @endif
 
                         </span>
 
                     </label>
 
-
+                    
 
                     <ul class="filter_location" style="list-style-type: none" wire:ignore.self>
 
@@ -1161,9 +1169,9 @@
 
                 <button disabled="disabled" class="save-filter button secondary ml-4" wire:click="saveFilter('update')" disabled
 
-                        wire:ignore.self>
+                            wire:ignore.self>
 
-                    {{ __('Save filters') }}
+                        {{ __('Save filters') }}
 
                 </button>
 
@@ -1180,6 +1188,8 @@
 
 
     </div>
+
+
 
     <div class="filter_save_filters_btn filter-save  model" wire:ignore.self>
 
@@ -1203,26 +1213,26 @@
 
 
 
-        <div class="model-btn-group">
+            <div class="model-btn-group">
 
-            <button class="secondary ml-4" wire:click="cancelFilter()">
+                <button class="secondary ml-4" wire:click="cancelFilter()">
 
-                {{ __('Cancel') }}
+                    {{ __('Cancel') }}
 
-            </button>
+                </button>
 
-            <button class="save-filter button secondary ml-4" wire:click="saveFilter('create')" disabled wire:ignore.self>
+                <button class="save-filter button secondary ml-4" wire:click="saveFilter('create')" disabled wire:ignore.self>
 
                 {{ __('Save filters') }}
 
-            </button>
+                </button>
 
-        </div>
+            </div>
 
 
 
     </div>
-
+    
     <div id="export" class="customer-modal-main" wire:ignore.self>
         <div class="customer-modal-inner">
             <div class="customer-modal">
@@ -1230,10 +1240,10 @@
                     <h2>Export Customers</h2>
                     <button type="button" class="close modal-close-btn" data-dismiss="modal"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></button>
                 </div>
-                <form wire:submit.prevent="exportCustomers">
-                    @csrf
+                 <form wire:submit.prevent="exportCustomers">
+                        @csrf
                     <div class="modal-body">
-
+                   
                         <label>Export</label>
                         <ul style="list-style-type: none" wire:ignore.self>
                             <li>
@@ -1243,14 +1253,14 @@
                                 <input value="All Customers" name="export" id="all-customers" type="radio" wire:model="export"/>
                                 <label for="all-customers">All Customers</label>
                             </li>
-                            <li wire:ignore>
-                                <input value="Selected Customers" name="export" id="selected_customers" type="radio" wire:model="export" disabled />
+                            <li  wire:ignore>
+                                <input value="Selected Customers" name="export" id="selected_customers" type="radio" wire:model="export" disabled/>
                                 <label for="selected_customers">Selected: <span class="selected_count">0</span> customers</label>
                             </li>
                             <li>
-                                <input value="Searched Customers" name="export" id="searched_customers" type="radio" wire:model="export"
-                                @if(count($filter) == 0 && empty($filter_customers)) disabled @endif />
+                                <input value="Searched Customers" name="export" id="searched_customers" type="radio" wire:model="export"  @if(count($filter) == 0 && empty($filter_customers)) disabled @endif />
                                 <label for="searched_customers">@if(count($filter) == 0 && empty($filter_customers)) 0 @else {{count($customers)}} @endif customers matching your search</label>
+
                             </li>
                         </ul>
 
@@ -1262,16 +1272,16 @@
                             <li><input value="Plain Csv" name="export_as" id="plain_csv" type="radio"
                                        wire:model="export_as"/> <label for="plain_csv">Plain CSV file</label></li>
                         </ul>
-
-                    </div>
+                    
+                </div>
                     <div class="modal-footer">
-                        <button data-dismiss="modal" class="button secondary">
-                            {{ __('Cancel') }}
-                        </button>
-                        <button type="submit" class="button green-btn">
-                            {{ __('Export customers') }}
-                        </button>
-                    </div>
+                    <button data-dismiss="modal" class="button secondary">
+                        {{ __('Cancel') }}
+                    </button>
+                    <button type="submit" class="button green-btn">
+                        {{ __('Export customers') }}
+                    </button>
+                </div>
                 </form>
             </div>
         </div>
@@ -1286,14 +1296,14 @@
                 </div>
                 <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="modal-body">
-
-                        <div class="import-file-details">
-                            <p><a target="_blank" href="{{ url('/assets/customers_import.csv') }}">Download a Sample CSV</a> to see an example of the required format </p>
-                            <p class="text-grey">Make sure that customers set to Accepts marketing have given you permission.</p>
-                        </div>
-
-
+                <div class="modal-body">
+                    
+                    <div class="import-file-details">
+                        <p><a target="_blank" href="{{ url('/assets/customers_import.csv') }}">Download a Sample CSV</a> to see an example of the required format </p>
+                        <p class="text-grey">Make sure that customers set to Accepts marketing have given you permission.</p>
+                    </div>
+                    
+                        
                         <div class="import-file">
                             <!--<input type="file" name="file" class="form-control" id="import_customers" onchange="importCustomers()">-->
                             <label for="et_pb_contact_brand_file_request_0" class="et_pb_contact_form_label custome-file-upload">
@@ -1304,26 +1314,26 @@
                             <input type="file" name="file" id="et_pb_contact_brand_file_request_0" class="file-upload"  onchange="importCustomers()">
                         </div>
                         <label class="import-checkbox"><input type="checkbox" name="overwrite_customers"  >Overwrite existing customers that have the same email or phone</label>
-
+                   
+                </div>
+                <div class="modal-footer">
+                    <div class="button-col">
+                        <button class="link">Need help importing customers?</button>
                     </div>
-                    <div class="modal-footer">
-                        <div class="button-col">
-                            <button class="link">Need help importing customers?</button>
-                        </div>
-                        <div class="button-col">
-                            <button data-dismiss="modal" class="button secondary">
+                    <div class="button-col">
+                        <button data-dismiss="modal" class="button secondary">
                                 {{ __('Cancel') }}
-                            </button>
-                            <button type="submit" class="button secondary import_customers" disabled >
-                                {{ __('Import customers') }}
-                            </button>
-                        </div>
+                        </button>
+                        <button type="submit" class="button secondary import_customers" disabled >
+                            {{ __('Import customers') }}
+                        </button>
                     </div>
-                </form>
+                </div>
+                 </form>
             </div>
         </div>
     </div>
-
+    
 
 </section>
 
@@ -1335,7 +1345,13 @@
 
         var container = $(".model");
 
+        console.log(container);
+
         if (!container.is(e.target) && container.has(e.target).length === 0) {
+
+            console.log($('.filter_' + e.target.id));
+
+
 
             if (e.target.id == "save-filter-btn" || e.target.id == "save") {
 
@@ -1347,11 +1363,21 @@
 
             }
 
+            console.log(select_element);
 
             var container_new = container.not(select_element);
+
+
+
+            console.log(container_new);
+
             container_new.hide();
 
         }
+
+
+
+
 
     });
 
@@ -1399,10 +1425,14 @@
         }
     }
 
+
+
     $(document).on('DOMNodeRemoved', function (e) {
 
+
+
         if ($(e.target).hasClass('tags')) {
-            if ($('.tags').length <= 1) {
+             if ($('.tags').length <= 1) {
 
                 $('li.active').removeClass('active');
 
@@ -1432,15 +1462,17 @@
 
             $('.titled').last().addClass('active');
 
+            console.log('node insert');
 
         }
 
     });
 
     $(document).ready(function () {
-
         $('#save').prop('disabled', true);
         $('#save').addClass('disabled');
+
+
 
         $('.sidebar-close').click(function () {
 
@@ -1450,20 +1482,20 @@
 
         $('.tab').click(function () {
 
+            console.log('tab');
 
             $('#untitled').hide();
 
             $('.saved-btn').show();
-
+            
             $('#save').prop('disabled', false);
             $('#save').removeClass('disabled');
 
             $('.save-filters-btn').hide();
+
             $('.checked_all').prop('checked',false);
             $('.checkbox').prop('checked',false);
             $(".order-form *").prop("disabled", false).css("pointer-events","auto").on('select');
-
-
         });
 
         $('.change-tagged-with-filter').keydown(function () {
@@ -1480,6 +1512,8 @@
 
         });
 
+
+
         $('.change-filter').change(function () {
 
             $('#untitled').show();
@@ -1491,6 +1525,8 @@
             $('li.active').removeClass('active');
 
             $('#untitled').addClass('active');
+
+
 
         });
 
@@ -1518,9 +1554,11 @@
 
             $('.all').addClass('active');
 
-        });
 
+
+        });
         $('.checked_all').on('change', function() {
+
             $(".order-form *").attr("disabled", "disabled").css("pointer-events","none").off('select');
 
                 $('.checked_all_clone').prop('checked',true);
@@ -1531,16 +1569,17 @@
             $('.checkbox').prop('checked', true);
 
             $('.selected_count').text($('.checkbox:checked').length);
-
         });
         $('.checked_all_clone').on('change', function() {
 
-            $(".order-form *").prop("disabled", false).css("pointer-events","auto").on('select');
+                 $(".order-form *").prop("disabled", false).css("pointer-events","auto").on('select');
+
+
                 $('.checked_all').prop('checked',false);
 
                 $('.select-customers').hide();
                 $('#selected_customers').prop('disabled', true);
-
+            
             $('.checkbox').prop('checked',false);
 
             $('.selected_count').text($('.checkbox:checked').length);
@@ -1549,23 +1588,20 @@
         $('.checkbox').change(function(){
 
             if($('.checkbox:checked').length == $('.checkbox').length){
-                $('.checked_all_clone').prop('checked',true);
-
+                $('.checked_all').prop('checked',true);
             }else{
                 $('.checked_all').prop('checked',false);
 
             }
             if ($('.checkbox:checked').length == 0) {
-                $('.select-customers').hide();
+               $('.select-customers').hide();
                 $('#selected_customers').prop('disabled', true);
                 $(".order-form *").prop("disabled", false).css("pointer-events","auto").on('select');
 
-
             } else {
-                $('.select-customers').show();
+                 $('.select-customers').show();
                 $('#selected_customers').prop('disabled', false);
                 $(".order-form *").attr("disabled", "disabled").css("pointer-events","none").off('select');
-
             }
 
             $('.selected_count').text($('.checkbox:checked').length);
@@ -1667,40 +1703,43 @@
 
     })(jQuery, window);
 
-    // custome upload file js
 
-    $(document).ready(function() {
-        $('input[type="file"]').on('click', function() {
-            $(".file_names").html("");
-        })
-        if ($('input[type="file"]')[0]) {
-            var fileInput = document.querySelector('label[for="et_pb_contact_brand_file_request_0"]');
-            fileInput.ondragover = function() {
-                this.className = "et_pb_contact_form_label changed";
-                return false;
-            }
-            fileInput.ondragleave = function() {
-                this.className = "et_pb_contact_form_label";
-                return false;
-            }
-            fileInput.ondrop = function(e) {
-                e.preventDefault();
-                var fileNames = e.dataTransfer.files;
-                for (var x = 0; x < fileNames.length; x++) {
-                    $=jQuery.noConflict();
-                    $('label[for="et_pb_contact_brand_file_request_0"]').append("<div class='file_names'>"+ fileNames[x].name +"</div>");
-                }
-            }
-            $('#et_pb_contact_brand_file_request_0').change(function() {
-                var fileNames = $('#et_pb_contact_brand_file_request_0')[0].files[0].name;
-                $('label[for="et_pb_contact_brand_file_request_0"]').append("<div class='file_names'>"+ fileNames +"</div>");
-                $('label[for="et_pb_contact_brand_file_request_0"]').css('background-color', '##eee9ff');
-            });
-        }
-    });
+// custome upload file js
 
+$(document).ready(function() {
+    $('input[type="file"]').on('click', function() {
+        $(".file_names").html("");
+      })
+    if ($('input[type="file"]')[0]) {
+    	var fileInput = document.querySelector('label[for="et_pb_contact_brand_file_request_0"]');
+    	fileInput.ondragover = function() {
+    		this.className = "et_pb_contact_form_label changed";
+    		return false;
+    	}
+    	fileInput.ondragleave = function() {
+    		this.className = "et_pb_contact_form_label";
+    		return false;
+    	}
+    	fileInput.ondrop = function(e) {
+    		e.preventDefault();
+    		var fileNames = e.dataTransfer.files;
+    		for (var x = 0; x < fileNames.length; x++) {
+    			console.log(fileNames[x].name);
+    			$=jQuery.noConflict();
+    			$('label[for="et_pb_contact_brand_file_request_0"]').append("<div class='file_names'>"+ fileNames[x].name +"</div>");
+    		}
+    	}
+    	$('#et_pb_contact_brand_file_request_0').change(function() {
+    		var fileNames = $('#et_pb_contact_brand_file_request_0')[0].files[0].name;
+    		$('label[for="et_pb_contact_brand_file_request_0"]').append("<div class='file_names'>"+ fileNames +"</div>");
+    		$('label[for="et_pb_contact_brand_file_request_0"]').css('background-color', '##eee9ff');
+    	});
+    }
+});
+    
 
 
 </script>
 
 </x-admin-layout>
+</div>

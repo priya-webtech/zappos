@@ -4,7 +4,7 @@ body {
 }
 
 .masonry-with-columns {
-    columns: 6 200px;
+    columns: 6 210px;
 }
 .masonry-with-columns div.mansory-item {
     margin: 0 1rem 1rem 0;
@@ -12,6 +12,15 @@ body {
     width: 100%;
 }
 
-.dropdown-menu {
-    width: 1000px;
+.masonry-with-columns div.mansory-item:last-child {
+    height: 100%;
 }
+#navbarSupportedContent ul.navbar-nav li.nav-item.dropdown.f-bl.show {
+    position: initial;
+}
+
+.dropdown-menu {
+    width: auto;
+}
+
+

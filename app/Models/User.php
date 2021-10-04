@@ -24,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use SoftDeletes;
     use Uuids;
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -35,8 +36,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'mobile_number',
         'email',
         'password',
-        'email_verified_at',
-        'status'
+        'email_verified_at'
     ];
 
     /**
@@ -68,7 +68,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
     ];
-
+    
     public function detail() {
         return $this->hasOne(CustomerDetail::class,'user_id','id');
     }

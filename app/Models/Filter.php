@@ -11,5 +11,4 @@ class Filter extends Model
     protected $table = "filters";
 
     protected $fillable = ['id','user_id','name','data'];
-
 }

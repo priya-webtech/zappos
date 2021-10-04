@@ -2150,34 +2150,3 @@ Note: The best way to structure the use of media queries is to create the querie
 /* Larger than Desktop HD */
 
 
-/*admin dropdown css*/
-
-div#myDIV {
-    background-color: #202123;
-    border-radius: 10px;
-    float: right;
-    position: absolute;
-    z-index: 9;
-    right: 15px;
-    top: 60px;
-}
-div#myDIV ul {
-    margin: 0;
-    width: auto;
-    padding: .8rem 0;
-}
-div#myDIV ul li a {
-    color: #e3e5e7;
-    padding: 10px 8px;
-    display: block;
-    text-align: left;
-    margin: 0 8px;
-    border-radius: 4px;
-}
-div#myDIV ul li a:hover {
-    background-color: #2f3133;
-}
-div#myDIV .dropdown-divider {
-    margin: 0.2rem 0;
-    border-top: 1px solid #454749;
-}

@@ -111,27 +111,31 @@
             </div>
 
             <div class="col-lg-8 col-md-6 row p-0 m-md-0">
-
+                @foreach($this->Product as $result)
                 <div class="col-lg-3 pt-2 col-md-6 col-6 pr-0 u-none">
+                    @foreach($Productmediass as $row_img)
+                        @if($row_img[0]['product_id'] == $result->id)
                     <div class="banner-element link-image align-items-center">
-
-                        <a href="#" class="w-100 bg-sand row md-small align-items-center m-1 m-md-0"
+                         @if($row_img && isset($row_img[0]))
+                        <a href="{{ route('product-front-detail', $result->seo_utl) }}" class="w-100 bg-sand row md-small align-items-center m-1 m-md-0"
                            style="height: 225px">
                             <img class="img-fluid m-auto p-2 pr-3 pl-3 "
-                                 src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg" alt="">
+                                 src="{{ url('storage/'.$row_img[0]['image']) }}" alt="">
                         </a>
+                        @endif
                     </div>
+                        @endif
+                    @endforeach
                     <button class="btn bg-white col-12 text-left heart-button pl-0 pb-sm-2 pb-1 pt-0 text-secondary"
                             name="r-heart-button">
                         <span class="f-14 text-secondary heart "><i class="far fa-heart" aria-hidden="true"></i> </span>
                         <span class="f-16 text-uppercase">595</span></button>
                     <a href="#" class="hover-blue title f-14">
-                        <p class="m-0">ASICS</p>
-                        <p class="m-0 f-bl">GEL-Nimbus&reg; 22</p>
+                        <p class="m-0">{{$result->title}}</p>
                     </a>
                     <p class="align-items-baseline row  m-0">
-                        <span class="f-14 text-danger d-block">$99.95</span>
-                        <span class="f-12 text-secondary pl-2 ml-1">MSRP: $150.00</span>
+                        <span class="f-14 text-danger d-block">${{round($result->price, 2)}}</span>
+                        <span class="f-12 text-secondary pl-2 ml-1">MSRP: ${{round($result->compare_price, 2)}}</span>
                     </p>
                     <p class="m-0 d-flex s-12">
                         <span class="fa fa-star checked"></span>
@@ -141,213 +145,8 @@
                         <span class="fa fa-star"></span>
                     </p>
                 </div>
+                @endforeach
 
-                <div class="col-lg-3 pt-2 col-md-6 col-6 pr-0 u-none">
-                    <div class="banner-element link-image align-items-center">
-
-                        <a href="#" class="w-100 bg-sand row md-small align-items-center m-1 m-md-0"
-                           style="height: 225px">
-                            <img class="img-fluid m-auto p-2 pr-3 pl-3 "
-                                 src="https://m.media-amazon.com/images/I/71KJWapcs7L._AC_SX255_.jpg" alt="">
-                        </a>
-                    </div>
-                    <button class="btn bg-white col-12 text-left heart-button pl-0 pb-sm-2 pb-1 pt-0 text-secondary"
-                            name="r-heart-button">
-                        <span class="f-14 text-secondary heart liked"><i class="far fa-heart"
-                                                                         aria-hidden="true"></i> </span>
-                        <span class="f-16 text-uppercase">595</span></button>
-                    <a href="#" class="hover-blue title f-14">
-                        <p class="m-0">ASICS</p>
-                        <p class="m-0 f-bl">GEL-Nimbus&reg; 22</p>
-                    </a>
-                    <p class="align-items-baseline row  m-0">
-                        <span class="f-14 text-success d-block">$99.95</span>
-                        <span class="f-12 d-none text-secondary pl-2 ml-1">MSRP: $150.00</span>
-                    </p>
-                    <p class="m-0 d-flex s-12">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </p>
-                </div>
-                <div class="col-lg-3 pt-2 col-md-6 col-6 pr-0 u-none">
-                    <div class="banner-element link-image align-items-center">
-
-                        <a href="#" class="w-100 bg-sand row md-small align-items-center m-1 m-md-0"
-                           style="height: 225px">
-                            <img class="img-fluid m-auto p-2 pr-3 pl-3 "
-                                 src="https://m.media-amazon.com/images/I/71CiDAb-eFL._AC_SX255_.jpg" alt="">
-                        </a>
-                    </div>
-                    <button class="btn bg-white col-12 text-left heart-button pl-0 pb-sm-2 pb-1 pt-0 text-secondary"
-                            name="r-heart-button">
-                        <span class="f-14 text-secondary heart "><i class="far fa-heart" aria-hidden="true"></i> </span>
-                        <span class="f-16 text-uppercase">595</span></button>
-                    <a href="#" class="hover-blue title f-14">
-                        <p class="m-0">ASICS</p>
-                        <p class="m-0 f-bl">GEL-Nimbus&reg; 22</p>
-                    </a>
-                    <p class="align-items-baseline row  m-0">
-                        <span class="f-14 text-danger d-block">$99.95</span>
-                        <span class="f-12 text-secondary pl-2 ml-1">MSRP: $150.00</span>
-                    </p>
-                    <p class="m-0 d-none s-12">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </p>
-                </div>
-                <div class="col-lg-3 pt-2 col-md-6 col-6 pr-0 u-none">
-                    <div class="banner-element link-image align-items-center">
-
-                        <a href="#" class="w-100 bg-sand row md-small align-items-center m-1 m-md-0"
-                           style="height: 225px">
-                            <img class="img-fluid m-auto p-2 pr-3 pl-3 "
-                                 src="https://m.media-amazon.com/images/I/71WGufRWq2L._AC_SX255_.jpg" alt="">
-                        </a>
-                    </div>
-                    <button class="btn bg-white col-12 text-left heart-button pl-0 pb-sm-2 pb-1 pt-0 text-secondary"
-                            name="r-heart-button">
-                        <span class="f-14 text-secondary heart liked"><i class="far fa-heart"
-                                                                         aria-hidden="true"></i> </span>
-                        <span class="f-16 text-uppercase">595</span></button>
-                    <a href="#" class="hover-blue title f-14">
-                        <p class="m-0">ASICS</p>
-                        <p class="m-0 f-bl">GEL-Nimbus&reg; 22</p>
-                    </a>
-                    <p class="align-items-baseline row  m-0">
-                        <span class="f-14 text-danger d-block">$99.95</span>
-                        <span class="f-12 text-secondary pl-2 ml-1">MSRP: $150.00</span>
-                    </p>
-                    <p class="m-0 d-flex s-12">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </p>
-                </div>
-                <div class="col-lg-3 pt-2 col-md-6 col-6 pr-0 u-none">
-                    <div class="banner-element link-image align-items-center">
-
-                        <a href="#" class="w-100 bg-sand row md-small align-items-center m-1 m-md-0"
-                           style="height: 225px">
-                            <img class="img-fluid m-auto p-2 pr-3 pl-3 "
-                                 src="https://m.media-amazon.com/images/I/71HuNSj9DyL._AC_SX255_.jpg" alt="">
-                        </a>
-                    </div>
-                    <button class="btn bg-white col-12 text-left heart-button pl-0 pb-sm-2 pb-1 pt-0 text-secondary"
-                            name="r-heart-button">
-                        <span class="f-14 text-secondary heart "><i class="far fa-heart" aria-hidden="true"></i> </span>
-                        <span class="f-16 text-uppercase">595</span></button>
-                    <a href="#" class="hover-blue title f-14">
-                        <p class="m-0">ASICS</p>
-                        <p class="m-0 f-bl">GEL-Nimbus&reg; 22</p>
-                    </a>
-                    <p class="align-items-baseline row  m-0">
-                        <span class="f-14 text-danger d-block">$99.95</span>
-                        <span class="f-12 text-secondary pl-2 ml-1">MSRP: $150.00</span>
-                    </p>
-                    <p class="m-0 d-none s-12">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </p>
-                </div>
-                <div class="col-lg-3 pt-2 col-md-6 col-6 pr-0 u-none">
-                    <div class="banner-element link-image align-items-center">
-
-                        <a href="#" class="w-100 bg-sand row md-small align-items-center m-1 m-md-0"
-                           style="height: 225px">
-                            <img class="img-fluid m-auto p-2 pr-3 pl-3 "
-                                 src="https://m.media-amazon.com/images/I/71++4aRfEDL._AC_SX255_.jpg" alt="">
-                        </a>
-                    </div>
-                    <button class="btn bg-white col-12 text-left heart-button pl-0 pb-sm-2 pb-1 pt-0 text-secondary"
-                            name="r-heart-button">
-                        <span class="f-14 text-secondary heart liked"><i class="far fa-heart"
-                                                                         aria-hidden="true"></i> </span>
-                        <span class="f-16 text-uppercase">595</span></button>
-                    <a href="#" class="hover-blue title f-14">
-                        <p class="m-0">ASICS</p>
-                        <p class="m-0 f-bl">GEL-Nimbus&reg; 22</p>
-                    </a>
-                    <p class="align-items-baseline row  m-0">
-                        <span class="f-14 text-success d-block">$99.95</span>
-                        <span class="f-12 d-none text-secondary pl-2 ml-1">MSRP: $150.00</span>
-                    </p>
-                    <p class="m-0 d-none s-12">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </p>
-                </div>
-                <div class="col-lg-3 pt-2 col-md-6 col-6 pr-0 u-none">
-                    <div class="banner-element link-image align-items-center">
-
-                        <a href="#" class="w-100 bg-sand row md-small align-items-center m-1 m-md-0"
-                           style="height: 225px">
-                            <img class="img-fluid m-auto p-2 pr-3 pl-3 "
-                                 src="https://m.media-amazon.com/images/I/91ZFQI5bbIL._AC_SX255_.jpg" alt="">
-                        </a>
-                    </div>
-                    <button class="btn bg-white col-12 text-left heart-button pl-0 pb-sm-2 pb-1 pt-0 text-secondary"
-                            name="r-heart-button">
-                        <span class="f-14 text-secondary heart "><i class="far fa-heart" aria-hidden="true"></i> </span>
-                        <span class="f-16 text-uppercase">595</span></button>
-                    <a href="#" class="hover-blue title f-14">
-                        <p class="m-0">ASICS</p>
-                        <p class="m-0 f-bl">GEL-Nimbus&reg; 22</p>
-                    </a>
-                    <p class="align-items-baseline row  m-0">
-                        <span class="f-14 text-danger d-block">$99.95</span>
-                        <span class="f-12 text-secondary pl-2 ml-1">MSRP: $150.00</span>
-                    </p>
-                    <p class="m-0 d-flex s-12">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </p>
-                </div>
-                <div class="col-lg-3 pt-2 col-md-6 col-6 pr-0 u-none">
-                    <div class="banner-element link-image align-items-center">
-
-                        <a href="#" class="w-100 bg-sand row md-small align-items-center m-1 m-md-0"
-                           style="height: 225px">
-                            <img class="img-fluid m-auto p-2 pr-3 pl-3 "
-                                 src="https://m.media-amazon.com/images/I/71SIln1xX9L._AC_SX255_.jpg" alt="">
-                        </a>
-                    </div>
-                    <button class="btn bg-white col-12 text-left heart-button pl-0 pb-sm-2 pb-1 pt-0 text-secondary"
-                            name="r-heart-button">
-                        <span class="f-14 text-secondary heart "><i class="far fa-heart" aria-hidden="true"></i> </span>
-                        <span class="f-16 text-uppercase">595</span></button>
-                    <a href="#" class="hover-blue title f-14">
-                        <p class="m-0">ASICS</p>
-                        <p class="m-0 f-bl">GEL-Nimbus&reg; 22</p>
-                    </a>
-                    <p class="align-items-baseline row  m-0">
-                        <span class="f-14 text-danger d-block">$99.95</span>
-                        <span class="f-12 text-secondary pl-2 ml-1">MSRP: $150.00</span>
-                    </p>
-                    <p class="m-0 d-flex s-12">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </p>
-                </div>
             </div>
 
         </section>

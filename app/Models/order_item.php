@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+
+class order_item extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+        'order_id',
+        'order_uid',
+        'user_id',
+        'product_id',
+        'varition_id',
+        'price',
+        'stock',
+        'total',
+    ];
+
+    public function order_product()
+    {
+        return $this->hasMany(Product::class, 'id', 'product_id');
+    }
+    public function media_product()
+    {
+        return $this->hasMany(ProductMedia::class, 'product_id', 'product_id');
+    }
+}

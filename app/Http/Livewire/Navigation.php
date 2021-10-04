@@ -12,9 +12,10 @@ class Navigation extends Component
     public function render()
     {
         $menus = Menu::where('name','Main Menu')->with('items')->first();
-        if(!empty($menus) && count($menus->items) > 0) {
+        if(count($menus->items) > 0) {
             $menuitems = $menus->items->sortBy('sort');
             $i = -1;
+        
             foreach ($menuitems as $menu) {
                 if ($menu->depth == 0) {
                     $i++;
@@ -39,7 +40,7 @@ class Navigation extends Component
         return view('livewire.navigation');
     }
 
-    public function temp() {
+    // public function temp() {
       /*  $menus = Menu::where('name','Main Menu')->with('items')->first();
         if(count($menus->items) > 0) {
 
@@ -68,5 +69,5 @@ class Navigation extends Component
             }
         }*/
 
-    }
+    // }
 }
