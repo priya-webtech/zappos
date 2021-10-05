@@ -20,7 +20,7 @@ class Header extends Component
        $this->CartItem = Cart::with('media_product')->with('product_detail')->where('user_id',$user_id)->get();
        $this->ProductVariant = ProductVariant::get();
        $this->varianttag = VariantTag::All();
-       dump($this->CartItem);
+
 
     }
     public function render()

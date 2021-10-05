@@ -26,7 +26,7 @@ use Illuminate\Http\Request;
 
 class ProductFrontDetail extends Component
 {
-    public $product,$Productmedia,$Productvariant,$tags,$Productmediafirst,$Productvariantsize,$varianttag,$fetchprice,$fetchstock;
+    public $product,$Productmedia,$Productvariant,$tags,$Productmediafirst,$Productvariantsize,$varianttag,$fetchprice,$CartItem,$fetchstock;
 
     public function render()
     {
@@ -35,6 +35,7 @@ class ProductFrontDetail extends Component
 
     public function mount($slug) {
 
+       $user_id =  Auth::user()->id; 
        $this->product = Product::where('seo_utl',$slug)->first();
        $this->varianttag = VariantTag::All();
        $this->Productvariantsize = ProductVariant::select('varient1','varient2','varient3','varient4','varient5','varient6','varient7','varient8','varient9','varient10')->where('product_id',$this->product['id'])->distinct()->get();
@@ -42,6 +43,7 @@ class ProductFrontDetail extends Component
        $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
        $this->Productvariant = ProductVariant::where('product_id',$this->product['id'])->get();
        $this->tags = Tag::All();
+       $this->CartItem = Cart::with('media_product')->with('product_detail')->where('user_id',$user_id)->get();
 
     }
 
@@ -62,6 +64,15 @@ class ProductFrontDetail extends Component
 
         $user_id =  Auth::user()->id;
 
+        if($Request['stock'] == "")
+        {
+            $stock = 1;
+        }
+        else
+        {
+            $stock = $Request['stock'];
+        }
+
         $cart_arr = [
                     
                     'product_id' => $Request['productid'],
@@ -72,7 +83,7 @@ class ProductFrontDetail extends Component
 
                     'price' => $Request['getpriceinput'],
 
-                    'stock' => $Request['stock'],
+                    'stock' => $stock,
 
                     'locationid' => '1'
 
@@ -80,7 +91,14 @@ class ProductFrontDetail extends Component
 
         $user = Cart::create($cart_arr);
 
-       return redirect()->back();
+        $user_id =  Auth::user()->id; 
+
+        $this->varianttag = VariantTag::All();
+
+        $this->CartItem = Cart::with('media_product')->with('product_detail')->where('user_id',$user_id)->get();
+
+        $this->Productvariant = ProductVariant::where('product_id',$this->product['id'])->get();
+
 
     }
 }

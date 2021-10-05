@@ -500,25 +500,25 @@
 
 
         $(document).ready(function() {
-            $("#addcart").click(function() { 
+        $("#addcart").click(function() { 
 
-            var productid =  $('#productid').val();
-            var stockitem =  $('#stockitem').val();
-            var getpriceinput =  $('#getpriceinput').val();
-            var varientid =  $('#varientid').val();
+        var productid =  $('#productid').val();
+        var stock =  $('#stock').val();
+        var getpriceinput =  $('#getpriceinput').val();
+        var varientid =  $('#varientid').val();
 
-             $.ajax({
-                url: '{{URL("add-to-cart")}}',  
-                type: 'GET',
-                data: { productid:productid,stockitem:stockitem,getpriceinput:getpriceinput,varientid:varientid},
+         $.ajax({
+            url: '{{URL("add-to-cart")}}',  
+            type: 'GET',
+            data: { productid:productid,stock:stock,getpriceinput:getpriceinput,varientid:varientid},
 
-                success:function(data){
-                    myVariable=data;
-                    console.log(data);
-                    document.getElementById("proceed-cart").style.display = "block";
-                }
-            });
-          });
+            success:function(data){
+                myVariable=data;
+                console.log(data);
+                document.getElementById("proceed-cart").style.display = "block";
+            }
+        });
+      });
       });
     </script>
 </x-customer-layout>

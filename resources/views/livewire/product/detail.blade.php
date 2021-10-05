@@ -1788,7 +1788,7 @@
                             </div>
                             @endif
                             @endforeach 
-                        @endif
+                            @endif
 
                     </div>
 

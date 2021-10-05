@@ -81,14 +81,16 @@
                                     <span id="cartItems" class="clearContent">{{count($CartItem)}} ITEM IN CART</span>
                                     </button>
                                 </div>
+                                <form method="post" action="{{ route('add-order') }}" name="form">
+                                 @csrf
                                 <div class="proceed-cart" id="proceed-cart">
                                     <div class="proceed-cart-head">
                                         <h4 class="h4">My Cart</h4>
-                                        <button class="myclose-close" onclick="document.getElementById('proceed-cart').style.display='none'">
+                                        <a class="myclose-close" onclick="document.getElementById('proceed-cart').style.display='none'">
                                             <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
                                                 <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
                                             </svg>
-                                        </button>
+                                        </a>
                                     </div>
                                     <div class="row cart-vip-code" name="cart-vip-code">
                                         <div class="col-12">
@@ -102,6 +104,7 @@
                                                     @if($CartItem)
                                                     <?php $price_sum  = 0; ?>
                                                     @foreach($CartItem as $cart)
+                                                    <input name="cartid[]" type="hidden" value="{{$cart->id}}">
                                                     <div class="cart-list">
                                                         <div class="product-img">
                                                             <img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}" alt="">
@@ -158,19 +161,20 @@
                                                                 @endforeach
                                                                 @endforeach
                                                                 <div class="add-cart-select">
-                                                                    <select class="total-item-select" name="total-items" id="total-items">
+                                                                    <select class="total-item-select" name="total-delete-items" id="total-items">
                                                                         <option value="none">Remove</option>
                                                                         <option selected value="1">1</option>
                                                                         <option value="1">2</option>
                                                                         <option value="1">3</option>
                                                                         <option value="1">4</option>
                                                                     </select>
+                                                                   
                                                                     <div class="total-item-select">
-                                                                        <span class="total-item">{{$cart->stock}}</span>
-                                                                        <span class="plus-minus-icon">
-                                                                            <button class="item-plus btn"><i class="fas fa-plus" ></i></button>
-                                                                            <button class="item-minus btn"><i class="fas fa-minus"></i></button>
-                                                                        </span>
+                                                                        <div class="input-plus-minus">
+                                                                            <input type="button" value="-" class="qty-minus">
+                                                                            <input name="stockitem[]" type="number" value="{{$cart->stock}}" class="stockqty" data-id="{{$cart->id}}">
+                                                                            <input type="button" value="+" class="qty-plus">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -195,11 +199,12 @@
                                             <div class="cart-footer-btn">
                                                 <button class="site-btn signin-btn">Sign In</button>
                                                 <button class="site-btn view-cart-btn">View Cart</button>
-                                                <button class="site-btn checkout-btn">Proceed to checkout</button>
+                                                <input type="submit" name="checkout" class="site-btn checkout-btn" value="Proceed to checkout">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                </form>
 
                             </div>
                         </div>
@@ -602,9 +607,10 @@
         </div>
 
     </section>
-                </nav>
-            </div>
-         
-        </div>
+        </nav>
+    </div>
+ 
 </div>
+</div>
+
 

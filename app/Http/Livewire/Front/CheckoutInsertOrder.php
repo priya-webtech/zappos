@@ -18,6 +18,8 @@ use App\Models\ProductVariant;
 
 use App\Models\order_item;
 
+use Illuminate\Http\Request;
+
 class CheckoutInsertOrder extends Component
 {
     public $Cart,$lastorderid,$locatioinstock;
@@ -25,7 +27,39 @@ class CheckoutInsertOrder extends Component
     public function mount()
     {
         $this->Cart = Cart::where('user_id',1)->get();
+    }
 
+    public function render()
+    {
+        
+        //return view('livewire.stripe-paymnet-controller', [ 'orderid' => $this->lastorderid['id']]);
+    }
+
+    public function checkoutInsert(Request $Request)
+    {
+
+        $stock_arr = $Request->stockitem;
+        $cartid_arr = $Request->cartid;
+        
+        foreach ($cartid_arr as $cartkey => $cartid) {
+            foreach ($stock_arr as $stockkey => $stockRow) {
+                
+                if($cartkey == $stockkey){
+                    $stock = $stockRow;
+                Cart::where('id', $cartid)->update(
+                    [
+                        'stock' => $stock,
+                    ]
+                );
+                }
+                
+            }
+
+             
+        }
+
+        $user_id =  Auth::user()->id;
+        $this->Cart = Cart::where('user_id',$user_id)->get();
         $netamout = 0;
         foreach($this->Cart as $res){
             $totalamout = $res->price * $res->stock;
@@ -84,13 +118,6 @@ class CheckoutInsertOrder extends Component
            $Orderitemvalue =  order_item::insert($insert_order_item);
 
 
-            return redirect(route('payment',$this->lastorderid['id'])); 
-    }
-
-    public function render()
-    {
-        
-        
-        //return view('livewire.stripe-paymnet-controller', [ 'orderid' => $this->lastorderid['id']]);
+            return redirect(route('payment',$this->lastorderid['id']));
     }
 }

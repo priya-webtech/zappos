@@ -49,8 +49,6 @@
 
     <!-----Custom-css-->
 
-    <link rel="stylesheet" href="{{ URL::asset('/styles/mainpage.css') }}">
-
     <link rel="stylesheet" href="{{ URL::asset('/css/mansory.css') }}">
 
 {{--        <link rel="stylesheet" type="text/css" href="slick/slick.css" />--}}
@@ -123,7 +121,16 @@
 
 
 @livewireScripts
+<!-- Optional JavaScript & Slice Carousel -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous"></script>
+<!-- jQuery first, then Bootstrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script src="{{ URL::asset('/js/front/custom.js') }}"></script>
 </body>
 
 </html>
@@ -142,6 +149,18 @@
 
 <script>
 
+
+   
+
+    $(document).ready(function() {
+        $(document).on('click', '.qty-plus', function () {
+           $(this).prev().val(+$(this).prev().val() + 1);
+        });
+        $(document).on('click', '.qty-minus', function () {
+           if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
+        });
+    });
+    
     $(document).ready(function () {
 
         item = 1;

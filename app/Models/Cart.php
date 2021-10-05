@@ -21,4 +21,15 @@ class Cart extends Model
 
     protected $fillable = ['user_id','product_id','locationid','varientid','price','stock'];
 
+    public function product_detail()
+    {
+        return $this->hasMany(Product::class, 'id', 'product_id');
+        
+    }
+
+    public function media_product()
+    {
+        return $this->hasMany(ProductMedia::class, 'product_id', 'product_id');
+    }
+
 }
