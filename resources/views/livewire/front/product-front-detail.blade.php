@@ -3,25 +3,22 @@
 <x-customer-layout>
     <section>
         <div> 
-         
-            @if($Productmediafirst->image)
-            <img src="{{ url('storage/'.$Productmediafirst->image) }}">
+            
+            @if($Productmediafirst['image'])
+            <img src="{{ url('storage/'.$Productmediafirst['image']) }}">
             @endif
         </div>
         <div>
-        <form action="{{ route('add-to-cart') }}" method="POST" enctype="multipart/form-data">
-
-        @csrf
+        <form  enctype="multipart/form-data">
         
             <label>Title : {{$product->title}}</label><br>
             <input type="hidden" name="productid" id="productid" value="{{$product->id}}">
-            <input type="hidden" name="user_id" id="user_id" value="1">
             <input type="hidden" name="varientid" id="varientid" value="">
             Price :<label id="getprice">{{$product->price}}</label><br>
             
             <input type="hidden" name="getpriceinput" id="getpriceinput" value="@if($Productvariantsize){{$product->price}}@endif">
 
-            Stock :<input type="number" name="stock" value="">
+            Stock :<input type="number" name="stock" id="stock" value="">
             In Stock :<label id="getstock"></label><br>
             @if($Productvariantsize)
                 @foreach($Productvariantsize as $size)
@@ -60,14 +57,98 @@
                                 @endif 
                             @endforeach
                         </select>
+                        @endif
+                        @if($locrow->id == $size->varient4)
+                        <input type="hidden" name="varient3">
+                        <label>{{$locrow->name}}</label>
+                        <select name="attribute2" class="varition-change" id="varient3">
+                            <option value="">Select Option</option> 
+                            @foreach($Productvariant as $row)
+                                @if($row->attribute4 != "")
+                                <option>{{$row->attribute4}}</option> 
+                                @endif 
+                            @endforeach
+                        </select>
+                        @endif
+                        @if($locrow->id == $size->varient5)
+                        <input type="hidden" name="varient3">
+                        <label>{{$locrow->name}}</label>
+                        <select name="attribute2" class="varition-change" id="varient3">
+                            <option value="">Select Option</option> 
+                            @foreach($Productvariant as $row)
+                                @if($row->attribute5 != "")
+                                <option>{{$row->attribute5}}</option> 
+                                @endif 
+                            @endforeach
+                        </select>
+                        @endif
+                        @if($locrow->id == $size->varient6)
+                        <input type="hidden" name="varient3">
+                        <label>{{$locrow->name}}</label>
+                        <select name="attribute2" class="varition-change" id="varient3">
+                            <option value="">Select Option</option> 
+                            @foreach($Productvariant as $row)
+                                @if($row->attribute6 != "")
+                                <option>{{$row->attribute6}}</option> 
+                                @endif 
+                            @endforeach
+                        </select>
+                        @endif
+                        @if($locrow->id == $size->varient7)
+                        <input type="hidden" name="varient3">
+                        <label>{{$locrow->name}}</label>
+                        <select name="attribute2" class="varition-change" id="varient3">
+                            <option value="">Select Option</option> 
+                            @foreach($Productvariant as $row)
+                                @if($row->attribute7 != "")
+                                <option>{{$row->attribute7}}</option> 
+                                @endif 
+                            @endforeach
+                        </select>
+                        @endif
+                        @if($locrow->id == $size->varient8)
+                        <input type="hidden" name="varient3">
+                        <label>{{$locrow->name}}</label>
+                        <select name="attribute2" class="varition-change" id="varient3">
+                            <option value="">Select Option</option> 
+                            @foreach($Productvariant as $row)
+                                @if($row->attribute8 != "")
+                                <option>{{$row->attribute8}}</option> 
+                                @endif 
+                            @endforeach
+                        </select>
+                        @endif
+                        @if($locrow->id == $size->varient9)
+                        <input type="hidden" name="varient3">
+                        <label>{{$locrow->name}}</label>
+                        <select name="attribute2" class="varition-change" id="varient3">
+                            <option value="">Select Option</option> 
+                            @foreach($Productvariant as $row)
+                                @if($row->attribute9 != "")
+                                <option>{{$row->attribute9}}</option> 
+                                @endif 
+                            @endforeach
+                        </select>
+                        @endif
+                        @if($locrow->id == $size->varient10)
+                        <input type="hidden" name="varient3">
+                        <label>{{$locrow->name}}</label>
+                        <select name="attribute2" class="varition-change" id="varient3">
+                            <option value="">Select Option</option> 
+                            @foreach($Productvariant as $row)
+                                @if($row->attribute10 != "")
+                                <option>{{$row->attribute10}}</option> 
+                                @endif 
+                            @endforeach
+                        </select>
                         @endif 
                     @endforeach
                 @endforeach
             @endif
-
-            <input type="submit" name="addcart" value="Add to Cart">
+            </form>
+            <input type="submit" name="addcart" id="addcart" value="Add to Cart">
             <a href="{{ route('add-order') }}"><button type="button" name="checkout" value="checkout"> Checkout</button></a>
-        </form>
+        
         </div>
     </section>
 
@@ -90,6 +171,28 @@
             });
         });
         })
+
+
+        $(document).ready(function() {
+        $("#addcart").click(function() { 
+
+        var productid =  $('#productid').val();
+        var stock =  $('#stock').val();
+        var getpriceinput =  $('#getpriceinput').val();
+        var varientid =  $('#varientid').val();
+
+         $.ajax({
+            url: '{{URL("add-to-cart")}}',  
+            type: 'GET',
+            data: { productid:productid,stock:stock,getpriceinput:getpriceinput,varientid:varientid},
+
+            success:function(data){
+                myVariable=data;
+                console.log(data);
+            }
+        });
+      });
+      });
     </script>
 </x-customer-layout>
 </div>

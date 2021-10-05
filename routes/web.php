@@ -147,7 +147,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         //Front Side
         Route::get('/product/{slug?}', Livewire\Front\ProductFrontDetail::class)->name('product-front-detail');
         Route::get('/varientData', [Livewire\Front\ProductFrontDetail::class, 'fetchPrice'])->name('varientData');
-        Route::post('/add-to-cart', [Livewire\Front\ProductFrontDetail::class, 'addCart'])->name('add-to-cart');
+        Route::get('/add-to-cart', [Livewire\Front\ProductFrontDetail::class, 'addCart'])->name('add-to-cart');
         Route::get('/add-order', Livewire\Front\CheckoutInsertOrder::class)->name('add-order');
         Route::get('/payment/{id?}', Livewire\StripePaymnetController::class)->name('payment');
         Route::post('/payment', [Livewire\StripePaymnetController::class, 'stripePost'])->name('stripe-post');

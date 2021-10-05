@@ -6,6 +6,8 @@ use Livewire\Component;
 
 use App\Models\Product;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\ProductMedia;
 
 use App\Models\ProductVariant;
@@ -56,11 +58,15 @@ class ProductFrontDetail extends Component
 
     public function addCart(Request $Request)
     {
+
+
+        $user_id =  Auth::user()->id;
+
         $cart_arr = [
                     
                     'product_id' => $Request['productid'],
 
-                    'user_id' => $Request['user_id'],
+                    'user_id' => $user_id,
 
                     'varientid' => $Request['varientid'],
 

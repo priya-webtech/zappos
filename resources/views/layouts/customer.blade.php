@@ -20,7 +20,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/styles/my-login.css') }}">
 
-
+    <link href="{{ URL::asset('/styles/main.css') }}" type="text/css" rel="stylesheet" />
 
     <!---Slick Carousel--->
 
@@ -44,11 +44,6 @@
 
 
 
-    <!-----Link CSS------>
-
-    <link href="{{ URL::asset('/styles/header.css') }}" type="text/css" rel="stylesheet"/>
-
-    <link rel="stylesheet" href="{{ URL::asset('/styles/customresponsive.css') }}">
 
 
 
@@ -108,15 +103,7 @@
 
 @if (isset($header))
 
-    <header class="bg-white shadow">
-
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-
-            {{ $header }}
-
-        </div>
-
-    </header>
+    {{ $header }}
 
 @endif
 
@@ -132,7 +119,6 @@
 
 </main>
 
-<livewire:footer/>
 
 
 
