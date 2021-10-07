@@ -26,9 +26,11 @@ use App\Models\Collection;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Cookie;
+
 class ProductFrontDetail extends Component
 {
-    public $product,$Productmedia,$Productvariant,$tags,$Productmediafirst,$Productvariantsize,$varianttag,$fetchprice,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock;
+    public $product,$Productmedia,$Productvariant,$tags,$Productmediafirst,$Productmediass,$Productvariantsize,$varianttag,$fetchprice,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock;
 
     protected $rules = [
 
@@ -46,10 +48,12 @@ class ProductFrontDetail extends Component
     public function mount($slug) {
 
        $user_id =  Auth::user()->id; 
+       $shopping_cart = [];
        $this->product = Product::where('seo_utl',$slug)->first();
        $this->varianttag = VariantTag::All();
        $this->productrelated = Product::All();
        $this->Collection = Collection::All();
+       $this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
        $this->Productvariantsize = ProductVariant::select('varient1','varient2','varient3','varient4','varient5','varient6','varient7','varient8','varient9','varient10')->where('product_id',$this->product['id'])->distinct()->get();
        $this->Productmediafirst = ProductMedia::where('product_id',$this->product['id'])->first();
        $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
@@ -57,6 +61,11 @@ class ProductFrontDetail extends Component
        $this->tags = Tag::All();
        $this->CartItem = Cart::with('media_product')->with('product_detail')->where('user_id',$user_id)->get();
 
+        $shopping_cart = json_decode(Cookie::get('shopping_cart'));
+        $shopping_cart[] = $this->product['id'];
+        //array_push($shopping_cart,$this->product['id']);
+        $minutes = 60;
+        Cookie::queue(Cookie::make('shopping_cart',  json_encode($shopping_cart), $minutes));
     }
 
     public function fetchPrice(Request $Request)
@@ -73,7 +82,7 @@ class ProductFrontDetail extends Component
     public function addCart()
     {
 
-        dd($this->productid);
+        dd($this->varientid);
 
         $user_id =  Auth::user()->id;
 
@@ -114,4 +123,6 @@ class ProductFrontDetail extends Component
 
 
     }
+
+
 }

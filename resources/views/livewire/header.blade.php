@@ -58,7 +58,7 @@
                     <div class="row">
                         <div class="col-12 d-flex align-items-center">
                             <div class="logo">
-                                <a href="#"><img src="../assets/ZAPPOS-HOLIDAY-HEADER-LOGO.gif"></a>
+                                <a href="#"><img src="{{ url('storage/assets/ZAPPOS-HOLIDAY-HEADER-LOGO.gif') }}"></a>
                             </div>
                             <div class="search-box ml-auto">
                                 <form class="search-container d-flex align-items-center" method="get" target="_parent" action="">

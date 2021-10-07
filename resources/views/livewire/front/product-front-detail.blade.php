@@ -42,50 +42,20 @@
                         </div>
                         <div class="product-slider">
                             <div class="product-slider-nav">
+                                @foreach($Productmedia as $image)
                                 <div>
-                                    <img src="https://m.media-amazon.com/images/I/81uYE2oCM+L._AC_SR700,525_.jpg">
+                                    <img src="{{ asset('storage/'.$image['image']) }}">
                                 </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81MXINsDtaL._AC_SR700,525_.jpg">
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/71ZEsXCmZUL._AC_SR700,525_.jpg">
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81GKo5ZMnbL._AC_SR700,525_.jpg">
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81ZrRIDVbnL._AC_SR700,525_.jpg">
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81gw5ZWtbEL._AC_SR700,525_.jpg">
-                                </div>
-                                <div>
-                                    <img src="https://img.youtube.com/vi/bjR8nZVkmfA/default.jpg" alt="One">
-                                </div>
+                                @endforeach
                             </div>
+
                             <div class="product-slider-for">
+                                 @foreach($Productmedia as $image)
                                 <div>
-                                    <img src="https://m.media-amazon.com/images/I/81uYE2oCM+L._AC_SR700,525_.jpg">
+                                    <img src="{{ asset('storage/'.$image['image']) }}" width="500PX" height="500PX">
                                 </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81MXINsDtaL._AC_SR700,525_.jpg">
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/71ZEsXCmZUL._AC_SR700,525_.jpg">
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81GKo5ZMnbL._AC_SR700,525_.jpg">
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81ZrRIDVbnL._AC_SR700,525_.jpg">
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81gw5ZWtbEL._AC_SR700,525_.jpg">
-                                </div>
-                                <div>
-                                    <iframe class="embed-player slide-media" width="980" height="520" src="https://www.youtube.com/embed/QV5EXOFcdrQ?enablejsapi=1&controls=0&fs=0&iv_load_policy=3&rel=0&showinfo=0&loop=1&playlist=QV5EXOFcdrQ&start=1" frameborder="0" allowfullscreen></iframe> 
-                                </div>
+                                @endforeach
+                                
                             </div>
                         </div>
                         <ul class="product-oneline-row">
@@ -252,7 +222,7 @@
                             <div class="product-right-top">
                                 <div class="pd-total">
                                     <input type="hidden" wire:model="productid" id="productid" value="{{$product->id}}">
-                                    <input type="hidden" wire:model="varientid" id="varientid" value="">
+                                    <input type="hidden" wire:model="varientid" id="varientid" value="22">
                                     <h2 class="h2" id="getprice">${{round($product->price,2)}}</h2>
                                     <label>Ships Free!</label>
                                 </div>
@@ -345,9 +315,12 @@
                             <h3 class="h3">Similar Items You May Like!</h3>
                             <div class="similar-items-slider">
                                 @foreach($productrelated as $rows)
-                                @if($product->collection == $rows->collection && $product->id != $rows->id)
+                                @foreach($Productmediass as $row_img)
+                                @if($product->collection == $rows->collection && $product->id != $rows->id && $row_img[0]['product_id'] == $rows->id)
                                 <div>
-                                    <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
+                                    @if($row_img && isset($row_img[0]))
+                                    <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
+                                    @endif
                                     <div class="multi-item-content">
                                         <a class="wish-list" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
                                         <p>ASICS</p>
@@ -355,7 +328,9 @@
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
                                     </div>
                                 </div>
+                                
                                 @endif
+                                @endforeach
                                 @endforeach
                             </div>
                         </div>
@@ -367,62 +342,23 @@
                         <div class="recently-viewed-sec multi-item-slider">
                             <h3 class="h3">Your Recently Viewed Items</h3>
                             <div class="recently-viewed-slider">
+                                @if(Cookie::get('shopping_cart'))
+                                <?php $cookieitem = json_decode(Cookie::get('shopping_cart')); ?>
+                                @foreach($productrelated as $pro_res)
+                                 @foreach($cookieitem as $result)
+                                @if($pro_res->id == $result)
                                 <div>
                                     <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
                                     <div class="multi-item-content">
                                         <a class="wish-list" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
-                                        <p>ASICS</p>
+                                        <p>{{$pro_res->title}}</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                     </div>
                                 </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
-                                    <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
-                                        <p>ASICS</p>
-                                        <p class="multi-pd-title">GEL-Nimbus® 22</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
-                                    <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
-                                        <p>ASICS</p>
-                                        <p class="multi-pd-title">GEL-Nimbus® 22</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
-                                    <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
-                                        <p>ASICS</p>
-                                        <p class="multi-pd-title">GEL-Nimbus® 22</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
-                                    <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
-                                        <p>ASICS</p>
-                                        <p class="multi-pd-title">GEL-Nimbus® 22</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
-                                    <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
-                                        <p>ASICS</p>
-                                        <p class="multi-pd-title">GEL-Nimbus® 22</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
-                                    <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
-                                        <p>ASICS</p>
-                                        <p class="multi-pd-title">GEL-Nimbus® 22</p>
-                                    </div>
-                                </div>
+                                @endif
+                                @endforeach
+                                @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>

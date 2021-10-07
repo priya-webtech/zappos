@@ -1,221 +1,169 @@
 <x-customer-layout>
-    <div class="container">
-        <!--Main Banner-->
-        <section class="row pointer">
-            <a href="#">
-                <img class="img-fluid zoom-center w-100 d-block" src="{{ URL::asset('/assets/main.gif')}}">
-            </a>
-        </section>
-        <!---End of Main Banner--->
-        <!---Popular Items--->
-        <div id="popularcat" class="mt-sm-5"></div>
-        <!---End of Popular Items---->
-        <!--Cat Blog-->
-        <section class="">
-            <div class="row m-0 p-0">
-                <div class="col-sm-4 p-0 mb-3  pt-3 p-sm-2 text-center">
-                    <a href="" class="underline-none  text-dark ">
-                        <img class="text-dark img-fluid w-100 mb-3"
-                             src="https://m.media-amazon.com/images/G/01/2020/homepage12.7/HOMEPAGE-TRIPTYCH-WOMENS-COATS-OUTERWEAR-500x500_1.jpg"
-                             alt="">
-                        <h3 class="text-dark f-18 f-bl mb-3 mt-2 mt-md-0">Cozy at Home: Clothing Favourites</h3>
-                        <p class="text-dark f-14 mb-1 mb-md-3">Super-soft pieces that look and feel amazing!</p>
+        <!-- banner start -->
+        <div class="banner">        
+            <img src="{{ url('storage/assets/home-banner.gif') }}">
+        </div>
+        <!-- banner end -->
 
-                        <span class=" f-14 underline-space  text-uppercase font-weight-bold">Shop Cozy Clothing</span>
-                    </a>
-                </div>
-                <div class="col-sm-4 p-0 mb-3  pt-3 p-sm-2 text-center">
-                    <a href="" class="underline-none  text-dark ">
-                        <img class="text-dark img-fluid w-100 mb-3"
-                             src="https://m.media-amazon.com/images/G/01/2020/homepage12.7/HOMEPAGE-TRIPTYCH-KIDS-COATS-OUTERWEAR-500x500.jpg"
-                             alt="">
-                        <h3 class="text-dark f-18 f-bl mb-3 mt-2 mt-md-0">Cozy at Home: Clothing Favourites</h3>
-                        <p class="text-dark f-14 mb-1 mb-md-3">Super-soft pieces that look and feel amazing!</p>
-                        <span class=" f-14 underline-space text-uppercase font-weight-bold">Shop Cozy Clothing</span>
-                    </a>
-                </div>
-                <div class="col-sm-4 p-0 mb-3  pt-3 p-sm-2 text-center">
-                    <a href="" class="underline-none  text-dark ">
-                        <img class="text-dark img-fluid w-100 mb-3"
-                             src="https://m.media-amazon.com/images/G/01/2020/homepage12.7/HOMEPAGE-TRIPTYCH-MENS-COATS-OUTERWEAR-500x500.jpg"
-                             alt="">
-                        <h3 class="text-dark f-18 f-bl mb-3 mt-2 mt-md-0">Cozy at Home: Clothing Favourites</h3>
-                        <p class="text-dark f-14 mb-1 mb-md-3">Super-soft pieces that look and feel amazing!</p>
-                        <span class=" f-14 underline-space text-uppercase font-weight-bold">Shop Cozy Clothing</span>
-                    </a>
+        <!-- home category section start -->
+        <div class="home-category-sec">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 home-cat-box">
+                        <figure><img src="https://m.media-amazon.com/images/G/01/2020/homepage12.7/HOMEPAGE-TRIPTYCH-WOMENS-COATS-OUTERWEAR-500x500_1.jpg"></figure>
+                        <h4 class="h4">Cozy at Home: Clothing Favourites</h4>
+                        <p>Super-soft pieces that look and feel amazing!</p>
+                        <a href="#" class="site-link-btn">Shop Cozy Clothing <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="col-md-4 home-cat-box">
+                        <figure><img src="https://m.media-amazon.com/images/G/01/2020/homepage12.7/HOMEPAGE-TRIPTYCH-KIDS-COATS-OUTERWEAR-500x500.jpg"></figure>
+                        <h4 class="h4">Cozy at Home: Clothing Favourites</h4>
+                        <p>Super-soft pieces that look and feel amazing!</p>
+                        <a href="#" class="site-link-btn">Shop Cozy Clothing <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="col-md-4 home-cat-box">
+                        <figure><img src="https://m.media-amazon.com/images/G/01/2020/homepage12.7/HOMEPAGE-TRIPTYCH-MENS-COATS-OUTERWEAR-500x500.jpg"></figure>
+                        <h4 class="h4">Cozy at Home: Clothing Favourites</h4>
+                        <p>Super-soft pieces that look and feel amazing!</p>
+                        <a href="#" class="site-link-btn">Shop Cozy Clothing <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    </div>
                 </div>
             </div>
-        </section>
-        <!--Cat-Blg-->
+        </div>
+        <!-- home second section end -->
 
-        <!--Right Side Image Banner-->
-        <section class="right-side-main-banner mt-5 mb-5">
+        <!-- home left container section start-->
+        <div class="left-container-sec half-container-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4 half-container">
+                        <h2 class="h2">The Cozy Shop</h2>
+                        <p>Supremely cozy looks for all your plan(or not-plans) - because around-the-clock cozy is the name of our game.</p>
+                        <a href="#" class="site-btn">Peak Cozy Right This Way</a>
+                    </div>
+                    <div class="col-md-8 full-container">
+                        <div class="full-container-img">
+                            <figure><img src="../assets/women3.jpg"></figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- home left container section end -->
+
+        <!-- home right container section start-->
+        <div class="right-container-sec half-container-sec">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8 full-container">
+                        <div class="full-container-img">
+                            <figure><img src="https://m.media-amazon.com/images/G/01/2020/style-room/HOMEPAGE-THE-STYLE-ROOM-ADIDAS-STELLA-MCCARTNEY-DECEMBER-965x500.jpg"></figure>
+                        </div>
+                    </div>
+                    <div class="col-md-4 half-container">
+                        <h2 class="h2">The Cozy Shop</h2>
+                        <p>Supremely cozy looks for all your plan(or not-plans) - because around-the-clock cozy is the name of our game.</p>
+                        <a href="#" class="site-btn">Peak Cozy Right This Way</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- home left container section end -->
+
+        <!-- Home Product section start -->
+        <div class="home-product-sec">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 home-pd-col">
+                        <h2 class="h2">UGG® for Her: Impeccable Style, Cozy Comfort</h2>
+                        <a href="#" class="site-btn">shop women's ugg®</a>
+                        <img src="https://m.media-amazon.com/images/G/01/2020/homepage12.14/500x740_LLBean.jpg">
+                    </div>
+                    <div class="col-md-8 home-pd-col">
+                        <div class="cat-product-section">
+                            <div class="row">
+                                @foreach($this->Product as $result)
+                                <div class="col-md-4 cat-pd-col">
+                                    @foreach($Productmediass as $row_img)
+                                    @if($row_img[0]['product_id'] == $result->id)
+                                    <div class="cat-pd-img">
+                                        @if($row_img && isset($row_img[0]))
+                                        <a href="{{ route('product-front-detail', $result->seo_utl) }}">
+                                            <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
+                                        </a>
+                                        @endif
+                                        <button class="cat-wishlist-btn wishlist-pd"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
+                                    </div>
+                                    @endif
+                                    @endforeach
+                                    <div class="cat-pd-content">
+                                        <a href="#">
+                                            <h6 class="h6">{{$result->title}}</h6>
+                                            <p>Slipper Socks</p>
+                                        </a>
+                                        <p class="product-price">
+                                            <span class="mrp-price">${{round($result->price, 2)}}</span>
+                                            <span class="msrp-price">MSRP: ${{round($result->compare_price, 2)}}</span>
+                                        </p>
+                                        <div class="cat-pd-review">
+                                            <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
+                                            <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
+                                            <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
+                                            <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
+                                            <p><i class="fa fa-star" aria-hidden="true"></i></p>
+                                            <span>(595)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Home Product section end -->
+
+        <!-- home mini banner start -->
+        <div class="home-mini-banner">
             <div class="row">
-                <div class="col-sm-4 row align-items-center m-0 order-sm-1 order-2">
-                    <div class="col-12 pr-0 text-center text-sm-left">
-                        <h2 class="f-26 s-22 mt-4 mt-md-2 mt-md-0 f-bl mb-3">
-                            The Cozy Shop
-                        </h2>
-                        <p class="f-19 s-18 line-height-small">Supremely cozy looks for all your plan(or not-plans) -
-                            because around-the-clock cozy is the name of our game.</p>
-                        <a class="btn btn-outline-dark font-weight-bolder text-uppercase f-14 p-2 pl-4 pr-4 mb-1 b-bold"
-                           href="">Peak Cozy Right This Way</a>
+                <div class="col-md-5">
+                    <div class="mini-banner-content">
+                        <h2 class="h2">Earn a Total of 5% Back at Zappos</h2>
+                        <p>Automatically earn a total of 5% Back on all Zappos purchases when using your Amazon Rewards Visa card.*</p>
+                        <a href="#" class="site-btn">Learn more</a>
                     </div>
                 </div>
-                <div class="col-sm-8 p-0 order-sm-2 order-1 row m-0 align-items-center">
-                    <img class="img-fluid zoom-mid" src="{{ URL::asset('/assets/women3.jpg')}}" alt="">
+                <div class="col-md-7">
                 </div>
             </div>
-        </section>
-        <!--Right-side-Image Banner-->
-        <!--Popular Items-->
-        <div id="popularitem"></div>
-        <!--Popular Items-->
-        <!--Right Side Image Banner-->
-        <section class="right-side-main-banner mt-5 mb-5">
-            <div class="row">
-                <div class="col-sm-4 row align-items-center m-0 order-sm-2 order-2">
-                    <div class="col-12 pr-0 text-center text-sm-left">
-                        <h2 class="f-26 s-22 mt-4 mt-md-2 mt-md-0 f-bl mb-3">
-                            The Cozy Shop
-                        </h2>
-                        <p class="f-19 s-18 line-height-small">Supremely cozy looks for all your plan(or not-plans) -
-                            because around-the-clock cozy is the name of our game.</p>
-                        <a class="btn btn-outline-dark font-weight-bolder text-uppercase f-14 p-2 pl-4 pr-4 mb-1 b-bold"
-                           href="">Peak Cozy Right This Way</a>
+        </div>
+        <!-- home mini banner end -->
+
+        <!-- home category section start -->
+        <div class="home-category-sec">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 home-cat-box">
+                        <figure><img src="https://m.media-amazon.com/images/G/01/zopus2020v/tony/TonyHsieh-500x500.jpg"></figure>
+                        <h4 class="h4">Cozy at Home: Clothing Favourites</h4>
+                        <p>Super-soft pieces that look and feel amazing!</p>
+                        <a href="#" class="site-link-btn">Shop Cozy Clothing <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="col-md-4 home-cat-box">
+                        <figure><img src="https://m.media-amazon.com/images/G/01/zappos/landing/opus/2020/homepage/july/NCR-01.svg"></figure>
+                        <h4 class="h4">Cozy at Home: Clothing Favourites</h4>
+                        <p>Super-soft pieces that look and feel amazing!</p>
+                        <a href="#" class="site-link-btn">Shop Cozy Clothing <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="col-md-4 home-cat-box">
+                        <figure><img src="https://m.media-amazon.com/images/G/01/zappos/landing/opus/2020/homepage/july/Inthistogether.jpg"></figure>
+                        <h4 class="h4">Cozy at Home: Clothing Favourites</h4>
+                        <p>Super-soft pieces that look and feel amazing!</p>
+                        <a href="#" class="site-link-btn">Shop Cozy Clothing <i class="fa fa-angle-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
-                <div class="col-sm-8 p-0 order-sm-1 order-1 row m-0 align-items-center">
-                    <img class="img-fluid zoom-mid"
-                         src="https://m.media-amazon.com/images/G/01/2020/style-room/HOMEPAGE-THE-STYLE-ROOM-ADIDAS-STELLA-MCCARTNEY-DECEMBER-965x500.jpg"
-                         alt="">
-                </div>
             </div>
-        </section>
-        <!--Right-side-Image Banner-->
-        <!--Brand-->
-        <div id="brands" class="mb-5"></div>
-        <!--brand--->
-        <!--Shop-->
-        <section class="row m-0 mb-5">
-            <div class="col-lg-4 col-md-6 pr-0 pl-md-3 pl-0">
-                <div class="col-12 p-0 text-center text-sm-left">
-                    <h2 class="f-24 s-22 pr-0 pr-lg-0 pr-md-4 pr-sm-0 mt-md-1 f-bl mb-3">
-                        UGG&reg for Her: Impeccable Style, Cozy Comfort
-                    </h2>
-                    <a class="btn btn-outline-dark font-weight-bolder text-uppercase f-14 p-2 pl-4 pr-4 mb-1 b-bold"
-                       href="">shop women's ugg&reg;</a>
-                    <img class="img-fluid w-100 pt-2"
-                         src="https://m.media-amazon.com/images/G/01/2020/homepage12.14/500x740_LLBean.jpg" alt="">
-                </div>
-            </div>
-
-            <div class="col-lg-8 col-md-6 row p-0 m-md-0">
-                @foreach($this->Product as $result)
-                <div class="col-lg-3 pt-2 col-md-6 col-6 pr-0 u-none">
-                    @foreach($Productmediass as $row_img)
-                        @if($row_img[0]['product_id'] == $result->id)
-                    <div class="banner-element link-image align-items-center">
-                         @if($row_img && isset($row_img[0]))
-                        <a href="{{ route('product-front-detail', $result->seo_utl) }}" class="w-100 bg-sand row md-small align-items-center m-1 m-md-0"
-                           style="height: 225px">
-                            <img class="img-fluid m-auto p-2 pr-3 pl-3 "
-                                 src="{{ url('storage/'.$row_img[0]['image']) }}" alt="">
-                        </a>
-                        @endif
-                    </div>
-                        @endif
-                    @endforeach
-                    <button class="btn bg-white col-12 text-left heart-button pl-0 pb-sm-2 pb-1 pt-0 text-secondary"
-                            name="r-heart-button">
-                        <span class="f-14 text-secondary heart "><i class="far fa-heart" aria-hidden="true"></i> </span>
-                        <span class="f-16 text-uppercase">595</span></button>
-                    <a href="#" class="hover-blue title f-14">
-                        <p class="m-0">{{$result->title}}</p>
-                    </a>
-                    <p class="align-items-baseline row  m-0">
-                        <span class="f-14 text-danger d-block">${{round($result->price, 2)}}</span>
-                        <span class="f-12 text-secondary pl-2 ml-1">MSRP: ${{round($result->compare_price, 2)}}</span>
-                    </p>
-                    <p class="m-0 d-flex s-12">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </p>
-                </div>
-                @endforeach
-
-            </div>
-
-        </section>
-        <!--Shop-->
-
-        <!--mini Banner-->
-        <section class=" row mb-5 pt-5">
-
-            <div class="row position-relative right">
-                <img class="zoom-right"
-                     src="https://m.media-amazon.com/images/G/01/zopus2020v/CHASE-HOMEPAGE-BANNER-STANDARD.jpg" alt="">
-            </div>
-            <div class="col-md-7 col-lg-g sm-relative" style="position: absolute;">
-                <div class="col-12 col-md-10 col-lg-8 pt-lg-4 pt-md-2 text-center">
-                    <h2 class="f-26 s-22 mt-4 mt-md-2 mt-md-0 f-bl mb-3">
-                        Earn a Total of 5% Back at Zappos
-                    </h2>
-                    <p class="f-19 s-18 line-height-small">Automatically earn a total of 5% Back on all Zappos purchases
-                        when using your Amazon Rewards Visa card.*</p>
-                    <a class="btn btn-outline-dark font-weight-bolder text-uppercase f-14 p-2 pl-4 pr-4 mb-1 b-bold"
-                       href="">Learn more</a>
-                </div>
-
-            </div>
-        </section>
-        <!--mini banner-->
-
-        <!--Cat Blog-->
-        <section class=" mb-4">
-            <div class="row m-0 p-0">
-                <div class="col-sm-4 p-0 mb-3  pt-3 p-sm-2 text-center">
-                    <a href="" class="underline-none  text-dark ">
-                        <img class="text-dark img-fluid w-100 mb-3"
-                             src="https://m.media-amazon.com/images/G/01/zopus2020v/tony/TonyHsieh-500x500.jpg" alt="">
-                        <h3 class="text-dark f-18 f-bl mb-3 mt-2 mt-md-0">Cozy at Home: Clothing Favourites</h3>
-                        <p class="text-dark f-14 mb-1 mb-md-3">Super-soft pieces that look and feel amazing!</p>
-
-                        <span class=" f-14 underline-space  text-uppercase font-weight-bold">Shop Cozy Clothing</span>
-                    </a>
-                </div>
-                <div class="col-sm-4 p-0 mb-3  pt-3 p-sm-2 text-center">
-                    <a href="" class="underline-none  text-dark ">
-                        <img class="text-dark img-fluid w-100 mb-3"
-                             src="https://m.media-amazon.com/images/G/01/zappos/landing/opus/2020/homepage/july/NCR-01.svg"
-                             alt="">
-                        <h3 class="text-dark f-18 f-bl mb-3 mt-2 mt-md-0">Black Lives Matter</h3>
-                        <p class="text-dark f-14 mb-1 mb-md-3">The Zappos Family stands in solidarity with the Black
-                            community to condemn the police brutality and racial injustice.</p>
-                        <span class=" f-14 underline-space text-uppercase font-weight-bold">Shop Cozy Clothing</span>
-                    </a>
-                </div>
-                <div class="col-sm-4 p-0 mb-3  pt-3 p-sm-2 text-center">
-                    <a href="" class="underline-none  text-dark ">
-                        <img class="text-dark img-fluid w-100 mb-3"
-                             src="https://m.media-amazon.com/images/G/01/zappos/landing/opus/2020/homepage/july/Inthistogether.jpg"
-                             alt="">
-                        <h3 class="text-dark f-18 f-bl mb-3 mt-2 mt-md-0">Cozy at Home: Clothing Favourites</h3>
-                        <p class="text-dark f-14 mb-1 mb-md-3">Super-soft pieces that look and feel amazing!</p>
-                        <span class=" f-14 underline-space text-uppercase font-weight-bold">Shop Cozy Clothing</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-        <!--Cat-Blg-->
-
-
-        <!--Recent-->
-        <div id="recent"></div>
-        <!--recent-->
-
-    </div>
+        </div>
+        <!-- home second section end -->
 </x-customer-layout>
