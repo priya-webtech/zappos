@@ -148,6 +148,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/product/{slug?}', Livewire\Front\ProductFrontDetail::class)->name('product-front-detail');
         Route::get('/varientData', [Livewire\Front\ProductFrontDetail::class, 'fetchPrice'])->name('varientData');
         Route::get('/add-to-cart', [Livewire\Front\ProductFrontDetail::class, 'addCart'])->name('add-to-cart');
+        Route::get('/delete-cart-product', [Livewire\Header::class, 'DeleteCartProduct'])->name('delete-cart-product');
         Route::post('/add-order', [Livewire\Front\CheckoutInsertOrder::class, 'checkoutInsert'])->name('add-order');
         Route::get('/payment/{id?}', Livewire\StripePaymnetController::class)->name('payment');
         Route::post('/payment', [Livewire\StripePaymnetController::class, 'stripePost'])->name('stripe-post');

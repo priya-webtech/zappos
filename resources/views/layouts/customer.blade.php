@@ -42,11 +42,6 @@
 
     <script src="{{ URL::asset('/js/font.js') }}"></script>
 
-
-
-
-
-
     <!-----Custom-css-->
 
     <link rel="stylesheet" href="{{ URL::asset('/css/mansory.css') }}">
@@ -83,19 +78,15 @@
 
     <livewire:header/>
 
-
-
     <!------------Navbar-------------------------->
 
-    <div class="container-fluid bg-light">
+    <!-- <div class="container-fluid bg-light">
 
         <livewire:navigation/>
 
-    </div>
+    </div> -->
 
 </div>
-
-
 
 <!-- Page Heading -->
 
@@ -106,9 +97,6 @@
 @endif
 
 
-
-
-
 <!-- Page Content -->
 
 <main>
@@ -117,7 +105,7 @@
 
 </main>
 
-
+<livewire:footer/>
 
 
 @livewireScripts
@@ -134,17 +122,6 @@
 </body>
 
 </html>
-
-
-
-
-
-<!-- Optional JavaScript -->
-
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-
-
 
 
 <script>

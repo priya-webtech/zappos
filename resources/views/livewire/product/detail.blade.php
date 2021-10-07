@@ -910,7 +910,7 @@
 
                             <label>Page title</label>
 
-                            <input type="text" name="seo_title" wire:model="product.seo_title">wire:model="product.seo_title"
+                            <input type="text" name="seo_title" wire:model="product.seo_title">
 
                             <p>0 of 70 characters used</p>
 

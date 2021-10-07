@@ -8,6 +8,7 @@ use App\Models\VariantTag;
 use App\Models\Menu;
 use App\Models\ProductVariant;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class Header extends Component
 {
@@ -75,5 +76,16 @@ class Header extends Component
 
         }
         return view('livewire.header');
+    }
+
+    public function DeleteCartProduct($flag)
+    {
+        $res=Cart::find($flag)->delete();
+
+        $user_id =  Auth::user()->id;
+
+        $this->CartItem = Cart::with('media_product')->with('product_detail')->where('user_id',$user_id)->get();
+        $this->ProductVariant = ProductVariant::get();
+       $this->varianttag = VariantTag::All();
     }
 }

@@ -22,12 +22,22 @@ use App\Models\Cart;
 
 use App\Models\Location;
 
+use App\Models\Collection;
+
 use Illuminate\Http\Request;
 
 class ProductFrontDetail extends Component
 {
-    public $product,$Productmedia,$Productvariant,$tags,$Productmediafirst,$Productvariantsize,$varianttag,$fetchprice,$CartItem,$fetchstock;
+    public $product,$Productmedia,$Productvariant,$tags,$Productmediafirst,$Productvariantsize,$varianttag,$fetchprice,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock;
 
+    protected $rules = [
+
+        'productid' => '',
+        'varientid' => '',
+        'getpriceinput' => '',
+        'stock' => '',
+
+    ];
     public function render()
     {
         return view('livewire.front.product-front-detail');
@@ -38,6 +48,8 @@ class ProductFrontDetail extends Component
        $user_id =  Auth::user()->id; 
        $this->product = Product::where('seo_utl',$slug)->first();
        $this->varianttag = VariantTag::All();
+       $this->productrelated = Product::All();
+       $this->Collection = Collection::All();
        $this->Productvariantsize = ProductVariant::select('varient1','varient2','varient3','varient4','varient5','varient6','varient7','varient8','varient9','varient10')->where('product_id',$this->product['id'])->distinct()->get();
        $this->Productmediafirst = ProductMedia::where('product_id',$this->product['id'])->first();
        $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
@@ -58,30 +70,31 @@ class ProductFrontDetail extends Component
 
     }
 
-    public function addCart(Request $Request)
+    public function addCart()
     {
 
+        dd($this->productid);
 
         $user_id =  Auth::user()->id;
 
-        if($Request['stock'] == "")
+        if($this->stock == "")
         {
             $stock = 1;
         }
         else
         {
-            $stock = $Request['stock'];
+            $stock = $this->stock;
         }
 
         $cart_arr = [
                     
-                    'product_id' => $Request['productid'],
+                    'product_id' => $this->productid,
 
                     'user_id' => $user_id,
 
-                    'varientid' => $Request['varientid'],
+                    'varientid' => $this->varientid,
 
-                    'price' => $Request['getpriceinput'],
+                    'price' => $this->getpriceinput,
 
                     'stock' => $stock,
 

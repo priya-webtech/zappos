@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div class="product-sec">
+        <div class="product-sec" wire:ignore>
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
@@ -251,12 +251,12 @@
                         <div class="product-rightbar">
                             <div class="product-right-top">
                                 <div class="pd-total">
-                                    <input type="hidden" name="productid" id="productid" value="{{$product->id}}">
-                                    <input type="hidden" name="varientid" id="varientid" value="">
+                                    <input type="hidden" wire:model="productid" id="productid" value="{{$product->id}}">
+                                    <input type="hidden" wire:model="varientid" id="varientid" value="">
                                     <h2 class="h2" id="getprice">${{round($product->price,2)}}</h2>
                                     <label>Ships Free!</label>
                                 </div>
-                                <input type="hidden" name="getpriceinput" id="getpriceinput" value="@if($Productvariantsize){{$product->price}}@endif">
+                                <input type="hidden" wire:model="getpriceinput" id="getpriceinput" value="@if($Productvariantsize){{$product->price}}@endif">
                                 <form>
                                     @if($Productvariantsize)
                                     @foreach($Productvariantsize as $size)
@@ -265,6 +265,7 @@
                                         @if($locrow->id == $size->varient1)
                                         <label>{{$locrow->name}}</label>
                                         <select name="attribute1" class="form-control varition-change" class="form-control" id="varient1">
+                                               <option>-- Select {{$locrow->name}} --</option> 
                                             @foreach($Productvariant as $row)
                                                 @if($row->attribute1 != "")
                                                 <option>{{$row->attribute1}}</option> 
@@ -297,7 +298,7 @@
                                     @endforeach
                                     @endif
                                 </form>
-                                    <button class="site-btn" name="addcart" id="addcart">Add to Cart</button>
+                                    <button class="site-btn" wire:ignore wire:click.prevent="addCart()">Add to Cart</button>
                                     <a class="site-btn add-collection-btn" href="#"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to collection</a>
                                 </form>
                             </div>
@@ -343,69 +344,19 @@
                         <div class="similar-items-sec multi-item-slider">
                             <h3 class="h3">Similar Items You May Like!</h3>
                             <div class="similar-items-slider">
+                                @foreach($productrelated as $rows)
+                                @if($product->collection == $rows->collection && $product->id != $rows->id)
                                 <div>
                                     <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
                                     <div class="multi-item-content">
                                         <a class="wish-list" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
                                         <p>ASICS</p>
-                                        <p class="multi-pd-title">GEL-Nimbus® 22</p>
+                                        <p class="multi-pd-title">{{$rows->title}}</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
                                     </div>
                                 </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
-                                    <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
-                                        <p>ASICS</p>
-                                        <p class="multi-pd-title">GEL-Nimbus® 22</p>
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
-                                    <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
-                                        <p>ASICS</p>
-                                        <p class="multi-pd-title">GEL-Nimbus® 22</p>
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
-                                    <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
-                                        <p>ASICS</p>
-                                        <p class="multi-pd-title">GEL-Nimbus® 22</p>
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
-                                    <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
-                                        <p>ASICS</p>
-                                        <p class="multi-pd-title">GEL-Nimbus® 22</p>
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
-                                    <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
-                                        <p>ASICS</p>
-                                        <p class="multi-pd-title">GEL-Nimbus® 22</p>
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
-                                    <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
-                                        <p>ASICS</p>
-                                        <p class="multi-pd-title">GEL-Nimbus® 22</p>
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
-                                    </div>
-                                </div>
+                                @endif
+                                @endforeach
                             </div>
                         </div>
                         <div class="free-shipping-return">
@@ -479,23 +430,24 @@
             </div>
         </div>
     <script type="text/javascript">
+        
         $(function(){
             $(document).on("change", ".varition-change", function () {
-            var val1 = $('#varient1').val();
-            var val2 = $('#varient2').val();
-            var val3 = $('#varient3').val();
-            $.ajax({
-                type: 'GET',
-                url: "{{URL('varientData')}}",
-                data: { text1: val1, text2: val2, text3: val3},
-                success: function(response) {
-                    $('#getprice').html(response.fetchprice.price);
-                    $('#getstock').html(response.fetchstock.stock);
-                    $('#getpriceinput').attr('value',response.fetchprice.price);
-                    $('#varientid').attr('value',response.fetchprice.id);
-                }
+                var val1 = $('#varient1').val();
+                var val2 = $('#varient2').val();
+                var val3 = $('#varient3').val();
+                $.ajax({
+                    type: 'GET',
+                    url: "{{URL('varientData')}}",
+                    data: { text1: val1, text2: val2, text3: val3},
+                    success: function(response) {
+                        $('#getprice').html(response.fetchprice.price);
+                        $('#getstock').html(response.fetchstock.stock);
+                        $('#getpriceinput').attr('value',response.fetchprice.price);
+                        $('#varientid').attr('value',response.fetchprice.id);
+                    }
+                });
             });
-        });
         })
 
 
@@ -519,7 +471,29 @@
                 }
             });
           });
-      });
+        });
+        
+        $(document).ready(function() {
+            $(".delete-cart").click(function() { 
+
+            var deletecartid =  $('#deletecartid').val();
+
+             $.ajax({
+                url: '{{URL("delete-cart-product")}}',  
+                type: 'GET',
+                data: { deletecartid:deletecartid},
+                success: function (response) {
+                    //window.location.reload();
+                     //myVariable=data;
+                    //console.log(data);
+                    document.getElementById("proceed-cart").style.display = "block";
+                },
+                complete: function () {
+                }
+            });
+          });
+        });
+
     </script>
 </x-customer-layout>
 </div>
