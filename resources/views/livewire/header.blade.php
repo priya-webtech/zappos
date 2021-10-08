@@ -36,19 +36,19 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="contact-time d-flex">
+                                <!-- <div class="contact-time d-flex">
                                     <p>
                                         Available 24/7 at &nbsp;
                                     </p>
                                     <span class="contact-number">(800) 92<span class="t7">7</span>-<span class="t7">7</span>6<span class="t7">7</span>1</span>
-                                </div>
+                                </div> -->
                             </div>
-                            <div class="header-info ml-auto pb-0 pt-0">
+                            <!-- <div class="header-info ml-auto pb-0 pt-0">
                                 <p>
                                     <span class="bold">Earn a total of 5% Back</span> with your Amazon
                                     Rewards Visa Card! Learn More
                                 </p>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -58,9 +58,9 @@
                     <div class="row">
                         <div class="col-12 d-flex align-items-center">
                             <div class="logo">
-                                <a href="#"><img src="{{ url('storage/assets/ZAPPOS-HOLIDAY-HEADER-LOGO.gif') }}"></a>
+                                <a href="#"><img src="{{ url('assets/zappos-logo.svg') }}"></a>
                             </div>
-                            <div class="search-box ml-auto">
+                            <div class="search-box">
                                 <form class="search-container d-flex align-items-center" method="get" target="_parent" action="">
                                     <input class="form" type="text" placeholder="Search for shoes, clothes, etc." name="searched-input" id="searched-input">
                                     <div class="header-search-icon"><i class="fa fa-search" aria-hidden="true"></i></div>
@@ -75,10 +75,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="my-cart turn-btn" id="my-cart">
+                            <?php 
+                            $cartCount = (!empty($CartItem)) ? count($CartItem) : 0;
+                            ?>
+                            <div class="my-cart turn-btn ml-auto" id="my-cart">
                                 <button class=" bg-cart" onclick="document.getElementById('proceed-cart').style.display='block'">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                <span id="cartItems" class="clearContent">{{count($CartItem)}} ITEM IN CART</span>
+                                <span id="cartItems" class="clearContent">{{$cartCount}} My Cart</span>
                                 </button>
                             </div>
                             <form method="post" action="{{ route('add-order') }}" name="form">
@@ -98,10 +101,11 @@
                                     </div>
                                 </div>
                                 <div wire:ignore>
+                                    @if(!empty($CartItem) && count($CartItem) > 0)
+
                                     <div>
                                         <div class="items" wire:ignore>
                                             <div class="col-12 p-0">
-                                                @if($CartItem)
                                                 <?php $price_sum  = 0; ?>
                                                 @foreach($CartItem as $cart)
                                                 <input name="cartid[]" type="hidden" id="deletecartid" value="{{$cart->id}}">
@@ -184,18 +188,19 @@
                                                 </div>
 
                                                 @endforeach
-                                                @endif
+                                               
                                             </div>
                                         </div>
                                     </div>
                                     <div class="cart-footer">
-                                        <p>Cart Subtotal (<?php echo count($CartItem) ?> Items) ${{round($price_sum, 2)}}</p>
+                                        <p>Cart Subtotal (<?php echo $cartCount ?> Items) ${{round($price_sum, 2)}}</p>
                                         <div class="cart-footer-btn">
                                             <button class="site-btn signin-btn">Sign In</button>
                                             <button class="site-btn view-cart-btn">View Cart</button>
                                             <input type="submit" name="checkout" class="site-btn checkout-btn" value="Proceed to checkout">
                                         </div>
                                     </div>
+                                     @endif
                                 </div>
                             </div>
                             </form>

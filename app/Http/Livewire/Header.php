@@ -17,9 +17,13 @@ class Header extends Component
     public $CartItem,$ProductVariant,$varianttag;
 
     public function mount() {
+        if (Auth::check()) {
+            $user_id =  Auth::user()->id;
+            $this->CartItem = Cart::with('media_product')->with('product_detail')->where('user_id',$user_id)->get();
+      
+        }
+        
 
-       $user_id =  Auth::user()->id;
-       $this->CartItem = Cart::with('media_product')->with('product_detail')->where('user_id',$user_id)->get();
        $this->ProductVariant = ProductVariant::get();
        $this->varianttag = VariantTag::All();
 

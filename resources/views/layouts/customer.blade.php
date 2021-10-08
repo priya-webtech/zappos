@@ -14,13 +14,11 @@
 
     @livewireStyles
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+<!--     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
 
-    <link rel="stylesheet" type="text/css" href="{{ URL::asset('/styles/my-login.css') }}">
-
-    <link href="{{ URL::asset('/styles/main.css') }}" type="text/css" rel="stylesheet" />
+<!--     <link rel="stylesheet" type="text/css" href="{{ URL::asset('/styles/my-login.css') }}"> -->
 
     <!---Slick Carousel--->
 
@@ -32,35 +30,39 @@
 
     <!-- Bootstrap CSS 	-->
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"> -->
 
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+        
 
     <!---------Link font Awsome---------->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <link href="{{ URL::asset('/styles/main.css') }}" type="text/css" rel="stylesheet" />
+
+
     <script src="{{ URL::asset('/js/font.js') }}"></script>
 
     <!-----Custom-css-->
 
-    <link rel="stylesheet" href="{{ URL::asset('/css/mansory.css') }}">
+<!--     <link rel="stylesheet" href="{{ URL::asset('/css/mansory.css') }}"> -->
 
 {{--        <link rel="stylesheet" type="text/css" href="slick/slick.css" />--}}
 
 {{--        <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />--}}
 
 <!-- Scripts -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 
    
-    <script type="text/javascript" src="{{ URL::asset('/js/main.js') }}'"></script>
+<!--     <script type="text/javascript" src="{{ URL::asset('/js/main.js') }}'"></script> -->
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
 
-    <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.4.2/bootstrap-tagsinput.min.js"></script> -->
 
     <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
 
@@ -110,7 +112,7 @@
 
 @livewireScripts
 <!-- Optional JavaScript & Slice Carousel -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script> -->
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
