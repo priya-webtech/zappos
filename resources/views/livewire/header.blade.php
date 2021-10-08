@@ -75,10 +75,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php 
+                            $cartCount = (!empty($CartItem)) ? count($CartItem) : 0;
+                            ?>
                             <div class="my-cart turn-btn" id="my-cart">
                                 <button class=" bg-cart" onclick="document.getElementById('proceed-cart').style.display='block'">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                <span id="cartItems" class="clearContent">{{count($CartItem)}} ITEM IN CART</span>
+                                <span id="cartItems" class="clearContent">{{$cartCount}} ITEM IN CART</span>
                                 </button>
                             </div>
                             <form method="post" action="{{ route('add-order') }}" name="form">
@@ -98,10 +101,11 @@
                                     </div>
                                 </div>
                                 <div wire:ignore>
+                                    @if(!empty($CartItem) && count($CartItem) > 0)
+
                                     <div>
                                         <div class="items" wire:ignore>
                                             <div class="col-12 p-0">
-                                                @if($CartItem)
                                                 <?php $price_sum  = 0; ?>
                                                 @foreach($CartItem as $cart)
                                                 <input name="cartid[]" type="hidden" id="deletecartid" value="{{$cart->id}}">
@@ -184,18 +188,19 @@
                                                 </div>
 
                                                 @endforeach
-                                                @endif
+                                               
                                             </div>
                                         </div>
                                     </div>
                                     <div class="cart-footer">
-                                        <p>Cart Subtotal (<?php echo count($CartItem) ?> Items) ${{round($price_sum, 2)}}</p>
+                                        <p>Cart Subtotal (<?php echo $cartCount ?> Items) ${{round($price_sum, 2)}}</p>
                                         <div class="cart-footer-btn">
                                             <button class="site-btn signin-btn">Sign In</button>
                                             <button class="site-btn view-cart-btn">View Cart</button>
                                             <input type="submit" name="checkout" class="site-btn checkout-btn" value="Proceed to checkout">
                                         </div>
                                     </div>
+                                     @endif
                                 </div>
                             </div>
                             </form>
