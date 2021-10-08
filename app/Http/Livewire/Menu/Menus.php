@@ -61,7 +61,8 @@ class Menus extends Component
          if($this->pages){
          $pageslink =  url('/').'/pages/'.$this->pages['seo_url'];
          $menuname = new MenuItems();
-         $menuname->label = $this->pages['title'];;
+         $menuname->label = $this->pages['title'];
+         $menuname->type_category = '1';
          $menuname->link = $pageslink;
          $menuname->menu = $menuidd;
          $menuname->save();
@@ -85,6 +86,7 @@ class Menus extends Component
          $menuname = new MenuItems();
          $menuname->label = $this->Product['title'];
          $menuname->multipleid = $this->Product['id'];
+         $menuname->type_category = '2';
          $menuname->link = $productlink;
          $menuname->menu = $menuidd;
          $menuname->save();
@@ -120,6 +122,7 @@ class Menus extends Component
          $menuname = new MenuItems();
          $menuname->label = $collection_name;
          $menuname->multipleid = $collection_id;
+         $menuname->type_category = '3';
          $menuname->link = $collectionlink;
          $menuname->menu = $menuidd;
          $menuname->save();
