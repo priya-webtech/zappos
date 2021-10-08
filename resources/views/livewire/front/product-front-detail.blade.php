@@ -8,7 +8,7 @@
                     <div class="col-12">
                         <div class="product-top-row" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item "><a href="#" id="backLink">« Back</a></li>
+                                <li class="breadcrumb-item "><a href="{{ route('dashboard') }}" id="backLink">« Back</a></li>
                                 <li class="breadcrumb-item "><a href="#">Shoes</a></li>
                                 <li class="breadcrumb-item"><a href="#">Sneakers Athletic Shoes</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">
@@ -316,7 +316,13 @@
                             <div class="similar-items-slider">
                                 @foreach($productrelated as $rows)
                                 @foreach($Productmediass as $row_img)
-                                @if($product->collection == $rows->collection && $product->id != $rows->id && $row_img[0]['product_id'] == $rows->id)
+                                <?php $decodeA = json_decode($rows->collection);  
+                                      $decodeB = json_decode($product->collection); 
+                                ?>
+                                @if(!empty($decodeA))
+                                @foreach($decodeA as $decoderes)
+                                @if(is_array($decodeB) && !empty($decodeB))
+                                @if(in_array($decoderes, $decodeB) && $product->id != $rows->id && $row_img[0]['product_id'] == $rows->id)
                                 <div>
                                     @if($row_img && isset($row_img[0]))
                                     <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
@@ -328,7 +334,9 @@
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
                                     </div>
                                 </div>
-                                
+                                @endif
+                                @endif
+                                @endforeach
                                 @endif
                                 @endforeach
                                 @endforeach

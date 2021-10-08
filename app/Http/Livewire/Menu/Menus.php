@@ -58,7 +58,7 @@ class Menus extends Component
         foreach ($pageid as $key => $id) {;
          $this->pages = page::where('id',$id)->first();
          $checkmenu = MenuItems::where('label',$this->pages)->get();
-         if(!$checkmenu){
+         if($this->pages){
          $pageslink =  url('/').'/pages/'.$this->pages['seo_url'];
          $menuname = new MenuItems();
          $menuname->label = $this->pages['title'];;
@@ -80,10 +80,11 @@ class Menus extends Component
         foreach ($productid as $key => $id) {
          $this->Product = Product::where('id',$id)->first();
          $checkmenu = MenuItems::where('label',$this->Product)->get();
-         if(!$checkmenu){
+         if($this->Product){
          $productlink =  url('/').'/product/'.$this->Product['seo_utl'];
          $menuname = new MenuItems();
          $menuname->label = $this->Product['title'];
+         $menuname->multipleid = $this->Product['id'];
          $menuname->link = $productlink;
          $menuname->menu = $menuidd;
          $menuname->save();
@@ -99,23 +100,32 @@ class Menus extends Component
         
        $menuidd = $request->menuid;
        $collectionid = $request->collection_id;
-       
+      
         foreach ($collectionid as $key => $id) {
          $this->Collection = Collection::where('id',$id)->first();
 
-         $checkmenu = MenuItems::where('label',$this->Collection)->get();
-         if(!$checkmenu){
+         $checkmenu = MenuItems::get();
+         foreach ($checkmenu as $key => $menu) {
+            if($menu['label'] === $this->Collection['title'])
+            {
+                 session()->flash('message', 'Already Added.'); 
+            }
+            else{
+            $collection_name =  $this->Collection['title'];
+            $collection_id =  $this->Collection['id'];
+            }
+         }
+         if($collection_name){
          $collectionlink =  url('/').'/collection/'.$this->Collection['seo_url'];
          $menuname = new MenuItems();
-         $menuname->label = $this->Collection['title'];
+         $menuname->label = $collection_name;
+         $menuname->multipleid = $collection_id;
          $menuname->link = $collectionlink;
          $menuname->menu = $menuidd;
          $menuname->save();
-         }
-         else{
-
-            session()->flash('message', 'Already Added.');
-         }
+        }
+        
+        
 
         }
     }

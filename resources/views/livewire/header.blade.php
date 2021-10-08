@@ -212,7 +212,7 @@
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
 
 
@@ -231,7 +231,6 @@
                 </a>
 
 
-
                 @if(count($menu['items']) > 0)
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -242,7 +241,7 @@
 
                                 <div class="mansory-item">
 
-                                    <div class="dropdown-header">{{$menuitem['label']}}</div>
+                                    <a class="dropdown-header" href="{{ route('product-front-category', $menuitem['label']) }}">{{$menuitem['label']}}</a>
 
                                     @if(isset($menuitem['items']))
 
