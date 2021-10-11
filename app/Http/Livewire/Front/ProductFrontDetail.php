@@ -65,7 +65,9 @@ class ProductFrontDetail extends Component
         $shopping_cart[] = $this->product['id'];
         //array_push($shopping_cart,$this->product['id']);
         $minutes = 60;
-        Cookie::queue(Cookie::make('shopping_cart',  json_encode($shopping_cart), $minutes));
+   
+           Cookie::queue(Cookie::make('shopping_cart',  json_encode($shopping_cart), $minutes));
+        
     }
 
     public function fetchPrice(Request $Request)

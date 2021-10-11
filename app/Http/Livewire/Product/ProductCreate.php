@@ -49,6 +49,8 @@ class ProductCreate extends Component
         'compare_price' => [],
 
         'cost' => [],
+        
+        'product_new' => [],
 
         'weight' => [],
 
@@ -233,6 +235,8 @@ class ProductCreate extends Component
                 'barcode' => $request['barcode'],
 
                 'location' => $locationid,
+
+                'product_new'      => $request['product_new'],
 
                 'product_type' => $request['product_type'],
 

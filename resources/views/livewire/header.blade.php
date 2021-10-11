@@ -60,18 +60,17 @@
                             <div class="logo">
                                 <a href="#"><img src="{{ url('assets/zappos-logo.svg') }}"></a>
                             </div>
-                            <div class="search-box">
-                                <form class="search-container d-flex align-items-center" method="get" target="_parent" action="">
-                                    <input class="form" type="text" placeholder="Search for shoes, clothes, etc." name="searched-input" id="searched-input">
+                            <div class="search-box" wire:ignore>
+                                <form class="search-container d-flex align-items-center" method="get" target="_parent" action="" autocomplete="off">
+                                    <input class="form" type="text" placeholder="Search for shoes, clothes, etc." wire:model="filter_product" id="searched-input">
                                     <div class="header-search-icon"><i class="fa fa-search" aria-hidden="true"></i></div>
                                 </form>
                                 <div class="col-12 text-dark p-0 auto-fill" id="autofill" style="display: none">
-                                    <div class="ml-md-2 border bg-white rounded-bottom pb-1">
-                                        <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">cases</button></div>
-                                        <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">iphone cases</button></div>
-                                        <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">samsung cases</button></div>
-                                        <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">winter sweaters</button></div>
-                                        <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">Trousers</button></div>
+                                    <div class="ml-md-2 border bg-white rounded-bottom pb-1"  wire:ignore>
+                                        @foreach($getproduct as $row)
+                                        <div class=" p-1 pl-3 m-0 pr-3 link-fill product-item"><a href="{{ route('product-front-detail', $row->seo_utl) }}"><button class="link-fill">{{$row->title}}</button></a></div>
+                                        @endforeach
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -246,7 +245,7 @@
 
                                 <div class="mansory-item">
 
-                                    <a class="dropdown-header" href="{{ route('product-front-category', $menuitem['label']) }}">{{$menuitem['label']}}</a>
+                                    <a class="dropdown-header" href="{{ route('product-front-category', $menuitem['link']) }}">{{$menuitem['label']}}</a>
 
                                     @if(isset($menuitem['items']))
 
@@ -611,5 +610,27 @@
 </div>
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+  $("#searched-input").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".product-item").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+$(document).ready(function(){
+  $("#searched-input").on("keyup", function() {
+  var x = document.getElementById('searched-input').value;
+  var y = document.getElementById('product-item');
+  if (x.length > 0) {
+    y.style.display = 'block';
+  } else {
+    y.style.display = 'none';
+  }
+  });
+});
+</script>
 
 

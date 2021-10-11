@@ -59,7 +59,7 @@ class Menus extends Component
          $this->pages = page::where('id',$id)->first();
          $checkmenu = MenuItems::where('label',$this->pages)->get();
          if($this->pages){
-         $pageslink =  url('/').'/pages/'.$this->pages['seo_url'];
+         $pageslink =  $this->pages['seo_url'];
          $menuname = new MenuItems();
          $menuname->label = $this->pages['title'];
          $menuname->type_category = '1';
@@ -82,7 +82,7 @@ class Menus extends Component
          $this->Product = Product::where('id',$id)->first();
          $checkmenu = MenuItems::where('label',$this->Product)->get();
          if($this->Product){
-         $productlink =  url('/').'/product/'.$this->Product['seo_utl'];
+         $productlink = $this->Product['seo_utl'];
          $menuname = new MenuItems();
          $menuname->label = $this->Product['title'];
          $menuname->multipleid = $this->Product['id'];
@@ -118,7 +118,7 @@ class Menus extends Component
             }
          }
          if($collection_name){
-         $collectionlink =  url('/').'/collection/'.$this->Collection['seo_url'];
+         $collectionlink =  $this->Collection['seo_url'];
          $menuname = new MenuItems();
          $menuname->label = $collection_name;
          $menuname->multipleid = $collection_id;
