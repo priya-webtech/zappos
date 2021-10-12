@@ -61,3 +61,33 @@ $(document).ready(function() {
 		slidesToScroll: 6,
 	});
 });
+
+
+// login & Resgister form js
+$(document).ready(function() {
+	const signUpButton = document.getElementById('signUp');
+	const signInButton = document.getElementById('signIn');
+	const container = document.getElementById('container');
+
+	signUpButton.addEventListener('click', () => {
+		container.classList.add("right-panel-active");
+	});
+
+	signInButton.addEventListener('click', () => {
+		container.classList.remove("right-panel-active");
+	});
+
+});
+
+// $(document).ready(function(){
+//     $(".nav-item").hover(            
+//         function() {
+//             $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
+//             $(this).toggleClass('open');        
+//         },
+//         function() {
+//             $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideUp("400");
+//             $(this).toggleClass('open');       
+//         }
+//     );
+// });

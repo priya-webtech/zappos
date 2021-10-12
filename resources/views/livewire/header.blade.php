@@ -66,7 +66,7 @@
                                     <div class="header-search-icon"><i class="fa fa-search" aria-hidden="true"></i></div>
                                 </form>
                                 <div class="col-12 text-dark p-0 auto-fill" id="autofill" style="display: none">
-                                    <div class="ml-md-2 border bg-white rounded-bottom pb-1">
+                                    <div class="border bg-white rounded-bottom pb-1">
                                         <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">cases</button></div>
                                         <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">iphone cases</button></div>
                                         <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">samsung cases</button></div>
@@ -238,65 +238,596 @@
 
                 @if(count($menu['items']) > 0)
 
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-menu mega-menu" aria-labelledby="navbarDropdown">
 
-                        <div class="masonry-with-columns">
+                        <div class="dropdown-menu-inner">
 
-                            @foreach($menu['items'] as $menuitem)
+                            <div class="masonry-with-columns">
 
-                                <div class="mansory-item">
-
-                                    <a class="dropdown-header" href="{{ route('product-front-category', $menuitem['label']) }}">{{$menuitem['label']}}</a>
-
-                                    @if(isset($menuitem['items']))
-
-                                        @foreach($menuitem['items'] as $item)
-
-                                            <a class="dropdown-item" href="#">{{$item['label']}}</a>
-
-                                        @endforeach
-
-                                    @endif
-
-                                </div>
-
-                            @endforeach
-
-                                @if(isset($menu['images']) && count($menu['images']) > 0)
+                                @foreach($menu['items'] as $menuitem)
 
                                     <div class="mansory-item">
 
-                                        <div class="dropdown-header"></div>
+                                        <a class="dropdown-header" href="{{ route('product-front-category', $menuitem['label']) }}">{{$menuitem['label']}}</a>
 
-                                        @foreach($menu['images'] as $menuimage)
+                                        @if(isset($menuitem['items']))
 
-                                            <aside>
+                                            @foreach($menuitem['items'] as $item)
 
-                                                <a class="dropdown-item" href="#">
+                                                <a class="dropdown-item" href="#">{{$item['label']}}</a>
 
-                                                    <img src="{{asset('storage/uploads/'.$menuimage['image'])}}"
+                                            @endforeach
 
-                                                         alt="&quot;&quot;" height="175px"
+                                        @endif
 
-                                                         width="175px">
-
-                                                    <p> {{$menuimage['label']}}</p>
-
-                                                </a>
-
-                                            </aside>
-
-                                        @endforeach
+                                        <ul class="dropdown-sub-list">
+                                            <li>
+                                                <a href="#">7 Utterly Wearable Fall ‘21 Trends</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The SOREL Sneaker Shop</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Denim For Every Body Style Finder</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The Gender-Neutral Fall Edit</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Fall Style For Every Size</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The Ultimate Fall Boot Guide</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Mix-and-Match Layering Pieces</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">‘90s Style Revivals Too Legit To Quit</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The Find New Arrivals</a>
+                                            </li>
+                                        </ul>
 
                                     </div>
 
-                                @endif
+                                @endforeach
+
+                                    @if(isset($menu['images']) && count($menu['images']) > 0)
+
+                                        <div class="mansory-item">
+
+                                            <div class="dropdown-header"></div>
+
+                                            @foreach($menu['images'] as $menuimage)
+
+                                                <aside>
+
+                                                    <a class="dropdown-item" href="#">
+
+                                                        <img src="{{asset('storage/uploads/'.$menuimage['image'])}}"
+
+                                                             alt="&quot;&quot;" height="175px"
+
+                                                             width="175px">
+
+                                                        <p> {{$menuimage['label']}}</p>
+
+                                                    </a>
+
+                                                </aside>
+
+                                            @endforeach
+
+                                            <ul class="dropdown-sub-list">
+                                                <li>
+                                                    <a href="#">7 Utterly Wearable Fall ‘21 Trends</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The SOREL Sneaker Shop</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Denim For Every Body Style Finder</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The Gender-Neutral Fall Edit</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Fall Style For Every Size</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The Ultimate Fall Boot Guide</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Mix-and-Match Layering Pieces</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">‘90s Style Revivals Too Legit To Quit</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The Find New Arrivals</a>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+
+                                    @endif
+
+                            </div>
+
+                            <div class="masonry-with-columns">
+
+                                @foreach($menu['items'] as $menuitem)
+
+                                    <div class="mansory-item">
+
+                                        <a class="dropdown-header" href="{{ route('product-front-category', $menuitem['label']) }}">{{$menuitem['label']}}</a>
+
+                                        @if(isset($menuitem['items']))
+
+                                            @foreach($menuitem['items'] as $item)
+
+                                                <a class="dropdown-item" href="#">{{$item['label']}}</a>
+
+                                            @endforeach
+
+                                        @endif
+
+                                        <ul class="dropdown-sub-list">
+                                            <li>
+                                                <a href="#">7 Utterly Wearable Fall ‘21 Trends</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The SOREL Sneaker Shop</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Denim For Every Body Style Finder</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The Gender-Neutral Fall Edit</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Fall Style For Every Size</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The Ultimate Fall Boot Guide</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Mix-and-Match Layering Pieces</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">‘90s Style Revivals Too Legit To Quit</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The Find New Arrivals</a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+
+                                @endforeach
+
+                                    @if(isset($menu['images']) && count($menu['images']) > 0)
+
+                                        <div class="mansory-item">
+
+                                            <div class="dropdown-header"></div>
+
+                                            @foreach($menu['images'] as $menuimage)
+
+                                                <aside>
+
+                                                    <a class="dropdown-item" href="#">
+
+                                                        <img src="{{asset('storage/uploads/'.$menuimage['image'])}}"
+
+                                                             alt="&quot;&quot;" height="175px"
+
+                                                             width="175px">
+
+                                                        <p> {{$menuimage['label']}}</p>
+
+                                                    </a>
+
+                                                </aside>
+
+                                            @endforeach
+
+                                            <ul class="dropdown-sub-list">
+                                                <li>
+                                                    <a href="#">7 Utterly Wearable Fall ‘21 Trends</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The SOREL Sneaker Shop</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Denim For Every Body Style Finder</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The Gender-Neutral Fall Edit</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Fall Style For Every Size</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The Ultimate Fall Boot Guide</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Mix-and-Match Layering Pieces</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">‘90s Style Revivals Too Legit To Quit</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The Find New Arrivals</a>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+
+                                    @endif
+
+                            </div>
+
+                            <div class="masonry-with-columns">
+
+                                @foreach($menu['items'] as $menuitem)
+
+                                    <div class="mansory-item">
+
+                                        <a class="dropdown-header" href="{{ route('product-front-category', $menuitem['label']) }}">{{$menuitem['label']}}</a>
+
+                                        @if(isset($menuitem['items']))
+
+                                            @foreach($menuitem['items'] as $item)
+
+                                                <a class="dropdown-item" href="#">{{$item['label']}}</a>
+
+                                            @endforeach
+
+                                        @endif
+
+                                        <ul class="dropdown-sub-list">
+                                            <li>
+                                                <a href="#">7 Utterly Wearable Fall ‘21 Trends</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The SOREL Sneaker Shop</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Denim For Every Body Style Finder</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The Gender-Neutral Fall Edit</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Fall Style For Every Size</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The Ultimate Fall Boot Guide</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Mix-and-Match Layering Pieces</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">‘90s Style Revivals Too Legit To Quit</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The Find New Arrivals</a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+
+                                @endforeach
+
+                                    @if(isset($menu['images']) && count($menu['images']) > 0)
+
+                                        <div class="mansory-item">
+
+                                            <div class="dropdown-header"></div>
+
+                                            @foreach($menu['images'] as $menuimage)
+
+                                                <aside>
+
+                                                    <a class="dropdown-item" href="#">
+
+                                                        <img src="{{asset('storage/uploads/'.$menuimage['image'])}}"
+
+                                                             alt="&quot;&quot;" height="175px"
+
+                                                             width="175px">
+
+                                                        <p> {{$menuimage['label']}}</p>
+
+                                                    </a>
+
+                                                </aside>
+
+                                            @endforeach
+
+                                            <ul class="dropdown-sub-list">
+                                                <li>
+                                                    <a href="#">7 Utterly Wearable Fall ‘21 Trends</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The SOREL Sneaker Shop</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Denim For Every Body Style Finder</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The Gender-Neutral Fall Edit</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Fall Style For Every Size</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The Ultimate Fall Boot Guide</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Mix-and-Match Layering Pieces</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">‘90s Style Revivals Too Legit To Quit</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The Find New Arrivals</a>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+
+                                    @endif
+
+                            </div>
+
+                            <div class="masonry-with-columns">
+
+                                @foreach($menu['items'] as $menuitem)
+
+                                    <div class="mansory-item">
+
+                                        <a class="dropdown-header" href="{{ route('product-front-category', $menuitem['label']) }}">{{$menuitem['label']}}</a>
+
+                                        @if(isset($menuitem['items']))
+
+                                            @foreach($menuitem['items'] as $item)
+
+                                                <a class="dropdown-item" href="#">{{$item['label']}}</a>
+
+                                            @endforeach
+
+                                        @endif
+
+                                        <ul class="dropdown-sub-list">
+                                            <li>
+                                                <a href="#">7 Utterly Wearable Fall ‘21 Trends</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The SOREL Sneaker Shop</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Denim For Every Body Style Finder</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The Gender-Neutral Fall Edit</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Fall Style For Every Size</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The Ultimate Fall Boot Guide</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Mix-and-Match Layering Pieces</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">‘90s Style Revivals Too Legit To Quit</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The Find New Arrivals</a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+
+                                @endforeach
+
+                                    @if(isset($menu['images']) && count($menu['images']) > 0)
+
+                                        <div class="mansory-item">
+
+                                            <div class="dropdown-header"></div>
+
+                                            @foreach($menu['images'] as $menuimage)
+
+                                                <aside>
+
+                                                    <a class="dropdown-item" href="#">
+
+                                                        <img src="{{asset('storage/uploads/'.$menuimage['image'])}}"
+
+                                                             alt="&quot;&quot;" height="175px"
+
+                                                             width="175px">
+
+                                                        <p> {{$menuimage['label']}}</p>
+
+                                                    </a>
+
+                                                </aside>
+
+                                            @endforeach
+
+                                            <ul class="dropdown-sub-list">
+                                                <li>
+                                                    <a href="#">7 Utterly Wearable Fall ‘21 Trends</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The SOREL Sneaker Shop</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Denim For Every Body Style Finder</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The Gender-Neutral Fall Edit</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Fall Style For Every Size</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The Ultimate Fall Boot Guide</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Mix-and-Match Layering Pieces</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">‘90s Style Revivals Too Legit To Quit</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The Find New Arrivals</a>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+
+                                    @endif
+
+                            </div>
+
+                            <div class="masonry-with-columns">
+
+                                @foreach($menu['items'] as $menuitem)
+
+                                    <div class="mansory-item">
+
+                                        <a class="dropdown-header" href="{{ route('product-front-category', $menuitem['label']) }}">{{$menuitem['label']}}</a>
+
+                                        @if(isset($menuitem['items']))
+
+                                            @foreach($menuitem['items'] as $item)
+
+                                                <a class="dropdown-item" href="#">{{$item['label']}}</a>
+
+                                            @endforeach
+
+                                        @endif
+
+                                        <ul class="dropdown-sub-list">
+                                            <li>
+                                                <a href="#">7 Utterly Wearable Fall ‘21 Trends</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The SOREL Sneaker Shop</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Denim For Every Body Style Finder</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The Gender-Neutral Fall Edit</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Fall Style For Every Size</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The Ultimate Fall Boot Guide</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Mix-and-Match Layering Pieces</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">‘90s Style Revivals Too Legit To Quit</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">The Find New Arrivals</a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+
+                                @endforeach
+
+                                    @if(isset($menu['images']) && count($menu['images']) > 0)
+
+                                        <div class="mansory-item">
+
+                                            <div class="dropdown-header"></div>
+
+                                            @foreach($menu['images'] as $menuimage)
+
+                                                <aside>
+
+                                                    <a class="dropdown-item" href="#">
+
+                                                        <img src="{{asset('storage/uploads/'.$menuimage['image'])}}"
+
+                                                             alt="&quot;&quot;" height="175px"
+
+                                                             width="175px">
+
+                                                        <p> {{$menuimage['label']}}</p>
+
+                                                    </a>
+
+                                                </aside>
+
+                                            @endforeach
+
+                                            <ul class="dropdown-sub-list">
+                                                <li>
+                                                    <a href="#">7 Utterly Wearable Fall ‘21 Trends</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The SOREL Sneaker Shop</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Denim For Every Body Style Finder</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The Gender-Neutral Fall Edit</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Fall Style For Every Size</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The Ultimate Fall Boot Guide</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Mix-and-Match Layering Pieces</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">‘90s Style Revivals Too Legit To Quit</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">The Find New Arrivals</a>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+
+                                    @endif
+
+                            </div>                            
+
+                            <div class="masonry-with-columns">
+                                <aside class="mega-menu-img">
+                                    <a href="#">
+                                        <img src="https://m.media-amazon.com/images/G/01/2021/Global-Nav/COOP-UGG-DISKETTE-GLOBAL-NAV-350x350.jpg">
+                                        <p class="mg-img-text">Shop Women's UGG®</p>
+                                    </a>
+                                </aside>
+                                <aside class="mega-menu-img">
+                                    <a href="#">
+                                        <img src="https://m.media-amazon.com/images/G/01/2021/Global-Nav/FREE-PEOPLE-BLOUSE-GLOBAL-NAV.jpg">
+                                        <p class="mg-img-text">Shop Free People</p>
+                                    </a>
+                                </aside>
+                            </div>
 
                         </div>
-
-
-
-
 
 
 
@@ -430,186 +961,73 @@
 
     @else
 
-        <a href="#" class=" mr-3 turn-btn f-bl" name="login-btn" id="login-btn">Sign In / Register</a>
+        <a href="#" class=" mr-3 turn-btn f-bl" name="login-btn" id="login-btn" onclick="document.getElementById('sign-in-form').style.display='block'">Sign In / Register</a>
 
     @endauth
 
 @endif
 
 
-
-<section class="sign-in-form turn-child z-999 dis-none col-12 p-0 left position-absolute" id="sign-in-form"
-
-         name="sign-in-form">
-
-    <div class=" position-relative signin-inner m-auto">
-
-        <div class="bg-white position-absolute">
-
-            <div class="top d-flex align-items-center">
-
-                <h3 class="login-heading p-2 pt-3 pl-3 s-22 f-24 f-bl">Sign-in</h3>
-
-                <div class="cross-container turn-cross mr-4" id="login-close">
-
-                    <span id="login-close" class="cross"></span>
-
-                    <span id="login-close" class="cross"></span>
-
-                </div>
-
-            </div>
-
-            <div class="middle row col-12 m-0 p-0">
-
-                <div class="col-md-6 col-12 left order-md-0 order-1  mt-md-4 pt-md-3">
-
-
-
-                    <a href="{{ route('login') }}">
-
-                        <div class="col-md-11 ml-auto mr-auto  signin-item rounded mb-3 d-flex align-items-center">
-
-                            <div class="platform zappos pt-1 ml-auto">
-
-                                <img class="img-fluid" src="{{ URL::asset('/assets/zappos-iicon.svg')}}" alt="">
-
-                            </div>
-
-                            <p class="sign-options m-0 ml-1 mr-auto">SIGN IN WITH ZAPOOS</p>
-
-                        </div>
-
-                    </a>
-
-
-
-                    <div class="col-md-11 ml-auto mr-auto  signin-item rounded mb-3 d-flex align-items-center">
-
-                        <div class="platform amazon ml-auto">
-
-                            <img class="img-fluid pt-2 mt-1"
-
-                                 src="https://cdn.freebiesupply.com/images/large/2x/amazon-logo-transparent.png"
-
-                                 alt="">
-
-                        </div>
-
-                        <p class="sign-options m-0 ml-2 mr-auto">SIGN IN WITH AMAZON</p>
-
-                    </div>
-
-
-
-                    <div class="col-md-11 ml-auto mr-auto  signin-item rounded mb-3 d-flex align-items-center">
-
-                        <div class="platform google ml-auto">
-
-                            <img class="img-fluid w-100 d-block pt-1 mt-1"
-
-                                 src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-google-icon-logo-png-transparent-svg-vector-bie-supply-14.png"
-
-                                 alt="">
-
-                        </div>
-
-                        <p class="sign-options m-0 ml-2 mr-auto">SIGN IN WITH GOOGLE</p>
-
-                    </div>
-
-
-
-                    <div class="d-flex m-auto col-12">
-
-                        <span class="ml-auto m-3" style="width: 40%; height:0.13em; background: grey;"></span>
-
-                        <p class="pl-4 pr-4">or</p>
-
-                        <span class="mr-auto m-3" style="width: 40%; height: 0.13em; background: grey;"></span>
-
-                    </div>
-
-
-
-                    <a href="{{ route('register') }}">
-
-                        <div class="col-md-11 ml-auto mr-auto  signin-item rounded mb-3 d-flex align-items-center">
-
-                            <div class="platform zappos pt-1 ml-auto d-none">
-
-                                <img class="img-fluid" src="{{ URL::asset('/assets/zappos-iicon.svg')}}" alt="">
-
-                            </div>
-
-                            <p class="sign-options m-0 ml-1 m-auto">CREATE YOUR ZAPOOS ACCOUNT</p>
-
-                        </div>
-
-                    </a>
-
-
-
-                    <div class="col-8 terms mr-auto ml-auto mt-md-5 mt-4 text-center">
-
-                        <p class="f-12 m-0">By signing in, you agree to Zappos</p>
-
-                        <p class="f-12"><a href="#" class="f-12 underline hover-blue">Terms and Conditions</a> and
-
-                            <a href="#" class="f-12 underline hover-blue">Privacy Policy</a>.</p>
-
-                    </div>
-
-
-
-                </div>
-
-                <div class="col-md-6 col-12 right pl-md-5">
-
-                    <h5 class="heading f-18 s-16 f-bl">
-
-                        By logging in with Amazon, you may be eligible for additional Prime benefits like FREE
-
-                        Upgraded Shipping. Then, join Zappos VIP for additional Prime-linked VIP perks:
-
-                    </h5>
-
-                    <ul>
-
-                        <li>If you are an Amazon Prime Member, sign in with Amazon to qualify for free upgraded
-
-                            shipping!
-
-                        </li>
-
-                        <li>Get FREE Expedited Shipping</li>
-
-                        <div class="d-none d-md-block">
-
-                            <li>Earn 2 Points for Every $1 Spent</li>
-
-                            <li>Receive Bonus Points on Select Brands</li>
-
-                            <li>Redeem Points for VIP Codes</li>
-
-                        </div>
-
-                    </ul>
-
-                </div>
-
-            </div>
-
-        </div>
-
-       </div>
-
-     </section>
     </nav>
 </div>
  
 </div>
-</div>
 
+
+
+    <!-- modal start -->
+    <div class="site-modal" id="sign-in-form" name="sign-in-form">
+        <div class="site-modal-main">
+            <div class="site-modal-inner">
+                <button class="signin-close-btn" onclick="document.getElementById('sign-in-form').style.display='none'">
+                    <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                        <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+                    </svg>
+                </button>
+                <div class="site-modal-middle">
+                    <div class="container" id="container">
+                        <div class="form-container sign-up-container">
+                            <form action="#">
+                                <h2 class="h2">Create Account</h2>
+                                <span>or use your email for registration</span>
+                                <input type="text" placeholder="Name" />
+                                <input type="email" placeholder="Email" />
+                                <input type="password" placeholder="Password" />
+                                <input type="password" placeholder="Re-enter password " />
+                                <button class="site-btn blue-btn">Sign Up</button>
+                            </form>
+                        </div>
+                        <div class="form-container sign-in-container">
+                            <form action="#">
+                                <h2 class="h2">Sign in</h2>
+                                <span>or use your account</span>
+                                <input type="email" placeholder="Email" />
+                                <input type="password" placeholder="Password" />
+                                <a href="#">Forgot your password?</a>
+                                <button class="site-btn blue-btn">Sign In</button>
+                            </form>
+                        </div>
+                        <div class="overlay-container">
+                            <div class="overlay">
+                                <div class="overlay-panel overlay-left">
+                                    <h2 class="h2">Welcome Back!</h2>
+                                    <p>To keep connected with us please login with your personal info</p>
+                                    <button class="ghost site-btn light-blue-btn" id="signIn">Sign In</button>
+                                </div>
+                                <div class="overlay-panel overlay-right">
+                                    <h2 class="h2">Hello, Friend!</h2>
+                                    <p>Enter your personal details and start journey with us</p>
+                                    <button class="ghost site-btn light-blue-btn" id="signUp">Sign Up</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal end -->
+
+</div>
 
 
