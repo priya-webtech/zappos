@@ -109,7 +109,7 @@ $(document).ready(function() {
 
 });
 
-// $(document).ready(function(){
+ $(document).ready(function(){
 //     $(".nav-item").hover(            
 //         function() {
 //             $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
@@ -120,4 +120,4 @@ $(document).ready(function() {
 //             $(this).toggleClass('open');       
 //         }
 //     );
-// });
+ });
