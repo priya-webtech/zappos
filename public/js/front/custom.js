@@ -108,7 +108,7 @@ $(document).ready(function() {
 	});
 
 });
-
+// test
  $(document).ready(function(){
 //     $(".nav-item").hover(            
 //         function() {
