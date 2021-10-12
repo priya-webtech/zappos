@@ -87,7 +87,7 @@ class Detail extends Component
         $this->customerData = $this->customer;
 
         $this->countries = Country::all();
-
+        
         $this->tags = Tag::all(['label']);
 
         

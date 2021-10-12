@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCollectionProductTable extends Migration
+class CreateTagsalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateCollectionProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('collection_product', function (Blueprint $table) {
-            $table->bigInteger('id');
-            $table->bigInteger('product_id');
-            $table->bigInteger('collection_id');
-            $table->string('product_name');
+        Schema::create('tagsales', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('icon');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateCollectionProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('collection_product');
+        Schema::dropIfExists('tagsales');
     }
 }

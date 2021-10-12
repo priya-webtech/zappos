@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductMediaTable extends Migration
+class CreateCartTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,6 @@ class CreateProductMediaTable extends Migration
             $table->bigInteger('user_id');
             $table->Integer('product_id');
             $table->Integer('varientid');
-            $table->Integer('product_id');
             $table->Integer('price');
             $table->Integer('locationid');
             $table->Integer('stock');
@@ -33,6 +32,6 @@ class CreateProductMediaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_media');
+        Schema::dropIfExists('cart');
     }
 }

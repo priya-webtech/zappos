@@ -9,17 +9,19 @@ use App\Models\ProductMedia;
 use Illuminate\Pagination\Paginator;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use App\Models\tagsale;
 
 class ProductCategory extends Component
 {
 	use WithFileUploads, WithPagination;
 
-	public $menuitems,$getproduct,$Productmediass,$amount_spent,$filter_product;
+	public $menuitems,$getproduct,$tagsale,$Productmediass,$amount_spent,$filter_product;
 	//protected $paginationTheme = 'bootstrap';
 	public $perPage = 10;
 	public function mount($slug) {
 
 		$this->menuitems = MenuItems::where('link',$slug)->first();
+		$this->tagsale = tagsale::orderBy('id', 'DESC')->get();
 		$this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
 		
 

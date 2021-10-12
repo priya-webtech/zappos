@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductMediaTable extends Migration
+class CreateProductTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProductMediaTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_variants', function (Blueprint $table) {
+        Schema::create('product', function (Blueprint $table) {
             $table->integer('id');
             $table->integer('product_id')->nullable();
             $table->integer('varient1')->nullable();
@@ -61,6 +61,6 @@ class CreateProductMediaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_media');
+        Schema::dropIfExists('product');
     }
 }

@@ -518,7 +518,7 @@
 
                                 <span>{{ url('/product') }}/</span>
 
-                                <input name="seo_utl" type="text">
+                                <input name="seo_url" type="text">
 
                             </div>
 

@@ -983,14 +983,12 @@
 
                         <p class="mb-0">
 
-                            <select  name="status" wire:model="product.product_new">
+                            <select  name="status" wire:model="product.product_new" multiple>
 
                                 <option value="">-- Select Option --</option>
-
-                                <option value="1" @if($product->product_new == '1') selected @endif>New</option>
-
-                                <option value="2" @if($product->product_new == '2') selected @endif>Sale</option>
-
+                                @foreach($tagsale as $res)
+                                <option value="{{$res->id}}" >{{$res->title}}</option>
+                                @endforeach
                             </select>                     
 
                         </p>
