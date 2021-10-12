@@ -3,13 +3,20 @@
     <x-customer-layout>
     	<!-- category html start -->
 
-        <div class="category-head">
+        <div class="category-head" wire:ignore>
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="category-title">
                             <h2 class="h2">Slippers</h2>
-                            <p>1463 items found</p>
+                            <?php  $countid = 0; ?>
+                            @foreach($Product as $rows)
+                            <?php $decodeA = json_decode($rows->collection); ?>
+                            @if(in_array($menuitems->multipleid, $decodeA))
+                              <?php  $countid++; ?>
+                            @endif
+                            @endforeach
+                            <p><?php echo $countid; ?> items found</p>
                         </div>
                         <form>
                             <div class="form-group">
@@ -212,15 +219,15 @@
                                         <div class="cat-content-inner">
                                             <div class="cat-checkbox-list">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    <input class="form-check-input" type="checkbox" value="50" wire:model="amount_spent">
                                                     <label class="form-check-label" for="defaultCheck1"> $50.00 and Under (11) </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    <input class="form-check-input" type="checkbox" value="100" wire:model="amount_spent">
                                                     <label class="form-check-label" for="defaultCheck1"> $100.00 and Under (16) </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    <input class="form-check-input" type="checkbox" value="200" wire:model="amount_spent">
                                                     <label class="form-check-label" for="defaultCheck1"> $200.00 and Under (16) </label>
                                                 </div>
                                             </div>
@@ -510,9 +517,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-9" wire:ignore>
                         <div class="category-right">
-                            <div class="your-selections">
+                            <div class="your-selections" wire:ignore>
                                 <h4 class="h4">Your Selections</h4>
                                 <div class="your-selections-inner">
                                     <div class="your-selections-list">
@@ -526,23 +533,28 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="cat-product-section">
+                            <div class="cat-product-section" wire:ignore>
                                 <div class="row">
+                                    @foreach($Product as $rows)
+                                    @foreach($Productmediass as $row_img)
+                                    <?php $decodeA = json_decode($rows->collection); ?>
+                                    @if(in_array($menuitems->multipleid, $decodeA) && $row_img[0]['product_id'] == $rows->id)
                                     <div class="col-md-3 cat-pd-col">
                                         <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
+                                            <a href="{{ route('product-front-detail', $rows->seo_utl) }}">
+                                                <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
                                             </a>
                                             <button class="cat-wishlist-btn wishlist-pd"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
+                                            @if($rows->product_new == 1) <span class="cat-pd-tag">New</span> @endif
+                                            @if($rows->product_new == 2) <span class="cat-pd-tag">Sale</span> @endif
                                         </div>
                                         <div class="cat-pd-content">
                                             <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
+                                                <h6 class="h6">{{$rows->title}}</h6>
+                                                <p>{{$rows->title}}</p>
                                             </a>
                                             <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
+                                                <span class="mrp-price">${{round($rows->price, 2)}}</span>
                                                 <span class="msrp-price">MSRP: $150.00</span>
                                             </p>
                                             <div class="cat-pd-review">
@@ -555,545 +567,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="#">
-                                                <img src="https://m.media-amazon.com/images/I/71JsuIDRWjL._AC_SX255_.jpg">
-                                            </a>
-                                            <button class="cat-wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            <span class="cat-pd-tag">New</span>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="#">
-                                                <h6 class="h6">Acron</h6>
-                                                <p>Slipper Socks</p>
-                                            </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">$99.95</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
-                                            </p>
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endif
+                              
+                                    @endforeach
+                                    @endforeach
                                 </div>
                             </div>
-                            <nav class="page-pagination" aria-label="Page navigation">
-                                <ul class="pagination ">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>Previous</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">1</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">3</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">4</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">5</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                                    </li>
-                                </ul>
+                            <nav class="page-pagination" aria-label="Page navigation" wire:ignore>
+                               <div class="pagination">
+
+                                 {{ $Product->links() }}
+
+                                </div>
                             </nav>
                         </div>
                     </div>

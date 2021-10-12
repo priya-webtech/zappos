@@ -1,3 +1,33 @@
+/*********************************
+			Jasmin Js
+*********************************/
+$(document).ready(function() {
+    $('.customer-service-btn').click(function() {
+        $('.customer-service-dropdown').slideToggle("fast");
+        $(this).toggleClass("up-arrow");
+    });
+    $('.cs-close-btn').click(function() {
+        $('.customer-service-dropdown').slideUp("fast");
+        $('.customer-service-btn').removeClass("up-arrow");
+    });
+});
+
+// Oty plus minus js
+
+$(document).ready(function() {
+	$(document).on('click', '.qty-plus', function () {
+	   $(this).prev().val(+$(this).prev().val() + 1);
+	});
+	$(document).on('click', '.qty-minus', function () {
+	   if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
+	});
+});
+
+$('.cat-title').click(function(e) {
+    // e.preventDefault();
+    // $('.cat-sidebar-list').removeClass('open-cat');
+    $(this).parent().toggleClass('open-cat');
+});
 /*Product details page js*/
 
 /*Product slider js*/

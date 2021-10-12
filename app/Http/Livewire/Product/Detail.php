@@ -141,6 +141,7 @@ class Detail extends Component
         'product.barcode' => '',
         'product.hscode' => '',
         'product.location' => '',
+        'product.product_new' => '',
         'product.trackqtn' => '',
         'product.outofstock' => '',
         'Productvariant.*.price' => 'required|string',
@@ -371,6 +372,8 @@ class Detail extends Component
                     'cost'             => $this->product['cost'],
                     
                     'margin'           => $this->product['margin'],
+                    
+                    'product_new'      => $this->product['product_new'],
                     
                     'profit'           => $this->product['profit'],
                 

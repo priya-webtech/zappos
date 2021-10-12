@@ -353,10 +353,11 @@
                                 @if(Cookie::get('shopping_cart'))
                                 <?php $cookieitem = json_decode(Cookie::get('shopping_cart')); ?>
                                 @foreach($productrelated as $pro_res)
-                                 @foreach($cookieitem as $result)
-                                @if($pro_res->id == $result)
+                                @foreach($cookieitem as $result)
+                                @foreach($Productmediass as $row_img)
+                                @if($pro_res->id == $result && $row_img[0]['product_id'] == $pro_res->id)
                                 <div>
-                                    <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
+                                    <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
                                     <div class="multi-item-content">
                                         <a class="wish-list" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
                                         <p>{{$pro_res->title}}</p>
@@ -364,6 +365,7 @@
                                     </div>
                                 </div>
                                 @endif
+                                @endforeach
                                 @endforeach
                                 @endforeach
                                 @endif

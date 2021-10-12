@@ -972,6 +972,31 @@
 
                     </div>
 
+
+                    <div class="card-header">
+
+                        <div class="header-title">
+
+                            <h3 class="fs-16 fw-6 mb-0">Product New</h3>
+
+                        </div>
+
+                        <p class="mb-0">
+
+                            <select  name="status" wire:model="product.product_new">
+
+                                <option value="">-- Select Option --</option>
+
+                                <option value="1" @if($product->product_new == '1') selected @endif>New</option>
+
+                                <option value="2" @if($product->product_new == '2') selected @endif>Sale</option>
+
+                            </select>                     
+
+                        </p>
+
+                    </div>
+
                     <div class="card-middle sales-channels-apps">
 
                         <div class="header-title">

@@ -558,6 +558,32 @@
 
                     </div>
 
+                    <div class="card-header">
+
+                        <div class="header-title">
+
+                            <h3 class="fs-16 fw-6 mb-0">Product New</h3>
+
+                        </div>
+
+                        <p class="mb-0">
+
+                            <select  name="product_new">
+
+                                <option value="">-- Select Option --</option>
+
+                                <option value="1">New</option>
+
+                                <option value="2">Sale</option>
+
+                            </select>                     
+
+                        </p>
+
+                        <p class="mb-0">This product will be hidden from all sales channels.</p>
+
+                    </div>
+
                     <div class="card-middle">
 
                         <div class="header-title">
