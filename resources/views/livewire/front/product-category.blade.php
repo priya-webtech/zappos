@@ -11,9 +11,11 @@
                             <h2 class="h2">Slippers</h2>
                             <?php  $countid = 0; ?>
                             @foreach($Product as $rows)
+                            @if($rows->collection)
                             <?php $decodeA = json_decode($rows->collection); ?>
                             @if(in_array($menuitems->multipleid, $decodeA))
                               <?php  $countid++; ?>
+                            @endif
                             @endif
                             @endforeach
                             <p><?php echo $countid; ?> items found</p>
@@ -545,8 +547,21 @@
                                                 <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
                                             </a>
                                             <button class="cat-wishlist-btn wishlist-pd"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
-                                            @if($rows->product_new == 1) <span class="cat-pd-tag">New</span> @endif
-                                            @if($rows->product_new == 2) <span class="cat-pd-tag">Sale</span> @endif
+
+                                            <?php $saledecode = json_decode($rows->product_new); ?>
+                                            <div class="cat-pd-tag-gp">
+                                            @if($rows->product_new)
+                                            @foreach($tagsale as $row)
+                                            @if(in_array($row->id, $saledecode))
+                                            @foreach($saledecode as $sale)
+                                            @if($row->id == $sale) 
+                                            <span class="cat-pd-tag">{{$row->title}}</span>
+                                            @endif
+                                            @endforeach
+                                            @endif
+                                            @endforeach
+                                            @endif
+                                            </div>
                                         </div>
                                         <div class="cat-pd-content">
                                             <a href="#">

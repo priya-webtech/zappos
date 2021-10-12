@@ -24,6 +24,8 @@ use App\Models\Location;
 
 use App\Models\VariantTag;
 
+use App\Models\tagsale;
+
 use Illuminate\Http\Request;
 
 use Livewire\WithFileUploads;
@@ -35,7 +37,7 @@ class Detail extends Component
     use WithFileUploads;
 
 
-    public $product,$variantag,$Country,$uuid,$Productmedia,$Productvariant,$tags,$location,$variantStock,$variantStock_clone,$descripation, $LocationId, $editQuantitiesDetailsModal,$varition_name,$location_edit,$Collection,$fullStock,$urlpath, $productCollection = [];
+    public $product,$variantag,$tagsale,$Country,$uuid,$Productmedia,$Productvariant,$tags,$location,$variantStock,$variantStock_clone,$descripation, $LocationId, $editQuantitiesDetailsModal,$varition_name,$location_edit,$Collection,$fullStock,$urlpath, $productCollection = [];
 
     public $image = [], $selectedlocation = [], $stock = [], $locationarray;
 
@@ -82,7 +84,7 @@ class Detail extends Component
         $this->product = Product::where('uuid',$this->uuid)->first();
         $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
         $this->Productvariant = ProductVariant::where('product_id',$this->product['id'])->get();
-    
+        $this->tagsale = tagsale::get();
         $this->tags = Tag::All();
         $this->variantag = VariantTag::All();
         $this->Collection = Collection::All();
@@ -361,7 +363,7 @@ class Detail extends Component
                     
                     'trackqtn'         => $trackqtn,
                     
-                    'location'            => json_encode($this->locationarray),
+                    'location'         => json_encode($this->locationarray),
                     
                     'hscode'           => $this->product['hscode'],
                     
@@ -373,7 +375,7 @@ class Detail extends Component
                     
                     'margin'           => $this->product['margin'],
                     
-                    'product_new'      => $this->product['product_new'],
+                    'product_new'      => json_encode($this->product['product_new']),
                     
                     'profit'           => $this->product['profit'],
                 

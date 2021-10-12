@@ -398,7 +398,9 @@ ul.product-right-social li a.pd-mail svg path {color: #dcdcdc; }
 .cat-wishlist-btn {position: absolute; bottom: 0; right: 0; background-color: #e4d518; font-size: 14px; padding: 3px 10px; border-radius: 5px 0 0 0; cursor: pointer; display: none;}
 .cat-wishlist-btn i {margin-right: 4px; color: #fff; }
 .wishlist-pd i {color: #D94040; }
-.cat-pd-tag {position: absolute; left: 6px; top: 6px; background-color: #035d59; border-radius: 0 15px 0 15px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: #fff; line-height: 20px; padding: 4px 15px; }
+.cat-pd-tag-gp {display: flex; justify-content: space-between; position: absolute; left: 6px; top: 6px; right: 6px; }
+.cat-pd-tag {background-color: #035d59; border-radius: 0 15px 0 15px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: #fff; line-height: 20px; padding: 4px 15px; }
+.cat-pd-tag-gp .cat-pd-tag:nth-child(2) {border-radius: 15px 0 15px 0; }
 .cat-pd-content {padding: 15px 0; }
 .cat-pd-content a {font-size: 14px; color: #202223; text-decoration: none; }
 .cat-pd-content .h6 {margin-bottom: 2px; font-size: 16px; color: #202223; font-weight: 600; }
