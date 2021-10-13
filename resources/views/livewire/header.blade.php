@@ -66,20 +66,17 @@
                                     <div class="header-search-icon"><i class="fa fa-search" aria-hidden="true"></i></div>
                                 </form>
                                 <div class="col-12 text-dark p-0 auto-fill" id="autofill" style="display: none">
-<<<<<<< HEAD
                                     <div class="border bg-white rounded-bottom pb-1">
                                         <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">cases</button></div>
                                         <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">iphone cases</button></div>
                                         <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">samsung cases</button></div>
                                         <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">winter sweaters</button></div>
                                         <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">Trousers</button></div>
-=======
                                     <div class="ml-md-2 border bg-white rounded-bottom pb-1"  wire:ignore>
                                         @foreach($getproduct as $row)
                                         <div class=" p-1 pl-3 m-0 pr-3 link-fill product-item"><a href="{{ route('product-front-detail', $row->seo_utl) }}"><button class="link-fill">{{$row->title}}</button></a></div>
                                         @endforeach
                                        
->>>>>>> main
                                     </div>
                                 </div>
                             </div>
@@ -254,11 +251,8 @@
 
                                 @foreach($menu['items'] as $menuitem)
 
-<<<<<<< HEAD
                                     <div class="mansory-item">
-=======
                                     <a class="dropdown-header" href="{{ route('product-front-category', $menuitem['link']) }}">{{$menuitem['label']}}</a>
->>>>>>> main
 
                                         <a class="dropdown-header" href="{{ route('product-front-category', $menuitem['label']) }}">{{$menuitem['label']}}</a>
 

@@ -1,8 +1,8 @@
-<div>
+<div :id="{{$product->id}}">
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
 <x-customer-layout>
 
-    <div id="breadcrumb-container" name="breadcrumb-container">
+    <div id="breadcrumb-container" name="breadcrumb-container" >
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -221,57 +221,59 @@
                         <div class="product-rightbar">
                             <div class="product-right-top">
                                 <div class="pd-total">
-                                    <input type="hidden" wire:model="productid" id="productid" value="{{$product->id}}">
-                                    <input type="hidden" wire:model="varientid" id="varientid" value="22">
                                     <h2 class="h2" id="getprice">${{round($product->price,2)}}</h2>
                                     <label>Ships Free!</label>
                                 </div>
-                                <input type="hidden" wire:model="getpriceinput" id="getpriceinput" value="@if($Productvariantsize){{$product->price}}@endif">
                                 <form>
-                                    @if($Productvariantsize)
-                                    @foreach($Productvariantsize as $size)
-                                    @foreach($varianttag as $locrow)
+
+                                    @if($product && isset($product->variants) && count($product->variants) > 0 )
+                                     @foreach($product->variants as $row)
                                     <div class="form-group">
-                                        @if($locrow->id == $size->varient1)
-                                        <label>{{$locrow->name}}</label>
+                                        @if(!empty($row->varient1))
+                                        <label>{{$row->varient1}}</label>
                                         <select name="attribute1" class="form-control varition-change" class="form-control" id="varient1">
-                                               <option>-- Select {{$locrow->name}} --</option> 
-                                            @foreach($Productvariant as $row)
+                                            @foreach($product->variants as $row)
                                                 @if($row->attribute1 != "")
                                                 <option>{{$row->attribute1}}</option> 
                                                 @endif 
                                             @endforeach
                                         </select>
                                         @endif
-                                        @if($locrow->id == $size->varient2)
-                                        <label>{{$locrow->name}}</label>
+
+                                         @if(!empty($row->varient2))
+                                        <label>{{$row->varient2}}</label>
                                         <select name="attribute2" class="form-control varition-change" class="form-control" id="varient2">
-                                            @foreach($Productvariant as $row)
+                                            @foreach($product->variants as $row)
                                                 @if($row->attribute2 != "")
                                                 <option>{{$row->attribute2}}</option> 
                                                 @endif 
                                             @endforeach
                                         </select>
                                         @endif
-                                        @if($locrow->id == $size->varient3)
-                                        <label>{{$locrow->name}}</label>
+
+                                         @if(!empty($row->varient3))
+                                        <label>{{$row->varient3}}</label>
                                         <select name="attribute3" class="form-control varition-change" class="form-control" id="varient3">
-                                            @foreach($Productvariant as $row)
+                                            @foreach($product->variants as $row)
                                                 @if($row->attribute3 != "")
                                                 <option>{{$row->attribute3}}</option> 
                                                 @endif 
                                             @endforeach
                                         </select>
                                         @endif
+
                                     </div>
-                                    @endforeach
+                                    <?php break; ?>
                                     @endforeach
                                     @endif
                                 </form>
-                                    <button class="site-btn" wire:ignore wire:click.prevent="addCart()">Add to Cart</button>
+                                <div :id="{{$product->id}}">
+                                    <input type="hidden" id="variant_id">
+                                    <button class="site-btn" wire:key="{{rand()}}" wire:click="addcart">Add to Cart</button>
                                     <a class="site-btn add-collection-btn" href="#"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to collection</a>
-                                </form>
+                                </div>
                             </div>
+                           
                             <div class="product-right-bottom">
                                 <div class="size-and-social pd-right-p">
                                     <a href="#">Don't See your size?</a>
@@ -376,7 +378,7 @@
             </div>
         </div>
     <script type="text/javascript">
-        
+         
         $(function(){
             $(document).on("change", ".varition-change", function () {
                 var val1 = $('#varient1').val();
@@ -387,58 +389,44 @@
                     url: "{{URL('varientData')}}",
                     data: { text1: val1, text2: val2, text3: val3},
                     success: function(response) {
-                        $('#getprice').html(response.fetchprice.price);
-                        $('#getstock').html(response.fetchstock.stock);
-                        $('#getpriceinput').attr('value',response.fetchprice.price);
-                        $('#varientid').attr('value',response.fetchprice.id);
+                        var price = stock = 0;
+                        var id = null;
+                        if(response.variant != null) 
+                        {
+                             price = response.variant.price;
+                             stock = response.variant.variant_stock[0].stock;
+                             id = response.variant.id;
+                        }
+                        
+                        $('#getprice').html('$'+price);
+                        $('#getstock').html(stock);
+                        $('#getpriceinput').attr('value',price);
+                        $('#variant_id').prop('value',id);
                     }
                 });
             });
         })
+    
+        // $(document).ready(function() {
+        //     $(".delete-cart").click(function() { 
 
+        //     var deletecartid =  $('#deletecartid').val();
 
-        $(document).ready(function() {
-            $("#addcart").click(function() { 
-
-            var productid =  $('#productid').val();
-            var stockitem =  $('#stockitem').val();
-            var getpriceinput =  $('#getpriceinput').val();
-            var varientid =  $('#varientid').val();
-
-             $.ajax({
-                url: '{{URL("add-to-cart")}}',  
-                type: 'GET',
-                data: { productid:productid,stockitem:stockitem,getpriceinput:getpriceinput,varientid:varientid},
-
-                success:function(data){
-                    myVariable=data;
-                    console.log(data);
-                    document.getElementById("proceed-cart").style.display = "block";
-                }
-            });
-          });
-        });
-        
-        $(document).ready(function() {
-            $(".delete-cart").click(function() { 
-
-            var deletecartid =  $('#deletecartid').val();
-
-             $.ajax({
-                url: '{{URL("delete-cart-product")}}',  
-                type: 'GET',
-                data: { deletecartid:deletecartid},
-                success: function (response) {
-                    //window.location.reload();
-                     //myVariable=data;
-                    //console.log(data);
-                    document.getElementById("proceed-cart").style.display = "block";
-                },
-                complete: function () {
-                }
-            });
-          });
-        });
+        //      $.ajax({
+        //         url: '{{URL("delete-cart-product")}}',  
+        //         type: 'GET',
+        //         data: { deletecartid:deletecartid},
+        //         success: function (response) {
+        //             //window.location.reload();
+        //              //myVariable=data;
+        //             //console.log(data);
+        //             document.getElementById("proceed-cart").style.display = "block";
+        //         },
+        //         complete: function () {
+        //         }
+        //     });
+        //   });
+        // });
 
     </script>
 </x-customer-layout>
