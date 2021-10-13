@@ -7,9 +7,7 @@
                     <div class="row">
                         <div class="col-12 d-flex align-items-center">
                             <div class="dropdown cs-drop-head" id="left-header-btn">
-                                <button class="btn customer-service-btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Customer Service
-                                </button>
+                                <button class="btn customer-service-btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Customer Service </button>
                                 <div class="dropdown-menu customer-service-dropdown" aria-labelledby="dropdownMenuButton">
                                     <li><a class="dropdown-item" href="#">Contact Info</a></li>
                                     <li><a class="dropdown-item" href="#">FAQ</a></li>
