@@ -6,49 +6,16 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center">
-                            <div class="left-header align-items-center d-flex">
-                                <div id="left-header-btn" name="left-header-btn">
-                                    <div class="customer-service d-flex">
-                                        <div id="drop-down-div" class="d-flex">
-                                            <p>
-                                                Customer Service
-                                            </h1>
-                                            <i class="fa fa-sort-down drop-down" id="drop-btn"></i>
-                                        </div>
-                                    </div>
-                                    <div class="drop-down-container bg-white text-dark p-0">
-                                        <div class="menu-container pb-2">
-                                            <div class="menu p-0" id="cs-close">
-                                                <span></span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <ul class="m-0">
-                                            <a href="#">
-                                                <li>Contact Info</li>
-                                            </a>
-                                            <a href="#">
-                                                <li>FAQ</li>
-                                            </a>
-                                            <a href="#">
-                                                <li>Give your Feedback</li>
-                                            </a>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- <div class="contact-time d-flex">
-                                    <p>
-                                        Available 24/7 at &nbsp;
-                                    </p>
-                                    <span class="contact-number">(800) 92<span class="t7">7</span>-<span class="t7">7</span>6<span class="t7">7</span>1</span>
-                                </div> -->
-                            </div>
-                            <!-- <div class="header-info ml-auto pb-0 pt-0">
-                                <p>
-                                    <span class="bold">Earn a total of 5% Back</span> with your Amazon
-                                    Rewards Visa Card! Learn More
-                                </p>
-                            </div> -->
+                            <div class="dropdown cs-drop-head" id="left-header-btn">
+                                <button class="btn customer-service-btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Customer Service
+                                </button>
+                                <div class="dropdown-menu customer-service-dropdown" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="#">Contact Info</a></li>
+                                    <li><a class="dropdown-item" href="#">FAQ</a></li>
+                                    <li><a class="dropdown-item" href="#">Give your Feedback</a></li>
+                                </div>      
+                            </div>                      
                         </div>
                     </div>
                 </div>
@@ -1024,6 +991,14 @@ $(document).ready(function(){
                                 <input type="password" placeholder="Re-enter password " />
                                 <button class="site-btn blue-btn">Sign Up</button>
                             </form>
+                            <div class="signin-bottom-cont">
+                                <p>By signing in, you agree to company name</p>
+                                <p>
+                                    <a href="#">Terms and Conditions</a>
+                                    <span>and</span>
+                                    <a href="#">Privacy Policy</a>
+                                </p>
+                            </div>
                         </div>
                         <div class="form-container sign-in-container">
                             <form action="#">
@@ -1034,6 +1009,14 @@ $(document).ready(function(){
                                 <a href="#">Forgot your password?</a>
                                 <button class="site-btn blue-btn">Sign In</button>
                             </form>
+                            <div class="signin-bottom-cont">
+                                <p>By signing in, you agree to company name</p>
+                                <p>
+                                    <a href="#">Terms and Conditions</a>
+                                    <span>and</span>
+                                    <a href="#">Privacy Policy</a>
+                                </p>
+                            </div>
                         </div>
                         <div class="overlay-container">
                             <div class="overlay">
