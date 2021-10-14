@@ -1,7 +1,7 @@
 <x-customer-layout>
         <!-- banner start -->
         <div class="banner">        
-            <img src="{{ url('storage/assets/home-banner.gif') }}">
+            <img src="{{ url('assets/main.gif') }}">
         </div>
         <!-- banner end -->
 
@@ -92,7 +92,7 @@
                                             <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
                                         </a>
                                         @endif
-                                        <button class="cat-wishlist-btn wishlist-pd"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
+                                        <button class="cat-wishlist-btn wishlist-pd wish-list"><i class="fa fa-heart-o" aria-hidden="true"></i>595</button>
                                     </div>
                                     @endif
                                     @endforeach

@@ -89,19 +89,19 @@
                             <h4 class="h4">Connect With Us</h4>
                             <ul class="footer-social">
                                 <li>
-                                    <a href="#"><i class="fab fa-facebook-square"></i></a>
+                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fab fa-youtube"></i></a>
+                                    <a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
                                 </li>
                             </ul>
                         </div>
