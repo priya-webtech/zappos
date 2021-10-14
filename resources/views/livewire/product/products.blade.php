@@ -1,19 +1,5 @@
 <div>
 <x-admin-layout>
-
-    <!--<div wire:key="alert">-->
-
-    <!--    @if (session()->has('message'))-->
-
-    <!--        <div class="alert alert-success">-->
-
-    <!--            {{ session('message') }}-->
-
-    <!--        </div>-->
-
-    <!--    @endif-->
-
-    <!--</div>-->
 <section class="full-width flex-wrap admin-full-width list-customers" wire:ignore.self>
     <div class="page_header d-flex align-item-center justify-content-space-between full-width mb-2">
         <h4 class="mb-0 fw-5">Products</h4>

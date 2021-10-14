@@ -121,7 +121,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/admin/setting/profiles/profile-detail', Livewire\Setting\ProfileDetail::class)->name('profile-detail');
         Route::get('/admin/setting/profile/profile-create', Livewire\Setting\ProfileCreate::class)->name('profile-create');
         Route::get('/admin/setting/local-delivery-detail', Livewire\Setting\LocalDeliveryDetail::class)->name('local-delivery-detail');
-        Route::get('/admin/setting/channels', Livewire\Setting\Channels::class)->name('Channels');
+        Route::get('/admin/setting/tagsale', Livewire\Setting\Channels::class)->name('Channels');
+        Route::get('/admin/setting/tagsale/new', Livewire\Setting\TagsaleCreate::class)->name('tagsale-create');
+        Route::get('/admin/setting/tagsale/{id?}', Livewire\Setting\TagsaleDetail::class)->name('tagsale-detail');
+        Route::post('/admin/setting/tagsale/store', [Livewire\Setting\TagsaleCreate::class, 'storeTagsale'])->name('tagsale-store');
         Route::get('/admin/setting/metafields', Livewire\Setting\Metafields::class)->name('metafields'); 
         Route::get('/admin/setting/taxes', Livewire\Setting\Taxes::class)->name('taxes');
         Route::get('/admin/setting/plan', Livewire\Setting\Plan::class)->name('plan');

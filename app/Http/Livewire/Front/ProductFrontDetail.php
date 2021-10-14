@@ -30,14 +30,12 @@ use Illuminate\Support\Facades\Cookie;
 
 class ProductFrontDetail extends Component
 {
+
     protected $keyType = 'string';
-public $incrementing = false;
+    public $incrementing = false;
 
     public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$fetchprice,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $variant_id;
 
-    public $selectVariant, $selectVariant1, $selectVariant2, $selectVariant3;
-
-    
 
     protected $product, $Productvariant;
 
@@ -52,23 +50,29 @@ public $incrementing = false;
 
     public function mount($slug) {
         $this->slug = $slug;
+
         $this->user_id = Auth::user()->id;
         $this->varianttag = VariantTag::all()->groupBy('id')->toArray();
        
         $shopping_cart = [];
         $product_id = $this->getProduct();
+
         $this->getCart();
 
         $this->productrelated = Product::All();
         $this->Collection = Collection::All();
         $this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
+
         // $this->Productmediafirst = ProductMedia::where('product_id',$this->product['id'])->first();
         $this->Productmedia = ProductMedia::where('product_id',$product_id)->get();
+
         $this->tags = Tag::All();
      
 
         $shopping_cart = json_decode(Cookie::get('shopping_cart'));
+
         $shopping_cart[] = $product_id;
+
         $minutes = 60;
         Cookie::queue(Cookie::make('shopping_cart',  json_encode($shopping_cart), $minutes));
     }

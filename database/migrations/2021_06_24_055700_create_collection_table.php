@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductMediaTable extends Migration
+class CreateCollectionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreateProductMediaTable extends Migration
     {
         Schema::create('collection', function (Blueprint $table) {
             $table->integer('id');
-            $table->uuid('uuid')->after('id');
+            $table->uuid('uuid');
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->string('collection_type')->nullable();
@@ -39,6 +39,6 @@ class CreateProductMediaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_media');
+        Schema::dropIfExists('collection');
     }
 }

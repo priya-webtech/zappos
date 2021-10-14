@@ -1,4 +1,4 @@
-<div>
+<div :id="{{$product->id}}">
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
 <x-customer-layout>
 
@@ -230,8 +230,10 @@
                                      @foreach($product->variants as $row)
                                     <div class="form-group">
                                         @if(!empty($row->varient1))
+
                                         <label>{{$varianttag[$row->varient1][0]['name']}}</label>
                                         <select name="attribute1"  class="form-control varition-change" id="varient1" >
+
                                             @foreach($product->variants as $row)
                                                 @if($row->attribute1 != "")
                                                 <option>{{$row->attribute1}}</option> 
@@ -241,8 +243,10 @@
                                         @endif
 
                                          @if(!empty($row->varient2))
+
                                         <label>{{$varianttag[$row->varient2][0]['name']}}</label>
                                         <select name="attribute2" class="form-control varition-change"   id="varient2">
+
                                             @foreach($product->variants as $row)
                                                 @if($row->attribute2 != "")
                                                 <option>{{$row->attribute2}}</option> 
@@ -252,8 +256,10 @@
                                         @endif
 
                                          @if(!empty($row->varient3))
+
                                         <label>{{$varianttag[$row->varient3][0]['name']}}</label>
                                         <select name="attribute3"  class="form-control varition-change" id="varient3">
+
                                             @foreach($product->variants as $row)
                                                 @if($row->attribute3 != "")
                                                 <option>{{$row->attribute3}}</option> 
@@ -267,8 +273,10 @@
                                     @endforeach
                                     @endif
                                 </form>
+
                                 <div>
                                     <button id="variant_id" class="site-btn" wire:click="addCart($event.target.value)">Add to Cart</button>
+
                                     <a class="site-btn add-collection-btn" href="#"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to collection</a>
                                 </div>
                             </div>
@@ -385,8 +393,6 @@
                 });
             });
         })
-       
-
 
     </script>
 </x-customer-layout>
