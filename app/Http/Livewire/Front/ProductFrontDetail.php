@@ -22,6 +22,8 @@ use App\Models\Cart;
 
 use App\Models\Location;
 
+use App\Models\favorite;
+
 use App\Models\Collection;
 
 use Illuminate\Http\Request;
@@ -35,7 +37,7 @@ class ProductFrontDetail extends Component
 
     
 
-    protected $product, $Productvariant;
+    public $product, $Productvarian, $favoritevalue,$favoritevalueget;
 
     protected $rules = [
 
@@ -59,7 +61,8 @@ class ProductFrontDetail extends Component
         $this->Productmediafirst = ProductMedia::where('product_id',$this->product['id'])->first();
         $this->Productmedia = ProductMedia::where('product_id',$this->product['id'])->get();
         $this->tags = Tag::All();
-     
+        
+        $this->favoritevalue  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
 
         $shopping_cart = json_decode(Cookie::get('shopping_cart'));
         $shopping_cart[] = $this->product['id'];
@@ -74,15 +77,16 @@ class ProductFrontDetail extends Component
     }
 
     public function getProduct() {
-       $product  = Product::with('variants')->where('seo_utl',$this->slug)->first();
-       $this->varianttag = VariantTag::all()->pluck('name','id');
 
-       $product->variants->each(function($item, $key) {
-            $item->varient1 = (!empty($item->varient1)) ? $this->varianttag[$item->varient1] : '';
-            $item->varient2 = (!empty($item->varient2)) ? $this->varianttag[$item->varient2] : '';
-            $item->varient3 = (!empty($item->varient3)) ? $this->varianttag[$item->varient3] : '';
-        });
+       $this->user_id =  Auth::user()->id;
+       $product  = Product::with('variants')->where('seo_utl',$this->slug)->first();
        $this->product = $product;
+
+       $this->favoritevalue  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
+       $this->favoritevalueget  = favorite::get();
+
+      
+
     }
 
     public function getCart() {
@@ -102,6 +106,33 @@ class ProductFrontDetail extends Component
     }
 
 
+    public function addFavorite()
+    {
+        $favorite  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
+
+        if(!$favorite){
+            $favorite_arr = [
+                    
+                    'product_id' => $this->product->id,
+
+                    'user_id' => $this->user_id,
+
+                    'status' => '1',
+                ];
+
+            favorite::create($favorite_arr);
+
+        }else{
+
+            if($favorite->status == 0){
+            $favorite_arr = favorite::where('id', $favorite['id'])->update(['status'  => '1']);
+            }else{
+               $favorite_arr = favorite::where('id', $favorite['id'])->update(['status'  => '0']); 
+            }
+
+        }
+
+    }
     public function addCart()
     {
 

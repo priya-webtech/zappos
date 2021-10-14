@@ -224,53 +224,17 @@
                                     <h2 class="h2" id="getprice">${{round($product->price,2)}}</h2>
                                     <label>Ships Free!</label>
                                 </div>
-                                <form>
-
-                                    @if($product && isset($product->variants) && count($product->variants) > 0 )
-                                     @foreach($product->variants as $row)
-                                    <div class="form-group">
-                                        @if(!empty($row->varient1))
-                                        <label>{{$row->varient1}}</label>
-                                        <select name="attribute1" class="form-control varition-change" class="form-control" id="varient1">
-                                            @foreach($product->variants as $row)
-                                                @if($row->attribute1 != "")
-                                                <option>{{$row->attribute1}}</option> 
-                                                @endif 
-                                            @endforeach
-                                        </select>
-                                        @endif
-
-                                         @if(!empty($row->varient2))
-                                        <label>{{$row->varient2}}</label>
-                                        <select name="attribute2" class="form-control varition-change" class="form-control" id="varient2">
-                                            @foreach($product->variants as $row)
-                                                @if($row->attribute2 != "")
-                                                <option>{{$row->attribute2}}</option> 
-                                                @endif 
-                                            @endforeach
-                                        </select>
-                                        @endif
-
-                                         @if(!empty($row->varient3))
-                                        <label>{{$row->varient3}}</label>
-                                        <select name="attribute3" class="form-control varition-change" class="form-control" id="varient3">
-                                            @foreach($product->variants as $row)
-                                                @if($row->attribute3 != "")
-                                                <option>{{$row->attribute3}}</option> 
-                                                @endif 
-                                            @endforeach
-                                        </select>
-                                        @endif
-
-                                    </div>
-                                    <?php break; ?>
-                                    @endforeach
-                                    @endif
-                                </form>
-                                <div :id="{{$product->id}}">
-                                    <input type="hidden" id="variant_id">
+                               
+                                <div :id="{{$product->id}}" wire:ignore>
+                                    <input type="hidden" wire:model="product.id">
                                     <button class="site-btn" wire:key="{{rand()}}" wire:click="addcart">Add to Cart</button>
-                                    <a class="site-btn add-collection-btn" href="#"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to collection</a>
+                 
+                                    @if($favoritevalue && $favoritevalue->status == 1)
+                                    <a class="site-btn add-collection-btn" wire:click="addFavorite" style="background-color: green;"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to collection</a>
+                                    @else
+                                    <a class="site-btn add-collection-btn" wire:click="addFavorite"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to collection</a>
+                                    @endif
+
                                 </div>
                             </div>
                            
