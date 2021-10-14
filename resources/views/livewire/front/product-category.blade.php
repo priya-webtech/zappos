@@ -546,7 +546,7 @@
                                             <a href="{{ route('product-front-detail', $rows->seo_utl) }}">
                                                 <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
                                             </a>
-                                            <button class="cat-wishlist-btn wishlist-pd"><i class="fa fa-heart" aria-hidden="true"></i>595</button>
+                                            <button class="cat-wishlist-btn wishlist-pd wish-list"><i class="fa fa-heart-o" aria-hidden="true"></i>595</button>
 
                                             <?php $saledecode = json_decode($rows->product_new); ?>
                                             <div class="cat-pd-tag-gp">
