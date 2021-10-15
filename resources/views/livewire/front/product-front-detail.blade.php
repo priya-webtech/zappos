@@ -279,12 +279,11 @@
                                         @endif
                                     </form>
                                     <input type="hidden" wire:model="product.id">
-                                    <button class="site-btn" wire:key="{{rand()}}" wire:click="addcart">Add to Cart</button>
-                 
+                                    <button class="site-btn" wire:key="{{rand()}}" wire:click="addcart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Add to Cart</button>
                                     @if($favoritevalue && $favoritevalue->status == 1)
-                                    <a class="site-btn add-collection-btn" wire:click="addFavorite" style="background-color: green;"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to collection</a>
+                                    <a class="site-btn" wire:click="addFavorite" style="background-color: green;"><i class="fa fa-heart" aria-hidden="true"></i>Add to collection</a>
                                     @else
-                                    <a class="site-btn add-collection-btn" wire:click="addFavorite"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to collection</a>
+                                    <a class="site-btn" wire:click="addFavorite"><i class="fa fa-heart" aria-hidden="true"></i>Add to collection</a>
                                     @endif
                                 </div>
                                   
