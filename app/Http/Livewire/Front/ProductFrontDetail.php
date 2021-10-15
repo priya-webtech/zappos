@@ -61,7 +61,7 @@ class ProductFrontDetail extends Component
 
         $this->getCart();
 
-        $this->productrelated = Product::All();
+        $this->productrelated = Product::with('productmediaget')->with('favoriteget')->get();
         $this->Collection = Collection::All();
         $this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
 
@@ -93,7 +93,6 @@ class ProductFrontDetail extends Component
        $this->product = $product;
 
        $this->favoritevalue  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
-       $this->favoritevalueget  = favorite::get();
 
        return Product::with('variants')->where('seo_utl',$this->slug)->first();
     }

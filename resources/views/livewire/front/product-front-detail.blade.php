@@ -333,20 +333,19 @@
                             <h3 class="h3">Similar Items You May Like!</h3>
                             <div class="similar-items-slider">
                                 @foreach($productrelated as $rows)
-                                @foreach($Productmediass as $row_img)
                                 <?php $decodeA = json_decode($rows->collection);  
                                       $decodeB = json_decode($product->collection); 
                                 ?>
                                 @if(!empty($decodeA))
                                 @foreach($decodeA as $decoderes)
                                 @if(is_array($decodeB) && !empty($decodeB))
-                                @if(in_array($decoderes, $decodeB) && $product->id != $rows->id && $row_img[0]['product_id'] == $rows->id)
+                                @if(in_array($decoderes, $decodeB) && $product->id != $rows->id)
                                 <div>
-                                    @if($row_img && isset($row_img[0]))
-                                    <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
+                                    @if($rows['productmediaget'] && isset($rows['productmediaget'][0]))
+                                    <img src="{{ asset('storage/'.$rows['productmediaget'][0]['image']) }}">
                                     @endif
                                     <div class="multi-item-content">
-                                        <a class="wish-list" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 595</a>
+                                        <a class="wish-list @if()add-wishlist@endif" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> <?php echo count($rows['favoriteget']); ?></a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">{{$rows->title}}</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -356,7 +355,6 @@
                                 @endif
                                 @endforeach
                                 @endif
-                                @endforeach
                                 @endforeach
                             </div>
                         </div>

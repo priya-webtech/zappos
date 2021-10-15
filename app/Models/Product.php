@@ -33,5 +33,15 @@ class Product extends Model
         return $this->hasMany(ProductVariant::class, 'product_id', 'id');
     }
 
+    public function favoriteget()
+    {
+        return $this->hasMany(favorite::class, 'product_id', 'id');
+    }
+
+    public function productmediaget()
+    {
+        return $this->hasMany(ProductMedia::class, 'product_id', 'id');
+    }
+
     
 }
