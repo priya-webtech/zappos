@@ -340,12 +340,17 @@
                                 @foreach($decodeA as $decoderes)
                                 @if(is_array($decodeB) && !empty($decodeB))
                                 @if(in_array($decoderes, $decodeB) && $product->id != $rows->id)
+
                                 <div>
                                     @if($rows['productmediaget'] && isset($rows['productmediaget'][0]))
                                     <img src="{{ asset('storage/'.$rows['productmediaget'][0]['image']) }}">
                                     @endif
+                                 
                                     <div class="multi-item-content">
-                                        <a class="wish-list add-wishlist" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> <?php echo count($rows['favoriteget']); ?></a>
+                                        @php
+                                        $result = favorite($rows->id);
+                                        @endphp
+                                        <a class="wish-list {{$result['class']}}" wire:click="UpdateWish({{$result['id']}})"><i class="fa fa-heart-o" aria-hidden="true"></i> <?php echo count($rows['favoriteget']); ?></a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">{{$rows->title}}</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -370,11 +375,9 @@
                                 <?php $cookieitem = json_decode(Cookie::get('shopping_cart')); ?>
                                 @foreach($productrelated as $pro_res)
                                 @foreach($cookieitem as $result)
-                                @foreach($Productmediass as $row_img)
-                               
-                                @if($pro_res->id == $result->id && $row_img[0]['product_id'] == $pro_res->id)
+                                @if($pro_res['productmediaget'] && isset($pro_res['productmediaget'][0]))
                                 <div>
-                                    <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
+                                    <img src="{{ asset('storage/'.$pro_res['productmediaget'][0]['image']) }}">
                                     <div class="multi-item-content">
                                         <a class="wish-list" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 595</a>
                                         <p>{{$pro_res->title}}</p>
@@ -382,7 +385,6 @@
                                     </div>
                                 </div>
                                 @endif
-                                @endforeach
                                 @endforeach
                                 @endforeach
                                 @endif

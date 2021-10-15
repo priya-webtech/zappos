@@ -57,13 +57,15 @@ class ProductFrontDetail extends Component
         $this->varianttag = VariantTag::all()->groupBy('id')->toArray();
        
         $shopping_cart = [];
+
         $product_id = $this->getProduct();
 
         $this->getCart();
 
         $this->productrelated = Product::with('productmediaget')->with('favoriteget')->get();
+
         $this->Collection = Collection::All();
-        $this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
+        //$this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
 
         // $this->Productmediafirst = ProductMedia::where('product_id',$this->product['id'])->first();
         $this->Productmedia = ProductMedia::where('product_id',$product_id->id)->get();
@@ -154,6 +156,38 @@ class ProductFrontDetail extends Component
 
         }
 
+    }
+
+    public function UpdateWish($id = 0){
+
+        if($id == 0){
+
+            $favorite  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
+
+            if(!$favorite){
+                $favorite_arr = [
+                        
+                        'product_id' => $this->product->id,
+
+                        'user_id' => $this->user_id,
+
+                        'status' => '1',
+                    ];
+
+                favorite::create($favorite_arr);
+
+            }
+        }else{
+
+            $favorite  = favorite::where('id',$id)->first();
+
+            if($favorite->status == 0){
+                $favorite_arr = favorite::where('id', $favorite['id'])->update(['status'  => '1']);
+                }else{
+                   $favorite_arr = favorite::where('id', $favorite['id'])->update(['status'  => '0']); 
+                }
+
+            }
     }
 
     public function addCart($variant_id)
