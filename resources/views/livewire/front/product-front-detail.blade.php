@@ -285,17 +285,20 @@
                                     @endforeach
                                     @endif
                                 </form>
-
-
                                 <div>
                                     <button id="variant_id" class="site-btn" wire:click="addCart($event.target.value)">Add to Cart</button>
 
-                                    <a class="site-btn add-collection-btn" href="#"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to collection</a>
+                                    <a class="site-btn add-collection-btn" href="#"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to 
                                 <div :id="{{$product->id}}">
                                     <input type="hidden" id="variant_id">
                                     <button class="site-btn single-pd-btn" wire:key="{{rand()}}" wire:click="addcart">Add to Cart</button>
                                     <a class="site-btn single-pd-btn" href="#">Add to collection</a>
 
+                                    <div :id="{{$product->id}}">
+                                        <input type="hidden" id="variant_id">
+                                        <button class="site-btn single-pd-btn" wire:key="{{rand()}}" wire:click="addcart">Add to Cart</button>
+                                        <a class="site-btn single-pd-btn" href="#">Add to collection</a>
+                                    </div>
                                 </div>
                             </div>
                            
