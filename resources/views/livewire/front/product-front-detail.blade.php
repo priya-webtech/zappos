@@ -43,6 +43,7 @@
                         <div class="product-slider">
                             <div class="product-slider-nav">
                                 @foreach($Productmedia as $image)
+
                                 <div>
                                     <img src="{{ asset('storage/'.$image['image']) }}">
                                 </div>

@@ -66,7 +66,7 @@ class ProductFrontDetail extends Component
         $this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
 
         // $this->Productmediafirst = ProductMedia::where('product_id',$this->product['id'])->first();
-        $this->Productmedia = ProductMedia::where('product_id',$product_id)->get();
+        $this->Productmedia = ProductMedia::where('product_id',$product_id->id)->get();
 
         $this->tags = Tag::All();
         
