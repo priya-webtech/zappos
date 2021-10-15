@@ -84,8 +84,8 @@
                                                         <img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}" alt="">
                                                     </div>
                                                     <div class="product-data">
-                                                        <p>{{$cart['product_detail'][0]['title']}}</p>
-                                                        <a href="#">Clare Tree</a>
+                                                        <p class="cart-pd-title">{{$cart['product_detail'][0]['title']}}</p>
+                                                        <a class="cart-pd-clear" href="#">Clare Tree</a>
                                                         <div class="product-data-inner">
                                                             @foreach($ProductVariant as $row)
                                                             @foreach($varianttag as $locrow)
@@ -145,8 +145,8 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <button class="btn move-heart-button" name="r-heart-button">
-                                                            Move To<i class="far fa-heart"></i>
+                                                        <button class="btn move-heart-button wish-list" name="r-heart-button">
+                                                            Move To<i class="fa fa-heart-o" aria-hidden="true"></i>
                                                         </button>
                                                     </div>
                                                     <?php $price_sum  += ($cart->price * $cart->stock); ?>
