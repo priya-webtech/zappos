@@ -345,7 +345,7 @@
                                     <img src="{{ asset('storage/'.$rows['productmediaget'][0]['image']) }}">
                                     @endif
                                     <div class="multi-item-content">
-                                        <a class="wish-list @if()add-wishlist@endif" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> <?php echo count($rows['favoriteget']); ?></a>
+                                        <a class="wish-list add-wishlist" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> <?php echo count($rows['favoriteget']); ?></a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">{{$rows->title}}</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
