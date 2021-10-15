@@ -6,49 +6,14 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center">
-                            <div class="left-header align-items-center d-flex">
-                                <div id="left-header-btn" name="left-header-btn">
-                                    <div class="customer-service d-flex">
-                                        <div id="drop-down-div" class="d-flex">
-                                            <p>
-                                                Customer Service
-                                            </h1>
-                                            <i class="fa fa-sort-down drop-down" id="drop-btn"></i>
-                                        </div>
-                                    </div>
-                                    <div class="drop-down-container bg-white text-dark p-0">
-                                        <div class="menu-container pb-2">
-                                            <div class="menu p-0" id="cs-close">
-                                                <span></span>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <ul class="m-0">
-                                            <a href="#">
-                                                <li>Contact Info</li>
-                                            </a>
-                                            <a href="#">
-                                                <li>FAQ</li>
-                                            </a>
-                                            <a href="#">
-                                                <li>Give your Feedback</li>
-                                            </a>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- <div class="contact-time d-flex">
-                                    <p>
-                                        Available 24/7 at &nbsp;
-                                    </p>
-                                    <span class="contact-number">(800) 92<span class="t7">7</span>-<span class="t7">7</span>6<span class="t7">7</span>1</span>
-                                </div> -->
-                            </div>
-                            <!-- <div class="header-info ml-auto pb-0 pt-0">
-                                <p>
-                                    <span class="bold">Earn a total of 5% Back</span> with your Amazon
-                                    Rewards Visa Card! Learn More
-                                </p>
-                            </div> -->
+                            <div class="dropdown cs-drop-head" id="left-header-btn">
+                                <button class="btn customer-service-btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Customer Service </button>
+                                <div class="dropdown-menu customer-service-dropdown" aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="#">Contact Info</a></li>
+                                    <li><a class="dropdown-item" href="#">FAQ</a></li>
+                                    <li><a class="dropdown-item" href="#">Give your Feedback</a></li>
+                                </div>      
+                            </div>                      
                         </div>
                     </div>
                 </div>
@@ -72,11 +37,11 @@
                                         <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">samsung cases</button></div>
                                         <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">winter sweaters</button></div>
                                         <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">Trousers</button></div>
-                                    <div class="ml-md-2 border bg-white rounded-bottom pb-1"  wire:ignore>
-                                        @foreach($getproduct as $row)
-                                        <div class=" p-1 pl-3 m-0 pr-3 link-fill product-item"><a href="{{ route('product-front-detail', $row->seo_utl) }}"><button class="link-fill">{{$row->title}}</button></a></div>
-                                        @endforeach
-                                       
+                                        <div class="ml-md-2 border bg-white rounded-bottom pb-1"  wire:ignore>
+                                            @foreach($getproduct as $row)
+                                            <div class=" p-1 pl-3 m-0 pr-3 link-fill product-item"><a href="{{ route('product-front-detail', $row->seo_utl) }}"><button class="link-fill">{{$row->title}}</button></a></div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +50,7 @@
                             ?>
                             <div class="my-cart turn-btn ml-auto" id="my-cart">
                                 <button class=" bg-cart" onclick="document.getElementById('proceed-cart').style.display='block'">
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 122.9 107.5" style="enable-background:new 0 0 122.9 107.5" xml:space="preserve"><g><path d="M3.9,7.9C1.8,7.9,0,6.1,0,3.9C0,1.8,1.8,0,3.9,0h10.2c0.1,0,0.3,0,0.4,0c3.6,0.1,6.8,0.8,9.5,2.5c3,1.9,5.2,4.8,6.4,9.1 c0,0.1,0,0.2,0.1,0.3l1,4H119c2.2,0,3.9,1.8,3.9,3.9c0,0.4-0.1,0.8-0.2,1.2l-10.2,41.1c-0.4,1.8-2,3-3.8,3v0H44.7 c1.4,5.2,2.8,8,4.7,9.3c2.3,1.5,6.3,1.6,13,1.5h0.1v0h45.2c2.2,0,3.9,1.8,3.9,3.9c0,2.2-1.8,3.9-3.9,3.9H62.5v0 c-8.3,0.1-13.4-0.1-17.5-2.8c-4.2-2.8-6.4-7.6-8.6-16.3l0,0L23,13.9c0-0.1,0-0.1-0.1-0.2c-0.6-2.2-1.6-3.7-3-4.5 c-1.4-0.9-3.3-1.3-5.5-1.3c-0.1,0-0.2,0-0.3,0H3.9L3.9,7.9z M96,88.3c5.3,0,9.6,4.3,9.6,9.6c0,5.3-4.3,9.6-9.6,9.6 c-5.3,0-9.6-4.3-9.6-9.6C86.4,92.6,90.7,88.3,96,88.3L96,88.3z M53.9,88.3c5.3,0,9.6,4.3,9.6,9.6c0,5.3-4.3,9.6-9.6,9.6 c-5.3,0-9.6-4.3-9.6-9.6C44.3,92.6,48.6,88.3,53.9,88.3L53.9,88.3z M33.7,23.7l8.9,33.5h63.1l8.3-33.5H33.7L33.7,23.7z"/></g></svg>
                                 <span id="cartItems" class="clearContent">{{$cartCount}} My Cart</span>
                                 </button>
                             </div>
@@ -1024,6 +989,14 @@ $(document).ready(function(){
                                 <input type="password" placeholder="Re-enter password " />
                                 <button class="site-btn blue-btn">Sign Up</button>
                             </form>
+                            <div class="signin-bottom-cont">
+                                <p>By signing in, you agree to company name</p>
+                                <p>
+                                    <a href="#">Terms and Conditions</a>
+                                    <span>and</span>
+                                    <a href="#">Privacy Policy</a>
+                                </p>
+                            </div>
                         </div>
                         <div class="form-container sign-in-container">
                             <form action="#">
@@ -1034,6 +1007,14 @@ $(document).ready(function(){
                                 <a href="#">Forgot your password?</a>
                                 <button class="site-btn blue-btn">Sign In</button>
                             </form>
+                            <div class="signin-bottom-cont">
+                                <p>By signing in, you agree to company name</p>
+                                <p>
+                                    <a href="#">Terms and Conditions</a>
+                                    <span>and</span>
+                                    <a href="#">Privacy Policy</a>
+                                </p>
+                            </div>
                         </div>
                         <div class="overlay-container">
                             <div class="overlay">

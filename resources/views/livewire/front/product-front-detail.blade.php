@@ -52,7 +52,9 @@
                             <div class="product-slider-for">
                                  @foreach($Productmedia as $image)
                                 <div>
-                                    <img src="{{ asset('storage/'.$image['image']) }}" width="500PX" height="500PX">
+                                    <div class="single-pd-img">
+                                        <img src="{{ asset('storage/'.$image['image']) }}">
+                                    </div>
                                 </div>
                                 @endforeach
                                 
@@ -72,7 +74,7 @@
                                 <div>
                                     <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
                                     <div class="multi-item-content">
-                                        <a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add Item</a>
+                                        <a class="pd-add-cart" href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add Item</a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -81,7 +83,7 @@
                                 <div>
                                     <img src="https://m.media-amazon.com/images/I/71cpd1J29LL._AC_SX272_.jpg">
                                     <div class="multi-item-content">
-                                        <a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add Item</a>
+                                        <a class="pd-add-cart" href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add Item</a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -90,7 +92,7 @@
                                 <div>
                                     <img src="https://m.media-amazon.com/images/I/81DnwjL9tBL._AC_SX272_.jpg">
                                     <div class="multi-item-content">
-                                        <a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add Item</a>
+                                        <a class="pd-add-cart" href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add Item</a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -99,7 +101,7 @@
                                 <div>
                                     <img src="https://m.media-amazon.com/images/I/71YPVyvWFDL._AC_SX272_.jpg">
                                     <div class="multi-item-content">
-                                        <a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add Item</a>
+                                        <a class="pd-add-cart" href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add Item</a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -108,7 +110,7 @@
                                 <div>
                                     <img src="https://m.media-amazon.com/images/I/71Gs5Cfb4hL._AC_SX272_.jpg">
                                     <div class="multi-item-content">
-                                        <a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add Item</a>
+                                        <a class="pd-add-cart" href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add Item</a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -117,7 +119,7 @@
                                 <div>
                                     <img src="https://m.media-amazon.com/images/I/71Gs5Cfb4hL._AC_SX272_.jpg">
                                     <div class="multi-item-content">
-                                        <a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add Item</a>
+                                        <a class="pd-add-cart" href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add Item</a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -126,7 +128,7 @@
                                 <div>
                                     <img src="https://m.media-amazon.com/images/I/71Gs5Cfb4hL._AC_SX272_.jpg">
                                     <div class="multi-item-content">
-                                        <a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add Item</a>
+                                        <a class="pd-add-cart" href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add Item</a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -154,7 +156,7 @@
                                 <div>
                                     <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
                                     <div class="multi-item-content">
-                                        <a class="wish-list" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
+                                        <a class="wish-list add-wishlist" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 595</a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -163,7 +165,7 @@
                                 <div>
                                     <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
                                     <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
+                                        <a class="wish-list" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 595</a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -172,7 +174,7 @@
                                 <div>
                                     <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
                                     <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
+                                        <a class="wish-list" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 595</a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -181,7 +183,7 @@
                                 <div>
                                     <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
                                     <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
+                                        <a class="wish-list" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 595</a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -190,7 +192,7 @@
                                 <div>
                                     <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
                                     <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
+                                        <a class="wish-list" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 595</a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -199,7 +201,7 @@
                                 <div>
                                     <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
                                     <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
+                                        <a class="wish-list" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 595</a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -208,7 +210,7 @@
                                 <div>
                                     <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
                                     <div class="multi-item-content">
-                                        <a class="grey-hart" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
+                                        <a class="wish-list" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 595</a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -234,6 +236,65 @@
                                     @else
                                     <a class="site-btn add-collection-btn" wire:click="addFavorite"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to collection</a>
                                     @endif
+                                <form>
+
+                                    @if($product && isset($product->variants) && count($product->variants) > 0 )
+                                     @foreach($product->variants as $row)
+                                    <div class="form-group">
+                                        @if(!empty($row->varient1))
+
+                                        <label>{{$varianttag[$row->varient1][0]['name']}}</label>
+                                        <select name="attribute1"  class="form-control varition-change" id="varient1" >
+
+                                            @foreach($product->variants as $row)
+                                                @if($row->attribute1 != "")
+                                                <option>{{$row->attribute1}}</option> 
+                                                @endif 
+                                            @endforeach
+                                        </select>
+                                        @endif
+
+                                         @if(!empty($row->varient2))
+
+                                        <label>{{$varianttag[$row->varient2][0]['name']}}</label>
+                                        <select name="attribute2" class="form-control varition-change"   id="varient2">
+
+                                            @foreach($product->variants as $row)
+                                                @if($row->attribute2 != "")
+                                                <option>{{$row->attribute2}}</option> 
+                                                @endif 
+                                            @endforeach
+                                        </select>
+                                        @endif
+
+                                         @if(!empty($row->varient3))
+
+                                        <label>{{$varianttag[$row->varient3][0]['name']}}</label>
+                                        <select name="attribute3"  class="form-control varition-change" id="varient3">
+
+                                            @foreach($product->variants as $row)
+                                                @if($row->attribute3 != "")
+                                                <option>{{$row->attribute3}}</option> 
+                                                @endif 
+                                            @endforeach
+                                        </select>
+                                        @endif
+
+                                    </div>
+                                    <?php break; ?>
+                                    @endforeach
+                                    @endif
+                                </form>
+
+
+                                <div>
+                                    <button id="variant_id" class="site-btn" wire:click="addCart($event.target.value)">Add to Cart</button>
+
+                                    <a class="site-btn add-collection-btn" href="#"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to collection</a>
+                                <div :id="{{$product->id}}">
+                                    <input type="hidden" id="variant_id">
+                                    <button class="site-btn single-pd-btn" wire:key="{{rand()}}" wire:click="addcart">Add to Cart</button>
+                                    <a class="site-btn single-pd-btn" href="#">Add to collection</a>
 
                                 </div>
                             </div>
@@ -244,10 +305,10 @@
                                     <a href="#"> Notify Me of the New Styles</a>
                                     <ul class="product-right-social">
                                         <li>Share:</li>
-                                        <li><a class="pd-facebook" href="#"><i class="fab fa-facebook-square f-24"></i></a></li>
-                                        <li><a class="pd-twitter" href="#"><i class="fab fa-twitter-square" aria-hidden="true"></i></a></li>
-                                        <li><a class="pd-pinterest" href="#"><i class="fab fa-pinterest-square" aria-hidden="true"></i></a></li>
-                                        <li><a class="pd-mail" href="#"><i class="fas fa-envelope-square f-24"></i></a></li>
+                                        <li><a class="pd-facebook" href="#"><i class="fa fa-facebook-square f-24"></i></a></li>
+                                        <li><a class="pd-twitter" href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+                                        <li><a class="pd-pinterest" href="#"><i class="fa fa-pinterest-square" aria-hidden="true"></i></a></li>
+                                        <li><a class="pd-mail" href="#"><i class="fa fa-envelope-square f-24"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="recommended-rightbar">
@@ -255,7 +316,7 @@
                                     <div class="rcmd-rightbar-pd">
                                         <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
                                         <div class="multi-item-content">
-                                            <a class="wish-list" href="#" tabindex="0"><i class="fa fa-heart" aria-hidden="true"></i>595</a>
+                                            <a class="wish-list" href="#" tabindex="0"><i class="fa fa-heart-o" aria-hidden="true"></i>595</a>
                                             <p>ASICS</p>
                                             <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                             <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -264,7 +325,7 @@
                                     <div class="rcmd-rightbar-pd">
                                         <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
                                         <div class="multi-item-content">
-                                            <a class="grey-hart" href="#" tabindex="0"><i class="fa fa-heart" aria-hidden="true"></i>595</a>
+                                            <a class="wish-list" href="#" tabindex="0"><i class="fa fa-heart-o" aria-hidden="true"></i>595</a>
                                             <p>ASICS</p>
                                             <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                             <p class="product-price"><span class="mrp-price">$99.95</span></p>
@@ -294,7 +355,7 @@
                                     <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
                                     @endif
                                     <div class="multi-item-content">
-                                        <a class="wish-list" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
+                                        <a class="wish-list" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 595</a>
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">{{$rows->title}}</p>
                                         <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
@@ -321,11 +382,12 @@
                                 @foreach($productrelated as $pro_res)
                                 @foreach($cookieitem as $result)
                                 @foreach($Productmediass as $row_img)
-                                @if($pro_res->id == $result && $row_img[0]['product_id'] == $pro_res->id)
+                               
+                                @if($pro_res->id == $result->id && $row_img[0]['product_id'] == $pro_res->id)
                                 <div>
                                     <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
                                     <div class="multi-item-content">
-                                        <a class="wish-list" href="#"><i class="fa fa-heart" aria-hidden="true"></i> 595</a>
+                                        <a class="wish-list" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 595</a>
                                         <p>{{$pro_res->title}}</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                     </div>
@@ -370,27 +432,6 @@
                 });
             });
         })
-    
-        // $(document).ready(function() {
-        //     $(".delete-cart").click(function() { 
-
-        //     var deletecartid =  $('#deletecartid').val();
-
-        //      $.ajax({
-        //         url: '{{URL("delete-cart-product")}}',  
-        //         type: 'GET',
-        //         data: { deletecartid:deletecartid},
-        //         success: function (response) {
-        //             //window.location.reload();
-        //              //myVariable=data;
-        //             //console.log(data);
-        //             document.getElementById("proceed-cart").style.display = "block";
-        //         },
-        //         complete: function () {
-        //         }
-        //     });
-        //   });
-        // });
 
     </script>
 </x-customer-layout>
