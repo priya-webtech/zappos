@@ -229,14 +229,6 @@
                                 </div>
                                
                                 <div :id="{{$product->id}}" wire:ignore>
-                                    <input type="hidden" wire:model="product.id">
-                                    <button class="site-btn" wire:key="{{rand()}}" wire:click="addcart">Add to Cart</button>
-                 
-                                    @if($favoritevalue && $favoritevalue->status == 1)
-                                    <a class="site-btn add-collection-btn" wire:click="addFavorite" style="background-color: green;"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to collection</a>
-                                    @else
-                                    <a class="site-btn add-collection-btn" wire:click="addFavorite"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to collection</a>
-                                    @endif
                                     <form>
 
                                         @if($product && isset($product->variants) && count($product->variants) > 0 )
@@ -286,21 +278,16 @@
                                         @endforeach
                                         @endif
                                     </form>
+                                    <input type="hidden" wire:model="product.id">
+                                    <button class="site-btn" wire:key="{{rand()}}" wire:click="addcart">Add to Cart</button>
+                 
+                                    @if($favoritevalue && $favoritevalue->status == 1)
+                                    <a class="site-btn add-collection-btn" wire:click="addFavorite" style="background-color: green;"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to collection</a>
+                                    @else
+                                    <a class="site-btn add-collection-btn" wire:click="addFavorite"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to collection</a>
+                                    @endif
                                 </div>
-                                    <button id="variant_id" class="site-btn" wire:click="addCart($event.target.value)">Add to Cart</button>
-
-                                    <a class="site-btn add-collection-btn" href="#"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to 
-                                <div :id="{{$product->id}}">
-                                    <input type="hidden" id="variant_id">
-                                    <button class="site-btn single-pd-btn" wire:key="{{rand()}}" wire:click="addcart">Add to Cart</button>
-                                    <a class="site-btn single-pd-btn" href="#">Add to collection</a>
-
-                                    <div :id="{{$product->id}}">
-                                        <input type="hidden" id="variant_id">
-                                        <button class="site-btn single-pd-btn" wire:key="{{rand()}}" wire:click="addcart">Add to Cart</button>
-                                        <a class="site-btn single-pd-btn" href="#">Add to collection</a>
-                                    </div>
-                                </div>
+                                  
                             </div>
                            
                             <div class="product-right-bottom">
