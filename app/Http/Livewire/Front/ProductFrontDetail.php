@@ -158,16 +158,12 @@ class ProductFrontDetail extends Component
 
     }
 
-    public function UpdateWish($id = 0){
+    public function UpdateWish($id,$productid){
 
         if($id == 0){
-
-            $favorite  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
-
-            if(!$favorite){
                 $favorite_arr = [
                         
-                        'product_id' => $this->product->id,
+                        'product_id' => $productid,
 
                         'user_id' => $this->user_id,
 
@@ -176,16 +172,10 @@ class ProductFrontDetail extends Component
 
                 favorite::create($favorite_arr);
 
-            }
+            
         }else{
 
-            $favorite  = favorite::where('id',$id)->first();
-
-            if($favorite->status == 0){
-                $favorite_arr = favorite::where('id', $favorite['id'])->update(['status'  => '1']);
-                }else{
-                   $favorite_arr = favorite::where('id', $favorite['id'])->update(['status'  => '0']); 
-                }
+            $favorite  = favorite::where('id',$id)->delete();
 
             }
     }

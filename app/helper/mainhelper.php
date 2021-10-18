@@ -10,8 +10,7 @@ use App\Models\favorite;
   	if(!empty($favorite) && $favorite->status == 1){
   		return [ 'class' => 'add-wishlist', 'id' => $favorite['id'], 'product_id' => $favorite['product_id']];
   	}else{
-
-  		return [ 'class' => '', 'id' => $favorite['id'], 'product_id' => $favorite['product_id']];
+  		return [ 'class' => '', 'id' => '0','product_id' => $product_id];
   	}
 
  }

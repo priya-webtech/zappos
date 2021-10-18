@@ -84,18 +84,23 @@
                             <div class="row">
                                 @foreach($this->Product as $result)
                                 <div class="col-md-4 cat-pd-col">
-                                    @foreach($Productmediass as $row_img)
-                                    @if($row_img[0]['product_id'] == $result->id)
                                     <div class="cat-pd-img">
-                                        @if($row_img && isset($row_img[0]))
+                                        @if($result['productmediaget'] && isset($result['productmediaget'][0]))
                                         <a href="{{ route('product-front-detail', $result->seo_utl) }}">
-                                            <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
+                                            <img src="{{ asset('storage/'.$result['productmediaget'][0]['image']) }}">
                                         </a>
                                         @endif
-                                        <button class="cat-wishlist-btn wishlist-pd wish-list"><i class="fa fa-heart-o" aria-hidden="true"></i>595</button>
+
+                                        <!-- Wish-list code -->
+                                        @php
+                                        $favresult = favorite($result->id);
+                                        @endphp
+                                        @if(!empty($favresult))
+                                         <a class="cat-wishlist-btn wishlist-pd wish-list {{$favresult['class']}}" wire:click="UpdateWish({{$favresult['id']}}, {{$favresult['product_id']}})"><i class="fa fa-heart-o" aria-hidden="true"></i> <?php echo count($result['favoriteget']); ?></a>
+                                        @endif
+                                        <!-- Wish-list code ends -->
+                                        
                                     </div>
-                                    @endif
-                                    @endforeach
                                     <div class="cat-pd-content">
                                         <a href="#">
                                             <h6 class="h6">{{$result->title}}</h6>

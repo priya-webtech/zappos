@@ -350,10 +350,13 @@
                                         @php
                                         $result = favorite($rows->id);
                                         @endphp
-                                        <a class="wish-list {{$result['class']}}" wire:click="UpdateWish({{$result['id']}})"><i class="fa fa-heart-o" aria-hidden="true"></i> <?php echo count($rows['favoriteget']); ?></a>
+
+                                        @if(!empty($result))
+                                        <a class="wish-list {{$result['class']}}" wire:click="UpdateWish({{$result['id']}}, {{$result['product_id']}})"><i class="fa fa-heart-o" aria-hidden="true"></i> <?php echo count($rows['favoriteget']); ?></a>
+                                        @endif
                                         <p>ASICS</p>
                                         <p class="multi-pd-title">{{$rows->title}}</p>
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        <p class="product-price"><span class="mrp-price">${{round($rows->price)}}</span><span class="msrp-price">MSRP: $150.00</span></p>
                                     </div>
                                 </div>
                                 @endif
@@ -379,7 +382,13 @@
                                 <div>
                                     <img src="{{ asset('storage/'.$pro_res['productmediaget'][0]['image']) }}">
                                     <div class="multi-item-content">
-                                        <a class="wish-list" href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 595</a>
+                                        @php
+                                        $result = favorite($pro_res->id);
+                                        @endphp
+
+                                        @if(!empty($result))
+                                        <a class="wish-list {{$result['class']}}" wire:click="UpdateWish({{$result['id']}}, {{$result['product_id']}})"><i class="fa fa-heart-o" aria-hidden="true"></i> <?php echo count($pro_res['favoriteget']); ?></a>
+                                        @endif
                                         <p>{{$pro_res->title}}</p>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
                                     </div>
