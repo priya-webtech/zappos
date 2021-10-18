@@ -209,5 +209,10 @@ class ProductFrontDetail extends Component
 
     }
 
+    public function UpdateReview($id)
+    {
+        return view('livewire.front.product-review');
+    }
+
 
 }

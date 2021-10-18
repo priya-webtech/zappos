@@ -157,6 +157,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/payment/{id?}', Livewire\StripePaymnetController::class)->name('payment');
         Route::post('/payment', [Livewire\StripePaymnetController::class, 'stripePost'])->name('stripe-post');
 
+        /*Account*/
+        Route::get('/account/favorites/detail', Livewire\Front\WishListDetail::class)->name('favorite-detail');
+        Route::get('/product/review/{id?}', [Livewire\Front\ProductFrontDetail::class, 'UpdateReview'])->name('product-review');
     });
 
 });
