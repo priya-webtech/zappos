@@ -1,5 +1,7 @@
-<div>
-    <div class="main-heder" wire:ignore>
+
+<div id="main_model">
+    <div class="main-heder">
+
         <div class="first-container"></div>
         <header class="text-white" name="header" id="header">
             <div class="header-top" name='header-top' id="header-top">
@@ -18,14 +20,14 @@
                     </div>
                 </div>
             </div>
-            <section class="header-mid" wire:ignore>
+            <section class="header-mid" >
                 <div class="container">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center">
                             <div class="logo">
                                 <a href="#"><img src="{{ url('assets/zappos-logo.svg') }}"></a>
                             </div>
-                            <div class="search-box" wire:ignore>
+                            <div class="search-box">
                                 <form class="search-container d-flex align-items-center" method="get" target="_parent" action="" autocomplete="off">
                                     <input class="form" type="text" placeholder="Search for shoes, clothes, etc." wire:model="filter_product" id="searched-input">
                                     <div class="header-search-icon"><i class="fa fa-search" aria-hidden="true"></i></div>
@@ -46,12 +48,12 @@
                                 </div>
                             </div>
                             <?php 
-                            $cartCount = (!empty($CartItem)) ? count($CartItem) : 0;
+                            $cartCount = ($CartItem && !empty($CartItem)) ? count($CartItem) : 0;
                             ?>
                             <div class="my-cart turn-btn ml-auto" id="my-cart">
                                 <button class=" bg-cart" onclick="document.getElementById('proceed-cart').style.display='block'">
                                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 122.9 107.5" style="enable-background:new 0 0 122.9 107.5" xml:space="preserve"><g><path d="M3.9,7.9C1.8,7.9,0,6.1,0,3.9C0,1.8,1.8,0,3.9,0h10.2c0.1,0,0.3,0,0.4,0c3.6,0.1,6.8,0.8,9.5,2.5c3,1.9,5.2,4.8,6.4,9.1 c0,0.1,0,0.2,0.1,0.3l1,4H119c2.2,0,3.9,1.8,3.9,3.9c0,0.4-0.1,0.8-0.2,1.2l-10.2,41.1c-0.4,1.8-2,3-3.8,3v0H44.7 c1.4,5.2,2.8,8,4.7,9.3c2.3,1.5,6.3,1.6,13,1.5h0.1v0h45.2c2.2,0,3.9,1.8,3.9,3.9c0,2.2-1.8,3.9-3.9,3.9H62.5v0 c-8.3,0.1-13.4-0.1-17.5-2.8c-4.2-2.8-6.4-7.6-8.6-16.3l0,0L23,13.9c0-0.1,0-0.1-0.1-0.2c-0.6-2.2-1.6-3.7-3-4.5 c-1.4-0.9-3.3-1.3-5.5-1.3c-0.1,0-0.2,0-0.3,0H3.9L3.9,7.9z M96,88.3c5.3,0,9.6,4.3,9.6,9.6c0,5.3-4.3,9.6-9.6,9.6 c-5.3,0-9.6-4.3-9.6-9.6C86.4,92.6,90.7,88.3,96,88.3L96,88.3z M53.9,88.3c5.3,0,9.6,4.3,9.6,9.6c0,5.3-4.3,9.6-9.6,9.6 c-5.3,0-9.6-4.3-9.6-9.6C44.3,92.6,48.6,88.3,53.9,88.3L53.9,88.3z M33.7,23.7l8.9,33.5h63.1l8.3-33.5H33.7L33.7,23.7z"/></g></svg>
-                                <span id="cartItems" class="clearContent">{{$cartCount}} My Cart</span>
+                                <span id="" class="clearContent">{{$cartCount}} My Cart</span>
                                 </button>
                             </div>
                             <form method="post" action="{{ route('add-order') }}" name="form">
@@ -70,15 +72,17 @@
                                         <p class="vip-text"><img src="https://www.flaticon.com/svg/static/icons/svg/2909/2909599.svg" class="stars img-fluid"> Check out to earn Zappos VIP points worth up to <span class="font-weight-bold">$1.20</span> in VIP codes.</p>
                                     </div>
                                 </div>
-                                <div wire:ignore>
-                                    @if(!empty($CartItem) && count($CartItem) > 0)
+                                <div>
+                                    @if($CartItem && !empty($CartItem) && count($CartItem) > 0)
 
                                     <div>
-                                        <div class="items" wire:ignore>
+                                        <div class="items">
                                             <div class="col-12 p-0">
                                                 <?php $price_sum  = 0; ?>
                                                 @foreach($CartItem as $cart)
-                                                <input name="cartid[]" type="hidden" id="deletecartid" value="{{$cart->id}}">
+
+                                                <?php echo($cart['id']) ?>
+                                                <input name="cartid[]" type="hidden" id="deletecartid" value="{{$cart['id']}}">
                                                 <div class="cart-list">
                                                     <div class="product-img">
                                                         <img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}" alt="">
@@ -89,7 +93,7 @@
                                                         <div class="product-data-inner">
                                                             @foreach($ProductVariant as $row)
                                                             @foreach($varianttag as $locrow)
-                                                            @if($row->id == $cart->varientid)
+                                                            @if($row->id == $cart['varientid'])
 
                                                             @if($row->varient1 == $locrow->id && $row->attribute1 != "")
                                                             <p>{{$locrow->name}}: {{$row->attribute1}}</p>
@@ -139,7 +143,7 @@
                                                                 <div class="total-item-select">
                                                                     <div class="input-plus-minus">
                                                                         <input type="button" value="-" class="qty-minus">
-                                                                        <input name="stockitem[]" type="number" value="{{$cart->stock}}" class="stockqty" id="stockqtyitem" data-id="{{$cart->id}}">
+                                                                        <input name="stockitem[]" type="number" value="{{$cart['stock']}}" class="stockqty" id="stockqtyitem" data-id="{{$cart['id']}}">
                                                                         <input type="button" value="+" class="qty-plus">
                                                                     </div>
                                                                 </div>
@@ -149,11 +153,11 @@
                                                             Move To<i class="fa fa-heart-o" aria-hidden="true"></i>
                                                         </button>
                                                     </div>
-                                                    <?php $price_sum  += ($cart->price * $cart->stock); ?>
+                                                    <?php $price_sum  += ($cart['price'] * $cart['stock']); ?>
                                                     <div class="cart-list-right">
-                                                        <p class="greenish">${{round($cart->price,2)}}</p>
+                                                        <p class="greenish">${{round($cart['price'],2)}}</p>
                                                         <p class="cart-msrp">MSRP: $220.00</p>
-                                                        <a wire:ignore wire:click.prevent="DeleteCartProduct({{$cart->id}})" href="javascript:;">delete</a>
+                                                        <a id="deleteCart" wire:click.prevent="DeleteCartProduct({{$cart['id']}})" href="javascript:;">delete</a>
                                                     </div>
                                                 </div>
 
@@ -1038,5 +1042,12 @@ $(document).ready(function(){
     <!-- modal end -->
 
 </div>
+
+<script type="text/javascript">
+    
+    $("#deleteCart").click(function(){
+        $(".cart-overlay").modal({backdrop: false});
+    });
+</script>
 
 

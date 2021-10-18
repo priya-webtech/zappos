@@ -224,7 +224,7 @@
                         <div class="product-rightbar">
                             <div class="product-right-top">
                                 <div class="pd-total">
-                                    <h2 class="h2" id="getprice">${{round($product->price,2)}}</h2>
+                                    <h2 class="h2" id="getprice">@if($Productvariant) ${{round($Productvariant->price,2)}} @else $0 @endif </h2>
                                     <label>Ships Free!</label>
                                 </div>
                                
@@ -235,42 +235,46 @@
                                          @foreach($product->variants as $row)
                                         <div class="form-group">
                                             @if(!empty($row->varient1))
+                                            <div wire:ignore wire:key="first">
 
                                             <label>{{$varianttag[$row->varient1][0]['name']}}</label>
-                                            <select name="attribute1"  class="form-control varition-change" id="varient1" >
+                                            <select name="attribute1"   class="form-control varition-change" id="varient1" wire:model="variant1" wire:key="first_sel" wire:ignore>
 
                                                 @foreach($product->variants as $row)
                                                     @if($row->attribute1 != "")
-                                                    <option>{{$row->attribute1}}</option> 
+                                                    <option wire:key="attr1_{{ $loop->index }}" wire:ignore.self>{{$row->attribute1}}</option> 
                                                     @endif 
                                                 @endforeach
                                             </select>
+                                        </div>
                                             @endif
 
                                              @if(!empty($row->varient2))
-
+                                            <div wire:ignore wire:key="second">
                                             <label>{{$varianttag[$row->varient2][0]['name']}}</label>
-                                            <select name="attribute2" class="form-control varition-change"   id="varient2">
+                                            <select name="attribute2"  class="form-control varition-change"   id="varient2" wire:model="variant2"  wire:key="sec_sel" wire:ignore>
 
                                                 @foreach($product->variants as $row)
                                                     @if($row->attribute2 != "")
-                                                    <option>{{$row->attribute2}}</option> 
+                                                    <option value="{{$row->attribute2}}" wire:key="attr2_{{ $loop->index }}" wire:ignore.self>{{$row->attribute2}}</option> 
                                                     @endif 
                                                 @endforeach
                                             </select>
+                                        </div>
                                             @endif
 
                                              @if(!empty($row->varient3))
-
+                                            <div wire:ignore wire:key="third">
                                             <label>{{$varianttag[$row->varient3][0]['name']}}</label>
-                                            <select name="attribute3"  class="form-control varition-change" id="varient3">
+                                            <select name="attribute3"  wire:ignore.self class="form-control varition-change" id="varient3" wire:model="variant3" wire:key="third_sel" wire:ignore>
 
                                                 @foreach($product->variants as $row)
                                                     @if($row->attribute3 != "")
-                                                    <option>{{$row->attribute3}}</option> 
+                                                    <option value="" wire:key="attr3_{{ $loop->index }}" wire:ignore.self>{{$row->attribute3}}</option> 
                                                     @endif 
                                                 @endforeach
                                             </select>
+                                        </div>
                                             @endif
 
                                         </div>
@@ -278,8 +282,8 @@
                                         @endforeach
                                         @endif
                                     </form>
-                                    <input type="hidden" wire:model="product.id">
-                                    <button class="site-btn" wire:key="{{rand()}}" wire:click="addcart"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Add to Cart</button>
+                                    <button class="site-btn" id="variant_id" wire:click="addCart($event.target.value)">Add to Cart</button>
+
                                     @if($favoritevalue && $favoritevalue->status == 1)
                                     <a class="site-btn" wire:click="addFavorite" style="background-color: green;"><i class="fa fa-heart" aria-hidden="true"></i>Add to collection</a>
                                     @else
@@ -345,15 +349,6 @@
                                     <img src="{{ asset('storage/'.$rows['productmediaget'][0]['image']) }}">
                                     @endif
                                  
-                                    <div class="multi-item-content">
-                                        @php
-                                        $result = favorite($rows->id);
-                                        @endphp
-                                        <a class="wish-list {{$result['class']}}" wire:click="UpdateWish({{$result['id']}})"><i class="fa fa-heart-o" aria-hidden="true"></i> <?php echo count($rows['favoriteget']); ?></a>
-                                        <p>ASICS</p>
-                                        <p class="multi-pd-title">{{$rows->title}}</p>
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
-                                    </div>
                                 </div>
                                 @endif
                                 @endif
@@ -393,6 +388,7 @@
                 </div>
             </div>
         </div>
+   
     <script type="text/javascript">
          
         $(function(){
