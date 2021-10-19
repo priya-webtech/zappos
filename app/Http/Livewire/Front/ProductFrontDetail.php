@@ -36,10 +36,12 @@ class ProductFrontDetail extends Component
     protected $keyType = 'string';
     public $incrementing = false;
 
-    public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$fetchprice,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $variant_id;
+    public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$fetchprice,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $Productvariant, $variationID;
 
 
     public $product, $Productvarian, $favoritevalue,$favoritevalueget;
+
+    public $variant1, $variant2, $variant3;
 
     protected $rules = [
 
@@ -50,6 +52,10 @@ class ProductFrontDetail extends Component
 
     ];
 
+    
+
+  
+
     public function mount($slug) {
         $this->slug = $slug;
 
@@ -59,6 +65,7 @@ class ProductFrontDetail extends Component
         $shopping_cart = [];
 
         $product_id = $this->getProduct();
+       
 
         $this->getCart();
 
@@ -84,15 +91,19 @@ class ProductFrontDetail extends Component
 
     public function render()
     {
+        $this->user_id = Auth::user()->id;
+
         $product = $this->getProduct();
+        // dd($product->variants);
+       
+
         return view('livewire.front.product-front-detail', ['product' => $product]);
     }
 
     public function getProduct() {
 
        $this->user_id =  Auth::user()->id;
-       $product  = Product::with('variants')->where('seo_utl',$this->slug)->first();
-       $this->product = $product;
+        $this->product  = Product::with('variants')->where('seo_utl',$this->slug)->first();
 
        $this->favoritevalue  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
 
@@ -100,31 +111,30 @@ class ProductFrontDetail extends Component
     }
 
     public function getCart() {
-     $this->CartItem = Cart::with(['media_product', 'product_detail'])->where('user_id',$this->user_id)->get();
+     $this->CartItem = Cart::with(['media_product', 'product_detail'])->where('user_id',Auth::user()->id)->get();
+        $this->emit('getCart');
+
     }
 
     public function fetchPrice(Request $request)
     {
-//         $this->Productvariant = ProductVariant::with(['variant_stock' => function($q) {
-//             $q->where('location_id', 1);
-//         }])->when($this->selectVariant1, function($q1) {
-//             return $q1->where('attribute1',$this->selectVariant1);
-
-//         })->when($this->selectVariant2, function($q1) {
-//             return $q1->where('attribute2',$this->selectVariant2);
-
-//         })->when($this->selectVariant3, function($q1) {
-//             return $q1->where('attribute3',$this->selectVariant3);
-
-//         })->first();
-//         $this->selectVariant1 =  $this->Productvariant->attribute1;
-
-// dd($this->selectVariant1 , $this->Productvariant);
         $this->Productvariant = ProductVariant::with(['variant_stock' => function($q) {
             $q->where('location_id', 1);
         }])->where('attribute1',$request->text1)->where('attribute2',$request->text2)->where('attribute3',$request->text3)->first();
 
+        // $this->Productvariant = ProductVariant::with(['variant_stock' => function($q) {
+        //     $q->where('location_id', 1);
+        // }])->when($this->variant1, function($q1) {
+        //     return $q1->where('attribute1',$this->variant1);
 
+        // })->when($this->variant2, function($q1) {
+        //     return $q1->where('attribute2',$this->variant2);
+
+        // })->when($this->variant3, function($q1) {
+        //     return $q1->where('attribute3',$this->variant3);
+
+        // })->where('product_id', $this->product->id)->first();
+        $this->variationID = $this->Productvariant->id;
          return response()->json(array('variant' => $this->Productvariant));
 
     }
@@ -180,10 +190,10 @@ class ProductFrontDetail extends Component
             }
     }
 
-    public function addCart($variant_id)
-
+    public function addCart($variationID)
     {
-        $variant = ProductVariant::where('id',$variant_id)->first();
+
+        $variant = ProductVariant::find($variationID);
 
         if(!empty($variant)) {
             $cart_arr = [

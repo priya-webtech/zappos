@@ -109,15 +109,11 @@ $(document).ready(function() {
 
 });
 
- $(document).ready(function(){
-//     $(".nav-item").hover(            
-//         function() {
-//             $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
-//             $(this).toggleClass('open');        
-//         },
-//         function() {
-//             $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideUp("400");
-//             $(this).toggleClass('open');       
-//         }
-//     );
- });
+$(document).ready(function(){
+	$('.my-cart .bg-cart').click(function(){
+		$('body').addClass('cart-overlay');
+	});
+	$('.myclose-close').click(function(){
+		$('body').removeClass('cart-overlay');
+	});	
+});

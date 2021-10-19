@@ -15,12 +15,14 @@ class Header extends Component
 {
     public $menu_arr = [];
     
-    public $CartItem,$ProductVariant,$varianttag,$filter_product,$getproduct;
+    public $CartItem,$ProductVariant,$varianttag,$filter_product,$getproduct, $user_id;
+
+    protected $listeners = ['getCart', 'DeleteCartProduct'];
 
     public function mount() {
         if (Auth::check()) {
-            $user_id =  Auth::user()->id;
-            $this->CartItem = Cart::with('media_product')->with('product_detail')->where('user_id',$user_id)->get();
+            $this->user_id =  Auth::user()->id;
+            $this->getCart();
         }
 
        $this->ProductVariant = ProductVariant::get();
@@ -28,8 +30,14 @@ class Header extends Component
 
 
     }
+    public function CartItem($value='')
+    {
+        $this->CartItem = $value;
+    }
     public function render()
     {
+
+$this->getCart();
         $this->getproduct = Product::when($this->filter_product, function ($query, $filter_product) {
 
             $query->where('title', 'LIKE', '%' . $filter_product . '%');
@@ -88,14 +96,24 @@ class Header extends Component
         return view('livewire.header');
     }
 
-    public function DeleteCartProduct($flag)
+    public function DeleteCartProduct($id)
     {
-        $res=Cart::find($flag)->delete();
+        Cart::find($id)->delete();
+        $this->getCart();
 
-        $user_id =  Auth::user()->id;
-
-        $this->CartItem = Cart::with('media_product')->with('product_detail')->where('user_id',$user_id)->get();
         $this->ProductVariant = ProductVariant::get();
        $this->varianttag = VariantTag::All();
     }
+
+    public function getCart()
+    {
+       
+            $this->user_id =  Auth::user()->id;
+
+            $this->CartItem =  Cart::with(['media_product', 'product_detail'])->where('user_id',$this->user_id)->get();
+
+
+
+    }
+
 }
