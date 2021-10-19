@@ -5,11 +5,12 @@ namespace App\Http\Livewire\Front;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\review;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductReviews extends Component
 {
-	public $text,$name,$image,$city,$brand,$user_id;
+	public $product_id,$productget;
 
 	protected $rules = [
 
@@ -21,6 +22,12 @@ class ProductReviews extends Component
 
     ];
 
+    public function mount($id)
+    {
+    	$this->product_id = $id;
+    	$this->productget = Product::where(['id' => $this->product_id])->first();
+    }
+
     public function render()
     {
     	$this->user_id = Auth::user()->id;
@@ -29,6 +36,8 @@ class ProductReviews extends Component
 
     public function SaveReview(Request $res)
     {
+
+    	$product = Product::where(['id' => $res->productid])->first();
     	$this->user_id = Auth::user()->id;
     	if($res->image){
     		$path_url = $res->image->storePublicly('review','public');
@@ -38,24 +47,30 @@ class ProductReviews extends Component
 
     	$review_arr = [
                     
-                    'product_id' => '1',
+                    'product_id'  => $res->productid,
                    
-                    'user_id' => $this->user_id,
+                    'user_id'     => $this->user_id,
                    
-                    'text' 	  => $res->text,
+                    'overall' 	  => $res->overall,
+                    
+                    'comfort' 	  => $res->comfort,
+                    
+                    'style' 	  => $res->style,
+                    
+                    'text' 	      => $res->text,
 
-                    'name' => $res->name,
+                    'name' 		  => $res->name,
                     
-                    'image' => $path_url,
+                    'image'       => $path_url,
                     
-                    'city' => $res->city,
+                    'city'        => $res->city,
                     
-                    'brand' => $res->brand,
+                    'brand'       => $res->brand,
 
-                    'status' => '1',
+                    'status'      => '1',
                 ];
 
         review::create($review_arr);
-        return view('livewire.front.product-review');
+
     }
 }
