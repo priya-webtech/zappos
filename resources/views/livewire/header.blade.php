@@ -221,7 +221,7 @@
                                 @foreach($menu['items'] as $menuitem)
 
                                     <div class="mansory-item">
-                                    <a class="dropdown-header" href="{{ route('product-front-category', $menuitem['link']) }}">{{$menuitem['label']}}</a>
+                                        <a class="dropdown-header" href="{{ route('product-front-category', $menuitem['link']) }}">{{$menuitem['label']}}</a>
 
                                         @if(isset($menuitem['items']))
 
@@ -237,6 +237,8 @@
                                     </div>
 
                                 @endforeach
+                            </div>
+                            <div class="masonry-with-columns mega-img-col">
 
                                     @if(isset($menu['images']) && count($menu['images']) > 0)
 
@@ -267,21 +269,6 @@
 
                                     @endif
 
-                            </div>
-
-                            <div class="masonry-with-columns">
-                                <aside class="mega-menu-img">
-                                    <a href="#">
-                                        <img src="https://m.media-amazon.com/images/G/01/2021/Global-Nav/COOP-UGG-DISKETTE-GLOBAL-NAV-350x350.jpg">
-                                        <p class="mg-img-text">Shop Women's UGG®</p>
-                                    </a>
-                                </aside>
-                                <aside class="mega-menu-img">
-                                    <a href="#">
-                                        <img src="https://m.media-amazon.com/images/G/01/2021/Global-Nav/FREE-PEOPLE-BLOUSE-GLOBAL-NAV.jpg">
-                                        <p class="mg-img-text">Shop Free People</p>
-                                    </a>
-                                </aside>
                             </div>
 
                         </div>
