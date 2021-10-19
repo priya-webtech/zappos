@@ -41,10 +41,12 @@ class Menus extends Component
 
         $menuitem->label = request()->input("labelmenu");
         $menuitem->link = request()->input("linkmenu");
+        $menuitem->multipleid = '0';
         if (config('menu.use_roles')) {
             $menuitem->role_id = request()->input("rolemenu") ? request()->input("rolemenu")  : 0 ;
         }
         $menuitem->menu = request()->input("idmenu");
+        $menuitem->type_category = '0';
         $menuitem->sort = MenuItems::getNextSortRoot(request()->input("idmenu"));
         $menuitem->save();
 
@@ -62,6 +64,7 @@ class Menus extends Component
          $pageslink =  $this->pages['seo_url'];
          $menuname = new MenuItems();
          $menuname->label = $this->pages['title'];
+         $menuname->multipleid = '0';
          $menuname->type_category = '1';
          $menuname->link = $pageslink;
          $menuname->menu = $menuidd;
