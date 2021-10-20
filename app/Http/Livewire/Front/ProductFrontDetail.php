@@ -20,6 +20,8 @@ use App\Models\VariantTag;
 
 use App\Models\Cart;
 
+use App\Models\review;
+
 use App\Models\Location;
 
 use App\Models\favorite;
@@ -36,7 +38,7 @@ class ProductFrontDetail extends Component
     protected $keyType = 'string';
     public $incrementing = false;
 
-    public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$fetchprice,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $Productvariant, $variationID;
+    public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$fetchprice,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $Productvariant, $variationID, $reviewget;
 
 
     public $product, $Productvarian, $favoritevalue,$favoritevalueget;
@@ -107,6 +109,7 @@ class ProductFrontDetail extends Component
 
        $this->favoritevalue  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
 
+       $this->reviewget = review::where('product_id',$this->product['id'])->get();
        return Product::with('variants')->where('seo_utl',$this->slug)->first();
     }
 

@@ -405,6 +405,19 @@
                     </div>
                 </div>
                 <a class="site-btn" href="{{ route('product-review', $product->id) }}">Write Review</a>
+                @if($this->reviewget)
+                @foreach($this->reviewget as $res)
+                <div>
+                    
+                    over all <input id="ratinginput" name="overall" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="@if($res){{$res->overall}}@endif" readonly>
+                    Comfort   <input id="ratinginput" name="overall" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="@if($res){{$res->comfort}}@endif" readonly>
+                    Style <input id="ratinginput" name="overall" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="@if($res){{$res->style}}@endif" readonly>
+                    <p>{{$res->text}}</p>
+                    <p>{{$res->name}},{{$res->city}},{{$res->created_at}}</p>
+                    <img src="{{ asset('storage/'.$res['image']) }}" height="200px" width="200px">
+                </div>
+                @endforeach
+                @endif
             </div>
         </div>
    

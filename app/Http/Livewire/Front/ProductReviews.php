@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\review;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductReviews extends Component
 {
@@ -39,8 +40,26 @@ class ProductReviews extends Component
     {
         $this->user_id = Auth::user()->id;
     	$product = Product::where(['id' => $res->productid])->first();
-        $productreview = review::where(['product_id' => $res->productid,'user_id' => $res->productid,])->first();
-        if(!empty($productreview)){
+        $productreview = review::where(['product_id' => $res->productid,'user_id' => $this->user_id])->first();
+        if(!$productreview){
+
+            if($res->image){
+               
+            if(!empty($productreview->image))
+            {
+                $productImage = $productreview->image;
+                if ($productImage) {
+                    Storage::delete($productImage);
+                    $path_url = $res->image->storePublicly('review','public');  
+                }
+            }   
+            else
+            {
+                $path_url = $res->image->storePublicly('review','public');
+            }
+            }else{
+                $path_url = '';
+            }
 
     	$review_arr = [
                     
@@ -68,11 +87,21 @@ class ProductReviews extends Component
         review::create($review_arr);
         }
         else{
-
             if($res->image){
-            $path_url = $res->image->storePublicly('review','public');
+               
+                if($productreview->image)
+                {
+                    $productImage = $productreview->image;
+                    if ($productImage) {
+                        Storage::delete($productImage);
+                        $path_url = $res->image->storePublicly('review','public');  
+                    }
+                }
+                else{
+                    $path_url = $res->image->storePublicly('review','public');
+                }   
             }else{
-                $path_url = 'null';
+                $path_url = '';
             }
             review::where('id', $productreview['id'])->update(
 
@@ -101,9 +130,7 @@ class ProductReviews extends Component
                 ]
 
             );
-
-             return redirect(route('product-front-detail', $product->seo_utl));
         }
-
+        return redirect(route('product-front-detail', $product->seo_utl));
     }
 }
