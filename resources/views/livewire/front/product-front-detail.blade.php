@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div class="product-sec" wire:ignore>
+        <div class="product-sec">
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
@@ -224,25 +224,26 @@
                         <div class="product-rightbar">
                             <div class="product-right-top">
                                 <div class="pd-total">
-                                    <h2 class="h2" id="getprice">@if($Productvariant) ${{round($Productvariant->price,2)}} @else $0 @endif </h2>
+                                    <h2 class="h2" id="getprice"></h2>
                                     <label>Ships Free!</label>
                                 </div>
                                
-                                <div :id="{{$product->id}}" wire:ignore>
+                                <div :id="{{$product->id}}" >
                                     <form>
+                                        <input id="productid" type="hidden" name="productid" value="{{$product->id}}" /> 
 
                                         @if($product && isset($product->variants) && count($product->variants) > 0 )
                                          @foreach($product->variants as $row)
                                         <div class="form-group">
                                             @if(!empty($row->varient1))
-                                            <div wire:ignore wire:key="first">
+                                            <div wire:key="first">
 
                                             <label>{{$varianttag[$row->varient1][0]['name']}}</label>
-                                            <select name="attribute1"   class="form-control varition-change" id="varient1" wire:model="variant1" wire:key="first_sel" wire:ignore>
+                                            <select name="attribute1"   class="form-control varition-change" id="varient1" wire:key="first_sel">
 
                                                 @foreach($product->variants as $row)
                                                     @if($row->attribute1 != "")
-                                                    <option wire:key="attr1_{{ $loop->index }}" wire:ignore.self>{{$row->attribute1}}</option> 
+                                                    <option wire:key="attr1_{{ $loop->index }}" >{{$row->attribute1}}</option> 
                                                     @endif 
                                                 @endforeach
                                             </select>
@@ -250,13 +251,13 @@
                                             @endif
 
                                              @if(!empty($row->varient2))
-                                            <div wire:ignore wire:key="second">
+                                            <div  wire:key="second">
                                             <label>{{$varianttag[$row->varient2][0]['name']}}</label>
-                                            <select name="attribute2"  class="form-control varition-change"   id="varient2" wire:model="variant2"  wire:key="sec_sel" wire:ignore>
+                                            <select name="attribute2"  class="form-control varition-change"    id="varient2"  wire:key="sec_sel">
 
                                                 @foreach($product->variants as $row)
                                                     @if($row->attribute2 != "")
-                                                    <option value="{{$row->attribute2}}" wire:key="attr2_{{ $loop->index }}" wire:ignore.self>{{$row->attribute2}}</option> 
+                                                    <option value="{{$row->attribute2}}" wire:key="attr2_{{ $loop->index }}">{{$row->attribute2}}</option> 
                                                     @endif 
                                                 @endforeach
                                             </select>
@@ -264,13 +265,13 @@
                                             @endif
 
                                              @if(!empty($row->varient3))
-                                            <div wire:ignore wire:key="third">
+                                            <div wire:key="third">
                                             <label>{{$varianttag[$row->varient3][0]['name']}}</label>
-                                            <select name="attribute3"  wire:ignore.self class="form-control varition-change" id="varient3" wire:model="variant3" wire:key="third_sel" wire:ignore>
+                                            <select name="attribute3" class="form-control varition-change" id="varient3"  wire:key="third_sel" >
 
                                                 @foreach($product->variants as $row)
                                                     @if($row->attribute3 != "")
-                                                    <option value="" wire:key="attr3_{{ $loop->index }}" wire:ignore.self>{{$row->attribute3}}</option> 
+                                                    <option value="" wire:key="attr3_{{ $loop->index }}" >{{$row->attribute3}}</option> 
                                                     @endif 
                                                 @endforeach
                                             </select>
@@ -428,10 +429,11 @@
                 var val1 = $('#varient1').val();
                 var val2 = $('#varient2').val();
                 var val3 = $('#varient3').val();
+                var productid = $('#productid').val();
                 $.ajax({
                     type: 'GET',
                     url: "{{URL('varientData')}}",
-                    data: { text1: val1, text2: val2, text3: val3},
+                    data: { text1: val1, text2: val2, text3: val3, productid: productid},
                     success: function(response) {
                         var price = stock = 0;
                         var id = null;
@@ -443,8 +445,6 @@
                         }
                         
                         $('#getprice').html('$'+price);
-                        $('#getstock').html(stock);
-                        $('#getpriceinput').attr('value',price);
                         $('#variant_id').prop('value',id);
                     }
                 });
