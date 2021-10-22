@@ -38,7 +38,9 @@ class ProductFrontDetail extends Component
     protected $keyType = 'string';
     public $incrementing = false;
 
-    public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$fetchprice,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $Productvariant, $variationID, $reviewget;
+
+    public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $Productvariant, $variationID, $reviewget;
+
 
 
     public $product, $Productvarian, $favoritevalue,$favoritevalueget;
@@ -66,7 +68,7 @@ class ProductFrontDetail extends Component
        
         $shopping_cart = [];
 
-        $product_id = $this->getProduct();
+        $this->getProduct();
        
 
         $this->getCart();
@@ -77,7 +79,7 @@ class ProductFrontDetail extends Component
         //$this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
 
         // $this->Productmediafirst = ProductMedia::where('product_id',$this->product['id'])->first();
-        $this->Productmedia = ProductMedia::where('product_id',$product_id->id)->get();
+        $this->Productmedia = ProductMedia::where('product_id',$this->product->id)->get();
 
         $this->tags = Tag::All();
         
@@ -85,7 +87,7 @@ class ProductFrontDetail extends Component
 
         $shopping_cart = json_decode(Cookie::get('shopping_cart'));
 
-        $shopping_cart[] = $product_id;
+        $shopping_cart[] = $this->product->id;
 
         $minutes = 60;
         Cookie::queue(Cookie::make('shopping_cart',  json_encode($shopping_cart), $minutes));
@@ -95,11 +97,10 @@ class ProductFrontDetail extends Component
     {
         $this->user_id = Auth::user()->id;
 
-        $product = $this->getProduct();
-        // dd($product->variants);
+        $this->getProduct();
        
 
-        return view('livewire.front.product-front-detail', ['product' => $product]);
+        return view('livewire.front.product-front-detail', ['product' => $this->product]);
     }
 
     public function getProduct() {
@@ -111,6 +112,7 @@ class ProductFrontDetail extends Component
 
        $this->reviewget = review::where('product_id',$this->product['id'])->get();
        return Product::with('variants')->where('seo_utl',$this->slug)->first();
+
     }
 
     public function getCart() {
@@ -123,7 +125,7 @@ class ProductFrontDetail extends Component
     {
         $this->Productvariant = ProductVariant::with(['variant_stock' => function($q) {
             $q->where('location_id', 1);
-        }])->where('attribute1',$request->text1)->where('attribute2',$request->text2)->where('attribute3',$request->text3)->first();
+        }])->where('attribute1',$request->text1)->where('attribute2',$request->text2)->where('attribute3',$request->text3)->where('product_id',$request->productid)->first();
 
         // $this->Productvariant = ProductVariant::with(['variant_stock' => function($q) {
         //     $q->where('location_id', 1);
