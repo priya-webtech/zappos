@@ -24,7 +24,7 @@ use Illuminate\Http\Request;
 
 class StripePaymnetController extends Component
 {
-    public $Cart,$orderdetail,$singleCart;
+    public $Cart,$orderdetail,$singleCart,$fullname,$address,$city,$country,$pincode,$mobile;
 
     public function mount($id)
     {
@@ -35,6 +35,19 @@ class StripePaymnetController extends Component
     {
         return view('livewire.stripe-paymnet-controller');
      
+    }
+    public function addshipping($id)
+    {
+        $paymentdetail = Orders::where('id', $id)->update(
+                    [
+                        'fullname' => $this->fullname,
+                        'address' => $this->address,
+                        'city' => $this->city,
+                        'country' => $this->country,
+                        'pincode' => $this->pincode,
+                        'mobile' => $this->mobile,
+                    ]
+                );
     }
 
     public function stripePost(Request $request)

@@ -297,7 +297,7 @@
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                <a href="#">Favorite</a>
+                <a href="{{ route('favorite-detail') }}">Favorite</a>
                 </li>
                 <li class="nav-item dropdown">
 

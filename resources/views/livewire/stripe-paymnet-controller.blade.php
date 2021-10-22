@@ -98,7 +98,66 @@
                         </div>
 
                     @endif
+                    <form role="form" class="require-validation">
 
+                        @csrf
+                        
+                        <input type="hidden" name="orderid" value="{{$orderdetail->id}}">
+                        <div class='form-row row'>
+
+                            <div class='col-xs-12 form-group required'>
+                                <label class='control-label'>Full name</label> 
+                                <input class='form-control' wire:model="fullname" name="fullname" type='text'>
+                            </div>
+                            <div class='col-xs-12 form-group'>
+                                <label class='control-label'>Address</label> 
+                                <textarea class='form-control' wire:model="address" name="address" type='text'></textarea>
+                            </div>
+                            <div class='col-xs-12 form-group required'>
+                                <label class='control-label'>City</label> 
+                                <input class='form-control' wire:model="city" name="city" type='text'>
+                            </div>
+                            <div class='col-xs-12 form-group required'>
+                                <label class='control-label'>Country</label> 
+                                <input class='form-control' wire:model="country" name="country" type='text'>
+                            </div>
+                            <div class='col-xs-12 form-group required'>
+                                <label class='control-label'>Pincode</label> 
+                                <input class='form-control' wire:model="pincode" name="pincode" type='text'>
+                            </div>
+                            <div class='col-xs-12 form-group required'>
+                                <label class='control-label'>Mobile Number</label> 
+                                <input class='form-control' wire:model="mobile" name="mobile" type='text'>
+                            </div>
+                        </div>
+
+                        <div class='form-row row'>
+
+                            <div class='col-md-12 error form-group hide'>
+
+                                <div class='alert-danger alert'>Please correct the errors and try
+
+                                    again.</div>
+
+                            </div>
+
+                        </div>
+
+                        
+
+                        <div class="row">
+
+                            <div class="col-xs-12">
+                              
+                                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Submit" wire:click="addshipping({{$orderdetail->id}})">
+
+                            </div>
+
+                        </div>
+
+                          
+
+                    </form>
   
 
                     <form role="form" 

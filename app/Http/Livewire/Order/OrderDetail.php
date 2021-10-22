@@ -22,7 +22,7 @@ class OrderDetail extends Component
 
     public function mount($id) {
 
-       $this->order = Orders::Where('id', $id)->first();
+       $this->order = Orders::with('user')->Where('id', $id)->first();
        $this->Taxes = tax::where('id',1)->first();
        $this->OrderItem = order_item::with('order_product')->with('media_product')->where('order_id',$id)->get();
 
