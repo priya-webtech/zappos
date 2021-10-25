@@ -24,22 +24,9 @@
 
         <div class="product-sec" wire:ignore>
             <div class="container">
+                <div class="single-pd-sec">
                 <div class="row">
-                    <div class="col-md-9">
-                        <div class="product-title">
-                            <h2 class="h2">
-                                <span class="product-brand">ASICS</span>
-                                <span class="product-title">{{$product->title}}</span>
-                            </h2>
-                            <div class="product-ratting">
-                                <i class="fa fa-star checked" aria-hidden="true"></i>
-                                <i class="fa fa-star checked" aria-hidden="true"></i>
-                                <i class="fa fa-star checked" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <a href="#" class="total-review">320 Reviews</a>
-                            </div>
-                        </div>
+                    <div class="col-md-8">
                         <div class="product-slider">
                             <div class="product-slider-nav">
                                 @foreach($Productmedia as $image)
@@ -61,6 +48,137 @@
                                 
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-4 pd-sidebar-details">
+                        <div class="product-rightbar">
+                            <div class="product-title">
+                                <h2 class="h2">
+                                    <span class="product-brand">ASICS</span>
+                                    <span class="product-title">{{$product->title}}</span>
+                                </h2>
+                                <div class="product-ratting">
+                                    <i class="fa fa-star checked" aria-hidden="true"></i>
+                                    <i class="fa fa-star checked" aria-hidden="true"></i>
+                                    <i class="fa fa-star checked" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <a href="#" class="total-review">320 Reviews</a>
+                                </div>
+                            </div>
+                            <div class="product-right-top">
+                                <div class="pd-total">
+                                    <h2 class="h2" id="getprice"><sup>$</sup><span>@if($Productvariant) ${{round($Productvariant->price,2)}} @else 145 @endif</span><sup>00</sup></h2>
+                                    <label><form><i class="fa fa-truck" aria-hidden="true"></i>Ships Free!</label></form>
+                                </div>
+                               
+                                <div class="pd-variation" :id="{{$product->id}}" wire:ignore>
+                                    @if($product && isset($product->variants) && count($product->variants) > 0 )
+                                     @foreach($product->variants as $row)
+                                    <div class="form-group">
+                                        @if(!empty($row->varient1))
+                                        <div wire:ignore wire:key="first">
+
+                                            <label>{{$varianttag[$row->varient1][0]['name']}}</label>
+                                            <select name="attribute1"   class="form-control varition-change" id="varient1" wire:model="variant1" wire:key="first_sel" wire:ignore>
+
+                                                @foreach($product->variants as $row)
+                                                    @if($row->attribute1 != "")
+                                                    <option wire:key="attr1_{{ $loop->index }}" wire:ignore.self>{{$row->attribute1}}</option> 
+                                                    @endif 
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    <div class="form-group">
+                                         @if(!empty($row->varient2))
+                                        <div wire:ignore wire:key="second">
+                                            <label>{{$varianttag[$row->varient2][0]['name']}}</label>
+                                            <select name="attribute2"  class="form-control varition-change"   id="varient2" wire:model="variant2"  wire:key="sec_sel" wire:ignore>
+
+                                                @foreach($product->variants as $row)
+                                                    @if($row->attribute2 != "")
+                                                    <option value="{{$row->attribute2}}" wire:key="attr2_{{ $loop->index }}" wire:ignore.self>{{$row->attribute2}}</option> 
+                                                    @endif 
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @endif
+
+                                         @if(!empty($row->varient3))
+                                        <div wire:ignore wire:key="third">
+                                            <label>{{$varianttag[$row->varient3][0]['name']}}</label>
+                                            <select name="attribute3"  wire:ignore.self class="form-control varition-change" id="varient3" wire:model="variant3" wire:key="third_sel" wire:ignore>
+
+                                                @foreach($product->variants as $row)
+                                                    @if($row->attribute3 != "")
+                                                    <option value="" wire:key="attr3_{{ $loop->index }}" wire:ignore.self>{{$row->attribute3}}</option> 
+                                                    @endif 
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    <?php break; ?>
+                                    @endforeach
+                                    @endif
+                                    <div class="pd-width-options">
+                                        <h5 class="h5">Width Options:</h5>
+                                        <div class="form-check">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                                <label class="custom-control-label" for="customRadio1">S</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                                <label class="custom-control-label" for="customRadio2">xl</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pd-btn-group">
+                                    <button class="site-btn" id="variant_id" wire:click="addCart($event.target.value)">Add to Cart</button>
+
+                                    @if($favoritevalue && $favoritevalue->status == 1)
+                                    <a class="site-btn add-collection-btn" wire:click="addFavorite" style="background-color: green;"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
+                                    @else
+                                    <a class="site-btn add-collection-btn" wire:click="addFavorite"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                           
+                        <div class="product-right-bottom">
+                            <div class="size-and-social pd-right-p">
+                                <!-- <a href="#">Don't See your size?</a>
+                                <a href="#"> Notify Me of the New Styles</a> -->
+                                <ul class="product-right-social">
+                                    <li>Share:</li>
+                                    <li><a class="pd-facebook" href="#">
+                                        <i class="fa fa-link" aria-hidden="true"></i>
+                                    </a></li>
+                                    <li><a class="pd-twitter" href="#">
+                                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                                    </a></li>
+                                    <li><a class="pd-pinterest" href="#">
+                                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                                    </a></li>
+                                    <li><a class="pd-mail" href="#">
+                                        <i class="fa fa-pinterest-p" aria-hidden="true"></i>
+                                    </a></li>
+                                </ul>
+                            </div>
+                            <div class="pd-sort-dec">
+                                <h4 class="h4">Product Information</h4>
+                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                <a href="#pd-all-details">Show More Information <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
                         <ul class="product-oneline-row">
                             <li>
                                 <img src="https://www.zappos.com/marty-assets/sizeinfo.8c1cdd5ad8b9fe200f2ab76c77c7746c.svg">
@@ -69,6 +187,10 @@
                             <li><b>85%</b> Felt true to width</li>
                             <li><b>83%</b> Moderate arch support</li>
                         </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
                         <div class="wear-it-With-sec multi-item-slider">
                             <h3 class="h3">Wear It With</h3>
                             <div class="wear-it-With-slider">
@@ -137,7 +259,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="product-information">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div id="pd-all-details" class="product-information">
                             <h3 class="h3">Item Information</h3>
                             <ul>
                                 <li>View the size chart</li>
@@ -149,8 +275,11 @@
                                 <li>Heel/Toe: 23 mm/13 mm.</li>
                                 <li>View the size chart</li>
                             </ul>
-                            <a href="#">Show More Information <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
                         <div class="item-bought-sec multi-item-slider">
                             <h3 class="h3">Customer Who Bought This Item Also Bought</h3>
                             <div class="item-bought-slider">
@@ -220,120 +349,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="product-rightbar">
-                            <div class="product-right-top">
-                                <div class="pd-total">
-                                    <h2 class="h2" id="getprice">@if($Productvariant) ${{round($Productvariant->price,2)}} @else $0 @endif </h2>
-                                    <label>Ships Free!</label>
-                                </div>
-                               
-                                <div :id="{{$product->id}}" wire:ignore>
-                                    <form>
-
-                                        @if($product && isset($product->variants) && count($product->variants) > 0 )
-                                         @foreach($product->variants as $row)
-                                        <div class="form-group">
-                                            @if(!empty($row->varient1))
-                                            <div wire:ignore wire:key="first">
-
-                                            <label>{{$varianttag[$row->varient1][0]['name']}}</label>
-                                            <select name="attribute1"   class="form-control varition-change" id="varient1" wire:model="variant1" wire:key="first_sel" wire:ignore>
-
-                                                @foreach($product->variants as $row)
-                                                    @if($row->attribute1 != "")
-                                                    <option wire:key="attr1_{{ $loop->index }}" wire:ignore.self>{{$row->attribute1}}</option> 
-                                                    @endif 
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                            @endif
-
-                                             @if(!empty($row->varient2))
-                                            <div wire:ignore wire:key="second">
-                                            <label>{{$varianttag[$row->varient2][0]['name']}}</label>
-                                            <select name="attribute2"  class="form-control varition-change"   id="varient2" wire:model="variant2"  wire:key="sec_sel" wire:ignore>
-
-                                                @foreach($product->variants as $row)
-                                                    @if($row->attribute2 != "")
-                                                    <option value="{{$row->attribute2}}" wire:key="attr2_{{ $loop->index }}" wire:ignore.self>{{$row->attribute2}}</option> 
-                                                    @endif 
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                            @endif
-
-                                             @if(!empty($row->varient3))
-                                            <div wire:ignore wire:key="third">
-                                            <label>{{$varianttag[$row->varient3][0]['name']}}</label>
-                                            <select name="attribute3"  wire:ignore.self class="form-control varition-change" id="varient3" wire:model="variant3" wire:key="third_sel" wire:ignore>
-
-                                                @foreach($product->variants as $row)
-                                                    @if($row->attribute3 != "")
-                                                    <option value="" wire:key="attr3_{{ $loop->index }}" wire:ignore.self>{{$row->attribute3}}</option> 
-                                                    @endif 
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                            @endif
-
-                                        </div>
-                                        <?php break; ?>
-                                        @endforeach
-                                        @endif
-                                    </form>
-                                    <button class="site-btn" id="variant_id" wire:click="addCart($event.target.value)">Add to Cart</button>
-
-                                    @if($favoritevalue && $favoritevalue->status == 1)
-                                    <a class="site-btn add-collection-btn" wire:click="addFavorite" style="background-color: green;"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
-                                    @else
-                                    <a class="site-btn add-collection-btn" wire:click="addFavorite"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
-                                    @endif
-                                </div>
-                                  
-                            </div>
-                           
-                            <div class="product-right-bottom">
-                                <div class="size-and-social pd-right-p">
-                                    <a href="#">Don't See your size?</a>
-                                    <a href="#"> Notify Me of the New Styles</a>
-                                    <ul class="product-right-social">
-                                        <li>Share:</li>
-                                        <li><a class="pd-facebook" href="#"><i class="fa fa-facebook-square f-24"></i></a></li>
-                                        <li><a class="pd-twitter" href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
-                                        <li><a class="pd-pinterest" href="#"><i class="fa fa-pinterest-square" aria-hidden="true"></i></a></li>
-                                        <li><a class="pd-mail" href="#"><i class="fa fa-envelope-square f-24"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="recommended-rightbar">
-                                    <h5 class="h5">Recommended For You</h5>
-                                    <div class="rcmd-rightbar-pd">
-                                        <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
-                                        <div class="multi-item-content">
-                                            <a class="wish-list" href="#" tabindex="0"><i class="fa fa-heart-o" aria-hidden="true"></i>595</a>
-                                            <p>ASICS</p>
-                                            <p class="multi-pd-title">GEL-Nimbus® 22</p>
-                                            <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
-                                        </div>
-                                    </div>
-                                    <div class="rcmd-rightbar-pd">
-                                        <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
-                                        <div class="multi-item-content">
-                                            <a class="wish-list" href="#" tabindex="0"><i class="fa fa-heart-o" aria-hidden="true"></i>595</a>
-                                            <p>ASICS</p>
-                                            <p class="multi-pd-title">GEL-Nimbus® 22</p>
-                                            <p class="product-price"><span class="mrp-price">$99.95</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="similar-items-sec multi-item-slider">
-                            <h3 class="h3">Similar Items You May Like!</h3>
+                            <h3 class="h3">Recommended For You</h3>
                             <div class="similar-items-slider">
                                 @foreach($productrelated as $rows)
                                 <?php $decodeA = json_decode($rows->collection);  

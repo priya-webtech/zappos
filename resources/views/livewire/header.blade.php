@@ -67,11 +67,11 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <div class="row cart-vip-code" name="cart-vip-code">
+                                <!-- <div class="row cart-vip-code" name="cart-vip-code">
                                     <div class="col-12">
                                         <p class="vip-text"><img src="https://www.flaticon.com/svg/static/icons/svg/2909/2909599.svg" class="stars img-fluid"> Check out to earn Zappos VIP points worth up to <span class="font-weight-bold">$1.20</span> in VIP codes.</p>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div>
                                     @if($CartItem && !empty($CartItem) && count($CartItem) > 0)
 
