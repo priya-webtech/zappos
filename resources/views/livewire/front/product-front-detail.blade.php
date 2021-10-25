@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div class="product-sec" wire:ignore>
+        <div class="product-sec">
             <div class="container">
                 <div class="single-pd-sec">
                 <div class="row">
@@ -349,6 +349,116 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="product-rightbar">
+                            <div class="product-right-top">
+                                <div class="pd-total">
+                                    <h2 class="h2" id="getprice"></h2>
+                                    <label>Ships Free!</label>
+                                </div>
+                               
+                                <div :id="{{$product->id}}" >
+                                    <form>
+                                        <input id="productid" type="hidden" name="productid" value="{{$product->id}}" /> 
+
+                                        @if($product && isset($product->variants) && count($product->variants) > 0 )
+                                         @foreach($product->variants as $row)
+                                        <div class="form-group">
+                                            @if(!empty($row->varient1))
+                                            <div wire:key="first">
+
+                                            <label>{{$varianttag[$row->varient1][0]['name']}}</label>
+                                            <select name="attribute1"   class="form-control varition-change" id="varient1" wire:key="first_sel">
+
+                                                @foreach($product->variants as $row)
+                                                    @if($row->attribute1 != "")
+                                                    <option wire:key="attr1_{{ $loop->index }}" >{{$row->attribute1}}</option> 
+                                                    @endif 
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                            @endif
+
+                                             @if(!empty($row->varient2))
+                                            <div  wire:key="second">
+                                            <label>{{$varianttag[$row->varient2][0]['name']}}</label>
+                                            <select name="attribute2"  class="form-control varition-change"    id="varient2"  wire:key="sec_sel">
+
+                                                @foreach($product->variants as $row)
+                                                    @if($row->attribute2 != "")
+                                                    <option value="{{$row->attribute2}}" wire:key="attr2_{{ $loop->index }}">{{$row->attribute2}}</option> 
+                                                    @endif 
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                            @endif
+
+                                             @if(!empty($row->varient3))
+                                            <div wire:key="third">
+                                            <label>{{$varianttag[$row->varient3][0]['name']}}</label>
+                                            <select name="attribute3" class="form-control varition-change" id="varient3"  wire:key="third_sel" >
+
+                                                @foreach($product->variants as $row)
+                                                    @if($row->attribute3 != "")
+                                                    <option value="" wire:key="attr3_{{ $loop->index }}" >{{$row->attribute3}}</option> 
+                                                    @endif 
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                            @endif
+
+                                        </div>
+                                        <?php break; ?>
+                                        @endforeach
+                                        @endif
+                                    </form>
+                                    <button class="site-btn" id="variant_id" wire:click="addCart($event.target.value)">Add to Cart</button>
+
+                                    @if($favoritevalue && $favoritevalue->status == 1)
+                                    <a class="site-btn add-collection-btn" wire:click="addFavorite" style="background-color: green;"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
+                                    @else
+                                    <a class="site-btn add-collection-btn" wire:click="addFavorite"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
+                                    @endif
+                                </div>
+                                  
+                            </div>
+                           
+                            <div class="product-right-bottom">
+                                <div class="size-and-social pd-right-p">
+                                    <a href="#">Don't See your size?</a>
+                                    <a href="#"> Notify Me of the New Styles</a>
+                                    <ul class="product-right-social">
+                                        <li>Share:</li>
+                                        <li><a class="pd-facebook" href="#"><i class="fa fa-facebook-square f-24"></i></a></li>
+                                        <li><a class="pd-twitter" href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+                                        <li><a class="pd-pinterest" href="#"><i class="fa fa-pinterest-square" aria-hidden="true"></i></a></li>
+                                        <li><a class="pd-mail" href="#"><i class="fa fa-envelope-square f-24"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="recommended-rightbar">
+                                    <h5 class="h5">Recommended For You</h5>
+                                    <div class="rcmd-rightbar-pd">
+                                        <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
+                                        <div class="multi-item-content">
+                                            <a class="wish-list" href="#" tabindex="0"><i class="fa fa-heart-o" aria-hidden="true"></i>595</a>
+                                            <p>ASICS</p>
+                                            <p class="multi-pd-title">GEL-Nimbus® 22</p>
+                                            <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="rcmd-rightbar-pd">
+                                        <img src="https://m.media-amazon.com/images/I/81aOMhB200L._AC_SX272_.jpg">
+                                        <div class="multi-item-content">
+                                            <a class="wish-list" href="#" tabindex="0"><i class="fa fa-heart-o" aria-hidden="true"></i>595</a>
+                                            <p>ASICS</p>
+                                            <p class="multi-pd-title">GEL-Nimbus® 22</p>
+                                            <p class="product-price"><span class="mrp-price">$99.95</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -425,6 +535,19 @@
                     </div>
                 </div>
                 <a class="site-btn" href="{{ route('product-review', $product->id) }}">Write Review</a>
+                @if($this->reviewget)
+                @foreach($this->reviewget as $res)
+                <div>
+                    
+                    over all <input id="ratinginput" name="overall" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="@if($res){{$res->overall}}@endif" readonly>
+                    Comfort   <input id="ratinginput" name="overall" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="@if($res){{$res->comfort}}@endif" readonly>
+                    Style <input id="ratinginput" name="overall" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="@if($res){{$res->style}}@endif" readonly>
+                    <p>{{$res->text}}</p>
+                    <p>{{$res->name}},{{$res->city}},{{$res->created_at}}</p>
+                    <img src="{{ asset('storage/'.$res['image']) }}" height="200px" width="200px">
+                </div>
+                @endforeach
+                @endif
             </div>
         </div>
    
@@ -435,10 +558,11 @@
                 var val1 = $('#varient1').val();
                 var val2 = $('#varient2').val();
                 var val3 = $('#varient3').val();
+                var productid = $('#productid').val();
                 $.ajax({
                     type: 'GET',
                     url: "{{URL('varientData')}}",
-                    data: { text1: val1, text2: val2, text3: val3},
+                    data: { text1: val1, text2: val2, text3: val3, productid: productid},
                     success: function(response) {
                         var price = stock = 0;
                         var id = null;
@@ -450,8 +574,6 @@
                         }
                         
                         $('#getprice').html('$'+price);
-                        $('#getstock').html(stock);
-                        $('#getpriceinput').attr('value',price);
                         $('#variant_id').prop('value',id);
                     }
                 });

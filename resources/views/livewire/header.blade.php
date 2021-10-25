@@ -81,7 +81,6 @@
                                                 <?php $price_sum  = 0; ?>
                                                 @foreach($CartItem as $cart)
 
-                                                <?php echo($cart['id']) ?>
                                                 <input name="cartid[]" type="hidden" id="deletecartid" value="{{$cart['id']}}">
                                                 <div class="cart-list">
                                                     <div class="product-img">
@@ -157,7 +156,7 @@
                                                     <div class="cart-list-right">
                                                         <p class="greenish">${{round($cart['price'],2)}}</p>
                                                         <p class="cart-msrp">MSRP: $220.00</p>
-                                                        <a id="deleteCart" wire:click.prevent="DeleteCartProduct({{$cart['id']}})" href="javascript:;">delete</a>
+                                                        <a class="myclose-close" wire:click.prevent="DeleteCartProduct({{$cart['id']}})" onclick="document.getElementById('proceed-cart').style.display='none'" href="javascript:;">delete</a>
                                                     </div>
                                                 </div>
 
@@ -297,7 +296,7 @@
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                <a href="#">Favorite</a>
+                <a href="{{ route('favorite-detail') }}">Favorite</a>
                 </li>
                 <li class="nav-item dropdown">
 
@@ -451,12 +450,5 @@ $(document).ready(function(){
     <!-- modal end -->
 
 </div>
-
-<script type="text/javascript">
-    
-    $("#deleteCart").click(function(){
-        $(".cart-overlay").modal({backdrop: false});
-    });
-</script>
 
 

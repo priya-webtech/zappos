@@ -16,7 +16,7 @@ class Order extends Component
 
     public function mount() {
 
-       $this->order = Orders::All();
+       $this->order = Orders::with('user')->get();
        $this->OrderItem = order_item::All();
 
     }

@@ -4,12 +4,12 @@
         <article class="full-width">
             <div class="columns customers-details-heading">
                 <div class="page_header d-flex  align-item-center">
-                    <a href="http://185.160.67.108/estore/public/admin/customers">
+                    <a href="{{ route('order-list') }}">
                         <button class="secondary icon-arrow-left mr-2">
                             <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M17 9H5.414l3.293-3.293a.999.999 0 1 0-1.414-1.414l-5 5a.999.999 0 0 0 0 1.414l5 5a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L5.414 11H17a1 1 0 1 0 0-2z"></path></svg>
                         </button>
                     </a>
-                    <h4 class="mb-0 fw-5">Orders #1042 <span class="tag grey"><span class="round-circle"></span>Paid</span> <span class="tag yellow"><span class="border-circle"></span>Unfulfilled</span><p class="header-leble">25 May 2021 at 7:30 from Draft Orders</p></h4>
+                    <h4 class="mb-0 fw-5">Orders #{{$order->id}} <span class="tag grey"><span class="round-circle"></span>Paid</span> <span class="tag yellow"><span class="border-circle"></span>Unfulfilled</span><p class="header-leble">25 May 2021 at 7:30 from Draft Orders</p></h4>
                 </div>
                 <div class="product-header-btn">
                     <button class="button link">Refund</button>
@@ -171,20 +171,26 @@
                     </div>
                 </div>
                 <div class="card od-customer-card">
+                    @if($order['user'])
                     <div class="card-header">
                         <div class="header-title">
                             <h3 class="fs-16 fw-6 mb-0">Customer</h3>
                         </div>
-                        <a href="#">John Doe</a>
+                        <a href="{{route('customer.details', $order['user'][0]['uuid'])}}">@if($order['user']){{$order['user'][0]['first_name']}}@endif</a>
                         <a href="#">9 orders</a>
                     </div>
+                    @endif
                     <div class="card-middle">
                         <div class="header-title">
                             <h4 class="fs-12  fw-6 mb-0">CONTACT INFORMATION </h4>
                             <button class="link" onclick="document.getElementById('edit-contact-informatio-modal').style.display='block'">Edit</button>
                         </div>
-                        <p><a href="#" onclick="document.getElementById('contact-customer-modal').style.display='block'">johndoe@webkul.com</a> <a href="#"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M15 2a1 1 0 0 1 1 1v13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16.5V3a1 1 0 1 1 2 0v1a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V3a1 1 0 0 1 1-1zm-4 2H9a1 1 0 1 1 0-2h2a1 1 0 1 1 0 2z"></path></svg></a></p>
+                        <p><a href="#" onclick="document.getElementById('contact-customer-modal').style.display='block'">@if($order['user']){{$order['user'][0]['email']}}@endif</a> <a href="#"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M15 2a1 1 0 0 1 1 1v13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16.5V3a1 1 0 1 1 2 0v1a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V3a1 1 0 0 1 1-1zm-4 2H9a1 1 0 1 1 0-2h2a1 1 0 1 1 0 2z"></path></svg></a></p>
+                        @if($order['user'][0]['mobile_number'])
+                        <p class="text-grey">{{$order['user'][0]['mobile_number']}}</p>
+                        @else
                         <p class="text-grey">No phone number</p>
+                        @endif
                     </div>
                     
                     <div class="card-middle">
@@ -192,7 +198,9 @@
                             <h4 class="fs-12  fw-6 mb-0">SHIPPING ADDRESS</h4>
                             <button class="link" onclick="document.getElementById('add-address-modal').style.display='block'">Edit</button>
                         </div>
-                        <p><span>John Doe <br> Mystery Rooms <br> 201306 Noida UP <br> India</span> <a href="#"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M15 2a1 1 0 0 1 1 1v13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16.5V3a1 1 0 1 1 2 0v1a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V3a1 1 0 0 1 1-1zm-4 2H9a1 1 0 1 1 0-2h2a1 1 0 1 1 0 2z"></path></svg></a></p>
+                        @if(!empty($order->fullname))
+                        <p><span>{{$order->fullname}} <br> {{$order->address}} <br> {{$order->city}}<br> {{$order->country}}<br> {{$order->pincode}}<br> {{$order->mobile}}</span> <a href="#"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M15 2a1 1 0 0 1 1 1v13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16.5V3a1 1 0 1 1 2 0v1a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V3a1 1 0 0 1 1-1zm-4 2H9a1 1 0 1 1 0-2h2a1 1 0 1 1 0 2z"></path></svg></a></p>
+                        @endif
                     </div>
                     
                     <div class="card-footer">

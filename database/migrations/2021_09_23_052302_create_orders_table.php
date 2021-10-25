@@ -16,6 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('uid');
+            $table->Integer('user_id');
             $table->string('transactionid');
             $table->bigInteger('netamout');
             $table->enum('paymentstatus', ['success', 'pending', 'failed'])->default('failed');

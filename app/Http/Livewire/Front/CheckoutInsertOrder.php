@@ -72,6 +72,8 @@ class CheckoutInsertOrder extends Component
 
                     'uuid' => '1',
 
+                    'user_id' => $res->user_id,
+                    
                     'transactionid' => '0',
 
                     'netamout' => $netamout,
