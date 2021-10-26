@@ -76,18 +76,21 @@ class StripePaymnetController extends Component
     }
 
 
-    public function thankYou(Request $request) {
+    /*public function thankYou(Request $request) {
 
         try {
 
-            $order = Orders::where('id', $id)->update(
+            $order = Orders::where('id', $request->orderid)->update(
                     [
                         'transactionid' => $request->get('payment_intent'),
                         'paymentstatus' => 'success',
                     ]
                 );
-           return view('livewire.thankyou',['order' => $order]);
-           
+            if($order) {
+                $orderData = Orders::find($request->orderid);
+            
+           return view('livewire.thankyou',['order' => $orderData]);
+           }
 
         } catch (Exception $ex) {
             return [
@@ -96,51 +99,21 @@ class StripePaymnetController extends Component
             ];
         }
          
-    }
+    }*/
 
 
-    /*public function stripePost(Request $request)
+    public function thankYou($id, Request $request)
 
     {
 
-        $STRIPE_KEY = 'pk_test_K34JYHJL8oSxYsrT8ct11JFY00WfJBOiTp';
-        $STRIPE_SECRET = 'sk_test_Z6QhEzwO45ckwTvG8zzwIMC4007hY9qpDO';
+
+        $getCartid = Orders::where('id',$id)->first();
         
 
-        $getCartid = Orders::where('id',$request->orderid)->first();
-        
-
-        \Stripe\Stripe::setApiKey($STRIPE_SECRET);
-
-        $token = $request->stripeToken;
-
-        $charge =  Stripe\Charge::create ([
-
-                "amount" => $getCartid->netamout,
-
-                "currency" => "INR",
-
-                "source" => $token,
-
-                "description" => "Test payment from itsolutionstuff.com.",
-
-
-
-        ]);
-
-
-         $customer = \Stripe\Customer::create(array(
-            'name' => 'test',
-            'description' => 'test description',
-            'email' => 'prajapativishal@gmail.com',
-            'address' => ["city" => 'patan', "country" => 'india', "postal_code" => '384265', "state" => 'Gujarat']
-        ));
-         $order_total_arr = [];
-
-            if($charge->status === 'succeeded'){
-                $paymentdetail = Orders::where('id', $request->orderid)->update(
+            if($request->redirect_status == 'succeeded') {
+                $paymentdetail = Orders::where('id', $id)->update(
                     [
-                        'transactionid' => $charge->balance_transaction,
+                        'transactionid' => $request->get('payment_intent'),
 
                         'paymentstatus' => 'success'
                     ]
@@ -148,73 +121,73 @@ class StripePaymnetController extends Component
                 
             // Stock Minus Code
 
-           if($paymentdetail){
+               if($paymentdetail){
 
-                $locatioinstock = VariantStock::All();
-                $getOrderitem = order_item::where('order_id',$request->orderid)->first();
-                $Cart = Cart::where('user_id',$getOrderitem->user_id)->get();
-                $Product = Product::All();
+                    $locatioinstock = VariantStock::All();
+                    $getOrderitem = order_item::where('order_id',$id)->first();
+                    $Cart = Cart::where('user_id',$getOrderitem->user_id)->get();
+                    $Product = Product::All();
 
-                foreach($Cart as $res) { 
+                    foreach($Cart as $res) { 
 
-                    if($res->varientid != "" && $res->locationid != ""){
+                        if($res->varientid != "" && $res->locationid != ""){
 
-                        foreach ($locatioinstock as $key => $stock) {
+                            foreach ($locatioinstock as $key => $stock) {
 
-                            if($res->varientid == $stock->variant_main_id && $res->locationid == $stock->location_id){
+                                if($res->varientid == $stock->variant_main_id && $res->locationid == $stock->location_id){
 
-                                $finalstock = ($stock->stock - $res->stock);
+                                    $finalstock = ($stock->stock - $res->stock);
 
-                                $paymentdetail = VariantStock::where('id', $stock->id)->update(
-                                    [
-                                        'stock' => $finalstock,
-                                    ]
-                                );
+                                    $paymentdetail = VariantStock::where('id', $stock->id)->update(
+                                        [
+                                            'stock' => $finalstock,
+                                        ]
+                                    );
 
+                                }
+                            }
+                        }
+                        else
+                        {
+
+                            foreach ($Product as  $row) {
+
+                                if($res->product_id == $row->id){
+                                    $stockcollection = collect();
+                                    $decodestock = json_decode($row['location']);
+                                      // 
+                                    foreach($decodestock as $key => $stock){
+                                    
+                                        if($res->locationid == $key){
+
+                                            $newstock = $stock - $res->stock;
+                                            $stockcollection->put($key, $newstock);
+
+                                        }else{
+                                            $stockcollection->put($key, $stock);
+                                        }
+                  
+                                    }
+
+                                    $stockencode = $stockcollection->toArray();
+                                    $fianl  = json_encode($stockencode);
+                                 
+                                   $paymentdetail = Product::where('id', $res->product_id)->update(
+                                        [
+                                            'location' => $fianl,
+                                        ]
+                                    );
+                                }     
+                                
                             }
                         }
                     }
-                    else
-                    {
-
-                        foreach ($Product as  $row) {
-
-                            if($res->product_id == $row->id){
-                                $stockcollection = collect();
-                                $decodestock = json_decode($row['location']);
-                                  // 
-                                foreach($decodestock as $key => $stock){
-                                
-                                    if($res->locationid == $key){
-
-                                        $newstock = $stock - $res->stock;
-                                        $stockcollection->put($key, $newstock);
-
-                                    }else{
-                                        $stockcollection->put($key, $stock);
-                                    }
-              
-                                }
-
-                                $stockencode = $stockcollection->toArray();
-                                $fianl  = json_encode($stockencode);
-                             
-                               $paymentdetail = Product::where('id', $res->product_id)->update(
-                                    [
-                                        'location' => $fianl,
-                                    ]
-                                );
-                            }     
-                            
-                        }
-                    }
                 }
-            }
 
             // Cart Empty
             if($paymentdetail){
 
-                $getOrderitem = order_item::where('order_id',$request->orderid)->first();
+                $getOrderitem = order_item::where('order_id',$id)->first();
 
                 Cart::where('user_id',$getOrderitem->user_id)->delete();
             }
@@ -224,11 +197,11 @@ class StripePaymnetController extends Component
         }
 
         // Failed Status
-         if ($charge->status === 'failed') {
+         if ($request->redirect_status == 'failed') {
 
-             $paymentdetail = Orders::where('id', $request->orderid)->update(
+             $paymentdetail = Orders::where('id', $id)->update(
                     [
-                        'transactionid' => $charge->balance_transaction,
+                        'transactionid' => $request->get('payment_intent'),
 
                         'paymentstatus' => 'failed'
                     ]
@@ -238,11 +211,11 @@ class StripePaymnetController extends Component
 
          }
 
-         if ($charge->status === 'pending') {
+         if ($request->redirect_status == 'pending') {
 
-             $paymentdetail = Orders::where('id', $request->orderid)->update(
+             $paymentdetail = Orders::where('id', $id)->update(
                     [
-                        'transactionid' => $charge->balance_transaction,
+                        'transactionid' => $request->get('payment_intent'),
 
                         'paymentstatus' => 'pending'
                     ]
@@ -250,12 +223,7 @@ class StripePaymnetController extends Component
              Session::flash('success', 'Payment pending!');
          }
     
+        return redirect('/');
 
-        
-
-          
-
-        return back();
-
-    }*/
+    }
 }

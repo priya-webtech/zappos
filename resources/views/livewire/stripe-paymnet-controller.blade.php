@@ -321,6 +321,7 @@ $(function() {
 
  document.addEventListener('DOMContentLoaded', async () => {
     console.log('node added');
+
         const stripe = Stripe('<?= $_ENV["STRIPE_PUBLISHABLE_KEY"]; ?>');
         const elements = stripe.elements();
         const idealBank = elements.create('idealBank');
@@ -331,7 +332,7 @@ $(function() {
         paymentForm.addEventListener('submit', async (e) => {
           // Avoid a full page POST request.
           e.preventDefault();
-
+          var orderid = '<?= $orderdetail->id ?>';
           // Customer inputs
           const nameInput = document.querySelector('#acholdername');
 
@@ -341,7 +342,7 @@ $(function() {
               payment_method: {
                 ideal: idealBank,
               },
-              return_url: `${window.location.origin}/thankyou`,
+              return_url: `${window.location.origin}/thankyou/`+orderid,
             },
           );
           if(error) {

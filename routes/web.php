@@ -156,7 +156,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('/add-order', [Livewire\Front\CheckoutInsertOrder::class, 'checkoutInsert'])->name('add-order');
         Route::get('/payment/{id?}', Livewire\StripePaymnetController::class)->name('payment');
         Route::post('/payment', [Livewire\StripePaymnetController::class, 'stripePost'])->name('stripe-post');
-        Route::get('/thankyou', [Livewire\StripePaymnetController::class, 'thankYou'])->name('thankyou');
+        Route::get('/thankyou/{id?}', [Livewire\StripePaymnetController::class, 'thankYou'])->name('thankyou');
 
         /*Account*/
         Route::get('/account/favorites/detail', Livewire\Front\WishListDetail::class)->name('favorite-detail');
