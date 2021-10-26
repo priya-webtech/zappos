@@ -2,10 +2,11 @@
     <x-admin-layout>
     {{-- In work, do what you enjoy. --}}
     <!DOCTYPE html>
+   
 
-<html>
 
-<head>
+
+
 
     <title>Laravel 6 - Stripe Payment Gateway Integration Example - </title>
 
@@ -47,9 +48,9 @@
 
     </style>
 
-</head>
 
-<body>
+
+
 
   
 
@@ -57,7 +58,7 @@
 
   
 
-    <h1S>tripe Payment<br/> </h1>
+    <h1S>stripe Payment<br/> </h1>
 
   
 
@@ -98,7 +99,8 @@
                         </div>
 
                     @endif
-                    <form role="form" class="require-validation">
+                    @if($view == 'address')
+                    <form role="form" id="address-form" class="require-validation"  >
 
                         @csrf
                         
@@ -149,7 +151,7 @@
 
                             <div class="col-xs-12">
                               
-                                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Submit" wire:click="addshipping({{$orderdetail->id}})">
+                                <input class="btn btn-primary btn-lg btn-block" wire:click.prevent="addshipping({{$orderdetail->id}})" value="Submit" >
 
                             </div>
 
@@ -158,118 +160,33 @@
                           
 
                     </form>
+                    @endif
   
 
-                    <form role="form" 
-
-                            action="{{ route('stripe-post') }}" 
-
-                            method="post" 
-
-                            class="require-validation"
-
-                            data-cc-on-file="false"
-
-                            data-stripe-publishable-key="pk_test_K34JYHJL8oSxYsrT8ct11JFY00WfJBOiTp"
-
-                            id="payment-form">
-
+                      <form id="payment-form">
                         @csrf
-                        
-                        <input type="hidden" name="orderid" value="{{$orderdetail->id}}">
-                        <div class='form-row row'>
+                        <h3>Payment</h3>
+                        <label for="name">
+                          Account Holder Name
+                        </label>
+                        <input id="acholdername" value="" required>
 
-                            <div class='col-xs-12 form-group required'>
-
-                                <label class='control-label'>Name on Card</label> <input
-
-                                    class='form-control' size='4' type='text'>
-
-                            </div>
-
+                        <label for="ideal-bank-element">
+                          iDEAL Bank
+                        </label>
+                        <div id="ideal-bank-element">
+                          <!-- A Stripe Element will be inserted here. -->
                         </div>
 
-  
+                        <button type="submit">Pay {{$orderdetail->netamout}}</button>
 
-                        <div class='form-row row'>
+                        <!-- Used to display form errors. -->
+                        <div id="error-message" role="alert"></div>
+                      </form>
+                   
 
-                            <div class='col-xs-12 form-group card required'>
-
-                                <label class='control-label'>Card Number</label> <input
-
-                                    autocomplete='off' class='form-control card-number' size='20'
-
-                                    type='text'>
-
-                            </div>
-
-                        </div>
-
-  
-
-                        <div class='form-row row'>
-
-                            <div class='col-xs-12 col-md-4 form-group cvc required'>
-
-                                <label class='control-label'>CVC</label> <input autocomplete='off'
-
-                                    class='form-control card-cvc' placeholder='ex. 311' size='4'
-
-                                    type='text'>
-
-                            </div>
-
-                            <div class='col-xs-12 col-md-4 form-group expiration required'>
-
-                                <label class='control-label'>Expiration Month</label> <input
-
-                                    class='form-control card-expiry-month' placeholder='MM' size='2'
-
-                                    type='text'>
-
-                            </div>
-
-                            <div class='col-xs-12 col-md-4 form-group expiration required'>
-
-                                <label class='control-label'>Expiration Year</label> <input
-
-                                    class='form-control card-expiry-year' placeholder='YYYY' size='4'
-
-                                    type='text'>
-
-                            </div>
-
-                        </div>
-
-  
-
-                        <div class='form-row row'>
-
-                            <div class='col-md-12 error form-group hide'>
-
-                                <div class='alert-danger alert'>Please correct the errors and try
-
-                                    again.</div>
-
-                            </div>
-
-                        </div>
-
-                        
-
-                        <div class="row">
-
-                            <div class="col-xs-12">
-                              
-                                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Pay Now (${{$orderdetail->netamout}})">
-
-                            </div>
-
-                        </div>
-
-                          
-
-                    </form>
+                      <div id="messages" role="alert" style="display: none;"></div>
+                   
 
                 </div>
 
@@ -285,11 +202,10 @@
 
   
 
-</body>
 
   
 
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <script src="https://js.stripe.com/v3/"></script>
 
   
 
@@ -399,13 +315,45 @@ $(function() {
         }
 
     }
-
-   
+  
 
 });
 
+ document.addEventListener('DOMContentLoaded', async () => {
+    console.log('node added');
+        const stripe = Stripe('<?= $_ENV["STRIPE_PUBLISHABLE_KEY"]; ?>');
+        const elements = stripe.elements();
+        const idealBank = elements.create('idealBank');
+        idealBank.mount('#ideal-bank-element');
+
+
+        const paymentForm = document.querySelector('#payment-form');
+        paymentForm.addEventListener('submit', async (e) => {
+          // Avoid a full page POST request.
+          e.preventDefault();
+
+          // Customer inputs
+          const nameInput = document.querySelector('#acholdername');
+
+          // Confirm the payment that was created server side:
+          const {error, paymentIntent} = await stripe.confirmIdealPayment(
+            '<?= $paymentIntent->client_secret; ?>', {
+              payment_method: {
+                ideal: idealBank,
+              },
+              return_url: `${window.location.origin}/thankyou`,
+            },
+          );
+          if(error) {
+            addMessage(error.message);
+            return;
+          }
+          addMessage(`Payment (${paymentIntent.id}): ${paymentIntent.status}`);
+        });
+      });
+
 </script>
 
-</html>
+
 </x-admin-layout>
 </div>

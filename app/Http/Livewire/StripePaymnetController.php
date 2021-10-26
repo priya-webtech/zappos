@@ -24,16 +24,38 @@ use Illuminate\Http\Request;
 
 class StripePaymnetController extends Component
 {
-    public $Cart,$orderdetail,$singleCart,$fullname,$address,$city,$country,$pincode,$mobile;
+    public $Cart,$orderdetail,$singleCart,$fullname,$address,$city,$country,$pincode,$mobile, $view;
 
     public function mount($id)
     {
-
+        $this->view = 'address';
         $this->orderdetail = Orders::where('id',$id)->first();
     }
     public function render()
     {
-        return view('livewire.stripe-paymnet-controller');
+        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
+
+        try {
+          $paymentIntent = $stripe->paymentIntents->create([
+            'payment_method_types' => ['ideal'],
+            'amount' => $this->orderdetail->netamout,
+            'currency' => 'eur',
+          ]);
+            $this->fullname = $this->orderdetail->fullname;
+            $this->address = $this->orderdetail->address;
+            $this->city  = $this->orderdetail->city;
+            $this->country  = $this->orderdetail->country;
+            $this->pincode  = $this->orderdetail->pincode;
+            $this->mobile  = $this->orderdetail->mobile;
+
+          return view('livewire.stripe-paymnet-controller', ['paymentIntent' => $paymentIntent]);
+
+
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+          http_response_code(400);
+          error_log($e->getError()->message); 
+        }
+        
      
     }
     public function addshipping($id)
@@ -48,9 +70,36 @@ class StripePaymnetController extends Component
                         'mobile' => $this->mobile,
                     ]
                 );
+        if($paymentdetail) {
+            $this->view = 'payment';
+        }
     }
 
-    public function stripePost(Request $request)
+
+    public function thankYou(Request $request) {
+
+        try {
+
+            $order = Orders::where('id', $id)->update(
+                    [
+                        'transactionid' => $request->get('payment_intent'),
+                        'paymentstatus' => 'success',
+                    ]
+                );
+           return view('livewire.thankyou',['order' => $order]);
+           
+
+        } catch (Exception $ex) {
+            return [
+                'status' => 'pending',
+                'message' => sprintf(__('%s'), $ex->getMessage()) 
+            ];
+        }
+         
+    }
+
+
+    /*public function stripePost(Request $request)
 
     {
 
@@ -208,5 +257,5 @@ class StripePaymnetController extends Component
 
         return back();
 
-    }
+    }*/
 }
