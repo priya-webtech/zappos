@@ -312,8 +312,6 @@
 
                         <a class="dropdown-item" href="#">Your Profile</a>
 
-                        <div class="dropdown-divider"></div>
-
                         <form method="POST" action="{{ route('logout') }}">
 
                             @csrf
