@@ -294,7 +294,7 @@
 
         @else
 
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav navbar-nav-right mr-auto">
                 <li class="nav-item">
                 <a href="{{ route('favorite-detail') }}">Favorite</a>
                 </li>
