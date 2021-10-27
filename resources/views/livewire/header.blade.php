@@ -303,9 +303,6 @@
         @else
 
             <ul class="navbar-nav navbar-nav-right mr-auto">
-                <li class="nav-item">
-                <a href="{{ route('favorite-detail') }}">Favorite</a>
-                </li>
                 <li class="nav-item dropdown">
 
                     <a class="nav-link dropdown-toggle f-bl" href="#" id="navbarDropdown" role="button"
@@ -319,6 +316,8 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                         <a class="dropdown-item" href="#">Your Profile</a>
+
+                        <a href="{{ route('favorite-detail') }}">My Favorites</a>
 
                         <form method="POST" action="{{ route('logout') }}">
 

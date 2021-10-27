@@ -245,7 +245,7 @@
 
                                     @endif
 
-                                    <div class="pd-width-options">
+                                    <!-- <div class="pd-width-options">
 
                                         <h5 class="h5">Width Options:</h5>
 
@@ -269,7 +269,7 @@
 
                                         </div>
 
-                                    </div>
+                                    </div> -->
 
                                 </div>
 
@@ -352,30 +352,6 @@
                     </div>
 
                 </div>
-
-                </div>
-
-                <div class="row">
-
-                    <div class="col-12">
-
-                        <ul class="product-oneline-row">
-
-                            <li>
-
-                                <img src="https://www.zappos.com/marty-assets/sizeinfo.8c1cdd5ad8b9fe200f2ab76c77c7746c.svg">
-
-                            </li>
-
-                            <li><b>77%</b> True to Size</li>
-
-                            <li><b>85%</b> Felt true to width</li>
-
-                            <li><b>83%</b> Moderate arch support</li>
-
-                        </ul>
-
-                    </div>
 
                 </div>
 
@@ -779,7 +755,7 @@
 
                         </div>
 
-                        <div class="free-shipping-return">
+                        <!-- <div class="free-shipping-return">
 
                             <h3 class="h3">Free Shipping and Free Return</h3>
 
@@ -787,7 +763,7 @@
 
                             <a href="#">Learn more about our free shipping and free returns policy</a>
 
-                        </div>
+                        </div> -->
 
                         <div class="recently-viewed-sec multi-item-slider">
 
