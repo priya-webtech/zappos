@@ -160,6 +160,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
         /*Account*/
         Route::get('/account/favorites/detail', Livewire\Front\WishListDetail::class)->name('favorite-detail');
+        Route::get('/account/viewcart/detail', Livewire\Front\ViewCart::class)->name('view-cart');
         Route::get('/product/review/{id?}', Livewire\Front\ProductReviews::class)->name('product-review');
         Route::post('/product/{slug?}', [Livewire\Front\ProductReviews::class, 'SaveReview'])->name('review-save');
     });

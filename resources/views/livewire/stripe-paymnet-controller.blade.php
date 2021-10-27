@@ -1,5 +1,5 @@
 <div>
-    <x-admin-layout>
+    <x-customer-layout>
     {{-- In work, do what you enjoy. --}}
     <!DOCTYPE html>
    
@@ -58,7 +58,7 @@
 
   
 
-    <h1S>stripe Payment<br/> </h1>
+    <h1>Checkout<br/> </h1>
 
   
 
@@ -72,19 +72,13 @@
 
                     <div class="row display-tr" >
 
-                        <h3 class="panel-title display-td" >Payment Details</h3>
-
-                        <div class="display-td" >                            
-
-                            <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
-
-                        </div>
+                        <h3 class="panel-title display-td" >Shipping Details</h3>
 
                     </div>                    
 
                 </div>
 
-                <div class="panel-body">
+                <div class="panel-body" wire:ignore>
 
   
 
@@ -101,8 +95,6 @@
                     @endif
                     @if($view == 'address')
                     <form role="form" id="address-form" class="require-validation"  >
-
-                        @csrf
                         
                         <input type="hidden" name="orderid" value="{{$orderdetail->id}}">
                         <div class='form-row row'>
@@ -151,7 +143,7 @@
 
                             <div class="col-xs-12">
                               
-                                <input class="btn btn-primary btn-lg btn-block" wire:click.prevent="addshipping({{$orderdetail->id}})" value="Submit" >
+                                <button class="btn btn-primary btn-lg btn-block" wire:click.prevent="addshipping({{$orderdetail->id}})" >Submit</button>
 
                             </div>
 
@@ -322,7 +314,7 @@ $(function() {
  document.addEventListener('DOMContentLoaded', async () => {
     console.log('node added');
 
-        const stripe = Stripe('<?= $_ENV["STRIPE_PUBLISHABLE_KEY"]; ?>');
+        const stripe = Stripe('pk_test_eEW1sG9Y0HvZ0SuSZsWts81500648362WW');
         const elements = stripe.elements();
         const idealBank = elements.create('idealBank');
         idealBank.mount('#ideal-bank-element');
@@ -356,5 +348,5 @@ $(function() {
 </script>
 
 
-</x-admin-layout>
+</x-customer-layout>
 </div>
