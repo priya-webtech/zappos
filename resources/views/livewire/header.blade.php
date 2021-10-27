@@ -169,7 +169,7 @@
                                         <p>Cart Subtotal (<?php echo $cartCount ?> Items) ${{round($price_sum, 2)}}</p>
                                         <div class="cart-footer-btn">
                                             <button class="site-btn signin-btn">Sign In</button>
-                                            <button class="site-btn view-cart-btn">View Cart</button>
+                                            <a href="{{ route('view-cart') }}" class="site-btn view-cart-btn">View Cart</a>
                                             <input type="submit" name="checkout" class="site-btn checkout-btn" value="Proceed to checkout">
                                         </div>
                                     </div>
@@ -200,7 +200,7 @@
 
             <li class="nav-item dropdown f-bl">
 
-                <a class="nav-link dropdown-toggle f-bl" href="#" id="navbarDropdown" role="button"
+                <a class="nav-link @if(count($menu['items']) > 0) dropdown-toggle @endif f-bl" href="#" id="navbarDropdown" role="button"
 
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 

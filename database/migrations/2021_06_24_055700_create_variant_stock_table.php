@@ -13,7 +13,7 @@ class CreateVariantStockTable extends Migration
      */
     public function up()
     {
-        Schema::create('variant_stocks', function (Blueprint $table) {
+        Schema::create('variant_stock', function (Blueprint $table) {
             $table->integer('id');
             $table->integer('variant_main_id');
             $table->bigInteger('location_id');
@@ -31,6 +31,6 @@ class CreateVariantStockTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('variant_stocks');
+        Schema::dropIfExists('variant_stock');
     }
 }

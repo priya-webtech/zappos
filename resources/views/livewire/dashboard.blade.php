@@ -92,12 +92,12 @@
                                         @endif
 
                                         <!-- Wish-list code -->
-                                       {-- @php
+                                        @php
                                         $favresult = favorite($result->id);
                                         @endphp
                                         @if(!empty($favresult))
                                          <a class="cat-wishlist-btn wishlist-pd wish-list {{$favresult['class']}}" wire:click="UpdateWish({{$favresult['id']}}, {{$favresult['product_id']}})"><i class="fa fa-heart-o" aria-hidden="true"></i> <?php echo count($result['favoriteget']); ?></a>
-                                        @endif --}
+                                        @endif 
                                         <!-- Wish-list code ends -->
                                         
                                     </div>

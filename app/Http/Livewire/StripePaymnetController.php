@@ -33,7 +33,8 @@ class StripePaymnetController extends Component
     }
     public function render()
     {
-        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
+
+        $stripe = new \Stripe\StripeClient('sk_test_ngkOUeScv0ATVVwLqg88ZdBv00ZX79AIQ8');
 
         try {
           $paymentIntent = $stripe->paymentIntents->create([
@@ -41,12 +42,7 @@ class StripePaymnetController extends Component
             'amount' => $this->orderdetail->netamout,
             'currency' => 'eur',
           ]);
-            $this->fullname = $this->orderdetail->fullname;
-            $this->address = $this->orderdetail->address;
-            $this->city  = $this->orderdetail->city;
-            $this->country  = $this->orderdetail->country;
-            $this->pincode  = $this->orderdetail->pincode;
-            $this->mobile  = $this->orderdetail->mobile;
+
 
           return view('livewire.stripe-paymnet-controller', ['paymentIntent' => $paymentIntent]);
 
@@ -60,6 +56,7 @@ class StripePaymnetController extends Component
     }
     public function addshipping($id)
     {
+
         $paymentdetail = Orders::where('id', $id)->update(
                     [
                         'fullname' => $this->fullname,

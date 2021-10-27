@@ -20,6 +20,12 @@ class CreateOrdersTable extends Migration
             $table->string('transactionid');
             $table->bigInteger('netamout');
             $table->enum('paymentstatus', ['success', 'pending', 'failed'])->default('failed');
+            $table->string('fullname');
+            $table->text('address');
+            $table->string('city');
+            $table->string('country');
+            $table->Integer('pincode');
+            $table->bigInteger('mobile');   
             $table->timestamps();
         });
     }

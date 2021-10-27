@@ -38,6 +38,7 @@ class Header extends Component
     {
 
 $this->getCart();
+
         $this->getproduct = Product::when($this->filter_product, function ($query, $filter_product) {
 
             $query->where('title', 'LIKE', '%' . $filter_product . '%');
