@@ -77,7 +77,6 @@ class ProductReviews extends Component
     public function SaveReview(Request $res)
 
     {
-
         $this->user_id = Auth::user()->id;
 
         $product = Product::where(['id' => $res->productid])->first();
@@ -95,16 +94,17 @@ class ProductReviews extends Component
             if(!empty($productreview->image))
 
             {
+                Storage::delete($productImage);
 
-                $productImage = $productreview->image;
-
-                if ($productImage) {
-
+                foreach ($res->image as $key => $imageres) {
+                    
+                    $productImage = $productreview->image;
                     Storage::delete($productImage);
+                    if ($productImage) {
 
-                    $path_url[] = $res->image->storePublicly('review','public');  
-
-                }
+                        $path_url[] = $imageres->storePublicly('review','public');  
+                    }
+                }  
 
             }   
 
@@ -112,7 +112,11 @@ class ProductReviews extends Component
 
             {
 
-                $path_url[] = $res->image->storePublicly('review','public');
+                foreach ($res->image as $key => $imageres) {
+
+                        $path_url[] = $imageres->storePublicly('review','public');  
+                        
+                    }
 
             }
 
@@ -201,7 +205,7 @@ class ProductReviews extends Component
                     foreach ($res->image as $key => $imageres) {
 
                         $path_url[] = $imageres->storePublicly('review','public');
-                        $path_url2 = $res->image;
+               
 
                     }
                 }   
