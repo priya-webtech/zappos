@@ -13,43 +13,40 @@ class CreateProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('product', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->integer('id');
-            $table->integer('product_id')->nullable();
-            $table->integer('varient1')->nullable();
-            $table->text('attribute1')->nullable();
-            $table->integer('varient2')->nullable();
-            $table->text('attribute2')->nullable();
-            $table->integer('varient3')->nullable();
-            $table->text('attribute3')->nullable();
-            $table->integer('varient4')->nullable();
-            $table->text('attribute4')->nullable();
-            $table->integer('varient5')->nullable();
-            $table->text('attribute5')->nullable();
-            $table->integer('varient6')->nullable();
-            $table->text('attribute6')->nullable();
-            $table->integer('varient7')->nullable();
-            $table->text('attribute7')->nullable();
-            $table->integer('varient8')->nullable();
-            $table->text('attribute8')->nullable();
-            $table->integer('varient9')->nullable();
-            $table->text('attribute9')->nullable();
-            $table->integer('varient10')->nullable();
-            $table->text('attribute10')->nullable();
-            $table->text('photo')->nullable();
-            $table->bigInteger('price')->nullable();
-            $table->bigInteger('cost')->nullable();
-            $table->bigInteger('margin')->nullable();
-            $table->bigInteger('profit')->nullable();
-            $table->text('sku')->nullable();
-            $table->enum('trackqtn',['0','1'])->default('1');
-            $table->enum('outofstock',['0','1'])->default('1');
-            $table->string('barcode')->nullable();
-            $table->string('location')->nullable();
-            $table->string('hscode')->nullable();
+            $table->char('uuid')->nullable();
+            $table->string('title')->nullable();
+            $table->text('descripation')->nullable();
+            $table->string('image')->nullable();
+            $table->float('price', 8, 2)->nullable();
+            $table->float('compare_price', 8, 2)->nullable();
+            $table->float('cost', 8, 2)->nullable();
+            $table->float('margin', 8, 2)->nullable();
+            $table->float('profit', 8, 2)->nullable();
+            $table->enum('tax',['true','false'])->default('false');
+            $table->string('sku')->nullable();
             $table->string('weight')->nullable();
             $table->string('weight_lable')->nullable();
             $table->string('country')->nullable();
+            $table->string('hscode')->nullable();
+            $table->string('barcode')->nullable();
+            $table->enum('trackqtn',['true','false'])->default('false');
+            $table->enum('outofstock',['true','false'])->default('false');
+            $table->string('stock')->nullable();
+            $table->string('location')->nullable();
+            $table->string('product_new')->nullable();
+            $table->enum('online_store',['true','false'])->default('true');
+            $table->enum('point_of_sale',['true','false'])->default('true');
+            $table->string('product_type')->nullable();
+            $table->string('vender')->nullable();
+            $table->text('collection')->nullable();
+            $table->string('tags')->nullable();
+            $table->enum('status',['active','disabled','invited','declined'])->default('disabled');
+            $table->string('variant')->nullable();
+            $table->string('seo_title')->nullable();
+            $table->text('seo_descripation')->nullable();
+            $table->string('seo_utl')->nullable();
             $table->timestamps();
         });
     }
@@ -61,6 +58,6 @@ class CreateProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product');
+        Schema::dropIfExists('products');
     }
 }
