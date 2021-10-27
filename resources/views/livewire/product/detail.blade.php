@@ -2493,12 +2493,12 @@ $(document).ready(function () {
 
         });         
     
-       $(document).on("change", '.varition-type-value', function() {
-            var selecetval = $(this).val();
-            arr_list_items.push(selecetval);
+       // $(document).on("change", '.varition-type-value', function() {
+       //      var selecetval = $(this).val();
+       //      arr_list_items.push(selecetval);
        
-            console.log(arr_list_items);
-        });
+       //      console.log(arr_list_items);
+       //  });
         
 
     });

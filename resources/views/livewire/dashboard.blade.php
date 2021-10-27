@@ -82,6 +82,7 @@
                     <div class="col-md-8 home-pd-col">
                         <div class="cat-product-section">
                             <div class="row">
+                                @if(count($this->Product) > 0)
                                 @foreach($this->Product as $result)
                                 <div class="col-md-4 cat-pd-col">
                                     <div class="cat-pd-img">
@@ -121,6 +122,7 @@
                                     </div>
                                 </div>
                                 @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>

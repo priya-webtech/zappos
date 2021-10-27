@@ -14,7 +14,7 @@ class CreateCollectionTable extends Migration
     public function up()
     {
         Schema::create('collection', function (Blueprint $table) {
-            $table->integer('id');
+            $table->id();
             $table->uuid('uuid');
             $table->string('title')->nullable();
             $table->text('description')->nullable();

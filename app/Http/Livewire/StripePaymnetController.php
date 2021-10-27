@@ -76,32 +76,6 @@ class StripePaymnetController extends Component
     }
 
 
-    /*public function thankYou(Request $request) {
-
-        try {
-
-            $order = Orders::where('id', $request->orderid)->update(
-                    [
-                        'transactionid' => $request->get('payment_intent'),
-                        'paymentstatus' => 'success',
-                    ]
-                );
-            if($order) {
-                $orderData = Orders::find($request->orderid);
-            
-           return view('livewire.thankyou',['order' => $orderData]);
-           }
-
-        } catch (Exception $ex) {
-            return [
-                'status' => 'pending',
-                'message' => sprintf(__('%s'), $ex->getMessage()) 
-            ];
-        }
-         
-    }*/
-
-
     public function thankYou($id, Request $request)
 
     {

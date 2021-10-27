@@ -14,31 +14,35 @@ class Dashboard extends Component
 
     public function mount()
     {
-        $this->user_id =  Auth::user()->id;
+        if (Auth::check()) {
+            $this->user_id =  Auth::user()->id;
+        }
         $this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
         $this->Product = Product::with('productmediaget')->with('favoriteget')->orderBy('id','asc')->limit(6)->get();
     }
 
-    public function UpdateWish($id,$productid){
+    public function UpdateWish($id,$productid) {
+        if (Auth::check()) {
 
-        if($id == 0){
-                $favorite_arr = [
-                        
-                        'product_id' => $productid,
+            if($id == 0){
+                    $favorite_arr = [
+                            
+                            'product_id' => $productid,
 
-                        'user_id' => $this->user_id,
+                             'user_id' => $this->user_id,
 
-                        'status' => '1',
-                    ];
+                            'status' => '1',
+                        ];
 
-                favorite::create($favorite_arr);
+                    favorite::create($favorite_arr);
 
-            
-        }else{
+                
+            }else{
 
-            $favorite  = favorite::where('id',$id)->delete();
+                $favorite  = favorite::where('id',$id)->delete();
 
-            }
+                }
+        }
     }
 
     public function render()

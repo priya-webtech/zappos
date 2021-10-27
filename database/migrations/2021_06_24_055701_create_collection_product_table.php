@@ -14,7 +14,7 @@ class CreateCollectionProductTable extends Migration
     public function up()
     {
         Schema::create('collection_product', function (Blueprint $table) {
-            $table->bigInteger('id');
+            $table->id();
             $table->bigInteger('product_id');
             $table->bigInteger('collection_id');
             $table->string('product_name');

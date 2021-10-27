@@ -36,8 +36,8 @@ class Header extends Component
     }
     public function render()
     {
-
-$this->getCart();
+        $this->getCart();
+        
         $this->getproduct = Product::when($this->filter_product, function ($query, $filter_product) {
 
             $query->where('title', 'LIKE', '%' . $filter_product . '%');
@@ -46,7 +46,7 @@ $this->getCart();
 
         $menus = Menu::where('name','Main Menu')->with('items')->first();
 
-        if(count($menus->items) > 0) {
+        if(!empty($menus) && count($menus->items) > 0) {
 
             $menuitems = $menus->items->sortBy('sort');
 
@@ -98,22 +98,21 @@ $this->getCart();
 
     public function DeleteCartProduct($id)
     {
-        Cart::find($id)->delete();
-        $this->getCart();
+        if (Auth::check()) {
+            Cart::find($id)->delete();
+            $this->getCart();
 
-        $this->ProductVariant = ProductVariant::get();
-       $this->varianttag = VariantTag::All();
+            $this->ProductVariant = ProductVariant::get();
+            $this->varianttag = VariantTag::All();
+        }
     }
 
     public function getCart()
     {
-       
-            $this->user_id =  Auth::user()->id;
+        if (Auth::check()) {
 
             $this->CartItem =  Cart::with(['media_product', 'product_detail'])->where('user_id',$this->user_id)->get();
-
-
-
+        }
     }
 
 }

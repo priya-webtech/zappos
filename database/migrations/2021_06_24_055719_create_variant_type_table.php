@@ -14,7 +14,7 @@ class CreateVariantTypeTable extends Migration
     public function up()
     {
         Schema::create('variant_type', function (Blueprint $table) {
-            $table->integer('id');
+            $table->id();
             $table->string('name');
           
         });

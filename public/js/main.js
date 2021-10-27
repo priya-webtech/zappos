@@ -19,6 +19,6 @@ $(document).ready(function(){
 		e.preventDefualt();
 	});
 
-	$('.multiple-select').select2();
+	// $('.multiple-select').select2();
 
 });
