@@ -139,7 +139,7 @@
 
                                 <div class="pd-total">
 
-                                    <h2 class="h2" id="getprice"><sup>$</sup><span>@if($Productvariant) ${{round($Productvariant->price,2)}} @else 145 @endif</span><sup>00</sup></h2>
+                                    <h2 class="h2" id="getprice"><sup>$</sup><span>@if($Productvariant)     ${{round($Productvariant->price,2)}} @else 00 @endif</span><sup>00</sup></h2>
 
                                     <label><form><i class="fa fa-truck" aria-hidden="true"></i>Ships Free!</label></form>
 
@@ -1030,7 +1030,7 @@
 
                     <p>{{$res->name}},{{$res->city}},{{$res->created_at}}</p>
 
-                    @if($res['image'])
+                    @if($res['image'] && $res['image'] != 'null')
                     <?php $image_decode = json_decode($res['image']); ?>
                     @foreach($image_decode as $row)
                     <img src="{{ asset('storage/'.$row) }}" height="200px" width="200px">
