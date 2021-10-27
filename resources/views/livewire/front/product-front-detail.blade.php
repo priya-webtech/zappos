@@ -6,7 +6,8 @@
 
 
 
-    <div id="breadcrumb-container" name="breadcrumb-container" wire:ignore>
+    <div id="breadcrumb-container" name="breadcrumb-container" >
+
 
             <div class="container">
 
