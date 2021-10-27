@@ -125,7 +125,7 @@ class ProductFrontDetail extends Component
     {
         $this->Productvariant = ProductVariant::with(['variant_stock' => function($q) {
             $q->where('location_id', 1);
-        }])->where('attribute1',$request->text1)->where('attribute2',$request->text2)->where('attribute3',$request->text3)->where('product_id',$request->productid)->first();
+        }])->where('attribute1',$request->text1)->orWhere('attribute2',$request->text2)->orWhere('attribute3',$request->text3)->where('product_id',$request->productid)->first();
 
         // $this->Productvariant = ProductVariant::with(['variant_stock' => function($q) {
         //     $q->where('location_id', 1);
