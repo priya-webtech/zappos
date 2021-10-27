@@ -10,6 +10,7 @@ use App\Models\ProductVariant;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\favorite;
 
 class Header extends Component
 {
@@ -104,6 +105,28 @@ $this->getCart();
 
         $this->ProductVariant = ProductVariant::get();
        $this->varianttag = VariantTag::All();
+    }
+
+    public function UpdateWish($id,$productid){
+
+        if($id == 0){
+                $favorite_arr = [
+                        
+                        'product_id' => $productid,
+
+                        'user_id' => $this->user_id,
+
+                        'status' => '1',
+                    ];
+
+                favorite::create($favorite_arr);
+
+            
+        }else{
+
+            $favorite  = favorite::where('id',$id)->delete();
+
+            }
     }
 
     public function getCart()

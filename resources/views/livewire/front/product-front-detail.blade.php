@@ -4,8 +4,6 @@
 
 <x-customer-layout>
 
-
-
     <div id="breadcrumb-container" name="breadcrumb-container" >
 
 
@@ -137,7 +135,7 @@
 
                                 <div class="pd-total">
 
-                                    <h2 class="h2" id="getprice"><sup>$</sup><span>@if($Productvariant)     ${{round($Productvariant->price,2)}} @else 00 @endif</span><sup>00</sup></h2>
+                                    <h2 class="h2" id="getprice"><sup>$</sup><span>@if($Productvariant)     {{round($Productvariant->price,2)}} @else {{round($product->price,2)}} @endif</span><sup>00</sup></h2>
 
                                     <label><form><i class="fa fa-truck" aria-hidden="true"></i>Ships Free!</label></form>
 

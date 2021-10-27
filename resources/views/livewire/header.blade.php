@@ -25,7 +25,7 @@
                     <div class="row">
                         <div class="col-12 d-flex align-items-center">
                             <div class="logo">
-                                <a href="#"><img src="{{ url('assets/zappos-logo.svg') }}"></a>
+                                <a href="{{url('/')}}"><img src="{{ url('assets/zappos-logo.svg') }}"></a>
                             </div>
                             <div class="search-box">
                                 <form class="search-container d-flex align-items-center" method="get" target="_parent" action="" autocomplete="off">
@@ -148,9 +148,14 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <button class="btn move-heart-button wish-list" name="r-heart-button">
+                                                        @php
+                                                        $result = favorite($cart['product_detail'][0]['id']);
+                                                        @endphp
+                                                        @if(!empty($result))
+                                                        <a class="wish-list {{$result['class']}}" name="r-heart-button" wire:click="UpdateWish({{$result['id']}}, {{$result['product_id']}})">
                                                             Move To<i class="fa fa-heart-o" aria-hidden="true"></i>
-                                                        </button>
+                                                        </a>
+                                                        @endif
                                                     </div>
                                                     <?php $price_sum  += ($cart['price'] * $cart['stock']); ?>
                                                     <div class="cart-list-right">
@@ -168,7 +173,10 @@
                                     <div class="cart-footer">
                                         <p>Cart Subtotal (<?php echo $cartCount ?> Items) ${{round($price_sum, 2)}}</p>
                                         <div class="cart-footer-btn">
+
+                                            @if(empty($this->user_id))
                                             <button class="site-btn signin-btn">Sign In</button>
+                                            @endif
                                             <a href="{{ route('view-cart') }}" class="site-btn view-cart-btn">View Cart</a>
                                             <input type="submit" name="checkout" class="site-btn checkout-btn" value="Proceed to checkout">
                                         </div>

@@ -250,7 +250,7 @@
                             </td>
                             <td>
 
-                                <?php $i = 0; ?>
+                                <?php $i = 1; ?>
                                 @foreach($OrderItem as $item)
                                     @if($item->order_id == $row->id)
                                         <?php $itemcount = $i++;  ?>
