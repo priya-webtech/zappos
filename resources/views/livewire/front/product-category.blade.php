@@ -31,12 +31,12 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                         <a href="#" class="category-feedback">
                             Have a Feedback?
                             <i class="fa fa-comment-o" aria-hidden="true"></i>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -523,16 +523,41 @@
                         <div class="category-right">
                             <div class="your-selections" wire:ignore>
                                 <h4 class="h4">Your Selections</h4>
+                                <div class="scroller scroller-left"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></div>
+                                <div class="scroller scroller-right"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
                                 <div class="your-selections-inner">
-                                    <div class="your-selections-list">
-                                        <span class="selections-tag"><span>Shoes</span> <button><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"> <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path> </svg></button></span>
-                                    </div>
-                                    <div class="your-selections-list">
-                                        <span class="selections-tag"><span>Slippers</span> <button><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"> <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path> </svg></button></span>
-                                    </div>
-                                    <div class="your-selections-list">
+                                    <ul class="tab-list" id="myTab">
+                                        <li class="your-selections-list active">
+                                            <span class="selections-tag"><span>Shoes</span> <button><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"> <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path> </svg></button></span>
+                                        </li>
+                                        <li class="your-selections-list">
+                                            <span class="selections-tag"><span>Slippers</span> <button><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"> <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path> </svg></button></span>
+                                        </li>
+                                        <li class="your-selections-list">
                                         <span class="selections-tag"><span>Women</span> <button><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"> <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path> </svg></button></span>
-                                    </div>
+                                    </li>
+                                    <li class="your-selections-list">
+                                        <span class="selections-tag"><span>Black</span> <button><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"> <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path> </svg></button></span>
+                                    </li>
+                                    <li class="your-selections-list">
+                                        <span class="selections-tag"><span>Birkenstock</span> <button><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"> <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path> </svg></button></span>
+                                    </li>
+                                    <li class="your-selections-list">
+                                        <span class="selections-tag"><span>Wedge Heel</span> <button><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"> <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path> </svg></button></span>
+                                    </li>
+                                    <li class="your-selections-list">
+                                        <span class="selections-tag"><span>White</span> <button><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"> <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path> </svg></button></span>
+                                    </li>
+                                    <li class="your-selections-list">
+                                        <span class="selections-tag"><span>Brown</span> <button><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"> <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path> </svg></button></span>
+                                    </li>
+                                    <li class="your-selections-list">
+                                        <span class="selections-tag"><span>Casual</span> <button><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"> <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path> </svg></button></span>
+                                    </li>
+                                    <li class="your-selections-list">
+                                        <span class="selections-tag"><span>Tan</span> <button><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"> <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path> </svg></button></span>
+                                    </li>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="cat-product-section" wire:ignore>

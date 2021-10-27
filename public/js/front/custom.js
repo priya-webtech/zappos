@@ -1,3 +1,64 @@
+$(document).ready(function() {
+var hidWidth;
+var scrollBarWidths = 40;
+
+var widthOfList = function(){
+  var itemsWidth = 0;
+  $('.tab-list li').each(function(){
+    var itemWidth = $(this).outerWidth();
+    itemsWidth+=itemWidth;
+  });
+  return itemsWidth;
+};
+
+var widthOfHidden = function(){
+  return (($('.your-selections-inner').outerWidth())-widthOfList()-getLeftPosi())-scrollBarWidths;
+};
+
+var getLeftPosi = function(){
+  return $('.tab-list').position().left;
+};
+
+var reAdjust = function(){
+  if (($('.your-selections-inner').outerWidth()) < widthOfList()) {
+    $('.scroller-right').show();
+  }
+  else {
+    $('.scroller-right').hide();
+  }
+  
+  if (getLeftPosi()<0) {
+    $('.scroller-left').show();
+  }
+}
+
+reAdjust();
+
+$(window).on('resize',function(e){  
+  	reAdjust();
+});
+
+$('.scroller-right').click(function() {
+  
+  // $('.scroller-left').fadeIn('slow');
+  // $('.scroller-right').fadeOut('slow');
+  
+  $('.tab-list').animate({left:"+="+widthOfHidden()+"px"},'slow',function(){
+
+  });
+});
+
+$('.scroller-left').click(function() {
+  
+	// $('.scroller-right').fadeIn('slow');
+	// $('.scroller-left').fadeOut('slow');
+  
+  	$('.tab-list').animate({left:"-="+getLeftPosi()+"px"},'slow',function(){
+  	
+  	});
+});
+});    
+
 /*********************************
 			Jasmin Js
 *********************************/
