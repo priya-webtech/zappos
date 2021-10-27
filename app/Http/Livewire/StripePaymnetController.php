@@ -220,7 +220,7 @@ class StripePaymnetController extends Component
              Session::flash('success', 'Payment pending!');
          }
     
-        return redirect('/');
+        return redirect('/thankyou');
 
     }
 }
