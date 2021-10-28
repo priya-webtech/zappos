@@ -49,8 +49,6 @@ class ProductCreate extends Component
         'compare_price' => [],
 
         'cost' => [],
-        
-        'product_new' => [],
 
         'weight' => [],
 
@@ -173,10 +171,9 @@ class ProductCreate extends Component
     public function storeProduct(Request $request)
     {    
 
-        if($request['title'] == "" && $request['descripation'] == ""){ 
+        if($request['seo_url'] == ""){ 
             $this->validate();
-        }
-    
+        }    
             $varition_arrray_crunch = $request['varition_arrray'];
             $productCollection_arrray = $request['productCollection'];
 

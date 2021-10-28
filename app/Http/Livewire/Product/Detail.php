@@ -439,9 +439,8 @@ class Detail extends Component
 
     public function deleteproduct($deleteid)
     {
-
         $unlinkimg = ProductMedia::where('product_id',$deleteid)->get();
-
+        $deleteimg = "";
         foreach ($unlinkimg as $key => $delete) {
 
             $image_path = storage_path("app/public/{$delete->image}");
@@ -462,6 +461,16 @@ class Detail extends Component
         ProductVariant::where('product_id',$deleteid)->delete();
         
         VariantStock::where('product_id',$deleteid)->delete();
+        }
+        else
+        {
+            Product::where('id',$deleteid)->delete();
+
+            CollectionProduct::where('product_id',$deleteid)->delete();
+
+            ProductVariant::where('product_id',$deleteid)->delete();
+            
+            VariantStock::where('product_id',$deleteid)->delete();
         }
 
 

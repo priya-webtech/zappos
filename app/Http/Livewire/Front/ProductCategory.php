@@ -49,12 +49,11 @@ class ProductCategory extends Component
 
         $paginator  = new Paginator($items, $this->perPage, $this->page);
 
-
 		if($this->menuitems['type_category'] == 3){
          return view('livewire.front.product-category', ['Product' => $paginator]);
 		}
-		if($this->menuitems['type_category'] == 2){
-		return redirect('product/'.$this->menuitems->link);	
+		if($this->menuitems['type_category'] == 2){ 
+		 return redirect('/product/'.$this->menuitems->link);	
 		}
 	}
 }

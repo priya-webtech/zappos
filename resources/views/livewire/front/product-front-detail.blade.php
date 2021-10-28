@@ -1,4 +1,4 @@
-<div :id="{{$product->id}}">
+<div>
 
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
 
@@ -58,11 +58,7 @@
                         <div class="product-slider">
 
                             <div class="product-slider-nav">
-
                                 @foreach($Productmedia as $image)
-
-
-
                                 <div>
 
                                     <img src="{{ asset('storage/'.$image['image']) }}">
@@ -161,13 +157,12 @@
 
                                             <select name="attribute1"   class="form-control varition-change" id="varient1" wire:model="variant1" wire:key="first_sel" wire:ignore>
 
-                                                <option value="">--Select Oprion--</option>
-
-                                                @foreach($product->variants as $row)
+                                                <option value="">--Select Option--</option>
+                                                @foreach($product->variants->unique('attribute1') as $row)
 
                                                     @if($row->attribute1 != "")
 
-                                                    <option wire:key="attr1_{{ $loop->index }}" wire:ignore.self>{{$row->attribute1}}</option> 
+                                                    <option wire:key="attr1_{{ $loop->index }}" wire:ignore>{{$row->attribute1}}</option> 
 
                                                     @endif 
 
@@ -192,12 +187,12 @@
                                             <select name="attribute2"  class="form-control varition-change"   id="varient2" wire:model="variant2"  wire:key="sec_sel" wire:ignore>
 
 
-                                                <option value="">--Select Oprion--</option>
-                                                @foreach($product->variants as $row)
+                                                <option value="">--Select Option--</option>
+                                                @foreach($product->variants->unique('attribute2') as $row)
 
                                                     @if($row->attribute2 != "")
 
-                                                    <option value="{{$row->attribute2}}" wire:key="attr2_{{ $loop->index }}" wire:ignore.self>{{$row->attribute2}}</option> 
+                                                    <option value="{{$row->attribute2}}" wire:key="attr2_{{ $loop->index }}" wire:ignore>{{$row->attribute2}}</option> 
 
                                                     @endif 
 
@@ -217,15 +212,15 @@
 
                                             <label>{{$varianttag[$row->varient3][0]['name']}}</label>
 
-                                            <select name="attribute3"  wire:ignore.self class="form-control varition-change" id="varient3" wire:model="variant3" wire:key="third_sel" wire:ignore>
+                                            <select name="attribute3"  wire:ignore class="form-control varition-change" id="varient3" wire:model="variant3" wire:key="third_sel" wire:ignore>
 
 
-                                                <option value="">--Select Oprion--</option>
-                                                @foreach($product->variants as $row)
+                                                <option value="">--Select Option--</option>
+                                                @foreach($product->variants->unique('attribute3') as $row)
 
                                                     @if($row->attribute3 != "")
 
-                                                    <option value="" wire:key="attr3_{{ $loop->index }}" wire:ignore.self>{{$row->attribute3}}</option> 
+                                                    <option value="" wire:key="attr3_{{ $loop->index }}" wire:ignore>{{$row->attribute3}}</option> 
 
                                                     @endif 
 
@@ -708,8 +703,8 @@
                                 <div>
 
                                     @if($rows['productmediaget'] && isset($rows['productmediaget'][0]))
-
-                                    <img src="{{ asset('storage/'.$rows['productmediaget'][0]['image']) }}">
+                                    <a class="dropdown-header" href="{{ route('product-front-detail', $rows['seo_utl']) }}">
+                                    <img src="{{ asset('storage/'.$rows['productmediaget'][0]['image']) }}"></a>
 
                                     @endif
 
@@ -731,7 +726,7 @@
 
                                         @endif
 
-                                        <p>ASICS</p>
+                                        <!-- <p>ASICS</p> -->
 
                                         <p class="multi-pd-title">{{$rows->title}}</p>
 
@@ -864,8 +859,6 @@
    
 
     <script type="text/javascript">
-
-         
 
         $(function(){
 

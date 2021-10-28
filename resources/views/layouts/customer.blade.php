@@ -273,11 +273,6 @@
         myFunction(x)
 
         x.addListener(myFunction);
-
-
-
-
-
         /*** Dont Remove it will update heart color when its span has liked class**/
 
         $('.heart').each(function () {
