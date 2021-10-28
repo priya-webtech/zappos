@@ -219,6 +219,24 @@ class ProductFrontDetail extends Component
 
             Cart::create($cart_arr);
         }
+        else
+        {
+            $cart_arr = [
+                    
+                    'product_id' => $this->product->id,
+
+                    'user_id' => $this->user_id,
+
+                    'price' => $this->product->price,
+
+                    'stock' => $this->product->stock,
+
+                    'locationid' => '1'
+
+                ];
+
+            Cart::create($cart_arr);
+        }
 
         $this->getCart();
 

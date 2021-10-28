@@ -228,7 +228,15 @@
                                 @foreach($menu['items'] as $menuitem)
 
                                     <div class="mansory-item">
+                                        @if($menuitem['type_category'] == 3)
                                         <a class="dropdown-header" href="{{ route('product-front-category', $menuitem['link']) }}">{{$menuitem['label']}}</a>
+                                        @endif
+                                        @if($menuitem['type_category'] == 2)
+                                        <a class="dropdown-header" href="{{ route('product-front-detail', $menuitem['link']) }}">{{$menuitem['label']}}</a>
+                                        @endif
+                                        @if($menuitem['type_category'] == 1)
+                                        <a class="dropdown-header" href="javascript:;">{{$menuitem['label']}}</a>
+                                        @endif
 
                                         @if(isset($menuitem['items']))
 

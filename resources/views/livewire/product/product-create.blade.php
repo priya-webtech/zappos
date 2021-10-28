@@ -32,6 +32,7 @@
     .dropdown a:hover {background-color: #ddd;}
 
     .show {display: block;}
+    .text-danger{color: red;}
     </style>
 
     <div wire:key="main">
@@ -497,7 +498,7 @@
                             <input name="seo_title" type="text">
 
                             <p>0 of 70 characters used</p>
-
+                            @error('seo_title') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
 
                         <div class="row">
@@ -507,7 +508,7 @@
                             <textarea name="seo_descripation"></textarea>
 
                             <p>0 of 320 characters used</p>
-
+                            @error('seo_descripation') <span class="text-danger">{{ $message }}</span>@enderror
                         </div>
 
                         <div class="row">
@@ -519,8 +520,8 @@
                                 <span>{{ url('/product') }}/</span>
 
                                 <input name="seo_url" type="text">
-
                             </div>
+                            @error('seo_url') <span class="text-danger">{{ $message }}</span>@enderror
 
                         </div>
 
