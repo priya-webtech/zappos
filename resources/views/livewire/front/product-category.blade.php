@@ -25,8 +25,10 @@
                                 <label for="categorySortBy">Sort By</label>
                                 <select class="form-control" id="categorySortBy">
                                     <option>Relevance</option>
-                                    <option>New Arrivals</option>
-                                    <option>Customer Rating</option>
+                                    <option>Price: Low to High</option>
+                                    <option>Price: High to Low</option>
+                                    <option>Price: A to Z</option>
+                                    <option>Price: Z to A</option>
                                 </select>
                             </div>
                         </form>
