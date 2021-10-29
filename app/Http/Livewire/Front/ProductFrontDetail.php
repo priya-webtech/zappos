@@ -197,6 +197,7 @@ class ProductFrontDetail extends Component
 
     public function addCart($variationID)
     {
+        dd($variationID);
 
         $variant = ProductVariant::find($variationID);
 

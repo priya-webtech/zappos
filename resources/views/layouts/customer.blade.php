@@ -81,13 +81,6 @@
 
     <livewire:header/>
 
-    <!------------Navbar-------------------------->
-
-    <!-- <div class="container-fluid bg-light">
-
-        <livewire:navigation/>
-
-    </div> -->
 
 </div>
 
