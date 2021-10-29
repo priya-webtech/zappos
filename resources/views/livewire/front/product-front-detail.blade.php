@@ -772,9 +772,8 @@
 
                                 @foreach($productrelated as $pro_res)
 
-                                @foreach($cookieitem as $result)
-
-                                @if($pro_res['productmediaget'] && isset($pro_res['productmediaget'][0]))
+                                @foreach($cookieitem as $cookieres)
+                                @if(in_array($pro_res->id, $cookieitem) && $pro_res['productmediaget'] && isset($pro_res['productmediaget'][0]))
 
                                 <div>
 
