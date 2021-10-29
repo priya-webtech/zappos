@@ -25,7 +25,7 @@
                     <div class="row">
                         <div class="col-12 d-flex align-items-center">
                             <div class="logo">
-                                <a href="{{url('/')}}"><img src="{{ url('assets/zappos-logo.svg') }}"></a>
+                                <a href="{{url('/dashboard')}}"><img src="{{ url('assets/zappos-logo.svg') }}"></a>
                             </div>
                             <div class="search-box">
                                 <form class="search-container d-flex align-items-center" method="get" target="_parent" action="" autocomplete="off">
