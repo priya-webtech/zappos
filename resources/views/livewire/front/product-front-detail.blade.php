@@ -136,9 +136,12 @@
                                 <div class="pd-total">
 
                                     <h2 class="h2" id="getprice"><sup>$</sup><span>@if($Productvariant)     {{round($Productvariant->price,2)}} @else {{round($product->price,2)}} @endif</span><sup>00</sup></h2>
-
-                                    <label><form><i class="fa fa-truck" aria-hidden="true"></i>Ships Free!</label></form>
-
+                                    <div class="pd-all-price offer-price">
+                                        <h2 class="h2" id="getprice"><sup>$</sup><span>@if($Productvariant)     {{round($Productvariant->price,2)}} @else {{round($product->price,2)}} @endif</span><sup>00</sup></h2>
+                                        <span class="pd-original-price"><s>$125.00</s></span>
+                                    </div>
+                                    <label class="free-shiping-tag"><form><i class="fa fa-truck" aria-hidden="true"></i>Ships Free!</form></label>
+                                    <label class="cost-shiping-tag"><form><i class="fa fa-truck" aria-hidden="true"></i>shipping cost $1</form></label>
                                 </div>
 
                                
@@ -377,7 +380,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
+                                        <p class="product-price product-single-price">$99.95</p>
 
                                     </div>
 
@@ -395,7 +399,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
+                                        <p class="product-price product-single-price">$99.95</p>
 
                                     </div>
 
@@ -413,7 +418,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
+                                        <p class="product-price product-single-price">$99.95</p>
 
                                     </div>
 
@@ -431,7 +437,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
+                                        <p class="product-price product-single-price">$99.95</p>
 
                                     </div>
 
@@ -449,7 +456,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
+                                        <p class="product-price product-single-price">$99.95</p>
 
                                     </div>
 
@@ -467,7 +475,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
+                                        <p class="product-price product-single-price">$99.95</p>
 
                                     </div>
 
@@ -485,7 +494,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
+                                        <p class="product-price product-single-price">$99.95</p>
 
                                     </div>
 
@@ -555,7 +565,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
+                                        <p class="product-price product-single-price">$99.95</p>
 
                                     </div>
 
@@ -573,7 +584,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
+                                        <p class="product-price product-single-price">$99.95</p>
 
                                     </div>
 
@@ -591,7 +603,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
+                                        <p class="product-price product-single-price">$99.95</p>
 
                                     </div>
 
@@ -609,7 +622,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
+                                        <p class="product-price product-single-price">$99.95</p>
 
                                     </div>
 
@@ -627,7 +641,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
+                                        <p class="product-price product-single-price">$99.95</p>
 
                                     </div>
 
@@ -645,7 +660,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
+                                        <p class="product-price product-single-price">$99.95</p>
 
                                     </div>
 
@@ -663,7 +679,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
+                                        <p class="product-price product-single-price">$99.95</p>
 
                                     </div>
 
@@ -735,7 +752,8 @@
 
                                         <p class="multi-pd-title">{{$rows->title}}</p>
 
-                                        <p class="product-price"><span class="mrp-price">${{round($rows->price)}}</span><span class="msrp-price">MSRP: $150.00</span></p>
+                                        <p class="product-price"><span class="mrp-price">${{round($rows->price)}}</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
+                                        <p class="product-price product-single-price">$99.95</p>
 
                                     </div>
 
@@ -755,15 +773,23 @@
 
                         </div>
 
-                        <!-- <div class="free-shipping-return">
+                    </div>
 
+                </div>
+
+                <!-- <div class="row">
+                    <div class="col-12">
+                        <div class="free-shipping-return">
                             <h3 class="h3">Free Shipping and Free Return</h3>
-
                             <p>If, for any reason, you are unsatisfied with your purchase from Zappos.com LLC you may return it in its original condition within 365 days for a refund. We'll even pay for return shipping!</p>
-
                             <a href="#">Learn more about our free shipping and free returns policy</a>
+                        </div>
+                    </div>
+                </div> -->
 
-                        </div> -->
+                <div class="row">
+
+                    <div class="col-12">
 
                         <div class="recently-viewed-sec multi-item-slider">
 
@@ -825,37 +851,55 @@
 
                 </div>
 
-                <a class="site-btn" href="{{ route('product-review', $product->id) }}">Write Review</a>
+                <div class="row">
 
-                @if($this->reviewget)
+                    <div class="col-12">
 
-                @foreach($this->reviewget as $res)
+                        <div class="product-review">
 
-                <div>
+                            <a class="site-btn" href="{{ route('product-review', $product->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i> Write Review</a>
 
-                    
+                            @if($this->reviewget)
 
-                    over all <input id="ratinginput" name="overall" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="@if($res){{$res->overall}}@endif" readonly>
+                            @foreach($this->reviewget as $res)
 
-                    Comfort   <input id="ratinginput" name="overall" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="@if($res){{$res->comfort}}@endif" readonly>
+                            <div class="pd-review-list">
+                                <div class="review-row">
+                                    <div class="review-star">
+                                        <label>Overall</label>
+                                        <input id="ratinginput" name="overall" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="@if($res){{$res->overall}}@endif" readonly>
+                                    </div>
+                                    <div class="review-star">
+                                        <label>Comfort</label>
+                                        <input id="ratinginput" name="overall" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="@if($res){{$res->comfort}}@endif" readonly>
+                                    </div>
+                                    <div class="review-star">
+                                        <label>Style </label> 
+                                        <input id="ratinginput" name="overall" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="@if($res){{$res->style}}@endif" readonly>
+                                    </div>
+                                </div>
+                                <p>{{$res->text}}</p>
 
-                    Style <input id="ratinginput" name="overall" class="rating rating-loading" data-min="0" data-max="5" data-step="1" value="@if($res){{$res->style}}@endif" readonly>
+                                <p class="reviewer-name">{{$res->name}},{{$res->city}},{{$res->created_at}}</p>
+                                <div class="reriew-img">
+                                    @if($res['image'] && $res['image'] != 'null')
+                                    <?php $image_decode = json_decode($res['image']); ?>
+                                    @foreach($image_decode as $row)
+                                    <img src="{{ asset('storage/'.$row) }}">
+                                    @endforeach
+                                    @endif
+                                </div>
+                            </div>
 
-                    <p>{{$res->text}}</p>
+                            @endforeach
 
-                    <p>{{$res->name}},{{$res->city}},{{$res->created_at}}</p>
+                            @endif
 
-                    @if($res['image'] && $res['image'] != 'null')
-                    <?php $image_decode = json_decode($res['image']); ?>
-                    @foreach($image_decode as $row)
-                    <img src="{{ asset('storage/'.$row) }}" height="200px" width="200px">
-                    @endforeach
-                    @endif
+                        </div>
+
+                    </div>
+
                 </div>
-
-                @endforeach
-
-                @endif
 
             </div>
 

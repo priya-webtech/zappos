@@ -595,8 +595,9 @@
                                             </a>
                                             <p class="product-price">
                                                 <span class="mrp-price">${{round($rows->price, 2)}}</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
+                                                <span class="msrp-price"><s>MSRP: $150.00</s></span>
                                             </p>
+                                            <p class="product-price product-single-price">$99.95</p>
                                             <div class="cat-pd-review">
                                                 <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
                                                 <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>

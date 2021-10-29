@@ -1,3 +1,11 @@
+
+/*********************************
+			Jasmin Js
+*********************************/
+
+
+// category select tag slider js start
+
 $(document).ready(function() {
 var hidWidth;
 var scrollBarWidths = 40;
@@ -59,9 +67,9 @@ $('.scroller-left').click(function() {
 });
 });    
 
-/*********************************
-			Jasmin Js
-*********************************/
+// category select tag slider js end
+
+
 $(document).ready(function() {
     $('.customer-service-btn').click(function() {
         $('.customer-service-dropdown').slideToggle("fast");
@@ -106,6 +114,7 @@ $(document).ready(function() {
 		slidesToScroll: 1,
 		asNavFor: '.product-slider-for',
 		dots: false,
+		arrows: true,
 		centerMode: true,
 		focusOnSelect: true,
 	});
