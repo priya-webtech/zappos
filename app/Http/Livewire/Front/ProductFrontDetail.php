@@ -76,9 +76,7 @@ class ProductFrontDetail extends Component
         $this->productrelated = Product::with('productmediaget')->with('favoriteget')->get();
 
         $this->Collection = Collection::All();
-        //$this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
 
-        // $this->Productmediafirst = ProductMedia::where('product_id',$this->product['id'])->first();
         $this->Productmedia = ProductMedia::where('product_id',$this->product->id)->get();
 
         $this->tags = Tag::All();
@@ -88,9 +86,9 @@ class ProductFrontDetail extends Component
         $shopping_cart = json_decode(Cookie::get('shopping_cart'));
 
         $shopping_cart[] = $this->product->id;
-
+        $shopping_cart1 = (array_unique($shopping_cart));
         $minutes = 60;
-        Cookie::queue(Cookie::make('shopping_cart',  json_encode($shopping_cart), $minutes));
+        Cookie::queue(Cookie::make('shopping_cart',  json_encode($shopping_cart1), $minutes));
     }
 
     public function render()
@@ -127,7 +125,7 @@ class ProductFrontDetail extends Component
             $q->where('location_id', 1);
         }])->where('attribute1',$request->text1)->orWhere('attribute2',$request->text2)->orWhere('attribute3',$request->text3)->where('product_id',$request->productid)->first();
 
-        // $this->Productvariant = ProductVariant::with(['variant_stock' => function($q) {
+        // $this->Productvariant = Productvariant::with(['variant_stock' => function($q) {
         //     $q->where('location_id', 1);
         // }])->when($this->variant1, function($q1) {
         //     return $q1->where('attribute1',$this->variant1);

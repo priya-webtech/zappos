@@ -130,14 +130,28 @@
                             <div class="product-right-top">
 
                                 <div class="pd-total">
+                                    @if($Productvariant)
+                                    @php 
+                                    $result = shipcharge($Productvariant->product_id,'variantproduct');
+                                    @endphp
 
-                                    <h2 class="h2" id="getprice"><sup>$</sup><span>@if($Productvariant)     {{round($Productvariant->price,2)}} @else {{round($product->price,2)}} @endif</span><sup>00</sup></h2>
                                     <div class="pd-all-price offer-price">
-                                        <h2 class="h2" id="getprice"><sup>$</sup><span>@if($Productvariant)     {{round($Productvariant->price,2)}} @else {{round($product->price,2)}} @endif</span><sup>00</sup></h2>
-                                        <span class="pd-original-price"><s>$125.00</s></span>
+                                        <h2 class="h2" id="getprice"><sup>$</sup><span>   {{round($result['price'],2)}}</span><sup>00</sup></h2>
+                                        <span class="pd-original-price"><s>${{round($result['compare_price'],2)}}</s></span>
                                     </div>
-                                    <label class="free-shiping-tag"><form><i class="fa fa-truck" aria-hidden="true"></i>Ships Free!</form></label>
-                                    <label class="cost-shiping-tag"><form><i class="fa fa-truck" aria-hidden="true"></i>shipping cost $1</form></label>
+
+                                    <label class="free-shiping-tag"><form><i class="fa fa-truck" aria-hidden="true"></i>{{$result['label']}} {{$result['shipprice']}}</form></label>
+
+                                    @else
+                                    @php
+                                    $result = shipcharge($product->id,'mainproduct');
+                                    @endphp
+                                    <div class="pd-all-price offer-price">
+                                        <h2 class="h2" id="getprice"><sup>$</sup><span>   {{round($result['price'],2)}}</span><sup>00</sup></h2>
+                                    </div>
+                                    <label class="free-shiping-tag"><form><i class="fa fa-truck" aria-hidden="true"></i>{{$result['label']}} {{$result['shipprice']}}</form></label>
+                                    @endif
+                                    
                                 </div>
 
                                
@@ -747,7 +761,7 @@
 
                                         <p class="multi-pd-title">{{$rows->title}}</p>
 
-                                        <p class="product-price"><span class="mrp-price">${{round($rows->price)}}</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
+                                        <p class="product-price"><span class="mrp-price">${{round($rows->price)}}</span><span class="msrp-price"><s>MSRP: ${{round($rows->compare_price,2)}}</s></span></p>
                                         <p class="product-price product-single-price">$99.95</p>
 
                                     </div>
@@ -798,8 +812,7 @@
 
                                 @foreach($productrelated as $pro_res)
 
-                                @foreach($cookieitem as $cookieres)
-                                @if(in_array($pro_res->id, $cookieitem) && $pro_res['productmediaget'] && isset($pro_res['productmediaget'][0]))
+                                @if(in_array($pro_res->id, $cookieitem) && $pro_res['productmediaget'] && isset($pro_res['productmediaget'][0]) && $pro_res->id != $cookieitem)
 
                                 <div>
 
@@ -831,7 +844,6 @@
 
                                 @endif
 
-                                @endforeach
 
                                 @endforeach
 
