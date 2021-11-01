@@ -92,7 +92,7 @@
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Have a Promotional Code?</label>
                                     <p class="d-flex">
-                                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+                                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Promotional Code">
                                         <button type="submit">Apply</button>
                                     </p>
                                 </div>
