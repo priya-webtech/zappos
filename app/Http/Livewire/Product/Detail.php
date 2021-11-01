@@ -135,6 +135,9 @@ class Detail extends Component
         'product.tax' => '',
         'product.margin' => '',
         'product.profit' => '',
+        'product.selling_price' => '',
+        'product.compare_selling_price' => '',
+        'product.discount' => '',
         'LocationId.name' => 'required',
         'product.weight' => '',
         'product.weight_lable' => '',
@@ -378,6 +381,12 @@ class Detail extends Component
                     'product_new'      => json_encode($this->product['product_new']),
                     
                     'profit'           => $this->product['profit'],
+                    
+                    'selling_price'         => $this->product['selling_price'],
+                    
+                    'compare_selling_price' => $this->product['compare_selling_price'],
+                    
+                    'discount'              => $this->product['discount'],
                 
 
                 ]

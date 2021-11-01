@@ -84,59 +84,15 @@
                                                 <input name="cartid[]" type="hidden" id="deletecartid" value="{{$cart['id']}}">
                                                 <div class="cart-list">
                                                     <div class="product-img">
-                                                        <img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}" alt="">
+                                                        <a class="dropdown-header" href="{{ route('product-front-detail', $cart['product_detail'][0]['seo_utl']) }}"><img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}" alt=""></a>
                                                     </div>
                                                     <div class="product-data">
                                                         <p class="cart-pd-title">{{$cart['product_detail'][0]['title']}}</p>
                                                         <a class="cart-pd-clear" href="#">Clare Tree</a>
                                                         <div class="product-data-inner">
-                                                            @foreach($ProductVariant as $row)
-                                                            @foreach($varianttag as $locrow)
-                                                            @if($row->id == $cart['varientid'])
 
-                                                            @if($row->varient1 == $locrow->id && $row->attribute1 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute1}}</p>
-                                                            @endif
+                                                           @include('livewire.front.cartdetail')
 
-                                                            @if($row->varient2 == $locrow->id && $row->attribute2 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute2}}</p>
-                                                            @endif
-
-                                                            @if($row->varient3 == $locrow->id && $row->attribute3 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute3}}</p>
-                                                            @endif
-
-                                                            @if($row->varient4 == $locrow->id && $row->attribute4 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute4}}</p>
-                                                            @endif
-
-                                                            @if($row->varient5 == $locrow->id && $row->attribute5 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute1}}</p>
-                                                            @endif
-
-                                                            @if($row->varient6 == $locrow->id && $row->attribute5 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute5}}</p>
-                                                            @endif
-
-                                                            @if($row->varient7 == $locrow->id && $row->attribute6 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute6}}</p>
-                                                            @endif
-
-                                                            @if($row->varient8 == $locrow->id && $row->attribute7 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute7}}</p>
-                                                            @endif
-
-                                                            @if($row->varient9 == $locrow->id && $row->attribute8 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute9}}</p>
-                                                            @endif
-
-                                                            @if($row->varient10 == $locrow->id && $row->attribute10 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute10}}</p>
-                                                            @endif
-
-                                                            @endif
-                                                            @endforeach
-                                                            @endforeach
                                                             <div class="add-cart-select">
                                                                
                                                                 <div class="total-item-select">
@@ -159,7 +115,7 @@
                                                     </div>
                                                     <?php $price_sum  += ($cart['price'] * $cart['stock']); ?>
                                                     <div class="cart-list-right">
-                                                        <p class="greenish">${{round($cart['price'],2)}}</p>
+                                                        <p class="greenish">${{number_format($cart['price'],2,".",",")}}</p>
                                                         <p class="cart-msrp">MSRP: $220.00</p>
                                                         <a class="myclose-close" wire:click.prevent="DeleteCartProduct({{$cart['id']}})" onclick="document.getElementById('proceed-cart').style.display='none'" href="javascript:;">delete</a>
                                                     </div>

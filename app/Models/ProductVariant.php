@@ -19,8 +19,7 @@ class ProductVariant extends Model
     
     protected $table = "product_variants";
 
-    protected $fillable = ['id','product_id','varient1','attribute1','varient2','attribute2','varient3','attribute3','varient4','attribute4',
-    'varient5','attribute5','varient6','attribute6','varient7','attribute7','varient8','attribute8','varient9','attribute9','varient10','attribute10','price','cost','margin','profit','sku','barcode','location','hscode'];
+    protected $guarded = [];
 
     public function variant_stock()
     {

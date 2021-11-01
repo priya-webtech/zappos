@@ -195,7 +195,6 @@ class ProductFrontDetail extends Component
 
     public function addCart($variationID)
     {
-        dd($variationID);
 
         $variant = ProductVariant::find($variationID);
 
@@ -210,7 +209,8 @@ class ProductFrontDetail extends Component
 
                     'price' => $variant->price,
 
-                    'stock' => $variant->variant_stock[0]->stock,
+                    //'stock' => $variant->variant_stock[0]->stock,
+                    'stock' => '1',
 
                     'locationid' => '1'
 
@@ -228,7 +228,7 @@ class ProductFrontDetail extends Component
 
                     'price' => $this->product->price,
 
-                    'stock' => $this->product->stock,
+                    'stock' => '1',
 
                     'locationid' => '1'
 

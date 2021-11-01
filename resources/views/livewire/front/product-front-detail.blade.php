@@ -139,9 +139,7 @@
                                         <h2 class="h2" id="getprice"><sup>$</sup><span>   {{round($result['price'],2)}}</span><sup>00</sup></h2>
                                         <span class="pd-original-price"><s>${{round($result['compare_price'],2)}}</s></span>
                                     </div>
-
                                     <label class="free-shiping-tag"><form><i class="fa fa-truck" aria-hidden="true"></i>{{$result['label']}} {{$result['shipprice']}}</form></label>
-
                                     @else
                                     @php
                                     $result = shipcharge($product->id,'mainproduct');
@@ -151,7 +149,6 @@
                                     </div>
                                     <label class="free-shiping-tag"><form><i class="fa fa-truck" aria-hidden="true"></i>{{$result['label']}} {{$result['shipprice']}}</form></label>
                                     @endif
-                                    
                                 </div>
 
                                
@@ -729,8 +726,7 @@
 
                                 @if(in_array($decoderes, $decodeB) && $product->id != $rows->id)
 
-
-
+                                 @php $priceres = allprice($rows->id) @endphp
                                 <div>
 
                                     @if($rows['productmediaget'] && isset($rows['productmediaget'][0]))
@@ -738,8 +734,6 @@
                                     <img src="{{ asset('storage/'.$rows['productmediaget'][0]['image']) }}"></a>
 
                                     @endif
-
-                                
 
                                     <div class="multi-item-content">
 
@@ -749,20 +743,21 @@
 
                                         @endphp
 
-
-
                                         @if(!empty($result))
 
                                         <a class="wish-list {{$result['class']}}" wire:click="UpdateWish({{$result['id']}}, {{$result['product_id']}})"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
 
                                         @endif
-
                                         <!-- <p>ASICS</p> -->
-
                                         <p class="multi-pd-title">{{$rows->title}}</p>
 
-                                        <p class="product-price"><span class="mrp-price">${{round($rows->price)}}</span><span class="msrp-price"><s>MSRP: ${{round($rows->compare_price,2)}}</s></span></p>
-                                        <p class="product-price product-single-price">$99.95</p>
+                                        <p class="product-price @if(!empty($priceres['label'])) {{$priceres['label']}} @endif" >
+                                        <span class="mrp-price">${{number_format($priceres['price'],2,'.',',')}}
+                                        </span>
+                                        @if(!empty($priceres['selling_price']))
+                                        <span class="msrp-price"><s>MSRP: ${{number_format($priceres['selling_price'],2,'.',',')}}</s></span>
+                                        @endif
+                                        </p>
 
                                     </div>
 
@@ -811,9 +806,8 @@
                                 <?php $cookieitem = json_decode(Cookie::get('shopping_cart')); ?>
 
                                 @foreach($productrelated as $pro_res)
-
                                 @if(in_array($pro_res->id, $cookieitem) && $pro_res['productmediaget'] && isset($pro_res['productmediaget'][0]) && $pro_res->id != $cookieitem)
-
+                                @php $priceres = allprice($pro_res->id) @endphp
                                 <div>
 
                                     <img src="{{ asset('storage/'.$pro_res['productmediaget'][0]['image']) }}">

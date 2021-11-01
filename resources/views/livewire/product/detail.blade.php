@@ -672,6 +672,18 @@
 
                             </div>
 
+                            <div class="form-field-list">
+
+                                <label>Selling price</label>
+
+                                <input type="text" name="compare_selling_price" wire:model="product.compare_selling_price" wire:ignore placeholder="0,00">
+
+                                <label for="input">US$</label>
+
+                                 @error('compare_selling_price') <span class="text-danger">{{ $message }}</span>@enderror
+
+                            </div>
+
                         </div>
 
                     </div>
@@ -715,6 +727,48 @@
                         </div>
 
                     <label class="variant-pricing-checkbox"><input type="checkbox" name="tax" checked="checked" wire:model="product.tax">Charge tax on this product</label>
+
+                    </div>
+
+                </div>
+
+                <div class="card variant-pricing-card" wire:ignore>
+
+                    <div class="row-items">
+
+                        <div class="header-title">
+
+                            <h3 class="fs-16 fw-6 mb-0">Discount</h3>
+
+                        </div>
+
+                        <div class="row">
+
+                            <!-- <div class="form-field-list">
+
+                                <label>Price</label>
+
+                                <input type="text" name="selling_price" id="price-change-input" class="price-change-input" wire:model="product.selling_price" wire:ignore placeholder="0,00">
+
+                                <label for="input">US$</label>
+
+                                @error('selling_price') <span class="text-danger">{{ $message }}</span>@enderror
+
+                            </div> -->
+
+                            <div class="form-field-list">
+
+                                <label>Discount</label>
+
+                                <input type="text" name="discount" wire:model="product.discount" wire:ignore placeholder="0,00">
+
+                                <label for="input">US$</label>
+
+                                 @error('discount') <span class="text-danger">{{ $message }}</span>@enderror
+
+                            </div>
+
+                        </div>
 
                     </div>
 

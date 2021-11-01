@@ -219,6 +219,12 @@ class ProductCreate extends Component
 
                 'cost' => $request['cost_main'],
                 
+                'selling_price' => $request['selling_price'],
+                
+                'compare_selling_price' => $request['compare_selling_price'],
+                
+                'discount' => $request['discount'],
+                
                 'weight' => $request['weight'],
                 
                 'weight_lable' => $request['weight_lable'],

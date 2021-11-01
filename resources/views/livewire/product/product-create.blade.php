@@ -321,6 +321,60 @@
 
                 </div>
 
+                <div class="card variant-pricing-card" wire:ignore>
+
+                    <div class="row-items">
+
+                        <div class="header-title">
+
+                            <h3 class="fs-16 fw-6 mb-0">Selling Pricing</h3>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="form-field-list">
+
+                                <label>Price</label>
+
+                                <input type="text" name="selling_price" id="price-change-input" class="price-change-input" placeholder="0,00">
+
+                                <label for="input">US$</label>
+
+                                @error('selling_price') <span class="text-danger">{{ $message }}</span>@enderror
+
+                            </div>
+
+                            <div class="form-field-list">
+
+                                <label>Selling Compare</label>
+
+                                <input type="text" name="compare_selling_price" placeholder="0,00">
+
+                                <label for="input">US$</label>
+
+                                 @error('compare_selling_price') <span class="text-danger">{{ $message }}</span>@enderror
+
+                            </div>
+
+                            <div class="form-field-list">
+
+                                <label>Discount</label>
+
+                                <input type="text" name="discount" placeholder="0,00">
+
+                                <label for="input">US$</label>
+
+                                 @error('discount') <span class="text-danger">{{ $message }}</span>@enderror
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
                 <div class="card variant-inventory-card">
 
                     <div class="row-items">

@@ -38,6 +38,7 @@ class CreateProductVariantsTable extends Migration
             $table->text('attribute10')->nullable();
             $table->text('photo')->nullable();
             $table->bigInteger('price')->nullable();
+            $table->float('selling_price', 8, 2)->nullable();
             $table->bigInteger('cost')->nullable();
             $table->bigInteger('margin')->nullable();
             $table->bigInteger('profit')->nullable();
