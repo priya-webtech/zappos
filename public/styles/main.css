@@ -397,8 +397,7 @@ iframe.embed-player.slide-media {max-width: 729px; height: 487px; }
 .product-information ul li {list-style: disc; margin-bottom: 5px; font-weight: 500; font-size: 14px; }
 .product-information a {font-size: 14px; font-weight: bold; color: #003953; text-decoration: underline; margin-top: 10px; display: inline-block; }
 .item-bought-sec {padding: 40px 0; }
-.multi-item-content p.product-single-price, 
-.cat-pd-content p.product-single-price {color: #035D59; font-weight: 600; }
+.multi-item-content p.product-single-price span, .cat-pd-content p.product-single-price span {color: #035D59; font-weight: 600; }
 
 
 /*Product details page right sidebar css*/

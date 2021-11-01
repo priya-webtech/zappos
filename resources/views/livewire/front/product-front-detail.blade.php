@@ -130,25 +130,28 @@
                             <div class="product-right-top">
 
                                 <div class="pd-total">
-                                    @if($Productvariant)
+                               
                                     @php 
-                                    $result = shipcharge($Productvariant->product_id,'variantproduct');
-                                    @endphp
+                                    if(!empty($Productvariant['product_id'])){
+                                    $result = shipcharge($Productvariant['product_id'],'variantproduct');
+                                    }
+                                   
+                                    $priceres = allprice($product['id']);
 
-                                    <div class="pd-all-price offer-price">
-                                        <h2 class="h2" id="getprice"><sup>$</sup><span>   {{round($result['price'],2)}}</span><sup>00</sup></h2>
-                                        <span class="pd-original-price"><s>${{round($result['compare_price'],2)}}</s></span>
-                                    </div>
-                                    <label class="free-shiping-tag"><form><i class="fa fa-truck" aria-hidden="true"></i>{{$result['label']}} {{$result['shipprice']}}</form></label>
-                                    @else
-                                    @php
-                                    $result = shipcharge($product->id,'mainproduct');
                                     @endphp
-                                    <div class="pd-all-price offer-price">
-                                        <h2 class="h2" id="getprice"><sup>$</sup><span>   {{round($result['price'],2)}}</span><sup>00</sup></h2>
-                                    </div>
-                                    <label class="free-shiping-tag"><form><i class="fa fa-truck" aria-hidden="true"></i>{{$result['label']}} {{$result['shipprice']}}</form></label>
+                                    @if(!empty($priceres))
+
+                                        <div class="pd-all-price offer-price ">
+                                            <h2 class="h2 @if(!empty($priceres['label'])) {{$priceres['label']}} @endif" id="getprice"><sup>$</sup><span>   {{number_format($priceres['price'],2,'.',',')}}</span></h2>
+                                            @if(!empty($priceres['selling_price']))
+                                            <span class="pd-original-price"><s>{{number_format($priceres['selling_price'],2,'.',',')}}</s></span>
+                                            @endif
+                                        </div>
+
                                     @endif
+                                     @if(!empty($result))
+                                        <label class="free-shiping-tag"><form><i class="fa fa-truck" aria-hidden="true"></i>{{$result['label']}} {{$result['shipprice']}}</form></label>
+                                        @endif
                                 </div>
 
                                
@@ -737,11 +740,7 @@
 
                                     <div class="multi-item-content">
 
-                                        @php
-
-                                        $result = favorite($rows->id);
-
-                                        @endphp
+                                        @php $result = favorite($rows->id); @endphp
 
                                         @if(!empty($result))
 
@@ -749,6 +748,7 @@
 
                                         @endif
                                         <!-- <p>ASICS</p> -->
+                                        @if(!empty($priceres))
                                         <p class="multi-pd-title">{{$rows->title}}</p>
 
                                         <p class="product-price @if(!empty($priceres['label'])) {{$priceres['label']}} @endif" >
@@ -758,6 +758,7 @@
                                         <span class="msrp-price"><s>MSRP: ${{number_format($priceres['selling_price'],2,'.',',')}}</s></span>
                                         @endif
                                         </p>
+                                        @endif
 
                                     </div>
 
@@ -807,20 +808,15 @@
 
                                 @foreach($productrelated as $pro_res)
                                 @if(in_array($pro_res->id, $cookieitem) && $pro_res['productmediaget'] && isset($pro_res['productmediaget'][0]) && $pro_res->id != $cookieitem)
+
                                 @php $priceres = allprice($pro_res->id) @endphp
                                 <div>
-
+                                    <a class="dropdown-header" href="{{ route('product-front-detail', $pro_res['seo_utl']) }}">
                                     <img src="{{ asset('storage/'.$pro_res['productmediaget'][0]['image']) }}">
-
+                                    </a>
                                     <div class="multi-item-content">
 
-                                        @php
-
-                                        $result = favorite($pro_res->id);
-
-                                        @endphp
-
-
+                                        @php $result = favorite($pro_res->id); @endphp
 
                                         @if(!empty($result))
 
@@ -832,6 +828,15 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
+                                        @if(!empty($priceres))
+                                        <p class="product-price @if(!empty($priceres['label'])) {{$priceres['label']}} @endif" >
+                                        <span class="mrp-price">${{number_format($priceres['price'],2,'.',',')}}
+                                        </span>
+                                        @if(!empty($priceres['selling_price']))
+                                        <span class="msrp-price"><s>MSRP: ${{number_format($priceres['selling_price'],2,'.',',')}}</s></span>
+                                        @endif
+                                        </p>
+                                        @endif
                                     </div>
 
                                 </div>

@@ -137,7 +137,6 @@ class Detail extends Component
         'product.profit' => '',
         'product.selling_price' => '',
         'product.compare_selling_price' => '',
-        'product.discount' => '',
         'LocationId.name' => 'required',
         'product.weight' => '',
         'product.weight_lable' => '',
@@ -150,6 +149,7 @@ class Detail extends Component
         'product.trackqtn' => '',
         'product.outofstock' => '',
         'Productvariant.*.price' => 'required|string',
+        'Productvariant.*.selling_price' => 'required|string',
         'Productvariant.*.sku' => 'required|string',
         'Productvariant.*.barcode' => 'required|string',
         'Productvariant.*.hscode' => 'required|string',
@@ -384,10 +384,7 @@ class Detail extends Component
                     
                     'selling_price'         => $this->product['selling_price'],
                     
-                    'compare_selling_price' => $this->product['compare_selling_price'],
-                    
-                    'discount'              => $this->product['discount'],
-                
+                    'compare_selling_price' => $this->product['compare_selling_price'],       
 
                 ]
 
@@ -433,6 +430,7 @@ class Detail extends Component
             if ($id) {
                $variationValue->update([
                    'price' => $this->Productvariant[$key]['price'],
+                   'selling_price' => $this->Productvariant[$key]['selling_price'],
                    'sku' => $this->Productvariant[$key]['sku'],
                    'barcode' => $this->Productvariant[$key]['barcode'],
                    'hscode' => $this->Productvariant[$key]['hscode']

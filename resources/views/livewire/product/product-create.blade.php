@@ -212,6 +212,7 @@
                                                    <a class="fw-6 button secondary">Edit Variants <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></a>
                                                     <ul class="edite-variants-dropdown">
                                                         <li><a class="link" onclick="document.getElementById('variants-edit-prices-modal').style.display='block'">Edit prices</a></li>
+                                                        <li><a class="link" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='block'">Edit Selling prices</a></li>
                                                         <li><a class="link" onclick="document.getElementById('edit-quantities-modal').style.display='block'">Edit quantities</a></li>
                                                         <li><a class="link" onclick="document.getElementById('variants-edit-skus-modal').style.display='block'">Edit SKUs</a></li>
                                                         <li><a class="link" onclick="document.getElementById('variants-edit-barcodes-modal').style.display='block'">Edit barcodes</a></li>
@@ -337,7 +338,7 @@
 
                                 <label>Price</label>
 
-                                <input type="text" name="selling_price" id="price-change-input" class="price-change-input" placeholder="0,00">
+                                <input type="text" name="selling_price" id="price-selling-change-input" class="price-selling-change-input" placeholder="0,00">
 
                                 <label for="input">US$</label>
 
@@ -354,18 +355,6 @@
                                 <label for="input">US$</label>
 
                                  @error('compare_selling_price') <span class="text-danger">{{ $message }}</span>@enderror
-
-                            </div>
-
-                            <div class="form-field-list">
-
-                                <label>Discount</label>
-
-                                <input type="text" name="discount" placeholder="0,00">
-
-                                <label for="input">US$</label>
-
-                                 @error('discount') <span class="text-danger">{{ $message }}</span>@enderror
 
                             </div>
 
@@ -817,6 +806,36 @@
                 <div class="modal-footer">
                     <a onclick="document.getElementById('variants-edit-prices-modal').style.display='none'" class="button secondary">Cancel</a>
                     <a class="button green-btn child-price-submit" data-recordid="">Done</a>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <!-- Price Modal -->
+    <div id="variants-edit-selling-prices-modal" class="customer-modal-main variants-edit-option-modal">
+        <div class="customer-modal-inner">
+            <div class="customer-modal">
+                <div class="modal-header">
+                    <h2>Edit Selling prices</h2>
+                    <span onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
+                </div>
+                <div class="modal-body">
+                    <div class="row side-elements align-item-bt">
+                        <div class="form-field-list">
+                            <label>Apply a Selling price to all variants</label>
+                            <span class="dollar-input">
+                                <input type="text" id="apply-selling-price" class="apply-selling-price" value="" placeholder="0,00">
+                            </span>
+                        </div>
+                        <a class="button fw-6" id="apply-price-selling-submit" class="apply-price-selling-submit">Apply to all</a>
+                    </div>
+                    <div class="attribute-selling-prices">
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='none'" class="button secondary">Cancel</a>
+                    <a class="button green-btn child-price-submit" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='none'" data-recordid="">Done</a>
                 </div>
             </div>
         </div>
@@ -1294,6 +1313,7 @@ $(document).ready(function () {
        
         var get_html = '';
         var get_price_html = '';
+        var get_selling_price_html = '';
         var get_sku_html = '';
         var get_barcode_html = '';
         var get_hscode_html = '';
@@ -1321,6 +1341,8 @@ $(document).ready(function () {
 
                                 get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
 
+                                get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
+
                                 get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 
                                 get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'/'+arr_name3+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
@@ -1340,6 +1362,8 @@ $(document).ready(function () {
 
                              get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>'; 
 
+                             get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
+
                              get_sku_html += '<div class="vep-list"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 
                              get_stock_html += '<div class="vep-list bd_none"><label>'+arr_name1+'/'+arr_name2+'</label><input type="text" id="child-popup-stock-'+uniq_id+'" class="att_stock_class" name=""></div><br>';
@@ -1357,6 +1381,8 @@ $(document).ready(function () {
                      get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+' data-id='+uniq_id+'  data-input="">'+arr_name1+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p><span>$</span><span class="price-view-class" id="price-view-'+uniq_id+'"></span><span>.00</span></p><p>6 available at 2 locations</p></td></tr><br>';
 
                      get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
+
+                      get_selling_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><span class="dollar-input"><input type="text" class="att_price_selling_class" name="att_price_selling[]" id="child-popup-price-selling-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
 
                      get_sku_html += '<div class="vep-list"><label>'+arr_name1+'</label><input type="text" id="child-popup-sku-'+uniq_id+'" class="att_sku_class" name="att_sku[]"></div><br>';
 
@@ -1376,6 +1402,11 @@ $(document).ready(function () {
 
            $('.attribute-prices').html(`        
                        `+get_price_html+`
+                
+            `);
+
+            $('.attribute-selling-prices').html(`        
+                       `+get_selling_price_html+`
                 
             `);
 
@@ -1445,8 +1476,26 @@ $(document).ready(function () {
             $('.att_price_class').attr("value", val);
         });
 
+         $(document).on("click", '#apply-price-selling-submit', function() {
+            var val = $('.apply-selling-price').val();
+
+            $('.att_price_selling_class').attr("value", val);
+        });
+
 
         $(document).on("change", '.att_price_class', function() {
+
+             var id_value = $(this).attr('id');
+             var dataid = $(this).data('id');
+             
+            var id1 = $('#'+id_value).val();
+             
+            $("#"+id_value).attr("value", id1);
+
+            $("#price-view-"+dataid).html(id1);
+        });
+
+        $(document).on("change", '.att_price_selling_class', function() {
 
              var id_value = $(this).attr('id');
              var dataid = $(this).data('id');
@@ -1498,7 +1547,11 @@ $(document).ready(function () {
            $("#margin-data-input-"+thisid).attr("data-input", $('.margin-get-value').val());
            $("#price-view-"+thisid).html($(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
            $("#child-popup-price-"+thisid).attr("value", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
+
+           $("#child-popup-price-selling-"+thisid).attr("value", $(this).parent().parent().find(".variant-pricing-card .form-field-list input").val());
+
            $("#cost-data-input-"+thisid).attr("value", $(this).parent().parent().find(".variant-pricing-card .cost-input input").val());
+
            $("#child-popup-sku-"+thisid).attr("value", $('#sku-input').val());
            $("#child-popup-barcode-"+thisid).attr("value", $('#barcode-input').val());
            $("#child-popup-hscode-"+thisid).attr("value", $('#hscode-input').val());
@@ -1694,6 +1747,7 @@ $(document).ready(function () {
     $(document).on("keyup", ".price-change-input", function () {
 
         var price = $('#price-change-input').val();
+        var price = $('#price-change-input').val();
         var cost = $('#cost-change-input').val();
 
         if (price > 0 && cost > 0) {
@@ -1714,6 +1768,7 @@ $(document).ready(function () {
            $(".margin-data-input").attr("data-input", grossMargin.toFixed(2));
            $(".price-view-class").html(price);
            $(".att_price_class").attr("value", price);
+           $(".att_price_selling_class").attr("value", price);
            $(".cost-data-input-new").attr("value", cost);
            $(".margin-data-input").attr("value", grossMargin.toFixed(2));
            $(".profit-data-input").attr("value", profit.toFixed(2)); 

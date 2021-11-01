@@ -178,6 +178,7 @@ class ProductCreate extends Component
             $productCollection_arrray = $request['productCollection'];
 
             $price_arr = $request['att_price'];
+            $price_selling_arr = $request['att_price_selling'];
             $cost_arr = $request['att_cost'];
             $sku_arr = $request['att_sku'];
             $barcode_arr = $request['att_barcode'];
@@ -222,8 +223,6 @@ class ProductCreate extends Component
                 'selling_price' => $request['selling_price'],
                 
                 'compare_selling_price' => $request['compare_selling_price'],
-                
-                'discount' => $request['discount'],
                 
                 'weight' => $request['weight'],
                 
@@ -372,6 +371,7 @@ class ProductCreate extends Component
                 $variations = [];
                 $variations['product_id'] = $this->product['id'];
                 $variations['price'] = $price_arr[$key];
+                $variations['selling_price'] = $price_selling_arr[$key];
                 $variations['cost'] = $cost_arr[$key];
                 $variations['sku'] = $sku_arr[$key];
                 $variations['barcode'] = $barcode_arr[$key];

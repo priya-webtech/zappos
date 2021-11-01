@@ -60,17 +60,29 @@ use App\Models\Cart;
     $product = Product::where(['id' => $productid])->first();
 
     if($Productvariant){
+      if($Productvariant['selling_price']){
+          $price = $Productvariant['selling_price'];
+          $selling_price = $Productvariant['price'];
 
-        $price = $Productvariant['price'];
-         $selling_price = $product['price'];
+          $discount = $selling_price - $price;
+           return [ 'label' => '' ,'price' => $price, 'selling_price' => $selling_price, 'discount' => $discount ];
+      }
+      else
+      {
+         $price = $Productvariant['price'];
+         $selling_price = '';
+     
+          return [ 'label' => 'product-single-price' ,'price' => $price, 'selling_price' => $selling_price ];
+      }
 
-      return [ 'label' => 'product-single-price' ,'price' => $price, 'selling_price' => $selling_price ];
+
     }
     else{
       if($product['compare_selling_price']){
           $price = $product['compare_selling_price'];
           $selling_price = $product['price'];
-           return [ 'label' => '' ,'price' => $price, 'selling_price' => $selling_price ];
+          $discount = $selling_price - $price;
+           return [ 'label' => '' ,'price' => $price, 'selling_price' => $selling_price, 'discount' => $discount ];
       }
       else
       {

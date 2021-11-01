@@ -20,10 +20,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php $sum = 0; @endphp
+                                    @php $subtotal = 0;  $discountrate = 0; $total = 0; @endphp
+                                    @if($CartItem)
                                     @foreach($CartItem as $cart)
-                                    @php $sum += $cart['price']; @endphp
-                                    @php $detailfetch = pricefetch($cart->id); @endphp
+                                    @php 
+
+                                    $detailfetch = allprice($cart->product_id);
+
+                                    if($detailfetch){
+
+                                    $subtotal += $detailfetch['price']; 
+                                    if(!empty($detailfetch['discount'])){
+                                    $discountrate += $detailfetch['discount'];
+                                    } 
+                                    $total += $subtotal;
+                                    }
+                                    @endphp
                                     <tr>
                                         <td>
                                             <div class="my-cart-pd-details">
@@ -51,6 +63,9 @@
                                         </td>
                                         <td>
                                             <span class="cart-pd-price">${{number_format($detailfetch['price'],2,".",",")}}</span>
+                                            @if(!empty($detailfetch['discount']))
+                                            <span class="msrp-price">Discount: ${{number_format($detailfetch['discount'],2,".",",")}}</span>
+                                            @endif
                                         </td>
                                         <td>
                                             <div class="viewcart-tbl-btn">
@@ -66,6 +81,7 @@
                                         </td>
                                     </tr>
                                     @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -84,9 +100,9 @@
                             <div class="viewcart-checkout">
                                 <div class="vc-inner">
                                     <p class="cart-summary">Cart Summary (1 Item)</p>
-                                    <p class="subtotal">subtotal: <span>${{number_format($sum,2,".",",")}}</span></p>
-                                    <p class="discount-price">discount: <span>-$10.00</span></p>
-                                    <p class="total-price">total: <span>$59.00</span></p>
+                                    <p class="subtotal">subtotal: <span>${{number_format($subtotal,2,".",",")}}</span></p>
+                                    <p class="discount-price">discount: <span>-${{number_format($discountrate,2,".",",")}}</span></p>
+                                    <p class="total-price">total: <span>${{number_format($total,2,".",",")}}</span></p>
                                 </div>
                                 <div class="vc-inner">
                                     <a href="#" class="site-btn">Proceed to Checkout</a>
