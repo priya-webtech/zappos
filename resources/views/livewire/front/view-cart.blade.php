@@ -20,21 +20,32 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php $subtotal = 0;  $discountrate = 0; $total = 0; @endphp
+                                    @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; @endphp
                                     @if($CartItem)
                                     @foreach($CartItem as $cart)
                                     @php 
 
                                     $detailfetch = allprice($cart->product_id);
 
-                                    if($detailfetch){
+                                    if($detailfetch['selling_price']){
+                                     $subtotal1 += $detailfetch['selling_price'];
 
-                                    $subtotal += $detailfetch['price']; 
+                                    }
+
+                                    if(!$detailfetch['selling_price']){
+                                      $subtotal2 +=  $detailfetch['price'];
+                                    }else{
+                                      $subtotal2 = 0;
+                                    }
+
+                                    $subtotal = $subtotal1 + $subtotal2;
+                                   
+                                   
                                     if(!empty($detailfetch['discount'])){
                                     $discountrate += $detailfetch['discount'];
                                     } 
-                                    $total += $subtotal;
-                                    }
+                                    $total = $subtotal - $discountrate;
+                                    
                                     @endphp
                                     <tr>
                                         <td>
@@ -62,10 +73,16 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="cart-pd-price">${{number_format($detailfetch['price'],2,".",",")}}</span>
-                                            @if(!empty($detailfetch['discount']))
-                                            <span class="msrp-price">Discount: ${{number_format($detailfetch['discount'],2,".",",")}}</span>
+                                            <span class="cart-pd-price">${{$detailfetch['selling_price']}}
+                                            @if(!$detailfetch['selling_price'])
+                                            {{$detailfetch['price']}}
                                             @endif
+
+                                            </span>
+                                            @if(!empty($detailfetch['discount']))
+                                            <span class="msrp-price">-  ${{number_format($detailfetch['price'],2,".",",")}}</span>
+                                            @endif
+
                                         </td>
                                         <td>
                                             <div class="viewcart-tbl-btn">
