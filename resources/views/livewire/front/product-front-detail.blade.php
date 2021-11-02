@@ -140,7 +140,7 @@
 
                                     @endphp
                                     @if(!empty($priceres))
-
+                                       
                                         <div class="pd-all-price offer-price ">
                                             <h2 class="h2 @if(!empty($priceres['label'])) {{$priceres['label']}} @endif" id="getprice"><sup>$</sup><span>   {{number_format($priceres['price'],2,'.',',')}}</span></h2>
                                             @if(!empty($priceres['selling_price']))
@@ -287,7 +287,7 @@
 
                                 <div class="pd-btn-group">
 
-                                    <button class="site-btn" id="variant_id" wire:click="addCart($event.target.value)">Add to Cart</button>
+                                    <button class="site-btn" id="variant_id" value="@if(!empty($row->id)){{$row->id}}@endif" wire:click="addCart($event.target.value)">Add to Cart</button>
 
 
 

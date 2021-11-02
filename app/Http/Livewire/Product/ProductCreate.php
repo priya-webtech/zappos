@@ -171,12 +171,11 @@ class ProductCreate extends Component
     public function storeProduct(Request $request)
     {    
 
+
         if($request['seo_url'] == ""){ 
             $this->validate();
         }    
             $varition_arrray_crunch = $request['varition_arrray'];
-            $productCollection_arrray = $request['productCollection'];
-
             $price_arr = $request['att_price'];
             $price_selling_arr = $request['att_price_selling'];
             $cost_arr = $request['att_cost'];
@@ -188,6 +187,14 @@ class ProductCreate extends Component
             $profit_arr = $request['profit_arry'];
             $variations_arr = [];
             $arr = [];
+            $productCollection_arrray = [];
+            $product_new_arrray = [];
+            if(!empty($request['productCollection'])){
+            $productCollection_arrray = $request['productCollection'];
+            }
+            if(!empty($request['product_new'])){
+            $product_new_arrray = $request['product_new'];
+            }
 
             
             foreach ($request->request as $key => $value) {
@@ -238,7 +245,7 @@ class ProductCreate extends Component
 
                 'location' => $locationid,
 
-                'product_new'      => $request['product_new'],
+                'product_new'      => json_encode($product_new_arrray),
 
                 'product_type' => $request['product_type'],
 

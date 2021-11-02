@@ -14,9 +14,10 @@ use App\Models\favorite;
 
 class ViewCart extends Component
 {
-	public $CartItem,$ProductVariant,$varianttag;
+	public $CartItem,$ProductVariant,$varianttag,$stockitem;
 
 	protected $listeners = ['getCart', 'DeleteCartProduct'];
+
 
 	public function mount() {
         if (Auth::check()) {
@@ -27,6 +28,12 @@ class ViewCart extends Component
        $this->ProductVariant = ProductVariant::get();
        $this->varianttag = VariantTag::All();
     }
+
+    protected $rules = [
+
+        'CartItem.*.stock' => [],
+
+    ];
 
     public function render()
     {
@@ -42,6 +49,19 @@ class ViewCart extends Component
             $this->ProductVariant = ProductVariant::get();
             $this->varianttag = VariantTag::All();
         }
+    }
+
+
+    public function stockplusminus($cartid)
+    {
+
+    	if($this->CartItem)
+        {
+            foreach ($this->CartItem as $stock) {
+                Cart::where('id', $stock->id)->update(['stock' => $stock->stock]);
+            }
+             
+        } 
     }
     
     public function UpdateWish($id,$productid){

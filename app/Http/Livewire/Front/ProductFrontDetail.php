@@ -39,7 +39,7 @@ class ProductFrontDetail extends Component
     public $incrementing = false;
 
 
-    public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $Productvariant, $variationID, $reviewget;
+    public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $Productvariant, $variationID, $reviewget,$stockitem;
 
 
 
@@ -53,6 +53,7 @@ class ProductFrontDetail extends Component
         'varientid' => '',
         'getpriceinput' => '',
         'stock' => '',
+        'stockitem' => '',
 
     ];
 
@@ -194,11 +195,17 @@ class ProductFrontDetail extends Component
     }
 
     public function addCart($variationID)
-    {
+    {   
 
         $variant = ProductVariant::find($variationID);
 
         if(!empty($variant)) {
+
+            if($variant->selling_price){
+                $price = $variant['selling_price'];
+            }else{
+                $price = $variant['price'];
+            }
             $cart_arr = [
                     
                     'product_id' => $variant->product_id,
@@ -207,7 +214,7 @@ class ProductFrontDetail extends Component
 
                     'varientid' => $variant->id,
 
-                    'price' => $variant->price,
+                    'price' => $price,
 
                     //'stock' => $variant->variant_stock[0]->stock,
                     'stock' => '1',
@@ -220,13 +227,19 @@ class ProductFrontDetail extends Component
         }
         else
         {
+
+            if($this->product->compare_selling_price){
+               $price = $this->product['compare_selling_price'];
+            }else{
+               $price = $this->product['price'];
+            }
             $cart_arr = [
                     
                     'product_id' => $this->product->id,
 
                     'user_id' => $this->user_id,
 
-                    'price' => $this->product->price,
+                    'price' => $price,
 
                     'stock' => '1',
 

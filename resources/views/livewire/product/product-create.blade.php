@@ -274,6 +274,18 @@
 
                             </div>
 
+                            <div class="form-field-list">
+
+                                <label>Selling price</label>
+
+                                <input type="text" name="compare_selling_price" wire:model="product.compare_selling_price" wire:ignore placeholder="0,00">
+
+                                <label for="input">US$</label>
+
+                                 @error('compare_selling_price') <span class="text-danger">{{ $message }}</span>@enderror
+
+                            </div>
+
                         </div>
 
                     </div>
@@ -317,48 +329,6 @@
                         </div>
 
                     <label class="variant-pricing-checkbox"><input type="checkbox" name="tax" checked="checked">Charge tax on this product</label>
-
-                    </div>
-
-                </div>
-
-                <div class="card variant-pricing-card" wire:ignore>
-
-                    <div class="row-items">
-
-                        <div class="header-title">
-
-                            <h3 class="fs-16 fw-6 mb-0">Selling Pricing</h3>
-
-                        </div>
-
-                        <div class="row">
-
-                            <div class="form-field-list">
-
-                                <label>Price</label>
-
-                                <input type="text" name="selling_price" id="price-selling-change-input" class="price-selling-change-input" placeholder="0,00">
-
-                                <label for="input">US$</label>
-
-                                @error('selling_price') <span class="text-danger">{{ $message }}</span>@enderror
-
-                            </div>
-
-                            <div class="form-field-list">
-
-                                <label>Selling Compare</label>
-
-                                <input type="text" name="compare_selling_price" placeholder="0,00">
-
-                                <label for="input">US$</label>
-
-                                 @error('compare_selling_price') <span class="text-danger">{{ $message }}</span>@enderror
-
-                            </div>
-
-                        </div>
 
                     </div>
 
@@ -612,7 +582,7 @@
 
                         <p class="mb-0">
 
-                            <select  name="product_new">
+                            <select  name="product_new[]">
 
                                 <option value="">-- Select Option --</option>
 

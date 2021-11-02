@@ -86,7 +86,7 @@ use App\Models\Cart;
       }
       else
       {
-         $price = $product['compare_selling_price'];
+         $price = $product['price'];
          $selling_price = '';
           return [ 'label' => 'product-single-price' ,'price' => $price, 'selling_price' => $selling_price ];
       }

@@ -22,28 +22,24 @@
                                 <tbody>
                                     @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; @endphp
                                     @if($CartItem)
-                                    @foreach($CartItem as $cart)
+                                    @foreach($CartItem as $key => $cart)
                                     @php 
-
                                     $detailfetch = allprice($cart->product_id);
 
                                     if($detailfetch['selling_price']){
-                                     $subtotal1 += $detailfetch['selling_price'];
-
+                                     $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
+                                    }else
+                                    {
+                                      $subtotal2 += $cart['stock'] * $detailfetch['price'];
                                     }
 
-                                    if(!$detailfetch['selling_price']){
-                                      $subtotal2 +=  $detailfetch['price'];
-                                    }else{
-                                      $subtotal2 = 0;
-                                    }
 
                                     $subtotal = $subtotal1 + $subtotal2;
-                                   
                                    
                                     if(!empty($detailfetch['discount'])){
                                     $discountrate += $detailfetch['discount'];
                                     } 
+                                   
                                     $total = $subtotal - $discountrate;
                                     
                                     @endphp
@@ -62,15 +58,12 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="my-cart-quantity">
-                                                <select>
-                                                    <option>Remove</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                </select>
+                                            <div class="add-cart-select">               
+                                                <div class="total-item-select">
+                                                        <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['id']}})" name="stockitem" type="number">
+                                                </div>
                                             </div>
+                                        </div>
                                         </td>
                                         <td>
                                             <span class="cart-pd-price">${{$detailfetch['selling_price']}}

@@ -78,8 +78,28 @@
                                     <div>
                                         <div class="items">
                                             <div class="col-12 p-0">
-                                                <?php $price_sum  = 0; ?>
+                                                @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; @endphp
                                                 @foreach($CartItem as $cart)
+
+                                                @php 
+                                                $detailfetch = allprice($cart->product_id);
+
+                                                if($detailfetch['selling_price']){
+                                                 $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
+                                                }else
+                                                {
+                                                  $subtotal2 += $cart['stock'] * $detailfetch['price'];
+                                                }
+
+                                                $subtotal = $subtotal1 + $subtotal2;
+                                               
+                                                if(!empty($detailfetch['discount'])){
+                                                $discountrate += $detailfetch['discount'];
+                                                } 
+                                               
+                                                $total = $subtotal - $discountrate;
+                                                
+                                                @endphp
 
                                                 <input name="cartid[]" type="hidden" id="deletecartid" value="{{$cart['id']}}">
                                                 <div class="cart-list">
@@ -98,8 +118,8 @@
                                                                 <div class="total-item-select">
                                                                     <div class="input-plus-minus">
                                                                         <input type="button" value="-" class="qty-minus">
-                                                                        <input name="stockitem[]" type="number" value="{{$cart['stock']}}" class="stockqty" id="stockqtyitem" data-id="{{$cart['id']}}">
-                                                                        <input type="button" value="+" class="qty-plus">
+                                                                        <input wire:model="stockitem"  type="number" value="{{$cart['stock']}}" class="stockqty" id="stockqtyitem" data-id="{{$cart['id']}}">
+                                                                        <input type="button" value="+" class="qty-plus" wire:click="stockplusminus({{$cart['id']}})">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -113,10 +133,18 @@
                                                         </a>
                                                         @endif
                                                     </div>
-                                                    <?php $price_sum  += ($cart['price'] * $cart['stock']); ?>
+                                                 
                                                     <div class="cart-list-right">
-                                                        <p class="greenish">${{number_format($cart['price'],2,".",",")}}</p>
-                                                        <p class="cart-msrp">MSRP: $220.00</p>
+                                                        @if(!empty($detailfetch))
+                                                        <p class="product-price @if(!empty($detailfetch['label'])) {{$detailfetch['label']}} @endif" >
+                                                        <span class="mrp-price">${{number_format($detailfetch['price'],2,'.',',')}}
+                                                        </span>
+                                                        @if(!empty($detailfetch['selling_price']))
+                                                        <span class="msrp-price"><s>MSRP: ${{number_format($detailfetch['selling_price'],2,'.',',')}}</s></span>
+                                                        @endif
+                                                        </p>
+                                                        @endif
+                                                       
                                                         <a class="myclose-close" wire:click.prevent="DeleteCartProduct({{$cart['id']}})" onclick="document.getElementById('proceed-cart').style.display='none'" href="javascript:;">delete</a>
                                                     </div>
                                                 </div>
@@ -127,7 +155,7 @@
                                         </div>
                                     </div>
                                     <div class="cart-footer">
-                                        <p>Cart Subtotal (<?php echo $cartCount ?> Items) ${{round($price_sum, 2)}}</p>
+                                        <p>Cart Subtotal (<?php echo $cartCount ?> Items) ${{number_format($total,2,".",",")}}</p>
                                         <div class="cart-footer-btn">
 
                                             @if(empty($this->user_id))
