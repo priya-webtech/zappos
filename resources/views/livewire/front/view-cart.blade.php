@@ -20,29 +20,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; @endphp
-                                    @if($CartItem)
-                                    @foreach($CartItem as $key => $cart)
-                                    @php 
-                                    $detailfetch = allprice($cart->product_id);
-
-                                    if($detailfetch['selling_price']){
-                                     $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
-                                    }else
-                                    {
-                                      $subtotal2 += $cart['stock'] * $detailfetch['price'];
-                                    }
-
-
-                                    $subtotal = $subtotal1 + $subtotal2;
-                                   
-                                    if(!empty($detailfetch['discount'])){
-                                    $discountrate += $detailfetch['discount'];
-                                    } 
-                                   
-                                    $total = $subtotal - $discountrate;
-                                    
-                                    @endphp
+                                    @php $sum = 0; @endphp
+                                    @foreach($CartItem as $cart)
+                                    @php $sum += $cart['price']; @endphp
+                                    @php $detailfetch = pricefetch($cart->id); @endphp
                                     <tr>
                                         <td>
                                             <div class="my-cart-pd-details">
@@ -58,24 +39,18 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="add-cart-select">               
-                                                <div class="total-item-select">
-                                                        <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['id']}})" name="stockitem" type="number">
-                                                </div>
+                                            <div class="my-cart-quantity">
+                                                <select>
+                                                    <option>Remove</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                </select>
                                             </div>
-                                        </div>
                                         </td>
                                         <td>
-                                            <span class="cart-pd-price">${{$detailfetch['selling_price']}}
-                                            @if(!$detailfetch['selling_price'])
-                                            {{$detailfetch['price']}}
-                                            @endif
-
-                                            </span>
-                                            @if(!empty($detailfetch['discount']))
-                                            <span class="msrp-price">-  ${{number_format($detailfetch['price'],2,".",",")}}</span>
-                                            @endif
-
+                                            <span class="cart-pd-price">${{number_format($detailfetch['price'],2,".",",")}}</span>
                                         </td>
                                         <td>
                                             <div class="viewcart-tbl-btn">
@@ -86,12 +61,11 @@
                                                 @if(!empty($result))
                                                 <a class="wish-list {{$result['class']}}" wire:click="UpdateWish({{$result['id']}}, {{$result['product_id']}})">move to<i class="fa fa-heart-o" aria-hidden="true"></i></a>
                                                 @endif
-                                                <a class="remove-btn" wire:click.prevent="DeleteCartProduct({{$cart['id']}})"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a>
+                                                <a class="remove-btn" wire:click.prevent="DeleteCartProduct({{$cart['id']}})">Remove to <i class="fa fa-trash" aria-hidden="true"></i> </a>
                                             </div>
                                         </td>
                                     </tr>
                                     @endforeach
-                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -110,9 +84,11 @@
                             <div class="viewcart-checkout">
                                 <div class="vc-inner">
                                     <p class="cart-summary">Cart Summary (1 Item)</p>
-                                    <p class="subtotal">subtotal: <span>${{number_format($subtotal,2,".",",")}}</span></p>
-                                    <p class="discount-price">discount: <span>-${{number_format($discountrate,2,".",",")}}</span></p>
-                                    <p class="total-price">total: <span>${{number_format($total,2,".",",")}}</span></p>
+                                    <p class="subtotal">subtotal: <span>${{number_format($sum,2,".",",")}}</span></p>
+                                    <p class="discount-price">discount: <span>-$10.00</span></p>
+                                    <p class="subtotal">tax: <span>$10</span></p>
+                                    <p class="subtotal">shipping cost: <span>$5</span></p>
+                                    <p class="total-price">total: <span>$59.00</span></p>
                                 </div>
                                 <div class="vc-inner">
                                     <a href="#" class="site-btn">Proceed to Checkout</a>

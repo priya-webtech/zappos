@@ -47,6 +47,12 @@ input:focus, select:focus, textarea:focus {
 .cart-overlay {position: relative; overflow: hidden; }
 .cart-overlay::before {content: ""; position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(0,0,0,.25); z-index: 1; }
 
+
+/*color css*/
+.red-color {color: #ed2939; }
+.grey-color {color: #707070; }
+
+
 /**************************
 		Header css
 **************************/
@@ -106,6 +112,7 @@ nav.navbar {padding:0 15px; }
 .navbar-light .navbar-nav li:last-child {margin-right: 0; }
 .navbar-light .navbar-nav .nav-link, .navbar-nav-right .nav-item a {color: #003953 !important; font-weight: 600; font-size: 15px; padding:15px 0; }
 .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link.active, .navbar-nav .nav-item a:hover {color: #000 !important; text-decoration: none;}
+.navbar-light .navbar-nav li:hover .dropdown-toggle::after {transform: rotate(180deg); }
 #login-btn {color: #003953; font-weight: 600; font-size: 15px; text-decoration: none; }
 .signin-inner{max-width: 911px; }
 .cross-container{width: 18px; margin-left: auto; right: 0; cursor: pointer; }
@@ -630,10 +637,23 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .my-cart-quantity select {padding: 6px 10px; border-radius: 5px; border: 1px solid #ddd; font-size: 14px; }
 
 .viewcart-tbl-btn {display: flex; justify-content: flex-end; flex-direction: column; align-items: flex-end; }
-.viewcart-tbl-btn a {background-color: #ed2939; margin-left: 10px; padding: 6px 20px; min-height: 36px; display: inline-flex; align-items: center; justify-content: center; color: #fff !important; font-size: 14px; border-radius: 5px; cursor: pointer; font-weight: 500; line-height: 20px; min-width: 112px; margin-bottom: 5px; }
-.viewcart-tbl-btn a.wish-list i {font-weight: 600; margin: 0 0 -2px 5px; color: #fff !important; }
-.viewcart-tbl-btn a.remove-btn {background-color: #003953; }
-.viewcart-tbl-btn a.remove-btn i { font-size: 16px; margin: 0 5px 2px 0;}
+.viewcart-tbl-btn a {
+    display: inline-flex;
+    align-items: center;
+    color: #ed2939 !important;
+    font-size: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    line-height: 20px;
+    margin-bottom: 8px;
+    text-decoration: underline !important;
+}
+.viewcart-tbl-btn a i {
+    font-weight: 600;
+    margin: 0 0 -2px 5px;
+}
+.viewcart-tbl-btn a.remove-btn { color: #003953 !important; }
 
 .offer-code {padding: 16px 20px 20px; background-color: #ffffff; box-shadow: 0 0 6px 3px rgb(0 0 0 / 10%); font-size: 14px; border-radius: 5px;}
 .offer-code .form-group, .offer-code p {margin: 0; }
@@ -651,3 +671,40 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .viewcart-checkout .total-price {font-weight: bold; font-size: 15px; margin-top: 8px; color: #003953; }
 .viewcart-checkout .site-btn {background-color: #035d59; color: #fff; border-color: #035d59; padding: 10px 20px; font-weight: 600; text-transform: uppercase; width: 100%; }
 .viewcart-checkout .vc-inner:last-child {padding-top: 20px; border-top: 1px solid #ddd; }
+
+
+/***********************************
+		Checkout page css
+***********************************/
+.checkout-page-sec {padding: 40px 0 60px; }
+.checkout-page-sec .h1 {margin-bottom: 30px; }
+.credit-card-box input {min-height: 46px; }
+.credit-card-box textarea {height: 100px; }
+.credit-card-box label {font-weight: 600; }
+.credit-card-box input, .credit-card-box textarea {box-shadow: none; margin-bottom: 5px; }
+.shipping-details-card {padding: 25px; box-shadow: 0 0 6px 2px rgb(0 0 0 / 10%); border-radius: 10px; }
+.checkout-page-sec .panel-title { font-size: 20px; font-weight: 600; margin-bottom: 20px; display: block; color: #003953; }
+.checkout-page-sec .site-btn {background-color: #003953; color: #fff; font-size: 16px; font-weight: 600; margin-left: auto; width: 100%; }
+
+#payment-form {box-shadow: 0 0 6px 2px rgb(0 0 0 / 10%); padding: 20px 20px 20px; margin-top: 20px; border-radius: 10px; }
+.account-name-row {display: flex; align-items: center; margin-bottom: 10px; }
+.account-name-row input {width: 100%; border: 1px solid #ccc; border-radius: 4px; padding: 11px 15px; }
+.account-name-row .bank-name {flex: 0 0 auto; margin-left: 10px; }
+#ideal-bank-element {width: 100%; padding: 14px 15px; height: 46px; border: 1px solid #ccc; border-radius: 4px; }
+#ideal-bank-element {width: 100%; padding: 14px 15px; height: 46px; border: 1px solid #ccc; border-radius: 4px 0 0 4px; }
+.account-name-row button {flex: 0 0 auto; margin-left: 0; background-color: #035d59; color: #fff; padding: 13px 18px; border-radius: 0 4px 4px 0; min-height: 46px; }
+
+.checkout-page-sec .viewcart-checkout {margin: 0; }
+.checkout-page-sec .viewcart-checkout p.cart-summary {font-size: 20px; font-weight: 600; margin-bottom: 20px; color: #003953;}
+.checkout-page-sec .viewcart-checkout p {margin-bottom: 8px; text-transform: capitalize; }
+.checkout-page-sec .viewcart-checkout .total-price {font-weight: 600; font-size: 18px; margin: 0; color: #035d59; }
+
+.privacy-condi-text {margin: 20px 0 0; color: #003953; line-height: 22px; font-weight: 500; }
+.privacy-condi-text a {color: #035d59; text-decoration: underline; }
+
+.review-shipping-sec {padding: 25px; box-shadow: 0 0 6px 2px rgb(0 0 0 / 10%); border-radius: 10px; margin-top: 20px; }
+.my-cart-pd-details:not(:last-child) {margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 15px; }
+.my-cart-desc p {margin-top: 12px; display: block; }
+.my-cart-desc p span {font-size: 14px; display: block; }
+.my-cart-desc p span span {display: inline-block; }
+.my-cart-desc p span b {font-weight: 600; }
