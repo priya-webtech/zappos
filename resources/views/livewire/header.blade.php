@@ -118,7 +118,7 @@
                                                                 <div class="total-item-select">
                                                                     <div class="input-plus-minus">
                                                                         <input type="button" value="-" class="qty-minus">
-                                                                        <input wire:model="stockitem"  type="number" value="{{$cart['stock']}}" class="stockqty" id="stockqtyitem" data-id="{{$cart['id']}}">
+                                                                        <input name="stockitem[]"  type="number" value="{{$cart['stock']}}" class="stockqty" id="stockqtyitem" data-id="{{$cart['id']}}">
                                                                         <input type="button" value="+" class="qty-plus" wire:click="stockplusminus({{$cart['id']}})">
                                                                     </div>
                                                                 </div>
