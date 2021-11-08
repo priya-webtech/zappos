@@ -38,25 +38,8 @@ class CheckoutInsertOrder extends Component
     public function checkoutInsert(Request $Request)
     {
 
-        $stock_arr = $Request->stockitem;
         $cartid_arr = $Request->cartid;
-        
-        foreach ($cartid_arr as $cartkey => $cartid) {
-            foreach ($stock_arr as $stockkey => $stockRow) {
-                
-                if($cartkey == $stockkey){
-                    $stock = $stockRow;
-                Cart::where('id', $cartid)->update(
-                    [
-                        'stock' => $stock,
-                    ]
-                );
-                }
-                
-            }
 
-             
-        }
 
         $user_id =  Auth::user()->id;
         $this->Cart = Cart::where('user_id',$user_id)->get();

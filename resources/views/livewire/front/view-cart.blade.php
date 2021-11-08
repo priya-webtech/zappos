@@ -37,7 +37,7 @@
                                     $subtotal = $subtotal1 + $subtotal2;
                                    
                                     if(!empty($detailfetch['discount'])){
-                                    $discountrate += $detailfetch['discount'];
+                                    $discountrate += $detailfetch['discount'] * $cart['stock'];
                                     } 
                                    
                                     $total = $subtotal - $discountrate;
@@ -109,7 +109,7 @@
                             </div>
                             <div class="viewcart-checkout">
                                 <div class="vc-inner">
-                                    <p class="cart-summary">Cart Summary (1 Item)</p>
+                                    <p class="cart-summary">Cart Summary (@php echo count($CartItem); @endphp Item)</p>
                                     <p class="subtotal">subtotal: <span>${{number_format($subtotal,2,".",",")}}</span></p>
                                     <p class="discount-price">discount: <span>-${{number_format($discountrate,2,".",",")}}</span></p>
                                     <p class="total-price">total: <span>${{number_format($total,2,".",",")}}</span></p>

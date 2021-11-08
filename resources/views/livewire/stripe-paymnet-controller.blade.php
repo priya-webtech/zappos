@@ -148,47 +148,59 @@
                         </form>
                     </div>
                     @endif
-
                     <div class="review-shipping-sec">
                         <h3 class="panel-title">Shipping Details</h3>
+                        @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; @endphp
+                        @if($CartItem)
+                        @foreach($CartItem as $key => $cart)
+                        @php 
+                        $detailfetch = allprice($cart->product_id);
+
+                        if($detailfetch['selling_price']){
+                         $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
+                        }else
+                        {
+                          $subtotal2 += $cart['stock'] * $detailfetch['price'];
+                        }
+
+                        $subtotal = $subtotal1 + $subtotal2;
+
+                       
+                        if(!empty($detailfetch['discount'])){
+                        $discountrate += $detailfetch['discount'] * $cart['stock'];
+                        } 
+                       
+                        $total = $subtotal - $discountrate;
+
+                        $gst = $Taxes->rate;
+                         $GetGst = ($gst/100)+1;
+                         $withoutgstaount = $total / $GetGst;
+
+                         $gst_include =  ($withoutgstaount*$gst) / 100;
+                         $gst_Total = $gst_include + $total;
+                        @endphp
                         <div class="my-cart-pd-details">
                             <div class="my-cart-img">
                                 <a class="dropdown-header" href="#">
-                                    <img src="http://127.0.0.1:8000/storage/media/nU6wmGj0C1dy5DUk13yDMuEnqNSo4uaNWZktAb0L.jpg">
+                                    <img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}">
                                 </a>
                             </div>
                             <div class="my-cart-desc">
                                 <span>Splendid</span>
-                                <h6>1x1 Classic Long Sleeve Turtleneck</h6>
+                                <h6>{{$cart['product_detail'][0]['title']}}</h6>
+                                @include('livewire.front.cartdetail')
+                                @if(!empty($detailfetch))
                                 <p>
-                                    <span><b>Color:</b> White</span>
-                                    <span><b>Size:</b> MD (Women's 6-8)</span>
+                                    <span><b>Sale:</b> <span class="red-color">${{number_format($detailfetch['price'],2,'.',',')}}</span></span>
+                                    @if(!empty($detailfetch['selling_price']))
+                                    <span class="grey-color"><b>MSRP:</b> ${{number_format($detailfetch['selling_price'],2,'.',',')}}</span>
+                                    @endif
                                 </p>
-                                <p>
-                                    <span><b>Sale:</b> <span class="red-color">$44.95</span></span>
-                                    <span class="grey-color"><b>MSRP:</b> $58.00</span>
-                                </p>
+                                @endif
                             </div>
                         </div>
-                        <div class="my-cart-pd-details">
-                            <div class="my-cart-img">
-                                <a class="dropdown-header" href="#">
-                                    <img src="http://127.0.0.1:8000/storage/media/nU6wmGj0C1dy5DUk13yDMuEnqNSo4uaNWZktAb0L.jpg">
-                                </a>
-                            </div>
-                            <div class="my-cart-desc">
-                                <span>Splendid</span>
-                                <h6>1x1 Classic Long Sleeve Turtleneck</h6>
-                                <p>
-                                    <span><b>Color:</b> White</span>
-                                    <span><b>Size:</b> MD (Women's 6-8)</span>
-                                </p>
-                                <p>
-                                    <span><b>Sale:</b> <span class="red-color">$44.95</span></span>
-                                    <span class="grey-color"><b>MSRP:</b> $58.00</span>
-                                </p>
-                            </div>
-                        </div>
+                        @endforeach
+                        @endif
                     </div>
   
                 </div>
@@ -200,15 +212,15 @@
         <div class="col-md-4">
             <div class="viewcart-checkout">
                 <div class="vc-inner">
-                    <p class="cart-summary">Order Summary (3 Items)</p>
-                    <p class="subtotal">subtotal:<span>$334.85</span></p>
+                    <p class="cart-summary">Order Summary (@php echo count($CartItem); @endphp Item Items)</p>
+                    <p class="subtotal">subtotal:<span>${{number_format($subtotal,2,".",",")}}</span></p>
                     <p class="subtotal">Shipping Cost:<span>Free</span></p>
-                    <p class="discount-price">discount: <span>-$10.00</span></p>
-                    <p class="subtotal">Total before tax:<span>$324.85</span></p>
-                    <p class="subtotal">Estimated tax to be collected:*<span>$0.00</span></p>
+                    <p class="discount-price">discount: <span>-${{number_format($discountrate,2,".",",")}}</span></p>
+                    <p class="subtotal">Total before tax:<span>${{number_format($total,2,".",",")}}</span></p>
+                    <p class="subtotal">Estimated tax to be collected:*<span>${{number_format($gst_include,2,".",",") }}</span></p>
                 </div>
                 <div class="vc-inner">
-                    <p class="total-price">total: <span>$324.85</span></p>
+                    <p class="total-price">total: <span>${{number_format($gst_Total,2,".",",")}}</span></p>
                 </div>
             </div>
             <form id="payment-form">
@@ -223,7 +235,7 @@
                     <div id="ideal-bank-element">
                       <!-- A Stripe Element will be inserted here. -->
                     </div>
-                    <button type="submit">Pay {{$orderdetail->netamout}}</button>
+                    <button type="submit">Pay ${{number_format($gst_Total,2,".",",")}}</button>
                 </div>
                 <!-- Used to display form errors. -->
                 <div id="error-message" role="alert"></div>
@@ -374,6 +386,7 @@ $(function() {
           var orderid = '<?= $orderdetail->id ?>';
           // Customer inputs
           const nameInput = document.querySelector('#acholdername');
+          const amounts = '<?= $gst_Total ?>';
 
           // Confirm the payment that was created server side:
           const {error, paymentIntent} = await stripe.confirmIdealPayment(
@@ -397,3 +410,4 @@ $(function() {
 
 </x-customer-layout>
 </div>
+    

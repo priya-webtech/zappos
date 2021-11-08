@@ -79,7 +79,7 @@
                                         <div class="items">
                                             <div class="col-12 p-0">
                                                 @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; @endphp
-                                                @foreach($CartItem as $cart)
+                                                @foreach($CartItem as $key => $cart)
 
                                                 @php 
                                                 $detailfetch = allprice($cart->product_id);
@@ -94,7 +94,7 @@
                                                 $subtotal = $subtotal1 + $subtotal2;
                                                
                                                 if(!empty($detailfetch['discount'])){
-                                                $discountrate += $detailfetch['discount'];
+                                                $discountrate += $detailfetch['discount'] * $cart['stock'];
                                                 } 
                                                
                                                 $total = $subtotal - $discountrate;
@@ -116,11 +116,11 @@
                                                             <div class="add-cart-select">
                                                                
                                                                 <div class="total-item-select">
-                                                                    <div class="input-plus-minus">
-                                                                        <input type="button" value="-" class="qty-minus">
+                                                                        <!-- <input type="button" value="-" class="qty-minus">
                                                                         <input name="stockitem[]"  type="number" value="{{$cart['stock']}}" class="stockqty" id="stockqtyitem" data-id="{{$cart['id']}}">
-                                                                        <input type="button" value="+" class="qty-plus" wire:click="stockplusminus({{$cart['id']}})">
-                                                                    </div>
+                                                                        <input type="button" value="+" class="qty-plus" wire:click="stockplusminus({{$cart['id']}})"> -->
+                                                                        <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['id']}})" name="stockitem" type="number">
+                                                               
                                                                 </div>
                                                             </div>
                                                         </div>

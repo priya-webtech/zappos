@@ -8,7 +8,13 @@ use App\Models\Cart;
 
 use App\Models\Product;
 
+use App\Models\VariantTag;
+
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Orders;
+
+use App\Models\tax;
 
 use App\Models\order_item;
 
@@ -24,18 +30,25 @@ use Illuminate\Http\Request;
 
 class StripePaymnetController extends Component
 {
-    public $Cart,$orderdetail,$singleCart,$fullname,$address,$city,$country,$pincode,$mobile, $view;
+    public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$fullname,$address,$city,$country,$pincode,$mobile,$Taxes, $view;
 
     public function mount($id)
     {
         $this->view = 'address';
         $this->orderdetail = Orders::where('id',$id)->first();
+        $this->Taxes = tax::where('id',1)->first();
+        $this->ProductVariant = ProductVariant::get();
+        $this->varianttag = VariantTag::All();
+        if (Auth::check()) {
+            $this->user_id =  Auth::user()->id;
+            $this->CartItem =  Cart::with(['media_product', 'product_detail'])->where('user_id',$this->user_id)->get();
+        }
     }
     public function render()
     {
 
         $stripe = new \Stripe\StripeClient('sk_test_ngkOUeScv0ATVVwLqg88ZdBv00ZX79AIQ8');
-
+            
         try {
           $paymentIntent = $stripe->paymentIntents->create([
             'payment_method_types' => ['ideal'],

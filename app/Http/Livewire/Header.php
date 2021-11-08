@@ -20,6 +20,12 @@ class Header extends Component
 
     protected $listeners = ['getCart', 'DeleteCartProduct'];
 
+    protected $rules = [
+
+        'CartItem.*.stock' => [],
+
+    ];
+    
     public function mount() {
         if (Auth::check()) {
             $this->user_id =  Auth::user()->id;
@@ -98,10 +104,16 @@ class Header extends Component
         return view('livewire.header');
     }
 
-     public function stockplusminus($cartid)
+    public function stockplusminus($cartid)
     {
 
-        dd($this->stockitem);
+        if($this->CartItem)
+        {
+            foreach ($this->CartItem as $stock) {
+                Cart::where('id', $stock->id)->update(['stock' => $stock->stock]);
+            }
+             
+        } 
     }
 
     public function DeleteCartProduct($id)
