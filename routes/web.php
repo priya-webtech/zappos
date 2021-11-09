@@ -101,7 +101,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
         //Discount
         Route::get('/admin/discounts', Livewire\Discount\DiscountList::class)->name('discount-list');
-        Route::get('/admin/discounts/detail', Livewire\Discount\DiscountDetail::class)->name('discount-detail');
+        Route::get('/admin/discounts/{id?}', Livewire\Discount\DiscountDetail::class)->name('discount-detail');
         Route::get('/admin/discounts/new', Livewire\Discount\DiscountCreate::class)->name('discount-create');
 
         //settings

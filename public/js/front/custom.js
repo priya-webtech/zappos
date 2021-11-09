@@ -33,7 +33,10 @@ var widthOfHidden = function(){
 };
 
 var getLeftPosi = function(){
-  return $('.tab-list').position().left;
+	if($('.tab-list').length > 0 ){
+		return $('.tab-list').position().left;
+	}
+   
 };
 
 var reAdjust = function(){

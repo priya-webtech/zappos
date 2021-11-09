@@ -108,15 +108,18 @@
                                 </div>
                             </div>
                             <div class="viewcart-checkout">
-                                <div class="vc-inner">
-                                    <p class="cart-summary">Cart Summary (@php echo count($CartItem); @endphp Item)</p>
-                                    <p class="subtotal">subtotal: <span>${{number_format($subtotal,2,".",",")}}</span></p>
-                                    <p class="discount-price">discount: <span>-${{number_format($discountrate,2,".",",")}}</span></p>
-                                    <p class="total-price">total: <span>${{number_format($total,2,".",",")}}</span></p>
-                                </div>
-                                <div class="vc-inner">
-                                    <a href="#" class="site-btn">Proceed to Checkout</a>
-                                </div>
+                                <form method="post" action="{{ route('add-order') }}" name="form">
+                                    @csrf
+                                    <div class="vc-inner">
+                                        <p class="cart-summary">Cart Summary (@php echo count($CartItem); @endphp Item)</p>
+                                        <p class="subtotal">subtotal: <span>${{number_format($subtotal,2,".",",")}}</span></p>
+                                        <p class="discount-price">discount: <span>-${{number_format($discountrate,2,".",",")}}</span></p>
+                                        <p class="total-price">total: <span>${{number_format($total,2,".",",")}}</span></p>
+                                    </div>
+                                    <div class="vc-inner">
+                                        <button type="submit" class="site-btn">Proceed to Checkout</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

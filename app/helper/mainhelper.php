@@ -9,6 +9,8 @@ use App\Models\Cart;
 
   function favorite($product_id){
 
+  	 if (Auth::check()) {
+
   	$user_id = Auth::user()->id;
   	$favorite = favorite::where(['product_id' => $product_id,'user_id' => $user_id])->first();
     
@@ -19,6 +21,7 @@ use App\Models\Cart;
   	}else{
   		return [ 'class' => '', 'id' => '0','product_id' => $product_id];
   	}
+  }
 
  }
 

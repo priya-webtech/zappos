@@ -400,14 +400,15 @@ $(document).ready(function(){
                 <div class="site-modal-middle">
                     <div class="container" id="container">
                         <div class="form-container sign-up-container">
-                            <form action="#">
+                            <form action="{{ route('register') }}" method="POST">
+                                @csrf
                                 <h2 class="h2">Create Account</h2>
                                 <span>or use your email for registration</span>
-                                <input type="text" placeholder="Name" />
-                                <input type="email" placeholder="Email" />
-                                <input type="password" placeholder="Password" />
-                                <input type="password" placeholder="Re-enter password " />
-                                <button class="site-btn blue-btn">Sign Up</button>
+                                <input type="text" placeholder="Name" name="name" />
+                                <input type="email" placeholder="Email" name="email"/>
+                                <input type="password" placeholder="Password" name="password" />
+                                <input type="password" placeholder="Re-enter password " name="password_confirmation" />
+                                <button type="submit" class="site-btn blue-btn">Sign Up</button>
                             </form>
                             <div class="signin-bottom-cont">
                                 <p>By signing in, you agree to company name</p>
@@ -419,13 +420,14 @@ $(document).ready(function(){
                             </div>
                         </div>
                         <div class="form-container sign-in-container">
-                            <form action="#">
+                            <form action="{{ route('login') }}" method="POST">
+                                @csrf
                                 <h2 class="h2">Sign in</h2>
                                 <span>or use your account</span>
-                                <input type="email" placeholder="Email" />
-                                <input type="password" placeholder="Password" />
+                                <input type="email" placeholder="Email" name="email" />
+                                <input type="password" placeholder="Password" name="password" />
                                 <a href="#">Forgot your password?</a>
-                                <button class="site-btn blue-btn">Sign In</button>
+                                <button type="submit" class="site-btn blue-btn">Sign In</button>
                             </form>
                             <div class="signin-bottom-cont">
                                 <p>By signing in, you agree to company name</p>
@@ -458,5 +460,6 @@ $(document).ready(function(){
     <!-- modal end -->
 
 </div>
+
 
 

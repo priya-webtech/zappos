@@ -41,11 +41,11 @@
 
             </div>
 
-        </div>
+    </div>
 
 
 
-        <div class="product-sec">
+    <div class="product-sec">
 
             <div class="container">
 
@@ -172,7 +172,7 @@
 
                                             <label>{{$varianttag[$row->varient1][0]['name']}}</label>
 
-                                            <select name="attribute1"   class="form-control varition-change" id="varient1" wire:model="variant1" wire:key="first_sel" wire:ignore>
+                                            <select name="attribute1"   class="form-control varition-change" id="varient1"  wire:ignore>
 
                                                 <option value="">--Select Option--</option>
                                                 @foreach($product->variants->unique('attribute1') as $row)
@@ -195,13 +195,13 @@
 
                                     <div class="form-group">
 
-                                         @if(!empty($row->varient2))
+                                        @if(!empty($row->varient2))
 
                                         <div wire:ignore wire:key="second">
 
                                             <label>{{$varianttag[$row->varient2][0]['name']}}</label>
 
-                                            <select name="attribute2"  class="form-control varition-change"   id="varient2" wire:model="variant2"  wire:key="sec_sel" wire:ignore>
+                                            <select name="attribute2"  class="form-control varition-change"   id="varient2">
 
 
                                                 <option value="">--Select Option--</option>
@@ -220,16 +220,16 @@
                                         </div>
 
                                         @endif
+                                    </div>
+                                    <div class="form-group">
 
-
-
-                                         @if(!empty($row->varient3))
+                                        @if(!empty($row->varient3))
 
                                         <div wire:ignore wire:key="third">
 
                                             <label>{{$varianttag[$row->varient3][0]['name']}}</label>
 
-                                            <select name="attribute3"  wire:ignore class="form-control varition-change" id="varient3" wire:model="variant3" wire:key="third_sel" wire:ignore>
+                                            <select name="attribute3"  class="form-control varition-change" id="varient3" >
 
 
                                                 <option value="">--Select Option--</option>
@@ -237,7 +237,7 @@
 
                                                     @if($row->attribute3 != "")
 
-                                                    <option value="" wire:key="attr3_{{ $loop->index }}" wire:ignore>{{$row->attribute3}}</option> 
+                                                    <option value="{{$row->attribute3}}" wire:key="attr3_{{ $loop->index }}" wire:ignore>{{$row->attribute3}}</option> 
 
                                                     @endif 
 
@@ -257,31 +257,7 @@
 
                                     @endif
 
-                                    <!-- <div class="pd-width-options">
-
-                                        <h5 class="h5">Width Options:</h5>
-
-                                        <div class="form-check">
-
-                                            <div class="custom-control custom-radio">
-
-                                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-
-                                                <label class="custom-control-label" for="customRadio1">S</label>
-
-                                            </div>
-
-                                            <div class="custom-control custom-radio">
-
-                                                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-
-                                                <label class="custom-control-label" for="customRadio2">xl</label>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div> -->
+                                   
 
                                 </div>
 
@@ -908,7 +884,7 @@
 
             </div>
 
-        </div>
+    </div>
 
    
 
@@ -923,6 +899,8 @@
                 var val2 = $('#varient2').val();
 
                 var val3 = $('#varient3').val();
+
+                console.log(val3);
 
                 var productid = $('#productid').val();
 
@@ -944,17 +922,22 @@
 
                         {
 
-                             price = response.variant.price;
+                             price = response.price;
 
-                             stock = response.variant.variant_stock[0].stock;
+                             console.log(response.variant.variant_stock);
 
+                             if(response.variant.variant_stock != null && response.variant.variant_stock.length > 0)
+                                { 
+                                    stock = response.variant.variant_stock[0].stock;
+                                }
+                            
                              id = response.variant.id;
 
                         }
 
                         
 
-                        $('#getprice').html('$'+price);
+                         $('#getprice').html("<sup>$</sup><span>"+price+"</span>");
 
                         $('#variant_id').prop('value',id);
 
@@ -965,8 +948,6 @@
             });
 
         })
-
-
 
     </script>
 

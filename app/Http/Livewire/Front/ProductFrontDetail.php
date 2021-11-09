@@ -139,7 +139,8 @@ class ProductFrontDetail extends Component
 
         // })->where('product_id', $this->product->id)->first();
         $this->variationID = $this->Productvariant->id;
-         return response()->json(array('variant' => $this->Productvariant));
+        $price = number_format($this->Productvariant->price,2,'.',',');
+         return response()->json(array('variant' => $this->Productvariant, 'price' => $price));
 
     }
 
@@ -149,6 +150,7 @@ class ProductFrontDetail extends Component
         $favorite  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
 
         if(!$favorite){
+
             $favorite_arr = [
                     
                     'product_id' => $this->product->id,
@@ -163,9 +165,9 @@ class ProductFrontDetail extends Component
         }else{
 
             if($favorite->status == 0){
-            $favorite_arr = favorite::where('id', $favorite['id'])->update(['status'  => '1']);
+            $favorite_arr = favorite::where('id', $favorite->id)->update(['status'  => '1']);
             }else{
-               $favorite_arr = favorite::where('id', $favorite['id'])->update(['status'  => '0']); 
+               $favorite_arr = favorite::where('id', $favorite->id)->update(['status'  => '0']); 
             }
 
         }
