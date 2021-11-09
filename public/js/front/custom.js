@@ -3,6 +3,15 @@
 			Jasmin Js
 *********************************/
 
+// Seach bar outside click autofill close js
+
+$('body').click(function (event) 
+{
+   if(!$(event.target).closest('#autofill').length && !$(event.target).is('#searched-input')) {
+     $("#autofill").hide();
+   }     
+});
+
 
 // category select tag slider js start
 
@@ -192,3 +201,5 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
+
+

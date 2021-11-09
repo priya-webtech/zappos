@@ -703,9 +703,65 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .privacy-condi-text {margin: 20px 0 0; color: #003953; line-height: 22px; font-weight: 500; }
 .privacy-condi-text a {color: #035d59; text-decoration: underline; }
 
-.review-shipping-sec {padding: 25px; box-shadow: 0 0 6px 2px rgb(0 0 0 / 10%); border-radius: 10px; margin-top: 20px; }
+.review-shipping-sec {padding: 25px; box-shadow: 0 0 6px 2px rgb(0 0 0 / 10%); border-radius: 10px; margin-bottom: 20px;}
 .my-cart-pd-details:not(:last-child) {margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 15px; }
 .my-cart-desc p {margin-top: 12px; display: block; }
 .my-cart-desc p span {font-size: 14px; display: block; }
 .my-cart-desc p span span {display: inline-block; }
 .my-cart-desc p span b {font-weight: 600; }
+
+.re-order-tbl {
+    margin-top: 20px;
+}
+.re-order-tbl table {
+	width: 100%;
+    font-size: 14px;
+}
+.re-order-tbl table th {
+    font-weight: 600;
+}
+.re-order-tbl table th {
+    text-transform: capitalize;
+}
+.re-order-tbl table th, .re-order-tbl table td {
+    padding-bottom: 15px;
+    vertical-align: top;
+    color: #202223;
+    padding-right: 20px;
+}
+.re-order-tbl table th:last-child, .re-order-tbl table td:last-child {
+   padding-right: 0;
+   text-align: right;
+}
+.re-order-tbl table span {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.add-cart-select input {
+    width: 98px;
+    min-height: 36px;
+    padding: 0 10px;
+}
+.re-order-tbl table h6 {
+    margin: 0;
+    line-height: normal;
+}
+
+.od-pd-name h6 {
+    font-weight: 600;
+    font-size: 14px;
+}
+.od-pd-price span b {
+    margin-right: 2px;
+}
+.re-order-tbl table span.grey-color {
+    -webkit-text-decoration-line: line-through;
+    text-decoration-line: line-through;
+    font-size: 13px;
+    margin-top: 2px;
+}
+.return-order-btn {
+    color: #035d59;
+    font-weight: bold;
+}
