@@ -140,15 +140,17 @@
 
         <!-- home mini banner start -->
         <div class="home-mini-banner">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="mini-banner-content">
-                        <h2 class="h2">Earn a Total of 5% Back at Zappos</h2>
-                        <p>Automatically earn a total of 5% Back on all Zappos purchases when using your Amazon Rewards Visa card.*</p>
-                        <a href="#" class="site-btn">Learn more</a>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="mini-banner-content">
+                            <h2 class="h2">Earn a Total of 5% Back at Zappos</h2>
+                            <p>Automatically earn a total of 5% Back on all Zappos purchases when using your Amazon Rewards Visa card.*</p>
+                            <a href="#" class="site-btn">Learn more</a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-7">
+                    <div class="col-md-7">
+                    </div>
                 </div>
             </div>
         </div>

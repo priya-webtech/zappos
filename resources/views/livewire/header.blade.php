@@ -33,15 +33,15 @@
                                     <div class="header-search-icon"><i class="fa fa-search" aria-hidden="true"></i></div>
                                 </form>
                                 <div class="col-12 text-dark p-0 auto-fill" id="autofill" style="display: none">
-                                    <div class="border bg-white rounded-bottom pb-1">
-                                        <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">cases</button></div>
-                                        <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">iphone cases</button></div>
-                                        <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">samsung cases</button></div>
-                                        <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">winter sweaters</button></div>
-                                        <div class=" p-1 pl-3 m-0 pr-3 link-fill"><button class="link-fill">Trousers</button></div>
-                                        <div class="ml-md-2 border bg-white rounded-bottom pb-1"  wire:ignore>
+                                    <div class="border bg-white search-autofill">
+                                        <div class="link-fill"><button class="link-fill-btn">cases</button></div>
+                                        <div class="link-fill"><button class="link-fill-btn">iphone cases</button></div>
+                                        <div class="link-fill"><button class="link-fill-btn">samsung cases</button></div>
+                                        <div class="link-fill"><button class="link-fill-btn">winter sweaters</button></div>
+                                        <div class="link-fill"><button class="link-fill-btn">Trousers</button></div>
+                                        <div class="sub-link-fill"  wire:ignore>
                                             @foreach($getproduct as $row)
-                                            <div class=" p-1 pl-3 m-0 pr-3 link-fill product-item"><a href="{{ route('product-front-detail', $row->seo_utl) }}"><button class="link-fill">{{$row->title}}</button></a></div>
+                                            <div class="link-fill product-item"><a href="{{ route('product-front-detail', $row->seo_utl) }}"><button class="link-fill-btn">{{$row->title}}</button></a></div>
                                             @endforeach
                                         </div>
                                     </div>
@@ -66,6 +66,17 @@
                                             <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
                                         </svg>
                                     </a>
+                                </div>
+                                <div class="empty-cart-modal">
+                                    <p>Fill up your Cart by checking out all the awesome things you can buy on company name or by adding items from Your Favorites!</p>
+                                    <ul>
+                                        <li><a href="#">Shop Women's</a></li>
+                                        <li><a href="#">Shop Men's</a></li>
+                                        <li><a href="#">Shop Shoes</a></li>
+                                        <li><a href="#">Brand List</a></li>
+                                    </ul>
+                                    <img src="http://185.160.67.108/estore/public/assets/empty-cart.svg">
+
                                 </div>
                                 <!-- <div class="row cart-vip-code" name="cart-vip-code">
                                     <div class="col-12">

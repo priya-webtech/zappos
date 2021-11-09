@@ -84,9 +84,9 @@
                                                 $result = favorite($cart['product_detail'][0]['id']);
                                                 @endphp
                                                 @if(!empty($result))
-                                                <a class="wish-list {{$result['class']}}" wire:click="UpdateWish({{$result['id']}}, {{$result['product_id']}})">move to<i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                                                <a class="wish-list {{$result['class']}}" wire:click="UpdateWish({{$result['id']}}, {{$result['product_id']}})"><span>move to</span><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                                                 @endif
-                                                <a class="remove-btn" wire:click.prevent="DeleteCartProduct({{$cart['id']}})"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a>
+                                                <a class="remove-btn" wire:click.prevent="DeleteCartProduct({{$cart['id']}})"><span>Remove</span> <i class="fa fa-trash" aria-hidden="true"></i></a>
                                             </div>
                                         </td>
                                     </tr>
