@@ -48,22 +48,24 @@ class StripePaymnetController extends Component
     {
 
         $stripe = new \Stripe\StripeClient('sk_test_ngkOUeScv0ATVVwLqg88ZdBv00ZX79AIQ8');
-            
         try {
           $paymentIntent = $stripe->paymentIntents->create([
             'payment_method_types' => ['ideal'],
-            'amount' => $this->orderdetail->netamout,
+            'amount' => $this->orderdetail->netamout *100 ,
             'currency' => 'eur',
+            'metadata' => ['order_id' => $this->orderdetail->id]
           ]);
-
 
           return view('livewire.stripe-paymnet-controller', ['paymentIntent' => $paymentIntent]);
 
 
         } catch (\Stripe\Exception\ApiErrorException $e) {
+            // dd($e->getError()->message);
           http_response_code(400);
           error_log($e->getError()->message); 
+          return redirect()->back()->with('message', $e->getError()->message);
         }
+
         
      
     }

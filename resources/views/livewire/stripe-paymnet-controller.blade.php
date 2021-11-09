@@ -230,11 +230,12 @@
                 <div class="account-name-row">
                     <input id="acholdername" value="" required>
                     <label for="ideal-bank-element" class="bank-name">iDEAL Bank</label>
-                </div>
-                <div class="account-name-row">
-                    <div id="ideal-bank-element">
+                     <div id="ideal-bank-element">
                       <!-- A Stripe Element will be inserted here. -->
                     </div>
+                </div>
+                <div class="account-name-row">
+                   
                     <button type="submit">Pay ${{number_format($gst_Total,2,".",",")}}</button>
                 </div>
                 <!-- Used to display form errors. -->
@@ -256,7 +257,7 @@
 
   
 
-  <script src="https://js.stripe.com/v3/"></script>
+<script src="https://js.stripe.com/v3/"></script>
 
   
 
@@ -384,7 +385,7 @@ $(function() {
           // Avoid a full page POST request.
           e.preventDefault();
           var orderid = '<?= $orderdetail->id ?>';
-          var app_url  '<?= env('APP_URL') ?>';
+          var app_url = '<?= env('APP_URL') ?>';
           // Customer inputs
           const nameInput = document.querySelector('#acholdername');
           const amounts = '<?= $gst_Total ?>';
