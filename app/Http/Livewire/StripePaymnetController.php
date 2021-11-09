@@ -194,7 +194,7 @@ class StripePaymnetController extends Component
              Session::flash('success', 'Payment pending!');
          }
     
-        return redirect('/thankyousuccess');
+         return view('livewire.front.thankyou');
 
     }
 }

@@ -325,6 +325,7 @@ $(function() {
           // Avoid a full page POST request.
           e.preventDefault();
           var orderid = '<?= $orderdetail->id ?>';
+          var app_url  '<?= env('APP_URL') ?>';
           // Customer inputs
           const nameInput = document.querySelector('#acholdername');
 
@@ -334,7 +335,7 @@ $(function() {
               payment_method: {
                 ideal: idealBank,
               },
-              return_url: `${window.location.origin}/thankyou/`+orderid,
+              return_url: app_url+`/thankyou/`+orderid,
             },
           );
           if(error) {
