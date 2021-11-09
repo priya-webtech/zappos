@@ -39,7 +39,7 @@ class ProductFrontDetail extends Component
     public $incrementing = false;
 
 
-    public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $Productvariant, $variationID, $reviewget;
+    public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $Productvariant, $variationID, $reviewget,$stockitem;
 
 
 
@@ -53,6 +53,7 @@ class ProductFrontDetail extends Component
         'varientid' => '',
         'getpriceinput' => '',
         'stock' => '',
+        'stockitem' => '',
 
     ];
 
@@ -76,9 +77,7 @@ class ProductFrontDetail extends Component
         $this->productrelated = Product::with('productmediaget')->with('favoriteget')->get();
 
         $this->Collection = Collection::All();
-        //$this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
 
-        // $this->Productmediafirst = ProductMedia::where('product_id',$this->product['id'])->first();
         $this->Productmedia = ProductMedia::where('product_id',$this->product->id)->get();
 
         $this->tags = Tag::All();
@@ -88,9 +87,9 @@ class ProductFrontDetail extends Component
         $shopping_cart = json_decode(Cookie::get('shopping_cart'));
 
         $shopping_cart[] = $this->product->id;
-
+        $shopping_cart1 = (array_unique($shopping_cart));
         $minutes = 60;
-        Cookie::queue(Cookie::make('shopping_cart',  json_encode($shopping_cart), $minutes));
+        Cookie::queue(Cookie::make('shopping_cart',  json_encode($shopping_cart1), $minutes));
     }
 
     public function render()
@@ -127,7 +126,7 @@ class ProductFrontDetail extends Component
             $q->where('location_id', 1);
         }])->where('attribute1',$request->text1)->orWhere('attribute2',$request->text2)->orWhere('attribute3',$request->text3)->where('product_id',$request->productid)->first();
 
-        // $this->Productvariant = ProductVariant::with(['variant_stock' => function($q) {
+        // $this->Productvariant = Productvariant::with(['variant_stock' => function($q) {
         //     $q->where('location_id', 1);
         // }])->when($this->variant1, function($q1) {
         //     return $q1->where('attribute1',$this->variant1);
@@ -196,12 +195,17 @@ class ProductFrontDetail extends Component
     }
 
     public function addCart($variationID)
-    {
-        dd($variationID);
+    {   
 
         $variant = ProductVariant::find($variationID);
 
         if(!empty($variant)) {
+
+            if($variant->selling_price){
+                $price = $variant['selling_price'];
+            }else{
+                $price = $variant['price'];
+            }
             $cart_arr = [
                     
                     'product_id' => $variant->product_id,
@@ -210,9 +214,10 @@ class ProductFrontDetail extends Component
 
                     'varientid' => $variant->id,
 
-                    'price' => $variant->price,
+                    'price' => $price,
 
-                    'stock' => $variant->variant_stock[0]->stock,
+                    //'stock' => $variant->variant_stock[0]->stock,
+                    'stock' => '1',
 
                     'locationid' => '1'
 
@@ -222,15 +227,21 @@ class ProductFrontDetail extends Component
         }
         else
         {
+
+            if($this->product->compare_selling_price){
+               $price = $this->product['compare_selling_price'];
+            }else{
+               $price = $this->product['price'];
+            }
             $cart_arr = [
                     
                     'product_id' => $this->product->id,
 
                     'user_id' => $this->user_id,
 
-                    'price' => $this->product->price,
+                    'price' => $price,
 
-                    'stock' => $this->product->stock,
+                    'stock' => '1',
 
                     'locationid' => '1'
 

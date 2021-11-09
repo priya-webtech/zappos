@@ -16,10 +16,16 @@ class Header extends Component
 {
     public $menu_arr = [];
     
-    public $CartItem,$ProductVariant,$varianttag,$filter_product,$getproduct, $user_id;
+    public $CartItem,$ProductVariant,$varianttag,$filter_product,$getproduct, $user_id, $stockitem;
 
     protected $listeners = ['getCart', 'DeleteCartProduct'];
 
+    protected $rules = [
+
+        'CartItem.*.stock' => [],
+
+    ];
+    
     public function mount() {
         if (Auth::check()) {
             $this->user_id =  Auth::user()->id;
@@ -37,6 +43,7 @@ class Header extends Component
     }
     public function render()
     {
+        $this->stockitem = 1;
         $this->getCart();
         
         $this->getproduct = Product::when($this->filter_product, function ($query, $filter_product) {
@@ -95,6 +102,18 @@ class Header extends Component
 
         }
         return view('livewire.header');
+    }
+
+    public function stockplusminus($cartid)
+    {
+
+        if($this->CartItem)
+        {
+            foreach ($this->CartItem as $stock) {
+                Cart::where('id', $stock->id)->update(['stock' => $stock->stock]);
+            }
+             
+        } 
     }
 
     public function DeleteCartProduct($id)

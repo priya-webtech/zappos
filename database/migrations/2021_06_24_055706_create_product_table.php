@@ -24,6 +24,9 @@ class CreateProductTable extends Migration
             $table->float('cost', 8, 2)->nullable();
             $table->float('margin', 8, 2)->nullable();
             $table->float('profit', 8, 2)->nullable();
+            $table->integer('selling_price');
+            $table->integer('compare_selling_price');
+            $table->integer('discount');
             $table->enum('tax',['true','false'])->default('false');
             $table->string('sku')->nullable();
             $table->string('weight')->nullable();

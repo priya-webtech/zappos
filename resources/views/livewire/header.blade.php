@@ -25,7 +25,7 @@
                     <div class="row">
                         <div class="col-12 d-flex align-items-center">
                             <div class="logo">
-                                <a href="{{url('/')}}"><img src="{{ url('assets/zappos-logo.svg') }}"></a>
+                                <a href="{{url('/dashboard')}}"><img src="{{ url('assets/zappos-logo.svg') }}"></a>
                             </div>
                             <div class="search-box">
                                 <form class="search-container d-flex align-items-center" method="get" target="_parent" action="" autocomplete="off">
@@ -78,73 +78,49 @@
                                     <div>
                                         <div class="items">
                                             <div class="col-12 p-0">
-                                                <?php $price_sum  = 0; ?>
-                                                @foreach($CartItem as $cart)
+                                                @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; @endphp
+                                                @foreach($CartItem as $key => $cart)
+
+                                                @php 
+                                                $detailfetch = allprice($cart->product_id);
+
+                                                if($detailfetch['selling_price']){
+                                                 $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
+                                                }else
+                                                {
+                                                  $subtotal2 += $cart['stock'] * $detailfetch['price'];
+                                                }
+
+                                                $subtotal = $subtotal1 + $subtotal2;
+                                               
+                                                if(!empty($detailfetch['discount'])){
+                                                $discountrate += $detailfetch['discount'] * $cart['stock'];
+                                                } 
+                                               
+                                                $total = $subtotal - $discountrate;
+                                                
+                                                @endphp
 
                                                 <input name="cartid[]" type="hidden" id="deletecartid" value="{{$cart['id']}}">
                                                 <div class="cart-list">
                                                     <div class="product-img">
-                                                        <img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}" alt="">
+                                                        <a class="dropdown-header" href="{{ route('product-front-detail', $cart['product_detail'][0]['seo_utl']) }}"><img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}" alt=""></a>
                                                     </div>
                                                     <div class="product-data">
                                                         <p class="cart-pd-title">{{$cart['product_detail'][0]['title']}}</p>
                                                         <a class="cart-pd-clear" href="#">Clare Tree</a>
                                                         <div class="product-data-inner">
-                                                            @foreach($ProductVariant as $row)
-                                                            @foreach($varianttag as $locrow)
-                                                            @if($row->id == $cart['varientid'])
 
-                                                            @if($row->varient1 == $locrow->id && $row->attribute1 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute1}}</p>
-                                                            @endif
+                                                           @include('livewire.front.cartdetail')
 
-                                                            @if($row->varient2 == $locrow->id && $row->attribute2 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute2}}</p>
-                                                            @endif
-
-                                                            @if($row->varient3 == $locrow->id && $row->attribute3 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute3}}</p>
-                                                            @endif
-
-                                                            @if($row->varient4 == $locrow->id && $row->attribute4 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute4}}</p>
-                                                            @endif
-
-                                                            @if($row->varient5 == $locrow->id && $row->attribute5 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute1}}</p>
-                                                            @endif
-
-                                                            @if($row->varient6 == $locrow->id && $row->attribute5 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute5}}</p>
-                                                            @endif
-
-                                                            @if($row->varient7 == $locrow->id && $row->attribute6 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute6}}</p>
-                                                            @endif
-
-                                                            @if($row->varient8 == $locrow->id && $row->attribute7 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute7}}</p>
-                                                            @endif
-
-                                                            @if($row->varient9 == $locrow->id && $row->attribute8 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute9}}</p>
-                                                            @endif
-
-                                                            @if($row->varient10 == $locrow->id && $row->attribute10 != "")
-                                                            <p>{{$locrow->name}}: {{$row->attribute10}}</p>
-                                                            @endif
-
-                                                            @endif
-                                                            @endforeach
-                                                            @endforeach
                                                             <div class="add-cart-select">
                                                                
                                                                 <div class="total-item-select">
-                                                                    <div class="input-plus-minus">
-                                                                        <input type="button" value="-" class="qty-minus">
-                                                                        <input name="stockitem[]" type="number" value="{{$cart['stock']}}" class="stockqty" id="stockqtyitem" data-id="{{$cart['id']}}">
-                                                                        <input type="button" value="+" class="qty-plus">
-                                                                    </div>
+                                                                        <!-- <input type="button" value="-" class="qty-minus">
+                                                                        <input name="stockitem[]"  type="number" value="{{$cart['stock']}}" class="stockqty" id="stockqtyitem" data-id="{{$cart['id']}}">
+                                                                        <input type="button" value="+" class="qty-plus" wire:click="stockplusminus({{$cart['id']}})"> -->
+                                                                        <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['id']}})" name="stockitem" type="number">
+                                                               
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -157,10 +133,18 @@
                                                         </a>
                                                         @endif
                                                     </div>
-                                                    <?php $price_sum  += ($cart['price'] * $cart['stock']); ?>
+                                                 
                                                     <div class="cart-list-right">
-                                                        <p class="greenish">${{round($cart['price'],2)}}</p>
-                                                        <p class="cart-msrp">MSRP: $220.00</p>
+                                                        @if(!empty($detailfetch))
+                                                        <p class="product-price @if(!empty($detailfetch['label'])) {{$detailfetch['label']}} @endif" >
+                                                        <span class="mrp-price">${{number_format($detailfetch['price'],2,'.',',')}}
+                                                        </span>
+                                                        @if(!empty($detailfetch['selling_price']))
+                                                        <span class="msrp-price"><s>MSRP: ${{number_format($detailfetch['selling_price'],2,'.',',')}}</s></span>
+                                                        @endif
+                                                        </p>
+                                                        @endif
+                                                       
                                                         <a class="myclose-close" wire:click.prevent="DeleteCartProduct({{$cart['id']}})" onclick="document.getElementById('proceed-cart').style.display='none'" href="javascript:;">delete</a>
                                                     </div>
                                                 </div>
@@ -171,7 +155,7 @@
                                         </div>
                                     </div>
                                     <div class="cart-footer">
-                                        <p>Cart Subtotal (<?php echo $cartCount ?> Items) ${{round($price_sum, 2)}}</p>
+                                        <p>Cart Subtotal (<?php echo $cartCount ?> Items) ${{number_format($total,2,".",",")}}</p>
                                         <div class="cart-footer-btn">
 
                                             @if(empty($this->user_id))

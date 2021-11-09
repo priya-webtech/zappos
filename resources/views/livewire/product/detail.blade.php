@@ -326,6 +326,8 @@
 
                                         <li><a class="link" onclick="document.getElementById('variants-edit-prices-modal').style.display='block'">Edit prices</a></li>
 
+                                        <li><a class="link" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='block'">Edit Selling prices</a></li>
+
                                         <li><a class="link"  onclick="document.getElementById('edit-quantities-modal').style.display='block'">Edit quantities</a></li>
 
                                         <!-- <li><a class="link" onclick="document.getElementById('edit-option-values-modal').style.display='block'">Edit option values</a></li> -->
@@ -607,6 +609,7 @@
                                                <a class="fw-6 button secondary">Edit Variants <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></a>
                                                 <ul class="edite-variants-dropdown">
                                                     <li><a class="link" onclick="document.getElementById('variants-edit-prices-modal').style.display='block'">Edit prices</a></li>
+                                                    <li><a class="link" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='block'">Edit Selling prices</a></li>
                                                     <li><a class="link" onclick="document.getElementById('edit-quantities-modal').style.display='block'">Edit quantities</a></li>
                                                     <li><a class="link" onclick="document.getElementById('variants-edit-skus-modal').style.display='block'">Edit SKUs</a></li>
                                                     <li><a class="link" onclick="document.getElementById('variants-edit-barcodes-modal').style.display='block'">Edit barcodes</a></li>
@@ -672,6 +675,18 @@
 
                             </div>
 
+                            <div class="form-field-list">
+
+                                <label>Selling price</label>
+
+                                <input type="text" name="compare_selling_price" wire:model="product.compare_selling_price" wire:ignore placeholder="0,00">
+
+                                <label for="input">US$</label>
+
+                                 @error('compare_selling_price') <span class="text-danger">{{ $message }}</span>@enderror
+
+                            </div>
+
                         </div>
 
                     </div>
@@ -719,6 +734,8 @@
                     </div>
 
                 </div>
+
+            
                 @if(count($Productvariant) == 0)
                 <div class="card variant-inventory-card" wire:ignore>
 
@@ -1684,9 +1701,9 @@
 
                 <div class="modal-footer">
 
-                    <button class="button secondary">Cancel</button>
+                    <a onclick="document.getElementById('variants-edit-prices-modal').style.display='none'" class="button secondary">Cancel</a>
 
-                    <button class="button green-btn" onclick="document.getElementById('variants-edit-prices-modal').style.display='none'">Done</button>
+                    <a class="button green-btn" onclick="document.getElementById('variants-edit-prices-modal').style.display='none'">Done</a>
 
                 </div>
 
@@ -1695,6 +1712,96 @@
         </div>
 
     </div> 
+
+
+    <!-- Edit Selling Price -->
+
+    <div id="variants-edit-selling-prices-modal" class="customer-modal-main variants-edit-option-modal" wire:ignore>
+
+        <div class="customer-modal-inner">
+
+            <div class="customer-modal">
+
+                <div class="modal-header">
+
+                    <h2>Edit Selling prices</h2>
+
+                    <span onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='none'" class="modal-close-btn"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg></span>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="row side-elements align-item-bt">
+
+                        <div class="form-field-list">
+
+                            <label>Apply a selling price to all variants</label>
+
+                            <span class="dollar-input">
+
+                                <input type="text" name="selling_price" placeholder="0,00">
+
+                            </span>
+
+                        </div>
+
+                        <button class="button fw-6" disabled="disabled">Apply to all</button>
+
+                    </div>
+
+                @foreach ($Productvariant as $key => $variantrow)
+
+                    <div class="vep-list bd_none">
+
+                        <label> @if($variantrow->attribute1 != ""){{$variantrow->attribute1}} @endif
+
+                                @if($variantrow->attribute2 != "")/{{$variantrow->attribute2}} @endif
+
+                                @if($variantrow->attribute3 != "")/{{$variantrow->attribute3}} @endif
+
+                                @if($variantrow->attribute4 != "")/{{$variantrow->attribute4}} @endif 
+
+                                @if($variantrow->attribute5 != "")/{{$variantrow->attribute5}} @endif 
+
+                                @if($variantrow->attribute6 != "")/{{$variantrow->attribute6}} @endif 
+
+                                @if($variantrow->attribute7 != "")/{{$variantrow->attribute7}} @endif 
+
+                                @if($variantrow->attribute8 != "")/{{$variantrow->attribute8}} @endif 
+
+                                @if($variantrow->attribute9 != "")/{{$variantrow->attribute9}} @endif 
+
+                                @if($variantrow->attribute10 != "")/{{$variantrow->attribute10}} @endif</label>
+
+                        <span class="dollar-input">
+
+                            <input type="text" wire:model.debounce.lazy="Productvariant.{{ $key }}.selling_price" wire:ignore>
+
+   
+
+                        </span>
+
+                    </div>
+
+                @endforeach
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <a class="button secondary" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='none'">Cancel</a>
+
+                    <a class="button green-btn" onclick="document.getElementById('variants-edit-selling-prices-modal').style.display='none'">Done</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div> 
+
     <!--Edit quantities modal-->
 
     

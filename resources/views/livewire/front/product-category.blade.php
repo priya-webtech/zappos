@@ -25,8 +25,10 @@
                                 <label for="categorySortBy">Sort By</label>
                                 <select class="form-control" id="categorySortBy">
                                     <option>Relevance</option>
-                                    <option>New Arrivals</option>
-                                    <option>Customer Rating</option>
+                                    <option>Price: Low to High</option>
+                                    <option>Price: High to Low</option>
+                                    <option>Price: A to Z</option>
+                                    <option>Price: Z to A</option>
                                 </select>
                             </div>
                         </form>
@@ -564,6 +566,8 @@
                                 <div class="row">
                                     @foreach($Product as $rows)
                                     @foreach($Productmediass as $row_img)
+                                    @php $priceres = allprice($rows->id) @endphp
+                                    @php $result = favorite($rows->id); @endphp
                                     <?php $decodeA = json_decode($rows->collection); ?>
                                     @if(in_array($menuitems->multipleid, $decodeA) && $row_img[0]['product_id'] == $rows->id)
                                     <div class="col-md-3 cat-pd-col">
@@ -571,11 +575,14 @@
                                             <a href="{{ route('product-front-detail', $rows->seo_utl) }}">
                                                 <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
                                             </a>
-                                            <button class="cat-wishlist-btn wishlist-pd wish-list"><i class="fa fa-heart-o" aria-hidden="true"></i>595</button>
+                                           
+                                            @if(!empty($result))
+                                            <button class="cat-wishlist-btn {{$result['class']}} wish-list" wire:click="UpdateWish({{$result['id']}}, {{$result['product_id']}})"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
+                                            @endif
 
-                                            <?php $saledecode = json_decode($rows->product_new); ?>
+                                            <?php if($rows->product_new != '0') { $saledecode = json_decode($rows->product_new); }?>
                                             <div class="cat-pd-tag-gp">
-                                            @if($rows->product_new)
+                                            @if(!empty($rows->product_new))
                                             @foreach($tagsale as $row)
                                             @if(in_array($row->id, $saledecode))
                                             @foreach($saledecode as $sale)
@@ -593,10 +600,15 @@
                                                 <h6 class="h6">{{$rows->title}}</h6>
                                                 <p>{{$rows->title}}</p>
                                             </a>
-                                            <p class="product-price">
-                                                <span class="mrp-price">${{round($rows->price, 2)}}</span>
-                                                <span class="msrp-price">MSRP: $150.00</span>
+                                            @if(!empty($priceres))
+                                            <p class="product-price @if(!empty($priceres['label'])) {{$priceres['label']}} @endif" >
+                                            <span class="mrp-price">${{number_format($priceres['price'],2,'.',',')}}
+                                            </span>
+                                            @if(!empty($priceres['selling_price']))
+                                            <span class="msrp-price"><s>MSRP: ${{number_format($priceres['selling_price'],2,'.',',')}}</s></span>
+                                            @endif
                                             </p>
+                                            @endif
                                             <div class="cat-pd-review">
                                                 <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
                                                 <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
