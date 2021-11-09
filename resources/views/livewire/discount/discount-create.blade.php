@@ -113,7 +113,7 @@
                     <div class="row pd-collections-product-head">
                         <div class="browse-products-search">
                             <input type="search" id="search-product" placeholder="Search Collection">
-                            <a class="secondary browse-products-btn" onclick="document.getElementById('collection-edit-product-modal').style.display='block'">Browse</a>
+                            <a class="secondary browse-products-btn" onclick="document.getElementById('collection-edit-collection-modal').style.display='block'">Browse</a>
                         </div>
                     </div>
                     <div class="product-table-details">
@@ -175,13 +175,57 @@
         </div>
     </section>
     
-    <!--Edit products modal-->
-    <div id="collection-edit-product-modal" class="customer-modal-main">
+    <!--Edit Product modal-->
+    <div id="collection-edit-collection-modal" class="customer-modal-main" wire:ignore>
+        <div class="customer-modal-inner">
+            <div class="customer-modal">
+                <div class="modal-header">
+                    <h2>Edit Collection</h2>
+                    <span onclick="document.getElementById('collection-edit-collection-modal').style.display='none'" class="modal-close-btn">
+                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+                        </svg>
+                    </span>
+                </div>
+                <div class="modal-body ta-left card-pd-0">
+                    <div class="p-16 modal-search">
+                        <input type="search" id="search" placeholder="Search collection">
+                    </div>
+                     @php $i = 1; @endphp
+                        @if(!empty($collection) && $collection->count())
+                        @foreach($collection as $key => $row)
+                    <div class="manage-carriers-list">
+                        <label class="collection-edit-pd-list"><input type="checkbox" value="{{ $row->id }}" wire:model.lazy="selectedcollection">
+                        <img src="https://cdn.shopify.com/s/files/1/0275/7722/1235/products/night_3daf8a9e-9370-45a8-a7af-be759cea1504_200x200.jpg?v=1630051535">
+                        <div class="manage-carriers-title">
+                            <p class="mb-0 black-color product-title">{{$row->title}}</p>
+                            <p class="mb-0"><span class="tag blue">Draft</span></p>
+                        </div>
+                        </label>
+                    </div>
+                     @php $i++; @endphp
+                    @endforeach
+                    @else
+                    <tr>
+                        <td colspan="10">There are no data.</td>
+                    </tr>
+                    @endif
+                </div>
+                <div class="modal-footer">
+                    <a class="button secondary" onclick="document.getElementById('collection-edit-collection-modal').style.display='none'">Cancel</a>
+                    <a class="button green-btn" onclick="document.getElementById('collection-edit-collection-modal').style.display='none'">Done</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!--Edit Product modal-->
+    <div id="collection-edit-product-modal" class="customer-modal-main" wire:ignore>
         <div class="customer-modal-inner">
             <input type="hidden" wire:model="customer.id" value="">
             <div class="customer-modal">
                 <div class="modal-header">
-                    <h2>Edit products</h2>
+                    <h2>Edit Product</h2>
                     <span onclick="document.getElementById('collection-edit-product-modal').style.display='none'" class="modal-close-btn">
                         <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
                             <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
@@ -190,13 +234,13 @@
                 </div>
                 <div class="modal-body ta-left card-pd-0">
                     <div class="p-16 modal-search">
-                        <input type="search" id="search" placeholder="Search products">
+                        <input type="search" id="search" placeholder="Search product">
                     </div>
                      @php $i = 1; @endphp
-                        @if(!empty($productpaginator) && $productpaginator->count())
-                        @foreach($productpaginator as $key => $row)
+                        @if(!empty($product) && $product->count())
+                        @foreach($product as $key => $row)
                     <div class="manage-carriers-list">
-                        <label class="collection-edit-pd-list"><input type="checkbox" value="{{ $row->id }}" name="getproductid[]">
+                        <label class="collection-edit-pd-list"><input type="checkbox" value="{{ $row->id }}" wire:model.lazy="selectedproduct">
                         <img src="https://cdn.shopify.com/s/files/1/0275/7722/1235/products/night_3daf8a9e-9370-45a8-a7af-be759cea1504_200x200.jpg?v=1630051535">
                         <div class="manage-carriers-title">
                             <p class="mb-0 black-color product-title">{{$row->title}}</p>
