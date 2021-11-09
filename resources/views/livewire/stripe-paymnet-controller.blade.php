@@ -346,12 +346,11 @@
                 <div class="account-name-row">
                     <input id="acholdername" value="" required>
                     <label for="ideal-bank-element" class="bank-name">iDEAL Bank</label>
+                </div>
+                <div class="account-name-row">
                      <div id="ideal-bank-element">
                       <!-- A Stripe Element will be inserted here. -->
                     </div>
-                </div>
-                <div class="account-name-row">
-                   
                     <button type="submit">Pay ${{number_format($gst_Total,2,".",",")}}</button>
                 </div>
                 <!-- Used to display form errors. -->
