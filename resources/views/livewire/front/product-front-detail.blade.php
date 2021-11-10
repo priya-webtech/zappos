@@ -268,13 +268,16 @@
 
 
 
-                                    @if($favoritevalue && $favoritevalue->status == 1)
+                                    @php $resultwish = favorite($product->id); @endphp
 
-                                    <a class="site-btn add-collection-btn" wire:click="addFavorite" style="background-color: green;"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
 
+                                    @if(!empty($resultwish) && $favoritevalue && $favoritevalue->status == 1)
+
+                                    <a class="site-btn add-collection-btn" wire:click="UpdateWish({{$resultwish['id']}}, {{$resultwish['product_id']}})" style="background-color: green;"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
+                                    
                                     @else
 
-                                    <a class="site-btn add-collection-btn" wire:click="addFavorite"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
+                                     <a class="site-btn add-collection-btn" wire:click="UpdateWish({{$resultwish['id']}}, {{$resultwish['product_id']}})"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
 
                                     @endif
 

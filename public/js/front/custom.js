@@ -212,10 +212,10 @@ function initializeCart()
 	});	
 }
 
-window.addEventListener('onContentChanged', () => {
+window.addEventListener('onCartChanged', () => {
     initializeCart();
 });
-$(document).ready(function(){
+ $(window).on('load', function() {
 	initializeCart();
 });
 

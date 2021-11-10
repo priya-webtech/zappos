@@ -177,7 +177,7 @@ class ProductFrontDetail extends Component
     }
 
     public function UpdateWish($id,$productid){
-
+        
         if($id == 0){
                 $favorite_arr = [
                         
@@ -192,7 +192,6 @@ class ProductFrontDetail extends Component
 
             session()->flash('message', 'Add WishList !!');
         }else{
-
             
             $favorite  = favorite::where('id',$id)->delete();
             session()->flash('message', 'Remove WishList !!');

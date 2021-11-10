@@ -43,6 +43,8 @@ class Header extends Component
     }
     public function render()
     {
+
+        $this->dispatchBrowserEvent('onCartChanged');
         $this->stockitem = 1;
         $this->getCart();
         
