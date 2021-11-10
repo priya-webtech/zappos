@@ -710,58 +710,87 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .my-cart-desc p span span {display: inline-block; }
 .my-cart-desc p span b {font-weight: 600; }
 
-.re-order-tbl {
-    margin-top: 20px;
-}
-.re-order-tbl table {
-	width: 100%;
-    font-size: 14px;
-}
-.re-order-tbl table th {
-    font-weight: 600;
-}
-.re-order-tbl table th {
-    text-transform: capitalize;
-}
-.re-order-tbl table th, .re-order-tbl table td {
-    padding-bottom: 15px;
-    vertical-align: top;
-    color: #202223;
-    padding-right: 20px;
-}
-.re-order-tbl table th:last-child, .re-order-tbl table td:last-child {
-   padding-right: 0;
-   text-align: right;
-}
-.re-order-tbl table span {
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-.add-cart-select input {
-    width: 98px;
-    min-height: 36px;
-    padding: 0 10px;
-}
-.re-order-tbl table h6 {
-    margin: 0;
-    line-height: normal;
-}
+.re-order-tbl {margin-top: 20px; }
+.re-order-tbl table {width: 100%; font-size: 14px; }
+.re-order-tbl table th {font-weight: 600; }
+.re-order-tbl table th {text-transform: capitalize; }
+.re-order-tbl table th, .re-order-tbl table td {padding-bottom: 15px; vertical-align: top; color: #202223; padding-right: 20px; }
+.re-order-tbl table th:last-child, .re-order-tbl table td:last-child {padding-right: 0; text-align: right; }
+.re-order-tbl table span {display: flex; align-items: center; width: 100%; }
+.add-cart-select input {width: 98px; min-height: 36px; padding: 0 10px; }
+.re-order-tbl table h6 {margin: 0; line-height: normal; }
+.od-pd-name h6 {font-weight: 600; font-size: 14px; }
+.od-pd-price span b {margin-right: 2px; }
+.re-order-tbl table span.grey-color {-webkit-text-decoration-line: line-through; text-decoration-line: line-through; font-size: 13px; margin-top: 2px; }
+.return-order-btn {color: #035d59; font-weight: bold; }
 
-.od-pd-name h6 {
-    font-weight: 600;
-    font-size: 14px;
-}
-.od-pd-price span b {
-    margin-right: 2px;
-}
-.re-order-tbl table span.grey-color {
-    -webkit-text-decoration-line: line-through;
-    text-decoration-line: line-through;
-    font-size: 13px;
-    margin-top: 2px;
-}
-.return-order-btn {
-    color: #035d59;
-    font-weight: bold;
-}
+/****************************************
+		Profile details page css
+****************************************/
+.modal-close-btn {opacity: 1; }
+.modal-close-btn svg {width: 20px; height: 20px;fill: #003953; }
+.site-btn.disabled, .site-btn:disabled {cursor: not-allowed;}
+
+.account-heading {padding: 60px 0 10px; }
+.primary-acc-info {padding: 30px 0; }
+.primary-acc-info .h2 {text-align: center; margin-bottom: 30px; font-weight: 600; }
+.acc-info-box {background-color: #e5f1f8; border-radius: 5px; padding: 20px 20px 45px; height: 100%; position: relative; }
+.acc-info-btn {position: absolute; bottom: 15px; left: 20px; }
+.acc-info-box .h4 {font-weight: 600; font-size: 18px; }
+.acc-info-box p {margin-bottom: 5px; font-size: 15px; }
+
+.acc-gift-card-inner {padding: 20px 20px 10px; background-color: #e5f1f8; border-radius: 5px; }
+.acc-gift-card .form-group {max-width: 450px; }
+.acc-gift-card .input-with-btn {display: flex; }
+.input-with-btn input {border-radius: 5px 0 0 5px; }
+.input-with-btn button {flex: 0 0 auto; padding: 11px 15px; border-radius: 0 5px 5px 0; background-color: #003953; color: #fff; font-size: 14px;}
+.gift-card-balance {font-size: 24px; color: #035d59; font-weight: 600; }
+
+.your-order-history-sec {padding: 60px 0; }
+.your-order-history-sec .h2 {font-weight: 600; margin-bottom: 20px; }
+.your-order-history-sec .row {align-items: flex-end; }
+.your-order-history-sec .form-group {max-width: 500px; margin: 0; }
+.order-empty-msg {font-size: 22px; margin: 40px 0; color: #ed2939;}
+
+.your-order-details .form-group {display: flex; align-items: center; }
+.your-order-details .form-group label {flex: 0 0 auto; }
+.your-order-details .form-group select {flex: 1 1 auto; max-width: 80px; padding: 0 5px; min-height: 46px; margin-left: 15px; }
+
+.proceed-cart-head .modal-title {color: #003953; margin: 0; font-weight: 600; }
+.primary-acc-info .site-btn {padding: 8px 20px; background-color: #035d59; border-color: #035d59; color: #fff; font-size: 14px; font-weight: 500; }
+.primary-acc-info .site-btn:hover {background-color: #003953;border-color: #003953; }
+
+.primary-acc-info .modal {font-size: 14px; background-color: rgba(0,0,0,.5);}
+.primary-acc-info .modal .modal-dialog {max-width: 600px;}
+.primary-acc-info .modal .modal-content {border-radius: 10px; }
+.modal-header {padding: 15px 20px; }
+.primary-acc-info .modal .modal-body {padding: 20px; }
+.modal-footer {padding: 15px 20px; }
+.primary-acc-info .modal .row {margin: 0 -8px; }
+.primary-acc-info .modal .col {padding: 0 8px; }
+.primary-acc-info .modal label {margin-bottom: 4px; display: block; font-weight: 600;}
+.primary-acc-info .modal .form-control {font-size: 14px; min-height: 42px; }
+.primary-acc-info .modal input::placeholder {font-size: 14px; }
+.primary-acc-info .modal input[type=number]::-webkit-inner-spin-button, 
+.primary-acc-info .modal input[type=number]::-webkit-outer-spin-button {-webkit-appearance: none; -moz-appearance: none; appearance: none; margin: 0; }
+
+.primary-acc-info .second-modal-body {border-top: 1px solid #e9ecef; }
+.primary-acc-info .second-modal-body .h3 {font-weight: 600; font-size: 20px; }
+.primary-acc-info .second-modal-body .site-btn {background-color: transparent; border-color: #003953; color: #003953; font-weight: 600; margin-bottom: 15px; }
+.primary-acc-info .second-modal-body p {margin-bottom: 0; }
+
+.primary-acc-info #LoginAndSecurity .modal-body {padding: 0; }
+.login-security-list {display: flex; justify-content: space-between; align-items: center; padding:15px 20px; background-color: #fafafa; border-bottom: 1px solid #ddd; }
+.login-security-list:last-child{border: none;}
+.login-security-list p {margin: 0; font-size: 14px;}
+.login-security-list label {font-weight: 600; margin-bottom: 2px !important; }
+.primary-acc-info .login-security-list .site-btn {background: transparent; color: #003953; border-color: #003953; font-weight: 600; padding: 6px 20px; }
+.primary-acc-info .login-security-list .site-btn:hover {background-color: #003953; color: #fff; }
+
+.details-change-modal .modal-title {font-weight: 600; }
+.details-change-modal p {font-size: 14px; margin-bottom: 20px; }
+.details-change-modal p label {margin-bottom: 0 !important; }
+
+.modal-backdrop {display: none; }
+.modal-open2 {overflow: hidden; padding-right: 17px; }
+.modal-open2 .details-change-modal {overflow-x: hidden; overflow-y: auto; padding-right: 17px; }

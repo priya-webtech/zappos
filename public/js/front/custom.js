@@ -3,6 +3,16 @@
 			Jasmin Js
 *********************************/
 
+//set button id on click to hide first modal
+$("#EditName, #ChangeEmail, #ChangePassword").on( "click", function() {
+   	$('#LoginAndSecurity').modal('hide');  
+   	$('body').addClass('modal-open2');  
+});
+$(".modal-close-btn").on( "click", function() {
+	$('body').removeClass('modal-open2');  
+});
+
+
 // Seach bar outside click autofill close js
 
 $('body').click(function (event) 
