@@ -58,7 +58,7 @@
                             </div>
                             <form method="post" action="{{ route('add-order') }}" name="form">
                              @csrf
-                            <div class="proceed-cart" id="proceed-cart" wire:ignore>
+                            <div class="proceed-cart" id="proceed-cart">
                                 <div class="proceed-cart-head">
                                     <h4 class="h4">My Cart</h4>
                                     <a class="myclose-close" onclick="document.getElementById('proceed-cart').style.display='none'">
@@ -142,7 +142,7 @@
                                                         $result = favorite($cart['product_detail'][0]['id']);
                                                         @endphp
                                                         @if(!empty($result))
-                                                        <a  class="wish-list {{$result['class']}} myclose-close" name="r-heart-button" wire:click.prevent="UpdateWish({{$result['id']}}, {{$result['product_id']}})">
+                                                        <a  class="wish-list {{$result['class']}}" name="r-heart-button" wire:click.prevent="UpdateWish({{$result['id']}}, {{$result['product_id']}})">
                                                             Move To<i class="fa fa-heart-o" aria-hidden="true"></i>
                                                         </a>
                                                         @endif
@@ -159,7 +159,7 @@
                                                         </p>
                                                         @endif
                                                        
-                                                        <a class="myclose-close" wire:click.prevent="DeleteCartProduct({{$cart['id']}})" onclick="document.getElementById('proceed-cart').style.display='none'" href="javascript:;">delete</a>
+                                                        <a wire:click.prevent="DeleteCartProduct({{$cart['id']}})" onclick="document.getElementById('proceed-cart').style.display='none'" href="javascript:;">delete</a>
                                                     </div>
                                                 </div>
 
@@ -321,7 +321,7 @@
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                        <a class="dropdown-item" href="#">Your Profile</a>
+                        <a class="dropdown-item" href="{{ route('front-user-detail') }}">Your Profile</a>
 
                         <a href="{{ route('favorite-detail') }}">My Favorites</a>
 

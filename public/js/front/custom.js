@@ -194,13 +194,22 @@ $(document).ready(function() {
 
 });
 
-$(document).ready(function(){
+
+function initializeCart()
+{
 	$('.my-cart .bg-cart').click(function(){
 		$('body').addClass('cart-overlay');
 	});
 	$('.myclose-close').click(function(){
 		$('body').removeClass('cart-overlay');
 	});	
+}
+
+window.addEventListener('onContentChanged', () => {
+    initializeCart();
+});
+$(document).ready(function(){
+	initializeCart();
 });
 
 
