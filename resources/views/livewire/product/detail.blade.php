@@ -20,6 +20,7 @@
          @endif
 
       </div>
+    @php $symbol = CurrencySymbol(); @endphp
     <section class="full-width flex-wrap admin-body-width add-customer-head-sec product-details-header">
 
         <article class="full-width">
@@ -481,7 +482,7 @@
 
                                         <td class="vendor-table-item">
 
-                                            <p>US${{$row->price}}.00</p>
+                                            <p>US{{$symbol['currency']}}{{number_format($row->price,2,".",",")}}</p>
                                             <?php $location_count = count($location); ?>
                                             <?php $sum = 0; ?>
                                             @foreach($fullStock as $res)
@@ -657,7 +658,7 @@
 
                                 <input type="text" name="price_main" id="price-change-input" class="price-change-input" wire:model="product.price" wire:ignore placeholder="0,00">
 
-                                <label for="input">US$</label>
+                                <label for="input">US{{$symbol['currency']}}</label>
 
                                 @error('price') <span class="text-danger">{{ $message }}</span>@enderror
 
@@ -669,7 +670,7 @@
 
                                 <input type="text" name="compare_price" wire:model="product.compare_price" wire:ignore placeholder="0,00">
 
-                                <label for="input">US$</label>
+                                <label for="input">US{{$symbol['currency']}}</label>
 
                                  @error('compare_price') <span class="text-danger">{{ $message }}</span>@enderror
 
@@ -681,7 +682,7 @@
 
                                 <input type="text" name="compare_selling_price" wire:model="product.compare_selling_price" wire:ignore placeholder="0,00">
 
-                                <label for="input">US$</label>
+                                <label for="input">{{$symbol['currency']}}</label>
 
                                  @error('compare_selling_price') <span class="text-danger">{{ $message }}</span>@enderror
 
@@ -701,7 +702,7 @@
 
                                 <input type="text" name="cost" id="cost-change-input" class="cost-change-input" placeholder="0,00" wire:model="product.cost" wire:ignore>
 
-                                <label for="input">US$</label>
+                                <label for="input">{{$symbol['currency']}}</label>
 
                                  @error('cost') <span class="text-danger">{{ $message }}</span>@enderror
 
@@ -1959,41 +1960,41 @@
 
                     <div class="row p-3">
 
-                        <label class="fs-12 fw-6">US$10.00</label>
+                        <label class="fs-12 fw-6">{{$symbol['currency']}}10.00</label>
 
                         <label>Denominations</label>
 
-                        <input type="text" value="US$10.00">
+                        <input type="text" value="{{$symbol['currency']}}10.00">
 
                     </div>
 
                     <div class="row p-3">
 
-                        <label class="fs-12 fw-6">US$25.00</label>
+                        <label class="fs-12 fw-6">{{$symbol['currency']}}25.00</label>
 
                         <label>Denominations</label>
 
-                        <input type="text" value="US$25.00">
+                        <input type="text" value="{{$symbol['currency']}}25.00">
 
                     </div>
 
                     <div class="row p-3">
 
-                        <label class="fs-12 fw-6">US$50.00</label>
+                        <label class="fs-12 fw-6">{{$symbol['currency']}}50.00</label>
 
                         <label>Denominations</label>
 
-                        <input type="text" value="US$50.00">
+                        <input type="text" value="{{$symbol['currency']}}50.00">
 
                     </div>
 
                     <div class="row p-3">
 
-                        <label class="fs-12 fw-6">US$100.00</label>
+                        <label class="fs-12 fw-6">{{$symbol['currency']}}100.00</label>
 
                         <label>Denominations</label>
 
-                        <input type="text" value="US$100.00">
+                        <input type="text" value="{{$symbol['currency']}}100.00">
 
                     </div>
 
@@ -2922,14 +2923,14 @@ $(document).ready(function () {
                                 <div class="form-field-list">
                                     <label>Price</label>
                                     <input type="text" value="`+inputvalue+`" id="main-popup-price`+id_value+`" class="change-value-main-price" placeholder="0.00">
-                                    <label for="input">US$</label>
+                                    <label for="input">{{$symbol['currency']}}</label>
                                 </div>
                             </div>
                             <div class="row variant-price-option">
                                 <div class="form-field-list cost-input">
                                     <label>Cost per item</label>
                                     <input type="text" name="cost" value="`+costinput+`" id="main-popup-cost-`+id_value+`" class="change-value-main-cost" placeholder="0,00">
-                                    <label for="input">US$</label>
+                                    <label for="input">{{$symbol['currency']}}</label>
                                     <p>Customers won’t see this</p>
                                 </div>
                                 <div class="form-field-list">

@@ -67,6 +67,7 @@
                                         </svg>
                                     </a>
                                 </div>
+                                @if(empty($CartItem))
                                 <div class="empty-cart-modal">
                                     <p>Fill up your Cart by checking out all the awesome things you can buy on company name or by adding items from Your Favorites!</p>
                                     <ul>
@@ -78,6 +79,7 @@
                                     <img src="http://185.160.67.108/estore/public/assets/empty-cart.svg">
 
                                 </div>
+                                @endif
                                 <!-- <div class="row cart-vip-code" name="cart-vip-code">
                                     <div class="col-12">
                                         <p class="vip-text"><img src="https://www.flaticon.com/svg/static/icons/svg/2909/2909599.svg" class="stars img-fluid"> Check out to earn Zappos VIP points worth up to <span class="font-weight-bold">$1.20</span> in VIP codes.</p>
@@ -93,6 +95,7 @@
                                                 @foreach($CartItem as $key => $cart)
 
                                                 @php 
+                                                $symbol = CurrencySymbol();
                                                 $detailfetch = allprice($cart->product_id);
 
                                                 if($detailfetch['selling_price']){
@@ -148,10 +151,10 @@
                                                     <div class="cart-list-right">
                                                         @if(!empty($detailfetch))
                                                         <p class="product-price @if(!empty($detailfetch['label'])) {{$detailfetch['label']}} @endif" >
-                                                        <span class="mrp-price">${{number_format($detailfetch['price'],2,'.',',')}}
+                                                        <span class="mrp-price">{{$symbol['currency']}}{{number_format($detailfetch['price'],2,'.',',')}}
                                                         </span>
                                                         @if(!empty($detailfetch['selling_price']))
-                                                        <span class="msrp-price"><s>MSRP: ${{number_format($detailfetch['selling_price'],2,'.',',')}}</s></span>
+                                                        <span class="msrp-price"><s>MSRP: {{$symbol['currency']}}{{number_format($detailfetch['selling_price'],2,'.',',')}}</s></span>
                                                         @endif
                                                         </p>
                                                         @endif
@@ -166,7 +169,7 @@
                                         </div>
                                     </div>
                                     <div class="cart-footer">
-                                        <p>Cart Subtotal (<?php echo $cartCount ?> Items) ${{number_format($total,2,".",",")}}</p>
+                                        <p>Cart Subtotal (<?php echo $cartCount ?> Items) {{$symbol['currency']}}{{number_format($total,2,".",",")}}</p>
                                         <div class="cart-footer-btn">
 
                                             @if(empty($this->user_id))

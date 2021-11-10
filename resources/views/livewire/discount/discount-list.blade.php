@@ -4,9 +4,9 @@
         <article class="full-width">
             <div class="columns customers-details-heading">
                 <div class="page_header d-flex  align-item-center">
-                    <h4 class="mb-0 fw-5">Collections</h4>
+                    <h4 class="mb-0 fw-5">Discount</h4>
                 </div>
-                <a class="button green-btn" href="{{ route('collections-create') }}">Create collection</a>
+                <a class="button green-btn" href="{{ route('discount-create') }}">Create Discount</a>
             </div>
         </article>
     </section> 
@@ -24,72 +24,9 @@
                             <div class="input-group">
                                 <!-- Search Field -->
                                 <div class="search-product-field">
-                                    <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" wire:model="filter_customers" id="search_products" placeholder="Filter Customers">
+                                    <input class="fs-13 placeholder_gray fw-4" type="search" name="search_products" wire:model="filter_customers" id="search_products" placeholder="Filter Discount">
                                 </div>
-                                <div class="form-field">
-                                    <!-- Status -->
-                                    <div class="fs-14 fw-6 status-dropdown dropdown-field">
-                                        <label id="main_email_subscription_status" class="dropdown-label">
-                                            Availability
-                                            <svg viewBox="0 0 20 20" class=" Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
-                                                <path d="m5 8 5 5 5-5H5z"></path>
-                                            </svg>
-                                        </label>
-                                        <ul class="filter_main_email_subscription_status filter-dropdown model">
-                                            <li><input value="Unavailable on all channels" id="unavailable-all-channels" type="radio" class="change-filter"> <label for="unavailable-all-channels">Unavailable on all channels</label>
-                                            </li>
-                                            <li><input value="Pending Available on Online Store" id="available-online-store" type="radio" class="change-filter"> <label for="available-online-store">
-                                                Available on Online Store</label>
-                                            </li>
-                                            <li><input value="Unavailable on Online Store" id="unavailable-online-store" type="radio" class="change-filter">
-                                                <label for="unavailable-online-store">Unavailable on Online Store</label>
-                                            </li>
-                                            <li><input value="Available on Point of Sale" id="available-point-of-Sale" type="radio" class="change-filter">
-                                                <label for="available-point-of-Sale">Available on Point of Sale</label>
-                                            </li>
-                                            <li><input value="Unavailable on Point of Sale" id="unavailable-point-of-Sale" type="radio" class="change-filter">
-                                                <label for="unavailable-point-of-Sale">Unavailable on Point of Sale</label>
-                                            </li>
-                                            <li><a class="clear-btn" type="button" wire:click="removeFilter(0)">Clear</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- Fullfillment Status -->
-                                    <div class="fs-14 fw-6 fullfillment-dropdown dropdown-field">
-                                        <label id="main_customer_account_status" class="dropdown-label">
-                                            Type
-                                            <svg viewBox="0 0 20 20" class=" Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
-                                                <path d="m5 8 5 5 5-5H5z"></path>
-                                            </svg>
-                                        </label>
-                                        <ul class="filter_main_customer_account_status filter-dropdown model">
-                                            <li><input value="Automated" id="automated" type="radio" class="change-filter">
-                                                <label for="automated">Automated</label>
-                                            </li>
-                                            <li><input value="Manual" id="manual" type="radio" class="change-filter">
-                                                <label for="manual">Manual</label>
-                                            </li>
-                                            <li><a class="clear-btn" type="button" wire:click="removeFilter(2)">Clear</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="saved-btn" wire:ignore="">
-                                    <button class="secondary fw-6 disabled" id="save">
-                                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
-                                            <path d="M5.2 18a.8.8 0 0 1-.792-.914l.743-5.203-2.917-2.917a.8.8 0 0 1 .434-1.355l4.398-.733 2.218-4.435a.8.8 0 0 1 1.435.008l2.123 4.361 4.498.801a.8.8 0 0 1 .425 1.353l-2.917 2.917.744 5.203a.8.8 0 0 1-1.154.828l-4.382-2.22-4.502 2.223A.792.792 0 0 1 5.2 18z"></path>
-                                        </svg>
-                                        Saved
-                                    </button>
-                                </div>
-                                <div class="save-filters-btn" wire:ignore="">
-                                    <button class="secondary fw-6" id="save_filter_btn">
-                                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
-                                            <path d="m6.71 15.116 3.357-1.658.892.452 2.327 1.178-.56-3.912.708-.707 1.29-1.29-3.235-.576-.445-.915-1.059-2.176L8.4 8.683l-1.005.168-2.098.35 1.975 1.975-.141.99-.422 2.95zM5.2 18a.8.8 0 0 1-.792-.914l.743-5.203-2.917-2.917a.8.8 0 0 1 .434-1.355l4.398-.733 2.218-4.435a.8.8 0 0 1 1.435.008l2.123 4.361 4.498.801a.8.8 0 0 1 .425 1.353l-2.917 2.917.744 5.203a.8.8 0 0 1-1.154.828l-4.382-2.22-4.502 2.223A.792.792 0 0 1 5.2 18z"></path>
-                                        </svg>
-                                        Save filters
-                                    </button>
-                                </div>
+                                
                                 <div class="sort-btn">
                                     <button class="secondary fw-6" id="sort">
                                         <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
@@ -97,25 +34,6 @@
                                         </svg>
                                         Sort
                                     </button>
-                                    <ul class="filter_main_email_subscription_status filter-dropdown model">
-                                        <label class="sort-dropdown">Sort by</label>
-                                        <li>
-                                            <input value="Subscribed" id="subscribed" type="radio" class="change-filter">
-                                            <label for="subscribed">Collection title A–Z</label>
-                                        </li>
-                                        <li>
-                                            <input value="Subscription Pending Confirmation" id="subscribed-pending" type="radio" class="change-filter">
-                                            <label for="subscribed-pending">Collection title Z–A</label>
-                                        </li>
-                                        <li>
-                                            <input value="Not subscribed" id="not-subscribed" type="radio" class="change-filter">
-                                            <label for="not-subscribed">Updated (oldest first)</label>
-                                        </li>
-                                        <li>
-                                            <input value="Subscribed" id="subscribed" type="radio" class="change-filter">
-                                            <label for="subscribed">Updated (newest first)</label>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -130,33 +48,12 @@
                     <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing collections-sec">
                         <tbody>
                             <tr>
-                                <th>
-                                    <div class="row"><label><input type="checkbox" name="option6a"></label></div>
-                                </th>
-                                <th class="fw-6">
-                                    <div class="select-customers">
-                                        <span class="button-group">
-                                            <button class="secondary all-customer-select">
-                                                <input type="checkbox" name="option2a" checked="checked">
-                                                <span>27 selected</span>
-                                            </button>
-                                            <button class="secondary select-customer-edit">
-                                                Edit customers
-                                            </button>
-                                            <button class="secondary select-customer-more-actions">
-                                                More actions
-                                                <svg viewBox="0 0 20 20" class=" Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </th>
-                            </tr>
-                            <tr>
                             	<th>#</th>
                                 <th>Code</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
                             </tr>
+                            @if(!empty($discountlist))
                             @foreach($discountlist as $row)
                             <tr>
                                 <td>
@@ -170,6 +67,7 @@
                                
                             </tr>
                             @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

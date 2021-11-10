@@ -25,14 +25,14 @@
                                     @foreach($CartItem as $key => $cart)
                                     @php 
                                     $detailfetch = allprice($cart->product_id);
-
+                                    $symbol = CurrencySymbol();
+                                    
                                     if($detailfetch['selling_price']){
                                      $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
                                     }else
                                     {
                                       $subtotal2 += $cart['stock'] * $detailfetch['price'];
                                     }
-
 
                                     $subtotal = $subtotal1 + $subtotal2;
                                    
@@ -66,14 +66,15 @@
                                         </div>
                                         </td>
                                         <td>
-                                            <span class="cart-pd-price">${{$detailfetch['selling_price']}}
+                                            <span class="cart-pd-price">
+                                            {{$symbol['currency']}}{{$detailfetch['selling_price']}}
                                             @if(!$detailfetch['selling_price'])
                                             {{$detailfetch['price']}}
                                             @endif
 
                                             </span>
                                             @if(!empty($detailfetch['discount']))
-                                            <span class="msrp-price">-  ${{number_format($detailfetch['price'],2,".",",")}}</span>
+                                            <span class="msrp-price">-  {{$symbol['currency']}}{{number_format($detailfetch['price'],2,".",",")}}</span>
                                             @endif
 
                                         </td>
@@ -112,9 +113,9 @@
                                     @csrf
                                     <div class="vc-inner">
                                         <p class="cart-summary">Cart Summary (@php echo count($CartItem); @endphp Item)</p>
-                                        <p class="subtotal">subtotal: <span>${{number_format($subtotal,2,".",",")}}</span></p>
-                                        <p class="discount-price">discount: <span>-${{number_format($discountrate,2,".",",")}}</span></p>
-                                        <p class="total-price">total: <span>${{number_format($total,2,".",",")}}</span></p>
+                                        <p class="subtotal">subtotal: <span>{{$symbol['currency']}}{{number_format($subtotal,2,".",",")}}</span></p>
+                                        <p class="discount-price">discount: <span>-{{$symbol['currency']}}{{number_format($discountrate,2,".",",")}}</span></p>
+                                        <p class="total-price">total: <span>{{$symbol['currency']}}{{number_format($total,2,".",",")}}</span></p>
                                     </div>
                                     <div class="vc-inner">
                                         <button type="submit" class="site-btn">Proceed to Checkout</button>

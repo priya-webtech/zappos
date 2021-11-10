@@ -6,6 +6,13 @@ use App\Models\ProductVariant;
 use App\Models\VariantTag;
 use App\Models\Product;
 use App\Models\Cart;
+  
+
+  function CurrencySymbol(){
+
+    return [ 'currency' => '€' ];
+
+ }
 
   function favorite($product_id){
 
