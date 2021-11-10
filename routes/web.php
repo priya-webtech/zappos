@@ -170,5 +170,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('/product/{slug?}', [Livewire\Front\ProductReviews::class, 'SaveReview'])->name('review-save');
     });
 
+    //Front User
+    Route::get('/userdetail', Livewire\Front\Account::class)->name('front-user-detail');
+
 });
 

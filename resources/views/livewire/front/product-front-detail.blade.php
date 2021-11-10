@@ -58,7 +58,7 @@
 
                         <div class="product-slider">
 
-                            <div class="product-slider-nav">
+                            <div class="product-slider-nav" wire:ignore>
                                 @foreach($Productmedia as $image)
                                 <div>
 
@@ -72,7 +72,7 @@
 
 
 
-                            <div class="product-slider-for">
+                            <div class="product-slider-for" wire:ignore>
 
                                  @foreach($Productmedia as $image)
 
@@ -352,7 +352,7 @@
 
                             <h3 class="h3">Wear It With</h3>
 
-                            <div class="wear-it-With-slider">
+                            <div class="wear-it-With-slider" wire:ignore>
 
                                 <div>
 
@@ -537,7 +537,7 @@
 
                             <h3 class="h3">Customer Who Bought This Item Also Bought</h3>
 
-                            <div class="item-bought-slider">
+                            <div class="item-bought-slider" wire:ignore>
 
                                 <div>
 
@@ -688,7 +688,7 @@
 
                             <h3 class="h3">Recommended For You</h3>
 
-                            <div class="similar-items-slider">
+                            <div class="similar-items-slider" wire:ignore>
 
                                 @foreach($productrelated as $rows)
 
@@ -777,7 +777,7 @@
 
                             <h3 class="h3">Your Recently Viewed Items</h3>
 
-                            <div class="recently-viewed-slider">
+                            <div class="recently-viewed-slider" wire:ignore>
 
                                 @if(Cookie::get('shopping_cart'))
 
@@ -923,6 +923,7 @@
 
                         {
 
+                            alert(response.variant.id);
                              price = response.price;
 
                              console.log(response.variant.variant_stock);

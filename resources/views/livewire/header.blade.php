@@ -1,4 +1,4 @@
-
+<div>
 <div id="main_model">
     <div class="main-heder">
 
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <section class="header-mid" >
+            <section class="header-mid">
                 <div class="container">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center">
@@ -39,7 +39,7 @@
                                         <div class="link-fill"><button class="link-fill-btn">samsung cases</button></div>
                                         <div class="link-fill"><button class="link-fill-btn">winter sweaters</button></div>
                                         <div class="link-fill"><button class="link-fill-btn">Trousers</button></div>
-                                        <div class="sub-link-fill"  wire:ignore>
+                                        <div class="sub-link-fill">
                                             @foreach($getproduct as $row)
                                             <div class="link-fill product-item"><a href="{{ route('product-front-detail', $row->seo_utl) }}"><button class="link-fill-btn">{{$row->title}}</button></a></div>
                                             @endforeach
@@ -58,7 +58,7 @@
                             </div>
                             <form method="post" action="{{ route('add-order') }}" name="form">
                              @csrf
-                            <div class="proceed-cart" id="proceed-cart">
+                            <div class="proceed-cart" id="proceed-cart" wire:ignore>
                                 <div class="proceed-cart-head">
                                     <h4 class="h4">My Cart</h4>
                                     <a class="myclose-close" onclick="document.getElementById('proceed-cart').style.display='none'">
@@ -133,7 +133,7 @@
                                                                         <!-- <input type="button" value="-" class="qty-minus">
                                                                         <input name="stockitem[]"  type="number" value="{{$cart['stock']}}" class="stockqty" id="stockqtyitem" data-id="{{$cart['id']}}">
                                                                         <input type="button" value="+" class="qty-plus" wire:click="stockplusminus({{$cart['id']}})"> -->
-                                                                        <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['id']}})" name="stockitem" type="number">
+                                                                        <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['id']}})" name="stockitem" type="number" class="myclose-close">
                                                                
                                                                 </div>
                                                             </div>
@@ -142,7 +142,7 @@
                                                         $result = favorite($cart['product_detail'][0]['id']);
                                                         @endphp
                                                         @if(!empty($result))
-                                                        <a class="wish-list {{$result['class']}}" name="r-heart-button" wire:click="UpdateWish({{$result['id']}}, {{$result['product_id']}})">
+                                                        <a  class="wish-list {{$result['class']}} myclose-close" name="r-heart-button" wire:click.prevent="UpdateWish({{$result['id']}}, {{$result['product_id']}})">
                                                             Move To<i class="fa fa-heart-o" aria-hidden="true"></i>
                                                         </a>
                                                         @endif
@@ -367,6 +367,7 @@
  
 </div>
 
+
 <script type="text/javascript">
     $(document).ready(function(){
   $("#searched-input").on("keyup", function() {
@@ -464,5 +465,5 @@ $(document).ready(function(){
 
 </div>
 
-
+</div>
 

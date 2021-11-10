@@ -122,10 +122,11 @@ class ProductFrontDetail extends Component
 
     public function fetchPrice(Request $request)
     {
+
         $this->Productvariant = ProductVariant::with(['variant_stock' => function($q) {
             $q->where('location_id', 1);
-        }])->where('attribute1',$request->text1)->orWhere('attribute2',$request->text2)->orWhere('attribute3',$request->text3)->where('product_id',$request->productid)->first();
-
+        }])->where('attribute1',$request->text1)->OrWhere('attribute2',$request->text2)->where('product_id',$request->productid)->first();
+        dump($this->Productvariant->id);
         // $this->Productvariant = Productvariant::with(['variant_stock' => function($q) {
         //     $q->where('location_id', 1);
         // }])->when($this->variant1, function($q1) {
@@ -188,17 +189,17 @@ class ProductFrontDetail extends Component
 
                 favorite::create($favorite_arr);
 
-            
+            session()->flash('message', 'Add WishList !!');
         }else{
 
+            
             $favorite  = favorite::where('id',$id)->delete();
-
+            session()->flash('message', 'Remove WishList !!');
             }
     }
 
     public function addCart($variationID)
     {   
-
         $variant = ProductVariant::find($variationID);
 
         if(!empty($variant)) {
@@ -208,6 +209,9 @@ class ProductFrontDetail extends Component
             }else{
                 $price = $variant['price'];
             }
+
+
+
             $cart_arr = [
                     
                     'product_id' => $variant->product_id,
@@ -226,6 +230,8 @@ class ProductFrontDetail extends Component
                 ];
 
             Cart::create($cart_arr);
+
+
         }
         else
         {

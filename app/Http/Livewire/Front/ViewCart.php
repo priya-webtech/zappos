@@ -16,7 +16,7 @@ class ViewCart extends Component
 {
 	public $CartItem,$ProductVariant,$varianttag,$stockitem;
 
-	protected $listeners = ['getCart', 'DeleteCartProduct'];
+	protected $listeners = ['getCart', 'DeleteCartProduct','UpdateWish','UpdateWishlist' => 'UpdateWishes'];
 
 
 	public function mount() {
@@ -63,9 +63,12 @@ class ViewCart extends Component
              
         } 
     }
-    
+    public function UpdateWishes(){
+         dd('erver');
+    }
     public function UpdateWish($id,$productid){
 
+        dd('erver');
     	if (Auth::check()) {
     		$this->user_id =  Auth::user()->id;
 	        if($id == 0){
@@ -80,12 +83,13 @@ class ViewCart extends Component
 
 	                favorite::create($favorite_arr);
 
-	            
+	            session()->flash('message', 'Add WishList !!');
 	        }else{
 
 	            $favorite  = favorite::where('id',$id)->delete();
-
+                session()->flash('message', 'Remove WishList !!');
 	            }
+
 	    }
     }
 
