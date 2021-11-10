@@ -148,61 +148,123 @@
                         </form>
                     </div>
                     @endif
-                    <div class="review-shipping-sec">
-                        <h3 class="panel-title">Shipping Details</h3>
-                        @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; @endphp
-                        @if($CartItem)
-                        @foreach($CartItem as $key => $cart)
-                        @php 
-                        $detailfetch = allprice($cart->product_id);
-
-                        if($detailfetch['selling_price']){
-                         $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
-                        }else
-                        {
-                          $subtotal2 += $cart['stock'] * $detailfetch['price'];
-                        }
-
-                        $subtotal = $subtotal1 + $subtotal2;
-
-                       
-                        if(!empty($detailfetch['discount'])){
-                        $discountrate += $detailfetch['discount'] * $cart['stock'];
-                        } 
-                       
-                        $total = $subtotal - $discountrate;
-
-                        $gst = $Taxes->rate;
-                         $GetGst = ($gst/100)+1;
-                         $withoutgstaount = $total / $GetGst;
-
-                         $gst_include =  ($withoutgstaount*$gst) / 100;
-                         $gst_Total = $gst_include + $total;
-                        @endphp
-                        <div class="my-cart-pd-details">
-                            <div class="my-cart-img">
-                                <a class="dropdown-header" href="#">
-                                    <img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}">
-                                </a>
-                            </div>
-                            <div class="my-cart-desc">
-                                <span>Splendid</span>
-                                <h6>{{$cart['product_detail'][0]['title']}}</h6>
-                                @include('livewire.front.cartdetail')
-                                @if(!empty($detailfetch))
-                                <p>
-                                    <span><b>Sale:</b> <span class="red-color">${{number_format($detailfetch['price'],2,'.',',')}}</span></span>
-                                    @if(!empty($detailfetch['selling_price']))
-                                    <span class="grey-color"><b>MSRP:</b> ${{number_format($detailfetch['selling_price'],2,'.',',')}}</span>
-                                    @endif
-                                </p>
-                                @endif
-                            </div>
-                        </div>
-                        @endforeach
-                        @endif
+                    <div class="shipping-details-card re-order-tbl">
+                        <h3 class="panel-title">Order Details</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>order <br> number</th>
+                                    <th>date</th>
+                                    <th>Prodoct name</th>
+                                    <th>quantity</th>
+                                    <th>Price</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>10/06/2021</td>
+                                    <td class="od-pd-name">
+                                        <span>Splendid</span>
+                                        <h6>Apple laptop</h6>
+                                    </td>
+                                    <td>
+                                        <div class="add-cart-select">               
+                                            <div class="total-item-select">
+                                                <input value="1" name="stockitem" type="number">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="od-pd-price">
+                                        <span>
+                                            <b>Sale:</b> 
+                                            <span class="red-color">$200.00</span>
+                                        </span>
+                                        <!-- <span class="grey-color"><b>MSRP:</b> $90.00</span> -->
+                                    </td>
+                                    <td>
+                                        <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>10/06/2021</td>
+                                    <td class="od-pd-name">
+                                        <span>Splendid</span>
+                                        <h6>Apple laptop</h6>
+                                    </td>
+                                    <td>
+                                        <div class="add-cart-select">               
+                                            <div class="total-item-select">
+                                                <input value="1" name="stockitem" type="number">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="od-pd-price">
+                                        <span>
+                                            <b>Sale:</b> 
+                                            <span class="red-color">$200.00</span>
+                                        </span>
+                                        <!-- <span class="grey-color"><b>MSRP:</b> $90.00</span> -->
+                                    </td>
+                                    <td>
+                                        <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>10/06/2021</td>
+                                    <td class="od-pd-name">
+                                        <span>Splendid</span>
+                                        <h6>Apple laptop</h6>
+                                    </td>
+                                    <td>
+                                        <div class="add-cart-select">               
+                                            <div class="total-item-select">
+                                                <input value="1" name="stockitem" type="number">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="od-pd-price">
+                                        <span>
+                                            <b>Sale:</b> 
+                                            <span class="red-color">$200.00</span>
+                                        </span>
+                                        <!-- <span class="grey-color"><b>MSRP:</b> $90.00</span> -->
+                                    </td>
+                                    <td>
+                                        <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>10/06/2021</td>
+                                    <td class="od-pd-name">
+                                        <span>Splendid</span>
+                                        <h6>Apple laptop</h6>
+                                    </td>
+                                    <td>
+                                        <div class="add-cart-select">               
+                                            <div class="total-item-select">
+                                                <input value="1" name="stockitem" type="number">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="od-pd-price">
+                                        <span>
+                                            <b>Sale:</b> 
+                                            <span class="red-color">$200.00</span>
+                                        </span>
+                                        <!-- <span class="grey-color"><b>MSRP:</b> $90.00</span> -->
+                                    </td>
+                                    <td>
+                                        <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-  
                 </div>
 
             </div>        
@@ -210,6 +272,60 @@
         </div>
 
         <div class="col-md-4">
+            <div class="review-shipping-sec">
+                <h3 class="panel-title">Item Review and Shipping</h3>
+                @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; @endphp
+                @if($CartItem)
+                @foreach($CartItem as $key => $cart)
+                @php 
+                $detailfetch = allprice($cart->product_id);
+
+                if($detailfetch['selling_price']){
+                 $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
+                }else
+                {
+                  $subtotal2 += $cart['stock'] * $detailfetch['price'];
+                }
+
+                $subtotal = $subtotal1 + $subtotal2;
+
+               
+                if(!empty($detailfetch['discount'])){
+                $discountrate += $detailfetch['discount'] * $cart['stock'];
+                } 
+               
+                $total = $subtotal - $discountrate;
+
+                $gst = $Taxes->rate;
+                 $GetGst = ($gst/100)+1;
+                 $withoutgstaount = $total / $GetGst;
+
+                 $gst_include =  ($withoutgstaount*$gst) / 100;
+                 $gst_Total = $gst_include + $total;
+                @endphp
+                <div class="my-cart-pd-details">
+                    <div class="my-cart-img">
+                        <a class="dropdown-header" href="#">
+                            <img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}">
+                        </a>
+                    </div>
+                    <div class="my-cart-desc">
+                        <span>Splendid</span>
+                        <h6>{{$cart['product_detail'][0]['title']}}</h6>
+                        @include('livewire.front.cartdetail')
+                        @if(!empty($detailfetch))
+                        <p>
+                            <span><b>Sale:</b> <span class="red-color">${{number_format($detailfetch['price'],2,'.',',')}}</span></span>
+                            @if(!empty($detailfetch['selling_price']))
+                            <span class="grey-color"><b>MSRP:</b> ${{number_format($detailfetch['selling_price'],2,'.',',')}}</span>
+                            @endif
+                        </p>
+                        @endif
+                    </div>
+                </div>
+                @endforeach
+                @endif
+            </div>
             <div class="viewcart-checkout">
                 <div class="vc-inner">
                     <p class="cart-summary">Order Summary (@php echo count($CartItem); @endphp Item Items)</p>
@@ -230,12 +346,11 @@
                 <div class="account-name-row">
                     <input id="acholdername" value="" required>
                     <label for="ideal-bank-element" class="bank-name">iDEAL Bank</label>
+                </div>
+                <div class="account-name-row">
                      <div id="ideal-bank-element">
                       <!-- A Stripe Element will be inserted here. -->
                     </div>
-                </div>
-                <div class="account-name-row">
-                   
                     <button type="submit">Pay ${{number_format($gst_Total,2,".",",")}}</button>
                 </div>
                 <!-- Used to display form errors. -->

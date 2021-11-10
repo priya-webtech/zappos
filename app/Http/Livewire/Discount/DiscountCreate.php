@@ -5,17 +5,21 @@ namespace App\Http\Livewire\Discount;
 use Livewire\Component;
 
 use App\Models\discount;
+use App\Models\Collection;
+use App\Models\Product;
 
 use str;
 
 class DiscountCreate extends Component
 {
 	public $applyto,$type,$code,$discount_value,$randomString,$start_date,$end_date,$start_time,$end_time;
+	public $selectedcollection = [], $selectedproduct = [];
 
 	protected $listeners = ['SaveRecord'];
     public function render()
     {
-
+    	$this->collection = Collection::get();
+		$this->product = Product::get();
         return view('livewire.discount.discount-create');
     }
 
@@ -31,7 +35,17 @@ class DiscountCreate extends Component
     }
 
     public function SaveRecord($flag)
-    {
+    {	
+
+    	
+		if(!empty($this->applyto)){
+			if($this->applyto == '2'){
+				$productarray = json_encode($this->selectedcollection);
+			}
+			if($this->applyto == '3'){
+				$productarray = json_encode($this->selectedproduct);
+			}
+		}
 
     	if($flag == 'save-discount')
         {
@@ -46,6 +60,7 @@ class DiscountCreate extends Component
              	'type' => $this->type,
              	'discount_value' => $this->discount_value,
              	'applyto' => $this->applyto,
+             	'apply_c_p' => $productarray,
              	'start_date' => $this->start_date,
              	'start_time' => $this->start_time,
              	'end_date' => $this->end_date,
