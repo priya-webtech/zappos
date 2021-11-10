@@ -794,3 +794,9 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .modal-backdrop {display: none; }
 .modal-open2 {overflow: hidden; padding-right: 17px; }
 .modal-open2 .details-change-modal {overflow-x: hidden; overflow-y: auto; padding-right: 17px; }
+
+
+.product-slider-for, .product-slider-nav, .wear-it-With-slider, .item-bought-slider,.similar-items-slider, .recently-viewed-slider { display: none; }
+
+.product-slider-for.slick-initialized, .product-slider-nav.slick-initialized, .wear-it-With-slider.slick-initialized,
+.item-bought-slider.slick-initialized,.similar-items-slider.slick-initialized, .recently-viewed-slider.slick-initialized { display: block; }

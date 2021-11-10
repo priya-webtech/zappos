@@ -13,10 +13,11 @@ use App\Http\Livewire;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', Livewire\Dashboard::class);
-Route::get('/signin', function (){
-    return view('livewire.admin.login');
-})->name('admin.login');
+Route::get('/', Livewire\Dashboard::class)->name('home');
+Route::get('/signin', [Livewire\Admin\Dashboard::class, 'checkLogin'])->name('admin.login');
+// Route::get('/signin', function (){
+//     return view('livewire.admin.login');
+// })->name('admin.login');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', Livewire\Dashboard::class)->name('dashboard');

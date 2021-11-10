@@ -5,7 +5,7 @@
                     <div class="col-12">
                     	<h1>Favorite List</h1>
                         <div class="similar-items-sec multi-item-slider">
-                            <div class="similar-items-slider">
+                            <div class="similar-items-slider" wire:ignore>
                                 @foreach($product as $rows)
                                 @if(!empty($rows['favoriteget'][0]['user_id']))
                                 <div>

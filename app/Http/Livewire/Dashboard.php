@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Models\Product;
 use App\Models\favorite;
 use App\Models\ProductMedia;
@@ -47,7 +48,12 @@ class Dashboard extends Component
 
     public function render()
     {
-        return view('livewire.dashboard');
+        $alert = null;
+        if(Session::get('alert') !== null){
+            $alert = Session::get('alert');
+            Session::forget('alert');
+        }
+        return view('livewire.dashboard', ['alert'=> $alert]);
     }
 
 }

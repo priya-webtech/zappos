@@ -7,6 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 class RedirectIfAuthenticated
 {
@@ -25,7 +26,8 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
                 if (Auth::guard($guard)->check()) {
                     $user = Auth::user();
-                    if (Route::prefix('admin') && isset($user->roles) && $user->hasRole('customer')) {
+
+                    if (Str::startsWith($request->route()->uri, 'admin') && isset($user->roles) && $user->hasRole('customer')) {
                         return redirect(RouteServiceProvider::HOME);
                     }
 
