@@ -140,12 +140,12 @@ class Header extends Component
                     ];
 
                 favorite::create($favorite_arr);
-
+            session()->flash('message', 'Add WishList !!');
             
         }else{
 
             $favorite  = favorite::where('id',$id)->delete();
-
+            session()->flash('message', 'Remove WishList !!');
             }
     }
 
