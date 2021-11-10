@@ -1,4 +1,10 @@
 <x-customer-layout>
+
+@if($alert !== null)
+<div class="alert alert-success">
+<strong>{{$alert}}</strong>
+</div>
+@endif
         <!-- banner start -->
         <div class="banner">        
             <img src="{{ url('assets/main.gif') }}">

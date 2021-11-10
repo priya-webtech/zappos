@@ -303,7 +303,7 @@
 
         @if(empty(Auth::User()->email_verified_at))
 
-            <a href="#" class=" mr-3 turn-btn f-bl" name="login-btn" id="login-btn">Sign In / Register</a>
+            <a href="#" class=" mr-3 turn-btn f-bl" name="login-btn" id="login-btn" onclick="document.getElementById('sign-in-form').style.display='block'">Sign In / Register</a>
 
         @else
 
@@ -406,7 +406,8 @@ $(document).ready(function(){
                                 @csrf
                                 <h2 class="h2">Create Account</h2>
                                 <span>or use your email for registration</span>
-                                <input type="text" placeholder="Name" name="name" />
+                                <input type="text" placeholder="First Name" name="first_name" />
+                                <input type="text" placeholder="Last Name" name="last_name" />
                                 <input type="email" placeholder="Email" name="email"/>
                                 <input type="password" placeholder="Password" name="password" />
                                 <input type="password" placeholder="Re-enter password " name="password_confirmation" />

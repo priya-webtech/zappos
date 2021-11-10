@@ -105,7 +105,8 @@ $('.cat-title').click(function(e) {
 /*Product details page js*/
 
 /*Product slider js*/
-$(document).ready(function() {
+
+function initializeSwiper() {
 	$('.product-slider-for').slick({
 		slidesToShow: 1,
 		slidesToScroll: 1,
@@ -165,8 +166,14 @@ $(document).ready(function() {
 		slidesToShow: 6,
 		slidesToScroll: 6,
 	});
+}
+ $(window).on('load', function() {
+	initializeSwiper();
 });
 
+window.addEventListener('onContentChanged', () => {
+    initializeSwiper();
+});
 
 // login & Resgister form js
 $(document).ready(function() {
@@ -205,4 +212,5 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+           
 

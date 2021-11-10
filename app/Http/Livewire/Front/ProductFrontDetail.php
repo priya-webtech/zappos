@@ -94,6 +94,7 @@ class ProductFrontDetail extends Component
 
     public function render()
     {
+        $this->dispatchBrowserEvent('onContentChanged');
         $this->user_id = Auth::user()->id;
 
         $this->getProduct();
