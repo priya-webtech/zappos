@@ -67,19 +67,7 @@
                                         </svg>
                                     </a>
                                 </div>
-                                @if(empty($CartItem))
-                                <div class="empty-cart-modal">
-                                    <p>Fill up your Cart by checking out all the awesome things you can buy on company name or by adding items from Your Favorites!</p>
-                                    <ul>
-                                        <li><a href="#">Shop Women's</a></li>
-                                        <li><a href="#">Shop Men's</a></li>
-                                        <li><a href="#">Shop Shoes</a></li>
-                                        <li><a href="#">Brand List</a></li>
-                                    </ul>
-                                    <img src="http://185.160.67.108/estore/public/assets/empty-cart.svg">
 
-                                </div>
-                                @endif
                                 <!-- <div class="row cart-vip-code" name="cart-vip-code">
                                     <div class="col-12">
                                         <p class="vip-text"><img src="https://www.flaticon.com/svg/static/icons/svg/2909/2909599.svg" class="stars img-fluid"> Check out to earn Zappos VIP points worth up to <span class="font-weight-bold">$1.20</span> in VIP codes.</p>
@@ -179,7 +167,19 @@
                                             <input type="submit" name="checkout" class="site-btn checkout-btn" value="Proceed to checkout">
                                         </div>
                                     </div>
-                                     @endif
+                                    @else
+                                    <div class="empty-cart-modal">
+                                        <p>Fill up your Cart by checking out all the awesome things you can buy on company name or by adding items from Your Favorites!</p>
+                                        <ul>
+                                            <li><a href="#">Shop Women's</a></li>
+                                            <li><a href="#">Shop Men's</a></li>
+                                            <li><a href="#">Shop Shoes</a></li>
+                                            <li><a href="#">Brand List</a></li>
+                                        </ul>
+                                        <img src="http://185.160.67.108/estore/public/assets/empty-cart.svg">
+
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                             </form>
