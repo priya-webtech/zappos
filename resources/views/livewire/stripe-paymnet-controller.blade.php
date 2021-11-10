@@ -2,13 +2,6 @@
     <x-customer-layout>
     {{-- In work, do what you enjoy. --}}
     <!DOCTYPE html>
-   
-
-
-
-
-
-    <title>Laravel 6 - Stripe Payment Gateway Integration Example - </title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
 
@@ -50,7 +43,7 @@
 
 
 
-
+@php $symbol = CurrencySymbol(); @endphp
 
 <div class="checkout-page-sec">
 
@@ -179,9 +172,9 @@
                                     <td class="od-pd-price">
                                         <span>
                                             <b>Sale:</b> 
-                                            <span class="red-color">$200.00</span>
+                                            <span class="red-color">{{$symbol['currency']}}200.00</span>
                                         </span>
-                                        <!-- <span class="grey-color"><b>MSRP:</b> $90.00</span> -->
+                                        <!-- <span class="grey-color"><b>MSRP:</b> {{$symbol['currency']}}90.00</span> -->
                                     </td>
                                     <td>
                                         <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
@@ -204,9 +197,9 @@
                                     <td class="od-pd-price">
                                         <span>
                                             <b>Sale:</b> 
-                                            <span class="red-color">$200.00</span>
+                                            <span class="red-color">{{$symbol['currency']}}200.00</span>
                                         </span>
-                                        <!-- <span class="grey-color"><b>MSRP:</b> $90.00</span> -->
+                                        <!-- <span class="grey-color"><b>MSRP:</b> {{$symbol['currency']}}90.00</span> -->
                                     </td>
                                     <td>
                                         <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
@@ -229,9 +222,9 @@
                                     <td class="od-pd-price">
                                         <span>
                                             <b>Sale:</b> 
-                                            <span class="red-color">$200.00</span>
+                                            <span class="red-color">{{$symbol['currency']}}200.00</span>
                                         </span>
-                                        <!-- <span class="grey-color"><b>MSRP:</b> $90.00</span> -->
+                                        <!-- <span class="grey-color"><b>MSRP:</b> {{$symbol['currency']}}90.00</span> -->
                                     </td>
                                     <td>
                                         <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
@@ -254,9 +247,9 @@
                                     <td class="od-pd-price">
                                         <span>
                                             <b>Sale:</b> 
-                                            <span class="red-color">$200.00</span>
+                                            <span class="red-color">{{$symbol['currency']}}200.00</span>
                                         </span>
-                                        <!-- <span class="grey-color"><b>MSRP:</b> $90.00</span> -->
+                                        <!-- <span class="grey-color"><b>MSRP:</b> {{$symbol['currency']}}90.00</span> -->
                                     </td>
                                     <td>
                                         <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
@@ -315,9 +308,9 @@
                         @include('livewire.front.cartdetail')
                         @if(!empty($detailfetch))
                         <p>
-                            <span><b>Sale:</b> <span class="red-color">${{number_format($detailfetch['price'],2,'.',',')}}</span></span>
+                            <span><b>Sale:</b> <span class="red-color">{{$symbol['currency']}}{{number_format($detailfetch['price'],2,'.',',')}}</span></span>
                             @if(!empty($detailfetch['selling_price']))
-                            <span class="grey-color"><b>MSRP:</b> ${{number_format($detailfetch['selling_price'],2,'.',',')}}</span>
+                            <span class="grey-color"><b>MSRP:</b> {{$symbol['currency']}}{{number_format($detailfetch['selling_price'],2,'.',',')}}</span>
                             @endif
                         </p>
                         @endif
@@ -329,14 +322,14 @@
             <div class="viewcart-checkout">
                 <div class="vc-inner">
                     <p class="cart-summary">Order Summary (@php echo count($CartItem); @endphp Item Items)</p>
-                    <p class="subtotal">subtotal:<span>${{number_format($subtotal,2,".",",")}}</span></p>
+                    <p class="subtotal">subtotal:<span>{{$symbol['currency']}}{{number_format($subtotal,2,".",",")}}</span></p>
                     <p class="subtotal">Shipping Cost:<span>Free</span></p>
-                    <p class="discount-price">discount: <span>-${{number_format($discountrate,2,".",",")}}</span></p>
-                    <p class="subtotal">Total before tax:<span>${{number_format($total,2,".",",")}}</span></p>
-                    <p class="subtotal">Estimated tax to be collected:*<span>${{number_format($gst_include,2,".",",") }}</span></p>
+                    <p class="discount-price">discount: <span>-{{$symbol['currency']}}{{number_format($discountrate,2,".",",")}}</span></p>
+                    <p class="subtotal">Total before tax:<span>{{$symbol['currency']}}{{number_format($total,2,".",",")}}</span></p>
+                    <p class="subtotal">Estimated tax to be collected:*<span>{{$symbol['currency']}}{{number_format($gst_include,2,".",",") }}</span></p>
                 </div>
                 <div class="vc-inner">
-                    <p class="total-price">total: <span>${{number_format($gst_Total,2,".",",")}}</span></p>
+                    <p class="total-price">total: <span>{{$symbol['currency']}}{{number_format($gst_Total,2,".",",")}}</span></p>
                 </div>
             </div>
             <form id="payment-form">
@@ -351,7 +344,7 @@
                      <div id="ideal-bank-element">
                       <!-- A Stripe Element will be inserted here. -->
                     </div>
-                    <button type="submit">Pay ${{number_format($gst_Total,2,".",",")}}</button>
+                    <button type="submit">Pay {{$symbol['currency']}}{{number_format($gst_Total,2,".",",")}}</button>
                 </div>
                 <!-- Used to display form errors. -->
                 <div id="error-message" role="alert"></div>

@@ -1,6 +1,7 @@
 <div>
     {{-- Because she competes with no one, no one can compete with her. --}}
     <x-customer-layout>
+        @php $symbol = CurrencySymbol(); @endphp
     	<!-- category html start -->
 
         <div class="category-head" wire:ignore>
@@ -602,10 +603,10 @@
                                             </a>
                                             @if(!empty($priceres))
                                             <p class="product-price @if(!empty($priceres['label'])) {{$priceres['label']}} @endif" >
-                                            <span class="mrp-price">${{number_format($priceres['price'],2,'.',',')}}
+                                            <span class="mrp-price">{{$symbol['currency']}}{{number_format($priceres['price'],2,'.',',')}}
                                             </span>
                                             @if(!empty($priceres['selling_price']))
-                                            <span class="msrp-price"><s>MSRP: ${{number_format($priceres['selling_price'],2,'.',',')}}</s></span>
+                                            <span class="msrp-price"><s>MSRP: {{$symbol['currency']}}{{number_format($priceres['selling_price'],2,'.',',')}}</s></span>
                                             @endif
                                             </p>
                                             @endif

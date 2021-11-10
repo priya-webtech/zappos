@@ -1,5 +1,6 @@
 <div>
 <x-admin-layout>
+@php $symbol = CurrencySymbol(); @endphp
     <section class="full-width admin-body-width flex-wrap admin-full-width inventory-heading">
         <article class="full-width">
             <div class="columns customers-details-heading">
@@ -47,8 +48,8 @@
                                 <a href="#">{{$item['order_product'][0]['title']}}</a>
                             </div>
                             <p class="unful-pd-price">
-                                <span>${{ round($item['price'],2)}} × {{$item['stock']}}</span>
-                                <span>${{ round($item['total'],2)}}</span>
+                                <span>{{$symbol['currency']}}{{number_format($item['price'],2,".",",")}} × {{$item['stock']}}</span>
+                                <span>{{$symbol['currency']}}{{number_format($item['total'],2,".",",")}}</span>
                             </p>
                         </div>
                         @endforeach
@@ -80,28 +81,28 @@
                         <li>
                             <span>Subtotal(excluding GST)</span>
                             <span>{{$Stock_sum}} item</span>
-                            <span>${{round($withoutgstaount,2) }}</span>
+                            <span>{{$symbol['currency']}}{{round($withoutgstaount,2) }}</span>
                         </li>
                         <li>
                             <span>Tax</span>
                             <span>IGST {{$gst}}%</span>
-                            <span>${{round($gst_include,2) }}</span>
+                            <span>{{$symbol['currency']}}{{round($gst_include,2) }}</span>
                         </li>
                         <li>
                             <span>Subtotal(including GST)</span>
                             <span>{{$Stock_sum}} item</span>
-                            <span>${{ round($netamount,2) }}</span>
+                            <span>{{$symbol['currency']}}{{ round($netamount,2) }}</span>
                         </li>
                         
                         <li>
                             <span class="fw-6">Total</span>
                             <span class="fw-6"></span>
-                            <span class="fw-6">${{ round($netamount,2) }}</span>
+                            <span class="fw-6">{{$symbol['currency']}}{{ round($netamount,2) }}</span>
                         </li>
                         <li>
                             <span>Paid by customer</span>
                             <span></span>
-                            <span>${{ round($netamount,2) }}</span>
+                            <span>{{$symbol['currency']}}{{ round($netamount,2) }}</span>
                         </li>
                     </ul>
                 </div>
