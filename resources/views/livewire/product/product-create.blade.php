@@ -63,7 +63,7 @@
         </article>
 
     </section>
-
+ @php $symbol = CurrencySymbol(); @endphp
 <form action="{{ route('products-store') }}" method="POST" enctype="multipart/form-data" id="add_people_form" autocomplete="off">
     @csrf
     <section class="full-width flex-wrap admin-body-width customers-details-sec product-details-sec">
@@ -256,7 +256,7 @@
 
                                 <input type="text" name="price_main" placeholder="0.00" id="price-change-input" class="price-change-input" value="">
 
-                                <label for="input">US$</label>
+                                <label for="input">US{{$symbol['currency']}}</label>
 
                                 @error('price') <span class="text-danger">{{ $message }}</span>@enderror
 
@@ -268,7 +268,7 @@
 
                                 <input type="text" name="compare_price" placeholder="0.00" value="">
 
-                                <label for="input">US$</label>
+                                <label for="input">US{{$symbol['currency']}}</label>
 
                                  @error('compare_price') <span class="text-danger">{{ $message }}</span>@enderror
 
@@ -280,7 +280,7 @@
 
                                 <input type="text" name="compare_selling_price" wire:model="product.compare_selling_price" wire:ignore placeholder="0,00">
 
-                                <label for="input">US$</label>
+                                <label for="input">US{{$symbol['currency']}}</label>
 
                                  @error('compare_selling_price') <span class="text-danger">{{ $message }}</span>@enderror
 
@@ -300,7 +300,7 @@
 
                                 <input type="text" name="cost_main" placeholder="0.00" id="cost-change-input" class="cost-change-input" placeholder="0,00">
 
-                                <label for="input">US$</label>
+                                <label for="input">US{{$symbol['currency']}}</label>
 
                                  @error('cost') <span class="text-danger">{{ $message }}</span>@enderror
 
@@ -1348,7 +1348,7 @@ $(document).ready(function () {
                 }
                 else
                 {
-                     get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+' data-id='+uniq_id+'  data-input="">'+arr_name1+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p><span>$</span><span class="price-view-class" id="price-view-'+uniq_id+'"></span><span>.00</span></p><p>6 available at 2 locations</p></td></tr><br>';
+                     get_html += '<input type="hidden" name="varition_arrray[]" class="varition_tags" value="'+id_type1+'/'+arr_name1+'"><tr id='+uniq_id+' class="recorditem"><td><div class="row"><label><input type="checkbox" name="option6a"></label></div></td><td class="product-table-item"><a class="tc-black fw-6 varition_popup_main price-main-popup-input '+uniq_id+'" data-toggle="modal" id='+arr_name1+' data-id='+uniq_id+'  data-input="">'+arr_name1+'</a><a class="tc-black fw-6 sku-data-input" id="sku-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 barcode-data-input" id="barcode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><a class="tc-black fw-6 hscode-data-input" id="hscode-data-input-'+uniq_id+'" data-input="" style="display: none;"></a><input type="hidden" name="profit_arry[]" class="profit-data-input" id="profit-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="margin_arry[]" class="margin-data-input" id="margin-data-input-'+uniq_id+'" value="" data-input=""><input type="hidden" name="att_cost[]" class="cost-data-input cost-data-input cost-data-input-new" id="cost-data-input-'+uniq_id+'" value="" data-input=""></td><td class="vendor-table-item ta-right"><p><span>{{$symbol["currency"]}}</span><span class="price-view-class" id="price-view-'+uniq_id+'"></span><span>.00</span></p><p>6 available at 2 locations</p></td></tr><br>';
 
                      get_price_html += '<div class="vep-list bd_none"><label>'+arr_name1+'</label><span class="dollar-input"><input type="text" class="att_price_class" name="att_price[]" id="child-popup-price-'+uniq_id+'" data-id="'+uniq_id+'" value=""></span></div><br>';
 
@@ -1577,14 +1577,14 @@ $(document).ready(function () {
                                 <div class="form-field-list">
                                     <label>Price</label>
                                     <input type="text" value="`+inputvalue+`" id="main-popup-price`+id_value+`" class="change-value-main-price" placeholder="0.00">
-                                    <label for="input">US$</label>
+                                    <label for="input">{{$symbol['currency']}}</label>
                                 </div>
                             </div>
                             <div class="row variant-price-option">
                                 <div class="form-field-list cost-input">
                                     <label>Cost per item</label>
                                     <input type="text" name="cost" value="`+costinput+`" id="main-popup-cost-`+id_value+`" class="change-value-main-cost" placeholder="0,00">
-                                    <label for="input">US$</label>
+                                    <label for="input">{{$symbol['currency']}}</label>
                                     <p>Customers won’t see this</p>
                                 </div>
                                 <div class="form-field-list">

@@ -3,6 +3,7 @@
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
 
 <x-customer-layout>
+    @php $symbol = CurrencySymbol(); @endphp
 
     <div id="breadcrumb-container" name="breadcrumb-container" >
 
@@ -57,7 +58,7 @@
 
                         <div class="product-slider">
 
-                            <div class="product-slider-nav">
+                            <div class="product-slider-nav" wire:ignore>
                                 @foreach($Productmedia as $image)
                                 <div>
 
@@ -71,7 +72,7 @@
 
 
 
-                            <div class="product-slider-for">
+                            <div class="product-slider-for" wire:ignore>
 
                                  @foreach($Productmedia as $image)
 
@@ -142,7 +143,7 @@
                                     @if(!empty($priceres))
                                        
                                         <div class="pd-all-price offer-price ">
-                                            <h2 class="h2 @if(!empty($priceres['label'])) {{$priceres['label']}} @endif" id="getprice"><sup>$</sup><span>   {{number_format($priceres['price'],2,'.',',')}}</span></h2>
+                                            <h2 class="h2 @if(!empty($priceres['label'])) {{$priceres['label']}} @endif" id="getprice"><sup>{{$symbol['currency']}}</sup><span>   {{number_format($priceres['price'],2,'.',',')}}</span></h2>
                                             @if(!empty($priceres['selling_price']))
                                             <span class="pd-original-price"><s>{{number_format($priceres['selling_price'],2,'.',',')}}</s></span>
                                             @endif
@@ -351,7 +352,7 @@
 
                             <h3 class="h3">Wear It With</h3>
 
-                            <div class="wear-it-With-slider">
+                            <div class="wear-it-With-slider" wire:ignore>
 
                                 <div>
 
@@ -365,8 +366,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
-                                        <p class="product-price product-single-price">$99.95</p>
+                                        <p class="product-price"><span class="mrp-price">{{$symbol['currency']}}99.95</span><span class="msrp-price"><s>MSRP: {{$symbol['currency']}}150.00</s></span></p>
+                                        <p class="product-price product-single-price">{{$symbol['currency']}}99.95</p>
 
                                     </div>
 
@@ -384,8 +385,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
-                                        <p class="product-price product-single-price">$99.95</p>
+                                        <p class="product-price"><span class="mrp-price">{{$symbol['currency']}}99.95</span><span class="msrp-price"><s>MSRP: {{$symbol['currency']}}150.00</s></span></p>
+                                        <p class="product-price product-single-price">{{$symbol['currency']}}99.95</p>
 
                                     </div>
 
@@ -403,8 +404,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
-                                        <p class="product-price product-single-price">$99.95</p>
+                                        <p class="product-price"><span class="mrp-price">{{$symbol['currency']}}99.95</span><span class="msrp-price"><s>MSRP: {{$symbol['currency']}}150.00</s></span></p>
+                                        <p class="product-price product-single-price">{{$symbol['currency']}}99.95</p>
 
                                     </div>
 
@@ -422,8 +423,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
-                                        <p class="product-price product-single-price">$99.95</p>
+                                        <p class="product-price"><span class="mrp-price">{{$symbol['currency']}}99.95</span><span class="msrp-price"><s>MSRP: {{$symbol['currency']}}150.00</s></span></p>
+                                        <p class="product-price product-single-price">{{$symbol['currency']}}99.95</p>
 
                                     </div>
 
@@ -441,8 +442,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
-                                        <p class="product-price product-single-price">$99.95</p>
+                                        <p class="product-price"><span class="mrp-price">{{$symbol['currency']}}99.95</span><span class="msrp-price"><s>MSRP: {{$symbol['currency']}}150.00</s></span></p>
+                                        <p class="product-price product-single-price">{{$symbol['currency']}}99.95</p>
 
                                     </div>
 
@@ -460,8 +461,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
-                                        <p class="product-price product-single-price">$99.95</p>
+                                        <p class="product-price"><span class="mrp-price">{{$symbol['currency']}}99.95</span><span class="msrp-price"><s>MSRP: {{$symbol['currency']}}150.00</s></span></p>
+                                        <p class="product-price product-single-price">{{$symbol['currency']}}99.95</p>
 
                                     </div>
 
@@ -479,8 +480,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
-                                        <p class="product-price product-single-price">$99.95</p>
+                                        <p class="product-price"><span class="mrp-price">{{$symbol['currency']}}99.95</span><span class="msrp-price"><s>MSRP: {{$symbol['currency']}}150.00</s></span></p>
+                                        <p class="product-price product-single-price">{{$symbol['currency']}}99.95</p>
 
                                     </div>
 
@@ -536,7 +537,7 @@
 
                             <h3 class="h3">Customer Who Bought This Item Also Bought</h3>
 
-                            <div class="item-bought-slider">
+                            <div class="item-bought-slider" wire:ignore>
 
                                 <div>
 
@@ -550,8 +551,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
-                                        <p class="product-price product-single-price">$99.95</p>
+                                        <p class="product-price"><span class="mrp-price">{{$symbol['currency']}}99.95</span><span class="msrp-price"><s>MSRP: {{$symbol['currency']}}150.00</s></span></p>
+                                        <p class="product-price product-single-price">{{$symbol['currency']}}99.95</p>
 
                                     </div>
 
@@ -569,8 +570,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
-                                        <p class="product-price product-single-price">$99.95</p>
+                                        <p class="product-price"><span class="mrp-price">{{$symbol['currency']}}99.95</span><span class="msrp-price"><s>MSRP: {{$symbol['currency']}}150.00</s></span></p>
+                                        <p class="product-price product-single-price">{{$symbol['currency']}}99.95</p>
 
                                     </div>
 
@@ -588,8 +589,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
-                                        <p class="product-price product-single-price">$99.95</p>
+                                        <p class="product-price"><span class="mrp-price">{{$symbol['currency']}}99.95</span><span class="msrp-price"><s>MSRP: {{$symbol['currency']}}150.00</s></span></p>
+                                        <p class="product-price product-single-price">{{$symbol['currency']}}99.95</p>
 
                                     </div>
 
@@ -607,8 +608,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
-                                        <p class="product-price product-single-price">$99.95</p>
+                                        <p class="product-price"><span class="mrp-price">{{$symbol['currency']}}99.95</span><span class="msrp-price"><s>MSRP: {{$symbol['currency']}}150.00</s></span></p>
+                                        <p class="product-price product-single-price">{{$symbol['currency']}}99.95</p>
 
                                     </div>
 
@@ -626,8 +627,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
-                                        <p class="product-price product-single-price">$99.95</p>
+                                        <p class="product-price"><span class="mrp-price">{{$symbol['currency']}}99.95</span><span class="msrp-price"><s>MSRP: {{$symbol['currency']}}150.00</s></span></p>
+                                        <p class="product-price product-single-price">{{$symbol['currency']}}99.95</p>
 
                                     </div>
 
@@ -645,8 +646,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
-                                        <p class="product-price product-single-price">$99.95</p>
+                                        <p class="product-price"><span class="mrp-price">{{$symbol['currency']}}99.95</span><span class="msrp-price"><s>MSRP: {{$symbol['currency']}}150.00</s></span></p>
+                                        <p class="product-price product-single-price">{{$symbol['currency']}}99.95</p>
 
                                     </div>
 
@@ -664,8 +665,8 @@
 
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
-                                        <p class="product-price"><span class="mrp-price">$99.95</span><span class="msrp-price"><s>MSRP: $150.00</s></span></p>
-                                        <p class="product-price product-single-price">$99.95</p>
+                                        <p class="product-price"><span class="mrp-price">{{$symbol['currency']}}99.95</span><span class="msrp-price"><s>MSRP: {{$symbol['currency']}}150.00</s></span></p>
+                                        <p class="product-price product-single-price">{{$symbol['currency']}}99.95</p>
 
                                     </div>
 
@@ -687,7 +688,7 @@
 
                             <h3 class="h3">Recommended For You</h3>
 
-                            <div class="similar-items-slider">
+                            <div class="similar-items-slider" wire:ignore>
 
                                 @foreach($productrelated as $rows)
 
@@ -728,10 +729,10 @@
                                         <p class="multi-pd-title">{{$rows->title}}</p>
 
                                         <p class="product-price @if(!empty($priceres['label'])) {{$priceres['label']}} @endif" >
-                                        <span class="mrp-price">${{number_format($priceres['price'],2,'.',',')}}
+                                        <span class="mrp-price">{{$symbol['currency']}}{{number_format($priceres['price'],2,'.',',')}}
                                         </span>
                                         @if(!empty($priceres['selling_price']))
-                                        <span class="msrp-price"><s>MSRP: ${{number_format($priceres['selling_price'],2,'.',',')}}</s></span>
+                                        <span class="msrp-price"><s>MSRP: {{$symbol['currency']}}{{number_format($priceres['selling_price'],2,'.',',')}}</s></span>
                                         @endif
                                         </p>
                                         @endif
@@ -776,7 +777,7 @@
 
                             <h3 class="h3">Your Recently Viewed Items</h3>
 
-                            <div class="recently-viewed-slider">
+                            <div class="recently-viewed-slider" wire:ignore>
 
                                 @if(Cookie::get('shopping_cart'))
 
@@ -806,10 +807,10 @@
 
                                         @if(!empty($priceres))
                                         <p class="product-price @if(!empty($priceres['label'])) {{$priceres['label']}} @endif" >
-                                        <span class="mrp-price">${{number_format($priceres['price'],2,'.',',')}}
+                                        <span class="mrp-price">{{$symbol['currency']}}{{number_format($priceres['price'],2,'.',',')}}
                                         </span>
                                         @if(!empty($priceres['selling_price']))
-                                        <span class="msrp-price"><s>MSRP: ${{number_format($priceres['selling_price'],2,'.',',')}}</s></span>
+                                        <span class="msrp-price"><s>MSRP: {{$symbol['currency']}}{{number_format($priceres['selling_price'],2,'.',',')}}</s></span>
                                         @endif
                                         </p>
                                         @endif
@@ -922,6 +923,7 @@
 
                         {
 
+                            alert(response.variant.id);
                              price = response.price;
 
                              console.log(response.variant.variant_stock);

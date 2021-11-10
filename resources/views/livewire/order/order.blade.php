@@ -1,5 +1,6 @@
 <div>
 <x-admin-layout>
+    @php $symbol = CurrencySymbol(); @endphp
     <section class="full-width flex-wrap admin-full-width list-customers">
         <div class="page_header d-flex align-item-center justify-content-space-between full-width mb-2">
             <h4 class="mb-0 fw-5">Orders</h4>
@@ -240,7 +241,7 @@
                                <a class="tc-black fw-6" href="{{ route('order-detail', $row->id) }}"> <button class="link">@if($row['user']){{$row['user'][0]['first_name']}}@endif <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button></a>
                             </td>
                             <td>
-                                <p>{{$row->netamout}}</p>
+                                <p>{{$symbol['currency']}}{{$row->netamout}}</p>
                             </td>
                             <td>
                                 <span class="tag grey"><span class="grey-circle"></span>{{$row->paymentstatus}}</span>
