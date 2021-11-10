@@ -21,7 +21,7 @@
                 </div>
             </div>
             <section class="header-mid">
-                <div class="container">
+                <div class="container"> 
                     <div class="row">
                         <div class="col-12 d-flex align-items-center">
                             <div class="logo">
