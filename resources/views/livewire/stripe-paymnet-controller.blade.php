@@ -376,6 +376,8 @@ $(function() {
 
         const stripe = Stripe('pk_test_eEW1sG9Y0HvZ0SuSZsWts81500648362WW');
         const elements = stripe.elements();
+        var accountholderName = document.getElementById('acholdername');
+
         const idealBank = elements.create('idealBank');
         idealBank.mount('#ideal-bank-element');
 
@@ -395,6 +397,9 @@ $(function() {
             '<?= $paymentIntent->client_secret; ?>', {
               payment_method: {
                 ideal: idealBank,
+                billing_details: {
+                    name: accountholderName.value,
+                },
               },
               return_url: app_url+`/thankyou/`+orderid,
             },
