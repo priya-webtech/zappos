@@ -121,13 +121,11 @@ class ProductFrontDetail extends Component
 
     }
 
-    public function fetchPrice(Request $request)
+      public function fetchPrice(Request $request)
     {
 
         $productvariants = ProductVariant::with(['variant_stock' => function($q) {
             $q->where('location_id', 1);
-
-        }])->where('attribute1',$request->text1)->OrWhere('attribute2',$request->text2)->where('product_id',$request->productid)->first();
         }])->get();
 
 
@@ -198,7 +196,6 @@ class ProductFrontDetail extends Component
 
 
         // dump($this->Productvariant->id);
-
         // $this->Productvariant = Productvariant::with(['variant_stock' => function($q) {
         //     $q->where('location_id', 1);
         // }])->when($this->variant1, function($q1) {
