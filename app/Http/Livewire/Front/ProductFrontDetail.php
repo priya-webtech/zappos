@@ -124,9 +124,81 @@ class ProductFrontDetail extends Component
     public function fetchPrice(Request $request)
     {
 
-        $this->Productvariant = ProductVariant::with(['variant_stock' => function($q) {
+        $productvariants = ProductVariant::with(['variant_stock' => function($q) {
             $q->where('location_id', 1);
+
         }])->where('attribute1',$request->text1)->OrWhere('attribute2',$request->text2)->where('product_id',$request->productid)->first();
+        }])->get();
+
+
+        // if(!empty($productvariants) && count($productvariants) > 0) {
+        
+
+        //     foreach ($productvariants as $variant) {
+        //         if($variant->attribute1 == $request->text1) {
+        //             if(empty($productvariant )) $productvariant = $variant;
+                    
+        //             if($variant->attribute2 == $request->text2) {
+        //                  if(empty($productvariant )) $productvariant = $variant;
+        //                 if($variant->attribute3 == $request->text3) {
+        //                     $productvariant = $variant;
+        //                     break;
+        //                 }                       
+        //             }
+        //         }
+        //     }
+                    
+
+        //              if(empty($productvariant)) { $productvariant = $productvariants[0];}
+        //              $this->Productvariant = $productvariant;
+
+        // }
+         
+                   
+
+
+        if(!empty($productvariants) && count($productvariants) > 0) {
+           
+        
+
+            foreach ($productvariants as $variant) {
+                if(($variant->attribute1 == $request->text1) && ($variant->attribute2 == $request->text2) && ($variant->attribute3 == $request->text3)) {
+                    $productvariant = $variant;
+                    break;     
+                }
+            }
+            if(empty($productvariant)) {
+
+
+            foreach ($productvariants as $variant) {
+                if($variant->attribute1 == $request->text1 && $variant->attribute2 == $request->text2) {
+                    $productvariant = $variant;
+                    break;     
+                }else if($variant->attribute1 == $request->text1 && $variant->attribute3 == $request->text3) {
+                    $productvariant = $variant;
+                    break;     
+                }else if($variant->attribute2 == $request->text2 && $variant->attribute3 == $request->text3) {
+                    $productvariant = $variant;
+                    break;     
+                }
+            }
+        }
+         if(empty($productvariant)) {
+            foreach ($productvariants as $variant) {
+                if(($variant->attribute1 == $request->text1) || ($variant->attribute2 == $request->text2) || ($variant->attribute3 == $request->text3)) {
+                    $productvariant = $variant;
+                    break;     
+                }
+            }
+        }
+        if(empty($productvariant)) { $productvariant = $productvariants[0];}
+                    $this->Productvariant = $productvariant;
+
+        }
+
+
+        // dump($this->Productvariant->id);
+
         // $this->Productvariant = Productvariant::with(['variant_stock' => function($q) {
         //     $q->where('location_id', 1);
         // }])->when($this->variant1, function($q1) {
