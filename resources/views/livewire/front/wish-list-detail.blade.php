@@ -1,11 +1,13 @@
 <div>
     {{-- Stop trying to control. --}}
     <x-customer-layout>
-    	<div class="row" wire:ignore>
-                    <div class="col-12">
-                    	<h1>Favorite List</h1>
-                        <div class="similar-items-sec multi-item-slider">
-                            <div class="similar-items-slider" wire:ignore>
+        <div class="favorite-list-sec">
+    	   <div class="row" wire:ignore>
+                <div class="col-12">
+                    <div class="container">
+                    	<h1 class="h1">Favorite List</h1>
+                        <div class="multi-item-slider">
+                            <div class="favorite-list-slider" wire:ignore>
                                 @foreach($product as $rows)
                                 @if(!empty($rows['favoriteget'][0]['user_id']))
                                 <div>
@@ -29,5 +31,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
     </x-customer-layout>
 </div>

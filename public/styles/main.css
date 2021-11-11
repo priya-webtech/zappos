@@ -200,8 +200,9 @@ nav.navbar {padding:0 15px; }
 .proceed-cart .wish-list i {margin-left: 6px; }
 
 .empty-cart-modal {padding: 20px; text-align: center; font-size: 14px; color: #202223; font-weight: 400; }
-.empty-cart-modal ul {display: flex; justify-content: space-between; margin-bottom: 30px; }
-.empty-cart-modal ul a {color: #003953; font-weight: 600; }
+.empty-cart-modal img {margin-top: 15px; }
+/*.empty-cart-modal ul {display: flex; justify-content: space-between; margin-bottom: 30px; }
+.empty-cart-modal ul a {color: #003953; font-weight: 600; }*/
 
 
 /*Sign In modal*/
@@ -219,7 +220,14 @@ button.signin-close-btn svg {fill: #003953; }
 #sign-in-form a {background-color: transparent; color: #003953; font-size: 14px; font-weight: bold; margin: 10px 0 20px; }
 .sign-up-container button.site-btn {margin-top: 15px; }
 #sign-in-form form {background-color: #e5f1f8; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 0 50px; height: 100%; text-align: center; width: 100%;}
-#sign-in-form input {background-color: #ffffff; border: none; padding: 11px 15px; margin: 8px 0; width: 100%; border-radius: 5px; font-size: 14px; line-height: 20px; }
+#sign-in-form input {background-color: #ffffff !important; border: none; padding: 11px 15px; margin: 8px 0; width: 100%; border-radius: 5px; font-size: 14px; line-height: 20px; }
+#sign-in-form input:-webkit-autofill, 
+#sign-in-form input:-webkit-autofill:hover,
+#sign-in-form input:-webkit-autofill:focus,
+#sign-in-form input:-webkit-autofill:active  {
+     -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+}
+
 #sign-in-form .container {background-color: #e5f1f8; border-radius: 10px; box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); position: relative; overflow: hidden; width: 768px; max-width: 100%; min-height: 500px;}
 #sign-in-form .form-container {position: absolute; top: 0; height: 100%; transition: all 0.6s ease-in-out; display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
 .sign-in-container {left: 0; width: 50%; z-index: 2; color: #003953; font-weight: 500; }
@@ -237,6 +245,7 @@ button.signin-close-btn svg {fill: #003953; }
 		z-index: 5;
 	}
 }
+
 
 .signin-bottom-cont {text-align: center; color: #666666; font-size: 13px; font-weight: 400; padding-bottom: 15px; }
 .signin-bottom-cont p {margin-bottom: 0; }
@@ -795,8 +804,12 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .modal-open2 {overflow: hidden; padding-right: 17px; }
 .modal-open2 .details-change-modal {overflow-x: hidden; overflow-y: auto; padding-right: 17px; }
 
-
 .product-slider-for, .product-slider-nav, .wear-it-With-slider, .item-bought-slider,.similar-items-slider, .recently-viewed-slider { display: none; }
-
 .product-slider-for.slick-initialized, .product-slider-nav.slick-initialized, .wear-it-With-slider.slick-initialized,
 .item-bought-slider.slick-initialized,.similar-items-slider.slick-initialized, .recently-viewed-slider.slick-initialized { display: block; }
+
+/*Favorite List page css*/
+.favorite-list-sec {padding: 60px 0; }
+.favorite-list-sec .h1 {font-size: 36px; margin-bottom: 30px ;}
+.favorite-list-sec .multi-item-content { margin-top: 0;}
+.favorite-list-sec {padding: 50px 0 60px; }

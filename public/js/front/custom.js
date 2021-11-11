@@ -176,6 +176,13 @@ function initializeSwiper() {
 		slidesToShow: 6,
 		slidesToScroll: 6,
 	});
+	$('.favorite-list-slider').slick({
+		dots: false,
+		infinite: false,
+		speed: 300,
+		slidesToShow: 6,
+		slidesToScroll: 6,
+	});
 }
  $(window).on('load', function() {
 	initializeSwiper();

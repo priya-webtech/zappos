@@ -170,12 +170,12 @@
                                     @else
                                     <div class="empty-cart-modal">
                                         <p>Fill up your Cart by checking out all the awesome things you can buy on company name or by adding items from Your Favorites!</p>
-                                        <ul>
+                                        <!-- <ul>
                                             <li><a href="#">Shop Women's</a></li>
                                             <li><a href="#">Shop Men's</a></li>
                                             <li><a href="#">Shop Shoes</a></li>
                                             <li><a href="#">Brand List</a></li>
-                                        </ul>
+                                        </ul> -->
                                         <img src="http://185.160.67.108/estore/public/assets/empty-cart.svg">
 
                                     </div>
