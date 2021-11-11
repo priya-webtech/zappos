@@ -808,8 +808,36 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .product-slider-for.slick-initialized, .product-slider-nav.slick-initialized, .wear-it-With-slider.slick-initialized,
 .item-bought-slider.slick-initialized,.similar-items-slider.slick-initialized, .recently-viewed-slider.slick-initialized { display: block; }
 
-/*Favorite List page css*/
+/********************************
+	  Favorite List page css
+********************************/
 .favorite-list-sec {padding: 60px 0; }
 .favorite-list-sec .h1 {font-size: 36px; margin-bottom: 30px ;}
 .favorite-list-sec .multi-item-content { margin-top: 0;}
 .favorite-list-sec {padding: 50px 0 60px; }
+
+/**********************************
+		thank you page css
+**********************************/
+.thank-you-sec {text-align: center; padding: 60px 0 50px;color: #003953; }
+.thank-you-sec .h1 {margin: 15px 0 20px; font-weight: bold;font-size: 36px; }
+.thank-you-sec .site-btn {margin-top: 10px; background-color: #003953; color: #fff; }
+/*.thank-you-sec .site-btn:hover {background-color: transparent;color: #003953;}*/
+.thank-you-sec .site-btn i, .thank-you-sec .site-btn svg {margin: 0 5px 0 0; transition: all .4s;}
+.thank-you-sec .site-btn:hover i, .thank-you-sec .site-btn:hover svg {margin: 0 9px 0 -4px; }
+
+/*********************************
+		static page css
+*********************************/
+.static-page {font-size: 14px; padding: 50px 0 60px; }
+.static-page .h1 {font-size: 36px; font-weight: 600; margin-bottom: 25px;color: #003953; }
+.static-page ul#myTab {display: block; background-color: #e5f1f8; box-shadow: -5px 0 6px 2px rgb(0 0 0 / 6%); height: 100%; border: none;}
+.static-page ul#myTab a {position: relative; padding: 15px 40px 15px 20px; border: none; font-size: 15px; color: #003953; font-weight: 600; border-radius: 0; border-bottom: 1px solid rgb(0 57 83 / 21%); }
+.static-page ul#myTab a::after {content: "\f105"; font-family: FontAwesome; font-weight: 600; font-size: 22px; position: absolute; top: 9px; right: 20px; }
+.static-page ul#myTab li:last-child a {border-bottom: none; }
+.static-page ul#myTab li .nav-item.show .nav-link, .static-page ul#myTab li .nav-link.active {border-color: transparent; }
+.static-page ul#myTab li .nav-item.show .nav-link, .static-page ul#myTab li .nav-link.active {border-color: transparent; background-color: #003953; color: #fff; }
+.static-page .tab-content .h4 {margin-bottom: 10px; margin-top: 10px; display: inline-block; font-weight: 600; }
+.static-page .tab-content .tab-pane > .h4:first-child {margin-top: 0; }
+.static-page .tab-content p {margin-bottom: 15px; }
+.static-page .site-btn {text-transform: capitalize; margin-top: 15px; margin-left: auto; }
