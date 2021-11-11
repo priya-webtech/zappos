@@ -926,7 +926,6 @@
 
                         {
 
-                            alert(response.variant.id);
                              price = response.price;
 
                              console.log(response.variant.variant_stock);
