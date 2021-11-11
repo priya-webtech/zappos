@@ -28,13 +28,16 @@ use Stripe;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Validator;
+
 class StripePaymnetController extends Component
 {
-    public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$fullname,$address,$city,$country,$pincode,$mobile,$Taxes, $view;
+    public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$fullname,$address,$city,$country,$pincode,$mobile,$Taxes, $view, $orderID;
 
     public function mount($id)
     {
-        $this->view = 'address';
+        $this->orderID = $id;
+        $this->view = false;
         $this->orderdetail = Orders::where('id',$id)->first();
         $this->Taxes = tax::where('id',1)->first();
         $this->ProductVariant = ProductVariant::get();
@@ -43,35 +46,48 @@ class StripePaymnetController extends Component
             $this->user_id =  Auth::user()->id;
             $this->CartItem =  Cart::with(['media_product', 'product_detail'])->where('user_id',$this->user_id)->get();
         }
+
+        $order = Orders::find($this->orderID);
+
+        $this->fullname = $order->fullname;
+        $this->address = $order->address;
+        $this->city = $order->city;
+        $this->country = $order->country;
+        $this->pincode = $order->pincode;
+        $this->mobile = $order->mobile;
+
+        if(!empty($order->address)) {
+            $this->view = true;
+        }
     }
     public function render()
     {
 
-        $stripe = new \Stripe\StripeClient('sk_test_ngkOUeScv0ATVVwLqg88ZdBv00ZX79AIQ8');
-        try {
-          $paymentIntent = $stripe->paymentIntents->create([
-            'payment_method_types' => ['ideal'],
-            'amount' => $this->orderdetail->netamout *100 ,
-            'currency' => 'eur',
-            'metadata' => ['order_id' => $this->orderdetail->id]
-          ]);
 
-          return view('livewire.stripe-paymnet-controller', ['paymentIntent' => $paymentIntent]);
+        // $stripe = new \Stripe\StripeClient('sk_test_ngkOUeScv0ATVVwLqg88ZdBv00ZX79AIQ8');
+        // try {
+        //   $paymentIntent = $stripe->paymentIntents->create([
+        //     'payment_method_types' => ['ideal'],
+        //     'amount' => $this->orderdetail->netamout *100 ,
+        //     'currency' => 'eur',
+        //     'metadata' => ['order_id' => $this->orderdetail->id]
+        //   ]);
+
+          return view('livewire.stripe-paymnet-controller');
 
 
-        } catch (\Stripe\Exception\ApiErrorException $e) {
-            // dd($e->getError()->message);
-          http_response_code(400);
-          error_log($e->getError()->message); 
-          return redirect()->back()->with('message', $e->getError()->message);
-        }
+        // } catch (\Stripe\Exception\ApiErrorException $e) {
+        //     // dd($e->getError()->message);
+        //   http_response_code(400);
+        //   error_log($e->getError()->message); 
+        //   return redirect()->back()->with('message', $e->getError()->message);
+        // }
 
         
      
     }
     public function addshipping($id)
     {
-
         $paymentdetail = Orders::where('id', $id)->update(
                     [
                         'fullname' => $this->fullname,
@@ -83,7 +99,7 @@ class StripePaymnetController extends Component
                     ]
                 );
         if($paymentdetail) {
-            $this->view = 'payment';
+            $this->view = true;
         }
     }
 

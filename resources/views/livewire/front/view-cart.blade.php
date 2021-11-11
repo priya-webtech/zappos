@@ -31,7 +31,7 @@
                                      $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
                                     }else
                                     {
-                                      $subtotal2 += $cart['stock'] * $detailfetch['price'];
+                                      $subtotal2 += $cart['stock'] * $cart['price'];
                                     }
 
                                     $subtotal = $subtotal1 + $subtotal2;
@@ -69,7 +69,7 @@
                                             <span class="cart-pd-price">
                                             {{$symbol['currency']}}{{$detailfetch['selling_price']}}
                                             @if(!$detailfetch['selling_price'])
-                                            {{$detailfetch['price']}}
+                                            {{$cart['price']}}
                                             @endif
 
                                             </span>
@@ -118,6 +118,7 @@
                                         <p class="total-price">total: <span>{{$symbol['currency']}}{{number_format($total,2,".",",")}}</span></p>
                                     </div>
                                     <div class="vc-inner">
+                                        <input type="hidden" name="total_price" value="{{$total}}" />
                                         <button type="submit" class="site-btn">Proceed to Checkout</button>
                                     </div>
                                 </form>

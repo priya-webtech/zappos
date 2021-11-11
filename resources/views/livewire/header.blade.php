@@ -58,7 +58,7 @@
                             </div>
                             <form method="post" action="{{ route('add-order') }}" name="form">
                              @csrf
-                            <div class="proceed-cart" id="proceed-cart">
+                            <div class="proceed-cart" id="proceed-cart" wire:ignore.self>
                                 <div class="proceed-cart-head">
                                     <h4 class="h4">My Cart</h4>
                                     <a class="myclose-close" onclick="document.getElementById('proceed-cart').style.display='none'">
@@ -90,7 +90,7 @@
                                                  $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
                                                 }else
                                                 {
-                                                  $subtotal2 += $cart['stock'] * $detailfetch['price'];
+                                                  $subtotal2 += $cart['stock'] * $cart['price'];
                                                 }
 
                                                 $subtotal = $subtotal1 + $subtotal2;
@@ -127,7 +127,7 @@
                                                             </div>
                                                         </div>
                                                         @php
-                                                        $result = favorite($cart['product_detail'][0]['id']);
+                                                        $result = favorite($cart['varientid']);
                                                         @endphp
                                                         @if(!empty($result))
                                                         <a  class="wish-list {{$result['class']}}" name="r-heart-button" wire:click.prevent="UpdateWish({{$result['id']}}, {{$result['product_id']}})">
@@ -139,15 +139,16 @@
                                                     <div class="cart-list-right">
                                                         @if(!empty($detailfetch))
                                                         <p class="product-price @if(!empty($detailfetch['label'])) {{$detailfetch['label']}} @endif" >
-                                                        <span class="mrp-price">{{$symbol['currency']}}{{number_format($detailfetch['price'],2,'.',',')}}
+                                                        <span class="mrp-price">{{$symbol['currency']}}{{number_format($cart['price'],2,'.',',')}}
                                                         </span>
                                                         @if(!empty($detailfetch['selling_price']))
                                                         <span class="msrp-price"><s>MSRP: {{$symbol['currency']}}{{number_format($detailfetch['selling_price'],2,'.',',')}}</s></span>
                                                         @endif
                                                         </p>
                                                         @endif
+
                                                        
-                                                        <a wire:click.prevent="DeleteCartProduct({{$cart['id']}})" onclick="document.getElementById('proceed-cart').style.display='none'" href="javascript:;">delete</a>
+                                                        <a wire:click.prevent="DeleteCartProduct({{$cart['id']}})"  href="javascript:;">delete</a>
                                                     </div>
                                                 </div>
 
@@ -164,6 +165,7 @@
                                             <button class="site-btn signin-btn">Sign In</button>
                                             @endif
                                             <a href="{{ route('view-cart') }}" class="site-btn view-cart-btn">View Cart</a>
+                                            <input type="hidden" name="total_price" value="{{$total}}" />
                                             <input type="submit" name="checkout" class="site-btn checkout-btn" value="Proceed to checkout">
                                         </div>
                                     </div>
@@ -467,4 +469,10 @@ $(document).ready(function(){
 </div>
 
 </div>
+<script type="text/javascript">
+    $("[type='number']").keypress(function (evt) {
+    evt.preventDefault();
+});
+</script>
+
 

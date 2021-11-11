@@ -77,40 +77,41 @@
                         </div>
 
                     @endif
-                    @if($view == 'address')
+                    
 
                     <div class="shipping-details-card">
 
                         <h3 class="panel-title">Shipping Details</h3>
 
-                        <form role="form" id="address-form" class="require-validation"  >
+                        <form role="form" id="address-form" class="require-validation" wire:submit.prevent="addshipping({{$orderdetail->id}})" >
                             
                             <input type="hidden" name="orderid" value="{{$orderdetail->id}}">
                             <div class='form-row'>
 
                                 <div class='col-xs-12 form-group required'>
                                     <label class='control-label'>Full name</label> 
-                                    <input class='form-control' wire:model="fullname" name="fullname" type='text'>
+                                    <input class='form-control' wire:model="fullname" name="fullname" type='text' required>
                                 </div>
+                                 
                                 <div class='col-xs-12 form-group'>
                                     <label class='control-label'>Address</label> 
-                                    <textarea class='form-control' wire:model="address" name="address" type='text'></textarea>
+                                    <textarea class='form-control' wire:model="address" name="address" type='text' required></textarea>
                                 </div>
                                 <div class='col-xs-12 form-group required'>
                                     <label class='control-label'>City</label> 
-                                    <input class='form-control' wire:model="city" name="city" type='text'>
+                                    <input class='form-control' wire:model="city" name="city" type='text' required>
                                 </div>
                                 <div class='col-xs-12 form-group required'>
                                     <label class='control-label'>Country</label> 
-                                    <input class='form-control' wire:model="country" name="country" type='text'>
+                                    <input class='form-control' wire:model="country" name="country" type='text' required>
                                 </div>
                                 <div class='col-xs-12 form-group required'>
                                     <label class='control-label'>Pincode</label> 
-                                    <input class='form-control' wire:model="pincode" name="pincode" type='text'>
+                                    <input class='form-control' wire:model="pincode" name="pincode" type='text' required>
                                 </div>
                                 <div class='col-xs-12 form-group required'>
                                     <label class='control-label'>Mobile Number</label> 
-                                    <input class='form-control' wire:model="mobile" name="mobile" type='text'>
+                                    <input class='form-control' wire:model="mobile" name="mobile" type='text' required>
                                 </div>
                             </div>
 
@@ -132,7 +133,7 @@
 
                                 <div class="col-xs-12">
                                   
-                                    <button class="site-btn" wire:click.prevent="addshipping({{$orderdetail->id}})" >Submit</button>
+                                    <button type="submit" class="site-btn" >Submit</button>
 
                                 </div>
 
@@ -140,7 +141,6 @@
 
                         </form>
                     </div>
-                    @endif
                     <div class="shipping-details-card re-order-tbl">
                         <h3 class="panel-title">Order Details</h3>
                         <table>
@@ -277,7 +277,7 @@
                  $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
                 }else
                 {
-                  $subtotal2 += $cart['stock'] * $detailfetch['price'];
+                  $subtotal2 += $cart['stock'] * $cart['price'];
                 }
 
                 $subtotal = $subtotal1 + $subtotal2;
@@ -308,7 +308,7 @@
                         @include('livewire.front.cartdetail')
                         @if(!empty($detailfetch))
                         <p>
-                            <span><b>Sale:</b> <span class="red-color">{{$symbol['currency']}}{{number_format($detailfetch['price'],2,'.',',')}}</span></span>
+                            <span><b>Sale:</b> <span class="red-color">{{$symbol['currency']}}{{number_format($cart['price'],2,'.',',')}}</span></span>
                             @if(!empty($detailfetch['selling_price']))
                             <span class="grey-color"><b>MSRP:</b> {{$symbol['currency']}}{{number_format($detailfetch['selling_price'],2,'.',',')}}</span>
                             @endif
@@ -332,23 +332,31 @@
                     <p class="total-price">total: <span>{{$symbol['currency']}}{{number_format($gst_Total,2,".",",")}}</span></p>
                 </div>
             </div>
+            @if($view)
             <form id="payment-form">
                 @csrf
                 <h3 class="panel-title">Payment</h3>
                 <label for="name"> Account Holder Name</label>
                 <div class="account-name-row">
                     <input id="acholdername" value="" required>
-                    <label for="ideal-bank-element" class="bank-name">iDEAL Bank</label>
                 </div>
+                <label for="ideal-bank-element" class="bank-name">iDEAL Bank</label>
+
                 <div class="account-name-row">
+
                      <div id="ideal-bank-element">
                       <!-- A Stripe Element will be inserted here. -->
                     </div>
-                    <button type="submit">Pay {{$symbol['currency']}}{{number_format($gst_Total,2,".",",")}}</button>
+
+                    
                 </div>
+                 <div class="account-name-row">
+                <button type="submit">Pay {{$symbol['currency']}}{{number_format($gst_Total,2,".",",")}}</button>
+            </div>
                 <!-- Used to display form errors. -->
                 <div id="error-message" role="alert"></div>
               </form>
+              @endif
            
 
               <div id="messages" role="alert" style="display: none;"></div>
@@ -492,6 +500,7 @@ $(function() {
 
         const paymentForm = document.querySelector('#payment-form');
         paymentForm.addEventListener('submit', async (e) => {
+
           // Avoid a full page POST request.
           e.preventDefault();
           var orderid = '<?= $orderdetail->id ?>';
@@ -499,6 +508,24 @@ $(function() {
           // Customer inputs
           const nameInput = document.querySelector('#acholdername');
           const amounts = '<?= $gst_Total ?>';
+
+           <?php
+
+                 
+                 $amt =number_format((float)$gst_Total, 2, '.', '');
+
+
+                  $stripe = new \Stripe\StripeClient('sk_test_ngkOUeScv0ATVVwLqg88ZdBv00ZX79AIQ8');
+       
+                  $paymentIntent = $stripe->paymentIntents->create([
+                    'payment_method_types' => ['ideal'],
+                    'amount' => $amt *100 ,
+                    'currency' => 'eur',
+                    'metadata' => ['order_id' => $orderdetail->id]
+                  ]);
+               
+             ?>
+
 
           // Confirm the payment that was created server side:
           const {error, paymentIntent} = await stripe.confirmIdealPayment(
@@ -509,7 +536,7 @@ $(function() {
                     name: accountholderName.value,
                 },
               },
-              return_url: app_url+`/thankyou/`+orderid,
+              return_url: `http://127.0.0.1:8000/thankyou/`+orderid,
             },
           );
           if(error) {

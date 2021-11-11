@@ -40,14 +40,15 @@ class CheckoutInsertOrder extends Component
 
         $cartid_arr = $Request->cartid;
 
+        $netamout  = $Request->total_price;
+
 
         $user_id =  Auth::user()->id;
         $this->Cart = Cart::where('user_id',$user_id)->get();
-        $netamout = 0;
-        foreach($this->Cart as $res){
-            $totalamout = $res->price * $res->stock;
-            $netamout += $totalamout;
-        }  
+        // foreach($this->Cart as $res){
+        //     $totalamout = $res->price * $res->stock;
+        //     $netamout += $totalamout;
+        // }  
 
 
          $Order_insert = Orders::insert(
@@ -55,7 +56,7 @@ class CheckoutInsertOrder extends Component
 
                     'uuid' => '1',
 
-                    'user_id' => $res->user_id,
+                    'user_id' => $user_id,
                     
                     'transactionid' => '0',
 
