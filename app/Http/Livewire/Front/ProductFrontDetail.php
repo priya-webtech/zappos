@@ -81,7 +81,7 @@ class ProductFrontDetail extends Component
         $this->Productmedia = ProductMedia::where('product_id',$this->product->id)->get();
 
         $this->tags = Tag::All();
-        
+            
         $this->favoritevalue  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
 
         $shopping_cart = json_decode(Cookie::get('shopping_cart'));

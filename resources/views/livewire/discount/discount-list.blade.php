@@ -6,7 +6,7 @@
                 <div class="page_header d-flex  align-item-center">
                     <h4 class="mb-0 fw-5">Discount</h4>
                 </div>
-                <a class="button green-btn" href="{{ route('discount-create') }}">Create Discount</a>
+                <a class="button green-btn" href="{{ route('discount-creates') }}">Create Discount</a>
             </div>
         </article>
     </section> 

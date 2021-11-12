@@ -36,16 +36,21 @@ class DiscountCreate extends Component
 
     public function SaveRecord($flag)
     {	
-
     	
 		if(!empty($this->applyto)){
 			if($this->applyto == '2'){
 				$productarray = json_encode($this->selectedcollection);
-			}
+			}else{
+                 $productarray = '0';
+            }
 			if($this->applyto == '3'){
 				$productarray = json_encode($this->selectedproduct);
-			}
-		}
+			}else{
+                 $productarray = '0';
+            }
+		}else{
+            $productarray = '0';
+        }
 
     	if($flag == 'save-discount')
         {

@@ -941,7 +941,7 @@
 
                         
 
-                         $('#getprice').html("<sup>$</sup><span>"+price+"</span>");
+                         $('#getprice').html("<sup>{{$symbol['currency']}}</sup><span>"+price+"</span>");
 
                         $('#variant_id').prop('value',id);
 
