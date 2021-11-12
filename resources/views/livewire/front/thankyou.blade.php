@@ -15,7 +15,7 @@
          </div>
 
          @endif
-
+ 
       </div>
 
        <a href="{{url('/')}}"><button class="btn move-heart-button">Redirect home</button></a>

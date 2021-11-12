@@ -26,7 +26,7 @@
                                     @php 
                                     $detailfetch = allprice($cart->product_id);
                                     $symbol = CurrencySymbol();
-                                    
+
                                     if($detailfetch['selling_price']){
                                      $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
                                     }else
@@ -38,9 +38,23 @@
                                    
                                     if(!empty($detailfetch['discount'])){
                                     $discountrate += $detailfetch['discount'] * $cart['stock'];
-                                    } 
-                                   
-                                    $total = $subtotal - $discountrate;
+                                    }
+
+                                    //discount apply
+                                    if($discoutget->discount_type == 2){
+                                        $promocode = $discoutget->discount;
+                                        $total = ($subtotal - $discountrate) - $promocode;
+                                    }
+                                    elseif($discoutget->discount_type == 1){
+                                        $promocode = $discoutget->discount;
+                                        $percetage_discount = $subtotal - $discountrate;
+                                        $saveprofit = ($percetage_discount * $promocode / 100);
+                                        $total = $percetage_discount - $saveprofit;
+                                    }
+                                    else
+                                    {
+                                        $total = $subtotal - $discountrate;
+                                    }
                                     
                                     @endphp
                                     <tr>
@@ -102,9 +116,9 @@
                             <div class="offer-code">
                                 <div class="form-group">
                                     <label for="formGroupExampleInput">Have a Promotional Code?</label>
-                                    <p class="d-flex">
-                                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Promotional Code">
-                                        <button type="submit">Apply</button>
+                                    <p class="d-flex" wire:ignore>
+                                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Promotional Code" wire:model="promotioncode">
+                                        <button type="submit" wire:click="PromotionalCode">Apply</button>
                                     </p>
                                 </div>
                             </div>

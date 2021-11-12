@@ -121,7 +121,7 @@ class ProductFrontDetail extends Component
 
     }
 
-    public function fetchPrice(Request $request)
+      public function fetchPrice(Request $request)
     {
 
         $productvariants = ProductVariant::with(['variant_stock' => function($q) {
