@@ -521,6 +521,9 @@ code {
 .mt-04 {
     margin-top: 4px;
 }
+.mr-04 {
+    margin-right: 4px;
+}
 /************* PADDING TYPOGRAPHY ******************************************/
  .card-padding0{
      padding: 0 !important;
