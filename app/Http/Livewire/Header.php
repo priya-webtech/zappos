@@ -16,7 +16,7 @@ class Header extends Component
 {
     public $menu_arr = [];
     
-    public $CartItem,$ProductVariant,$varianttag,$filter_product,$getproduct, $user_id, $stockitem;
+    public $CartItem,$ProductVariant,$varianttag,$filter_product,$getproduct,$discoutget, $user_id, $stockitem;
 
     protected $listeners = ['getCart', 'DeleteCartProduct'];
 
@@ -31,7 +31,7 @@ class Header extends Component
             $this->user_id =  Auth::user()->id;
             $this->getCart();
         }
-
+       $this->discoutget = Cart::where('user_id', $this->user_id)->first();
        $this->ProductVariant = ProductVariant::get();
        $this->varianttag = VariantTag::All();
 

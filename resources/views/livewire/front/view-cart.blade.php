@@ -66,7 +66,9 @@
                                                 </div>
                                                 <div class="my-cart-desc">
                                                     <span>Vans</span>
+                                                    <a href="{{ route('product-front-detail', $cart['product_detail'][0]['seo_utl']) }}">
                                                     <h6> {{$cart['product_detail'][0]['title']}}</h6>
+                                                    </a>
                                                     @include('livewire.front.cartdetail')
                                                 </div>
                                             </div>
@@ -120,6 +122,12 @@
                                         <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Promotional Code" wire:model="promotioncode">
                                         <button type="submit" wire:click="PromotionalCode">Apply</button>
                                     </p>
+                                    @if($discoutget->discount_type == 1)
+                                    <a style="color: red;">Apply <b>{{$discoutget->discount}}{{$symbol['currency']}}</b> Discount</a>
+                                    @endif
+                                    @if($discoutget->discount_type == 2)
+                                    <a style="color: red;">Apply <b>{{$discoutget->discount}}%</b> Discount</a>
+                                    @endif
                                 </div>
                             </div>
                             <div class="viewcart-checkout">

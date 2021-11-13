@@ -110,7 +110,7 @@
                                         
                                     </div>
                                     <div class="cat-pd-content">
-                                        <a href="#">
+                                        <a href="{{ route('product-front-detail', $result['seo_utl']) }}">
                                             <h6 class="h6">{{$result->title}}</h6>
                                             <p>Slipper Socks</p>
                                         </a>

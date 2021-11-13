@@ -48,6 +48,7 @@ class DiscountCreate extends Component
 			}else{
                  $productarray = '0';
             }
+            
 		}else{
             $productarray = '0';
         }

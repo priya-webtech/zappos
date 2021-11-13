@@ -32,7 +32,7 @@ class ProductCreate extends Component
 {
     use WithFileUploads;
 
-    public $title,$Country,$descripation,$price,$compare_price,$cost,$weight,$weight_lable,$country,$hscode,$status,$seo_title,$seo_descripation,$seo_url,$variantag,$product,$Productmedia,$varition_name,$tags,$location,$Collection, $productCollection = [];
+    public $title,$Country,$descripation,$price,$compare_price,$cost,$weight,$weight_lable,$country,$hscode,$status,$seo_title,$seo_descripation,$seo_url,$variantag,$product,$Productmedia,$varition_name,$tags,$location,$Collection, $productCollection = [], $product_new = [];
 
     public $image = [];
 
@@ -61,6 +61,8 @@ class ProductCreate extends Component
         'varition_name' => [],
        
         'productCollection' => [],
+        
+        'product_new' => [],
 
         'seo_title' => ['required'],
 
@@ -189,13 +191,14 @@ class ProductCreate extends Component
             $arr = [];
             $productCollection_arrray = [];
             $product_new_arrray = [];
+
             if(!empty($request['productCollection'])){
+
             $productCollection_arrray = $request['productCollection'];
             }
             if(!empty($request['product_new'])){
             $product_new_arrray = $request['product_new'];
             }
-
             
             foreach ($request->request as $key => $value) {
 
@@ -211,7 +214,6 @@ class ProductCreate extends Component
             }     
             
             $locationid = json_encode($arr);     
-       
 
             $product_detail_arr = [
 
@@ -245,7 +247,7 @@ class ProductCreate extends Component
 
                 'location' => $locationid,
 
-                'product_new'      => json_encode($product_new_arrray),
+                'product_new'  => json_encode($product_new_arrray),
 
                 'product_type' => $request['product_type'],
 

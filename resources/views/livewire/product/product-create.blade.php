@@ -582,7 +582,7 @@
 
                         <p class="mb-0">
 
-                            <select  name="product_new[]">
+                            <select  name="product_new">
 
                                 <option value="">-- Select Option --</option>
 

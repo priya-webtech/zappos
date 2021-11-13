@@ -597,7 +597,7 @@
                                             </div>
                                         </div>
                                         <div class="cat-pd-content">
-                                            <a href="#">
+                                            <a href="{{ route('product-front-detail', $rows->seo_utl) }}">
                                                 <h6 class="h6">{{$rows->title}}</h6>
                                                 <p>{{$rows->title}}</p>
                                             </a>
