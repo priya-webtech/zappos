@@ -21,9 +21,7 @@ class Header extends Component
     protected $listeners = ['getCart', 'DeleteCartProduct'];
 
     protected $rules = [
-
         'CartItem.*.stock' => [],
-
     ];
     
     public function mount() {

@@ -37,6 +37,7 @@ class StripePaymnetController extends Component
     public function mount($id)
     {
         $this->user_id =  Auth::user()->id;
+        
         $this->orderID = $id;
         $this->view = false;
         $this->orderdetail = Orders::where('id',$id)->first();
