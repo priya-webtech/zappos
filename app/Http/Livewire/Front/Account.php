@@ -116,12 +116,12 @@ class Account extends Component
 					if(Hash::check($this->password, $this->UserDetail->password)) {
 						User::where('id',$this->user_id)->update(['email' => $this->email]);
 					}else{
-						dd('Invalid password');
+						//dd('Invalid password');
 						session()->flash('message', 'Password Invalid !!');
 					}
 					
 				}else{
-					dd('Not same Email');
+					//dd('Not same Email');
 					session()->flash('message', 'Not Same Email Address !!');
 				}
 			}
@@ -135,14 +135,14 @@ class Account extends Component
 
 					$hashedPassword = Hash::make($this->newpassword);
 					User::where('id',$this->user_id)->update(['password' => $hashedPassword]);
-					dd('change');
+					//dd('change');
 					
 				}else{
-					dd('Not same Email');
+					//dd('Not same Email');
 					session()->flash('message', 'Not Same Email Address !!');
 				}
 			}else{
-				dd('old password match');
+				//dd('old password match');
 			}
     	}
     }
