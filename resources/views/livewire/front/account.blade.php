@@ -13,7 +13,10 @@
         </div>
         <div class="primary-acc-info">
             <div class="container">
-                <h2 class="h2">Your Primary Account Information</h2>
+                <div class="primary-acc-info-title">
+                    <h2 class="h2">Your Primary Account Information</h2>
+                    <a href="http://127.0.0.1:8000/account/favorites/detail" class="site-btn"><i class="fa fa-heart-o" aria-hidden="true"></i> My Favorites</a>
+                </div>
                 <div class="row">
                     <div class="col-md-4 acc-info-col">
                         <div class="acc-info-box">
@@ -215,28 +218,54 @@
                                             </span>
                                             </button>
                                         </div>
-                                        <div class="modal-body">
+                                         <div class="modal-body">
                                             <form>
-                                                <div class="form-group">
-                                                    <label>Full Name</label>
-                                                    <input type="text" class="form-control" placeholder="Full Name">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="FullName">First Name</label>
+                                                            <input type="text" class="form-control" id="FullName" aria-describedby="emailHelp" placeholder="First Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="FullName">Last Name</label>
+                                                            <input type="text" class="form-control" id="FullName" aria-describedby="emailHelp" placeholder="Last Name">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>Address</label>
-                                                    <textarea placeholder="Enter Address"></textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Apartment, suite, etc.</label>
-                                                    <input type="text" class="form-control" placeholder="Full Name">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>City</label>
-                                                    <input type="text" class="form-control" placeholder="Full Name">
+                                                <div class="row street-unit-row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="postalCode">Street Name</label>
+                                                            <input type="text" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="Street Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="primaryVoiceNumber">Unit Number</label>
+                                                            <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="form-group">
-                                                            <label for="Country">Country/region</label>
+                                                            <label for="postalCode">Zip</label>
+                                                            <input type="number" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="City">City</label>
+                                                            <input type="text" class="form-control" id="City" aria-describedby="emailHelp" placeholder="Enter City">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="Country">Country</label>
                                                             <select class="form-control" id="Country">
                                                                 <option value="AS">American Samoa</option>
                                                                 <option value="GU">Guam</option>
@@ -253,14 +282,14 @@
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
-                                                            <label>Postal code</label>
-                                                            <input type="number" class="form-control" placeholder="12345">
+                                                            <label for="primaryVoiceNumber">Phone</label>
+                                                            <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="123-456-7890">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input" id="defaultAddress">
-                                                    <label class="form-check-label" for="defaultAddress">Make this my primary payment</label>
+                                                    <label class="form-check-label" for="defaultAddress">Make this my primary billing address</label>
                                                 </div>
                                             </form>
                                         </div>

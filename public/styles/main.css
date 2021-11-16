@@ -746,7 +746,11 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 
 .account-heading {padding: 60px 0 10px; }
 .primary-acc-info {padding: 30px 0; }
-.primary-acc-info .h2 {text-align: center; margin-bottom: 30px; font-weight: 600; }
+.primary-acc-info-title {display: flex; align-items: center; justify-content: space-between;  margin-bottom: 30px;}
+.primary-acc-info .h2 { font-weight: 600; margin-bottom: 0;}
+.primary-acc-info-title .site-btn {background-color: #003953; border-color: #003953; }
+.primary-acc-info-title .site-btn:hover {background-color: #035d59; border-color: #035d59; }
+
 .acc-info-box {background-color: #e5f1f8; border-radius: 5px; padding: 20px 20px 45px; height: 100%; position: relative; }
 .acc-info-btn {position: absolute; bottom: 15px; left: 20px; }
 .acc-info-box .h4 { font-weight: bold; font-size: 16px; text-transform: capitalize; margin-bottom: 10px;}
