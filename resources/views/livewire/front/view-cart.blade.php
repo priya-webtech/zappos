@@ -20,43 +20,58 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; @endphp
-                                    @if($CartItem)
+                                    @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; $subtotal3 = 0; $subtotal4 = 0; $subtotal5 = 0; $subtotal6 = 0; @endphp
+                                    @if(!empty($CartItem))
                                     @foreach($CartItem as $key => $cart)
-                                    @php 
+                                    <?php 
                                     $detailfetch = allprice($cart->product_id);
                                     $symbol = CurrencySymbol();
-
-                                    if($detailfetch['selling_price']){
-                                     $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
-                                    }else
+                                       
+                                    $decodeproduct = json_decode($discoutget['promocode'][0]['apply_c_p']);
+                                    if ($discoutget['promocode'][0]['applyto'] == 3 && in_array($cart->product_id, $decodeproduct))
                                     {
-                                      $subtotal2 += $cart['stock'] * $cart['price'];
-                                    }
+                                        if($discoutget['promocode'][0]['type'] == 2){
+                                          
+                                            if($discoutget['promocode'][0]['selling_price']){
+                                              $subtotal3 += $cart['stock'] * $discoutget['promocode'][0]['selling_price'];
+                                            }else
+                                            {
+                                              $subtotal4 += $cart['stock'] * $cart['price'];
+                                               
+                                            }
+                                           
+                                        }
+                                        if($discoutget['promocode'][0]['type'] == 1){
 
-                                    $subtotal = $subtotal1 + $subtotal2;
-                                   
-                                    if(!empty($detailfetch['discount'])){
-                                    $discountrate += $detailfetch['discount'] * $cart['stock'];
-                                    }
+                                            if($discoutget['promocode'][0]['selling_price']){
+                                              $subtotal3 += $cart['stock'] * $discoutget['promocode'][0]['selling_price'];
+                                            }else
+                                            {
+                                              $subtotal4 += $cart['stock'] * $cart['price'];
+                                               
+                                            }
 
-                                    //discount apply
-                                    if($discoutget->discount_type == 2){
-                                        $promocode = $discoutget->discount;
-                                        $total = ($subtotal - $discountrate) - $promocode;
-                                    }
-                                    elseif($discoutget->discount_type == 1){
-                                        $promocode = $discoutget->discount;
-                                        $percetage_discount = $subtotal - $discountrate;
-                                        $saveprofit = ($percetage_discount * $promocode / 100);
-                                        $total = $percetage_discount - $saveprofit;
+                                        }
                                     }
                                     else
                                     {
-                                        $total = $subtotal - $discountrate;
+
+                                        if($detailfetch['selling_price']){
+
+                                         $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
+                                        }else
+                                        {
+                                          $subtotal2 += $cart['stock'] * $cart['price'];
+                                        }
+
+
                                     }
-                                    
-                                    @endphp
+
+                                      if(!empty($detailfetch['discount'])){
+                                      $discountrate += $detailfetch['discount'] * $cart['stock'];
+                                    }
+ 
+                                   ?>
                                     <tr>
                                         <td>
                                             <div class="my-cart-pd-details">
@@ -109,6 +124,64 @@
                                     </tr>
                                     @endforeach
                                     @endif
+
+                                    <?php 
+                                    if ($discoutget['promocode'][0]['applyto'] == 3)
+                                    {
+                                        if($discoutget['promocode'][0]['type'] == 2){
+                                        $promocode = $discoutget['promocode'][0]['discount_value'];
+                                        $sumproduct = $subtotal4 + $subtotal3;
+                                        $subtotal5 = $sumproduct - $promocode;
+                                        }
+                                        if($discoutget['promocode'][0]['type'] == 1){
+                                        $promocode = $discoutget['promocode'][0]['discount_value'];
+                                        $sumproduct = $subtotal4 + $subtotal3;
+                                        $saveprofit = ($sumproduct * $promocode / 100);
+                                        $subtotal5 = $sumproduct - $saveprofit;
+                                        }
+                                    }
+
+                                        $subtotal6 = $subtotal1 + $subtotal2;
+
+                                        $subtotal = $subtotal6 + $subtotal5;
+                                     
+                                    if ($discoutget['promocode'][0]['applyto'] == 3)
+                                    {
+                                    //discount apply
+                                        if($discoutget['promocode'][0]['type'] == 2){
+                                            
+                                            $total = $subtotal - $discountrate;
+
+
+                                        }
+                                        if($discoutget['promocode'][0]['type'] == 1){
+                                          
+                                            $total = $subtotal - $discountrate;
+                                            
+                                        
+                                        }
+                                    }
+                                    else{
+
+                                        if($discoutget['promocode'][0]['type'] == 2){
+                                            $promocode = $discoutget['promocode'][0]['discount_value'];
+                                            $total = ($subtotal - $discountrate) - $promocode;
+
+
+                                        }
+                                        if($discoutget['promocode'][0]['type'] == 1){
+                                            $promocode = $discoutget['promocode'][0]['discount_value'];
+                                            $percetage_discount = $subtotal - $discountrate;
+                                            $saveprofit = ($percetage_discount * $promocode / 100);
+                                            $total = $percetage_discount - $saveprofit;
+                                        
+                                        }
+                                        else
+                                        {
+                                            $total = $subtotal - $discountrate;
+                                        }
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
@@ -122,11 +195,11 @@
                                         <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Promotional Code" wire:model="promotioncode">
                                         <button type="submit" wire:click="PromotionalCode">Apply</button>
                                     </p>
-                                    @if($discoutget->discount_type == 1)
-                                    <a style="color: red;">Apply <b>{{$discoutget->discount}}{{$symbol['currency']}}</b> Discount</a>
+                                    @if($discoutget['promocode'][0]['type'] == 2)
+                                    <a style="color: red;">Apply <b>{{$discoutget['promocode'][0]['discount_value']}}{{$symbol['currency']}}</b> Discount</a>
                                     @endif
-                                    @if($discoutget->discount_type == 2)
-                                    <a style="color: red;">Apply <b>{{$discoutget->discount}}%</b> Discount</a>
+                                    @if($discoutget['promocode'][0]['type'] == 1)
+                                    <a style="color: red;">Apply <b>{{$discoutget['promocode'][0]['discount_value']}}%</b> Discount</a>
                                     @endif
                                 </div>
                             </div>
