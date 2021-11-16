@@ -101,9 +101,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/admin/checkouts/detail', Livewire\Order\CheckoutDetail::class)->name('checkout-detail');
 
         //Discount
+        Route::get('/admin/discounts/new', Livewire\Discount\DiscountCreate::class)->name('discount-creates');
         Route::get('/admin/discounts', Livewire\Discount\DiscountList::class)->name('discount-list');
         Route::get('/admin/discounts/{id?}', Livewire\Discount\DiscountDetail::class)->name('discount-detail');
-        Route::get('/admin/discounts/new', Livewire\Discount\DiscountCreate::class)->name('discount-create');
+        
 
         //settings
         Route::get('/admin/settings', Livewire\Admin\Settings::class)->name('settings');

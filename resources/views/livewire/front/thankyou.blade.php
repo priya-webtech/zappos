@@ -3,21 +3,16 @@
     <x-customer-layout>
 
 
-    	<h1>Thank you </h1>
-    	<div wire:key="alert">
-
-         @if (session()->has('success'))
-
-         <div class="alert alert-success">
-
-            {{ session('success') }}
-
-         </div>
-
-         @endif
- 
-      </div>
-
-       <a href="{{url('/')}}"><button class="btn move-heart-button">Redirect home</button></a>
+        <div class="thank-you-sec">
+            <div class="container">
+                <div class="col-12">
+                    <img src="../assets/thank-you-icon.png">
+                    <h1 class="h1">Thank You</h1>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <a href="{{url('/')}}" class="site-btn"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Home</a>
+                </div>
+            </div>
+        </div>
+    	
     </x-customer-layout>
 </div>

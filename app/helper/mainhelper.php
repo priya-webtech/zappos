@@ -68,7 +68,7 @@ use App\Models\Cart;
     $Productvariant = ProductVariant::with(['variant_stock' => function($q) {
             $q->where('location_id', 1);}])->where('product_id',$productid)->first();
     $product = Product::where(['id' => $productid])->first();
-
+    
     if($Productvariant){
       if($Productvariant['selling_price']){
           $price = $Productvariant['selling_price'];

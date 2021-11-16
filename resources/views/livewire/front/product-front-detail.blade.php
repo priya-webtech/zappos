@@ -729,8 +729,9 @@
                                         @endif
                                         <!-- <p>ASICS</p> -->
                                         @if(!empty($priceres))
+                                        <a href="{{ route('product-front-detail', $rows['seo_utl']) }}">
                                         <p class="multi-pd-title">{{$rows->title}}</p>
-
+                                        </a>
                                         <p class="product-price @if(!empty($priceres['label'])) {{$priceres['label']}} @endif" >
                                         <span class="mrp-price">{{$symbol['currency']}}{{number_format($priceres['price'],2,'.',',')}}
                                         </span>
@@ -803,9 +804,9 @@
                                         <a class="wish-list {{$result['class']}}" wire:click="UpdateWish({{$result['id']}}, {{$result['product_id']}})"><i class="fa fa-heart-o" aria-hidden="true"></i> </a>
 
                                         @endif
-
+                                        <a href="{{ route('product-front-detail', $rows['seo_utl']) }}">
                                         <p>{{$pro_res->title}}</p>
-
+                                        </a>
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
                                         @if(!empty($priceres))
@@ -941,7 +942,7 @@
 
                         
 
-                         $('#getprice').html("<sup>$</sup><span>"+price+"</span>");
+                         $('#getprice').html("<sup>{{$symbol['currency']}}</sup><span>"+price+"</span>");
 
                         $('#variant_id').prop('value',id);
 

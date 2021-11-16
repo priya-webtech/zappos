@@ -83,8 +83,8 @@
                                                 @foreach($CartItem as $key => $cart)
 
                                                 @php 
-                                                $symbol = CurrencySymbol();
                                                 $detailfetch = allprice($cart->product_id);
+                                                $symbol = CurrencySymbol();
 
                                                 if($detailfetch['selling_price']){
                                                  $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
@@ -97,9 +97,23 @@
                                                
                                                 if(!empty($detailfetch['discount'])){
                                                 $discountrate += $detailfetch['discount'] * $cart['stock'];
-                                                } 
-                                               
-                                                $total = $subtotal - $discountrate;
+                                                }
+
+                                                //discount apply
+                                                if($discoutget->discount_type == 2){
+                                                    $promocode = $discoutget->discount;
+                                                    $total = ($subtotal - $discountrate) - $promocode;
+                                                }
+                                                elseif($discoutget->discount_type == 1){
+                                                    $promocode = $discoutget->discount;
+                                                    $percetage_discount = $subtotal - $discountrate;
+                                                    $saveprofit = ($percetage_discount * $promocode / 100);
+                                                    $total = $percetage_discount - $saveprofit;
+                                                }
+                                                else
+                                                {
+                                                    $total = $subtotal - $discountrate;
+                                                }
                                                 
                                                 @endphp
 
@@ -109,7 +123,9 @@
                                                         <a class="dropdown-header" href="{{ route('product-front-detail', $cart['product_detail'][0]['seo_utl']) }}"><img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}" alt=""></a>
                                                     </div>
                                                     <div class="product-data">
+                                                        <a href="{{ route('product-front-detail', $cart['product_detail'][0]['seo_utl']) }}">
                                                         <p class="cart-pd-title">{{$cart['product_detail'][0]['title']}}</p>
+                                                        </a>
                                                         <a class="cart-pd-clear" href="#">Clare Tree</a>
                                                         <div class="product-data-inner">
 

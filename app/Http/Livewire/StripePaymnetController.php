@@ -32,18 +32,20 @@ use Illuminate\Support\Facades\Validator;
 
 class StripePaymnetController extends Component
 {
-    public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$fullname,$address,$city,$country,$pincode,$mobile,$Taxes, $view, $orderID;
+    public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$fullname,$address,$city,$country,$pincode,$mobile,$Taxes, $view,$discoutget, $orderID;
 
     public function mount($id)
     {
+        $this->user_id =  Auth::user()->id;
+        
         $this->orderID = $id;
         $this->view = false;
         $this->orderdetail = Orders::where('id',$id)->first();
+        $this->discoutget = Cart::where('user_id', $this->user_id)->first();
         $this->Taxes = tax::where('id',1)->first();
         $this->ProductVariant = ProductVariant::get();
         $this->varianttag = VariantTag::All();
         if (Auth::check()) {
-            $this->user_id =  Auth::user()->id;
             $this->CartItem =  Cart::with(['media_product', 'product_detail'])->where('user_id',$this->user_id)->get();
         }
 
