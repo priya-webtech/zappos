@@ -87,34 +87,72 @@
                             
                             <input type="hidden" name="orderid" value="{{$orderdetail->id}}">
                             <div class='form-row'>
-
-                                <div class='col-xs-12 form-group required'>
-                                    <label class='control-label'>Full name</label> 
-                                    <input class='form-control' wire:model="fullname" name="fullname" type='text' required>
+                                <div class="col">
+                                    <div class='form-group required'>
+                                        <label class='control-label'>First Name</label> 
+                                        <input class='form-control' wire:model="firstname" name="firstname" placeholder="First Name" type='text' required>
+                                    </div>
                                 </div>
-                                 
-                                <div class='col-xs-12 form-group'>
-                                    <label class='control-label'>Address</label> 
-                                    <textarea class='form-control' wire:model="address" name="address" type='text' required></textarea>
-                                </div>
-                                <div class='col-xs-12 form-group required'>
-                                    <label class='control-label'>City</label> 
-                                    <input class='form-control' wire:model="city" name="city" type='text' required>
-                                </div>
-                                <div class='col-xs-12 form-group required'>
-                                    <label class='control-label'>Country</label> 
-                                    <input class='form-control' wire:model="country" name="country" type='text' required>
-                                </div>
-                                <div class='col-xs-12 form-group required'>
-                                    <label class='control-label'>Pincode</label> 
-                                    <input class='form-control' wire:model="pincode" name="pincode" type='text' required>
-                                </div>
-                                <div class='col-xs-12 form-group required'>
-                                    <label class='control-label'>Mobile Number</label> 
-                                    <input class='form-control' wire:model="mobile" name="mobile" type='text' required>
+                                <div class="col">
+                                    <div class='form-group required'>
+                                        <label class='control-label'>Last Name</label> 
+                                        <input class='form-control' wire:model="lastname" name="lastname" placeholder="Last Name" type='text' required>
+                                    </div>
                                 </div>
                             </div>
-
+                            <div class='form-row street-unit-row'>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="control-label">Street Name</label>
+                                        <input type="text" class="form-control" wire:model="streetname" placeholder="Street Name">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="primaryVoiceNumber">Unit Number</label>
+                                        <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="postalCode">Zip</label>
+                                        <input type="number" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="City">City</label>
+                                        <input type="text" class="form-control" id="City" aria-describedby="emailHelp" placeholder="Enter City">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="Country">Country</label>
+                                        <select class="form-control" id="Country">
+                                            <option value="AS">American Samoa</option>
+                                            <option value="GU">Guam</option>
+                                            <option value="MH">Marshall Islands</option>
+                                            <option value="FM">Micronesia, Federated States of</option>
+                                            <option value="MP">Northern Mariana Islands</option>
+                                            <option value="PW">Palau</option>
+                                            <option value="PR">Puerto Rico</option>
+                                            <option selected="" value="NL">Netherlands</option>
+                                            <option value="UM">United States Minor Outlying Islands</option>
+                                            <option value="VI">Virgin Islands, U.S.</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="primaryVoiceNumber">Phone</label>
+                                        <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="123-456-7890">
+                                    </div>
+                                </div>
+                            </div>
                             <div class='form-row'>
 
                                 <div class='col-md-12 error form-group hide'>
