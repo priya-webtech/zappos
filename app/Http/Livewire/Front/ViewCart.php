@@ -25,7 +25,7 @@ class ViewCart extends Component
             $this->user_id =  Auth::user()->id;
             $this->getCart();
         }
-       $this->discoutget = Cart::where('user_id', $this->user_id)->first();
+       $this->discoutget = Cart::with('promocode')->where('user_id', $this->user_id)->first();
        $this->ProductVariant = ProductVariant::get();
        $this->varianttag = VariantTag::All();
     }
@@ -96,11 +96,10 @@ class ViewCart extends Component
             $checkdiscount =  discount::where('code',$this->promotioncode)->first();
             if($checkdiscount){
                Cart::where('user_id',$this->user_id)->update([
-                'discount' => $checkdiscount->discount_value,
-                'discount_type' => $checkdiscount->type,
+                'discount_id' => $checkdiscount->id,
                ]);
             }else{
-               session()->flash('message', 'Code Wrong!!!');
+               session()->flash('message', 'Promotional Code Wrong!!!');
             }
 
         }
