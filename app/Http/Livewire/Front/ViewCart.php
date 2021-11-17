@@ -21,12 +21,14 @@ class ViewCart extends Component
 
 
 	public function mount() {
+        
         if (Auth::check()) {
             $this->user_id =  Auth::user()->id;
             $this->getCart();
+            $this->discoutget = Cart::with('promocode')->where('user_id', $this->user_id)->first();
         }
-       $this->discoutget = Cart::with('promocode')->where('user_id', $this->user_id)->first();
-       $this->ProductVariant = ProductVariant::get();
+
+       $this->ProductVariant = ProductVariant::all();
        $this->varianttag = VariantTag::All();
     }
 
