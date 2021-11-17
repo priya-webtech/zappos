@@ -1,16 +1,28 @@
 <div>
     <x-customer-layout>
+    @php $symbol = CurrencySymbol(); @endphp
     {{-- Close your eyes. Count to one. That is how long forever feels. --}}
      <div class="account-heading text-center">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h1 class="h1">Hello, jasmin patel!</h1>
-                        <p>You are logged in as hingrajiyajasmin@gmail.com</p>
+                        <h1 class="h1">Hello, {{$UserDetail->first_name}} {{$UserDetail->last_name}}!</h1>
+                        <p>You are logged in as {{$UserDetail->email}}</p>
                     </div>
                 </div>
             </div>
         </div>
+        @if (Session::has('message'))
+
+            <div class="alert alert-success text-center">
+
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+
+                <p>{{ Session::get('message') }}</p>
+
+            </div>
+
+        @endif
         <div class="primary-acc-info">
             <div class="container">
                 <div class="primary-acc-info-title">
@@ -21,11 +33,15 @@
                     <div class="col-md-4 acc-info-col">
                         <div class="acc-info-box">
                             <h4 class="h4">Primary Shipping Address</h4>
-                            <p class="red-color">No address available</p>
+                            @if(count($customer['address']) > 0)
                             <div class="available-sp-add">
-                                <p>2 Address Available</p>
+                                <p>{{count($customer['address'])}} Address Available</p>
                                 <button type="button" class="site-btn" data-toggle="modal" data-target="#ShowAllShippingAddress">Show All</button>
                             </div>
+                            @else
+                             <p class="red-color">No address available</p>
+                            @endif
+
                             <div class="acc-info-btn">
                                 <button type="button" class="site-link-btn" data-toggle="modal" data-target="#AddNewShippingAddress">ADD A NEW SHIPPING ADDRESS <i class="fa fa-angle-right" aria-hidden="true"></i></button>
                             </div>
@@ -43,44 +59,31 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
+                                            @if($customer['address'])
+                                            @foreach($customer['address'] as $address)
                                             <div class="sp-add-list">
                                                 <div class="sp-add-details">
                                                     <p>
                                                         <label>Name:</label>
-                                                        <span>jasmin patel</span>
+                                                        <span>{{$address['first_name']}} {{$address['last_name']}}</span>
                                                     </p>
                                                     <p>
                                                         <label>Address:</label>
-                                                        <span>6, krishna park, rc road, ghatlodiya, 123456, ahmedabad, india. </span>
+                                                        <span>{{$address['address']}}, {{$address['apartment']}}, {{$address['postal_code']}}, {{$address['city']}}, {{$address['country']}}. </span>
                                                     </p>
                                                     <p>
                                                         <label>Phone:</label>
-                                                        <span>1234567890</span>
+                                                        <span>{{$address['mobile_no']}}</span>
                                                     </p>
                                                 </div>
                                                 <div class="sp-add-edit-btn">
                                                     <button type="button" class="site-btn" data-toggle="modal" data-target="#AddNewShippingAddress">Edit</button>
                                                 </div>
                                             </div>
-                                            <div class="sp-add-list">
-                                                <div class="sp-add-details">
-                                                    <p>
-                                                        <label>Name:</label>
-                                                        <span>jasmin patel</span>
-                                                    </p>
-                                                    <p>
-                                                        <label>Address:</label>
-                                                        <span>6, krishna park, rc road, ghatlodiya, 123456, ahmedabad, india. </span>
-                                                    </p>
-                                                    <p>
-                                                        <label>Phone:</label>
-                                                        <span>1234567890</span>
-                                                    </p>
-                                                </div>
-                                                <div class="sp-add-edit-btn">
-                                                    <button type="button" class="site-btn" data-toggle="modal" data-target="#AddNewShippingAddress">Edit</button>
-                                                </div>
-                                            </div>
+                                            @endforeach
+                                            @else
+                                            <p>No address available</p>
+                                            @endif
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn site-btn">Cancel</button>
@@ -88,7 +91,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal fade" id="AddNewShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="AddNewShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header proceed-cart-head ">
@@ -107,13 +110,13 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="FullName">First Name</label>
-                                                            <input type="text" class="form-control" id="FullName" aria-describedby="emailHelp" placeholder="First Name">
+                                                            <input type="text" class="form-control" id="FullName" wire:model="first_name" aria-describedby="emailHelp" placeholder="First Name" required>
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="FullName">Last Name</label>
-                                                            <input type="text" class="form-control" id="FullName" aria-describedby="emailHelp" placeholder="Last Name">
+                                                            <input type="text" wire:model="last_name" class="form-control" id="FullName" aria-describedby="emailHelp" placeholder="Last Name" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -121,13 +124,13 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="postalCode">Street Name</label>
-                                                            <input type="text" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="Street Name">
+                                                            <input type="text" wire:model="address" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="Street Name" required>
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Unit Number</label>
-                                                            <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number">
+                                                            <input type="number" wire:model="apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -135,13 +138,13 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="postalCode">Zip</label>
-                                                            <input type="number" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345">
+                                                            <input type="number" wire:model="postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" required>
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="City">City</label>
-                                                            <input type="text" class="form-control" id="City" aria-describedby="emailHelp" placeholder="Enter City">
+                                                            <input type="text" wire:model="city" class="form-control" id="City" aria-describedby="emailHelp" placeholder="Enter City" requireds>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -149,36 +152,30 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="Country">Country</label>
-                                                            <select class="form-control" id="Country">
-                                                                <option value="AS">American Samoa</option>
-                                                                <option value="GU">Guam</option>
-                                                                <option value="MH">Marshall Islands</option>
-                                                                <option value="FM">Micronesia, Federated States of</option>
-                                                                <option value="MP">Northern Mariana Islands</option>
-                                                                <option value="PW">Palau</option>
-                                                                <option value="PR">Puerto Rico</option>
-                                                                <option selected="" value="NL">Netherlands</option>
-                                                                <option value="UM">United States Minor Outlying Islands</option>
-                                                                <option value="VI">Virgin Islands, U.S.</option>
+                                                            <select class="form-control" id="Country" wire:model="country" required>
+                                                                <option value="">-- Select Country --</option>
+                                                                @foreach($countries as $country)
+                                                                    <option value="{{$country->name}}">{{$country->name}}</option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Phone</label>
-                                                            <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="123-456-7890">
+                                                            <input type="number" wire:model="mobile_no" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="123-456-7890" required>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="defaultAddress">
+                                                    <input type="checkbox" class="form-check-input" id="defaultAddress" wire:model="address_type">
                                                     <label class="form-check-label" for="defaultAddress">Make this my primary shipping address</label>
                                                 </div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn site-btn">Cancel</button>
-                                            <button type="button" class="btn site-btn" disabled>Save</button>
+                                            <button type="button" class="btn site-btn" wire:click="SaveShipping()">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -310,8 +307,8 @@
                     <div class="col-md-4 acc-info-col">
                         <div class="acc-info-box">
                             <h4 class="h4">Name, Email & Password</h4>
-                            <p>jasmin patel</p>
-                            <p>hingrajiyajasmin@gmail.com</p>
+                            <p>{{$UserDetail->first_name}} {{$UserDetail->last_name}}</p>
+                            <p>{{$UserDetail->email}}</p>
                             <p>******</p>
                             <div class="acc-info-btn">
                                 <button type="button" class="site-link-btn" data-toggle="modal" data-target="#LoginAndSecurity">MANAGE ACCOUNT INFO <i class="fa fa-angle-right" aria-hidden="true"></i></button>
@@ -334,7 +331,7 @@
                                                 <div class="login-security-list">
                                                     <p>
                                                         <label>Name:</label>
-                                                        <span>jasmin patel</span>
+                                                        <span>{{$UserDetail->first_name}} {{$UserDetail->last_name}}</span>
                                                     </p>
                                                     <button type="button" class="btn site-btn" data-toggle="modal" id="EditName" data-target="#EditNameModal">Edit</button>
 
@@ -342,7 +339,7 @@
                                                 <div class="login-security-list">
                                                     <p>
                                                         <label>Email:</label>
-                                                        <span>hingrajiyajasmin@gmail.com</span>
+                                                        <span>{{$UserDetail->email}}</span>
                                                     </p>
                                                     <button type="button" class="btn site-btn" data-toggle="modal" id="ChangeEmail" data-target="#ChangeEmailModal">Edit</button>
                                                 </div>
@@ -362,7 +359,7 @@
                                 </div>
                                   
                                 <!-- Edit Name Modal -->
-                                <div class="modal details-change-modal fade" id="EditNameModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal details-change-modal fade" id="EditNameModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" wire:ignore>
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -379,20 +376,24 @@
                                                 <p>If you want to change the name associated with your Zappos customer account, you may do so below. Be sure to click the Save Changes button when you are done.</p>
                                                 <form>
                                                     <div class="form-group">
-                                                        <label for="NameOnCard">New name</label>
-                                                        <input type="text" class="form-control" value="Jasmin Patel">
+                                                        <label for="NameOnCard">First Name</label>
+                                                        <input type="text" wire:model="UserDetail.first_name" class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="NameOnCard">Last Name</label>
+                                                        <input type="text" wire:model="UserDetail.last_name" class="form-control">
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn site-btn">Save Changes</button>
+                                                <button type="submit" wire:click="UpdateUser('updatename')" data-dismiss="modal" class="btn site-btn">Save Changes</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Edit email Modal -->
-                                <div class="modal details-change-modal fade" id="ChangeEmailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal details-change-modal fade" id="ChangeEmailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" wire:ignore>
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -408,31 +409,31 @@
                                             <div class="modal-body">
                                                 <p>
                                                     <label>Old email address:</label>
-                                                    <span>hingrajiyajasmin@gmail.com</span>
+                                                    <span>{{$UserDetail->email}}</span>
                                                 </p>
                                                 <form>
                                                     <div class="form-group">
                                                         <label>New email address:</label>
-                                                        <input type="email" class="form-control">
+                                                        <input type="email" wire:model="email" class="form-control">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Re-enter new email:</label>
-                                                        <input type="email" class="form-control">
+                                                        <input type="email" wire:model="reemail" class="form-control">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Password:</label>
-                                                        <input type="password" class="form-control">
+                                                        <input type="password" wire:model="password" class="form-control">
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn site-btn">Save Changes</button>
+                                                <button type="submit" wire:click="UpdateUser('updateemail')" class="btn site-btn">Save Changes</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Edit email Modal -->
-                                <div class="modal details-change-modal fade" id="ChangePasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal details-change-modal fade" id="ChangePasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" wire:ignore>
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -450,20 +451,20 @@
                                                 <form>
                                                     <div class="form-group">
                                                         <label>Current password:</label>
-                                                        <input type="password" class="form-control" >
+                                                        <input type="password" wire:model="currpassword" class="form-control" >
                                                     </div>
                                                     <div class="form-group">
                                                         <label>New password:</label>
-                                                        <input type="password" class="form-control" >
+                                                        <input type="password" wire:model="newpassword" class="form-control" >
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Re-enter new password:</label>
-                                                        <input type="password" class="form-control" >
+                                                        <input type="password" wire:model="repassword" class="form-control" >
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn site-btn">Save Changes</button>
+                                                <button type="submit" wire:click="UpdateUser('updatepassword')" class="btn site-btn">Save Changes</button>
                                             </div>
                                         </div>
                                     </div>
@@ -538,12 +539,16 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if($order)
+                                @php $i = 1; @endphp
+                                @foreach($OrderItem as $row)
+                               <?php  $detailfetch = allprice($row->product_id); ?>
                                 <tr>
-                                    <td>1</td>
-                                    <td>10/06/2021</td>
+                                    <td>{{$row['order'][0]['id']}}</td>
+                                    <td>{{$row['order'][0]['updated_at']}}</td>
                                     <td class="od-pd-name">
                                         <span>Splendid</span>
-                                        <h6>Apple laptop</h6>
+                                        <h6>{{$row['order_product'][0]['title']}}</h6>
                                     </td>
                                     <td>
                                         <div class="add-cart-select">               
@@ -553,91 +558,24 @@
                                         </div>
                                     </td>
                                     <td class="od-pd-price">
+                                        @if(!empty($detailfetch))
                                         <span>
                                             <b>Sale:</b> 
-                                            <span class="red-color">€200.00</span>
+                                            <span class="red-color">{{$symbol['currency']}}{{number_format($detailfetch['price'],2,'.',',')}}</span>
                                         </span>
-                                        <span class="grey-color"><b>MSRP:</b> €200.00</span>
+                                        @if(!empty($detailfetch['selling_price']))
+                                        <span class="grey-color"><b>MSRP:</b> {{$symbol['currency']}}{{number_format($detailfetch['selling_price'],2,'.',',')}}</span>
+                                        @endif
+                                        @endif
                                     </td>
                                     <td>
                                         <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>10/06/2021</td>
-                                    <td class="od-pd-name">
-                                        <span>Splendid</span>
-                                        <h6>Apple laptop</h6>
-                                    </td>
-                                    <td>
-                                        <div class="add-cart-select">               
-                                            <div class="total-item-select">
-                                                <input value="1" name="stockitem" type="number">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="od-pd-price">
-                                        <span>
-                                            <b>Sale:</b> 
-                                            <span class="red-color">€200.00</span>
-                                        </span>
-                                        <span class="grey-color"><b>MSRP:</b> €200.00</span>
-                                    </td>
-                                    <td>
-                                        <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>10/06/2021</td>
-                                    <td class="od-pd-name">
-                                        <span>Splendid</span>
-                                        <h6>Apple laptop</h6>
-                                    </td>
-                                    <td>
-                                        <div class="add-cart-select">               
-                                            <div class="total-item-select">
-                                                <input value="1" name="stockitem" type="number">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="od-pd-price">
-                                        <span>
-                                            <b>Sale:</b> 
-                                            <span class="red-color">€200.00</span>
-                                        </span>
-                                        <span class="grey-color"><b>MSRP:</b> €200.00</span>
-                                    </td>
-                                    <td>
-                                        <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>10/06/2021</td>
-                                    <td class="od-pd-name">
-                                        <span>Splendid</span>
-                                        <h6>Apple laptop</h6>
-                                    </td>
-                                    <td>
-                                        <div class="add-cart-select">               
-                                            <div class="total-item-select">
-                                                <input value="1" name="stockitem" type="number">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="od-pd-price">
-                                        <span>
-                                            <b>Sale:</b> 
-                                            <span class="red-color">€200.00</span>
-                                        </span>
-                                        <span class="grey-color"><b>MSRP:</b> €200.00</span>
-                                    </td>
-                                    <td>
-                                        <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
-                                    </td>
-                                </tr>
+                                @endforeach
+                                @else
+                                 <p class="order-empty-msg">Your order history is empty.</p>
+                                @endif
                             </tbody>
                         </table>
                     </div>

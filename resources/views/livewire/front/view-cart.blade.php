@@ -32,8 +32,8 @@
                                     {
                                         if($discoutget['promocode'][0]['type'] == 2){
                                           
-                                            if($discoutget['promocode'][0]['selling_price']){
-                                              $subtotal3 += $cart['stock'] * $discoutget['promocode'][0]['selling_price'];
+                                            if($detailfetch['selling_price']){
+                                              $subtotal3 += $cart['stock'] * $detailfetch['selling_price'];
                                             }else
                                             {
                                               $subtotal4 += $cart['stock'] * $cart['price'];
@@ -43,14 +43,57 @@
                                         }
                                         if($discoutget['promocode'][0]['type'] == 1){
 
-                                            if($discoutget['promocode'][0]['selling_price']){
-                                              $subtotal3 += $cart['stock'] * $discoutget['promocode'][0]['selling_price'];
+                                            if($detailfetch['selling_price']){
+                                              $subtotal3 += $cart['stock'] * $detailfetch['selling_price'];
                                             }else
                                             {
                                               $subtotal4 += $cart['stock'] * $cart['price'];
                                                
                                             }
 
+                                        }
+                                    }
+                                    elseif ($discoutget['promocode'][0]['applyto'] == 2)
+                                    {
+                                        $categoryget = json_decode($detailfetch['product']['collection']);
+                                 
+                                        foreach ($categoryget as $key => $value) {
+                                           if(in_array($value, $decodeproduct)){
+
+                                            if($discoutget['promocode'][0]['type'] == 2){
+                                                if($detailfetch['selling_price']){
+                                                  $subtotal3 += $cart['stock'] * $detailfetch['selling_price'];
+                                                }else
+                                                {
+                                                  $subtotal4 += $cart['stock'] * $cart['price'];
+                                                   
+                                                }
+
+
+                                               
+                                            }
+                                            if($discoutget['promocode'][0]['type'] == 1){
+
+                                                if($detailfetch['selling_price']){
+                                                  $subtotal3 += $cart['stock'] * $detailfetch['selling_price'];
+                                                }else
+                                                {
+                                                  $subtotal4 += $cart['stock'] * $cart['price'];
+                                                   
+                                                }
+
+
+
+                                            }
+                                           }else{
+                                                if($detailfetch['selling_price']){
+
+                                                 $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
+                                                }else
+                                                {
+                                                  $subtotal2 += $cart['stock'] * $cart['price'];
+                                                }
+                                           }
                                         }
                                     }
                                     else
@@ -140,14 +183,45 @@
                                         $subtotal5 = $sumproduct - $saveprofit;
                                         }
                                     }
+                                    if ($discoutget['promocode'][0]['applyto'] == 2)
+                                    {
+                                        if($discoutget['promocode'][0]['type'] == 2){
+                                        $promocode = $discoutget['promocode'][0]['discount_value'];
+                                        $sumproduct = $subtotal4 + $subtotal3;
+                                        $subtotal5 = $sumproduct - $promocode;
+                                        }
+                                        if($discoutget['promocode'][0]['type'] == 1){
+                                        $promocode = $discoutget['promocode'][0]['discount_value'];
+                                        $sumproduct = $subtotal4 + $subtotal3;
+                                        $saveprofit = ($sumproduct * $promocode / 100);
+                                        $subtotal5 = $sumproduct - $saveprofit;
+                                        }
+                                    }
+
+                                   
 
                                         $subtotal6 = $subtotal1 + $subtotal2;
 
                                         $subtotal = $subtotal6 + $subtotal5;
-                                     
+                                         
                                     if ($discoutget['promocode'][0]['applyto'] == 3)
                                     {
                                     //discount apply
+                                        if($discoutget['promocode'][0]['type'] == 2){
+                                            
+                                            $total = $subtotal - $discountrate;
+
+
+                                        }
+                                        if($discoutget['promocode'][0]['type'] == 1){
+                                          
+                                            $total = $subtotal - $discountrate;
+                                            
+                                        
+                                        }
+                                    }
+                                    elseif ($discoutget['promocode'][0]['applyto'] == 2) {
+
                                         if($discoutget['promocode'][0]['type'] == 2){
                                             
                                             $total = $subtotal - $discountrate;

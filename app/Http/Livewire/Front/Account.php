@@ -35,7 +35,7 @@ class Account extends Component
 	{
 		if (Auth::check()) {
             $this->ManageUser();
-            $this->OrderItem = order_item::with('order_product')->with('media_product')->get();
+            $this->OrderItem = order_item::with('order_product')->with('order')->with('media_product')->get();
         }
 	}
     public function render()
@@ -56,6 +56,7 @@ class Account extends Component
         }])->where('id',$this->user_id)->first()->toArray();
 
         $this->order = Orders::with('UserOrder')->where('transactionid','!=','0' )->get();
+
 
     }
     public function SaveShipping()
