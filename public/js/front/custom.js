@@ -186,6 +186,7 @@ function initializeSwiper() {
 }
  $(window).on('load', function() {
 	initializeSwiper();
+	initializeCart();
 });
 
 window.addEventListener('onContentChanged', () => {
@@ -222,9 +223,7 @@ function initializeCart()
 window.addEventListener('onCartChanged', () => {
     initializeCart();
 });
- $(window).on('load', function() {
-	initializeCart();
-});
+
 
 
 // href click smooth scoll js

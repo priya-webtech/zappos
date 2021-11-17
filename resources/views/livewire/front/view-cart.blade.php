@@ -26,7 +26,12 @@
                                     <?php 
                                     $detailfetch = allprice($cart->product_id);
                                     $symbol = CurrencySymbol();
-                                       
+
+
+                                    if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0)  {
+
+
+
                                     $decodeproduct = json_decode($discoutget['promocode'][0]['apply_c_p']);
                                     if ($discoutget['promocode'][0]['applyto'] == 3 && in_array($cart->product_id, $decodeproduct))
                                     {
@@ -53,6 +58,7 @@
 
                                         }
                                     }
+                                }
                                     else
                                     {
 
@@ -61,15 +67,17 @@
                                          $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
                                         }else
                                         {
+
                                           $subtotal2 += $cart['stock'] * $cart['price'];
                                         }
 
 
                                     }
 
-                                      if(!empty($detailfetch['discount'])){
+                                    if(!empty($detailfetch['discount'])){
                                       $discountrate += $detailfetch['discount'] * $cart['stock'];
                                     }
+
  
                                    ?>
                                     <tr>
@@ -126,7 +134,7 @@
                                     @endif
 
                                     <?php 
-                                    if ($discoutget['promocode'][0]['applyto'] == 3)
+                                    if (!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['applyto'] == 3)
                                     {
                                         if($discoutget['promocode'][0]['type'] == 2){
                                         $promocode = $discoutget['promocode'][0]['discount_value'];
@@ -140,11 +148,11 @@
                                         $subtotal5 = $sumproduct - $saveprofit;
                                         }
                                     }
-
                                         $subtotal6 = $subtotal1 + $subtotal2;
 
                                         $subtotal = $subtotal6 + $subtotal5;
-                                     
+                                     if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0 ) 
+                                     {
                                     if ($discoutget['promocode'][0]['applyto'] == 3)
                                     {
                                     //discount apply
@@ -181,6 +189,7 @@
                                             $total = $subtotal - $discountrate;
                                         }
                                     }
+                                }
                                     ?>
                                 </tbody>
                             </table>
@@ -195,10 +204,10 @@
                                         <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Promotional Code" wire:model="promotioncode">
                                         <button type="submit" wire:click="PromotionalCode">Apply</button>
                                     </p>
-                                    @if($discoutget['promocode'][0]['type'] == 2)
+                                    @if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['type'] == 2)
                                     <a style="color: red;">Apply <b>{{$discoutget['promocode'][0]['discount_value']}}{{$symbol['currency']}}</b> Discount</a>
                                     @endif
-                                    @if($discoutget['promocode'][0]['type'] == 1)
+                                    @if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['type'] == 1)
                                     <a style="color: red;">Apply <b>{{$discoutget['promocode'][0]['discount_value']}}%</b> Discount</a>
                                     @endif
                                 </div>

@@ -100,6 +100,7 @@
                                                 }
 
                                                 //discount apply
+                                                if($discoutget) {
                                                 if($discoutget->discount_type == 2){
                                                     $promocode = $discoutget->discount;
                                                     $total = ($subtotal - $discountrate) - $promocode;
@@ -114,6 +115,7 @@
                                                 {
                                                     $total = $subtotal - $discountrate;
                                                 }
+                                            }
                                                 
                                                 @endphp
 
@@ -164,7 +166,7 @@
                                                         @endif
 
                                                        
-                                                        <a wire:click.prevent="DeleteCartProduct({{$cart['id']}})"  href="javascript:;">delete</a>
+                                                        <a :key="{{$cart['id']}}" wire:click="DeleteCartProduct({{$cart['id']}})"  href="javascript:;">delete</a>
                                                     </div>
                                                 </div>
 
