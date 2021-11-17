@@ -3972,7 +3972,7 @@ code {
      justify-content: space-between;
      padding-bottom: 16px;
 }
- .page-bottom-btn button {
+ .page-bottom-btn button, .page-bottom-btn input.button {
      background-color: #f1f1f1 !important;
      border: none !important;
      color: #8c9196 !important;
@@ -4426,7 +4426,7 @@ code {
  .add-transfers-sec h3 {
      line-height: 24px;
 }
- input[type="date"] {
+ input[type="date"], input[type="time"] {
      width: 100%;
      min-height: 36px;
      padding: 5px 10px;

@@ -15,7 +15,7 @@
             <div class="container">
                 <div class="primary-acc-info-title">
                     <h2 class="h2">Your Primary Account Information</h2>
-                    <a href="http://127.0.0.1:8000/account/favorites/detail" class="site-btn"><i class="fa fa-heart-o" aria-hidden="true"></i> My Favorites</a>
+                    <a href="http://127.0.0.1:8000/account/favorites/detail" class="site-btn blue-btn"><i class="fa fa-heart-o" aria-hidden="true"></i> My Favorites</a>
                 </div>
                 <div class="row">
                     <div class="col-md-4 acc-info-col">
@@ -24,7 +24,7 @@
                             <p class="red-color">No address available</p>
                             <div class="available-sp-add">
                                 <p>2 Address Available</p>
-                                <button type="button" class="site-btn" data-toggle="modal" data-target="#ShowAllShippingAddress">Show All</button>
+                                <button type="button" class="site-btn green-btn" data-toggle="modal" data-target="#ShowAllShippingAddress">Show All</button>
                             </div>
                             <div class="acc-info-btn">
                                 <button type="button" class="site-link-btn" data-toggle="modal" data-target="#AddNewShippingAddress">ADD A NEW SHIPPING ADDRESS <i class="fa fa-angle-right" aria-hidden="true"></i></button>
@@ -59,7 +59,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="sp-add-edit-btn">
-                                                    <button type="button" class="site-btn" data-toggle="modal" data-target="#AddNewShippingAddress">Edit</button>
+                                                    <button type="button" class="site-link-btn" data-toggle="modal" data-target="#AddNewShippingAddress">Edit</button>
                                                 </div>
                                             </div>
                                             <div class="sp-add-list">
@@ -78,12 +78,12 @@
                                                     </p>
                                                 </div>
                                                 <div class="sp-add-edit-btn">
-                                                    <button type="button" class="site-btn" data-toggle="modal" data-target="#AddNewShippingAddress">Edit</button>
+                                                    <button type="button" class="site-link-btn" data-toggle="modal" data-target="#AddNewShippingAddress">Edit</button>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn site-btn">Cancel</button>
+                                            <button type="button" class="btn site-btn green-btn">Cancel</button>
                                         </div>
                                     </div>
                                 </div>
@@ -177,8 +177,8 @@
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn site-btn">Cancel</button>
-                                            <button type="button" class="btn site-btn" disabled>Save</button>
+                                            <button type="button" class="btn site-btn green-btn">Cancel</button>
+                                            <button type="button" class="btn site-btn green-btn" disabled>Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -299,8 +299,8 @@
                                             <p>Please add a billing or shipping address before you add a new payment method.</p>
                                         </div> -->
                                         <div class="modal-footer">
-                                            <button type="button" class="btn site-btn">Cancel</button>
-                                            <button type="button" class="btn site-btn" disabled>Save</button>
+                                            <button type="button" class="btn site-btn green-btn">Cancel</button>
+                                            <button type="button" class="btn site-btn green-btn" disabled>Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -336,7 +336,7 @@
                                                         <label>Name:</label>
                                                         <span>jasmin patel</span>
                                                     </p>
-                                                    <button type="button" class="btn site-btn" data-toggle="modal" id="EditName" data-target="#EditNameModal">Edit</button>
+                                                    <button type="button" class="btn site-btn blue-border-btn " data-toggle="modal" id="EditName" data-target="#EditNameModal">Edit</button>
 
                                                 </div>
                                                 <div class="login-security-list">
@@ -344,18 +344,18 @@
                                                         <label>Email:</label>
                                                         <span>hingrajiyajasmin@gmail.com</span>
                                                     </p>
-                                                    <button type="button" class="btn site-btn" data-toggle="modal" id="ChangeEmail" data-target="#ChangeEmailModal">Edit</button>
+                                                    <button type="button" class="btn site-btn blue-border-btn" data-toggle="modal" id="ChangeEmail" data-target="#ChangeEmailModal">Edit</button>
                                                 </div>
                                                 <div class="login-security-list">
                                                     <p>
                                                         <label>Password:</label>
                                                         <span>********</span>
                                                     </p>
-                                                    <button type="button" class="btn site-btn" data-toggle="modal" id="ChangePassword" data-target="#ChangePasswordModal">Edit</button>
+                                                    <button type="button" class="btn site-btn blue-border-btn" data-toggle="modal" id="ChangePassword" data-target="#ChangePasswordModal">Edit</button>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn site-btn">Done</button>
+                                                <button type="submit" class="btn site-btn green-btn">Done</button>
                                             </div>
                                         </div>
                                     </div>
@@ -385,7 +385,7 @@
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn site-btn">Save Changes</button>
+                                                <button type="submit" class="btn site-btn green-btn">Save Changes</button>
                                             </div>
                                         </div>
                                     </div>
@@ -426,7 +426,7 @@
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn site-btn">Save Changes</button>
+                                                <button type="submit" class="btn site-btn green-btn">Save Changes</button>
                                             </div>
                                         </div>
                                     </div>
@@ -463,7 +463,7 @@
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn site-btn">Save Changes</button>
+                                                <button type="submit" class="btn site-btn green-btn">Save Changes</button>
                                             </div>
                                         </div>
                                     </div>
@@ -513,7 +513,7 @@
                                 <label for="EnterGiftCard">Search items in your order history</label>
                                 <div class="input-with-btn">
                                     <input type="text" class="form-control" id="EnterGiftCard" placeholder="Search by Order Number, Brand, or Name">
-                                    <button class="site-btn" type="submit">Search Orders</button>
+                                    <button class="site-btn blue-btn" type="submit">Search Orders</button>
                                 </div>
                             </div>
                         </form>

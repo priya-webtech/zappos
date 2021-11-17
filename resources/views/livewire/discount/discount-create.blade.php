@@ -24,41 +24,64 @@
         <article class="full-width">
             <div class="columns two-thirds">
                 <div class="card">
-                    <label>Title <span><a wire:click="RendomGenrate" >Genrate Code</a></span></label>
+                    <div class="header-title">
+                        <h3 class="fs-16 fw-6 mb-0">Discount code</h3>
+                        <a wire:click="RendomGenrate" >Genrate Code</a>
+                    </div>
                     <input type="text" wire:model="code" class="GFG_DOWN" name="code" placeholder="Discount">
+                    <span class="text-grey mt-04 d-inline-block">Customers will enter this discount code at checkout.</span>
                 </div>
                 
                 <div class="card">
-                    <label>Type</label>
-                    <div class="form-field-list"> 
-                    	<input value="1" type="radio" data-section="#div-1" name="type" class="change-filter" wire:model="type" checked>
-                        <span><label for="subscribed-pending">Percentage</label></span>
+                    <div class="header-title">
+                        <h3 class="fs-16 fw-6 mb-0">Type</h3>
                     </div>
-                    <div> 
-                    	<input value="2" wire:model="type" type="radio" data-section="#div-2" name="type" class="change-filter">
-                        <span><label for="subscribed-pending">Fixed amount</label></span>
+                    <div class="row row-mb-0">
+                        <div class="package-type-radio">
+                            <label>
+                            	<input value="1" type="radio" data-section="#div-1" name="type" class="change-filter" wire:model="type" checked>Percentage
+                            </label>
+                            <label>
+                            	<input value="2" wire:model="type" type="radio" data-section="#div-2" name="type" class="change-filter">Fixed amount
+                            </label>
+                        </div>
                     </div>
                 </div>
 
-                <div  id="div-1" class="card percentage-value">
-                    <input type="text" wire:model="discount_value" name="discount_value" placeholder="%">
-                </div>
-                <div  id="div-2" class="card percentage-value">
-                    <input type="text" wire:model="discount_value" name="discount_value" placeholder="$">
-                </div>
+                <div class="card card-padding0">
+                    <div class="card-header">
+                        <div class="header-title">
+                            <h3 class="fs-16 fw-6 mb-0">Value</h3>
+                        </div>
+                        <div id="div-1" class="percentage-value">
+                            <div class="row">
+                                <label class="lbl-mb-4">Discount value</label>
+                                <input type="text" wire:model="discount_value" name="discount_value" placeholder="%">
+                            </div>
+                        </div>
+                        <div id="div-2" class="percentage-value">
+                            <div class="row">
+                                <label class="lbl-mb-4">Discount value</label>
+                                <input type="text" wire:model="discount_value" name="discount_value" placeholder="$">
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="card">
-                    <div class="form-field-list"> 
-                    	<input value="1" type="radio" wire:model="applyto" data-section="#product-1" name="applyto" class="change-filter" checked>
-                        <span><label for="subscribed-pending">All products</label></span>
-                    </div>
-                    <div> 
-                    	<input value="2" type="radio" wire:model="applyto" data-section="#product-2" name="applyto" class="change-filter">
-                        <span><label for="subscribed-pending">Specific collections</label></span>
-                    </div>
-                    <div> 
-                    	<input value="3" type="radio" wire:model="applyto" data-section="#product-3" name="applyto" class="change-filter">
-                        <span><label for="subscribed-pending">Specific products</label></span>
+                    <div class="card-middle">
+                        <div class="header-title">
+                            <h3 class="lh-normal mb-8 fw-6 fs-12">APPLIES TO</h3>
+                        </div>
+                        <div class="package-type-radio">
+                            <label> 
+                            	<input value="1" type="radio" wire:model="applyto" data-section="#product-1" name="applyto" class="change-filter" checked>All products
+                            </label>
+                            <label>
+                            	<input value="2" type="radio" wire:model="applyto" data-section="#product-2" name="applyto" class="change-filter">Specific collections
+                            </label>
+                            <label>
+                            	<input value="3" type="radio" wire:model="applyto" data-section="#product-3" name="applyto" class="change-filter">Specific products
+                            </label>
+                        </div>
                     </div>
                 </div>
 
@@ -151,27 +174,69 @@
                 </div>
 
                 <div class="card">
-                    <label>Start Date </label>
-                    <input type="date" wire:model="start_date" name="sdate" placeholder="Start Date">
-
-                    <label>Start Time </label>
-                    <input type="time" wire:model="start_time" name="stime" placeholder="Start Time">
-
-                    <label>End Date </label>
-                    <input type="date" wire:model="end_date" name="etime" placeholder="End Date">
-
-                     <label>End Time </label>
-                    <input type="time" wire:model="end_time" name="etime" placeholder="Start Time">
+                    <div class="header-title">
+                        <h3 class="fs-16 fw-6 mb-0">Active dates</h3>
+                    </div>
+                    <div class="row row-mb-0">
+                        <div class="full-width">
+                            <div class="columns six row mb-2">
+                                <label>Start Date </label>
+                                <input type="date" wire:model="start_date" name="sdate" placeholder="Start Date">
+                            </div>
+                            <div class="columns six row mb-2">
+                                <label>Start Time </label>
+                                <input type="time" wire:model="start_time" name="stime" placeholder="Start Time">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label><input type="checkbox" name="option2a">Set end date</label>
+                    </div>
+                    <div class="row row-mb-0">
+                        <div class="full-width">
+                            <div class="columns six row mb-2">
+                                <label>End Date </label>
+                                <input type="date" wire:model="end_date" name="etime" placeholder="End Date">
+                            </div>
+                            <div class="columns six row mb-2">
+                                <label>End Time </label>
+                                <input type="time" wire:model="end_time" name="etime" placeholder="Start Time">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-
-
+            </div>
+            <div class="columns one-third right-details">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="header-title">
+                            <h3 class="fs-16 fw-6 mb-0">Summary</h3>
+                        </div>
+                        <p class="text-grey mb-0">No information entered yet.</p>
+                    </div>
+                    <div class="card-middle">
+                        <div class="header-title">
+                            <h4 class="fs-12  fw-6 mb-0">PERFORMANCE</h4>
+                        </div>
+                        <p class="text-grey mb-0">Discount is not active yet.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-middle">
+                        <div class="header-title">
+                            <h4 class="fs-12 fw-6 mb-0 lh-normal">CAN’T COMBINE WITH OTHER AUTOMATIC DISCOUNTS</h4>
+                        </div>
+                        <p class="text-grey mb-0">Customers won’t be able to enter a code if an automatic discount is already applied at checkout.</p>
+                    </div>
+                </div>
             </div>
         </article>
     </section>
-    <section class="full-width flex-wrap admin-body-width create-collection-footer">
+    
+    <section class="full-width flex-wrap admin-body-width">
         <div class="page-bottom-btn">
-            <input type="submit" class="button" value="save" wire:click.prevent="SaveRecord('save-discount')">
+            <button class="secondary secondary-brd-btn">Discard</button>
+            <input type="submit" class="button" disabled="disabled" value="save" wire:click.prevent="SaveRecord('save-discount')">
         </div>
     </section>
     
