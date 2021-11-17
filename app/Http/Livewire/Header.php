@@ -28,8 +28,9 @@ class Header extends Component
         if (Auth::check()) {
             $this->user_id =  Auth::user()->id;
             $this->getCart();
+            $this->discoutget = Cart::where('user_id', $this->user_id)->first();
+
         }
-       $this->discoutget = Cart::where('user_id', $this->user_id)->first();
        $this->ProductVariant = ProductVariant::get();
        $this->varianttag = VariantTag::All();
 
@@ -118,12 +119,13 @@ class Header extends Component
 
     public function DeleteCartProduct($id)
     {
+
         if (Auth::check()) {
             Cart::find($id)->delete();
             $this->getCart();
 
-            $this->ProductVariant = ProductVariant::get();
-            $this->varianttag = VariantTag::All();
+            // $this->ProductVariant = ProductVariant::get();
+            // $this->varianttag = VariantTag::All();
         }
     }
 

@@ -19,7 +19,7 @@ class Cart extends Model
     
     protected $table = "cart";
 
-    protected $fillable = ['user_id','product_id','locationid','varientid','price','stock'];
+    protected $guarded =[];
 
     public function product_detail()
     {
@@ -30,6 +30,11 @@ class Cart extends Model
     public function media_product()
     {
         return $this->hasMany(ProductMedia::class, 'product_id', 'product_id');
+    }
+
+    public function promocode()
+    {
+        return $this->hasMany(discount::class, 'id', 'discount_id');
     }
 
 }
