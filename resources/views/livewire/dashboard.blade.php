@@ -1,7 +1,7 @@
 <x-customer-layout>
 
 @if($alert !== null)
-<div class="alert alert-success">
+<div class="alert alert-info">
 <strong>{{$alert}}</strong>
 </div>
 @endif

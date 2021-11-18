@@ -426,13 +426,19 @@ $(document).ready(function(){
                         <div class="form-container sign-up-container">
                             <form action="{{ route('register') }}" method="POST">
                                 @csrf
+
                                 <h2 class="h2">Create Account</h2>
                                 <span>or use your email for registration</span>
+
                                 <input type="text" placeholder="First Name" name="first_name" />
+                                @error('first_name') <span class="error">{{ $message }}</span> @enderror
                                 <input type="text" placeholder="Last Name" name="last_name" />
-                                <input type="email" placeholder="Email" name="email"/>
+                                @error('last_name') <span class="error">{{ $message }}</span> @enderror
+                                <input type="email" placeholder="Email" name="email" />
+                                @error('email') <span class="error">{{ $message }}</span> @enderror
                                 <input type="password" placeholder="Password" name="password" />
                                 <input type="password" placeholder="Re-enter password " name="password_confirmation" />
+                                @error('password') <span class="error">{{ $message }}</span> @enderror
                                 <button type="submit" class="site-btn blue-btn">Sign Up</button>
                             </form>
                             <div class="signin-bottom-cont">
@@ -449,9 +455,10 @@ $(document).ready(function(){
                                 @csrf
                                 <h2 class="h2">Sign in</h2>
                                 <span>or use your account</span>
+                                <input type="hidden" name="login_from" value="frontend" />
                                 <input type="email" placeholder="Email" name="email" />
                                 <input type="password" placeholder="Password" name="password" />
-                                <a href="#">Forgot your password?</a>
+                                <a href="{{ route('password.request') }}">Forgot your password?</a>
                                 <button type="submit" class="site-btn blue-btn">Sign In</button>
                             </form>
                             <div class="signin-bottom-cont">
