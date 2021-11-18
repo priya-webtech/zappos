@@ -75,30 +75,35 @@ use App\Models\Cart;
           $selling_price = $Productvariant['price'];
 
           $discount = $selling_price - $price;
-           return [ 'label' => '' ,'price' => $price, 'selling_price' => $selling_price, 'discount' => $discount ];
+           return [ 'label' => '' ,'price' => $price, 'selling_price' => $selling_price, 'discount' => $discount,'product' => $product ];
       }
       else
       {
          $price = $Productvariant['price'];
          $selling_price = '';
      
-          return [ 'label' => 'product-single-price' ,'price' => $price, 'selling_price' => $selling_price ];
+          return [ 'label' => 'product-single-price' ,'price' => $price, 'selling_price' => $selling_price,'product' => $product ];
+
       }
 
 
     }
     else{
+
       if($product['compare_selling_price']){
           $price = $product['compare_selling_price'];
           $selling_price = $product['price'];
           $discount = $selling_price - $price;
-           return [ 'label' => '' ,'price' => $price, 'selling_price' => $selling_price, 'discount' => $discount ];
+          
+           return [ 'label' => '' ,'price' => $price, 'selling_price' => $selling_price, 'discount' => $discount,'product' => $product ];
+
       }
       else
       {
          $price = $product['price'];
          $selling_price = '';
-          return [ 'label' => 'product-single-price' ,'price' => $price, 'selling_price' => $selling_price ];
+          return [ 'label' => 'product-single-price' ,'price' => $price, 'selling_price' => $selling_price,'product' => $product ];
+
       }
      
     }

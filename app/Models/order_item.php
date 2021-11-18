@@ -28,4 +28,8 @@ class order_item extends Model
     {
         return $this->hasMany(ProductMedia::class, 'product_id', 'product_id');
     }
+    public function order()
+    {
+        return $this->hasMany(Orders::class, 'id', 'order_id');
+    }
 }

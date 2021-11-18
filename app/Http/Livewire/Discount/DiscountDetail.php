@@ -46,6 +46,7 @@ class DiscountDetail extends Component
     }
     public function UpdateDiscount()
     {
+        $productarray = [];
     	if(!empty($this->discountlist['applyto'])){
     		if($this->discountlist['applyto'] == '2'){
     			$productarray = json_encode($this->selectedcollection);

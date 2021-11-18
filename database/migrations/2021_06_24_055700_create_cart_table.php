@@ -19,8 +19,7 @@ class CreateCartTable extends Migration
             $table->Integer('product_id');
             $table->Integer('varientid')->nullable();
             $table->Integer('price');
-            $table->Integer('discount')->nullable();
-            $table->Integer('discount_type')->nullable();
+            $table->Integer('discount_id')->default('0');
             $table->Integer('locationid');
             $table->Integer('stock');
             $table->timestamps();
