@@ -958,6 +958,51 @@
                         <input type="hidden" wire:model="address_id">
 
                        
+                        <div class="row">
+
+                           <div class="form-field-list">
+
+                           
+
+                               <label>First Name</label>
+
+                           
+
+                               <input type="text" wire:model="customerAddress.first_name">
+
+                           
+
+                           </div>
+
+                           
+
+                           <div class="form-field-list">
+
+                           
+
+                               <label>Last Name</label>
+
+                           
+
+                               <input type="text" wire:model="customerAddress.last_name">
+
+                           
+
+                           </div>
+
+                        </div>
+
+                        <div class="row">
+
+                           <div class="form-field-list">
+
+                              <label>Company</label>
+
+                              <input type="text" wire:model.lazy="customerAddress.company">
+
+                           </div>
+
+                        </div>
 
                         <div class="row">
 
@@ -1043,6 +1088,20 @@
 
                         </div>
 
+                        <div class="row">
+
+                           <div class="form-field-list">
+
+                               <label>Phone number</label>
+
+                               <div class="cd-phone-field">
+
+                                   <input class="rounded-md shadow-sm block mt-1 w-full displaycode" id="customer_mobile_number" type="" name="phone" wire:model="customerAddress.mobile_no">
+
+                               </div>
+                           </div>
+
+                        </div>
                       
 
                      </form>
@@ -1107,7 +1166,7 @@
 
                         <input type="hidden" wire:model="customer.id">
 
-                        <!-- <div class="row">
+                        <div class="row">
 
                            <div class="form-field-list">
 
@@ -1117,7 +1176,7 @@
 
                            
 
-                               <input type="text" wire:model="first_name">
+                               <input type="text" wire:model="customerBillingAddress.first_name">
 
                            
 
@@ -1133,13 +1192,13 @@
 
                            
 
-                               <input type="text" wire:model="last_name">
+                               <input type="text" wire:model="customerBillingAddress.last_name">
 
                            
 
                            </div>
 
-                           </div> -->
+                        </div>
 
                         <div class="row">
 
@@ -1217,25 +1276,20 @@
 
                         </div>
 
-                        <!-- <div class="row">
+                         <div class="row">
 
                            <div class="form-field-list">
 
-                           
-
                                <label>Phone number</label>
-
-                           
 
                                <div class="cd-phone-field">
 
+
+                                   <input class="rounded-md shadow-sm block mt-1 w-full displaycode" id="customer_mobile_number" type="" name="phone" wire:model="customerBillingAddress.mobile_no">
+
                            
 
-                                   <input class="rounded-md shadow-sm block mt-1 w-full displaycode" id="customer_mobile_number" type="text" name="phone" wire:model="phone">
-
-                           
-
-                                   <select name="customer_phone_code" class="country-drop changeadd" >
+                                   <!-- <select name="customer_phone_code" class="country-drop changeadd" >
 
                            
 
@@ -1261,21 +1315,12 @@
 
                                        @endforeach
 
-                           
-
-                                   </select>    
-
-                           
+                                   </select> -->    
 
                                </div>
-
-                           
-
                            </div>
 
-                           
-
-                           </div> -->
+                        </div> 
 
                      </form>
 

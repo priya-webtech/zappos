@@ -17,22 +17,35 @@ use Illuminate\Support\Facades\Hash;
 class Account extends Component
 {
 	protected $listeners = ['ManageUser'];
-	public $user_id,$customer,$Taxes,$UserDetail,$email,$reemail,$password,$repassword,$newpassword,$currpassword,$countries,$first_name,$last_name,$city,$address,$apartment,$country,$postal_code,$mobile_no,$address_type,$order,$OrderItem;
+	public $user_id,$customer,$Taxes,$UserDetail,$email,$reemail,$password,$repassword,$newpassword,$currpassword,$countries,$first_name,$last_name,$city,$address,$apartment,$company,$country,$postal_code,$mobile_no,$address_type,$order,$OrderItem,$EditShippingAddress,$editaddress,$addressid;
 
+    public $updateMode = false;
 
 	protected $rules = [
         'UserDetail.first_name' => '',
         'UserDetail.last_name' => '',
         'email' => 'required|email|unique:User,email',
         'reemail' => 'required|email',
-        'repassword' => 'required|email|unique:User,email',
-        'newpassword' => 'required|email|unique:User,email',
-        'currpassword' => 'required|email|unique:User,email',
+        'repassword' => 'required',
+        'newpassword' => 'required',
+        'currpassword' => 'required',
+        'editaddress.first_name' => 'required',
+        'editaddress.last_name' => '',
+        'editaddress.company' => '',
+        'editaddress.address' => '',
+        'editaddress.apartment' => '',
+        'editaddress.city' => '',
+        'editaddress.country' => '',
+        'editaddress.postal_code' => '',
+        'editaddress.mobile_no' => '',
+        'editaddress.address_type' => '',
+        'editaddress.id' => '',
     ];
 
 
 	public function mount()
 	{
+        $this->updateMode= false;
 		if (Auth::check()) {
             $this->ManageUser();
             $this->OrderItem = order_item::with('order_product')->with('order')->with('media_product')->get();
@@ -68,29 +81,85 @@ class Account extends Component
     	}
     	
     	$ship_arr = [
-                        'user_id' => $this->user_id,
-                        
-                        'first_name' => $this->first_name,
 
-                        'last_name' => $this->last_name,
-                        
-                        'address' => $this->address,
-                        
-                        'apartment' => $this->apartment,
-                        
-                        'city' => $this->city,
+                    'user_id' => $this->user_id,
+                    
+                    'first_name' => $this->first_name,
 
-                        'country' => $this->country,
-                        
-                        'postal_code' => $this->postal_code,
-                        
-                        'mobile_no' => $this->mobile_no,
-                        
-                        'address_type' => $shippingAddress,
-                    ];
+                    'last_name' => $this->last_name,
+                    
+                    'address' => $this->address,
+                    
+                    'apartment' => $this->apartment,
+                    
+                    'city' => $this->city,
+                    
+                    'company' => $this->company,
+
+                    'country' => $this->country,
+                    
+                    'postal_code' => $this->postal_code,
+                    
+                    'mobile_no' => $this->mobile_no,
+                    
+                    'address_type' => $shippingAddress,
+                ];
 
         CustomerAddress::create($ship_arr);
         session()->flash('message', 'shipping Address Added !!');
+    }
+    public function shippingedit($id){
+        $this->updateMode = true;
+        $this->editaddress = CustomerAddress::find($id);
+        $this->addressid = $this->editaddress->id;
+    }
+    public function update($id)
+    {
+        $validatedDate = $this->validate([
+            'editaddress.first_name' => '',
+            'editaddress.last_name' => '',
+            'editaddress.address' => '',
+            'editaddress.apartment' => '',
+            'editaddress.city' => '',
+            'editaddress.country' => '',
+            'editaddress.postal_code' => '',
+            'editaddress.address_type' => '',
+        ]);
+
+        $editupdate = CustomerAddress::find($id);
+
+        if($editupdate->address_type == true){
+            $shippingAddress = 'shipping_address';
+        }else{
+            $shippingAddress = 'billing_address';
+        }
+
+        CustomerAddress::where('id',$id)->update([
+
+            'user_id' => $editupdate->id,
+            
+            'first_name' => $editupdate->first_name,
+
+            'last_name' => $editupdate->last_name,
+            
+            'address' => $editupdate->address,
+            
+            'apartment' => $editupdate->apartment,
+            
+            'city' => $editupdate->city,
+            
+            'company' => $editupdate->company,
+
+            'country' => $editupdate->country,
+            
+            'postal_code' => $editupdate->postal_code,
+            
+            'mobile_no' => $editupdate->mobile_no,
+            
+            'address_type' => $shippingAddress,
+        ]);
+
+        session()->flash('message', 'Edit shipping Address !!');
     }
     public function UpdateUser($flag)
     {
