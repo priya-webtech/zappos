@@ -126,7 +126,7 @@
 
                                 <div class="add-review-filed">
 
-                                    <input class="site-btn" type="submit" name='submit' value="submit">
+                                    <input class="site-btn blue-btn" type="submit" name='submit' value="submit">
 
                                 </div>
 

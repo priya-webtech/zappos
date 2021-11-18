@@ -264,7 +264,7 @@
 
                                 <div class="pd-btn-group">
 
-                                    <button class="site-btn" id="variant_id" value="@if(!empty($row->id)){{$row->id}}@endif" wire:click="addCart($event.target.value)">Add to Cart</button>
+                                    <button class="site-btn green-btn" id="variant_id" value="@if(!empty($row->id)){{$row->id}}@endif" wire:click="addCart($event.target.value)">Add to Cart</button>
 
 
 
@@ -273,11 +273,11 @@
 
                                     @if(!empty($resultwish) && $favoritevalue && $favoritevalue->status == 1)
 
-                                    <a class="site-btn add-collection-btn" wire:click="UpdateWish({{$resultwish['id']}}, {{$resultwish['product_id']}})" style="background-color: green;"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
+                                    <a class="site-btn green-btn add-collection-btn" wire:click="UpdateWish({{$resultwish['id']}}, {{$resultwish['product_id']}})"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
                                     
                                     @else
 
-                                     <a class="site-btn add-collection-btn" wire:click="UpdateWish({{$resultwish['id']}}, {{$resultwish['product_id']}})"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
+                                     <a class="site-btn green-btn add-collection-btn" wire:click="UpdateWish({{$resultwish['id']}}, {{$resultwish['product_id']}})"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
 
                                     @endif
 
@@ -335,7 +335,7 @@
 
                                 <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
 
-                                <a href="#pd-all-details">Show More Information <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                                <a class="site-link-btn" href="#pd-all-details">Show More Information <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
 
                             </div>
 
@@ -843,7 +843,7 @@
 
                         <div class="product-review">
 
-                            <a class="site-btn" href="{{ route('product-review', $product->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i> Write Review</a>
+                            <a class="site-btn blue-btn" href="{{ route('product-review', $product->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i> Write Review</a>
 
                             @if($this->reviewget)
 

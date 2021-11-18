@@ -171,7 +171,7 @@
 
                                 <div class="col-xs-12">
                                   
-                                    <button type="submit" class="site-btn" >Submit</button>
+                                    <button type="submit" class="site-btn blue-btn">Submit</button>
 
                                 </div>
 

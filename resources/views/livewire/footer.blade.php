@@ -8,7 +8,7 @@
                         <p>Make your inbox happy by joining our newsletter!</p>
                         <form action="" class="footer-input">
                             <input type="email" placeholder="Email">
-                            <button id="btn-ouline-nl">Sign Up</button>
+                            <button class="site-btn blue-btn" id="btn-ouline-nl">Sign Up</button>
                         </form>
                     </div>
                 </div>
