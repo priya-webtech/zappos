@@ -287,7 +287,7 @@
                                     <label for="formGroupExampleInput">Have a Promotional Code?</label>
                                     <p class="d-flex" wire:ignore>
                                         <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Promotional Code" wire:model="promotioncode">
-                                        <button type="submit" wire:click="PromotionalCode">Apply</button>
+                                        <button type="submit" class="site-btn green-btn" wire:click="PromotionalCode">Apply</button>
                                     </p>
                                     @if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['type'] == 2)
                                     <a style="color: red;">Apply <b>{{$discoutget['promocode'][0]['discount_value']}}{{$symbol['currency']}}</b> Discount</a>
@@ -308,7 +308,7 @@
                                     </div>
                                     <div class="vc-inner">
                                         <input type="hidden" name="total_price" value="{{$total}}" />
-                                        <button type="submit" class="site-btn">Proceed to Checkout</button>
+                                        <button type="submit" class="site-btn green-btn">Proceed to Checkout</button>
                                     </div>
                                 </form>
                             </div>

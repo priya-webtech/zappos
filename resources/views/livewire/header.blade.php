@@ -180,9 +180,9 @@
                                             @if(empty($this->user_id))
                                             <button class="site-btn signin-btn">Sign In</button>
                                             @endif
-                                            <a href="{{ route('view-cart') }}" class="site-btn view-cart-btn">View Cart</a>
+                                            <a href="{{ route('view-cart') }}" class="site-btn green-btn view-cart-btn">View Cart</a>
                                             <input type="hidden" name="total_price" value="{{$total}}" />
-                                            <input type="submit" name="checkout" class="site-btn checkout-btn" value="Proceed to checkout">
+                                            <input type="submit" name="checkout" class="site-btn green-btn checkout-btn" value="Proceed to checkout">
                                         </div>
                                     </div>
                                     @else
