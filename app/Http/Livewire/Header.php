@@ -31,7 +31,7 @@ class Header extends Component
             $this->discoutget = Cart::where('user_id', $this->user_id)->first();
 
         }
-       $this->ProductVariant = ProductVariant::get();
+       $this->ProductVariant = ProductVariant::all();
        $this->varianttag = VariantTag::All();
 
 
@@ -124,7 +124,7 @@ class Header extends Component
             Cart::find($id)->delete();
             $this->getCart();
 
-            // $this->ProductVariant = ProductVariant::get();
+            // $this->ProductVariant = ProductVariant::all();
             // $this->varianttag = VariantTag::All();
         }
     }

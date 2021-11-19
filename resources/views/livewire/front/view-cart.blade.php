@@ -53,9 +53,7 @@
                                                   $subtotal4 += $cart['stock'] * $cart['price'];
                                                    
                                                 }
-
                                             }
-
                                         }
                                         elseif ($discoutget['promocode'][0]['applyto'] == 2){
                                             $categoryget = json_decode($detailfetch['product']['collection']);
@@ -274,7 +272,6 @@
                                             $total = $subtotal - $discountrate;
                                         }
                                     }
-                                
                                 ?>
                                 </tbody>
                             </table>

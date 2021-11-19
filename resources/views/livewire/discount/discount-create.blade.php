@@ -19,8 +19,8 @@
             </div>
         </article>
     </section>
-<form action="#">
-    <section class="full-width admin-body-width flex-wrap admin-full-width bd_none add-transfers-sec" wire:ignore>
+<form wire:submit.prevent="SaveRecord('save-discount')">
+    <section class="full-width admin-body-width flex-wrap admin-full-width bd_none add-transfers-sec">
         <article class="full-width">
             <div class="columns two-thirds">
                 <div class="card">
@@ -28,7 +28,8 @@
                         <h3 class="fs-16 fw-6 mb-0">Discount code</h3>
                         <a wire:click="RendomGenrate" >Genrate Code</a>
                     </div>
-                    <input type="text" wire:model="code" class="GFG_DOWN" name="code" placeholder="Discount">
+                    <input type="text" wire:model="code" class="GFG_DOWN" name="code" placeholder="Discount" wire:ignore>
+                    @error('code') <span class="text-danger">{{ $message }}</span>@enderror <br>
                     <span class="text-grey mt-04 d-inline-block">Customers will enter this discount code at checkout.</span>
                 </div>
                 
@@ -53,18 +54,19 @@
                         <div class="header-title">
                             <h3 class="fs-16 fw-6 mb-0">Value</h3>
                         </div>
-                        <div id="div-1" class="percentage-value">
+                        <div id="div-1" class="percentage-value"  wire:ignore.self >
                             <div class="row">
                                 <label class="lbl-mb-4">Discount value</label>
-                                <input type="text" wire:model="discount_value" name="discount_value" placeholder="%">
+                                <input  wire:ignore.self type="text" wire:model="discount_value" name="discount_value" placeholder="%">
                             </div>
                         </div>
-                        <div id="div-2" class="percentage-value">
+                        <div id="div-2" class="percentage-value"  wire:ignore.self >
                             <div class="row">
                                 <label class="lbl-mb-4">Discount value</label>
-                                <input type="text" wire:model="discount_value" name="discount_value" placeholder="$">
+                                <input   wire:ignore.self type="text" wire:model="discount_value" name="discount_value" placeholder="$">
                             </div>
                         </div>
+                         @error('discount_value') <span class="text-danger">{{ $message }}</span>@enderror <br>
                     </div>
 
                     <div class="card-middle">
@@ -85,7 +87,7 @@
                     </div>
                 </div>
 
-                <div id="product-3" class="applyto columns product_listing_columns pdpage-checkbox has-sections card ml-0 product-tab-table ccd-product-tbl">
+                <div id="product-3" class="applyto columns product_listing_columns pdpage-checkbox has-sections card ml-0 product-tab-table ccd-product-tbl" wire:ignore>
                     <div class="product-table-title">
                         <h3>Products</h3>
                     </div>
@@ -129,7 +131,7 @@
                     </div>
                 </div>
 
-                <div id="product-2" class="applyto columns product_listing_columns pdpage-checkbox has-sections card ml-0 product-tab-table ccd-product-tbl">
+                <div id="product-2" class="applyto columns product_listing_columns pdpage-checkbox has-sections card ml-0 product-tab-table ccd-product-tbl" wire:ignore>
                     <div class="product-table-title">
                         <h3>Collection</h3>
                     </div>
@@ -185,14 +187,15 @@
                             </div>
                             <div class="columns six row mb-2">
                                 <label>Start Time </label>
-                                <input type="time" wire:model="start_time" name="stime" placeholder="Start Time">
+                                <input value="" type="time" wire:model="start_time" name="stime" placeholder="Start Time">
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <label><input type="checkbox" name="option2a">Set end date</label>
+                        <label><input type="checkbox" name="option2a" wire:click="SetEndDate($event.target.checked)">Set end date</label>
                     </div>
-                    <div class="row row-mb-0">
+                    @if($set_end_date)
+                    <div id="end_date_box" class="row row-mb-0">
                         <div class="full-width">
                             <div class="columns six row mb-2">
                                 <label>End Date </label>
@@ -204,6 +207,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
             <div class="columns one-third right-details">
@@ -236,12 +240,16 @@
     <section class="full-width flex-wrap admin-body-width">
         <div class="page-bottom-btn">
             <button class="secondary secondary-brd-btn">Discard</button>
-            <input type="submit" class="button" disabled="disabled" value="save" wire:click.prevent="SaveRecord('save-discount')">
+            <input type="submit" class="button" value="save">
         </div>
     </section>
     
     <!--Edit Product modal-->
-    <div id="collection-edit-collection-modal" class="customer-modal-main" wire:ignore>
+ 
+    
+    
+</form>
+   <div id="collection-edit-collection-modal" class="customer-modal-main" wire:ignore>
         <div class="customer-modal-inner">
             <div class="customer-modal">
                 <div class="modal-header">
@@ -328,9 +336,6 @@
             </div>
         </div>
     </div>
-    
-    
-</form>
   	
 
   	<script type="text/javascript">

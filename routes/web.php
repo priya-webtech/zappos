@@ -14,8 +14,8 @@ use App\Http\Livewire;
 |
 */
 Route::get('/', Livewire\Dashboard::class)->name('home');
-Route::get('/signin', [Livewire\Admin\Dashboard::class, 'checkLogin'])->name('admin.login');
-// Route::get('/signin', function (){
+// Route::get('/signin', [Livewire\Admin\Dashboard::class, 'checkLogin'])->name('admin.login');
+// Route::get('/login', function (){
 //     return view('livewire.admin.login');
 // })->name('admin.login');
 

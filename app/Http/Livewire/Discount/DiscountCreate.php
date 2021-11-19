@@ -7,20 +7,43 @@ use Livewire\Component;
 use App\Models\discount;
 use App\Models\Collection;
 use App\Models\Product;
+use Illuminate\Http\Request;
+
 
 use str;
 
 class DiscountCreate extends Component
 {
 	public $applyto,$type,$code,$discount_value,$randomString,$start_date,$end_date,$start_time,$end_time;
-	public $selectedcollection = [], $selectedproduct = [];
+	public $selectedcollection = [], $selectedproduct = [], $set_end_date;
 
 	protected $listeners = ['SaveRecord'];
+
+     protected $rules = [
+
+        'code' => ['required'],
+        'discount_value' => ['required'],
+
+    ];
+
+    public function mount()
+    {
+        $this->type = '1';
+        $this->applyto = '1';
+        $this->set_end_date = false;
+    }
+
+
     public function render()
     {
     	$this->collection = Collection::get();
 		$this->product = Product::get();
         return view('livewire.discount.discount-create');
+    }
+
+    public function SetEndDate($value)
+    {
+        $this->set_end_date = $value;
     }
 
     public function RendomGenrate()
@@ -34,8 +57,9 @@ class DiscountCreate extends Component
         $this->code = $this->randomString;
     }
 
-    public function SaveRecord($flag)
+    public function SaveRecord(Request $request, $flag)
     {	
+        $this->validate($this->rules);
     	
 		if(!empty($this->applyto)){
 			if($this->applyto == '2'){
@@ -56,10 +80,7 @@ class DiscountCreate extends Component
     	if($flag == 'save-discount')
         {
 
-            $this->validate([
-                'code' => 'required',
-                'discount_value' => 'required'
-            ]);
+          
 
              discount::insert([
              	'code' => $this->code,

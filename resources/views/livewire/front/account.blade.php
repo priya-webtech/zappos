@@ -27,7 +27,8 @@
             <div class="container">
                 <div class="primary-acc-info-title">
                     <h2 class="h2">Your Primary Account Information</h2>
-                    <a href="http://127.0.0.1:8000/account/favorites/detail" class="site-btn blue-btn"><i class="fa fa-heart-o" aria-hidden="true"></i> My Favorites</a>
+                    <a href="{{ route('favorite-detail') }}" class="site-btn"><i class="fa fa-heart-o" aria-hidden="true"></i> My Favorites</a>
+
                 </div>
                 <div class="row">
                     <div class="col-md-4 acc-info-col">
@@ -46,7 +47,7 @@
                             <div class="acc-info-btn">
                                 <button type="button" class="site-link-btn" data-toggle="modal" data-target="#AddNewShippingAddress">ADD A NEW SHIPPING ADDRESS <i class="fa fa-angle-right" aria-hidden="true"></i></button>
                             </div>
-                            <div class="modal fade" id="ShowAllShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="ShowAllShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header proceed-cart-head ">
@@ -79,7 +80,8 @@
                                                     </p>
                                                 </div>
                                                 <div class="sp-add-edit-btn">
-                                                    <button type="button" class="site-link-btn" data-toggle="modal" data-target="#AddNewShippingAddress">Edit</button>
+                                                    <button type="button" class="site-btn" data-toggle="modal" data-target="#editShippingAddress" wire:click="shippingedit({{$address['id']}})">Edit</button>
+
                                                 </div>
                                             </div>
 
@@ -94,7 +96,108 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal fade" id="AddNewShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore>
+                            @if($updateMode)
+                            <div class="modal" id="editShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore>
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header proceed-cart-head ">
+                                            <h4 class="h4 modal-title" id="exampleModalLabel">Edit Address</h4>
+                                            <button type="button" class="close modal-close-btn" data-dismiss="modal" onclick="document.getElementById('ShowAllShippingAddress').style.display='none'" aria-label="Close">
+                                            <span aria-hidden="true">
+                                                <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                                                    <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+                                                </svg>
+                                            </span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form >
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="FullName">First Name</label>
+                                                            <input type="text" class="form-control" id="FullName" wire:model="editaddress.first_name" aria-describedby="emailHelp" placeholder="First Name">
+                                                            @error('editaddress.first_name') <span class="error">{{ $message }}</span> @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="FullName">Last Name</label>
+                                                            <input type="text" wire:model="editaddress.last_name" class="form-control" id="FullName" aria-describedby="emailHelp" placeholder="Last Name" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row street-unit-row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="primaryVoiceNumber">Company Name</label>
+                                                            <input type="text" wire:model="editaddress.company" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Company Name" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row street-unit-row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="postalCode">Street Name</label>
+                                                            <input type="text" wire:model="editaddress.address" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="Street Name" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="primaryVoiceNumber">Unit Number</label>
+                                                            <input type="number" wire:model="editaddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="postalCode">Zip</label>
+                                                            <input type="number" wire:model="editaddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="City">City</label>
+                                                            <input type="text" wire:model="editaddress.city" class="form-control" id="City" aria-describedby="emailHelp" placeholder="Enter City" requireds>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="Country">Country</label>
+                                                            <select class="form-control" id="Country" wire:model="editaddress.country" required>
+                                                                <option value="">-- Select Country --</option>
+                                                                @foreach($countries as $country)
+                                                                    <option value="{{$country->name}}">{{$country->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="primaryVoiceNumber">Phone</label>
+                                                            <input type="number" wire:model="editaddress.mobile_no" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="123-456-7890" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="defaultAddress" wire:model="editaddress.address_type">
+                                                    <label class="form-check-label" for="defaultAddress">Make this my primary shipping address</label>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn site-btn">Cancel</button>
+                                            <button type="button" class="btn site-btn" wire:click.prevent="update({{$addressid}})">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                            <div class="modal fade" id="AddNewShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header proceed-cart-head ">
@@ -113,13 +216,27 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="FullName">First Name</label>
-                                                            <input type="text" class="form-control" id="FullName" wire:model="first_name" aria-describedby="emailHelp" placeholder="First Name" required>
+                                                            <input type="text" class="form-control" id="FullName" wire:model="first_name" aria-describedby="emailHelp" placeholder="First Name" wire:ignore.self>
+                                                            @if($errors->has('first_name'))
+                                                                <span class="text-danger">{{ $errors->first('first_name') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="FullName">Last Name</label>
-                                                            <input type="text" wire:model="last_name" class="form-control" id="FullName" aria-describedby="emailHelp" placeholder="Last Name" required>
+                                                            <input type="text" wire:model="last_name" class="form-control" id="FullName" aria-describedby="emailHelp" placeholder="Last Name" wire:ignore.self>
+                                                            @if($errors->has('last_name'))
+                                                                <span class="text-danger">{{ $errors->first('last_name') }}</span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row street-unit-row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="primaryVoiceNumber">Company Name</label>
+                                                            <input type="text" wire:model="company" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Company Name" wire:ignore.self required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -127,13 +244,19 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="postalCode">Street Name</label>
-                                                            <input type="text" wire:model="address" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="Street Name" required>
+                                                            <input type="text" wire:model="address" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="Street Name" wire:ignore.self required>
+                                                            @if($errors->has('address'))
+                                                                <span class="text-danger">{{ $errors->first('address') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Unit Number</label>
                                                             <input type="number" wire:model="apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" required>
+                                                            @if($errors->has('apartment'))
+                                                                <span class="text-danger">{{ $errors->first('apartment') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -141,13 +264,19 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="postalCode">Zip</label>
-                                                            <input type="number" wire:model="postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" required>
+                                                            <input type="number" wire:model="postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" wire:ignore.self placeholder="12345" required>
+                                                            @if($errors->has('postal_code'))
+                                                                <span class="text-danger">{{ $errors->first('postal_code') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="City">City</label>
-                                                            <input type="text" wire:model="city" class="form-control" id="City" aria-describedby="emailHelp" placeholder="Enter City" requireds>
+                                                            <input type="text" wire:model="city" class="form-control" id="City" aria-describedby="emailHelp" placeholder="Enter City" wire:ignore.self required>
+                                                            @if($errors->has('city'))
+                                                                <span class="text-danger">{{ $errors->first('city') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -155,31 +284,38 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="Country">Country</label>
-                                                            <select class="form-control" id="Country" wire:model="country" required>
+                                                            <select class="form-control" id="Country" wire:model="country" wire:ignore.self required>
                                                                 <option value="">-- Select Country --</option>
                                                                 @foreach($countries as $country)
                                                                     <option value="{{$country->name}}">{{$country->name}}</option>
                                                                 @endforeach
                                                             </select>
+                                                            @if($errors->has('country'))
+                                                                <span class="text-danger">{{ $errors->first('country') }}</span>
+                                                            @endif
+
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Phone</label>
-                                                            <input type="number" wire:model="mobile_no" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="123-456-7890" required>
+                                                            <input type="number" wire:model="mobile_no" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" wire:ignore.self placeholder="123-456-7890" required>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="defaultAddress" wire:model="address_type">
+                                                    <input type="checkbox" class="form-check-input" id="defaultAddress" wire:ignore.self wire:model="address_type">
                                                     <label class="form-check-label" for="defaultAddress">Make this my primary shipping address</label>
+                                                    @if($errors->has('address_type'))
+                                                        <span class="text-danger">{{ $errors->first('address_type') }}</span>
+                                                    @endif
                                                 </div>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
 
                                             <button type="button" class="btn site-btn">Cancel</button>
-                                            <button type="button" class="btn site-btn" wire:click="SaveShipping()">Save</button>
+                                            <button type="button" class="btn site-btn" wire:click.prevent="SaveShipping()">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -189,24 +325,29 @@
                     <div class="col-md-4 acc-info-col">
                         <div class="acc-info-box">
                             <h4 class="h4">billing address</h4>
-                            <p class="red-color">No billing address available</p>
+                            @if(count($customer_billing['address']) > 0)
                             <div class="sp-add-details sp-details-box">
                                 <p>
                                     <label>Name:</label>
-                                    <span>jasmin patel</span>
+                                    <span>{{$customer_billing['address'][0]['first_name']}}</span>
                                 </p>
                                 <p>
                                     <label>Address:</label>
-                                    <span>6, krishna park, rc road, ghatlodiya, 123456, ahmedabad, india. </span>
+                                    <span>{{$customer_billing['address'][0]['address']}}, {{$customer_billing['address'][0]['apartment']}}, {{$customer_billing['address'][0]['postal_code']}}, {{$customer_billing['address'][0]['city']}}, {{$customer_billing['address'][0]['country']}}. </span>
                                 </p>
                             </div>
+                            @else
+                              <p class="red-color">No billing address available</p>
+                            @endif
+
+                            
                             <div class="billing-address">
 
                             </div>
                             <div class="acc-info-btn">
                                 <button type="button" class="site-link-btn" data-toggle="modal" data-target="#AddBillingAddress">ADD A billing address <i class="fa fa-angle-right" aria-hidden="true"></i></button>
                             </div>
-                            <div class="modal fade" id="AddBillingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="AddBillingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header proceed-cart-head ">
@@ -225,13 +366,27 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="FullName">First Name</label>
-                                                            <input type="text" class="form-control" id="FullName" aria-describedby="emailHelp" placeholder="First Name">
+                                                            <input type="text" class="form-control" id="FullName" wire:model="bfirst_name" aria-describedby="emailHelp" placeholder="First Name">
+                                                            @if($errors->has('bfirst_name'))
+                                                                <span class="text-danger">{{ $errors->first('bfirst_name') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="FullName">Last Name</label>
-                                                            <input type="text" class="form-control" id="FullName" aria-describedby="emailHelp" placeholder="Last Name">
+                                                            <input type="text" wire:model="blast_name" class="form-control" id="FullName" aria-describedby="emailHelp" placeholder="Last Name" required>
+                                                            @if($errors->has('blast_name'))
+                                                                <span class="text-danger">{{ $errors->first('blast_name') }}</span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row street-unit-row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="primaryVoiceNumber">Company Name</label>
+                                                            <input type="text" wire:model="bcompany" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Company Name" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -239,13 +394,19 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="postalCode">Street Name</label>
-                                                            <input type="text" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="Street Name">
+                                                            <input type="text" wire:model="baddress" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="Street Name" required>
+                                                            @if($errors->has('baddress'))
+                                                                <span class="text-danger">{{ $errors->first('baddress') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Unit Number</label>
-                                                            <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number">
+                                                            <input type="number" wire:model="bapartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" required>
+                                                            @if($errors->has('bapartment'))
+                                                                <span class="text-danger">{{ $errors->first('bapartment') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -253,13 +414,19 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="postalCode">Zip</label>
-                                                            <input type="number" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345">
+                                                            <input type="number" wire:model="bpostal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" required>
+                                                            @if($errors->has('bpostal_code'))
+                                                                <span class="text-danger">{{ $errors->first('bpostal_code') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="City">City</label>
-                                                            <input type="text" class="form-control" id="City" aria-describedby="emailHelp" placeholder="Enter City">
+                                                            <input type="text" wire:model="bcity" class="form-control" id="City" aria-describedby="emailHelp" placeholder="Enter City" required>
+                                                            @if($errors->has('bcity'))
+                                                                <span class="text-danger">{{ $errors->first('bcity') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -267,30 +434,30 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="Country">Country</label>
-                                                            <select class="form-control" id="Country">
-                                                                <option value="AS">American Samoa</option>
-                                                                <option value="GU">Guam</option>
-                                                                <option value="MH">Marshall Islands</option>
-                                                                <option value="FM">Micronesia, Federated States of</option>
-                                                                <option value="MP">Northern Mariana Islands</option>
-                                                                <option value="PW">Palau</option>
-                                                                <option value="PR">Puerto Rico</option>
-                                                                <option selected="" value="NL">Netherlands</option>
-                                                                <option value="UM">United States Minor Outlying Islands</option>
-                                                                <option value="VI">Virgin Islands, U.S.</option>
+                                                            <select class="form-control" id="Country" wire:model="bcountry" required>
+                                                                <option value="">-- Select Country --</option>
+                                                                @foreach($countries as $country)
+                                                                    <option value="{{$country->name}}">{{$country->name}}</option>
+                                                                @endforeach
                                                             </select>
+                                                            @if($errors->has('bcountry'))
+                                                                <span class="text-danger">{{ $errors->first('bcountry') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Phone</label>
-                                                            <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="123-456-7890">
+                                                            <input type="number" wire:model="bmobile_no" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="123-456-7890" required>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="defaultAddress">
+                                                    <input type="checkbox" class="form-check-input" id="defaultAddress" wire:model="baddress_type">
                                                     <label class="form-check-label" for="defaultAddress">Make this my primary billing address</label>
+                                                    @if($errors->has('baddress_type'))
+                                                        <span class="text-danger">{{ $errors->first('baddress_type') }}</span>
+                                                    @endif
                                                 </div>
                                             </form>
                                         </div>
@@ -300,8 +467,10 @@
                                             <p>Please add a billing or shipping address before you add a new payment method.</p>
                                         </div> -->
                                         <div class="modal-footer">
-                                            <button type="button" class="btn site-btn green-btn">Cancel</button>
-                                            <button type="button" class="btn site-btn green-btn" disabled>Save</button>
+
+                                            <button type="button" class="btn site-btn">Cancel</button>
+                                            <button type="button" class="btn site-btn" wire:click.prevent="SaveBilling()">Save</button>
+
                                         </div>
                                     </div>
                                 </div>
@@ -317,7 +486,7 @@
                             <div class="acc-info-btn">
                                 <button type="button" class="site-link-btn" data-toggle="modal" data-target="#LoginAndSecurity">MANAGE ACCOUNT INFO <i class="fa fa-angle-right" aria-hidden="true"></i></button>
                                <!-- Login & security Modal -->
-                                <div class="modal fade" id="LoginAndSecurity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="LoginAndSecurity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" wire:ignore>
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -598,4 +767,9 @@
             </div>
         </div>
     </x-customer-layout>
+    <script type="text/javascript">
+        window.livewire.on('userStore', () => {
+            $('#editShippingAddress').modal('hide');
+        });
+    </script>
 </div>

@@ -14,9 +14,9 @@
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
+                <input type="hidden" name="login_from" value="backend">
             <div>
-                <x-jet-label for="email" value="{{ __('E-mail Address ') }}" />
+                <x-jet-label for="email" value="{{ __('E-mail Address') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
             </div>
 
