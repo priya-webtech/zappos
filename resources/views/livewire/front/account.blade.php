@@ -28,6 +28,7 @@
                 <div class="primary-acc-info-title">
                     <h2 class="h2">Your Primary Account Information</h2>
                     <a href="{{ route('favorite-detail') }}" class="site-btn"><i class="fa fa-heart-o" aria-hidden="true"></i> My Favorites</a>
+
                 </div>
                 <div class="row">
                     <div class="col-md-4 acc-info-col">
@@ -35,6 +36,7 @@
                             <h4 class="h4">Primary Shipping Address</h4>
                             @if(count($customer['address']) > 0)
                             <div class="available-sp-add">
+
                                 <p>{{count($customer['address'])}} Address Available</p>
                                 <button type="button" class="site-btn" data-toggle="modal" data-target="#ShowAllShippingAddress">Show All</button>
                             </div>
@@ -73,20 +75,23 @@
                                                     </p>
                                                     <p>
                                                         <label>Phone:</label>
+
                                                         <span>{{$address['mobile_no']}}</span>
                                                     </p>
                                                 </div>
                                                 <div class="sp-add-edit-btn">
                                                     <button type="button" class="site-btn" data-toggle="modal" data-target="#editShippingAddress" wire:click="shippingedit({{$address['id']}})">Edit</button>
+
                                                 </div>
                                             </div>
+
                                             @endforeach
                                             @else
                                             <p>No address available</p>
                                             @endif
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn site-btn">Cancel</button>
+                                            <button type="button" class="btn site-btn green-btn">Cancel</button>
                                         </div>
                                     </div>
                                 </div>
@@ -308,6 +313,7 @@
                                             </form>
                                         </div>
                                         <div class="modal-footer">
+
                                             <button type="button" class="btn site-btn">Cancel</button>
                                             <button type="button" class="btn site-btn" wire:click.prevent="SaveShipping()">Save</button>
                                         </div>
@@ -461,8 +467,10 @@
                                             <p>Please add a billing or shipping address before you add a new payment method.</p>
                                         </div> -->
                                         <div class="modal-footer">
+
                                             <button type="button" class="btn site-btn">Cancel</button>
                                             <button type="button" class="btn site-btn" wire:click.prevent="SaveBilling()">Save</button>
+
                                         </div>
                                     </div>
                                 </div>
@@ -498,7 +506,7 @@
                                                         <label>Name:</label>
                                                         <span>{{$UserDetail->first_name}} {{$UserDetail->last_name}}</span>
                                                     </p>
-                                                    <button type="button" class="btn site-btn" data-toggle="modal" id="EditName" data-target="#EditNameModal">Edit</button>
+                                                    <button type="button" class="btn site-btn blue-border-btn " data-toggle="modal" id="EditName" data-target="#EditNameModal">Edit</button>
 
                                                 </div>
                                                 <div class="login-security-list">
@@ -506,18 +514,18 @@
                                                         <label>Email:</label>
                                                         <span>{{$UserDetail->email}}</span>
                                                     </p>
-                                                    <button type="button" class="btn site-btn" data-toggle="modal" id="ChangeEmail" data-target="#ChangeEmailModal">Edit</button>
+                                                    <button type="button" class="btn site-btn blue-border-btn" data-toggle="modal" id="ChangeEmail" data-target="#ChangeEmailModal">Edit</button>
                                                 </div>
                                                 <div class="login-security-list">
                                                     <p>
                                                         <label>Password:</label>
                                                         <span>********</span>
                                                     </p>
-                                                    <button type="button" class="btn site-btn" data-toggle="modal" id="ChangePassword" data-target="#ChangePasswordModal">Edit</button>
+                                                    <button type="button" class="btn site-btn blue-border-btn" data-toggle="modal" id="ChangePassword" data-target="#ChangePasswordModal">Edit</button>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn site-btn">Done</button>
+                                                <button type="submit" class="btn site-btn green-btn">Done</button>
                                             </div>
                                         </div>
                                     </div>
@@ -551,6 +559,7 @@
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
+
                                                 <button type="submit" wire:click="UpdateUser('updatename')" data-dismiss="modal" class="btn site-btn">Save Changes</button>
                                             </div>
                                         </div>
@@ -592,6 +601,7 @@
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
+
                                                 <button type="submit" wire:click="UpdateUser('updateemail')" class="btn site-btn">Save Changes</button>
                                             </div>
                                         </div>
@@ -629,6 +639,7 @@
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
+
                                                 <button type="submit" wire:click="UpdateUser('updatepassword')" class="btn site-btn">Save Changes</button>
                                             </div>
                                         </div>
@@ -679,7 +690,7 @@
                                 <label for="EnterGiftCard">Search items in your order history</label>
                                 <div class="input-with-btn">
                                     <input type="text" class="form-control" id="EnterGiftCard" placeholder="Search by Order Number, Brand, or Name">
-                                    <button class="site-btn" type="submit">Search Orders</button>
+                                    <button class="site-btn blue-btn" type="submit">Search Orders</button>
                                 </div>
                             </div>
                         </form>

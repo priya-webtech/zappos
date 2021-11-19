@@ -15,7 +15,9 @@ use App\Http\Responses\LoginResponse;
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 use App\Http\Responses\LogoutResponse;
 use Laravel\Fortify\Contracts\LogoutResponse as LogoutResponseContract;
-
+use App\Http\Responses\RegisterResponse;
+use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
+use App\Models\User;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -34,6 +36,10 @@ class FortifyServiceProvider extends ServiceProvider
             LogoutResponseContract::class,
             LogoutResponse::class,
         );
+        $this->app->bind(
+            RegisterResponseContract::class,
+            RegisterResponse::class,
+        );
     }
 
     /**
@@ -49,11 +55,37 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
         RateLimiter::for('login', function (Request $request) {
+            $role = $this->getRoleFromEmail($request->email);
+
+            if(!empty($role)) {
+                if($request->login_from == 'frontend' && $role == 'admin') {
+                    return redirect()->back();
+                } 
+
+                if($request->login_from == 'backend' && $role == 'customer') {
+
+                    return redirect()->back();
+                }
+            }
+
             return Limit::perMinute(5)->by($request->email.$request->ip());
         });
 
         RateLimiter::for('two-factor', function (Request $request) {
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
+    }
+
+    public function getRoleFromEmail($email) {
+        $user = User::where('email', $email)->first();
+
+        if($user && isset($user->roles)) {
+            if($user->hasRole('admin')) {
+                return 'admin';
+            } else {
+                return 'customer';
+            }
+        }
+        return '';
     }
 }

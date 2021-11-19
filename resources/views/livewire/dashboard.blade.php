@@ -1,7 +1,7 @@
 <x-customer-layout>
 
 @if($alert !== null)
-<div class="alert alert-success">
+<div class="alert alert-info">
 <strong>{{$alert}}</strong>
 </div>
 @endif
@@ -45,7 +45,7 @@
                     <div class="col-md-4 half-container">
                         <h2 class="h2">The Cozy Shop</h2>
                         <p>Supremely cozy looks for all your plan(or not-plans) - because around-the-clock cozy is the name of our game.</p>
-                        <a href="#" class="site-btn">Peak Cozy Right This Way</a>
+                        <a href="#" class="site-btn blue-border-btn">Peak Cozy Right This Way</a>
                     </div>
                     <div class="col-md-8 full-container">
                         <div class="full-container-img">
@@ -69,7 +69,7 @@
                     <div class="col-md-4 half-container">
                         <h2 class="h2">The Cozy Shop</h2>
                         <p>Supremely cozy looks for all your plan(or not-plans) - because around-the-clock cozy is the name of our game.</p>
-                        <a href="#" class="site-btn">Peak Cozy Right This Way</a>
+                        <a href="#" class="site-btn blue-border-btn ">Peak Cozy Right This Way</a>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                 <div class="row">
                     <div class="col-md-4 home-pd-col">
                         <h2 class="h2">UGG® for Her: Impeccable Style, Cozy Comfort</h2>
-                        <a href="#" class="site-btn">shop women's ugg®</a>
+                        <a href="#" class="site-btn blue-border-btn">shop women's ugg®</a>
                         <img src="https://m.media-amazon.com/images/G/01/2020/homepage12.14/500x740_LLBean.jpg">
                     </div>
                     <div class="col-md-8 home-pd-col">
@@ -152,7 +152,7 @@
                         <div class="mini-banner-content">
                             <h2 class="h2">Earn a Total of 5% Back at Zappos</h2>
                             <p>Automatically earn a total of 5% Back on all Zappos purchases when using your Amazon Rewards Visa card.*</p>
-                            <a href="#" class="site-btn">Learn more</a>
+                            <a href="#" class="site-btn blue-border-btn">Learn more</a>
                         </div>
                     </div>
                     <div class="col-md-7">

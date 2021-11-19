@@ -19,7 +19,7 @@ class LogoutResponse implements LogoutResponseContract
             $request->input('role') == "";
             return $request->wantsJson()
                 ? response()->json(['two_factor' => false])
-                : redirect()->intended(route('admin.login')); // This is the line you want to modify so the application behaves the way you want.
+                : redirect()->intended('/login'); // This is the line you want to modify so the application behaves the way you want.
 
         }
         return $request->wantsJson()

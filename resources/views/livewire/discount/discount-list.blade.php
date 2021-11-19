@@ -111,9 +111,7 @@
                                 <td >
                                     <p class="tag green order-filed"> Active </p> 
                                 </td>
-                                <td>
-                                    0/10 used
-                                </td>
+                                <td class="ta-right">0/10 used</td>
                                 <td class="ta-right">
                                     <span class="text-grey  pr-3">From 6 Nov 20</span>
                                 </td>
