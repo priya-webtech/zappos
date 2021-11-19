@@ -1138,7 +1138,7 @@
 
                         <input type="hidden" wire:model="customer.id">
 
-                        <!-- <div class="row">
+                        <div class="row">
 
                            <div class="form-field-list">
 
@@ -1170,7 +1170,7 @@
 
                            </div>
 
-                           </div> -->
+                           </div>
 
                         <div class="row">
 

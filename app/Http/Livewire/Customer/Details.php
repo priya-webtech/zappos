@@ -25,7 +25,7 @@ class Details extends Component
 
 {
 
-    public $uuid, $customer, $countries, $tags, $customerData, $address_id, $collect_tax, $agreed_to_receive_marketing_mails, $customerAddress = [], $customerBillingAddress = [], $address;
+    public $uuid, $customer, $countries, $tags, $customerData, $first_name, $last_name ,$address_id, $collect_tax, $agreed_to_receive_marketing_mails, $customerAddress = [], $customerBillingAddress = [], $address;
 
 
 
@@ -36,9 +36,7 @@ class Details extends Component
      protected $rules = [
 
         'customerData.detail.collect_tax' => [],
-
-       
-
+        
         'customerData.detail.email_marketing_status' => [],
 
         'customerData.first_name'=> [],
@@ -149,21 +147,12 @@ class Details extends Component
 
         $this->resetInputFields();
 
-        
-
-
 
         session()->flash('message', 'Address Created Successfully.');
 
 
 
         $this->initial();
-
-
-
-
-
-
 
     }
 
