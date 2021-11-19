@@ -272,15 +272,17 @@ class ProductFrontDetail extends Component
 
         if(!empty($variant)) {
 
-            if($variant->selling_price){
+            if($variant->selling_price) {
                 $price = $variant['selling_price'];
-            }else{
+            } else {
                 $price = $variant['price'];
             }
 
+            $exist = Cart::where('product_id', $variant->product_id)->where('varientid', $variant->id)->first();
 
+            if(empty($exist)) {
 
-            $cart_arr = [
+                $cart_arr = [
                     
                     'product_id' => $variant->product_id,
 
@@ -290,26 +292,32 @@ class ProductFrontDetail extends Component
 
                     'price' => $price,
 
-                    //'stock' => $variant->variant_stock[0]->stock,
                     'stock' => '1',
 
                     'locationid' => '1'
 
                 ];
 
-            Cart::create($cart_arr);
+                Cart::create($cart_arr);
 
+            } else {
 
-        }
-        else
-        {
+                Cart::where('id', $exist->id)->update(['stock' => $exist->stock + 1]);
+            }   
+
+        } else {
 
             if($this->product->compare_selling_price){
                $price = $this->product['compare_selling_price'];
             }else{
                $price = $this->product['price'];
             }
-            $cart_arr = [
+
+            $exist = Cart::where('product_id', $variant->product_id)->first();
+
+            if(empty($exist)) {
+
+               $cart_arr = [
                     
                     'product_id' => $this->product->id,
 
@@ -323,7 +331,13 @@ class ProductFrontDetail extends Component
 
                 ];
 
-            Cart::create($cart_arr);
+                Cart::create($cart_arr);
+
+            } else {
+
+                Cart::where('id', $exist->id)->update(['stock' => $exist->stock + 1]);
+            }   
+            
         }
 
         $this->getCart();

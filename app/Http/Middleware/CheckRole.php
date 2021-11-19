@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+
+class CheckRole
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle(Request $request, Closure $next)
+    {
+
+
+        if(Auth::check()) {
+
+            if(!str_contains($request->url(),'/logout'))
+            {
+                if(str_contains($request->url(),'/admin') && !Auth::user()->hasRole('admin')) {
+                    return redirect('/');
+                }
+                if(!str_contains($request->url(),'/admin') && !Auth::user()->hasRole('customer')) {
+                    return redirect('/admin');
+                }
+            }
+
+        } 
+
+       
+        return $next($request);
+    }
+}

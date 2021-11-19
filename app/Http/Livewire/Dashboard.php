@@ -15,8 +15,15 @@ class Dashboard extends Component
 
     public function mount()
     {
+        
         if (Auth::check()) {
             $this->user_id =  Auth::user()->id;
+
+            
+
+            // if (Auth::user()->hasRole('admin')) {
+            //     return redirect('/admin');
+            // }
         }
         $this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
         $this->Product = Product::with('productmediaget')->with('favoriteget')->orderBy('id','asc')->limit(6)->get();
@@ -53,7 +60,17 @@ class Dashboard extends Component
             $alert = Session::get('alert');
             Session::forget('alert');
         }
+
+       
         return view('livewire.dashboard', ['alert'=> $alert]);
     }
+
+    // public function checkLogin()
+    // {
+    //     if (Auth::check() && Auth::user()->hasRole('admin')) {
+    //         return redirect('/admin');
+    //     } 
+        
+    // }
 
 }

@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                             <?php 
-                            $cartCount = ($CartItem && !empty($CartItem)) ? count($CartItem) : 0;
+                            $cartCount = ($CartItem && !empty($CartItem)) ? $CartItem->sum('stock') : 0;
                             ?>
                             <div class="my-cart turn-btn ml-auto" id="my-cart">
                                 <button class="site-btn green-border-btn bg-cart" onclick="document.getElementById('proceed-cart').style.display='block'">

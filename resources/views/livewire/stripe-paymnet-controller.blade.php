@@ -374,7 +374,7 @@
             </div>
             <div class="viewcart-checkout">
                 <div class="vc-inner">
-                    <p class="cart-summary">Order Summary (@php echo count($CartItem); @endphp Item Items)</p>
+                    <p class="cart-summary">Order Summary (@php echo $CartItem->sum('stock'); @endphp Item Items)</p>
                     <p class="subtotal">subtotal:<span>{{$symbol['currency']}}{{number_format($subtotal,2,".",",")}}</span></p>
                     <p class="subtotal">Shipping Cost:<span>Free</span></p>
                     <p class="discount-price">discount: <span>-{{$symbol['currency']}}{{number_format($discountrate,2,".",",")}}</span></p>

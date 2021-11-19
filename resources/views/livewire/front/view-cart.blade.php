@@ -301,7 +301,7 @@
                                 <form method="post" action="{{ route('add-order') }}" name="form">
                                     @csrf
                                     <div class="vc-inner">
-                                        <p class="cart-summary">Cart Summary (@php echo count($CartItem); @endphp Item)</p>
+                                        <p class="cart-summary">Cart Summary (@php echo $CartItem->sum('stock'); @endphp Item)</p>
                                         <p class="subtotal">subtotal: <span>{{$symbol['currency']}}{{number_format($subtotal,2,".",",")}}</span></p>
                                         <p class="discount-price">discount: <span>-{{$symbol['currency']}}{{number_format($discountrate,2,".",",")}}</span></p>
                                         <p class="total-price">total: <span>{{$symbol['currency']}}{{number_format($total,2,".",",")}}</span></p>

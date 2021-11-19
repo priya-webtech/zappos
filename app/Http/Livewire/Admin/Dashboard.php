@@ -8,6 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class Dashboard extends Component
 {
+
+    public function mount()
+    {
+        // if(!Auth::check()) {
+        //     return view('livewire.admin.login');
+        // } 
+        // if (Auth::check() && !Auth::user()->hasRole('admin')) {
+        //     return redirect('/');
+        // } 
+    }
     public function render()
     {
         return view('livewire.admin.dashboard');
@@ -16,10 +26,10 @@ class Dashboard extends Component
     {
     	if(!Auth::check()) {
     		return view('livewire.admin.login');
-    	} elseif (in_array('admin', Auth::user()->getRoleNames()->toArray())) {
-    		return redirect('/admin');
-    	} else {
+    	} elseif (!Auth::user()->hasRole('admin')) {
     		return redirect('/');
+    	} else {
+    		$this->render();
     	}
         
     }
