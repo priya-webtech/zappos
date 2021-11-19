@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\User;
 use App\Models\CustomerAddress;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Livewire\Field;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Country;
@@ -17,29 +18,52 @@ use Illuminate\Support\Facades\Hash;
 class Account extends Component
 {
 	protected $listeners = ['ManageUser'];
-	public $user_id,$customer,$Taxes,$UserDetail,$email,$reemail,$password,$repassword,$newpassword,$currpassword,$countries,$first_name,$last_name,$city,$address,$apartment,$company,$country,$postal_code,$mobile_no,$address_type,$order,$OrderItem,$EditShippingAddress,$editaddress,$addressid;
+	public $user_id,$editupdate,$customer,$Taxes,$UserDetail,$email,$reemail,$password,$repassword,$newpassword,$currpassword,$countries,$first_name,$last_name,$city,$address,$apartment,$company,$country,$postal_code,$mobile_no,$address_type,$order,$OrderItem,$EditShippingAddress,$editaddress,$addressid;
+
+    public $bfirst_name,$blast_name,$bcity,$baddress,$bapartment,$bcompany,$bcountry,$bpostal_code,$bmobile_no,$baddress_type,$customer_billing;
 
     public $updateMode = false;
 
-	protected $rules = [
-        'UserDetail.first_name' => '',
-        'UserDetail.last_name' => '',
-        'email' => 'required|email|unique:User,email',
-        'reemail' => 'required|email',
-        'repassword' => 'required',
-        'newpassword' => 'required',
-        'currpassword' => 'required',
-        'editaddress.first_name' => 'required',
-        'editaddress.last_name' => '',
-        'editaddress.company' => '',
-        'editaddress.address' => '',
-        'editaddress.apartment' => '',
-        'editaddress.city' => '',
-        'editaddress.country' => '',
-        'editaddress.postal_code' => '',
-        'editaddress.mobile_no' => '',
-        'editaddress.address_type' => '',
-        'editaddress.id' => '',
+
+        protected $rules = [
+
+        'first_name' => ['required'],
+        'last_name' => ['required'],
+        'address' => ['required'],
+        'last_name' => ['required'],
+        'apartment' => ['required'],
+        'city' => ['required'],
+        'country' => ['required'],
+        'postal_code' => ['required'],
+        'address_type' => ['required'],
+
+        'bfirst_name' => ['required'],
+        'blast_name' => ['required'],
+        'baddress' => ['required'],
+        'blast_name' => ['required'],
+        'bapartment' => ['required'],
+        'bcity' => ['required'],
+        'bcountry' => ['required'],
+        'bpostal_code' => ['required'],
+        'baddress_type' => ['required'],
+
+        'UserDetail.first_name' => ['required'],
+        'UserDetail.last_name' => ['required'],
+        'editaddress.first_name' => ['required'],
+        'editaddress.last_name' => ['required'],
+        'editaddress.address' => ['required'],
+        'editaddress.apartment' => ['required'],
+        'editaddress.city' => ['required'],
+        'editaddress.country' => ['required'],
+        'editaddress.postal_code' => ['required'],
+        'editaddress.address_type' => ['required'],
+        'editaddress.company' => [],
+        'editaddress.mobile_no' => [],
+        'email' => ['required'],
+        'reemail' => ['required'],
+        'repassword' => ['required'],
+        'newpassword' => ['required'],
+        'currpassword' => ['required'],
     ];
 
 
@@ -68,16 +92,29 @@ class Account extends Component
 
         }])->where('id',$this->user_id)->first()->toArray();
 
+        $this->customer_billing = User::with(['detail','address'=>function($query) {
+
+            $query->where('address_type','billing_address')->where('is_billing_address','yes')->orderBy('id', 'DESC');
+
+        }])->where('id',$this->user_id)->orderBy('id', 'DESC')->first()->toArray();
+
         $this->order = Orders::with('UserOrder')->where('transactionid','!=','0' )->get();
 
 
     }
     public function SaveShipping()
     {
+
+        $this->validate();
+
+
     	if($this->address_type == true){
     		$shippingAddress = 'shipping_address';
+            $is_billing_address = 'yes';
+
     	}else{
-    		$shippingAddress = 'billing_address';
+            $shippingAddress = 'shipping_address';
+    		$is_billing_address = 'no';
     	}
     	
     	$ship_arr = [
@@ -103,11 +140,62 @@ class Account extends Component
                     'mobile_no' => $this->mobile_no,
                     
                     'address_type' => $shippingAddress,
+                   
+                    'is_billing_address' => $is_billing_address,
                 ];
+
 
         CustomerAddress::create($ship_arr);
         session()->flash('message', 'shipping Address Added !!');
+        
     }
+
+    public function SaveBilling()
+    {
+
+        $this->validate();
+
+        if($this->baddress_type == true){
+            $billing_address = 'billing_address';
+            $is_billing_address = 'yes';
+
+        }else{
+            $billing_address = 'billing_address';
+            $is_billing_address = 'no';
+        }
+        
+        $bill_arr = [
+
+                    'user_id' => $this->user_id,
+                    
+                    'first_name' => $this->bfirst_name,
+
+                    'last_name' => $this->blast_name,
+                    
+                    'address' => $this->baddress,
+                    
+                    'apartment' => $this->bapartment,
+                    
+                    'city' => $this->bcity,
+                    
+                    'company' => $this->bcompany,
+
+                    'country' => $this->bcountry,
+                    
+                    'postal_code' => $this->bpostal_code,
+                    
+                    'mobile_no' => $this->bmobile_no,
+                    
+                    'address_type' => $billing_address,
+                   
+                    'is_billing_address' => $is_billing_address,
+                ];
+
+        CustomerAddress::create($bill_arr);
+
+        session()->flash('message', 'Billing Address Added !!');
+    }
+
     public function shippingedit($id){
         $this->updateMode = true;
         $this->editaddress = CustomerAddress::find($id);
@@ -115,46 +203,33 @@ class Account extends Component
     }
     public function update($id)
     {
-        $validatedDate = $this->validate([
-            'editaddress.first_name' => '',
-            'editaddress.last_name' => '',
-            'editaddress.address' => '',
-            'editaddress.apartment' => '',
-            'editaddress.city' => '',
-            'editaddress.country' => '',
-            'editaddress.postal_code' => '',
-            'editaddress.address_type' => '',
-        ]);
-
-        $editupdate = CustomerAddress::find($id);
-
-        if($editupdate->address_type == true){
+        if($this->editaddress->address_type == true){
             $shippingAddress = 'shipping_address';
         }else{
             $shippingAddress = 'billing_address';
         }
 
+
         CustomerAddress::where('id',$id)->update([
 
-            'user_id' => $editupdate->id,
-            
-            'first_name' => $editupdate->first_name,
 
-            'last_name' => $editupdate->last_name,
-            
-            'address' => $editupdate->address,
-            
-            'apartment' => $editupdate->apartment,
-            
-            'city' => $editupdate->city,
-            
-            'company' => $editupdate->company,
+            'first_name' => $this->editaddress->first_name,
 
-            'country' => $editupdate->country,
+            'last_name' => $this->editaddress->last_name,
             
-            'postal_code' => $editupdate->postal_code,
+            'address' => $this->editaddress->address,
             
-            'mobile_no' => $editupdate->mobile_no,
+            'apartment' => $this->editaddress->apartment,
+            
+            'city' => $this->editaddress->city,
+            
+            'company' => $this->editaddress->company,
+
+            'country' => $this->editaddress->country,
+            
+            'postal_code' => $this->editaddress->postal_code,
+            
+            'mobile_no' => $this->editaddress->mobile_no,
             
             'address_type' => $shippingAddress,
         ]);
