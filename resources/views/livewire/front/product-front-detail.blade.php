@@ -4,12 +4,7 @@
 
 <x-customer-layout>
     @php $symbol = CurrencySymbol(); @endphp
-
-    @if($alert !== null)
-    <div class="alert alert-info">
-    <strong>{{$alert}}</strong>
-    </div>
-    @endif
+    
 
     <div id="breadcrumb-container" name="breadcrumb-container" >
 

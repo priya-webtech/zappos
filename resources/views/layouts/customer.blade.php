@@ -99,6 +99,30 @@
 <!-- Page Content -->
 
 <main>
+     <div>
+        @if (session()->has('message'))
+            <div class="alert alert-info">
+                {{ session('message') }}
+            </div>
+        @endif
+        @if (session()->has('warning'))
+            <div class="alert alert-warning">
+                {{ session('warning') }}
+            </div>
+        @endif
+        @if (session()->has('alert'))
+            <div class="alert alert-danger">
+                {{ session('alert') }}
+            </div>
+        @endif
+        @if (session()->has('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+    </div>
+    
+
 
     {{ $slot }}
 

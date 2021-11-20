@@ -1,6 +1,8 @@
 <div>
 <div id="main_model">
     <div class="main-heder">
+ 
+
 
         <div class="first-container"></div>
         <header class="text-white" name="header" id="header">
@@ -565,9 +567,12 @@ $(document).ready(function(){
   } else {
     y.style.display = 'none';
   }
-  });
+  });   
 });
 </script>
+
+
+
 
 
     <!-- modal start -->
@@ -588,15 +593,20 @@ $(document).ready(function(){
                                 <h2 class="h2">Create Account</h2>
                                 <span>or use your email for registration</span>
 
-                                <input type="text" placeholder="First Name" name="first_name" />
-                                @error('first_name') <span class="error">{{ $message }}</span> @enderror
-                                <input type="text" placeholder="Last Name" name="last_name" />
-                                @error('last_name') <span class="error">{{ $message }}</span> @enderror
-                                <input type="email" placeholder="Email" name="email" />
-                                @error('email') <span class="error">{{ $message }}</span> @enderror
+                                <input type="text" placeholder="First Name" name="first_name" @if(old('first_name')) value="{{old('first_name')}}" @endif />
+                               
+                                @error('first_name') <span class="error text-danger">{{ $message }}</span> @enderror
+                                
+                                <input type="text" placeholder="Last Name" name="last_name" @if(old('last_name')) value="{{old('first_name')}}" @endif />
+                                @error('last_name') <span class="error text-danger">{{ $message }}</span> @enderror
+                                
+                                <input type="email" placeholder="Email" name="email" @if(old('email')) value="{{old('email')}}" @endif />
+                                 @if(Session::has('screen'))
+                                @error('email') <span class="error text-danger">{{ $message }}</span> @enderror
+                                @endif
                                 <input type="password" placeholder="Password" name="password" />
                                 <input type="password" placeholder="Re-enter password " name="password_confirmation" />
-                                @error('password') <span class="error">{{ $message }}</span> @enderror
+                                @error('password') <span class="error text-danger">{{ $message }}</span> @enderror
                                 <button type="submit" class="site-btn blue-btn">Sign Up</button>
                             </form>
                             <div class="signin-bottom-cont">
@@ -613,6 +623,9 @@ $(document).ready(function(){
                                 @csrf
                                 <h2 class="h2">Sign in</h2>
                                 <span>or use your account</span>
+                                  @if(!Session::has('screen'))
+                                   @error('email') <span class="error text-danger">{{ $message }}</span> @enderror
+                                  @endif
                                 <input type="hidden" name="login_from" value="frontend" />
                                 <input type="email" placeholder="Email" name="email" />
                                 <input type="password" placeholder="Password" name="password" />
@@ -648,10 +661,23 @@ $(document).ready(function(){
         </div>
     </div>
     <!-- modal end -->
+<script type="text/javascript">
+@if (count($errors) > 0)
+    $('#sign-in-form').css('display', 'block');
 
+    @if(Session::has('screen'))
+        $('#container').addClass("right-panel-active");
+        <?php Session::forget('screen') ?>
+    @else
+        $('#container').addClass("left-panel-active");
+    @endif
+
+@endif
+</script>
 </div>
 
 </div>
+
 <script type="text/javascript">
     $("[type='number']").keypress(function (evt) {
     evt.preventDefault();

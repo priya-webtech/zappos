@@ -39,7 +39,7 @@ class ProductFrontDetail extends Component
     public $incrementing = false;
 
 
-    public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $Productvariant, $variationID, $reviewget,$stockitem, $alert;
+    public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $Productvariant, $variationID, $reviewget,$stockitem;
 
 
 
@@ -58,7 +58,6 @@ class ProductFrontDetail extends Component
     ];
 
     public function mount($slug) {
-        $this->alert = null;
         $this->slug = $slug;
 
         $this->varianttag = VariantTag::all()->groupBy('id')->toArray();
@@ -222,7 +221,8 @@ class ProductFrontDetail extends Component
     {
         
         if(!Auth::check()) {
-            $this->alert = 'You need to Login';
+                   session()->flash('message', 'Post successfully updated.');
+
         } else {
 
 
@@ -256,7 +256,7 @@ class ProductFrontDetail extends Component
 
     public function UpdateWish($id,$productid){
         if(!Auth::check()) {
-            $this->alert = 'You need to Login';
+            session()->flash('alert', 'You need to login');
         } else {
 
         if($id == 0){
@@ -283,7 +283,7 @@ class ProductFrontDetail extends Component
     public function addCart($variationID)
     {   
         if(!Auth::check()) {
-            $this->alert = 'You need to Login';
+            session()->flash('alert', 'You need to login');
         } else {
 
         $variant = ProductVariant::find($variationID);
@@ -366,7 +366,7 @@ class ProductFrontDetail extends Component
     public function UpdateReview($id)
     {
         if(!Auth::check()) {
-            $this->alert = 'You need to Login';
+            session()->flash('alert', 'You need to login');
         } else {
 
         return view('livewire.front.product-reviews');

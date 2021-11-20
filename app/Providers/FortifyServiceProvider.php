@@ -59,11 +59,12 @@ class FortifyServiceProvider extends ServiceProvider
 
             if(!empty($role)) {
                 if($request->login_from == 'frontend' && $role == 'admin') {
+                    session()->flash('alert', 'You can not login here');
                     return redirect()->back();
                 } 
 
                 if($request->login_from == 'backend' && $role == 'customer') {
-
+                    session()->flash('alert', 'You can not login here');
                     return redirect()->back();
                 }
             }

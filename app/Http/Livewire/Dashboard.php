@@ -55,14 +55,12 @@ class Dashboard extends Component
 
     public function render()
     {
-        $alert = null;
-        if(Session::get('alert') !== null){
-            $alert = Session::get('alert');
-            Session::forget('alert');
-        }
+        // if(Session::has('alert')){
+        //     Session::forget('alert');
+        // }
 
        
-        return view('livewire.dashboard', ['alert'=> $alert]);
+        return view('livewire.dashboard');
     }
 
     // public function checkLogin()

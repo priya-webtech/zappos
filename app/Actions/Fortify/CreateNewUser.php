@@ -13,6 +13,7 @@ class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
 
+
     /**
      * Validate and create a newly registered user.
      *
@@ -21,6 +22,7 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
+        Session::put('screen', 'register');
          $validator = Validator::make($input, [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
@@ -31,11 +33,11 @@ class CreateNewUser implements CreatesNewUsers
         $user = User::create([
                 'first_name' => $input['first_name'],
                 'last_name' => $input['last_name'],
-                'email' => $input['email'],
+                'email' => $input['mail'],
                 'password' => Hash::make($input['password']),
             ]);
             $user->assignRole('customer');
-            Session::put('alert', 'Email verification mail is sent');
+            session()->flash('success', 'Email verification mail is sent');
             $user->sendEmailVerificationNotification();
 
             return $user;
