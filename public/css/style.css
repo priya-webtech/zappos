@@ -584,7 +584,7 @@ code {
     padding-top: 20px;
 }
  .pr-3{
-    padding-right: 20px;
+    padding-right: 20px !important;
 }
  .pb-3{
     padding-bottom: 20px;

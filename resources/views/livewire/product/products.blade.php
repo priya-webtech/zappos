@@ -177,7 +177,7 @@
                             <th>
                                 <div class="row all-select-checkbox"><label><input type="checkbox" class="checked_all" name="customer_all"></label></div>
                             </th>
-                            <th class="fw-6">
+                            <th class="fw-6" colspan="6">
                                 <span class="all-customer-list">
                                      Showing {{($product->currentPage()-1) * $product->perPage()+(count($product) ? 1:0)}}  - {{($product->currentPage()-1)*$product->perPage()+count($product)}} of {{count($getproduct)}} product
                                 </span>
@@ -208,11 +208,15 @@
                                     </span>
                                 </div>
                             </th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>Image</th>
                             <th>Product</th>
                             <th>Status</th>
                             <th>Inventory</th>
                             <th>Type</th>
-                            <th>Vendor</th>
+                            <th>Type</th>
                         </tr>
 
                         <span>@foreach($product as $row)
