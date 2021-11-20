@@ -159,11 +159,30 @@ header .header-mid .logo img{width: 125px; height: 75px; }
 .search-container input {position: relative; width: 495px; min-height: 44px;font-size: 16px; outline: none; padding: 8px 20px; border: 2px solid #ddd; border-radius: 5px 0 0 5px; border-right: none; }
 .search-container .search-btn{position: absolute; font-weight: bolder; font-size: 0.79em; padding: 11px 29px; transform: translateX(-2px); border-radius:0px; background-color: #003953; border-radius: 0px 4px 4px 0px; height: 45px; top: -5%; right: -3px; }
 .search-container .search-btn:hover{background-color:#0076bd; }
-header .header-mid .my-cart button {font-size: 15px; padding: 11px 20px; font-weight: 600;display: flex;align-items: center; }
+header .header-mid .my-cart button {position: relative; font-size: 15px; padding: 11px 20px; font-weight: 600;display: flex;align-items: center; }
 header .header-mid .my-cart button svg {width: 20px; height: auto; fill: #035d59; margin-right: 5px; transition: all .4s; }
 header .header-mid .my-cart button:hover svg {fill: #ffffff;}
 header .header-mid .my-cart button .cart-img{transition: 0.3s; }
 header .header-mid .my-cart button .cart-img:hover{transform: scale(1.1); }
+
+header .header-mid .my-cart button.my-cart-animate::before {content: ''; position: absolute; top: -18px; left: -10px; bottom: -18px; right: -10px; background: inherit; border-radius: 5px; z-index: -1; opacity: 0.4; -webkit-transform: scale3d(0.9, 0.6, 1); transform: scale3d(0.9, 0.6, 1); box-shadow: 0px 0px 8px 5px rgb(3 93 89 / 20%); }
+header .header-mid .my-cart button.my-cart-animate {-webkit-transition: background-color 0.3s 0.5s, color 0.3s 0.5s; transition: background-color 0.3s 0.5s, color 0.3s 0.5s; -webkit-animation: anim-moema-1 0.5s forwards; animation: anim-moema-1 0.5s forwards; }
+@-webkit-keyframes anim-moema-1 {
+    60% {
+        -webkit-transform: scale3d(0.9, 0.9, 1);
+        transform: scale3d(0.9, 0.9, 1);
+    }
+    85% {
+        -webkit-transform: scale3d(1.1, 1.1, 1);
+        transform: scale3d(1.1, 1.1, 1);
+    }
+    100% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+
 #navbarSupportedContent {padding: 0; }
 .header-navbar {background-color: rgb(229, 241, 248); border-top: 1px solid #dfdfdf; }
 nav.navbar {padding:0 15px; }
