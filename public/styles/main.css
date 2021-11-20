@@ -849,8 +849,8 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .modal-header {padding: 15px 20px; }
 .primary-acc-info .modal .modal-body {padding: 20px; }
 .modal-footer {padding: 15px 20px; }
-.primary-acc-info .modal .row {margin: 0 -8px; }
-.primary-acc-info .modal .col {padding: 0 8px; }
+.primary-acc-info .modal .row {margin: 0 -8px; width: 100%;}
+.primary-acc-info .modal .col {padding: 0 8px;width: 100%; }
 .primary-acc-info .modal label {margin-bottom: 4px; display: block; font-weight: 600;}
 .primary-acc-info .modal .form-control {font-size: 14px; min-height: 42px; }
 .primary-acc-info .modal input::placeholder {font-size: 14px; }
@@ -919,3 +919,21 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .static-page .tab-content .tab-pane > .h4:first-child {margin-top: 0; }
 .static-page .tab-content p {margin-bottom: 15px; }
 .static-page .site-btn {text-transform: capitalize; margin-top: 15px; margin-left: auto; }
+
+
+/******************************************
+    Forgot and create new password css
+*******************************************/
+.forgot-pass-sec {padding: 60px 0 40px; }
+.forgot-pass-form {max-width: 450px; font-size: 14px; background-color: aliceblue; margin: 0 auto; padding: 25px 25px; border-radius: 10px; box-shadow: 0 0 6px 2px rgb(0 57 83 / 14%); font-size: 13px; line-height: 20px; }
+.forgot-pass-form input {height: 42px; font-size: 14px; color: #202223; }
+.forgot-pass-form label {font-size: 14px; font-weight: 500; }
+.forgot-pass-form .logo img {width: 150px; margin: 0 auto 25px; display: table; }
+.forgot-pass-form form .form-group:last-child {margin-bottom: 0; }
+.forgot-pass-form button.site-btn {font-size: 14px; padding: 8px 15px; margin-left: auto; display: table; font-weight: 600; }
+.create-new-pass-form {width: 450px; margin: 0 auto; }
+.forgot-pass-form p {margin-bottom: 25px; }
+.create-new-pass-form a {display: block; text-align: center; margin-bottom: 30px; }
+.create-new-pass-form img {width: 150px; }
+.create-new-pass-form .h3 {font-weight: 700; margin-bottom: 5px; font-size: 27px; text-transform: capitalize; }
+.create-new-pass-form .form-group span {color: #707070; font-size: 14px; margin-top: 2px; display: block; }

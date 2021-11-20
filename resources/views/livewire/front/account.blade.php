@@ -128,11 +128,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="row street-unit-row">
-                                                    <div class="col">
-                                                        <div class="form-group">
-                                                            <label for="primaryVoiceNumber">Company Name</label>
-                                                            <input type="text" wire:model="editaddress.company" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Company Name" required>
-                                                        </div>
+                                                    <div class="form-group">
+                                                        <label for="primaryVoiceNumber">Company Name</label>
+                                                        <input type="text" wire:model="editaddress.company" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Company Name" required>
                                                     </div>
                                                 </div>
                                                 <div class="row street-unit-row">
@@ -232,7 +230,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row street-unit-row">
+                                                <div class="row company-name-row">
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Company Name</label>
@@ -382,7 +380,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row street-unit-row">
+                                                <div class="row company-name-row">
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Company Name</label>
@@ -711,6 +709,7 @@
                                     <th>Prodoct name</th>
                                     <th>quantity</th>
                                     <th>Price</th>
+                                    <th>status</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -745,6 +744,9 @@
                                         @endif
                                     </td>
                                     <td>
+                                        Pending 
+                                    </td>
+                                    <td>
                                         <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
                                     </td>
                                 </tr>
@@ -757,12 +759,12 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Orders per page:</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>10</option>
-                                <option>25</option>
-                                <option>30</option>
-                            </select>
-                        </div>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>10</option>
+                            <option>25</option>
+                            <option>30</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>

@@ -360,6 +360,15 @@
                     </th>
 
                 </tr>
+                <tr>
+                    <th></th>
+                    <th class="fw-6">
+                        Customers
+                    </th>
+                    <th class="fw-6">Status</th>
+                    <th class="fw-6">Order</th>
+                    <th class="fw-6 pr-3 ta-right">Amount</th>
+                </tr>
 
                 <span>@foreach($users as $customer)
 
