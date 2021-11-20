@@ -5,6 +5,12 @@
 <x-customer-layout>
     @php $symbol = CurrencySymbol(); @endphp
 
+    @if($alert !== null)
+    <div class="alert alert-info">
+    <strong>{{$alert}}</strong>
+    </div>
+    @endif
+
     <div id="breadcrumb-container" name="breadcrumb-container" >
 
 
@@ -264,7 +270,7 @@
 
                                 <div class="pd-btn-group">
 
-                                    <button class="site-btn green-btn" id="variant_id" value="@if(!empty($row->id)){{$row->id}}@endif" wire:click="addCart($event.target.value)">Add to Cart</button>
+                                    <button class="site-btn green-btn add-cart" id="variant_id" value="@if(!empty($row->id)){{$row->id}}@endif" wire:click="addCart($event.target.value)">Add to Cart</button>
 
 
 
@@ -277,7 +283,7 @@
                                     
                                     @else
 
-                                     <a class="site-btn green-btn add-collection-btn" wire:click="UpdateWish({{$resultwish['id']}}, {{$resultwish['product_id']}})"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
+                                     <a class="site-btn green-btn add-collection-btn" @if(!empty($resultwish)) wire:click="UpdateWish({{$resultwish['id']}}, {{$resultwish['product_id']}})" @else wire:click="UpdateWish(0, 0)" @endif><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
 
                                     @endif
 
@@ -952,7 +958,15 @@
 
             });
 
-        })
+        });
+
+        $(".add-cart").click(function () {
+            setTimeout(function() {
+                $(".bg-cart").removeClass("my-cart-animate");
+            }, 10000);
+            $(".bg-cart").addClass("my-cart-animate");
+
+        });
 
     </script>
 

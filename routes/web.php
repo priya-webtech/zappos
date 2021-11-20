@@ -23,9 +23,8 @@ Route::middleware(['checkRole'])->group(function () {
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/dashboard', Livewire\Dashboard::class)->name('dashboard');
 
-        Route::middleware(['guest'])->group(function () {
 
-            Route::middleware(['guest'])->group(function () {
+        Route::middleware(['guest'])->group(function () {
             Route::get('/admin', Livewire\Admin\Dashboard::class);
             //users
             Route::get('/admin/users', Livewire\User\Users::class)->name('users');
@@ -156,9 +155,9 @@ Route::middleware(['checkRole'])->group(function () {
 
 
             //Front Side
-            Route::get('/product/{slug?}', Livewire\Front\ProductFrontDetail::class)->name('product-front-detail');
+            
             Route::get('/collection/{slug?}', Livewire\Front\ProductCategory::class)->name('product-front-category');
-            Route::get('/varientData', [Livewire\Front\ProductFrontDetail::class, 'fetchPrice'])->name('varientData');
+           
             Route::get('/add-to-cart', [Livewire\Front\ProductFrontDetail::class, 'addCart'])->name('add-to-cart');
             Route::get('/delete-cart-product', [Livewire\Header::class, 'DeleteCartProduct'])->name('delete-cart-product');
             Route::post('/add-order', [Livewire\Front\CheckoutInsertOrder::class, 'checkoutInsert'])->name('add-order');
@@ -172,12 +171,13 @@ Route::middleware(['checkRole'])->group(function () {
             Route::get('/account/viewcart/detail', Livewire\Front\ViewCart::class)->name('view-cart');
             Route::get('/product/review/{id?}', Livewire\Front\ProductReviews::class)->name('product-review');
             Route::post('/product/{slug?}', [Livewire\Front\ProductReviews::class, 'SaveReview'])->name('review-save');
+            Route::get('/userdetail', Livewire\Front\Account::class)->name('front-user-detail');
+
         });
-
-        //Front User
-        Route::get('/userdetail', Livewire\Front\Account::class)->name('front-user-detail');
-
+  
     });
-});
+    Route::get('/product/{slug?}', Livewire\Front\ProductFrontDetail::class)->name('product-front-detail');
+     Route::get('/varientData', [Livewire\Front\ProductFrontDetail::class, 'fetchPrice'])->name('varientData');
+
 });
 

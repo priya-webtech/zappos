@@ -39,7 +39,7 @@ class ProductFrontDetail extends Component
     public $incrementing = false;
 
 
-    public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $Productvariant, $variationID, $reviewget,$stockitem;
+    public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $Productvariant, $variationID, $reviewget,$stockitem, $alert;
 
 
 
@@ -57,32 +57,31 @@ class ProductFrontDetail extends Component
 
     ];
 
-    
-
-  
-
     public function mount($slug) {
+        $this->alert = null;
         $this->slug = $slug;
 
-        $this->user_id = Auth::user()->id;
         $this->varianttag = VariantTag::all()->groupBy('id')->toArray();
        
         $shopping_cart = [];
 
         $this->getProduct();
-       
-
-        $this->getCart();
 
         $this->productrelated = Product::with('productmediaget')->with('favoriteget')->get();
 
         $this->Collection = Collection::All();
 
+        if(Auth::check()) {
+            $this->user_id = Auth::user()->id;
+            $this->favoritevalue  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
+            $this->favoritevalue  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
+            $this->getCart();
+        }
+
         $this->Productmedia = ProductMedia::where('product_id',$this->product->id)->get();
 
         $this->tags = Tag::All();
             
-        $this->favoritevalue  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
 
         $shopping_cart = json_decode(Cookie::get('shopping_cart'));
 
@@ -95,7 +94,9 @@ class ProductFrontDetail extends Component
     public function render()
     {
         $this->dispatchBrowserEvent('onContentChanged');
-        $this->user_id = Auth::user()->id;
+        if(Auth::check()) {
+            $this->user_id = Auth::user()->id;
+        }
 
         $this->getProduct();
        
@@ -105,23 +106,25 @@ class ProductFrontDetail extends Component
 
     public function getProduct() {
 
-       $this->user_id =  Auth::user()->id;
         $this->product  = Product::with('variants')->where('seo_utl',$this->slug)->first();
 
-       $this->favoritevalue  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
+        if(Auth::check()) {
+            $this->user_id = Auth::user()->id;
+            $this->favoritevalue  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
+        }     
 
-       $this->reviewget = review::where('product_id',$this->product['id'])->get();
-       return Product::with('variants')->where('seo_utl',$this->slug)->first();
+        $this->reviewget = review::where('product_id',$this->product['id'])->get();
+        return Product::with('variants')->where('seo_utl',$this->slug)->first();
 
     }
 
     public function getCart() {
-     $this->CartItem = Cart::with(['media_product', 'product_detail'])->where('user_id',Auth::user()->id)->get();
+        $this->CartItem = Cart::with(['media_product', 'product_detail'])->where('user_id',Auth::user()->id)->get();
         $this->emit('getCart');
 
     }
 
-      public function fetchPrice(Request $request)
+    public function fetchPrice(Request $request)
     {
 
         $productvariants = ProductVariant::with(['variant_stock' => function($q) {
@@ -217,35 +220,45 @@ class ProductFrontDetail extends Component
 
     public function addFavorite()
     {
-        $favorite  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
+        
+        if(!Auth::check()) {
+            $this->alert = 'You need to Login';
+        } else {
 
-        if(!$favorite){
 
-            $favorite_arr = [
-                    
-                    'product_id' => $this->product->id,
+            $favorite  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
 
-                    'user_id' => $this->user_id,
+            if(!$favorite){
 
-                    'status' => '1',
-                ];
+                $favorite_arr = [
+                        
+                        'product_id' => $this->product->id,
 
-            favorite::create($favorite_arr);
+                        'user_id' => $this->user_id,
 
-        }else{
+                        'status' => '1',
+                    ];
 
-            if($favorite->status == 0){
-            $favorite_arr = favorite::where('id', $favorite->id)->update(['status'  => '1']);
+                favorite::create($favorite_arr);
+
             }else{
-               $favorite_arr = favorite::where('id', $favorite->id)->update(['status'  => '0']); 
-            }
 
+                if($favorite->status == 0){
+                $favorite_arr = favorite::where('id', $favorite->id)->update(['status'  => '1']);
+                }else{
+                   $favorite_arr = favorite::where('id', $favorite->id)->update(['status'  => '0']); 
+                }
+
+            }
         }
 
     }
 
     public function UpdateWish($id,$productid){
-        
+        if(!Auth::check()) {
+            $this->alert = 'You need to Login';
+        } else {
+
         if($id == 0){
                 $favorite_arr = [
                         
@@ -264,10 +277,15 @@ class ProductFrontDetail extends Component
             $favorite  = favorite::where('id',$id)->delete();
             session()->flash('message', 'Remove WishList !!');
             }
+        }
     }
 
     public function addCart($variationID)
     {   
+        if(!Auth::check()) {
+            $this->alert = 'You need to Login';
+        } else {
+
         $variant = ProductVariant::find($variationID);
 
         if(!empty($variant)) {
@@ -341,12 +359,18 @@ class ProductFrontDetail extends Component
         }
 
         $this->getCart();
+    }
 
     }
 
     public function UpdateReview($id)
     {
+        if(!Auth::check()) {
+            $this->alert = 'You need to Login';
+        } else {
+
         return view('livewire.front.product-reviews');
+    }
     }
 
 
