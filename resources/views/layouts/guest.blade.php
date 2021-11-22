@@ -94,6 +94,12 @@
                     </div>
                 @endif
             </div>
+            @php 
+                Illuminate\Support\Facades\Session::forget('message'); 
+                Illuminate\Support\Facades\Session::forget('warning'); 
+                Illuminate\Support\Facades\Session::forget('alert'); 
+                Illuminate\Support\Facades\Session::forget('success'); 
+            @endphp
 
             {{ $slot }}
 

@@ -155,7 +155,8 @@ class Header extends Component
     {
         if (Auth::check()) {
 
-            $this->CartItem =  Cart::with(['media_product', 'product_detail'])->where('user_id',$this->user_id)->get();
+            $this->CartItem =  Cart::with(['media_product', 'product_detail'])->where('user_id',Auth::user()->id)->get();
+
         }
     }
 
