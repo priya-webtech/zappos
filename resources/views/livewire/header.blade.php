@@ -618,7 +618,7 @@ $(document).ready(function(){
                                  <span class="input-group-btn" id="eyeShow2" style="display: none;">
                                    <button class="btn btn-default reveal" onclick="visibility2()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
                                  </span>
-                                @error('password') <span class="error text-danger">minimum 1 uppercase 1 lowercash 1 number and 1 special characters password / lenth minimum 8</span> @enderror
+                               
                                 <button type="submit" class="site-btn blue-btn">Sign Up</button>
                             </form>
                             <div class="signin-bottom-cont">
