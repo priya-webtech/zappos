@@ -80,7 +80,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="sp-add-edit-btn">
-                                                    <button type="button" class="site-btn" data-toggle="modal" data-target="#editShippingAddress" wire:click="shippingedit({{$address['id']}})">Edit</button>
+                                                    <button type="button" class="btn site-btn blue-border-btn" data-toggle="modal" data-target="#editShippingAddress" wire:click="shippingedit({{$address['id']}})">Edit</button>
 
                                                 </div>
                                             </div>
@@ -187,8 +187,8 @@
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn site-btn">Cancel</button>
-                                            <button type="button" class="btn site-btn" wire:click.prevent="update({{$addressid}})">Save</button>
+                                            <button type="button" class="site-btn blue-btn">Cancel</button>
+                                            <button type="button" class="site-btn blue-btn" wire:click.prevent="update({{$addressid}})">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -198,6 +198,17 @@
                             <div class="modal fade" id="AddNewShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
+                                        @if (Session::has('add_shipp'))
+
+                                            <div class="alert alert-success text-center">
+
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+
+                                                <p>{{ Session::get('add_shipp') }}</p>
+
+                                            </div>
+
+                                        @endif
                                         <div class="modal-header proceed-cart-head ">
                                             <h4 class="h4 modal-title" id="exampleModalLabel">Add New Address</h4>
                                             <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
@@ -312,8 +323,8 @@
                                         </div>
                                         <div class="modal-footer">
 
-                                            <button type="button" class="btn site-btn">Cancel</button>
-                                            <button type="button" class="btn site-btn" wire:click.prevent="SaveShipping()">Save</button>
+                                            <button type="button" class="btn site-btn green-btn">Cancel</button>
+                                            <button type="button" class="btn site-btn green-btn" wire:click.prevent="SaveShipping()">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -348,6 +359,17 @@
                             <div class="modal fade" id="AddBillingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
+                                        @if (Session::has('add_bill'))
+
+                                            <div class="alert alert-success text-center">
+
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+
+                                                <p>{{ Session::get('add_bill') }}</p>
+
+                                            </div>
+
+                                        @endif
                                         <div class="modal-header proceed-cart-head ">
                                             <h4 class="h4 modal-title" id="exampleModalLabel">Add New billing address</h4>
                                             <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
@@ -464,10 +486,10 @@
                                             <button type="button" class="btn site-btn">Add New Address</button>
                                             <p>Please add a billing or shipping address before you add a new payment method.</p>
                                         </div> -->
-                                        <div class="modal-footer">
+                                        <div class="modal-footer" wire:ignore>
 
-                                            <button type="button" class="btn site-btn">Cancel</button>
-                                            <button type="button" class="btn site-btn" wire:click.prevent="SaveBilling()">Save</button>
+                                            <button type="button" class="site-btn blue-btn">Cancel</button>
+                                            <button type="button" class="site-btn blue-btn" wire:ignore.self wire:click.prevent="SaveBilling()">Save</button>
 
                                         </div>
                                     </div>
@@ -504,7 +526,7 @@
                                                         <label>Name:</label>
                                                         <span>{{$UserDetail->first_name}} {{$UserDetail->last_name}}</span>
                                                     </p>
-                                                    <button type="button" class="btn site-btn blue-border-btn " data-toggle="modal" id="EditName" data-target="#EditNameModal">Edit</button>
+                                                    <button type="button" class="btn site-btn blue-border-btn" data-toggle="modal" id="EditName" data-target="#EditNameModal">Edit</button>
 
                                                 </div>
                                                 <div class="login-security-list">
@@ -698,8 +720,8 @@
                     </div>
                 </div>
                 <div class="your-order-details">
-                    <p class="order-empty-msg">Your order history is empty.</p>
-                     <div class="shipping-details-card re-order-tbl">
+                    @if($order)
+                    <div class="shipping-details-card re-order-tbl">
                         <h3 class="panel-title">Order Details</h3>
                         <table>
                             <thead>
@@ -714,10 +736,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($order)
-                                @php $i = 1; @endphp
+                                
+                                @php $i = 1;  $user_id = Auth::user()->id; @endphp
                                 @foreach($OrderItem as $row)
-                               <?php  $detailfetch = allprice($row->product_id); ?>
+                                @if($row['user_id'] == $user_id)
+                               <?php $detailfetch = allprice($row->product_id); ?>
                                 <tr>
                                     <td>{{$row['order'][0]['id']}}</td>
                                     <td>{{$row['order'][0]['updated_at']}}</td>
@@ -750,13 +773,14 @@
                                         <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
                                     </td>
                                 </tr>
-                                @endforeach
-                                @else
-                                 <p class="order-empty-msg">Your order history is empty.</p>
                                 @endif
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
+                    @else
+                     <p class="order-empty-msg">Your order history is empty.</p>
+                    @endif
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Orders per page:</label>
                         <select class="form-control" id="exampleFormControlSelect1">

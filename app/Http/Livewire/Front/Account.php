@@ -27,28 +27,6 @@ class Account extends Component
 
         protected $rules = [
 
-        'first_name' => ['required'],
-        'last_name' => ['required'],
-        'address' => ['required'],
-        'last_name' => ['required'],
-        'apartment' => ['required'],
-        'city' => ['required'],
-        'country' => ['required'],
-        'postal_code' => ['required'],
-        'address_type' => ['required'],
-
-        'bfirst_name' => ['required'],
-        'blast_name' => ['required'],
-        'baddress' => ['required'],
-        'blast_name' => ['required'],
-        'bapartment' => ['required'],
-        'bcity' => ['required'],
-        'bcountry' => ['required'],
-        'bpostal_code' => ['required'],
-        'baddress_type' => ['required'],
-
-        'UserDetail.first_name' => ['required'],
-        'UserDetail.last_name' => ['required'],
         'editaddress.first_name' => ['required'],
         'editaddress.last_name' => ['required'],
         'editaddress.address' => ['required'],
@@ -59,6 +37,8 @@ class Account extends Component
         'editaddress.address_type' => ['required'],
         'editaddress.company' => [],
         'editaddress.mobile_no' => [],
+        'UserDetail.first_name' => ['required'],
+        'UserDetail.last_name' => ['required'],
         'email' => ['required'],
         'reemail' => ['required'],
         'repassword' => ['required'],
@@ -105,7 +85,17 @@ class Account extends Component
     public function SaveShipping()
     {
 
-        $this->validate();
+        $this->validate([
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'address' => ['required'],
+            'last_name' => ['required'],
+            'apartment' => ['required'],
+            'city' => ['required'],
+            'country' => ['required'],
+            'postal_code' => ['required'],
+            'address_type' => ['required'],
+        ]);
 
 
     	if($this->address_type == true){
@@ -146,14 +136,32 @@ class Account extends Component
 
 
         CustomerAddress::create($ship_arr);
-        session()->flash('message', 'shipping Address Added !!');
+        $this->customer = User::with(['detail','address'=>function($query) {
+
+            $query->where('address_type','shipping_address');
+
+        }])->where('id',$this->user_id)->first()->toArray();
+        session()->flash('add_shipp', 'shipping Address Added !!');
         
     }
 
     public function SaveBilling()
     {
 
-        $this->validate();
+        $this->validate([
+            'bfirst_name' => ['required'],
+            'blast_name' => ['required'],
+            'baddress' => ['required'],
+            'blast_name' => ['required'],
+            'bapartment' => ['required'],
+            'bcity' => ['required'],
+            'bcountry' => ['required'],
+            'bcompany' => [],
+            'bpostal_code' => ['required'],
+            'baddress_type' => ['required'],
+            'bmobile_no' => ['required'],
+
+        ]);
 
         if($this->baddress_type == true){
             $billing_address = 'billing_address';
@@ -192,8 +200,12 @@ class Account extends Component
                 ];
 
         CustomerAddress::create($bill_arr);
+        $this->customer = User::with(['detail','address'=>function($query) {
 
-        session()->flash('message', 'Billing Address Added !!');
+            $query->where('address_type','shipping_address');
+
+        }])->where('id',$this->user_id)->first()->toArray();
+        session()->flash('add_bill', 'Billing Address Added !!');
     }
 
     public function shippingedit($id){
@@ -203,6 +215,21 @@ class Account extends Component
     }
     public function update($id)
     {
+
+        $this->validate([
+            'editaddress.first_name' => ['required'],
+            'editaddress.last_name' => ['required'],
+            'editaddress.address' => ['required'],
+            'editaddress.apartment' => ['required'],
+            'editaddress.city' => ['required'],
+            'editaddress.country' => ['required'],
+            'editaddress.postal_code' => ['required'],
+            'editaddress.address_type' => ['required'],
+            'editaddress.company' => [],
+            'editaddress.mobile_no' => [],
+
+        ]);
+
         if($this->editaddress->address_type == true){
             $shippingAddress = 'shipping_address';
         }else{
