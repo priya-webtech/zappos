@@ -739,7 +739,7 @@
                                 
                                 @php $i = 1;  $user_id = Auth::user()->id; @endphp
                                 @foreach($OrderItem as $row)
-                                @if($row['user_id'] == $user_id)
+                                @if($row['order'][0]['transactionid'] == "" && $row['user_id'] == $user_id)
                                <?php $detailfetch = allprice($row->product_id); ?>
                                 <tr>
                                     <td>{{$row['order'][0]['id']}}</td>
