@@ -604,9 +604,21 @@ $(document).ready(function(){
                                  @if(Session::has('screen'))
                                 @error('email') <span class="error text-danger">{{ $message }}</span> @enderror
                                 @endif
-                                <input type="password" placeholder="Password" name="password" />
-                                <input type="password" placeholder="Re-enter password " name="password_confirmation" />
-                                @error('password') <span class="error text-danger">{{ $message }}</span> @enderror
+                                <input type="password" id="login_password" placeholder="Password" name="password" />
+                                <span class="input-group-btn" id="eyeSlash">
+                                   <button class="btn btn-default reveal" onclick="visibility3()" type="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                                 </span>
+                                 <span class="input-group-btn" id="eyeShow" style="display: none;">
+                                   <button class="btn btn-default reveal" onclick="visibility3()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                 </span>
+                                <input type="password" placeholder="Re-enter password" id="login_password2" name="password_confirmation" />
+                                <span class="input-group-btn" id="eyeSlash2">
+                                   <button class="btn btn-default reveal" onclick="visibility2()" type="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                                 </span>
+                                 <span class="input-group-btn" id="eyeShow2" style="display: none;">
+                                   <button class="btn btn-default reveal" onclick="visibility2()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                 </span>
+                                @error('password') <span class="error text-danger">minimum 1 uppercase 1 lowercash 1 number and 1 special characters password / lenth minimum 8</span> @enderror
                                 <button type="submit" class="site-btn blue-btn">Sign Up</button>
                             </form>
                             <div class="signin-bottom-cont">
@@ -628,7 +640,13 @@ $(document).ready(function(){
                                   @endif
                                 <input type="hidden" name="login_from" value="frontend" />
                                 <input type="email" placeholder="Email" name="email" />
-                                <input type="password" placeholder="Password" name="password" />
+                                <input type="password" placeholder="Password" id="login_password1" name="password" />
+                                <span class="input-group-btn" id="eyeSlash1">
+                                   <button class="btn btn-default reveal" onclick="visibility4()" type="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                                 </span>
+                                 <span class="input-group-btn" id="eyeShow1" style="display: none;">
+                                   <button class="btn btn-default reveal" onclick="visibility4()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                 </span>
                                 <a href="{{ route('password.request') }}">Forgot your password?</a>
                                 <button type="submit" class="site-btn blue-btn">Sign In</button>
                             </form>
@@ -662,6 +680,44 @@ $(document).ready(function(){
     </div>
     <!-- modal end -->
 <script type="text/javascript">
+
+function visibility2() {
+  var x = document.getElementById('login_password2');
+  if (x.type === 'password') {
+    x.type = "text";
+    $('#eyeShow2').show();
+    $('#eyeSlash2').hide();
+  }else {
+    x.type = "password";
+    $('#eyeShow2').hide();
+    $('#eyeSlash2').show();
+  }
+}
+function visibility3() {
+  var x = document.getElementById('login_password');
+  if (x.type === 'password') {
+    x.type = "text";
+    $('#eyeShow').show();
+    $('#eyeSlash').hide();
+  }else {
+    x.type = "password";
+    $('#eyeShow').hide();
+    $('#eyeSlash').show();
+  }
+}
+function visibility4() {
+  var x = document.getElementById('login_password1');
+  if (x.type === 'password') {
+    x.type = "text";
+    $('#eyeShow1').show();
+    $('#eyeSlash1').hide();
+  }else {
+    x.type = "password";
+    $('#eyeShow1').hide();
+    $('#eyeSlash1').show();
+  }
+}
+
 @if (count($errors) > 0)
     $('#sign-in-form').css('display', 'block');
 
