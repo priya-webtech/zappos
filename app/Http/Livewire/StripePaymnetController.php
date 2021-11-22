@@ -104,7 +104,18 @@ class StripePaymnetController extends Component
     public function addshipping($id)
     {
 
-        $this->validate();
+        $this->validate([
+
+        'orderdetail.first_name' => ['required'],
+        'orderdetail.last_name' => ['required'],
+        'orderdetail.address' => ['required'],
+        'orderdetail.unit_number' => ['required'],
+        'orderdetail.city' => ['required'],
+        'orderdetail.country' => ['required'],
+        'orderdetail.pincode' => ['required'],
+        'orderdetail.mobile' => [],
+
+    ]);
         
         $paymentdetail = Orders::where('id', $id)->update(
                     [
@@ -120,7 +131,7 @@ class StripePaymnetController extends Component
                 );
         if($paymentdetail) {
             $this->view = true;
-             Session::flash('success', 'Shipping Update Successfully!');
+             Session::flash('shipp_success', 'Shipping Update Successfully!');
         }
     }
 
@@ -132,7 +143,7 @@ class StripePaymnetController extends Component
 
         $getCartid = Orders::where('id',$id)->first();
         
-
+        dd($request->redirect_status);
             if($request->redirect_status == 'succeeded') {
                 $paymentdetail = Orders::where('id', $id)->update(
                     [

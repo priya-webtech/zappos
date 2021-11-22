@@ -62,24 +62,24 @@
             <div class="panel credit-card-box">
 
 
-                <div class="checkout-left" wire:ignore>
+                <div class="checkout-left">
 
   
 
-                    @if (Session::has('success'))
+                    @if (Session::has('shipp_success'))
 
                         <div class="alert alert-success text-center">
 
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 
-                            <p>{{ Session::get('success') }}</p>
+                            <p>{{ Session::get('shipp_success') }}</p>
 
                         </div>
 
                     @endif
                     
 
-                    <div class="shipping-details-card" wire:ignore>
+                    <div class="shipping-details-card">
 
                         <h3 class="panel-title">Shipping Details</h3>
 
@@ -91,14 +91,14 @@
                                     <div class='form-group required'>
                                         <label class='control-label'>First Name</label> 
                                         <input class='form-control' wire:model="orderdetail.first_name" name="firstname" placeholder="First Name" type='text' required wire:ignore.self>
-                                        @error('orderdetail.first_name') <span class="error">{{ $message }}</span> @enderror
+                                        @error('orderdetail.first_name') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class='form-group required'>
                                         <label class='control-label'>Last Name</label> 
                                         <input class='form-control' wire:model="orderdetail.last_name" name="lastname" placeholder="Last Name" type='text' required wire:ignore.self>
-                                        @error('orderdetail.last_name') <span class="error">{{ $message }}</span> @enderror
+                                        @error('orderdetail.last_name') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -107,14 +107,14 @@
                                     <div class="form-group">
                                         <label class="control-label">Street Name</label>
                                         <input type="text" class="form-control" wire:model="orderdetail.address" placeholder="Street Name" wire:ignore.self>
-                                        @error('orderdetail.address') <span class="error">{{ $message }}</span> @enderror
+                                        @error('orderdetail.address') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="primaryVoiceNumber">Unit Number</label>
                                         <input type="number" wire:model="orderdetail.unit_number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" wire:ignore.self>
-                                        @error('orderdetail.unit_number') <span class="error">{{ $message }}</span> @enderror
+                                        @error('orderdetail.unit_number') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -123,14 +123,14 @@
                                     <div class="form-group">
                                         <label for="postalCode">Zip</label>
                                         <input type="number" wire:model="orderdetail.pincode" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" wire:ignore.self>
-                                        @error('orderdetail.pincode') <span class="error">{{ $message }}</span> @enderror
+                                        @error('orderdetail.pincode') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="City">City</label>
                                         <input type="text" class="form-control" wire:model="orderdetail.city" id="City" aria-describedby="emailHelp" placeholder="Enter City" wire:ignore.self>
-                                        @error('orderdetail.city') <span class="error">{{ $message }}</span> @enderror
+                                        @error('orderdetail.city') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                                             <option value="UM">United States Minor Outlying Islands</option>
                                             <option value="VI">Virgin Islands, U.S.</option>
                                         </select>
-                                        @error('orderdetail.country') <span class="error">{{ $message }}</span> @enderror
+                                        @error('orderdetail.country') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col">

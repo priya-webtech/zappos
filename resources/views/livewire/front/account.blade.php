@@ -720,8 +720,8 @@
                     </div>
                 </div>
                 <div class="your-order-details">
-                    <p class="order-empty-msg">Your order history is empty.</p>
-                     <div class="shipping-details-card re-order-tbl">
+                    @if($order)
+                    <div class="shipping-details-card re-order-tbl">
                         <h3 class="panel-title">Order Details</h3>
                         <table>
                             <thead>
@@ -736,10 +736,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($order)
-                                @php $i = 1; @endphp
+                                
+                                @php $i = 1;  $user_id = Auth::user()->id; @endphp
                                 @foreach($OrderItem as $row)
-                               <?php  $detailfetch = allprice($row->product_id); ?>
+                                @if($row['user_id'] == $user_id)
+                               <?php $detailfetch = allprice($row->product_id); ?>
                                 <tr>
                                     <td>{{$row['order'][0]['id']}}</td>
                                     <td>{{$row['order'][0]['updated_at']}}</td>
@@ -772,13 +773,14 @@
                                         <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
                                     </td>
                                 </tr>
-                                @endforeach
-                                @else
-                                 <p class="order-empty-msg">Your order history is empty.</p>
                                 @endif
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
+                    @else
+                     <p class="order-empty-msg">Your order history is empty.</p>
+                    @endif
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Orders per page:</label>
                         <select class="form-control" id="exampleFormControlSelect1">
