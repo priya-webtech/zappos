@@ -80,7 +80,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="sp-add-edit-btn">
-                                                    <button type="button" class="site-btn" data-toggle="modal" data-target="#editShippingAddress" wire:click="shippingedit({{$address['id']}})">Edit</button>
+                                                    <button type="button" class="btn site-btn blue-border-btn" data-toggle="modal" data-target="#editShippingAddress" wire:click="shippingedit({{$address['id']}})">Edit</button>
 
                                                 </div>
                                             </div>
@@ -187,8 +187,8 @@
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn site-btn">Cancel</button>
-                                            <button type="button" class="btn site-btn" wire:click.prevent="update({{$addressid}})">Save</button>
+                                            <button type="button" class="site-btn blue-btn">Cancel</button>
+                                            <button type="button" class="site-btn blue-btn" wire:click.prevent="update({{$addressid}})">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -312,8 +312,8 @@
                                         </div>
                                         <div class="modal-footer">
 
-                                            <button type="button" class="btn site-btn">Cancel</button>
-                                            <button type="button" class="btn site-btn" wire:click.prevent="SaveShipping()">Save</button>
+                                            <button type="button" class="btn site-btn green-btn">Cancel</button>
+                                            <button type="button" class="btn site-btn green-btn" wire:click.prevent="SaveShipping()">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -464,10 +464,10 @@
                                             <button type="button" class="btn site-btn">Add New Address</button>
                                             <p>Please add a billing or shipping address before you add a new payment method.</p>
                                         </div> -->
-                                        <div class="modal-footer">
+                                        <div class="modal-footer" wire:ignore>
 
-                                            <button type="button" class="btn site-btn">Cancel</button>
-                                            <button type="button" class="btn site-btn" wire:click.prevent="SaveBilling()">Save</button>
+                                            <button type="button" class="site-btn blue-btn">Cancel</button>
+                                            <button type="button" class="site-btn blue-btn" wire:ignore.self wire:click.prevent="SaveBilling()">Save</button>
 
                                         </div>
                                     </div>
@@ -504,7 +504,7 @@
                                                         <label>Name:</label>
                                                         <span>{{$UserDetail->first_name}} {{$UserDetail->last_name}}</span>
                                                     </p>
-                                                    <button type="button" class="btn site-btn blue-border-btn " data-toggle="modal" id="EditName" data-target="#EditNameModal">Edit</button>
+                                                    <button type="button" class="btn site-btn blue-border-btn" data-toggle="modal" id="EditName" data-target="#EditNameModal">Edit</button>
 
                                                 </div>
                                                 <div class="login-security-list">

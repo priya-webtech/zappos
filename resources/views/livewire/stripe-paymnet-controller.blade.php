@@ -79,7 +79,7 @@
                     @endif
                     
 
-                    <div class="shipping-details-card">
+                    <div class="shipping-details-card" wire:ignore>
 
                         <h3 class="panel-title">Shipping Details</h3>
 
@@ -90,13 +90,15 @@
                                 <div class="col">
                                     <div class='form-group required'>
                                         <label class='control-label'>First Name</label> 
-                                        <input class='form-control' wire:model="firstname" name="firstname" placeholder="First Name" type='text' required>
+                                        <input class='form-control' wire:model="orderdetail.first_name" name="firstname" placeholder="First Name" type='text' required wire:ignore.self>
+                                        @error('orderdetail.first_name') <span class="error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class='form-group required'>
                                         <label class='control-label'>Last Name</label> 
-                                        <input class='form-control' wire:model="lastname" name="lastname" placeholder="Last Name" type='text' required>
+                                        <input class='form-control' wire:model="orderdetail.last_name" name="lastname" placeholder="Last Name" type='text' required wire:ignore.self>
+                                        @error('orderdetail.last_name') <span class="error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -104,13 +106,15 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label class="control-label">Street Name</label>
-                                        <input type="text" class="form-control" wire:model="streetname" placeholder="Street Name">
+                                        <input type="text" class="form-control" wire:model="orderdetail.address" placeholder="Street Name" wire:ignore.self>
+                                        @error('orderdetail.address') <span class="error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="primaryVoiceNumber">Unit Number</label>
-                                        <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number">
+                                        <input type="number" wire:model="orderdetail.unit_number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" wire:ignore.self>
+                                        @error('orderdetail.unit_number') <span class="error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -118,13 +122,15 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="postalCode">Zip</label>
-                                        <input type="number" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345">
+                                        <input type="number" wire:model="orderdetail.pincode" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" wire:ignore.self>
+                                        @error('orderdetail.pincode') <span class="error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="City">City</label>
-                                        <input type="text" class="form-control" id="City" aria-describedby="emailHelp" placeholder="Enter City">
+                                        <input type="text" class="form-control" wire:model="orderdetail.city" id="City" aria-describedby="emailHelp" placeholder="Enter City" wire:ignore.self>
+                                        @error('orderdetail.city') <span class="error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +138,7 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="Country">Country</label>
-                                        <select class="form-control" id="Country">
+                                        <select class="form-control" id="Country" wire:model="orderdetail.country" wire:ignore.self>
                                             <option value="AS">American Samoa</option>
                                             <option value="GU">Guam</option>
                                             <option value="MH">Marshall Islands</option>
@@ -144,12 +150,13 @@
                                             <option value="UM">United States Minor Outlying Islands</option>
                                             <option value="VI">Virgin Islands, U.S.</option>
                                         </select>
+                                        @error('orderdetail.country') <span class="error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="primaryVoiceNumber">Phone</label>
-                                        <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="123-456-7890">
+                                        <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" wire:model="orderdetail.mobile" placeholder="123-456-7890" wire:ignore.self> 
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +178,7 @@
 
                                 <div class="col-xs-12">
                                   
-                                    <button type="submit" class="site-btn blue-btn">Submit</button>
+                                    <button type="submit" class="site-btn blue-btn" wire:click.prevent="addshipping({{$orderdetail->id}})" wire:ignore.self>Submit</button>
 
                                 </div>
 

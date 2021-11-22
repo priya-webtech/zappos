@@ -32,8 +32,21 @@ use Illuminate\Support\Facades\Validator;
 
 class StripePaymnetController extends Component
 {
-    public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$fullname,$address,$city,$country,$pincode,$mobile,$Taxes, $view,$discoutget, $orderID;
+    public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$firstname,$lastname,$streetname,$city,$country,$pincode,$mobile,$Taxes, $view,$discoutget, $orderID,$unit_number;
 
+
+    protected $rules = [
+
+        'orderdetail.first_name' => ['required'],
+        'orderdetail.last_name' => ['required'],
+        'orderdetail.address' => ['required'],
+        'orderdetail.unit_number' => ['required'],
+        'orderdetail.city' => ['required'],
+        'orderdetail.country' => ['required'],
+        'orderdetail.pincode' => ['required'],
+        'orderdetail.mobile' => [],
+
+    ];
     public function mount($id)
     {
         $this->user_id =  Auth::user()->id;
@@ -90,18 +103,24 @@ class StripePaymnetController extends Component
     }
     public function addshipping($id)
     {
+
+        $this->validate();
+        
         $paymentdetail = Orders::where('id', $id)->update(
                     [
-                        'fullname' => $this->fullname,
-                        'address' => $this->address,
-                        'city' => $this->city,
-                        'country' => $this->country,
-                        'pincode' => $this->pincode,
-                        'mobile' => $this->mobile,
+                        'first_name' => $this->orderdetail['first_name'],
+                        'last_name' => $this->orderdetail['last_name'],
+                        'address' => $this->orderdetail['address'],
+                        'unit_number' => $this->orderdetail['unit_number'],
+                        'city' => $this->orderdetail['city'],
+                        'country' => $this->orderdetail['country'],
+                        'pincode' => $this->orderdetail['pincode'],
+                        'mobile' => $this->orderdetail['mobile'],
                     ]
                 );
         if($paymentdetail) {
             $this->view = true;
+             Session::flash('success', 'Shipping Update Successfully!');
         }
     }
 
