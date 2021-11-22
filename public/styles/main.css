@@ -29,15 +29,6 @@ input[type=checkbox]:focus {
 .h4, h4 { font-size: 18px; font-weight: 500; }
 .h5, h5 {color: #003953; font-weight: bold; font-size: 16px; }
 
-
-/*.site-btn {background-color: transparent; padding: 12px 25px; font-weight: bold; color: #003953; border-radius: 5px; display: inline-block; line-height: 20px; text-align: center; text-decoration: none !important; cursor: pointer; border: 2px solid #003953; }
-.site-btn:hover {background: #003953; color: #ffffff; }
-
-.site-link-btn {display: flex; align-items: center; color: #003953 !important; font-size: 16px; font-weight: bold; text-decoration: none !important; transition: all .4s; cursor: pointer;}*/
-/*.site-link-btn:hover {color: #e4d518 !important; }*/
-
-/*.light-blue-btn {background-color: transparent; color: #e5f1f8; border: 2px solid #e5f1f8; }*/
-
 /***************************
 		site button
 ***************************/
@@ -87,7 +78,8 @@ input[type=checkbox]:focus {
 
 
 
-.light-blue-btn:hover {background-color: #e5f1f8; color: #003953; }
+.light-blue-btn {background-color: #e5f1f8; color: #003953 !important; }
+.light-blue-btn:hover {background-color: #ffffff; color: #035d59 !important; }
 
 .site-link-btn {display: flex; align-items: center; color: #003953 !important; font-size: 16px; font-weight: bold; text-decoration: none !important; transition: all .4s; cursor: pointer;}
 .site-link-btn i {margin-left: 10px; font-weight: bold; font-size: 20px; margin-bottom: -2px; transition: all .4s; }
@@ -301,7 +293,7 @@ button.signin-close-btn svg {fill: #003953; }
      -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
 }
 
-#sign-in-form .container {background-color: #e5f1f8; border-radius: 10px; box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); position: relative; overflow: hidden; width: 768px; max-width: 100%; min-height: 500px;}
+#sign-in-form .container {background-color: #e5f1f8; border-radius: 10px; box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); position: relative; overflow: hidden; width: 768px; max-width: 100%; min-height: 90%;}
 #sign-in-form .form-container {position: absolute; top: 0; height: 100%; transition: all 0.6s ease-in-out; display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
 .sign-in-container {left: 0; width: 50%; z-index: 2; color: #003953; font-weight: 500; }
 .container.right-panel-active .sign-in-container {transform: translateX(100%); }
@@ -340,7 +332,7 @@ button.signin-close-btn svg {fill: #003953; }
 .overlay-right .h2, .overlay-left .h2 {color: #fff; }
 .sign-in-container span, .sign-up-container span {margin-bottom: 10px; }
 .overlay-panel p {margin: 5px 0 25px; }
-
+#sign-in-form form span.error {margin: -5px 0 2px; font-size: 13px; line-height: normal; text-align: left; display: block; width: 100%; color: #ed2939; }
 
 
 /*Cart css end*/
