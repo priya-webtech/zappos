@@ -15,8 +15,6 @@ use App\Http\Responses\LoginResponse;
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 use App\Http\Responses\LogoutResponse;
 use Laravel\Fortify\Contracts\LogoutResponse as LogoutResponseContract;
-use App\Http\Responses\RegisterResponse;
-use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
 use App\Models\User;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -36,10 +34,7 @@ class FortifyServiceProvider extends ServiceProvider
             LogoutResponseContract::class,
             LogoutResponse::class,
         );
-        $this->app->bind(
-            RegisterResponseContract::class,
-            RegisterResponse::class,
-        );
+        
     }
 
     /**
