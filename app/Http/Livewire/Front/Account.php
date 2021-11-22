@@ -136,7 +136,12 @@ class Account extends Component
 
 
         CustomerAddress::create($ship_arr);
-        session()->flash('message', 'shipping Address Added !!');
+        $this->customer = User::with(['detail','address'=>function($query) {
+
+            $query->where('address_type','shipping_address');
+
+        }])->where('id',$this->user_id)->first()->toArray();
+        session()->flash('add_shipp', 'shipping Address Added !!');
         
     }
 
@@ -195,8 +200,12 @@ class Account extends Component
                 ];
 
         CustomerAddress::create($bill_arr);
+        $this->customer = User::with(['detail','address'=>function($query) {
 
-        session()->flash('message', 'Billing Address Added !!');
+            $query->where('address_type','shipping_address');
+
+        }])->where('id',$this->user_id)->first()->toArray();
+        session()->flash('add_bill', 'Billing Address Added !!');
     }
 
     public function shippingedit($id){

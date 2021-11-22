@@ -198,6 +198,17 @@
                             <div class="modal fade" id="AddNewShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
+                                        @if (Session::has('add_shipp'))
+
+                                            <div class="alert alert-success text-center">
+
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+
+                                                <p>{{ Session::get('add_shipp') }}</p>
+
+                                            </div>
+
+                                        @endif
                                         <div class="modal-header proceed-cart-head ">
                                             <h4 class="h4 modal-title" id="exampleModalLabel">Add New Address</h4>
                                             <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
@@ -348,6 +359,17 @@
                             <div class="modal fade" id="AddBillingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
+                                        @if (Session::has('add_bill'))
+
+                                            <div class="alert alert-success text-center">
+
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+
+                                                <p>{{ Session::get('add_bill') }}</p>
+
+                                            </div>
+
+                                        @endif
                                         <div class="modal-header proceed-cart-head ">
                                             <h4 class="h4 modal-title" id="exampleModalLabel">Add New billing address</h4>
                                             <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
