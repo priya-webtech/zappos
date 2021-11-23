@@ -19,6 +19,6 @@ class ProductMedia extends Model
     
     protected $table = "product_media";
 
-    protected $fillable = ['product_id','image'];
+    protected $guarded =[];
 
 }

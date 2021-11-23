@@ -261,8 +261,23 @@ class Account extends Component
             'address_type' => $shippingAddress,
         ]);
 
-        session()->flash('message', 'Edit shipping Address !!');
+        session()->flash('editship', 'Edit shipping Address !!');
     }
+     
+    public function deleteship($addid)
+    {   
+
+       $deleteRecord = CustomerAddress::find($addid)->delete();
+       if($deleteRecord){
+        $this->customer = User::with(['detail','address'=>function($query) {
+
+            $query->where('address_type','shipping_address');
+
+        }])->where('id',$this->user_id)->first()->toArray();
+        session()->flash('deleteshipmessage', 'Delete shipping Address !!');
+       }
+    }
+
     public function UpdateUser($flag)
     {
 
