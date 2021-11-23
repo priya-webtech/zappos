@@ -25,7 +25,7 @@ class Product extends Model
     
     protected $table = "product";
 
-    protected $fillable = ['title','descripation','image','price','compare_price','cost','tax','sku','barcode','location','online_store','point_of_sale','product_type','vender','collection','tags','status','seo_title','seo_descripation','seo_utl','variant'];
+    protected $guarded =[];
 
 
     public function variants()

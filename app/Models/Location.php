@@ -19,6 +19,6 @@ class Location extends Model
     
     protected $table = "location";
 
-    protected $fillable = ['name','online_order','address','apartment','city','country','State','pincode','phone'];
+    protected $guarded =[];
 
 }
