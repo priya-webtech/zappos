@@ -23,17 +23,7 @@
             </div>
 
         @endif
-        @if (Session::has('deleteshipmessage'))
-
-            <div class="alert alert-danger text-center">
-
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-
-                <p>{{ Session::get('deleteshipmessage') }}</p>
-
-            </div>
-
-        @endif
+        
         <div class="primary-acc-info">
             <div class="container">
                 <div class="primary-acc-info-title">
@@ -58,9 +48,20 @@
                             <div class="acc-info-btn">
                                 <button type="button" class="site-link-btn" data-toggle="modal" data-target="#AddNewShippingAddress">ADD A NEW SHIPPING ADDRESS <i class="fa fa-angle-right" aria-hidden="true"></i></button>
                             </div>
-                            <div class="modal fade" id="ShowAllShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore>
+                            <div class="modal fade" id="ShowAllShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
+                                        @if (Session::has('deleteshipmessage'))
+
+                                            <div class="alert alert-danger text-center">
+
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+
+                                                <p>{{ Session::get('deleteshipmessage') }}</p>
+
+                                            </div>
+
+                                        @endif
                                         <div class="modal-header proceed-cart-head ">
                                             <h4 class="h4 modal-title" id="exampleModalLabel">Edit Shipping Address</h4>
                                             <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
