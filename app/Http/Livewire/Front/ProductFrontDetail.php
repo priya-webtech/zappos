@@ -108,8 +108,7 @@ class ProductFrontDetail extends Component
         $this->product  = Product::with('variants')->where('seo_utl',$this->slug)->first();
 
         if(Auth::check()) {
-            $this->user_id = Auth::user()->id;
-            $this->favoritevalue  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
+            $this->favoritevalue  = favorite::where('user_id',Auth::user()->id)->where('product_id',$this->product->id)->first();
         }     
 
         $this->reviewget = review::where('product_id',$this->product['id'])->get();
@@ -226,7 +225,7 @@ class ProductFrontDetail extends Component
         } else {
 
 
-            $favorite  = favorite::where('user_id',$this->user_id)->where('product_id',$this->product->id)->first();
+            $favorite  = favorite::where('user_id',Auth::user()->id)->where('product_id',$this->product->id)->first();
 
             if(!$favorite){
 
@@ -234,7 +233,7 @@ class ProductFrontDetail extends Component
                         
                         'product_id' => $this->product->id,
 
-                        'user_id' => $this->user_id,
+                        'user_id' => Auth::user()->id,
 
                         'status' => '1',
                     ];
@@ -264,7 +263,7 @@ class ProductFrontDetail extends Component
                         
                         'product_id' => $productid,
 
-                        'user_id' => $this->user_id,
+                        'user_id' => Auth::user()->id,
 
                         'status' => '1',
                     ];
@@ -304,7 +303,7 @@ class ProductFrontDetail extends Component
                     
                     'product_id' => $variant->product_id,
 
-                    'user_id' => $this->user_id,
+                    'user_id' => Auth::user()->id,
 
                     'varientid' => $variant->id,
 
@@ -319,7 +318,6 @@ class ProductFrontDetail extends Component
                 Cart::create($cart_arr);
 
             } else {
-
                 Cart::where('id', $exist->id)->update(['stock' => $exist->stock + 1]);
             }   
 
@@ -339,7 +337,7 @@ class ProductFrontDetail extends Component
                     
                     'product_id' => $this->product->id,
 
-                    'user_id' => $this->user_id,
+                    'user_id' => Auth::user()->id,
 
                     'price' => $price,
 
