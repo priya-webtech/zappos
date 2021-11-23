@@ -16,6 +16,8 @@ use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 use App\Http\Responses\LogoutResponse;
 use Laravel\Fortify\Contracts\LogoutResponse as LogoutResponseContract;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
+
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -50,6 +52,7 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
         RateLimiter::for('login', function (Request $request) {
+            Session::put('screen', 'login');
             $role = $this->getRoleFromEmail($request->email);
 
             if(!empty($role)) {

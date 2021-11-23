@@ -1,7 +1,7 @@
 <div>
 <div id="main_model">
     <div class="main-heder">
- 
+         
 
 
         <div class="first-container"></div>
@@ -594,15 +594,19 @@ $(document).ready(function(){
                                 <span>or use your email for registration</span>
 
                                 <input type="text" placeholder="First Name" name="first_name" @if(old('first_name')) value="{{old('first_name')}}" @endif />
-                               
+                                @if(Session::has('screen') && Session::get('screen') == 'register')
                                 @error('first_name') <span class="error text-danger">{{ $message }}</span> @enderror
+                                @endif
                                 
                                 <input type="text" placeholder="Last Name" name="last_name" @if(old('last_name')) value="{{old('first_name')}}" @endif />
+                                @if(Session::has('screen') && Session::get('screen') == 'register')
                                 @error('last_name') <span class="error text-danger">{{ $message }}</span> @enderror
+                                @endif
                                 
                                 <input type="email" placeholder="Email" name="email" @if(old('email')) value="{{old('email')}}" @endif />
-                                 @if(Session::has('screen'))
+                                 @if(Session::has('screen') && Session::get('screen') == 'register')
                                 @error('email') <span class="error text-danger">{{ $message }}</span> @enderror
+
                                 @endif
                                 <input type="password" id="login_password" placeholder="Password" name="password" />
                                 <span class="input-group-btn" id="eyeSlash">
@@ -618,9 +622,12 @@ $(document).ready(function(){
                                  <span class="input-group-btn" id="eyeShow2" style="display: none;">
                                    <button class="btn btn-default reveal" onclick="visibility2()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
                                  </span>
+                                  @if(Session::has('screen') && Session::get('screen') == 'register')
                                  @error('password') <span class="error text-danger">{{ $message }}</span> @enderror
+                                 @endif
                                
                                 <button type="submit" class="site-btn blue-btn">Sign Up</button>
+                                 
                             </form>
                             <div class="signin-bottom-cont">
                                 <p>By signing in, you agree to company name</p>
@@ -636,7 +643,10 @@ $(document).ready(function(){
                                 @csrf
                                 <h2 class="h2">Sign in</h2>
                                 <span>or use your account</span>
-                                  @if(!Session::has('screen'))
+                                
+ 
+
+                                  @if(Session::has('screen') && Session::get('screen') == 'login')
                                    @error('email') <span class="error text-danger">{{ $message }}</span> @enderror
                                   @endif
                                 <input type="hidden" name="login_from" value="frontend" />
@@ -648,7 +658,8 @@ $(document).ready(function(){
                                  <span class="input-group-btn" id="eyeShow1" style="display: none;">
                                    <button class="btn btn-default reveal" onclick="visibility4()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
                                  </span>
-                                <a href="{{ route('password.request') }}">Forgot your password?</a>
+                                <a href="{{ route('password.request.front') }}">Forgot your password?</a>
+
                                 <button type="submit" class="site-btn blue-btn">Sign In</button>
                             </form>
                             <div class="signin-bottom-cont">
@@ -719,19 +730,28 @@ function visibility4() {
   }
 }
 
-@if (count($errors) > 0)
-    $('#sign-in-form').css('display', 'block');
 
-    @if(Session::has('screen'))
+    @if(Session::has('screen') && Session::get('screen') == 'register' && count($errors) > 0)
+        $('#sign-in-form').css('display', 'block');
+
         $('#container').addClass("right-panel-active");
-        <?php Session::forget('screen') ?>
-    @else
+        @php
+            Illuminate\Support\Facades\Session::forget('screen');
+        @endphp
+    @endif
+    @if(Session::has('screen') && Session::get('screen') == 'login' && count($errors) > 0)
+        $('#sign-in-form').css('display', 'block');
+
         $('#container').addClass("left-panel-active");
+        @php
+            Illuminate\Support\Facades\Session::forget('screen');
+        @endphp
     @endif
 
-@endif
 </script>
+
 </div>
+
 
 </div>
 
@@ -740,5 +760,6 @@ function visibility4() {
     evt.preventDefault();
 });
 </script>
+
 
 

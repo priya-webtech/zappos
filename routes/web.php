@@ -177,7 +177,18 @@ Route::middleware(['checkRole'])->group(function () {
   
     });
     Route::get('/product/{slug?}', Livewire\Front\ProductFrontDetail::class)->name('product-front-detail');
-     Route::get('/varientData', [Livewire\Front\ProductFrontDetail::class, 'fetchPrice'])->name('varientData');
+    Route::get('/varientData', [Livewire\Front\ProductFrontDetail::class, 'fetchPrice'])->name('varientData');
 
+    Route::get('/forgot-password', [Livewire\Front\Auth\Login::class, 'forgotPassword'])->middleware(['guest:'.config('fortify.guard')])->name('password.request.front');
+    Route::post('/forgot-password', [Livewire\Front\Auth\Login::class, 'sendPasswordResetLink'])
+            ->name('password.email.front');
+    Route::get('/reset-password', [Livewire\Front\Auth\Login::class, 'resetPassword'])
+     ->middleware(['guest:'.config('fortify.guard')])
+            ->name('password.reset.front');
+    Route::post('/reset-password', [Livewire\Front\Auth\Login::class, 'storeNewPassword'])
+            ->name('password.update.front');
+    
+
+    
 });
 

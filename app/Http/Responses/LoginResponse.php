@@ -16,6 +16,8 @@ class LoginResponse implements LoginResponseContract
     {
         $user = Auth::user();
 
+        Session::put('screen', 'login');
+
         if (isset($user->roles) && $user->hasRole('admin')) {
             return $request->wantsJson()
                 ? response()->json(['two_factor' => false])
