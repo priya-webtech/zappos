@@ -105,11 +105,47 @@ class Header extends Component
         return view('livewire.header');
     }
 
-    public function stockplusminus($cartid)
+    public function stockplusminus($cartid, $variantid = null)
     {
+
 
         if($this->CartItem)
         {
+
+            if(Auth::check()) {
+
+                Cart::where('id', $cartid)->update(['stock' => $this->CartItem[$cartid]['stock']]);
+
+            } else {
+                $cart = session()->get('cart');
+                if(!empty($cart)) {
+
+                    if(!empty($variantid)) {
+
+                        if(isset($cart[$variantid]) && $cart[$variantid]['type'] == 'variant') {
+                            $cart[$variantid]['stock'] = $this->CartItem[$variantid]['stock'];
+                            session()->put('cart', $cart);
+
+                        }
+
+                    } else {
+
+                        if(isset($cart[$cartid])  && $cart[$variantid]['type'] == 'product') {
+
+                            $cart[$cartid]['stock'] = $this->CartItem[$cartid]['stock'];
+                            session()->put('cart', $cart);
+
+                        }
+
+                    }
+                    
+                }
+
+            }
+ 
+            
+
+            if(Auth::check())
             foreach ($this->CartItem as $stock) {
                 Cart::where('id', $stock->id)->update(['stock' => $stock->stock]);
             }
@@ -117,16 +153,24 @@ class Header extends Component
         } 
     }
 
-    public function DeleteCartProduct($id)
+    public function DeleteCartProduct($id, $variantid = null)
     {
 
         if (Auth::check()) {
             Cart::find($id)->delete();
-            $this->getCart();
+        } else {
+            $cart = session()->get('cart');
 
-            // $this->ProductVariant = ProductVariant::all();
-            // $this->varianttag = VariantTag::All();
+            if(isset($cart[$variantid]) && $cart[$variantid]['type'] == 'variant') {
+                unset($cart[$variantid]);
+            }
+
+            if(isset($cart[$id]) && $cart[$id]['type'] == 'product') {
+                unset($cart[$id]);
+            }
+             session()->put('cart', $cart);
         }
+        $this->getCart();
     }
 
     public function UpdateWish($id,$productid){
@@ -155,9 +199,12 @@ class Header extends Component
     {
         if (Auth::check()) {
 
-            $this->CartItem =  Cart::with(['media_product', 'product_detail'])->where('user_id',Auth::user()->id)->get();
+            $this->CartItem =  Cart::with(['media_product', 'product_detail'])->where('user_id',Auth::user()->id)->get()->toArray();
 
+        } else {
+            $this->CartItem  = session()->get('cart');
         }
+
     }
 
 }

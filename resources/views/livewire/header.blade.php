@@ -50,7 +50,16 @@
                                 </div>
                             </div>
                             <?php 
-                            $cartCount = ($CartItem && !empty($CartItem)) ? $CartItem->sum('stock') : 0;
+
+                                $stock = 0;
+                                if($CartItem && !empty($CartItem)) {
+
+                                    foreach ($CartItem as $item) {
+                                        $stock += $item['stock'];
+                                    }
+                                }
+                                $cartCount = $stock;
+
                             ?>
                             <div class="my-cart turn-btn ml-auto" id="my-cart">
                                 <button class="site-btn green-border-btn bg-cart" onclick="document.getElementById('proceed-cart').style.display='block'">
@@ -85,14 +94,14 @@
                                                 @if(!empty($CartItem))
                                                 @foreach($CartItem as $key => $cart)
                                                 <?php 
-                                                $detailfetch = allprice($cart->product_id);
+                                                $detailfetch = allprice($cart['product_id']);
                                                 $symbol = CurrencySymbol();
 
 
                                                 if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0) 
                                                 {
                                                     $decodeproduct = json_decode($discoutget['promocode'][0]['apply_c_p']);
-                                                    if ($discoutget['promocode'][0]['applyto'] == 3 && in_array($cart->product_id, $decodeproduct))
+                                                    if ($discoutget['promocode'][0]['applyto'] == 3 && in_array($cart['product_id'], $decodeproduct))
                                                     {
                                                         if($discoutget['promocode'][0]['type'] == 2){
                                                           
@@ -190,14 +199,16 @@
              
                                                ?>
 
+                                                @if(Auth::check())
                                                 <input name="cartid[]" type="hidden" id="deletecartid" value="{{$cart['id']}}">
+                                                @endif
                                                 <div class="cart-list">
                                                     <div class="product-img">
-                                                        <a class="dropdown-header" href="{{ route('product-front-detail', $cart['product_detail'][0]['seo_utl']) }}"><img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}" alt=""></a>
+                                                        <a class="dropdown-header" href="{{ route('product-front-detail', $cart['product_detail']['seo_utl']) }}"><img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}" alt=""></a>
                                                     </div>
                                                     <div class="product-data">
-                                                        <a href="{{ route('product-front-detail', $cart['product_detail'][0]['seo_utl']) }}">
-                                                        <p class="cart-pd-title">{{$cart['product_detail'][0]['title']}}</p>
+                                                        <a href="{{ route('product-front-detail', $cart['product_detail']['seo_utl']) }}">
+                                                        <p class="cart-pd-title">{{$cart['product_detail']['title']}}</p>
                                                         </a>
                                                         <a class="cart-pd-clear" href="#">Clare Tree</a>
                                                         <div class="product-data-inner">
@@ -207,8 +218,14 @@
                                                             <div class="add-cart-select">
                                                                
                                                                 <div class="total-item-select">
+
+                                                                    @if(Auth::check())
+                                                                         <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['id']}})" name="stockitem" type="number" min="1">
+                                                                    @else
+                                                                         <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['product_id']}}, {{$cart['varientid']}})" name="stockitem" type="number" min="1">
+                                                                    @endif
                                                                     
-                                                                        <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['id']}})" name="stockitem" type="number">
+                                                                       
                                                                
                                                                 </div>
                                                             </div>
@@ -234,8 +251,11 @@
                                                         </p>
                                                         @endif
 
-                                                       
-                                                        <a :key="{{$cart['id']}}" wire:click="DeleteCartProduct({{$cart['id']}})"  href="javascript:;">delete</a>
+                                                       @if(Auth::check())
+                                                        <a :key="{{$key}}" wire:click="DeleteCartProduct({{$cart['id']}})"  href="javascript:;">delete</a>
+                                                        @else
+                                                        <a :key="{{$key}}" wire:click="DeleteCartProduct({{$cart['product_id']}}, {{$cart['varientid']}})"  href="javascript:;">delete</a>
+                                                        @endif
                                                     </div>
                                                 </div>
 
@@ -344,7 +364,9 @@
                                             @endif
                                             <a href="{{ route('view-cart') }}" class="site-btn green-btn view-cart-btn">View Cart</a>
                                             <input type="hidden" name="total_price" value="{{$total}}" />
+                                            @if(Auth::check())
                                             <input type="submit" name="checkout" class="site-btn green-btn checkout-btn" value="Proceed to checkout">
+                                            @endif
                                         </div>
                                     </div>
                                     @else
