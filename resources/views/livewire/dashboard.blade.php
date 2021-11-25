@@ -37,12 +37,12 @@
         <div class="left-container-sec half-container-sec">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4 half-container">
+                    <div class="col-lg-4 col-md-5 half-container">
                         <h2 class="h2">The Cozy Shop</h2>
                         <p>Supremely cozy looks for all your plan(or not-plans) - because around-the-clock cozy is the name of our game.</p>
                         <a href="#" class="site-btn blue-border-btn">Peak Cozy Right This Way</a>
                     </div>
-                    <div class="col-md-8 full-container">
+                    <div class="col-lg-8 col-md-7 full-container">
                         <div class="full-container-img">
                             <figure><img src="../assets/women3.jpg"></figure>
                         </div>
@@ -56,12 +56,12 @@
         <div class="right-container-sec half-container-sec">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-8 full-container">
+                    <div class="col-lg-8 col-md-7 full-container">
                         <div class="full-container-img">
                             <figure><img src="https://m.media-amazon.com/images/G/01/2020/style-room/HOMEPAGE-THE-STYLE-ROOM-ADIDAS-STELLA-MCCARTNEY-DECEMBER-965x500.jpg"></figure>
                         </div>
                     </div>
-                    <div class="col-md-4 half-container">
+                    <div class="col-lg-4 col-md-5 half-container">
                         <h2 class="h2">The Cozy Shop</h2>
                         <p>Supremely cozy looks for all your plan(or not-plans) - because around-the-clock cozy is the name of our game.</p>
                         <a href="#" class="site-btn blue-border-btn ">Peak Cozy Right This Way</a>
@@ -143,14 +143,14 @@
         <div class="home-mini-banner">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-lg-5 col-md-12">
                         <div class="mini-banner-content">
                             <h2 class="h2">Earn a Total of 5% Back at Zappos</h2>
                             <p>Automatically earn a total of 5% Back on all Zappos purchases when using your Amazon Rewards Visa card.*</p>
                             <a href="#" class="site-btn blue-border-btn">Learn more</a>
                         </div>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-lg-7 col-md-12">
                     </div>
                 </div>
             </div>
