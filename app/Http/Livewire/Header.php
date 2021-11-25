@@ -109,13 +109,12 @@ class Header extends Component
     public function stockplusminus($cartid, $variantid = null)
     {
 
-
         if($this->CartItem)
         {
 
             if(Auth::check()) {
 
-                Cart::where('id', $cartid)->update(['stock' => $this->CartItem[$cartid]['stock']]);
+                Cart::where('id', $this->CartItem[$cartid]['id'])->update(['stock' => $this->CartItem[$cartid]['stock']]);
 
             } else {
                 $cart = session()->get('cart');
@@ -143,14 +142,7 @@ class Header extends Component
                 }
 
             }
- 
-            
-
-            if(Auth::check())
-            foreach ($this->CartItem as $stock) {
-                Cart::where('id', $stock->id)->update(['stock' => $stock->stock]);
-            }
-             
+            $this->emit('getCart');
         } 
     }
 
@@ -205,7 +197,8 @@ class Header extends Component
         } else {
             $this->CartItem  = session()->get('cart');
         }
-        
+
+
     }
 
 }

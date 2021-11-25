@@ -21,7 +21,6 @@
                                 </thead>
                                 <tbody>
                                     @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; $subtotal3 = 0; $subtotal4 = 0; $subtotal5 = 0; $subtotal6 = 0;  $symbol = CurrencySymbol();@endphp
-                                     $symbol = CurrencySymbol();
                                     @if(!empty($CartItem))
                                     @foreach($CartItem as $key => $cart)
                                     <?php 
@@ -149,9 +148,9 @@
                                             <div class="add-cart-select">               
                                                 <div class="total-item-select">
                                                     @if(Auth::check())
-                                                                         <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['id']}})" name="stockitem" type="number" min="1">
+                                                                         <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$key}})" name="stockitem" type="number" min="1" wire:ignore.self>
                                                                     @else
-                                                                         <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['product_id']}}, {{$cart['varientid']}})" name="stockitem" type="number" min="1">
+                                                                         <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['product_id']}}, {{$cart['varientid']}})" name="stockitem" type="number" min="1" wire:ignore.self>
                                                                     @endif
                                                         
                                                 </div>
