@@ -1024,7 +1024,7 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 #sign-in-form .site-modal-middle {
     overflow: hidden;
     overflow-y: auto;
-    height: 92%;
+    height: 600px;
     border-radius: 10px;
 }
 #sign-in-form .container {
