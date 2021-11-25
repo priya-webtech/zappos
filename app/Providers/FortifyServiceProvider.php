@@ -53,7 +53,9 @@ class FortifyServiceProvider extends ServiceProvider
 
         RateLimiter::for('login', function (Request $request) {
             Session::put('screen', 'login');
-            $role = $this->getRoleFromEmail($request->email);
+            $user = User::where('email', $request->email)->first();
+            $role = $this->getRoleFromEmail($user);
+            $verified = $this->isVerified($user);
 
             if(!empty($role)) {
                 if($request->login_from == 'frontend' && $role == 'admin') {
@@ -67,6 +69,13 @@ class FortifyServiceProvider extends ServiceProvider
                 }
             }
 
+            if(!$verified) {
+
+                session()->flash('success', 'Email verification mail is sent');
+                $user->sendEmailVerificationNotification();
+                return redirect()->back();
+            }
+
             return Limit::perMinute(5)->by($request->email.$request->ip());
         });
 
@@ -75,8 +84,7 @@ class FortifyServiceProvider extends ServiceProvider
         });
     }
 
-    public function getRoleFromEmail($email) {
-        $user = User::where('email', $email)->first();
+    public function getRoleFromEmail($user) {
 
         if($user && isset($user->roles)) {
             if($user->hasRole('admin')) {
@@ -86,5 +94,15 @@ class FortifyServiceProvider extends ServiceProvider
             }
         }
         return '';
+    }
+
+    public function isVerified($user)
+    {
+        if(empty($user->email_verified_at)) {
+            return false;
+        } else {
+            return true;
+        }
+        
     }
 }

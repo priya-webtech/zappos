@@ -220,7 +220,7 @@
                                                                 <div class="total-item-select">
 
                                                                     @if(Auth::check())
-                                                                         <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['id']}})" name="stockitem" type="number" min="1">
+                                                                         <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$key}})" name="stockitem" type="number" min="1" wire:ignore.self>
                                                                     @else
                                                                          <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['product_id']}}, {{$cart['varientid']}})" name="stockitem" type="number" min="1">
                                                                     @endif

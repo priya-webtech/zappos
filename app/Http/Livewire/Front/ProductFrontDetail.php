@@ -123,7 +123,7 @@ class ProductFrontDetail extends Component
         } else {
             $this->CartItem = session()->get('cart');
         }
-        
+
         $this->emit('getCart');
 
     }
@@ -334,16 +334,18 @@ class ProductFrontDetail extends Component
                     ];
 
                     Cart::create($cart_arr);
+                     $this->getCart();
 
                 } else {
                     Cart::where('id', $exist->id)->update(['stock' => $exist->stock + 1]);
+                     $this->getCart();
                 }
 
             } else {
                 $cart = session()->get('cart');
 
                 // if cart is empty then this the first product
-                if(!$cart) {
+                if(empty($cart)) {
 
                     $cart = [
                             $variationID => [
@@ -367,40 +369,43 @@ class ProductFrontDetail extends Component
                     ];
 
                     session()->put('cart', $cart);
+                     $this->getCart();
 
-                }
-
-                // if cart not empty then check if this product exist then increment quantity
-                if(isset($cart[$variationID]) && $cart[$variationID]['type'] == 'variant') {
+                } else if(isset($cart[$variationID]) && $cart[$variationID]['type'] == 'variant') {
 
                     $cart[$variationID]['stock']++;
 
                     session()->put('cart', $cart);
+                     $this->getCart();
 
 
+
+                } else {
+                     $cart[$variationID] = [
+
+                                        'type' => 'variant',
+
+                                        'product_id' => $this->product->id,
+
+                                        'varientid' => $variant->id,
+
+                                        'price' => $price,
+
+                                        'stock' => 1,
+
+                                        'locationid' => 1,
+
+                                        'product_detail' => $product_detail,
+
+                                        'media_product' => $media_product
+                                    ];
+
+                                    session()->put('cart', $cart);
+                                     $this->getCart();
                 }
 
                 // if item not exist in cart then add to cart with quantity = 1
-                $cart[$variationID] = [
-
-                    'type' => 'variant',
-
-                    'product_id' => $this->product->id,
-
-                    'varientid' => $variant->id,
-
-                    'price' => $price,
-
-                    'stock' => 1,
-
-                    'locationid' => 1,
-
-                    'product_detail' => $product_detail,
-
-                    'media_product' => $media_product
-                ];
-
-                session()->put('cart', $cart);
+               
 
             }  
 
@@ -432,10 +437,12 @@ class ProductFrontDetail extends Component
                         ];
 
                         Cart::create($cart_arr);
+                        $this->getCart();
 
                     } else {
 
                         Cart::where('id', $exist->id)->update(['stock' => $exist->stock + 1]);
+                        $this->getCart();
                     }   
                 } else {
 
@@ -464,39 +471,41 @@ class ProductFrontDetail extends Component
                         ];
 
                         session()->put('cart', $cart);
+                        $this->getCart();
 
-                    }
-
-                    // if cart not empty then check if this product exist then increment quantity
-                    if(isset($cart[$this->product->id])) {
+                    } else if(isset($cart[$this->product->id])) {
 
                         $cart[$this->product->id]['stock']++;
 
                         session()->put('cart', $cart);
+                        $this->getCart();
 
 
+                    } else {
+                        // if item not exist in cart then add to cart with quantity = 1
+                        $cart[$this->product->id] = [
+                            'type' => 'product',
+
+                            'product_id' => $this->product->id,
+
+                            'price' => $price,
+
+                            'stock' => 1,
+
+                            'locationid' => 1,
+
+                            'product_detail' => $product_detail,
+
+                            'media_product' => $media_product
+                        ];
+
+
+
+                        session()->put('cart', $cart);
+                        $this->getCart();
                     }
 
-                    // if item not exist in cart then add to cart with quantity = 1
-                    $cart[$this->product->id] = [
-                        'type' => 'product',
-
-                        'product_id' => $this->product->id,
-
-                        'price' => $price,
-
-                        'stock' => 1,
-
-                        'locationid' => 1,
-
-                        'product_detail' => $product_detail,
-
-                        'media_product' => $media_product
-                    ];
-
-
-
-                    session()->put('cart', $cart);
+                    
 
                 }
 
@@ -504,7 +513,6 @@ class ProductFrontDetail extends Component
             
             }
 
-             $this->getCart();
 
         
 

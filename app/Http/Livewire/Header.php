@@ -27,10 +27,11 @@ class Header extends Component
     public function mount() {
         if (Auth::check()) {
             $this->user_id =  Auth::user()->id;
-            $this->getCart();
+           
             $this->discoutget = Cart::where('user_id', $this->user_id)->first();
 
         }
+         $this->getCart();
        $this->ProductVariant = ProductVariant::all();
        $this->varianttag = VariantTag::All();
 
@@ -45,7 +46,7 @@ class Header extends Component
 
         $this->dispatchBrowserEvent('onCartChanged');
         $this->stockitem = 1;
-        $this->getCart();
+        
         
         $this->getproduct = Product::when($this->filter_product, function ($query, $filter_product) {
 
@@ -108,13 +109,12 @@ class Header extends Component
     public function stockplusminus($cartid, $variantid = null)
     {
 
-
         if($this->CartItem)
         {
 
             if(Auth::check()) {
 
-                Cart::where('id', $cartid)->update(['stock' => $this->CartItem[$cartid]['stock']]);
+                Cart::where('id', $this->CartItem[$cartid]['id'])->update(['stock' => $this->CartItem[$cartid]['stock']]);
 
             } else {
                 $cart = session()->get('cart');
@@ -142,14 +142,7 @@ class Header extends Component
                 }
 
             }
- 
-            
-
-            if(Auth::check())
-            foreach ($this->CartItem as $stock) {
-                Cart::where('id', $stock->id)->update(['stock' => $stock->stock]);
-            }
-             
+            $this->emit('getCart');
         } 
     }
 
@@ -204,6 +197,7 @@ class Header extends Component
         } else {
             $this->CartItem  = session()->get('cart');
         }
+
 
     }
 

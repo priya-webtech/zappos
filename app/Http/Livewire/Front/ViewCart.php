@@ -72,7 +72,7 @@ class ViewCart extends Component
 
             if(Auth::check()) {
 
-                Cart::where('id', $cartid)->update(['stock' => $this->CartItem[$cartid]['stock']]);
+                Cart::where('id', $this->CartItem[$cartid]['id'])->update(['stock' => $this->CartItem[$cartid]['stock']]);
 
             } else {
                 $cart = session()->get('cart');
@@ -100,15 +100,10 @@ class ViewCart extends Component
                 }
 
             }
- 
-            
-
-            if(Auth::check())
-            foreach ($this->CartItem as $stock) {
-                Cart::where('id', $stock->id)->update(['stock' => $stock->stock]);
-            }
              
         } 
+        $this->emit('getCart');
+
     }
     public function UpdateWish($id,$productid){
 
@@ -162,7 +157,7 @@ class ViewCart extends Component
         } else {
             $this->CartItem  = session()->get('cart');
         }
-       
+
     }
 
     public function checkout()
