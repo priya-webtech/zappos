@@ -12,21 +12,27 @@
                 <div class="row">
                     <div class="col-md-4 home-cat-box">
                         <figure><img src="https://m.media-amazon.com/images/G/01/2020/homepage12.7/HOMEPAGE-TRIPTYCH-WOMENS-COATS-OUTERWEAR-500x500_1.jpg"></figure>
-                        <h4 class="h4">Cozy at Home: Clothing Favourites</h4>
-                        <p>Super-soft pieces that look and feel amazing!</p>
-                        <a href="#" class="site-link-btn">Shop Cozy Clothing <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        <div class="home-cat-box-cont">
+                            <h4 class="h4">Cozy at Home: Clothing Favourites</h4>
+                            <p>Super-soft pieces that look and feel amazing!</p>
+                            <a href="#" class="site-link-btn">Shop Cozy Clothing <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
                     </div>
                     <div class="col-md-4 home-cat-box">
                         <figure><img src="https://m.media-amazon.com/images/G/01/2020/homepage12.7/HOMEPAGE-TRIPTYCH-KIDS-COATS-OUTERWEAR-500x500.jpg"></figure>
-                        <h4 class="h4">Cozy at Home: Clothing Favourites</h4>
-                        <p>Super-soft pieces that look and feel amazing!</p>
-                        <a href="#" class="site-link-btn">Shop Cozy Clothing <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        <div class="home-cat-box-cont">
+                            <h4 class="h4">Cozy at Home: Clothing Favourites</h4>
+                            <p>Super-soft pieces that look and feel amazing!</p>
+                            <a href="#" class="site-link-btn">Shop Cozy Clothing <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
                     </div>
                     <div class="col-md-4 home-cat-box">
                         <figure><img src="https://m.media-amazon.com/images/G/01/2020/homepage12.7/HOMEPAGE-TRIPTYCH-MENS-COATS-OUTERWEAR-500x500.jpg"></figure>
-                        <h4 class="h4">Cozy at Home: Clothing Favourites</h4>
-                        <p>Super-soft pieces that look and feel amazing!</p>
-                        <a href="#" class="site-link-btn">Shop Cozy Clothing <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        <div class="home-cat-box-cont">
+                            <h4 class="h4">Cozy at Home: Clothing Favourites</h4>
+                            <p>Super-soft pieces that look and feel amazing!</p>
+                            <a href="#" class="site-link-btn">Shop Cozy Clothing <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -250,6 +250,11 @@ button.signin-close-btn svg {fill: #003953; }
 #sign-in-form a {background-color: transparent; color: #003953; font-size: 14px; font-weight: bold; margin: 10px 0 20px; }
 .sign-up-container button.site-btn {margin-top: 15px; }
 #sign-in-form form {background-color: #e5f1f8; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 0 50px; height: 100%; text-align: center; width: 100%;}
+#sign-in-form .password-filed {width: 100%; position: relative; }
+#sign-in-form .eye-close, #sign-in-form .eye-open {position: absolute; right: 12px; top: 50%; transform: translateY(-50%); margin: 0; }
+#sign-in-form .eye-close button.btn, #sign-in-form .eye-open button.btn {padding: 0; color: #003953; }
+#sign-in-form .eye-close button.btn:focus, #sign-in-form .eye-open button.btn:focus {outline: none !important; box-shadow: none; }
+
 #sign-in-form input {background-color: #ffffff !important; border: none; padding: 11px 15px; margin: 8px 0; width: 100%; border-radius: 5px; font-size: 14px; line-height: 20px; }
 #sign-in-form input:-webkit-autofill, 
 #sign-in-form input:-webkit-autofill:hover,
@@ -293,6 +298,7 @@ button.signin-close-btn svg {fill: #003953; }
 .social-container {margin: 20px 0; }
 .social-container a {border: 1px solid #DDDDDD; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; margin: 0 5px; height: 40px; width: 40px; }
 #sign-in-form .site-btn {padding: 8px 20px 10px; line-height: normal; }
+.mobile-swipe-btn {display: none;}
 #sign-in-form .h2 {font-weight: bold; font-size: 32px; }
 .overlay-right .h2, .overlay-left .h2 {color: #fff; }
 .sign-in-container span, .sign-up-container span {margin-bottom: 10px; }
@@ -957,10 +963,122 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
     .footer-social li {margin-right: 0;}
     #footer .footer-social li a { font-size: 16px; width: 28px; height: 28px;}
     .footer-copyrigh ul li {padding: 0 8px;}
+    .site-modal-inner {max-width: 700px;}
+    #sign-in-form form, .overlay-panel {padding: 0 35px;}
 }
 
 @media only screen and (max-width: 767px) {
+    .container {padding: 0 20px;}
+    .header-mid .row .col-12 {flex-wrap: wrap; }
     .logo {order: 1;}
-    .search-box {order: 3;}
+    header .header-mid .logo img {width: 100%; height: 50px; }
+    .search-box {order: 3; width: 100%;margin-left: 0; margin-top: 12px;}
+    .search-container input {width: 100%; font-size: 14px;padding: 8px 15px;}
     .my-cart {order: 2;}
+    header .header-mid .my-cart button {font-size: 14px; padding: 10px 15px;}
+    header .header-mid .my-cart button svg {width: 18px;}
+    nav.navbar {padding: 0 5px; }
+    #login-btn {margin-right: 0 !important; }
+
+    .banner {padding-bottom: 25; }
+    .banner img {width: 100%; height: 220px; object-fit: cover; object-position: center center; }
+    .home-category-sec {padding: 25px 0 0; }
+    .home-cat-box figure {margin: 0; }
+    .home-cat-box {padding: 0 10px 40px; }
+    .home-cat-box-cont {display: inline-block; width: 100%; background-color: #e5f1f8; padding: 10px 15px 30px; }
+
+    .half-container {padding: 0 20px 35px; }
+    .half-container-sec {padding: 0 0 40px; }
+
+    .full-container {padding: 0 20px !important; }
+    .right-container-sec .row {flex-direction: column-reverse; }
+    .right-container-sec .full-container {padding-right: 0; }
+    .home-product-sec {padding: 0 0 10px; }
+
+    .home-product-sec .cat-product-section {padding: 0; border-radius: 0; box-shadow: none; }
+    .home-product-sec .cat-pd-img {height: 280px;}
+    .cat-pd-col {padding: 40px 7px 10px; display: inline-block; width: 100%; }
+    .cat-pd-content {padding: 30px 15px; background-color: #e5f1f8; }
+
+    #footer .newsletter-col {font-size: 15px;}
+    .page-footer .newsletter-col .h4 {font-size: 18px;}
+
+    .footer-inner {padding: 0;}
+    .footer-inner > .container {padding: 40px 20px 15px; }
+    .page-footer .h4 {font-size: 16px;}
+    .footer-inner .list-unstyled {column-count: 2; margin-bottom: 35px; }
+    #footer .list-unstyled li {padding: 0; }
+    #footer a {font-size: 13px;}
+    .footer-last-col {padding: 0 15px; }
+    .footer-social li {margin-right: 5px; }
+    #footer .footer-social li a {font-size: 17px; width: 32px; height: 32px; }
+
+    .footer-copyrigh {background-color: #e5f1f8; padding: 15px 0 10px; }
+    #footer .footer-copyrigh, #footer .footer-copyrigh a {color: #003953; font-weight: 600;}
+    .footer-copyrigh .container ul {padding: 0; margin-top: 0; display: inline-block; width: 100%; border-top: none; }
+    .footer-copyrigh ul li {width: 50%; float: left;  padding: 1px 0; border: none;}
+    .footer-copyrigh ul li:last-child {width: 100%;}
+    .footer-copyrigh p {font-size: 14px; display: inline-block; margin-bottom: 5px; width: 100%; padding: 10px 0 0; border-top: 1px solid rgb(0 57 83 / 50%); margin-top: 10px; }
+
+    /*************************/
+#sign-in-form .site-modal-middle {
+    overflow: hidden;
+    overflow-y: auto;
+    height: 92%;
+    border-radius: 10px;
+}
+#sign-in-form .container {
+    min-height: 600px;
+    width: 88vw;
+    height: 100%;
+}
+#sign-in-form form, .overlay-panel {
+    padding: 0 8%;
+}
+.overlay-container {
+    display: none;
+}
+#sign-in-form .h2 {
+    font-size: 26px;
+}
+.sign-up-container {
+    transform: translateX(100%);
+    width: 100%;
+}
+.sign-in-container {
+    transform: translateX(0%);
+    width: 100%;
+}
+
+.mobile-sign-up-container .sign-up-container, .container.right-panel-active .sign-up-container{
+    transform: translateX(0%);
+    opacity: 1;
+}
+.mobile-sign-up-container .sign-in-container, .container.right-panel-active .sign-in-container{
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+#sign-in-form .mobile-sign-in-container .sign-in-container {
+    transform: translateX(0%);
+    opacity: 1;
+}
+#sign-in-form .mobile-sign-in-container .sign-up-container {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.mobile-swipe-btn {
+    display: flex;
+    margin: 0;
+    align-items: center;
+    margin-top: 8px;
+    color: #a5a5a5;
+    font-weight: 400;
+    font-size: 14px;
+}
+#sign-in-form .mobile-swipe-btn a {
+    margin: 0 0 0 3px;
+    text-decoration: underline;
+    display: block;
 }

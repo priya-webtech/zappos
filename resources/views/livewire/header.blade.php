@@ -613,7 +613,7 @@ $(document).ready(function(){
                                 @csrf
 
                                 <h2 class="h2">Create Account</h2>
-                                <span>or use your email for registration</span>
+                                <!-- <span>or use your email for registration</span> -->
 
                                 <input type="text" placeholder="First Name" name="first_name" @if(old('first_name')) value="{{old('first_name')}}" @endif />
                                 @if(Session::has('screen') && Session::get('screen') == 'register')
@@ -630,26 +630,29 @@ $(document).ready(function(){
                                 @error('email') <span class="error text-danger">{{ $message }}</span> @enderror
 
                                 @endif
-                                <input type="password" id="login_password" placeholder="Password" name="password" />
-                                <span class="input-group-btn" id="eyeSlash">
-                                   <button class="btn btn-default reveal" onclick="visibility3()" type="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
-                                 </span>
-                                 <span class="input-group-btn" id="eyeShow" style="display: none;">
-                                   <button class="btn btn-default reveal" onclick="visibility3()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                 </span>
-                                <input type="password" placeholder="Re-enter password" id="login_password2" name="password_confirmation" />
-                                <span class="input-group-btn" id="eyeSlash2">
-                                   <button class="btn btn-default reveal" onclick="visibility2()" type="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
-                                 </span>
-                                 <span class="input-group-btn" id="eyeShow2" style="display: none;">
-                                   <button class="btn btn-default reveal" onclick="visibility2()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                 </span>
+                                <div class="password-filed">
+                                    <input type="password" id="login_password" placeholder="Password" name="password" />
+                                    <span class="input-group-btn eye-close" id="eyeSlash">
+                                       <button class="btn btn-default reveal" onclick="visibility3()" type="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                                    </span>
+                                    <span class="input-group-btn eye-open" id="eyeShow" style="display: none;">
+                                       <button class="btn btn-default reveal" onclick="visibility3()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
+                                <div class="password-filed">
+                                    <input type="password" placeholder="Re-enter password" id="login_password2" name="password_confirmation" />
+                                    <span class="input-group-btn eye-close" id="eyeSlash2">
+                                       <button class="btn btn-default reveal" onclick="visibility2()" type="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                                     </span>
+                                    <span class="input-group-btn eye-open" id="eyeShow2" style="display: none;">
+                                        <button class="btn btn-default reveal" onclick="visibility2()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
                                   @if(Session::has('screen') && Session::get('screen') == 'register')
                                  @error('password') <span class="error text-danger">{{ $message }}</span> @enderror
                                  @endif
-                               
-                                <button type="submit" class="site-btn blue-btn">Sign Up</button>
-                                 
+                                <button type="submit" class="site-btn green-btn">Sign Up</button>
+                                <p class="mobile-swipe-btn">Already registered?<a class="signIn-mobile">Sign in</a></p>
                             </form>
                             <div class="signin-bottom-cont">
                                 <p>By signing in, you agree to company name</p>
@@ -664,7 +667,7 @@ $(document).ready(function(){
                             <form action="{{ route('login') }}" method="POST">
                                 @csrf
                                 <h2 class="h2">Sign in</h2>
-                                <span>or use your account</span>
+                                <!-- <span>or use your account</span> -->
                                 
  
 
@@ -673,16 +676,18 @@ $(document).ready(function(){
                                   @endif
                                 <input type="hidden" name="login_from" value="frontend" />
                                 <input type="email" placeholder="Email" name="email" />
+                                <div class="password-filed">
                                 <input type="password" placeholder="Password" id="login_password1" name="password" />
-                                <span class="input-group-btn" id="eyeSlash1">
-                                   <button class="btn btn-default reveal" onclick="visibility4()" type="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
-                                 </span>
-                                 <span class="input-group-btn" id="eyeShow1" style="display: none;">
-                                   <button class="btn btn-default reveal" onclick="visibility4()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                 </span>
+                                    <span class="input-group-btn  eye-close" id="eyeSlash1">
+                                       <button class="btn btn-default reveal" onclick="visibility4()" type="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                                    </span>
+                                    <span class="input-group-btn  eye-open" id="eyeShow1" style="display: none;">
+                                       <button class="btn btn-default reveal" onclick="visibility4()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
                                 <a href="{{ route('password.request.front') }}">Forgot your password?</a>
-
                                 <button type="submit" class="site-btn blue-btn">Sign In</button>
+                                <p class="mobile-swipe-btn">Not registered?<a class="signUp-mobile" href="#">Sign Up</a></p>
                             </form>
                             <div class="signin-bottom-cont">
                                 <p>By signing in, you agree to company name</p>
