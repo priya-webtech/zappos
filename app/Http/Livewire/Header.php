@@ -27,10 +27,11 @@ class Header extends Component
     public function mount() {
         if (Auth::check()) {
             $this->user_id =  Auth::user()->id;
-            $this->getCart();
+           
             $this->discoutget = Cart::where('user_id', $this->user_id)->first();
 
         }
+         $this->getCart();
        $this->ProductVariant = ProductVariant::all();
        $this->varianttag = VariantTag::All();
 
@@ -45,7 +46,7 @@ class Header extends Component
 
         $this->dispatchBrowserEvent('onCartChanged');
         $this->stockitem = 1;
-        $this->getCart();
+        
         
         $this->getproduct = Product::when($this->filter_product, function ($query, $filter_product) {
 
@@ -204,7 +205,7 @@ class Header extends Component
         } else {
             $this->CartItem  = session()->get('cart');
         }
-
+        
     }
 
 }
