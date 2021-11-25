@@ -651,7 +651,7 @@ $(document).ready(function(){
                                   @if(Session::has('screen') && Session::get('screen') == 'register')
                                  @error('password') <span class="error text-danger">{{ $message }}</span> @enderror
                                  @endif
-                                <button type="submit" class="site-btn green-btn">Sign Up</button>
+                                <button type="submit" class="site-btn blue-btn">Sign Up</button>
                                 <p class="mobile-swipe-btn">Already registered?<a class="signIn-mobile">Sign in</a></p>
                             </form>
                             <div class="signin-bottom-cont">
