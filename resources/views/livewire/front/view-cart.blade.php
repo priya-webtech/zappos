@@ -20,12 +20,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; $subtotal3 = 0; $subtotal4 = 0; $subtotal5 = 0; $subtotal6 = 0; @endphp
+                                    @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; $subtotal3 = 0; $subtotal4 = 0; $subtotal5 = 0; $subtotal6 = 0;  $symbol = CurrencySymbol();@endphp
+                                     $symbol = CurrencySymbol();
                                     @if(!empty($CartItem))
                                     @foreach($CartItem as $key => $cart)
                                     <?php 
                                     $detailfetch = allprice($cart['product_id']);
-                                    $symbol = CurrencySymbol();
+                                   
 
 
                                     if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0) 
