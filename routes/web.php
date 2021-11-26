@@ -162,8 +162,6 @@ Route::middleware(['checkRole'])->group(function () {
 
 
             //Front Side
-            
-            Route::get('/collection/{slug?}', Livewire\Front\ProductCategory::class)->name('product-front-category');
            
             Route::get('/add-to-cart', [Livewire\Front\ProductFrontDetail::class, 'addCart'])->name('add-to-cart');
             Route::get('/delete-cart-product', [Livewire\Header::class, 'DeleteCartProduct'])->name('delete-cart-product');
@@ -175,7 +173,7 @@ Route::middleware(['checkRole'])->group(function () {
 
             /*Account*/
             Route::get('/account/favorites/detail', Livewire\Front\WishListDetail::class)->name('favorite-detail');
-            Route::get('/account/viewcart/detail', Livewire\Front\ViewCart::class)->name('view-cart');
+            
             Route::get('/product/review/{id?}', Livewire\Front\ProductReviews::class)->name('product-review');
             Route::post('/product/{slug?}', [Livewire\Front\ProductReviews::class, 'SaveReview'])->name('review-save');
             Route::get('/userdetail', Livewire\Front\Account::class)->name('front-user-detail');
@@ -183,8 +181,21 @@ Route::middleware(['checkRole'])->group(function () {
         });
   
     });
+    Route::get('/collection/{slug?}', Livewire\Front\ProductCategory::class)->name('product-front-category');
     Route::get('/product/{slug?}', Livewire\Front\ProductFrontDetail::class)->name('product-front-detail');
-     Route::get('/varientData', [Livewire\Front\ProductFrontDetail::class, 'fetchPrice'])->name('varientData');
+    Route::get('/varientData', [Livewire\Front\ProductFrontDetail::class, 'fetchPrice'])->name('varientData');
 
+    Route::get('/forgot-password', [Livewire\Front\Auth\Login::class, 'forgotPassword'])->name('password.request.front');
+    Route::post('/forgot-password', [Livewire\Front\Auth\Login::class, 'sendPasswordResetLink'])
+            ->name('password.email.front');
+    Route::get('/reset-password', [Livewire\Front\Auth\Login::class, 'resetPassword'])
+            ->name('password.reset.front');
+    Route::post('/reset-password', [Livewire\Front\Auth\Login::class, 'storeNewPassword'])
+            ->name('password.update.front');
+
+    Route::get('/account/viewcart/detail', Livewire\Front\ViewCart::class)->name('view-cart');
+    
+
+    
 });
 

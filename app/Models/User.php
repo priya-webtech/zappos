@@ -76,4 +76,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function address() {
         return $this->hasMany(CustomerAddress::class,'user_id','id');
     }
+
+    public function routeNotificationFor()
+    {
+        return $this->email;
+    }
 }

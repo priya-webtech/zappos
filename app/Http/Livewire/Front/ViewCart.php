@@ -24,9 +24,9 @@ class ViewCart extends Component
         
         if (Auth::check()) {
             $this->user_id =  Auth::user()->id;
-            $this->getCart();
             $this->discoutget = Cart::with('promocode')->where('user_id', $this->user_id)->first();
         }
+        $this->getCart();
 
        $this->ProductVariant = ProductVariant::all();
        $this->varianttag = VariantTag::All();
@@ -43,28 +43,67 @@ class ViewCart extends Component
         return view('livewire.front.view-cart');
     }
 
-    public function DeleteCartProduct($id)
+    public function DeleteCartProduct($id, $variantid = null)
     {
+
         if (Auth::check()) {
             Cart::find($id)->delete();
-            $this->getCart();
+        } else {
+            $cart = session()->get('cart');
 
-            $this->ProductVariant = ProductVariant::get();
-            $this->varianttag = VariantTag::All();
+            if(isset($cart[$variantid]) && $cart[$variantid]['type'] == 'variant') {
+                unset($cart[$variantid]);
+            }
+
+            if(isset($cart[$id]) && $cart[$id]['type'] == 'product') {
+                unset($cart[$id]);
+            }
+             session()->put('cart', $cart);
         }
+        $this->getCart();
     }
 
 
-    public function stockplusminus($cartid)
+    public function stockplusminus($cartid, $variantid = null)
     {
 
-    	if($this->CartItem)
+        if($this->CartItem)
         {
-            foreach ($this->CartItem as $stock) {
-                Cart::where('id', $stock->id)->update(['stock' => $stock->stock]);
+
+            if(Auth::check()) {
+
+                Cart::where('id', $this->CartItem[$cartid]['id'])->update(['stock' => $this->CartItem[$cartid]['stock']]);
+
+            } else {
+                $cart = session()->get('cart');
+                if(!empty($cart)) {
+
+                    if(!empty($variantid)) {
+
+                        if(isset($cart[$variantid]) && $cart[$variantid]['type'] == 'variant') {
+                            $cart[$variantid]['stock'] = $this->CartItem[$variantid]['stock'];
+                            session()->put('cart', $cart);
+
+                        }
+
+                    } else {
+
+                        if(isset($cart[$cartid])  && $cart[$variantid]['type'] == 'product') {
+
+                            $cart[$cartid]['stock'] = $this->CartItem[$cartid]['stock'];
+                            session()->put('cart', $cart);
+
+                        }
+
+                    }
+                    
+                }
+
             }
              
         } 
+        $this->emit('getCart');
+
     }
     public function UpdateWish($id,$productid){
 
@@ -104,13 +143,27 @@ class ViewCart extends Component
                session()->flash('message', 'Promotional Code Wrong!!!');
             }
 
+        } else {
+            session()->flash('alert', 'You need to login');
         }
     }
     public function getCart()
     {
-        if (Auth::check()) {
-        	$this->user_id =  Auth::user()->id;
-            $this->CartItem =  Cart::with(['media_product', 'product_detail'])->where('user_id',$this->user_id)->get();
+
+         if (Auth::check()) {
+
+            $this->CartItem =  Cart::with(['media_product', 'product_detail'])->where('user_id',Auth::user()->id)->get()->toArray();
+
+        } else {
+            $this->CartItem  = session()->get('cart');
         }
+
+    }
+
+    public function checkout()
+    {
+        if(!Auth::check()) {
+            session()->flash('alert', 'You need to login');
+        } 
     }
 }
