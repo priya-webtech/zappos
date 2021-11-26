@@ -17,7 +17,7 @@
         <div class="footer-inner">
             <div class="container">
                 <div class="row ">
-                    <div class="col-md-3 col-6">
+                    <div class="col-lg-3 col-md-3">
                         <h4 class="h4">Explore Zappos</h4>
                         <ul class="list-unstyled">
                             <li><a href="#">Brands</a></li>
@@ -40,7 +40,7 @@
                             <li><a href="#">Jackets</a></li>
                         </ul>        
                     </div>
-                    <div class="col-md-3 col-6">
+                    <div class="col-lg-3 col-md-3">
                         <div class="col-12 p-0 footer-inner-col">
                             <h4 class="h4">Customer Service</h4>
                             <ul class="list-unstyled">
@@ -60,7 +60,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-2 col-6">
+                    <div class="col-lg-2 col-md-3">
                         <div class="col-12 p-0 footer-inner-col">
                             <h4 class="h4">About Zappos</h4>
                             <ul class="list-unstyled">
@@ -84,7 +84,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-4 col-6 footer-last-col">
+                    <div class="col-lg-4 col-md-3 footer-last-col">
                         <div class="col-12 p-0 footer-inner-col footer-social-col">
                             <h4 class="h4">Connect With Us</h4>
                             <ul class="footer-social">

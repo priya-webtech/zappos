@@ -3,6 +3,27 @@
 			Jasmin Js
 *********************************/
 
+// mobile login form
+
+$(document).ready(function(){
+    if(window.matchMedia("(max-width: 767px)").matches){
+    	$('.signUp-mobile').on('click', function(){
+			$('#sign-in-form .site-modal-middle').removeClass('mobile-sign-in-container');
+			$('#sign-in-form .site-modal-middle').addClass('mobile-sign-up-container');
+    	});
+    	$('.signIn-mobile').on('click', function(){
+    		$('#sign-in-form .site-modal-middle').removeClass('mobile-sign-up-container');
+			$('#sign-in-form .site-modal-middle').addClass('mobile-sign-in-container');
+    	});
+    } else{
+
+    }
+});
+
+
+
+
+
 //set button id on click to hide first modal
 $("#EditName, #ChangeEmail, #ChangePassword").on( "click", function() {
    	$('#LoginAndSecurity').modal('hide');  

@@ -904,7 +904,7 @@
                                 <tr>
                                     <th>order number</th>
                                     <th>date</th>
-                                    <th>Prodoct name</th>
+                                    <th>Product name</th>
                                     <th>quantity</th>
                                     <th>Price</th>
                                     <th>status</th>

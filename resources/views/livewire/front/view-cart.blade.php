@@ -20,12 +20,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; $subtotal3 = 0; $subtotal4 = 0; $subtotal5 = 0; $subtotal6 = 0; @endphp
+                                    @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; $subtotal3 = 0; $subtotal4 = 0; $subtotal5 = 0; $subtotal6 = 0;  $symbol = CurrencySymbol();@endphp
                                     @if(!empty($CartItem))
                                     @foreach($CartItem as $key => $cart)
                                     <?php 
-                                    $detailfetch = allprice($cart->product_id);
-                                    $symbol = CurrencySymbol();
+                                    $detailfetch = allprice($cart['product_id']);
+                                   
 
 
                                     if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0) 
@@ -132,13 +132,13 @@
                                         <td>
                                             <div class="my-cart-pd-details">
                                                 <div class="my-cart-img">
-                                                    <a class="dropdown-header" href="{{ route('product-front-detail', $cart['product_detail'][0]['seo_utl']) }}">
+                                                    <a class="dropdown-header" href="{{ route('product-front-detail', $cart['product_detail']['seo_utl']) }}">
                                                     <img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}"></a>
                                                 </div>
                                                 <div class="my-cart-desc">
                                                     <span>Vans</span>
-                                                    <a href="{{ route('product-front-detail', $cart['product_detail'][0]['seo_utl']) }}">
-                                                    <h6> {{$cart['product_detail'][0]['title']}}</h6>
+                                                    <a href="{{ route('product-front-detail', $cart['product_detail']['seo_utl']) }}">
+                                                    <h6> {{$cart['product_detail']['title']}}</h6>
                                                     </a>
                                                     @include('livewire.front.cartdetail')
                                                 </div>
@@ -147,7 +147,12 @@
                                         <td>
                                             <div class="add-cart-select">               
                                                 <div class="total-item-select">
-                                                        <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['id']}})" name="stockitem" type="number">
+                                                    @if(Auth::check())
+                                                                         <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$key}})" name="stockitem" type="number" min="1" wire:ignore.self>
+                                                                    @else
+                                                                         <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['product_id']}}, {{$cart['varientid']}})" name="stockitem" type="number" min="1" wire:ignore.self>
+                                                                    @endif
+                                                        
                                                 </div>
                                             </div>
                                         </div>
@@ -169,12 +174,18 @@
                                             <div class="viewcart-tbl-btn">
 
                                                 @php
-                                                $result = favorite($cart['product_detail'][0]['id']);
+                                                $result = favorite($cart['product_detail']['id']);
                                                 @endphp
                                                 @if(!empty($result))
                                                 <a class="wish-list {{$result['class']}}" wire:click="UpdateWish({{$result['id']}}, {{$result['product_id']}})"><span>move to</span><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                                                 @endif
-                                                <a class="remove-btn" wire:click.prevent="DeleteCartProduct({{$cart['id']}})"><span>Remove</span> <i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                 @if(Auth::check())
+                                                        <a class="remove-btn" wire:click.prevent="DeleteCartProduct({{$cart['id']}})"><span>Remove</span> <i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                @else
+                                                        <a class="remove-btn" wire:click.prevent="DeleteCartProduct({{$cart['product_id']}}, {{$cart['varientid']}})"><span>Remove</span> <i class="fa fa-trash" aria-hidden="true"></i></a>
+
+                                                @endif
+                                                
                                             </div>
                                         </td>
                                     </tr>
@@ -279,13 +290,16 @@
                     </div>
                     <div class="col-3">
                         <div class="checkout-right">
+
                             <div class="offer-code">
                                 <div class="form-group">
+                                   
                                     <label for="formGroupExampleInput">Have a Promotional Code?</label>
                                     <p class="d-flex" wire:ignore>
                                         <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Promotional Code" wire:model="promotioncode">
                                         <button type="submit" class="site-btn green-btn" wire:click="PromotionalCode">Apply</button>
                                     </p>
+
                                     @if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['type'] == 2)
                                     <a style="color: red;">Apply <b>{{$discoutget['promocode'][0]['discount_value']}}{{$symbol['currency']}}</b> Discount</a>
                                     @endif
@@ -294,20 +308,41 @@
                                     @endif
                                 </div>
                             </div>
+                            
                             <div class="viewcart-checkout">
                                 <form method="post" action="{{ route('add-order') }}" name="form">
                                     @csrf
                                     <div class="vc-inner">
-                                        <p class="cart-summary">Cart Summary (@php echo $CartItem->sum('stock'); @endphp Item)</p>
+                                        <?php 
+
+                                            $stock = 0;
+                                            if($CartItem && !empty($CartItem)) {
+
+                                                foreach ($CartItem as $item) {
+                                                    $stock += $item['stock'];
+                                                }
+                                            }
+                                            $cartCount = $stock;
+
+                                        ?>
+                                        <p class="cart-summary">Cart Summary (@php echo $cartCount; @endphp Item)</p>
                                         <p class="subtotal">subtotal: <span>{{$symbol['currency']}}{{number_format($subtotal,2,".",",")}}</span></p>
                                         <p class="discount-price">discount: <span>-{{$symbol['currency']}}{{number_format($discountrate,2,".",",")}}</span></p>
                                         <p class="total-price">total: <span>{{$symbol['currency']}}{{number_format($total,2,".",",")}}</span></p>
                                     </div>
+                                    @if(Auth::check())
                                     <div class="vc-inner">
                                         <input type="hidden" name="total_price" value="{{$total}}" />
-                                        <button type="submit" class="site-btn green-btn">Proceed to Checkout</button>
+                                            <button type="submit" class="site-btn green-btn">Proceed to Checkout</button>
                                     </div>
+                                    @endif
                                 </form>
+                                @if(!Auth::check())
+                                 <div class="vc-inner">
+                                    <input type="hidden" name="total_price" value="{{$total}}" />
+                                    <button wire:click="checkout()" class="site-btn green-btn">Proceed to Checkout</button>
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>

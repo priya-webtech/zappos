@@ -19,8 +19,11 @@ class CheckRole
     public function handle(Request $request, Closure $next)
     {
 
-
         if(Auth::check()) {
+            if(str_contains($request->url(),'/forgot-password') || str_contains($request->url(),'/reset-password'))
+            {
+                return redirect('/');
+            }
 
             if(!str_contains($request->url(),'/logout'))
             {

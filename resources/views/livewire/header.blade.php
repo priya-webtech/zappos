@@ -1,7 +1,7 @@
 <div>
 <div id="main_model">
     <div class="main-heder">
- 
+         
 
 
         <div class="first-container"></div>
@@ -50,7 +50,16 @@
                                 </div>
                             </div>
                             <?php 
-                            $cartCount = ($CartItem && !empty($CartItem)) ? $CartItem->sum('stock') : 0;
+
+                                $stock = 0;
+                                if($CartItem && !empty($CartItem)) {
+
+                                    foreach ($CartItem as $item) {
+                                        $stock += $item['stock'];
+                                    }
+                                }
+                                $cartCount = $stock;
+
                             ?>
                             <div class="my-cart turn-btn ml-auto" id="my-cart">
                                 <button class="site-btn green-border-btn bg-cart" onclick="document.getElementById('proceed-cart').style.display='block'">
@@ -85,14 +94,14 @@
                                                 @if(!empty($CartItem))
                                                 @foreach($CartItem as $key => $cart)
                                                 <?php 
-                                                $detailfetch = allprice($cart->product_id);
+                                                $detailfetch = allprice($cart['product_id']);
                                                 $symbol = CurrencySymbol();
 
 
                                                 if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0) 
                                                 {
                                                     $decodeproduct = json_decode($discoutget['promocode'][0]['apply_c_p']);
-                                                    if ($discoutget['promocode'][0]['applyto'] == 3 && in_array($cart->product_id, $decodeproduct))
+                                                    if ($discoutget['promocode'][0]['applyto'] == 3 && in_array($cart['product_id'], $decodeproduct))
                                                     {
                                                         if($discoutget['promocode'][0]['type'] == 2){
                                                           
@@ -190,14 +199,16 @@
              
                                                ?>
 
+                                                @if(Auth::check())
                                                 <input name="cartid[]" type="hidden" id="deletecartid" value="{{$cart['id']}}">
+                                                @endif
                                                 <div class="cart-list">
                                                     <div class="product-img">
-                                                        <a class="dropdown-header" href="{{ route('product-front-detail', $cart['product_detail'][0]['seo_utl']) }}"><img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}" alt=""></a>
+                                                        <a class="dropdown-header" href="{{ route('product-front-detail', $cart['product_detail']['seo_utl']) }}"><img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}" alt=""></a>
                                                     </div>
                                                     <div class="product-data">
-                                                        <a href="{{ route('product-front-detail', $cart['product_detail'][0]['seo_utl']) }}">
-                                                        <p class="cart-pd-title">{{$cart['product_detail'][0]['title']}}</p>
+                                                        <a href="{{ route('product-front-detail', $cart['product_detail']['seo_utl']) }}">
+                                                        <p class="cart-pd-title">{{$cart['product_detail']['title']}}</p>
                                                         </a>
                                                         <a class="cart-pd-clear" href="#">Clare Tree</a>
                                                         <div class="product-data-inner">
@@ -207,8 +218,14 @@
                                                             <div class="add-cart-select">
                                                                
                                                                 <div class="total-item-select">
+
+                                                                    @if(Auth::check())
+                                                                         <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$key}})" name="stockitem" type="number" min="1" wire:ignore.self>
+                                                                    @else
+                                                                         <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['product_id']}}, {{$cart['varientid']}})" name="stockitem" type="number" min="1">
+                                                                    @endif
                                                                     
-                                                                        <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['id']}})" name="stockitem" type="number">
+                                                                       
                                                                
                                                                 </div>
                                                             </div>
@@ -234,8 +251,11 @@
                                                         </p>
                                                         @endif
 
-                                                       
-                                                        <a :key="{{$cart['id']}}" wire:click="DeleteCartProduct({{$cart['id']}})"  href="javascript:;">delete</a>
+                                                       @if(Auth::check())
+                                                        <a :key="{{$key}}" wire:click="DeleteCartProduct({{$cart['id']}})"  href="javascript:;">delete</a>
+                                                        @else
+                                                        <a :key="{{$key}}" wire:click="DeleteCartProduct({{$cart['product_id']}}, {{$cart['varientid']}})"  href="javascript:;">delete</a>
+                                                        @endif
                                                     </div>
                                                 </div>
 
@@ -344,7 +364,9 @@
                                             @endif
                                             <a href="{{ route('view-cart') }}" class="site-btn green-btn view-cart-btn">View Cart</a>
                                             <input type="hidden" name="total_price" value="{{$total}}" />
+                                            @if(Auth::check())
                                             <input type="submit" name="checkout" class="site-btn green-btn checkout-btn" value="Proceed to checkout">
+                                            @endif
                                         </div>
                                     </div>
                                     @else
@@ -591,36 +613,46 @@ $(document).ready(function(){
                                 @csrf
 
                                 <h2 class="h2">Create Account</h2>
-                                <span>or use your email for registration</span>
+                                <!-- <span>or use your email for registration</span> -->
 
                                 <input type="text" placeholder="First Name" name="first_name" @if(old('first_name')) value="{{old('first_name')}}" @endif />
-                               
+                                @if(Session::has('screen') && Session::get('screen') == 'register')
                                 @error('first_name') <span class="error text-danger">{{ $message }}</span> @enderror
+                                @endif
                                 
                                 <input type="text" placeholder="Last Name" name="last_name" @if(old('last_name')) value="{{old('first_name')}}" @endif />
+                                @if(Session::has('screen') && Session::get('screen') == 'register')
                                 @error('last_name') <span class="error text-danger">{{ $message }}</span> @enderror
+                                @endif
                                 
                                 <input type="email" placeholder="Email" name="email" @if(old('email')) value="{{old('email')}}" @endif />
-                                 @if(Session::has('screen'))
+                                 @if(Session::has('screen') && Session::get('screen') == 'register')
                                 @error('email') <span class="error text-danger">{{ $message }}</span> @enderror
+
                                 @endif
-                                <input type="password" id="login_password" placeholder="Password" name="password" />
-                                <span class="input-group-btn" id="eyeSlash">
-                                   <button class="btn btn-default reveal" onclick="visibility3()" type="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
-                                 </span>
-                                 <span class="input-group-btn" id="eyeShow" style="display: none;">
-                                   <button class="btn btn-default reveal" onclick="visibility3()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                 </span>
-                                <input type="password" placeholder="Re-enter password" id="login_password2" name="password_confirmation" />
-                                <span class="input-group-btn" id="eyeSlash2">
-                                   <button class="btn btn-default reveal" onclick="visibility2()" type="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
-                                 </span>
-                                 <span class="input-group-btn" id="eyeShow2" style="display: none;">
-                                   <button class="btn btn-default reveal" onclick="visibility2()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                 </span>
+                                <div class="password-filed">
+                                    <input type="password" id="login_password" placeholder="Password" name="password" />
+                                    <span class="input-group-btn eye-close" id="eyeSlash">
+                                       <button class="btn btn-default reveal" onclick="visibility3()" type="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                                    </span>
+                                    <span class="input-group-btn eye-open" id="eyeShow" style="display: none;">
+                                       <button class="btn btn-default reveal" onclick="visibility3()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
+                                <div class="password-filed">
+                                    <input type="password" placeholder="Re-enter password" id="login_password2" name="password_confirmation" />
+                                    <span class="input-group-btn eye-close" id="eyeSlash2">
+                                       <button class="btn btn-default reveal" onclick="visibility2()" type="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                                     </span>
+                                    <span class="input-group-btn eye-open" id="eyeShow2" style="display: none;">
+                                        <button class="btn btn-default reveal" onclick="visibility2()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
+                                  @if(Session::has('screen') && Session::get('screen') == 'register')
                                  @error('password') <span class="error text-danger">{{ $message }}</span> @enderror
-                               
+                                 @endif
                                 <button type="submit" class="site-btn blue-btn">Sign Up</button>
+                                <p class="mobile-swipe-btn">Already registered?<a class="signIn-mobile">Sign in</a></p>
                             </form>
                             <div class="signin-bottom-cont">
                                 <p>By signing in, you agree to company name</p>
@@ -635,21 +667,27 @@ $(document).ready(function(){
                             <form action="{{ route('login') }}" method="POST">
                                 @csrf
                                 <h2 class="h2">Sign in</h2>
-                                <span>or use your account</span>
-                                  @if(!Session::has('screen'))
+                                <!-- <span>or use your account</span> -->
+                                
+ 
+
+                                  @if(Session::has('screen') && Session::get('screen') == 'login')
                                    @error('email') <span class="error text-danger">{{ $message }}</span> @enderror
                                   @endif
                                 <input type="hidden" name="login_from" value="frontend" />
                                 <input type="email" placeholder="Email" name="email" />
+                                <div class="password-filed">
                                 <input type="password" placeholder="Password" id="login_password1" name="password" />
-                                <span class="input-group-btn" id="eyeSlash1">
-                                   <button class="btn btn-default reveal" onclick="visibility4()" type="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
-                                 </span>
-                                 <span class="input-group-btn" id="eyeShow1" style="display: none;">
-                                   <button class="btn btn-default reveal" onclick="visibility4()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                 </span>
-                                <a href="{{ route('password.request') }}">Forgot your password?</a>
+                                    <span class="input-group-btn  eye-close" id="eyeSlash1">
+                                       <button class="btn btn-default reveal" onclick="visibility4()" type="button"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                                    </span>
+                                    <span class="input-group-btn  eye-open" id="eyeShow1" style="display: none;">
+                                       <button class="btn btn-default reveal" onclick="visibility4()" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
+                                <a href="{{ route('password.request.front') }}">Forgot your password?</a>
                                 <button type="submit" class="site-btn blue-btn">Sign In</button>
+                                <p class="mobile-swipe-btn">Not registered?<a class="signUp-mobile" href="#">Sign Up</a></p>
                             </form>
                             <div class="signin-bottom-cont">
                                 <p>By signing in, you agree to company name</p>
@@ -719,19 +757,28 @@ function visibility4() {
   }
 }
 
-@if (count($errors) > 0)
-    $('#sign-in-form').css('display', 'block');
 
-    @if(Session::has('screen'))
+    @if(Session::has('screen') && Session::get('screen') == 'register' && count($errors) > 0)
+        $('#sign-in-form').css('display', 'block');
+
         $('#container').addClass("right-panel-active");
-        <?php Session::forget('screen') ?>
-    @else
+        @php
+            Illuminate\Support\Facades\Session::forget('screen');
+        @endphp
+    @endif
+    @if(Session::has('screen') && Session::get('screen') == 'login' && count($errors) > 0)
+        $('#sign-in-form').css('display', 'block');
+
         $('#container').addClass("left-panel-active");
+        @php
+            Illuminate\Support\Facades\Session::forget('screen');
+        @endphp
     @endif
 
-@endif
 </script>
+
 </div>
+
 
 </div>
 
@@ -740,5 +787,6 @@ function visibility4() {
     evt.preventDefault();
 });
 </script>
+
 
 
