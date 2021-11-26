@@ -48,6 +48,7 @@ Route::middleware(['checkRole'])->group(function () {
             Route::get('/admin/create-role', Livewire\Role\CreateRole::class)->name('create-role');
             Route::get('/admin/update-role', Livewire\Role\UpdateRole::class)->name('update-role');
             Route::get('/admin/role-permission', Livewire\RolePermission\ManageRolePermission::class)->name('role-permission');
+            Route::post('/admin/role-permission/store', [Livewire\RolePermission\CreateRolePermission::class, 'Permissionsave'])->name('Permissionsave.store');
             Route::get('/admin/create-role-permission', Livewire\RolePermission\CreateRolePermission::class)->name('create-role-permission');
             Route::get('/admin/update-role-permission', Livewire\RolePermission\UpdateRolePermission::class)->name('update-role-permission');
             
@@ -162,8 +163,6 @@ Route::middleware(['checkRole'])->group(function () {
 
 
             //Front Side
-            
-            Route::get('/collection/{slug?}', Livewire\Front\ProductCategory::class)->name('product-front-category');
            
             Route::get('/add-to-cart', [Livewire\Front\ProductFrontDetail::class, 'addCart'])->name('add-to-cart');
             Route::get('/delete-cart-product', [Livewire\Header::class, 'DeleteCartProduct'])->name('delete-cart-product');
@@ -183,6 +182,7 @@ Route::middleware(['checkRole'])->group(function () {
         });
   
     });
+    Route::get('/collection/{slug?}', Livewire\Front\ProductCategory::class)->name('product-front-category');
     Route::get('/product/{slug?}', Livewire\Front\ProductFrontDetail::class)->name('product-front-detail');
     Route::get('/varientData', [Livewire\Front\ProductFrontDetail::class, 'fetchPrice'])->name('varientData');
 

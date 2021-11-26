@@ -143,7 +143,7 @@
                                     @endphp
                                     @if(!empty($priceres))
                                        
-                                        <div class="pd-all-price offer-price ">
+                                        <div class="pd-all-price offer-price "  wire:ignore>
                                             <h2 class="h2 @if(!empty($priceres['label'])) {{$priceres['label']}} @endif" id="getprice"><sup>{{$symbol['currency']}}</sup><span>   {{number_format($priceres['price'],2,'.',',')}}</span></h2>
                                             @if(!empty($priceres['selling_price']))
                                             <span class="pd-original-price"><s>{{number_format($priceres['selling_price'],2,'.',',')}}</s></span>
@@ -152,7 +152,7 @@
 
                                     @endif
                                      @if(!empty($result))
-                                        <label class="free-shiping-tag"><form><i class="fa fa-truck" aria-hidden="true"></i>{{$result['label']}} {{$result['shipprice']}}</form></label>
+                                        <form><label class="free-shiping-tag"><i class="fa fa-truck" aria-hidden="true"></i>{{$result['label']}} {{$result['shipprice']}}</form></label>
                                         @endif
                                 </div>
 
@@ -174,14 +174,14 @@
 
                                             <label>{{$varianttag[$row->varient1][0]['name']}}</label>
 
-                                            <select name="attribute1"   class="form-control varition-change" id="varient1"  wire:ignore>
+                                            <select name="attribute1"   class="form-control varition-change" id="varient1"  >
 
                                                 <option value="">--Select Option--</option>
                                                 @foreach($product->variants->unique('attribute1') as $row)
 
                                                     @if($row->attribute1 != "")
 
-                                                    <option wire:key="attr1_{{ $loop->index }}" wire:ignore>{{$row->attribute1}}</option> 
+                                                    <option wire:key="attr1_{{ $loop->index }}" wire:ignore.self>{{$row->attribute1}}</option> 
 
                                                     @endif 
 
@@ -265,7 +265,7 @@
 
                                 <div class="pd-btn-group">
 
-                                    <button class="site-btn green-btn add-cart" id="variant_id" value="@if(!empty($row->id)){{$row->id}}@endif" wire:click="addCart($event.target.value)">Add to Cart</button>
+                                    <button class="site-btn green-btn add-cart" id="variant_id" wire:ignore.self value="@if(!empty($row->id)){{$row->id}}@endif" wire:click="addCart($event.target.value)">Add to Cart</button>
 
 
 

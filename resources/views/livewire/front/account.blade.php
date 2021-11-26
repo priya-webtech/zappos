@@ -33,6 +33,26 @@
 
             </div>
 
+        @endif  
+        @if (Session::has('add_bill'))
+            <div class="alert alert-success text-center">
+
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+
+                <p>{{ Session::get('add_bill') }}</p>
+
+            </div>
+        @endif      
+        @if (Session::has('add_shipp'))
+
+            <div class="alert alert-success text-center">
+
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+
+                <p>{{ Session::get('add_shipp') }}</p>
+
+            </div>
+
         @endif
         <div class="primary-acc-info">
             <div class="container">
@@ -58,7 +78,9 @@
                             <div class="acc-info-btn">
                                 <button type="button" class="site-link-btn" data-toggle="modal" data-target="#AddNewShippingAddress">ADD A NEW SHIPPING ADDRESS <i class="fa fa-angle-right" aria-hidden="true"></i></button>
                             </div>
-                            <div class="modal fade" id="ShowAllShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore>
+
+                            
+                            <div class="modal fade" id="ShowAllShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header proceed-cart-head ">
@@ -91,7 +113,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="sp-add-edit-btn">
-                                                    <button type="button" class="btn site-btn blue-border-btn" data-toggle="modal" data-target="#editShippingAddress" wire:click="shippingedit({{$address['id']}})">Edit</button>
+                                                    <button type="button" class="btn site-btn blue-border-btn" data-toggle="modal" data-target="#editShippingAddress" wire:click="shippingedit({{$address['id']}})" wire:ignore.self>Edit</button>
 
                                                 </div>
                                             </div>
@@ -123,6 +145,9 @@
                                         </div>
                                         <div class="modal-body">
                                             <form >
+
+                                                <input type="hidden" class="form-control" id="FullName" wire:model="shippingaddressvalue" aria-describedby="emailHelp" placeholder="First Name" wire:ignore>
+
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="form-group">
@@ -209,7 +234,7 @@
 
                                         @endif
                                         <div class="modal-footer">
-                                            <button type="button" class="site-btn blue-btn" style="border-color: red; background-color: white; color: red;" wire:click.prevent="deleteship({{$addressid}})" wire:ignore.self data-dismiss="modal">Delete</button>
+                                            <button type="button" class="site-btn blue-btn" style="border-color: red; background-color: white; color: red;" wire:click.prevent="deleteship({{$addressid}})" data-dismiss="modal">Delete</button>
                                             <button type="button" class="site-btn blue-btn" data-dismiss="modal" data-dismiss="modal">Cancel</button>
                                             <button type="button" class="site-btn blue-btn" wire:ignore.self wire:click.prevent="update({{$addressid}})">Save</button>
                                         </div>
@@ -333,17 +358,6 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        @if (Session::has('add_shipp'))
-
-                                            <div class="alert alert-success text-center">
-
-                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-
-                                                <p>{{ Session::get('add_shipp') }}</p>
-
-                                            </div>
-
-                                        @endif
                                         <div class="modal-footer">
 
                                             <button type="button" class="btn site-btn green-btn" data-dismiss="modal">Cancel</button>
@@ -357,21 +371,15 @@
                     <div class="col-md-4 acc-info-col">
                         <div class="acc-info-box">
                             <h4 class="h4">billing address</h4>
-                            @if(count($customer_billing['address']) > 0)
-                            <div class="sp-add-details sp-details-box">
-                                <p>
-                                    <label>Name:</label>
-                                    <span>{{$customer_billing['address'][0]['first_name']}}</span>
-                                </p>
-                                <p>
-                                    <label>Address:</label>
-                                    <span>{{$customer_billing['address'][0]['address']}}, {{$customer_billing['address'][0]['apartment']}}, {{$customer_billing['address'][0]['postal_code']}}, {{$customer_billing['address'][0]['city']}}, {{$customer_billing['address'][0]['country']}}. </span>
-                                </p>
+                            @if(count($billing_address['address']) > 0)
+                            <div class="available-sp-add">
+
+                                <p>{{count($billing_address['address'])}} Address Available</p>
+                                <button type="button" class="site-btn blue-btn" data-toggle="modal" data-target="#ShowAllbillingAddress">Show All</button>
                             </div>
                             @else
-                              <p class="red-color">No billing address available</p>
+                             <p class="red-color">No billing address available</p>
                             @endif
-
                             
                             <div class="billing-address">
 
@@ -379,20 +387,170 @@
                             <div class="acc-info-btn">
                                 <button type="button" class="site-link-btn" data-toggle="modal" data-target="#AddBillingAddress">ADD A billing address <i class="fa fa-angle-right" aria-hidden="true"></i></button>
                             </div>
-                            <div class="modal fade" id="AddBillingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+                            <div class="modal fade" id="ShowAllbillingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+                                <div class="modal-dialog alog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header proceed-cart-head ">
+                                            <h4 class="h4 modal-title" id="exampleModalLabel">Edit Billing Address</h4>
+                                            <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">
+                                                <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                                                    <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+                                                </svg>
+                                            </span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            @if($billing_address['address'])
+                                            @foreach($billing_address['address'] as $address)
+                                            <div class="sp-add-list">
+                                                <div class="sp-add-details">
+                                                    <p>
+                                                        <label>Name:</label>
+                                                        <span>{{$address['first_name']}} {{$address['last_name']}}</span>
+                                                    </p>
+                                                    <p>
+                                                        <label>Address:</label>
+                                                        <span>{{$address['address']}}, {{$address['apartment']}}, {{$address['postal_code']}}, {{$address['city']}}, {{$address['country']}}. </span>
+                                                    </p>
+                                                    <p>
+                                                        <label>Phone:</label>
+
+                                                        <span>{{$address['mobile_no']}}</span>
+                                                    </p>
+                                                </div>
+                                                <div class="sp-add-edit-btn">
+                                                    <button type="button" class="btn site-btn blue-border-btn" data-toggle="modal" data-target="#editbillingAddress" wire:click="shippingedit({{$address['id']}})" >Edit</button>
+
+                                                </div>
+                                            </div>
+
+                                            @endforeach
+                                            @else
+                                            <p>No address available</p>
+                                            @endif
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn site-btn green-btn" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @if($updateMode)
+                            <div class="modal" id="editbillingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
-                                        @if (Session::has('add_bill'))
+                                        <div class="modal-header proceed-cart-head">
+                                            <h4 class="h4 modal-title" id="exampleModalLabel">Edit Address</h4>
+                                            <button type="button" class="close modal-close-btn" data-dismiss="modal" onclick="document.getElementById('ShowAllShippingAddress').style.display='none'" aria-label="Close">
+                                            <span aria-hidden="true">
+                                                <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                                                    <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+                                                </svg>
+                                            </span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form >
+
+                                                 <input type="hidden" class="form-control" id="FullName" wire:model="billingaddressvalue" aria-describedby="emailHelp" placeholder="First Name" wire:ignore.self>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="FullName">First Name</label>
+                                                            <input type="text" class="form-control" id="FullName" wire:model="editaddress.first_name" aria-describedby="emailHelp" placeholder="First Name" wire:ignore.self>
+                                                            @error('editaddress.first_name') <span class="error">{{ $message }}</span> @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="FullName">Last Name</label>
+                                                            <input type="text" wire:model="editaddress.last_name" class="form-control" id="FullName" aria-describedby="emailHelp" placeholder="Last Name" required wire:ignore.self>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row street-unit-row">
+                                                    <div class="form-group">
+                                                        <label for="primaryVoiceNumber">Company Name</label>
+                                                        <input type="text" wire:model="editaddress.company" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Company Name" required wire:ignore.self>
+                                                    </div>
+                                                </div>
+                                                <div class="row street-unit-row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="postalCode">Street Name</label>
+                                                            <input type="text" wire:model="editaddress.address" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="Street Name" required wire:ignore.self>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="primaryVoiceNumber">Unit Number</label>
+                                                            <input type="number" wire:model="editaddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" wire:ignore.self required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="postalCode">Zip</label>
+                                                            <input type="number" wire:model="editaddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" wire:ignore.self required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="City">City</label>
+                                                            <input type="text" wire:model="editaddress.city" class="form-control" id="City" aria-describedby="emailHelp" placeholder="Enter City" wire:ignore.self requireds>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="Country">Country</label>
+                                                            <select class="form-control" id="Country" wire:ignore.self wire:model="editaddress.country" required>
+                                                                <option value="">-- Select Country --</option>
+                                                                @foreach($countries as $country)
+                                                                    <option value="{{$country->name}}">{{$country->name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="primaryVoiceNumber">Phone</label>
+                                                            <input type="number" wire:ignore.self wire:model="editaddress.mobile_no" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="123-456-7890" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" wire:ignore.self id="defaultAddress" wire:model="editaddress.address_type">
+                                                    <label class="form-check-label" for="defaultAddress">Make this my primary billing address</label>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        @if (Session::has('editship'))
 
                                             <div class="alert alert-success text-center">
 
                                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 
-                                                <p>{{ Session::get('add_bill') }}</p>
+                                                <p>{{ Session::get('editship') }}</p>
 
                                             </div>
 
                                         @endif
+                                        <div class="modal-footer">
+                                            <button type="button" class="site-btn blue-btn" style="border-color: red; background-color: white; color: red;" wire:click.prevent="deleteship({{$addressid}})" data-dismiss="modal">Delete</button>
+                                            <button type="button" class="site-btn blue-btn" data-dismiss="modal" data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="site-btn blue-btn" wire:ignore.self wire:click.prevent="acountupdate({{$addressid}})">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                            <div class="modal fade" id="AddBillingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore>
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
                                         <div class="modal-header proceed-cart-head ">
                                             <h4 class="h4 modal-title" id="exampleModalLabel">Add New billing address</h4>
                                             <button type="button" class="close modal-close-btn" data-dismiss="modal" aria-label="Close">
@@ -504,15 +662,10 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <!-- <div class="modal-body second-modal-body">
-                                            <h3 class="h3">Please Choose a Billing Address</h3>
-                                            <button type="button" class="btn site-btn">Add New Address</button>
-                                            <p>Please add a billing or shipping address before you add a new payment method.</p>
-                                        </div> -->
                                         <div class="modal-footer" wire:ignore>
 
                                             <button type="button" class="site-btn blue-btn" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="site-btn blue-btn" wire:ignore.self wire:click.prevent="SaveBilling()">Save</button>
+                                            <button type="button" class="site-btn blue-btn" wire:click.prevent="SaveBilling()">Save</button>
 
                                         </div>
                                     </div>
@@ -817,8 +970,20 @@
         </div>
     </x-customer-layout>
     <script type="text/javascript">
+        window.livewire.on('AddBillingAddresshide', () => {
+             $('#AddBillingAddress').modal('hide');
+        });
+        window.livewire.on('deletebillingconfirm', () => {
+             $('#ShowAllbillingAddress').modal('hide');
+        });
+        window.livewire.on('deleteconfirm', () => {
+             $('#ShowAllShippingAddress').modal('hide');
+        });
         window.livewire.on('userStore', () => {
             $('#editShippingAddress').modal('hide');
+        });
+        window.livewire.on('AddNewShippingAddresshide', () => {
+             $('#AddNewShippingAddress').modal('hide');
         });
     </script>
 </div>
