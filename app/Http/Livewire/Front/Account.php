@@ -331,8 +331,6 @@ class Account extends Component
      
     public function deleteship($addid)
     {   
-
-        dd($addid);
        $deleteRecord = CustomerAddress::find($addid)->delete();
        if($deleteRecord){
         $this->ManageUser();
