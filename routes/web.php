@@ -162,8 +162,6 @@ Route::middleware(['checkRole'])->group(function () {
 
 
             //Front Side
-            
-            Route::get('/collection/{slug?}', Livewire\Front\ProductCategory::class)->name('product-front-category');
            
             Route::get('/add-to-cart', [Livewire\Front\ProductFrontDetail::class, 'addCart'])->name('add-to-cart');
             Route::get('/delete-cart-product', [Livewire\Header::class, 'DeleteCartProduct'])->name('delete-cart-product');
@@ -183,6 +181,7 @@ Route::middleware(['checkRole'])->group(function () {
         });
   
     });
+    Route::get('/collection/{slug?}', Livewire\Front\ProductCategory::class)->name('product-front-category');
     Route::get('/product/{slug?}', Livewire\Front\ProductFrontDetail::class)->name('product-front-detail');
     Route::get('/varientData', [Livewire\Front\ProductFrontDetail::class, 'fetchPrice'])->name('varientData');
 
