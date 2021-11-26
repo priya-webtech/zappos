@@ -130,7 +130,7 @@
                                 </div>
                             </div>
                             @if($updateMode)
-                            <div class="modal" id="editShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore>
+                            <div class="modal" id="editShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header proceed-cart-head">
@@ -234,7 +234,7 @@
 
                                         @endif
                                         <div class="modal-footer">
-                                            <button type="button" class="site-btn blue-btn" style="border-color: red; background-color: white; color: red;" wire:click.prevent="deleteship({{$addressid}})" wire:ignore.self data-dismiss="modal">Delete</button>
+                                            <button type="button" class="site-btn blue-btn" style="border-color: red; background-color: white; color: red;" wire:click.prevent="deleteship({{$addressid}})" data-dismiss="modal">Delete</button>
                                             <button type="button" class="site-btn blue-btn" data-dismiss="modal" data-dismiss="modal">Cancel</button>
                                             <button type="button" class="site-btn blue-btn" wire:ignore.self wire:click.prevent="update({{$addressid}})">Save</button>
                                         </div>
@@ -540,7 +540,7 @@
 
                                         @endif
                                         <div class="modal-footer">
-                                            <button type="button" class="site-btn blue-btn" style="border-color: red; background-color: white; color: red;" wire:click.prevent="deleteship({{$addressid}})" wire:ignore.self data-dismiss="modal">Delete</button>
+                                            <button type="button" class="site-btn blue-btn" style="border-color: red; background-color: white; color: red;" wire:click.prevent="deleteship({{$addressid}})" data-dismiss="modal">Delete</button>
                                             <button type="button" class="site-btn blue-btn" data-dismiss="modal" data-dismiss="modal">Cancel</button>
                                             <button type="button" class="site-btn blue-btn" wire:ignore.self wire:click.prevent="acountupdate({{$addressid}})">Save</button>
                                         </div>
