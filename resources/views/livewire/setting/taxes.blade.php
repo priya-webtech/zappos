@@ -68,7 +68,31 @@
                                     </div>
                                 </form>
                             </div>
-                            <!-- <div class="sales-channels-list">
+                            <div class="sales-channels-list">
+                                <div class="sales-channels-list-img">
+                                    <img src="http://127.0.0.1:8000/assets/images/Flag_of_the_Netherlands.png">
+                                </div>
+                                <div class="sales-channels-title">
+                                    <h3 class="fs-14 fw-4 mb-0">Netherlands</h3>    
+                                </div>
+                                <div class="sales-channels-btn-grp">
+                                    <span class="tag taxes-tag yellow">collecting</span>
+                                    <button class="secondary fw-6">Manage</button>
+                                </div>
+                            </div>
+                            <div class="sales-channels-list">
+                                <div class="sales-channels-list-img">
+                                    <img src="https://cdn.shopify.com/shopifycloud/web/assets/v1/1ae10ee3926d9bbebd5cd1fec685e91a.svg">
+                                </div>
+                                <div class="sales-channels-title">
+                                    <h3 class="fs-14 fw-4 mb-0">India</h3>    
+                                </div>
+                                <div class="sales-channels-btn-grp">
+                                    <span class="tag taxes-tag blue">collecting</span>
+                                    <button class="secondary fw-6">Manage</button>
+                                </div>
+                            </div>
+                            <div class="sales-channels-list">
                                 <div class="sales-channels-list-img">
                                     <img src="https://cdn.shopify.com/shopifycloud/web/assets/v1/e3ecd16972ae5480aa8bbb8e30a5abaa.svg">
                                 </div>
@@ -79,7 +103,7 @@
                                     <span class="tag taxes-tag grey">Not collecting</span>
                                     <button class="secondary fw-6">Set up</button>
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="sales-channels-btn-grp card-grey-bg p-3">
                                 <p class="mb-0">These regions are from your <a class="blue-color td-underline" href="#">shipping profiles.</a> To add a region, edit your shipping settings.</p>
                             </div>
