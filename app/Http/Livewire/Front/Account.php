@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Hash;
 
 class Account extends Component
 {
-	protected $listeners = ['ManageUser'];
+	protected $listeners = ['mount'];
 	public $user_id,$editupdate,$customer,$Taxes,$UserDetail,$email,$reemail,$password,$repassword,$newpassword,$currpassword,$countries,$first_name,$last_name,$city,$address,$apartment,$company,$country,$postal_code,$mobile_no,$address_type,$order,$OrderItem,$EditShippingAddress,$editaddress,$addressid;
 
     public $bfirst_name,$blast_name,$bcity,$baddress,$bapartment,$bcompany,$bcountry,$bpostal_code,$bmobile_no,$baddress_type,$customer_billing,$billing_address,$billingaddressvalue = 'billingaddress',$shippingaddressvalue ='shippingaddress';
@@ -57,7 +57,7 @@ class Account extends Component
 	}
     public function render()
     {
-         $this->ManageUser();
+      
         return view('livewire.front.account');
     }
 
@@ -92,6 +92,7 @@ class Account extends Component
 
 
     }
+
     public function SaveShipping()
     {
 
@@ -150,7 +151,7 @@ class Account extends Component
         $this->emit('AddNewShippingAddresshide');
         session()->flash('add_shipp', 'shipping Address Added !!');
 
-         $this->ManageUser();
+         $this->mount();
         
     }
 
@@ -209,18 +210,20 @@ class Account extends Component
                 ];
 
         CustomerAddress::create($bill_arr);
-
+        $this->mount();
         $this->emit('AddBillingAddresshide'); // Close modal "deleteconfirm"
 
         session()->flash('add_bill', 'Billing Address Added !!');
 
-         $this->ManageUser();
+         
     }
 
     public function shippingedit($id){
+
         $this->updateMode = true;
         $this->editaddress = CustomerAddress::find($id);
         $this->addressid = $this->editaddress->id;
+
     }
 
     public function acountupdate($id)
@@ -270,10 +273,9 @@ class Account extends Component
             
             'address_type' => $shippingAddress,
         ]);
-
+        $this->mount();
         session()->flash('editship', 'Update Record !!');
 
-         $this->ManageUser();
     }
 
     public function update($id)
@@ -323,20 +325,17 @@ class Account extends Component
             
             'address_type' => $shippingAddress,
         ]);
-
+        $this->mount();
         session()->flash('editship', 'Update Record !!');
 
-         $this->ManageUser();
     }
      
     public function deleteship($addid)
     {   
        $deleteRecord = CustomerAddress::find($addid)->delete();
        if($deleteRecord){
-        $this->ManageUser();
-        $this->emit('deleteconfirm'); // Close modal "deleteconfirm"
-        $this->emit('deletebillingconfirm'); // Close modal "deletebillingconfirm"
-        session()->flash('deleteshipmessage', 'Record Deleted !!');
+        $this->mount();
+        return redirect(route('front-user-detail'))->with('deleteshipmessage', 'Record Deleted !!');
        }
     }
 
