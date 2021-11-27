@@ -151,6 +151,7 @@ nav.navbar {padding:0 15px; }
 .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link.active, .navbar-nav .nav-item a:hover {color: #000 !important; text-decoration: none;}
 .navbar-light .navbar-nav li:hover .dropdown-toggle::after {transform: rotate(180deg); }
 #login-btn {color: #003953; font-weight: 600; font-size: 15px; text-decoration: none; }
+#login-btn .mb-login-icon {display: none; }
 .signin-inner{max-width: 911px; }
 .cross-container{width: 18px; margin-left: auto; right: 0; cursor: pointer; }
 .sign-in-form .top{border-bottom: 1px solid grey; }
@@ -221,7 +222,7 @@ nav.navbar {padding:0 15px; }
 .cart-footer {padding: 15px; display: flex; flex-direction: column; align-items: flex-end; background-color: #ffffff; box-shadow: 0 0 4px 1px rgb(0 0 0 / 8%); }
 .cart-footer p {margin-bottom: 10px; color: #035d59; font-size: 14px; font-weight: 600; }
 .cart-footer-btn {display: flex; margin: 0 -5px; }
-.cart-footer-btn input, .cart-footer-btn a {padding: 8px 20px; font-weight: 600; font-size: 14px; margin: 0 5px; }
+.cart-footer-btn button, .cart-footer-btn a {padding: 8px 20px; font-weight: 600; font-size: 14px; margin: 0 5px; }
 
 .product-data .cart-pd-title {color: #003953; font-size: 16px; font-weight: 600; }
 .product-data .cart-pd-clear {color: #035d59; margin: 3px 0 10px; display: inline-block; font-weight: 600; }
@@ -230,7 +231,7 @@ nav.navbar {padding:0 15px; }
 .proceed-cart .wish-list i {margin-left: 6px; }
 
 .empty-cart-modal {padding: 20px; text-align: center; font-size: 14px; color: #202223; font-weight: 400; }
-.empty-cart-modal img {margin-top: 15px; }
+.empty-cart-modal img {margin-top: 15px; width: 100%;}
 /*.empty-cart-modal ul {display: flex; justify-content: space-between; margin-bottom: 30px; }
 .empty-cart-modal ul a {color: #003953; font-weight: 600; }*/
 
@@ -238,7 +239,7 @@ nav.navbar {padding:0 15px; }
 /*Sign In modal*/
 .site-modal {display: none; position: fixed; left: 0; right: 0; overflow: hidden; background-color: rgb(0 0 0 / 65%); top: 0; bottom: 0; z-index: 9;}
 .site-modal-main {width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-.site-modal-inner {max-width: 800px;font-weight: 300; font-size: 15px; margin: 0 auto; background: #003953; border-radius: 10px; position: relative; box-shadow: 0 0px 10px 5px rgb(255 255 255 / 15%); color: #fff; }
+.site-modal-inner {max-width: 768px; font-weight: 300; font-size: 15px; margin: 0 auto; border-radius: 10px; position: relative; box-shadow: 0 0px 10px 5px rgb(255 255 255 / 15%); color: #fff; width: 100%; height: 90%; display: flex; align-content: center; justify-content: center; }
 .site-modal-head {display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background: #fff; }
 .site-modal-head .h4 {color: #003953; margin: 0; }
 #sign-in-form .site-modal-middle .row {box-sizing: border-box; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-flex-wrap: wrap; -ms-flex-wrap: wrap; flex-wrap: wrap; }
@@ -259,11 +260,9 @@ button.signin-close-btn svg {fill: #003953; }
 #sign-in-form input:-webkit-autofill, 
 #sign-in-form input:-webkit-autofill:hover,
 #sign-in-form input:-webkit-autofill:focus,
-#sign-in-form input:-webkit-autofill:active  {
-     -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
-}
+#sign-in-form input:-webkit-autofill:active  {-webkit-box-shadow: 0 0 0px 1000px #ffffff inset; }
 
-#sign-in-form .container {background-color: #e5f1f8; border-radius: 10px; box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); position: relative; overflow: hidden; width: 768px; max-width: 100%; min-height: 90%;}
+#sign-in-form .container {background-color: #e5f1f8; border-radius: 10px; box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); overflow: hidden; width: 768px; max-width: 100%; height: 100%; padding: 0; position: relative; }
 #sign-in-form .form-container {position: absolute; top: 0; height: 100%; transition: all 0.6s ease-in-out; display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
 .sign-in-container {left: 0; width: 50%; z-index: 2; color: #003953; font-weight: 500; }
 .container.right-panel-active .sign-in-container {transform: translateX(100%); }
@@ -873,7 +872,7 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 	  Favorite List page css
 ********************************/
 .favorite-list-sec {padding: 60px 0; }
-.favorite-list-sec .h1 {font-size: 36px; margin-bottom: 30px ;}
+.favorite-list-sec .h1 {font-size: 36px; margin-bottom: 30px; font-weight: bold;}
 .favorite-list-sec .multi-item-content { margin-top: 0;}
 .favorite-list-sec {padding: 50px 0 60px; }
 
@@ -957,13 +956,25 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
     .full-container {padding-left: 15px; }
     .right-container-sec .full-container { padding-right: 15px;}
 
+    .navbar-light .navbar-toggler {position: absolute; color: #003953; border: none; padding: 0; right: 5%; top: 80px; }
+    div#my-cart {margin-right: 48px;}
+    nav.navbar { position: initial;}
+    header .header-mid .my-cart button {padding: 0; border: none; background: transparent;}
+    header .header-mid .my-cart button .clearContent {width: 20px; height: 20px; background-color: #035d59; color: #fff; font-weight: 400; font-size: 13px; border-radius: 100%; position: absolute; top: -10px; right: -10px; }
+    header .header-mid .my-cart button .clearContent span {display: none;}
+    header .header-mid .my-cart button svg {width: 30px; fill: #003953 !important; }
+
+    #login-btn {font-size: 0; position: absolute; top: 82px; right: calc(10% + 44px); }
+    #login-btn .mb-login-icon {display: block; font-size: 25px;}
+    .navbar-toggler-icon {background-image: url(http://127.0.0.1:8000/assets/mobile-menu.png) !important; background-size: 26px; }
+
     .home-mini-banner {background-color: #e5f1f8; background-image: initial; }
     .mini-banner-content {max-width: 100%; padding: 50px 0; }
     .footer-last-col {padding-left: 0; }
     .footer-social li {margin-right: 0;}
     #footer .footer-social li a { font-size: 16px; width: 28px; height: 28px;}
     .footer-copyrigh ul li {padding: 0 8px;}
-    .site-modal-inner {max-width: 700px;}
+    .site-modal-inner, #sign-in-form .container {max-width: 700px;}
     #sign-in-form form, .overlay-panel {padding: 0 35px;}
 }
 
@@ -975,10 +986,10 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
     .search-box {order: 3; width: 100%;margin-left: 0; margin-top: 12px;}
     .search-container input {width: 100%; font-size: 14px;padding: 8px 15px;}
     .my-cart {order: 2;}
-    header .header-mid .my-cart button {font-size: 14px; padding: 10px 15px;}
-    header .header-mid .my-cart button svg {width: 18px;}
     nav.navbar {padding: 0 5px; }
     #login-btn {margin-right: 0 !important; }
+    .navbar-light .navbar-toggler {right: 20px; top: 67px; }
+    #login-btn {top: 68px; right: 118px; }
 
     .banner {padding-bottom: 25; }
     .banner img {width: 100%; height: 220px; object-fit: cover; object-position: center center; }
@@ -1021,64 +1032,32 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
     .footer-copyrigh p {font-size: 14px; display: inline-block; margin-bottom: 5px; width: 100%; padding: 10px 0 0; border-top: 1px solid rgb(0 57 83 / 50%); margin-top: 10px; }
 
     /*************************/
-#sign-in-form .site-modal-middle {
-    overflow: hidden;
-    overflow-y: auto;
-    height: 600px;
-    border-radius: 10px;
-}
-#sign-in-form .container {
-    min-height: 600px;
-    width: 88vw;
-    height: 100%;
-}
-#sign-in-form form, .overlay-panel {
-    padding: 0 8%;
-}
-.overlay-container {
-    display: none;
-}
-#sign-in-form .h2 {
-    font-size: 26px;
-}
-.sign-up-container {
-    transform: translateX(100%);
-    width: 100%;
-}
-.sign-in-container {
-    transform: translateX(0%);
-    width: 100%;
+    #sign-in-form .site-modal-middle {overflow: hidden; overflow-y: auto; border-radius: 10px; }
+    #sign-in-form .container {min-height: 600px; width: 88vw; height: auto; }
+    #sign-in-form form, .overlay-panel {padding: 0 8%; }
+    .overlay-container {display: none; }
+    #sign-in-form .h2 {font-size: 26px; }
+    .sign-up-container {transform: translateX(100%); width: 100%; }
+    .sign-in-container {transform: translateX(0%); width: 100%; }
+    .mobile-sign-up-container .sign-up-container, .container.right-panel-active .sign-up-container{transform: translateX(0%); opacity: 1; }
+    .mobile-sign-up-container .sign-in-container, .container.right-panel-active .sign-in-container{transform: translateX(100%); opacity: 0; }
+    #sign-in-form .mobile-sign-in-container .sign-in-container {transform: translateX(0%); opacity: 1; }
+    #sign-in-form .mobile-sign-in-container .sign-up-container {transform: translateX(100%); opacity: 0; }
+    .mobile-swipe-btn {display: flex; margin: 0; align-items: center; margin-top: 8px; color: #a5a5a5; font-weight: 400; font-size: 14px; }
+    #sign-in-form .mobile-swipe-btn a {margin: 0 0 0 3px; text-decoration: underline; display: block; }
+    .site-modal-inner {width: auto;height: auto;}
+
 }
 
-.mobile-sign-up-container .sign-up-container, .container.right-panel-active .sign-up-container{
-    transform: translateX(0%);
-    opacity: 1;
-}
-.mobile-sign-up-container .sign-in-container, .container.right-panel-active .sign-in-container{
-    transform: translateX(100%);
-    opacity: 0;
+@media only screen and (max-width: 480px) { 
+    .pd-add-cart, .multi-item-content p, .mrp-price { font-size: 13px;}
+    .msrp-price {margin-left: 0;}
+    .product-price { flex-direction: column;  align-items: flex-start;}
 }
 
-#sign-in-form .mobile-sign-in-container .sign-in-container {
-    transform: translateX(0%);
-    opacity: 1;
-}
-#sign-in-form .mobile-sign-in-container .sign-up-container {
-    transform: translateX(100%);
-    opacity: 0;
-}
-
-.mobile-swipe-btn {
-    display: flex;
-    margin: 0;
-    align-items: center;
-    margin-top: 8px;
-    color: #a5a5a5;
-    font-weight: 400;
-    font-size: 14px;
-}
-#sign-in-form .mobile-swipe-btn a {
-    margin: 0 0 0 3px;
-    text-decoration: underline;
-    display: block;
+@media only screen and (max-width: 480px) {
+    .proceed-cart {top: 60px; max-width: 100%; left: 15px; }
+    .favorite-list-sec {padding: 40px 0 40px; }
+    .multi-item-slider img {height: 160px;}
+    .favorite-list-sec .h1 {font-size: 30px; margin-bottom: 18px;}
 }

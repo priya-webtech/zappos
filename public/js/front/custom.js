@@ -175,6 +175,22 @@ function initializeSwiper() {
 	  speed: 300,
 	  slidesToShow: 5,
 	  slidesToScroll: 5,
+	  responsive: [
+        {
+          breakpoint: 991,
+          settings: {
+			slidesToShow: 3,
+			slidesToScroll: 3,
+          },
+        },
+        {
+          breakpoint: 576,
+          settings: {
+			slidesToShow: 2,
+			slidesToScroll: 2,
+          },
+        },
+      ],
 	});
 	$('.item-bought-slider').slick({
 		dots: false,
@@ -182,20 +198,68 @@ function initializeSwiper() {
 		speed: 300,
 		slidesToShow: 5,
 		slidesToScroll: 5,
+		responsive: [
+        {
+          breakpoint: 991,
+          settings: {
+			slidesToShow: 3,
+			slidesToScroll: 3,
+          },
+        },
+        {
+          breakpoint: 576,
+          settings: {
+			slidesToShow: 2,
+			slidesToScroll: 2,
+          },
+        },
+      ],
 	});
 	$('.similar-items-slider').slick({
 		dots: false,
 		infinite: false,
 		speed: 300,
-		slidesToShow: 6,
-		slidesToScroll: 6,
+		slidesToShow: 5,
+		slidesToScroll: 5,
+		responsive: [
+        {
+          breakpoint: 991,
+          settings: {
+			slidesToShow: 3,
+			slidesToScroll: 3,
+          },
+        },
+        {
+          breakpoint: 576,
+          settings: {
+			slidesToShow: 2,
+			slidesToScroll: 2,
+          },
+        },
+      ],
 	});
 	$('.recently-viewed-slider').slick({
 		dots: false,
 		infinite: false,
 		speed: 300,
-		slidesToShow: 6,
-		slidesToScroll: 6,
+		slidesToShow: 5,
+		slidesToScroll: 5,
+		responsive: [
+        {
+          breakpoint: 991,
+          settings: {
+			slidesToShow: 3,
+			slidesToScroll: 3,
+          },
+        },
+        {
+          breakpoint: 576,
+          settings: {
+			slidesToShow: 2,
+			slidesToScroll: 2,
+          },
+        },
+      ],
 	});
 	$('.favorite-list-slider').slick({
 		dots: false,
@@ -203,6 +267,36 @@ function initializeSwiper() {
 		speed: 300,
 		slidesToShow: 6,
 		slidesToScroll: 6,
+		responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 5,
+			slidesToScroll: 5,
+          },
+        },
+        {
+          breakpoint: 991,
+          settings: {
+			slidesToShow: 4,
+			slidesToScroll: 4,
+          },
+        },
+        {
+          breakpoint: 768,
+          settings: {
+			slidesToShow: 3,
+			slidesToScroll: 3,
+          },
+        },
+        {
+          breakpoint: 480,
+          settings: {
+			slidesToShow: 2,
+			slidesToScroll: 2,
+          },
+        },
+      ],
 	});
 }
  $(window).on('load', function() {
