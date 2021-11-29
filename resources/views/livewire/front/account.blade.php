@@ -94,6 +94,17 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
+                                            @if (Session::has('editship'))
+
+                                                <div class="alert alert-success text-center">
+
+                                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+
+                                                    <p>{{ Session::get('editship') }}</p>
+
+                                                </div>
+
+                                            @endif
                                             @if($customer['address'])
                                             @foreach($customer['address'] as $address)
                                             <div class="sp-add-list">
@@ -144,7 +155,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form >
+                                            <form autocomplete="off">
 
                                                 <input type="hidden" class="form-control" id="FullName" wire:model="shippingaddressvalue" aria-describedby="emailHelp" placeholder="First Name" wire:ignore>
 
@@ -217,22 +228,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" wire:ignore.self id="defaultAddress" wire:model="editaddress.address_type">
+                                                    <input type="checkbox" class="form-check-input" wire:ignore.self id="defaultAddress" wire:model="address_type" <?php if($editaddress->is_billing_address == 'yes') {echo "checked";} ?> >
                                                     <label class="form-check-label" for="defaultAddress">Make this my primary shipping address</label>
                                                 </div>
                                             </form>
                                         </div>
-                                        @if (Session::has('editship'))
-
-                                            <div class="alert alert-success text-center">
-
-                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-
-                                                <p>{{ Session::get('editship') }}</p>
-
-                                            </div>
-
-                                        @endif
                                         <div class="modal-footer">
                                             <button type="button" class="site-btn blue-btn" style="border-color: red; background-color: white; color: red;" wire:click.prevent="deleteship({{$addressid}})" data-dismiss="modal">Delete</button>
                                             <button type="button" class="site-btn blue-btn" data-dismiss="modal" data-dismiss="modal">Cancel</button>
@@ -257,7 +257,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form>
+                                            <form autocomplete="off">
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="form-group">
@@ -282,7 +282,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Company Name</label>
-                                                            <input type="text" wire:model="company" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Company Name" wire:ignore.self required>
+                                                            <input type="text" wire:model="company" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Company Name" wire:ignore.self>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -346,6 +346,9 @@
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Phone</label>
                                                             <input type="number" wire:model="mobile_no" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" wire:ignore.self placeholder="123-456-7890" required>
+                                                            @if($errors->has('mobile_no'))
+                                                                <span class="text-danger">{{ $errors->first('mobile_no') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -401,6 +404,17 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
+                                            @if (Session::has('editbill'))
+
+                                                <div class="alert alert-success text-center">
+
+                                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+
+                                                    <p>{{ Session::get('editbill') }}</p>
+
+                                                </div>
+
+                                            @endif
                                             @if($billing_address['address'])
                                             @foreach($billing_address['address'] as $address)
                                             <div class="sp-add-list">
@@ -420,7 +434,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="sp-add-edit-btn">
-                                                    <button type="button" class="btn site-btn blue-border-btn" data-toggle="modal" data-target="#editbillingAddress" wire:click="shippingedit({{$address['id']}})" >Edit</button>
+                                                    <button type="button" class="btn site-btn blue-border-btn"  wire:click="billingedit({{$address['id']}})" >Edit</button>
 
                                                 </div>
                                             </div>
@@ -451,7 +465,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form >
+                                            <form autocomplete="off">
 
                                                  <input type="hidden" class="form-control" id="FullName" wire:model="billingaddressvalue" aria-describedby="emailHelp" placeholder="First Name" wire:ignore.self>
                                                 <div class="row">
@@ -523,22 +537,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" wire:ignore.self id="defaultAddress" wire:model="editaddress.address_type">
+                                                    <input type="checkbox" class="form-check-input" wire:ignore.self id="defaultAddress" wire:model="baddress_type">
                                                     <label class="form-check-label" for="defaultAddress">Make this my primary billing address</label>
                                                 </div>
                                             </form>
                                         </div>
-                                        @if (Session::has('editship'))
-
-                                            <div class="alert alert-success text-center">
-
-                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-
-                                                <p>{{ Session::get('editship') }}</p>
-
-                                            </div>
-
-                                        @endif
                                         <div class="modal-footer">
                                             <button type="button" class="site-btn blue-btn" style="border-color: red; background-color: white; color: red;" wire:click.prevent="deleteship({{$addressid}})" data-dismiss="modal">Delete</button>
                                             <button type="button" class="site-btn blue-btn" data-dismiss="modal" data-dismiss="modal">Cancel</button>
@@ -548,7 +551,7 @@
                                 </div>
                             </div>
                             @endif
-                            <div class="modal fade" id="AddBillingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore>
+                            <div class="modal fade" id="AddBillingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header proceed-cart-head ">
@@ -562,7 +565,7 @@
                                             </button>
                                         </div>
                                          <div class="modal-body">
-                                            <form>
+                                            <form autocomplete="off">
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="form-group">
@@ -650,6 +653,9 @@
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Phone</label>
                                                             <input type="number" wire:model="bmobile_no" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="123-456-7890" required>
+                                                            @if($errors->has('bmobile_no'))
+                                                                <span class="text-danger">{{ $errors->first('bmobile_no') }}</span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -662,7 +668,7 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <div class="modal-footer" wire:ignore>
+                                        <div class="modal-footer">
 
                                             <button type="button" class="site-btn blue-btn" data-dismiss="modal">Cancel</button>
                                             <button type="button" class="site-btn blue-btn" wire:click.prevent="SaveBilling()">Save</button>
@@ -728,7 +734,7 @@
                                 </div>
                                   
                                 <!-- Edit Name Modal -->
-                                <div class="modal details-change-modal fade" id="EditNameModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" wire:ignore>
+                                <div class="modal details-change-modal fade" id="EditNameModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" wire:ignore.self>
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -743,27 +749,27 @@
                                             </div>
                                             <div class="modal-body">
                                                 <p>If you want to change the name associated with your Zappos customer account, you may do so below. Be sure to click the Save Changes button when you are done.</p>
-                                                <form>
+                                                <form autocomplete="off">
                                                     <div class="form-group">
                                                         <label for="NameOnCard">First Name</label>
-                                                        <input type="text" wire:model="UserDetail.first_name" class="form-control">
+                                                        <input type="text" wire:ignore.self wire:model="UserDetail.first_name" class="form-control">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="NameOnCard">Last Name</label>
-                                                        <input type="text" wire:model="UserDetail.last_name" class="form-control">
+                                                        <input type="text" wire:ignore.self wire:model="UserDetail.last_name" class="form-control">
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
 
-                                                <button type="submit" wire:click="UpdateUser('updatename')" data-dismiss="modal" class="btn site-btn">Save Changes</button>
+                                                <button type="submit" wire:click="UpdateUser('updatename')" data-dismiss="modal" class="site-btn blue-btn">Save Changes</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Edit email Modal -->
-                                <div class="modal details-change-modal fade" id="ChangeEmailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" wire:ignore>
+                                <div class="modal details-change-modal fade" id="ChangeEmailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" wire:ignore.self>
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -777,34 +783,54 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
+                                                @if (Session::has('emailpassword'))
+
+                                                    <div class="alert alert-danger text-center">
+
+                                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+
+                                                        <p>{{ Session::get('emailpassword') }}</p>
+
+                                                    </div>
+
+                                                @endif
                                                 <p>
                                                     <label>Old email address:</label>
                                                     <span>{{$UserDetail->email}}</span>
                                                 </p>
-                                                <form>
+                                                <form autocomplete="off">
                                                     <div class="form-group">
                                                         <label>New email address:</label>
                                                         <input type="email" wire:model="email" class="form-control">
+                                                        @if($errors->has('email'))
+                                                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                                                        @endif
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Re-enter new email:</label>
                                                         <input type="email" wire:model="reemail" class="form-control">
+                                                        @if($errors->has('reemail'))
+                                                            <span class="text-danger">{{ $errors->first('reemail') }}</span>
+                                                        @endif
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Password:</label>
                                                         <input type="password" wire:model="password" class="form-control">
+                                                        @if($errors->has('password'))
+                                                            <span class="text-danger">{{ $errors->first('password') }}</span>
+                                                        @endif
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
 
-                                                <button type="submit" wire:click="UpdateUser('updateemail')" class="btn site-btn">Save Changes</button>
+                                                <button type="submit" wire:click="UpdateUser('updateemail')" class="site-btn blue-btn">Save Changes</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Edit email Modal -->
-                                <div class="modal details-change-modal fade" id="ChangePasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" wire:ignore>
+                                <div class="modal details-change-modal fade" id="ChangePasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" wire:ignore.self>
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -818,25 +844,47 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
+                                                @if (Session::has('oldpassworderror'))
+
+                                                    <div class="alert alert-danger text-center">
+
+                                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+
+                                                        <p>{{ Session::get('oldpassworderror') }}</p>
+
+                                                    </div>
+
+                                                @endif
                                                 <p>To change the password for your Zappos account, use this form.</p>
-                                                <form>
+                                                <p style="color: red">Note : Password must contains at least 1 Uppercase, 1 Lowercase, 1 Digit, 1 Special character</p>
+
+                                                <form autocomplete="off">
                                                     <div class="form-group">
                                                         <label>Current password:</label>
-                                                        <input type="password" wire:model="currpassword" class="form-control" >
+                                                        <input type="password" wire:model="currpassword" class="form-control">
+                                                        @if($errors->has('currpassword'))
+                                                            <span class="text-danger">{{ $errors->first('currpassword') }}</span>
+                                                        @endif
                                                     </div>
                                                     <div class="form-group">
                                                         <label>New password:</label>
                                                         <input type="password" wire:model="newpassword" class="form-control" >
+                                                        @if($errors->has('newpassword'))
+                                                            <span class="text-danger">{{ $errors->first('newpassword') }}</span>
+                                                        @endif
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Re-enter new password:</label>
                                                         <input type="password" wire:model="repassword" class="form-control" >
+                                                        @if($errors->has('repassword'))
+                                                            <span class="text-danger">{{ $errors->first('repassword') }}</span>
+                                                        @endif
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
 
-                                                <button type="submit" wire:click="UpdateUser('updatepassword')" class="btn site-btn">Save Changes</button>
+                                                <button type="submit" wire:click="UpdateUser('updatepassword')" class="site-btn blue-btn">Save Changes</button>
                                             </div>
                                         </div>
                                     </div>
@@ -881,7 +929,7 @@
                 <h2 class="h2">Your Order History</h2>
                 <div class="row">
                     <div class="col-md-8">
-                        <form>
+                        <form autocomplete="off">
                             <div class="form-group">
                                 <label for="EnterGiftCard">Search items in your order history</label>
                                 <div class="input-with-btn">
@@ -970,6 +1018,9 @@
         </div>
     </x-customer-layout>
     <script type="text/javascript">
+         window.livewire.on('editbillingAddresshow', () => {
+             $('#editbillingAddress').modal('show');
+        });
         window.livewire.on('AddBillingAddresshide', () => {
              $('#AddBillingAddress').modal('hide');
         });
@@ -978,6 +1029,9 @@
         });
         window.livewire.on('deleteconfirm', () => {
              $('#ShowAllShippingAddress').modal('hide');
+        });
+        window.livewire.on('editShippingAddressshow', () => {
+            $('#editShippingAddress').modal('show');
         });
         window.livewire.on('userStore', () => {
             $('#editShippingAddress').modal('hide');

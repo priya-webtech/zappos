@@ -43,7 +43,7 @@ class PagesDetail extends Component
 
     public function Updatepages()
     {
-
+        dd('ehell');
         if ($this->page['visibility'] == 'no') {
 
             $visibility = 'yes';

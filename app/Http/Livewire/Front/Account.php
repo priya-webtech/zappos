@@ -37,13 +37,9 @@ class Account extends Component
         'editaddress.address_type' => ['required'],
         'editaddress.company' => [],
         'editaddress.mobile_no' => [],
+        'editaddress.is_billing_address' => [],
         'UserDetail.first_name' => ['required'],
         'UserDetail.last_name' => ['required'],
-        'email' => ['required'],
-        'reemail' => ['required'],
-        'repassword' => ['required'],
-        'newpassword' => ['required'],
-        'currpassword' => ['required'],
     ];
 
 
@@ -106,6 +102,7 @@ class Account extends Component
             'country' => ['required'],
             'postal_code' => ['required'],
             'address_type' => [],
+            'mobile_no' => ['between:10,12|numeric']
         ]);
 
 
@@ -169,7 +166,7 @@ class Account extends Component
             'bcompany' => [],
             'bpostal_code' => ['required'],
             'baddress_type' => [],
-            'bmobile_no' => ['required'],
+            'bmobile_no' => ['between:10,12|numeric']
 
         ]);
 
@@ -218,11 +215,31 @@ class Account extends Component
          
     }
 
+    public function billingedit($id){
+
+        $this->updateMode = true;
+        $this->editaddress = CustomerAddress::find($id);
+        $this->addressid = $this->editaddress->id;
+        if($this->editaddress['is_billing_address'] == 'yes') {
+            $this->baddress_type = true;
+        } else {
+            $this->baddress_type = false;
+        }
+         $this->emit('editbillingAddresshow');
+
+    }
+
     public function shippingedit($id){
 
         $this->updateMode = true;
         $this->editaddress = CustomerAddress::find($id);
         $this->addressid = $this->editaddress->id;
+        if($this->editaddress['is_billing_address'] == 'yes') {
+            $this->address_type = true;
+        } else {
+            $this->address_type = false;
+        }
+         $this->emit('editShippingAddressshow');
 
     }
 
@@ -240,13 +257,16 @@ class Account extends Component
             'editaddress.address_type' => [],
             'editaddress.company' => [],
             'editaddress.mobile_no' => [],
+            'editaddress.is_billing_address' => [],
 
         ]);
 
-        if($this->editaddress->address_type == true){
+        if($this->baddress_type == true){
             $shippingAddress = 'billing_address';
+             $is_billing_address = 'yes';
         }else{
             $shippingAddress = 'billing_address';
+             $is_billing_address = 'no';
         }
 
 
@@ -272,10 +292,11 @@ class Account extends Component
             'mobile_no' => $this->editaddress->mobile_no,
             
             'address_type' => $shippingAddress,
+            
+            'is_billing_address' => $is_billing_address,
         ]);
         $this->mount();
-        session()->flash('editship', 'Update Record !!');
-
+        session()->flash('editbill', 'Record Updated !!');
     }
 
     public function update($id)
@@ -295,10 +316,12 @@ class Account extends Component
 
         ]);
 
-        if($this->editaddress->address_type == true){
+        if($this->address_type == true){
             $shippingAddress = 'shipping_address';
+            $is_billing_address = 'yes';
         }else{
             $shippingAddress = 'shipping_address';
+            $is_billing_address = 'no';
         }
 
 
@@ -324,9 +347,11 @@ class Account extends Component
             'mobile_no' => $this->editaddress->mobile_no,
             
             'address_type' => $shippingAddress,
+            
+            'is_billing_address' => $is_billing_address,
         ]);
         $this->mount();
-        session()->flash('editship', 'Update Record !!');
+        session()->flash('editship', 'Record Updated !!');
 
     }
      
@@ -335,7 +360,8 @@ class Account extends Component
        $deleteRecord = CustomerAddress::find($addid)->delete();
        if($deleteRecord){
         $this->mount();
-        return redirect(route('front-user-detail'))->with('deleteshipmessage', 'Record Deleted !!');
+        session()->flash('deleteshipmessage', 'Record Deleted !!');
+        return redirect(route('front-user-detail'));
        }
     }
 
@@ -351,12 +377,16 @@ class Account extends Component
 
     		]);
 
-    		session()->flash('message', 'Update Name !!');
+    		session()->flash('message', 'Name Updated!!');
     	}
 
     		
     	if($flag == 'updateemail'){
- 
+        $this->validate([
+            'email' => ['required'],
+            'reemail' => ['required'],
+            'password' => ['required','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/','min:8']
+            ]);
     		
     		if($this->reemail)
 			{
@@ -365,18 +395,23 @@ class Account extends Component
 						User::where('id',$this->user_id)->update(['email' => $this->email]);
 					}else{
 						//dd('Invalid password');
-						session()->flash('message', 'Password Invalid !!');
+						session()->flash('emailpassword', 'Password Invalid !!');
 					}
 					
 				}else{
 					//dd('Not same Email');
-					session()->flash('message', 'Not Same Email Address !!');
+					session()->flash('emailpassword', 'Password Wrong !!');
 				}
 			}
     	}
 
     	if($flag == 'updatepassword'){
- 
+            $this->validate([
+            'repassword' => ['required','same:newpassword','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/','min:8'],
+            'newpassword' => ['required','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/','min:8'],
+            'currpassword' => ['required','regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/','min:8'],
+            ]);
+
     		if(Hash::check($this->currpassword, $this->UserDetail->password))
 			{
 				if($this->newpassword == $this->repassword){
@@ -384,13 +419,13 @@ class Account extends Component
 					$hashedPassword = Hash::make($this->newpassword);
 					User::where('id',$this->user_id)->update(['password' => $hashedPassword]);
 					//dd('change');
-					
 				}else{
 					//dd('Not same Email');
 					session()->flash('message', 'Not Same Email Address !!');
 				}
+                    
 			}else{
-				//dd('old password match');
+				session()->flash('oldpassworderror', 'Old Password Not Match !!');
 			}
     	}
     }

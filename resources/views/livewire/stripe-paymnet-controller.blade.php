@@ -84,21 +84,26 @@
                         <h3 class="panel-title">Shipping Details</h3>
 
                         <form role="form" id="address-form" class="require-validation" wire:submit.prevent="addshipping({{$orderdetail->id}})" >
-                            
                             <input type="hidden" name="orderid" value="{{$orderdetail->id}}">
+
+                            <div class="form-row">
+                                <input type="checkbox" class="form-check-input" wire:model="newaddress" wire:ignore.self id="defaultAddress">
+                                <label class="form-check-label" for="defaultAddress">Create New Address</label>
+                            </div><br><Br>
+
                             <div class='form-row'>
                                 <div class="col">
                                     <div class='form-group required'>
                                         <label class='control-label'>First Name</label> 
-                                        <input class='form-control' wire:model="orderdetail.first_name" name="firstname" placeholder="First Name" type='text' required wire:ignore.self>
-                                        @error('orderdetail.first_name') <span class="text-danger">{{ $message }}</span> @enderror
+                                        <input class='form-control' wire:model="customerAddress.first_name" name="firstname" placeholder="First Name" type='text' required wire:ignore.self>
+                                        @error('customerAddress.first_name') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class='form-group required'>
                                         <label class='control-label'>Last Name</label> 
-                                        <input class='form-control' wire:model="orderdetail.last_name" name="lastname" placeholder="Last Name" type='text' required wire:ignore.self>
-                                        @error('orderdetail.last_name') <span class="text-danger">{{ $message }}</span> @enderror
+                                        <input class='form-control' wire:model="customerAddress.last_name" name="lastname" placeholder="Last Name" type='text' required wire:ignore.self>
+                                        @error('customerAddress.last_name') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -106,15 +111,15 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label class="control-label">Street Name</label>
-                                        <input type="text" class="form-control" wire:model="orderdetail.address" placeholder="Street Name" wire:ignore.self>
-                                        @error('orderdetail.address') <span class="text-danger">{{ $message }}</span> @enderror
+                                        <input type="text" class="form-control" wire:model="customerAddress.address" placeholder="Street Name" wire:ignore.self>
+                                        @error('customerAddress.address') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="primaryVoiceNumber">Unit Number</label>
-                                        <input type="number" wire:model="orderdetail.unit_number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" wire:ignore.self>
-                                        @error('orderdetail.unit_number') <span class="text-danger">{{ $message }}</span> @enderror
+                                        <input type="number" wire:model="customerAddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" wire:ignore.self>
+                                        @error('customerAddress.unit_number') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -122,15 +127,15 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="postalCode">Zip</label>
-                                        <input type="number" wire:model="orderdetail.pincode" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" wire:ignore.self>
-                                        @error('orderdetail.pincode') <span class="text-danger">{{ $message }}</span> @enderror
+                                        <input type="number" wire:model="customerAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" wire:ignore.self>
+                                        @error('customerAddress.pincode') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="City">City</label>
-                                        <input type="text" class="form-control" wire:model="orderdetail.city" id="City" aria-describedby="emailHelp" placeholder="Enter City" wire:ignore.self>
-                                        @error('orderdetail.city') <span class="text-danger">{{ $message }}</span> @enderror
+                                        <input type="text" class="form-control" wire:model="customerAddress.city" id="City" aria-describedby="emailHelp" placeholder="Enter City" wire:ignore.self>
+                                        @error('customerAddress.city') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -138,25 +143,20 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="Country">Country</label>
-                                        <select class="form-control" id="Country" wire:model="orderdetail.country" wire:ignore.self>
-                                            <option value="AS">American Samoa</option>
-                                            <option value="GU">Guam</option>
-                                            <option value="MH">Marshall Islands</option>
-                                            <option value="FM">Micronesia, Federated States of</option>
-                                            <option value="MP">Northern Mariana Islands</option>
-                                            <option value="PW">Palau</option>
-                                            <option value="PR">Puerto Rico</option>
-                                            <option selected="" value="NL">Netherlands</option>
-                                            <option value="UM">United States Minor Outlying Islands</option>
-                                            <option value="VI">Virgin Islands, U.S.</option>
+                                        <select class="form-control" id="Country" wire:model="customerAddress.country" wire:ignore.self>
+                                            <option value="">-- Select Countries --</option>
+                                            @foreach($countries as $row)
+                                            <option value="{{$row->name}}">{{$row->name}}</option>
+                                            @endforeach
                                         </select>
-                                        @error('orderdetail.country') <span class="text-danger">{{ $message }}</span> @enderror
+                                        @error('customerAddress.country') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="primaryVoiceNumber">Phone</label>
-                                        <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" wire:model="orderdetail.mobile" placeholder="123-456-7890" wire:ignore.self> 
+                                        <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" wire:model="customerAddress.mobile_no" placeholder="123-456-7890" wire:ignore.self> 
+                                        @error('customerAddress.mobile') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -172,6 +172,10 @@
 
                             </div>
 
+                            <div class="form-check">
+                                <input type="checkbox" wire:model="billing_type" class="form-check-input"  id="defaultAddress">
+                                <label class="form-check-label" for="defaultAddress">Make this my primary billing address</label>
+                            </div>
                             
 
                             <div class="row">
@@ -186,123 +190,7 @@
 
                         </form>
                     </div>
-                    <div class="shipping-details-card re-order-tbl">
-                        <h3 class="panel-title">Order Details</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>order <br> number</th>
-                                    <th>date</th>
-                                    <th>Prodoct name</th>
-                                    <th>quantity</th>
-                                    <th>Price</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>10/06/2021</td>
-                                    <td class="od-pd-name">
-                                        <span>Splendid</span>
-                                        <h6>Apple laptop</h6>
-                                    </td>
-                                    <td>
-                                        <div class="add-cart-select">               
-                                            <div class="total-item-select">
-                                                <input value="1" name="stockitem" type="number">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="od-pd-price">
-                                        <span>
-                                            <b>Sale:</b> 
-                                            <span class="red-color">{{$symbol['currency']}}200.00</span>
-                                        </span>
-                                        <!-- <span class="grey-color"><b>MSRP:</b> {{$symbol['currency']}}90.00</span> -->
-                                    </td>
-                                    <td>
-                                        <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>10/06/2021</td>
-                                    <td class="od-pd-name">
-                                        <span>Splendid</span>
-                                        <h6>Apple laptop</h6>
-                                    </td>
-                                    <td>
-                                        <div class="add-cart-select">               
-                                            <div class="total-item-select">
-                                                <input value="1" name="stockitem" type="number">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="od-pd-price">
-                                        <span>
-                                            <b>Sale:</b> 
-                                            <span class="red-color">{{$symbol['currency']}}200.00</span>
-                                        </span>
-                                        <!-- <span class="grey-color"><b>MSRP:</b> {{$symbol['currency']}}90.00</span> -->
-                                    </td>
-                                    <td>
-                                        <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>10/06/2021</td>
-                                    <td class="od-pd-name">
-                                        <span>Splendid</span>
-                                        <h6>Apple laptop</h6>
-                                    </td>
-                                    <td>
-                                        <div class="add-cart-select">               
-                                            <div class="total-item-select">
-                                                <input value="1" name="stockitem" type="number">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="od-pd-price">
-                                        <span>
-                                            <b>Sale:</b> 
-                                            <span class="red-color">{{$symbol['currency']}}200.00</span>
-                                        </span>
-                                        <!-- <span class="grey-color"><b>MSRP:</b> {{$symbol['currency']}}90.00</span> -->
-                                    </td>
-                                    <td>
-                                        <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>10/06/2021</td>
-                                    <td class="od-pd-name">
-                                        <span>Splendid</span>
-                                        <h6>Apple laptop</h6>
-                                    </td>
-                                    <td>
-                                        <div class="add-cart-select">               
-                                            <div class="total-item-select">
-                                                <input value="1" name="stockitem" type="number">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="od-pd-price">
-                                        <span>
-                                            <b>Sale:</b> 
-                                            <span class="red-color">{{$symbol['currency']}}200.00</span>
-                                        </span>
-                                        <!-- <span class="grey-color"><b>MSRP:</b> {{$symbol['currency']}}90.00</span> -->
-                                    </td>
-                                    <td>
-                                        <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    
                 </div>
 
             </div>        

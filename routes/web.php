@@ -183,6 +183,8 @@ Route::middleware(['checkRole'])->group(function () {
   
     });
     Route::get('/collection/{slug?}', Livewire\Front\ProductCategory::class)->name('product-front-category');
+    Route::get('/pages/{slug?}', Livewire\Front\Pages::class)->name('pages-front');
+
     Route::get('/product/{slug?}', Livewire\Front\ProductFrontDetail::class)->name('product-front-detail');
     Route::get('/varientData', [Livewire\Front\ProductFrontDetail::class, 'fetchPrice'])->name('varientData');
 
