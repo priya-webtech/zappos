@@ -228,12 +228,17 @@
                                                             </div>
                                                         </div>
                                                         @php
-                                                        $result = favorite($cart['varientid']);
+                                                        $result = favorite($cart['product_id']);
                                                         @endphp
                                                         @if(!empty($result))
-                                                        <a  class="wish-list {{$result['class']}}" name="r-heart-button" wire:click.prevent="UpdateWish({{$result['id']}}, {{$result['product_id']}})">
+                                                        <a  class="wish-list add-wishlist" name="r-heart-button" wire:click.prevent="UpdateWish(false, {{$cart['product_id']}})">
                                                             Move To<i class="fa fa-heart-o" aria-hidden="true"></i>
                                                         </a>
+                                                        @else
+                                                         <a  class="wish-list" name="r-heart-button" wire:click.prevent="UpdateWish(true, {{$cart['product_id']}})">
+                                                            Move To<i class="fa fa-heart-o" aria-hidden="true"></i>
+                                                        </a>
+
                                                         @endif
                                                     </div>
                                                  

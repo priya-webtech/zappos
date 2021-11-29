@@ -55,7 +55,7 @@
 
                 <div class="row">
 
-                    <div class="col-md-8">
+                    <div class="col-lg-8 col-md-12">
 
                         <div class="product-slider">
 
@@ -97,7 +97,7 @@
 
                     </div>
 
-                    <div class="col-md-4 pd-sidebar-details">
+                    <div class="col-lg-4 col-md-12 pd-sidebar-details">
 
                         <div class="product-rightbar">
 
@@ -176,7 +176,6 @@
 
                                             <select name="attribute1"   class="form-control varition-change" id="varient1"  >
 
-                                                <option value="">--Select Option--</option>
                                                 @foreach($product->variants->unique('attribute1') as $row)
 
                                                     @if($row->attribute1 != "")
@@ -206,7 +205,6 @@
                                             <select name="attribute2"  class="form-control varition-change"   id="varient2">
 
 
-                                                <option value="">--Select Option--</option>
                                                 @foreach($product->variants->unique('attribute2') as $row)
 
                                                     @if($row->attribute2 != "")
@@ -234,7 +232,6 @@
                                             <select name="attribute3"  class="form-control varition-change" id="varient3" >
 
 
-                                                <option value="">--Select Option--</option>
                                                 @foreach($product->variants->unique('attribute3') as $row)
 
                                                     @if($row->attribute3 != "")
@@ -263,24 +260,25 @@
 
                                 </div>
 
-                                <div class="pd-btn-group">
+                                <div class="pd-btn-group" wire:target="refresh">
 
                                     <button class="site-btn green-btn add-cart" id="variant_id" wire:ignore.self value="@if(!empty($row->id)){{$row->id}}@endif" wire:click="addCart($event.target.value)">Add to Cart</button>
 
+                                    @php $favorite = favorite($product->id); @endphp
 
 
-                                    @php $resultwish = favorite($product->id); @endphp
+                                    @if(!empty($favorite))
 
+                                    <button class="site-btn green-btn add-collection-btn add-wishlist" wire:click="UpdateWish(false, {{$product->id}})"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</button>
 
-                                    @if(!empty($resultwish) && $favoritevalue && $favoritevalue->status == 1)
-
-                                    <a class="site-btn green-btn add-collection-btn" wire:click="UpdateWish({{$resultwish['id']}}, {{$resultwish['product_id']}})"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
-                                    
                                     @else
 
-                                     <a class="site-btn green-btn add-collection-btn" @if(!empty($resultwish)) wire:click="UpdateWish({{$resultwish['id']}}, {{$resultwish['product_id']}})" @else wire:click="UpdateWish(0, 0)" @endif><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</a>
+                                    <button class="site-btn green-btn add-collection-btn" wire:click="UpdateWish(true, {{$product->id}})"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</button>
+
 
                                     @endif
+
+                              
 
                                 </div>
 
@@ -721,13 +719,23 @@
 
                                     <div class="multi-item-content">
 
-                                        @php $result = favorite($rows->id); @endphp
+                                       @php $favorite = favorite($product->id); @endphp
 
-                                        @if(!empty($result))
+                                    @if(!empty($favorite))
 
-                                        <a class="wish-list {{$result['class']}}" wire:click="UpdateWish({{$result['id']}}, {{$result['product_id']}})"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                                     <a class="wish-list add-wishlist" wire:click="UpdateWish(false, {{$rows->id}})"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
 
-                                        @endif
+                                    
+
+                                    @else
+
+                                     <a class="wish-list" wire:click="UpdateWish(true, {{$rows->id}})"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+
+
+                                    @endif
+
+
+
                                         <!-- <p>ASICS</p> -->
                                         @if(!empty($priceres))
                                         <a href="{{ route('product-front-detail', $rows['seo_utl']) }}">
@@ -798,13 +806,26 @@
                                     </a>
                                     <div class="multi-item-content">
 
-                                        @php $result = favorite($pro_res->id); @endphp
+                                        @php $favorite = favorite($product->id); @endphp
 
-                                        @if(!empty($result))
 
-                                        <a class="wish-list {{$result['class']}}" wire:click="UpdateWish({{$result['id']}}, {{$result['product_id']}})"><i class="fa fa-heart-o" aria-hidden="true"></i> </a>
+                                     
+                                        @if(!empty($favorite))
+
+                                         <a class="wish-list add-wishlist" wire:click="UpdateWish(false, {{$pro_res->id}})"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+
+                                        
+
+                                        @else
+
+                                         <a class="wish-list" wire:click="UpdateWish(true, {{$pro_res->id}})"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+
 
                                         @endif
+
+
+
+
                                         <a href="{{ route('product-front-detail', $rows['seo_utl']) }}">
                                         <p>{{$pro_res->title}}</p>
                                         </a>
