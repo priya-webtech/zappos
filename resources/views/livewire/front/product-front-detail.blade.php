@@ -690,7 +690,7 @@
 
                             <h3 class="h3">Recommended For You</h3>
 
-                            <div class="similar-items-slider" wire:ignore.self>
+                            <div class="similar-items-slider" wire:ignore>
 
                                 @foreach($productrelated as $rows)
 
@@ -790,7 +790,7 @@
 
                             <h3 class="h3">Your Recently Viewed Items</h3>
 
-                            <div class="recently-viewed-slider" wire:ignore.self>
+                            <div class="recently-viewed-slider" wire:ignore>
 
                                 @if(Cookie::get('shopping_cart'))
 
