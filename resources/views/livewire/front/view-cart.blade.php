@@ -19,6 +19,7 @@
                                         <th></th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
                                     @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; $subtotal3 = 0; $subtotal4 = 0; $subtotal5 = 0; $subtotal6 = 0;  $symbol = CurrencySymbol();@endphp
                                     @if(!empty($CartItem))
@@ -173,12 +174,30 @@
                                         <td>
                                             <div class="viewcart-tbl-btn">
 
-                                                @php
-                                                $result = favorite($cart['product_detail']['id']);
-                                                @endphp
-                                                @if(!empty($result))
-                                                <a class="wish-list {{$result['class']}}" wire:click="UpdateWish({{$result['id']}}, {{$result['product_id']}})"><span>move to</span><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                                                @endif
+
+                                                @php $favorite = favorite($cart['product_detail']['id']); @endphp
+
+
+                                     
+                                        @if(!empty($favorite))
+
+
+
+                                         <a class="wish-list add-wishlist" wire:click="UpdateWish(false, {{$cart['product_detail']['id']}})"><span>move to</span><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+
+                                        
+
+                                        @else
+
+                                         <a class="wish-list" wire:click="UpdateWish(true, {{$cart['product_detail']['id']}})"><span>move to</span><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+
+
+                                        @endif
+
+
+
+
+                                               
                                                  @if(Auth::check())
                                                         <a class="remove-btn" wire:click.prevent="DeleteCartProduct({{$cart['id']}})"><span>Remove</span> <i class="fa fa-trash" aria-hidden="true"></i></a>
                                                 @else
@@ -190,6 +209,9 @@
                                         </td>
                                     </tr>
                                     @endforeach
+                                    @else
+                                    <tr><td colspan="3" align="center">No items yet!</td></tr>
+
                                     @endif
 
                                     <?php 
@@ -285,6 +307,7 @@
                                     }
                                 ?>
                                 </tbody>
+
                             </table>
                         </div>
                     </div>

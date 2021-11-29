@@ -42,7 +42,6 @@ class ProductFrontDetail extends Component
     public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $Productvariant, $variationID, $reviewget,$stockitem;
 
 
-
     public $product, $Productvarian, $favoritevalue,$favoritevalueget;
 
     public $variant1, $variant2, $variant3;
@@ -58,6 +57,7 @@ class ProductFrontDetail extends Component
     ];
 
     public function mount($slug) {
+        $this->variationID = null;
         $this->slug = $slug;
 
         $this->varianttag = VariantTag::all()->groupBy('id')->toArray();
@@ -88,6 +88,7 @@ class ProductFrontDetail extends Component
         $shopping_cart1 = (array_unique($shopping_cart));
         $minutes = 60;
         Cookie::queue(Cookie::make('shopping_cart',  json_encode($shopping_cart1), $minutes));
+
     }
 
     public function render()
@@ -112,6 +113,9 @@ class ProductFrontDetail extends Component
         }     
 
         $this->reviewget = review::where('product_id',$this->product['id'])->get();
+
+
+
         return Product::with('variants')->where('seo_utl',$this->slug)->first();
 
     }
@@ -217,6 +221,7 @@ class ProductFrontDetail extends Component
         // })->where('product_id', $this->product->id)->first();
         $this->variationID = $this->Productvariant->id;
         $price = number_format($this->Productvariant->price,2,'.',',');
+        $this->refresh();
          return response()->json(array('variant' => $this->Productvariant, 'price' => $price));
 
     }
@@ -259,30 +264,47 @@ class ProductFrontDetail extends Component
 
     }
 
-    public function UpdateWish($id,$productid){
+    public function UpdateWish($value, $product_id) {
+
         if(!Auth::check()) {
-            session()->flash('alert', 'You need to login');
+
+             session()->flash('alert', 'You need to login');
+
         } else {
+           
+            if(!$value) {
 
-        if($id == 0){
-                $favorite_arr = [
+                $favorite = favorite($product_id);
+               
+                favorite::where('id',$favorite->id)->delete();
+                session()->flash('message', 'Item removed from WishList !!');
+
+            } else {
+
+                 $favorite_arr = [
                         
-                        'product_id' => $productid,
+                    'product_id' => $product_id,
 
-                        'user_id' => Auth::user()->id,
+                    'user_id' => Auth::user()->id,
 
-                        'status' => '1',
+                    'status' => 1,
+                    
                     ];
 
                 favorite::create($favorite_arr);
+                session()->flash('message', 'Item added in Wishlist');
 
-            session()->flash('message', 'Add WishList !!');
-        }else{
-            
-            $favorite  = favorite::where('id',$id)->delete();
-            session()->flash('message', 'Remove WishList !!');
             }
+
+            $this->getProduct();
+
         }
+       
+    }
+
+    public function refresh()
+    {
+        return;
     }
 
     public function UpdateReview($id)
