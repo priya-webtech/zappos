@@ -224,6 +224,7 @@
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Phone</label>
                                                             <input type="number" wire:ignore.self wire:model="editaddress.mobile_no" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="123-456-7890" required>
+                                                            @error('editaddress.mobile_no') <span class="text-danger">{{ $message }}</span> @enderror
                                                         </div>
                                                     </div>
                                                 </div>
@@ -533,6 +534,7 @@
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Phone</label>
                                                             <input type="number" wire:ignore.self wire:model="editaddress.mobile_no" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="123-456-7890" required>
+                                                            @error('editaddress.mobile_no') <span class="text-danger">{{ $message }}</span> @enderror
                                                         </div>
                                                     </div>
                                                 </div>

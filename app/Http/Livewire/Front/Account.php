@@ -256,7 +256,7 @@ class Account extends Component
             'editaddress.postal_code' => ['required'],
             'editaddress.address_type' => [],
             'editaddress.company' => [],
-            'editaddress.mobile_no' => [],
+            'editaddress.mobile_no' => ['between:10,12|numeric'],
             'editaddress.is_billing_address' => [],
 
         ]);
@@ -312,7 +312,7 @@ class Account extends Component
             'editaddress.postal_code' => ['required'],
             'editaddress.address_type' => [],
             'editaddress.company' => [],
-            'editaddress.mobile_no' => [],
+            'editaddress.mobile_no' => ['between:10,12|numeric'],
 
         ]);
 
