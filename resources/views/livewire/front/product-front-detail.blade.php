@@ -55,7 +55,7 @@
 
                 <div class="row">
 
-                    <div class="col-md-8">
+                    <div class="col-lg-8 col-md-12">
 
                         <div class="product-slider">
 
@@ -97,7 +97,7 @@
 
                     </div>
 
-                    <div class="col-md-4 pd-sidebar-details">
+                    <div class="col-lg-4 col-md-12 pd-sidebar-details">
 
                         <div class="product-rightbar">
 
@@ -274,6 +274,7 @@
                                     @else
 
                                     <button class="site-btn green-btn add-collection-btn" wire:click="UpdateWish(true, {{$product->id}})"><i class="fa fa-heart" aria-hidden="true"></i></i>Add to Favorite</button>
+
 
                                     @endif
 
