@@ -88,12 +88,12 @@
                     </div>
                     <div class="col-md-8 home-pd-col">
                         <div class="cat-product-section">
-                            <div class="row">
+                            <div class="row" >
                                 @if(count($this->Product) > 0)
                                 @foreach($this->Product as $result)
                                 @php $priceres = allprice($result->id) @endphp
-                                <div class="col-md-4 cat-pd-col">
-                                    <div class="cat-pd-img">
+                                <div class="col-md-4 cat-pd-col"  >
+                                    <div class="cat-pd-img" wire:target="refresh" >
                                         @if($result['productmediaget'] && isset($result['productmediaget'][0]))
                                         <a href="{{ route('product-front-detail', $result->seo_utl) }}">
                                             <img src="{{ asset('storage/'.$result['productmediaget'][0]['image']) }}">
@@ -105,7 +105,12 @@
                                         $favresult = favorite($result->id);
                                         @endphp
                                         @if(!empty($favresult))
-                                         <a class="cat-wishlist-btn wishlist-pd wish-list {{$favresult['class']}}" wire:click="UpdateWish({{$favresult['id']}}, {{$favresult['product_id']}})"><i class="fa fa-heart-o" aria-hidden="true"></i> <?php echo count($result['favoriteget']); ?></a>
+                                         <a class="cat-wishlist-btn wishlist-pd wish-list add-wishlist" wire:click="UpdateWish(false, {{$result->id}});refresh()"><i class="fa fa-heart-o" aria-hidden="true"></i> <?php echo count($result['favoriteget']); ?></a>
+
+                                         @else
+
+                                         <a class="cat-wishlist-btn wishlist-pd wish-list" wire:click="UpdateWish(true, {{$result->id}}); refresh()"><i class="fa fa-heart-o" aria-hidden="true"></i> <?php echo count($result['favoriteget']); ?></a>
+
                                         @endif 
                                         <!-- Wish-list code ends -->
                                         

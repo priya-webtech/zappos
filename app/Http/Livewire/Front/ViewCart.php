@@ -17,7 +17,7 @@ class ViewCart extends Component
 {
 	public $CartItem,$ProductVariant,$varianttag,$stockitem,$promotioncode,$discoutget;
 
-	protected $listeners = ['getCart', 'DeleteCartProduct','UpdateWish','UpdateWishlist' => 'UpdateWishes'];
+	protected $listeners = ['getCart', 'DeleteCartProduct'];
 
 
 	public function mount() {
@@ -48,6 +48,8 @@ class ViewCart extends Component
 
         if (Auth::check()) {
             Cart::find($id)->delete();
+            return redirect(request()->header('Referer'));
+
         } else {
             $cart = session()->get('cart');
 
@@ -105,31 +107,7 @@ class ViewCart extends Component
         $this->emit('getCart');
 
     }
-    public function UpdateWish($id,$productid){
 
-    	if (Auth::check()) {
-    		$this->user_id =  Auth::user()->id;
-	        if($id == 0){
-	                $favorite_arr = [
-	                        
-	                        'product_id' => $productid,
-
-	                        'user_id' => $this->user_id,
-
-	                        'status' => '1',
-	                    ];
-
-	                favorite::create($favorite_arr);
-
-	            session()->flash('message', 'Add WishList !!');
-	        }else{
-
-	            $favorite  = favorite::where('id',$id)->delete();
-                session()->flash('message', 'Remove WishList !!');
-	            }
-
-	    }
-    }
     public function PromotionalCode()
     {
         if (Auth::check()) {
@@ -165,5 +143,44 @@ class ViewCart extends Component
         if(!Auth::check()) {
             session()->flash('alert', 'You need to login');
         } 
+    }
+
+    public function UpdateWish($value, $product_id) {
+
+        if(!Auth::check()) {
+
+             session()->flash('alert', 'You need to login');
+
+        } else {
+           
+            if(!$value) {
+
+                $favorite = favorite($product_id);
+               
+                favorite::where('id',$favorite->id)->delete();
+                session()->flash('message', 'Item removed from WishList !!');
+
+            } else {
+
+                 $favorite_arr = [
+                        
+                    'product_id' => $product_id,
+
+                    'user_id' => Auth::user()->id,
+
+                    'status' => 1,
+                    
+                    ];
+
+                favorite::create($favorite_arr);
+                session()->flash('message', 'Item added in Wishlist');
+
+            }
+             $this->getCart();
+
+
+
+        }
+       
     }
 }

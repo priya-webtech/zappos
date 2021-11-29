@@ -16,19 +16,13 @@ use App\Models\Cart;
 
   function favorite($product_id){
 
-  	 if (Auth::check()) {
+  	if (Auth::check()) {
+        
+        $user_id = Auth::user()->id;
 
-  	$user_id = Auth::user()->id;
-  	$favorite = favorite::where(['product_id' => $product_id,'user_id' => $user_id])->first();
-    
-    $productres = favorite::where(['product_id' => $product_id,'user_id' => $user_id])->first();
+        return favorite::where(['product_id' => $product_id,'user_id' => $user_id])->first();
 
-  	if(!empty($favorite) && $favorite->status == 1){
-  		return [ 'class' => 'add-wishlist', 'id' => $favorite['id'], 'product_id' => $favorite['product_id']];
-  	}else{
-  		return [ 'class' => '', 'id' => '0','product_id' => $product_id];
-  	}
-  }
+      }
 
  }
 

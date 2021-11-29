@@ -25,32 +25,57 @@ class Dashboard extends Component
             //     return redirect('/admin');
             // }
         }
-        $this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
-        $this->Product = Product::with('productmediaget')->with('favoriteget')->orderBy('id','asc')->limit(6)->get();
+        $this->getProducts();
     }
 
-    public function UpdateWish($id,$productid) {
-        if (Auth::check()) {
+    public function getProducts()
+    {
+        $this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
 
-            if($id == 0){
-                    $favorite_arr = [
-                            
-                            'product_id' => $productid,
+        $this->Product = Product::with('productmediaget')->with('favoriteget')->orderBy('id','asc')->limit(6)->get();
 
-                             'user_id' => $this->user_id,
+    }
+    public function UpdateWish($value, $product_id) {
 
-                            'status' => '1',
-                        ];
+        if(!Auth::check()) {
 
-                    favorite::create($favorite_arr);
+             session()->flash('alert', 'You need to login');
 
-                
-            }else{
+        } else {
+           
+            if(!$value) {
 
-                $favorite  = favorite::where('id',$id)->delete();
+                $favorite = favorite($product_id);
+               
+                favorite::where('id',$favorite->id)->delete();
+                session()->flash('message', 'Item removed from WishList !!');
 
-                }
+            } else {
+
+                 $favorite_arr = [
+                        
+                    'product_id' => $product_id,
+
+                    'user_id' => Auth::user()->id,
+
+                    'status' => 1,
+                    
+                    ];
+
+                favorite::create($favorite_arr);
+                session()->flash('message', 'Item added in Wishlist');
+
+            }
+
+            $this->getProducts();
+
         }
+       
+    }
+
+    public function refresh($value='')
+    {
+        return;
     }
 
     public function render()
@@ -63,6 +88,7 @@ class Dashboard extends Component
         return view('livewire.dashboard');
     }
 
+    
     // public function checkLogin()
     // {
     //     if (Auth::check() && Auth::user()->hasRole('admin')) {
