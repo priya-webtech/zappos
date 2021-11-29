@@ -535,7 +535,7 @@ ul.product-right-social li a:hover {background-color: #035d59; }
 .pd-review-list .rating-stars .empty-stars span.star, .pd-review-list .rating-stars .filled-stars span.star {font-size: 22px;}
 .reviewer-name {font-weight: 600; color: #003953; margin-bottom: 15px; }
 .reriew-img {display: flex; flex-wrap: wrap; margin: -3px;}
-.reriew-img img {width: 200px; height: 160px; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 5px; object-fit: contain; object-position: center center; overflow: hidden;}
+.reriew-img img {width: 200px; height: 160px; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 5px; object-fit: contain; object-position: center center; overflow: hidden;margin: 4px;}
 
 
 /**********************************
@@ -988,6 +988,7 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
     .product-rightbar {font-size: 14px; border-top: 1px solid #dfdfdf; padding-top: 30px; }
     .pd-btn-group {flex-wrap: initial; max-width: 370px; }
     .product-rightbar a.site-btn {margin-top: 0px !important; }
+    .review-star:not(:last-child) {padding-right: 55px; }
 }
 
 @media only screen and (max-width: 767px) {
@@ -1059,6 +1060,11 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
     #sign-in-form .mobile-swipe-btn a {margin: 0 0 0 3px; text-decoration: underline; display: block; }
     .site-modal-inner {width: auto;height: auto;}
 
+    .pd-review-list .review-row {flex-wrap: wrap; }
+    .review-star {width: 100%; }
+    .review-star:not(:last-child) {padding-right: 0; }
+    .reriew-img img {width: 150px; height: 120px;}
+
 }
 
 @media only screen and (max-width: 576px) { 
@@ -1082,5 +1088,7 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
     .product-slider-nav .slick-slide {width: 70px !important; height: 62px; }
     .product-slider-nav img, .slider-nav iframe {padding: 4px; }
     .product-slider-for {width: calc(100% - 70px); }
+
+    .reriew-img img { width: 140px; height: 100px;}
 
 }
