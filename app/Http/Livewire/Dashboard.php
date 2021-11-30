@@ -13,6 +13,9 @@ class Dashboard extends Component
 {
     public $product,$Productmediass,$user_id;
 
+    protected $listeners = ['getProducts'];
+
+
     public function mount()
     {
         
@@ -68,6 +71,7 @@ class Dashboard extends Component
             }
 
             $this->getProducts();
+            $this->emit('getCart');
 
         }
        

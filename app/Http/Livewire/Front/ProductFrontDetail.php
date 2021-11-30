@@ -14,15 +14,11 @@ use App\Models\ProductVariant;
 
 use App\Models\Tag;
 
-use App\Models\VariantStock;
-
 use App\Models\VariantTag;
 
 use App\Models\Cart;
 
 use App\Models\review;
-
-use App\Models\Location;
 
 use App\Models\favorite;
 
@@ -38,6 +34,9 @@ class ProductFrontDetail extends Component
     protected $keyType = 'string';
     public $incrementing = false;
 
+    protected $listeners = ['getProduct'];
+
+
 
     public $Productmedia,$tags,$Productmediass,$varianttag,$slug,$CartItem,$fetchstock,$Collection,$productrelated,$productid,$varientid,$getpriceinput,$stock, $user_id, $Productvariant, $variationID, $reviewget,$stockitem;
 
@@ -45,6 +44,7 @@ class ProductFrontDetail extends Component
     public $product, $Productvarian, $favoritevalue,$favoritevalueget;
 
     public $variant1, $variant2, $variant3;
+
 
     protected $rules = [
 
@@ -57,6 +57,8 @@ class ProductFrontDetail extends Component
     ];
 
     public function mount($slug) {
+
+        // dump('mount');
         $this->variationID = null;
         $this->slug = $slug;
 
@@ -93,18 +95,38 @@ class ProductFrontDetail extends Component
 
     public function render()
     {
+        // dump('render');
         $this->dispatchBrowserEvent('onContentChanged');
         if(Auth::check()) {
             $this->user_id = Auth::user()->id;
         }
+        
 
-        $this->getProduct();
        
 
-        return view('livewire.front.product-front-detail', ['product' => $this->product]);
+        return view('livewire.front.product-front-detail');
+    }
+       public function dehydrate()
+    {
+        // dump('dehydrate');
+        $this->product = null;
+        $this->favoritevalue  = null;
+
+    }
+
+    public function hydrate()
+    {
+        // dump('hydrate');
+        $this->favoritevalue  = null;
+        $this->getProduct();
+        // $this->productrelated = Product::with('productmediaget')->with('favoriteget')->get();
+
+
     }
 
     public function getProduct() {
+
+        // dump('getProduct');
 
         $this->product  = Product::with('variants')->where('seo_utl',$this->slug)->first();
 
@@ -112,7 +134,9 @@ class ProductFrontDetail extends Component
             $this->favoritevalue  = favorite::where('user_id',Auth::user()->id)->where('product_id',$this->product->id)->first();
         }     
 
-        $this->reviewget = review::where('product_id',$this->product['id'])->get();
+        $this->reviewget = review::where('product_id',$this->product->id)->get();
+        $this->productrelated = Product::with('productmediaget')->with('favoriteget')->get();
+
 
 
 
@@ -140,28 +164,28 @@ class ProductFrontDetail extends Component
         }])->get();
 
 
-        // if(!empty($productvariants) && count($productvariants) > 0) {
+        /*if(!empty($productvariants) && count($productvariants) > 0) {
         
 
-        //     foreach ($productvariants as $variant) {
-        //         if($variant->attribute1 == $request->text1) {
-        //             if(empty($productvariant )) $productvariant = $variant;
+            foreach ($productvariants as $variant) {
+                if($variant->attribute1 == $request->text1) {
+                    if(empty($productvariant )) $productvariant = $variant;
                     
-        //             if($variant->attribute2 == $request->text2) {
-        //                  if(empty($productvariant )) $productvariant = $variant;
-        //                 if($variant->attribute3 == $request->text3) {
-        //                     $productvariant = $variant;
-        //                     break;
-        //                 }                       
-        //             }
-        //         }
-        //     }
+                    if($variant->attribute2 == $request->text2) {
+                         if(empty($productvariant )) $productvariant = $variant;
+                        if($variant->attribute3 == $request->text3) {
+                            $productvariant = $variant;
+                            break;
+                        }                       
+                    }
+                }
+            }
                     
 
-        //              if(empty($productvariant)) { $productvariant = $productvariants[0];}
-        //              $this->Productvariant = $productvariant;
+                     if(empty($productvariant)) { $productvariant = $productvariants[0];}
+                     $this->Productvariant = $productvariant;
 
-        // }
+        }*/
          
                    
 
@@ -206,19 +230,19 @@ class ProductFrontDetail extends Component
         }
 
 
-        // dump($this->Productvariant->id);
-        // $this->Productvariant = Productvariant::with(['variant_stock' => function($q) {
-        //     $q->where('location_id', 1);
-        // }])->when($this->variant1, function($q1) {
-        //     return $q1->where('attribute1',$this->variant1);
+        /*dump($this->Productvariant->id);
+            $this->Productvariant = Productvariant::with(['variant_stock' => function($q) {
+                $q->where('location_id', 1);
+            }])->when($this->variant1, function($q1) {
+                return $q1->where('attribute1',$this->variant1);
 
-        // })->when($this->variant2, function($q1) {
-        //     return $q1->where('attribute2',$this->variant2);
+            })->when($this->variant2, function($q1) {
+                return $q1->where('attribute2',$this->variant2);
 
-        // })->when($this->variant3, function($q1) {
-        //     return $q1->where('attribute3',$this->variant3);
+            })->when($this->variant3, function($q1) {
+                return $q1->where('attribute3',$this->variant3);
 
-        // })->where('product_id', $this->product->id)->first();
+            })->where('product_id', $this->product->id)->first();*/
         $this->variationID = $this->Productvariant->id;
         $price = number_format($this->Productvariant->price,2,'.',',');
         $this->refresh();
@@ -297,6 +321,7 @@ class ProductFrontDetail extends Component
             }
 
             $this->getProduct();
+            $this->emit('getCart');
 
         }
        
@@ -335,9 +360,10 @@ class ProductFrontDetail extends Component
 
             if(Auth::check()) {
 
-                $exist = Cart::where('product_id', $variant->product_id)->where('varientid', $variant->id)->first();
+                $exist = Cart::where('product_id', $variant->product_id)->where('varientid', $variant->id)->where('user_id', Auth::user()->id)->first();
 
                 if(empty($exist)) {
+
 
                     $cart_arr = [
                         
@@ -440,7 +466,7 @@ class ProductFrontDetail extends Component
                 }
 
                 if(Auth::check()) {
-                    $exist = Cart::where('product_id', $this->product->id)->first();
+                    $exist = Cart::where('product_id', $this->product->id)->where('user_id', Auth::user()->id)->first();
 
                     if(empty($exist)) {
 

@@ -146,12 +146,24 @@ class Header extends Component
         } 
     }
 
+      public function dehydrate($value='')
+    {
+        $this->discoutget = null;
+    }
+
+    public function hydrate($value='')
+    {
+        if(Auth::check())
+         $this->discoutget = Cart::where('user_id', Auth::user()->id)->first();
+    }
+
+
     public function DeleteCartProduct($id, $variantid = null)
     {
 
         if (Auth::check()) {
             Cart::find($id)->delete();
-            return redirect(request()->header('Referer'));
+            // return redirect(request()->header('Referer'));
 
         } else {
             $cart = session()->get('cart');
@@ -166,30 +178,10 @@ class Header extends Component
              session()->put('cart', $cart);
         }
         $this->getCart();
+        $this->emit('getCart');
+
     }
 
-    // public function UpdateWish($id,$productid){
-    //     if (Auth::check()) {
-    //     if($id == 0){
-    //             $favorite_arr = [
-                        
-    //                     'product_id' => $productid,
-
-    //                     'user_id' => $this->user_id,
-
-    //                     'status' => '1',
-    //                 ];
-
-    //             favorite::create($favorite_arr);
-    //         session()->flash('message', 'Add WishList !!');
-            
-    //     }else{
-
-    //         $favorite  = favorite::where('id',$id)->delete();
-    //         session()->flash('message', 'Remove WishList !!');
-    //         }
-    //     }
-    // }
 
     public function getCart()
     {
@@ -216,7 +208,8 @@ class Header extends Component
 
                 $favorite = favorite($product_id);
                
-                favorite::where('id',$favorite->id)->delete();
+                $fav = favorite::findOrFail($favorite->id);
+                $fav->delete();
                 session()->flash('message', 'Item removed from WishList !!');
 
             } else {
@@ -237,9 +230,14 @@ class Header extends Component
             }
 
             $this->getCart();
+            $this->emit('getProduct');
+            $this->emit('getCart');
+            $this->emit('getProducts');
 
         }
        
     }
+
+   
 
 }
