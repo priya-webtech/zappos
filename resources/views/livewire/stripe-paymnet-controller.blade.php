@@ -82,10 +82,10 @@
                     <div class="shipping-details-card">
 
                         <h3 class="panel-title">Shipping Details</h3>
-                        <div class="form-row">
+                        <div class="form-check">
                                 <input type="checkbox" class="form-check-input" wire:model="newaddress" wire:ignore.self id="chknewaddress">
                                 <label class="form-check-label" for="defaultAddress">Create New Address</label>
-                            </div><br><Br>
+                            </div>
                         <div id="bydefultform"  wire:ignore.self>
                             <form role="form" id="address-form" class="require-validation" wire:submit.prevent="addshipping({{$orderdetail->id}})" >
                                 <input type="hidden" name="orderid" value="{{$orderdetail->id}}">

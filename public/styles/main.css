@@ -728,6 +728,8 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .checkout-page-sec {padding: 40px 0 60px; }
 .checkout-page-sec .h1 {margin-bottom: 30px; }
 .credit-card-box input {min-height: 42px; }
+.credit-card-box .form-check {padding-left: 0; margin-bottom: 20px; display: flex; align-items: center;}
+.credit-card-box input[type=checkbox] {min-height: auto; position: initial; width: 16px; height: 16px; display: inline-block; margin: 0 6px 0 0 !important; }
 .credit-card-box textarea {height: 100px; }
 .credit-card-box label {font-weight: 600; }
 .credit-card-box input, .credit-card-box textarea {box-shadow: none; margin-bottom: 5px; }
