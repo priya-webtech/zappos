@@ -43,8 +43,7 @@ class ProductFrontDetail extends Component
 
     public $product, $Productvarian, $favoritevalue,$favoritevalueget;
 
-    public $variant1, $variant2, $variant3, $iteration;
-      public $hydrate;
+    public $variant1, $variant2, $variant3;
 
 
     protected $rules = [
@@ -363,9 +362,10 @@ class ProductFrontDetail extends Component
 
             if(Auth::check()) {
 
-                $exist = Cart::where('product_id', $variant->product_id)->where('varientid', $variant->id)->first();
+                $exist = Cart::where('product_id', $variant->product_id)->where('varientid', $variant->id)->where('user_id', Auth::user()->id)->first();
 
                 if(empty($exist)) {
+
 
                     $cart_arr = [
                         
@@ -468,7 +468,7 @@ class ProductFrontDetail extends Component
                 }
 
                 if(Auth::check()) {
-                    $exist = Cart::where('product_id', $this->product->id)->first();
+                    $exist = Cart::where('product_id', $this->product->id)->where('user_id', Auth::user()->id)->first();
 
                     if(empty($exist)) {
 

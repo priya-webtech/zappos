@@ -785,7 +785,7 @@
                         </div>
                     </div>
                 </div> -->
-
+ @if(!empty($productrelated))
                 <div class="row">
 
                     <div class="col-12">
@@ -794,13 +794,14 @@
 
                             <h3 class="h3">Your Recently Viewed Items</h3>
 
-                            <div class="recently-viewed-slider" wire:ignore>
+                            <div class="recently-viewed-slider" wire:ignore.self>
 
                                 @if(Cookie::get('shopping_cart'))
 
                                 <?php $cookieitem = json_decode(Cookie::get('shopping_cart')); ?>
-                                @if(!empty($productrelated))
+                               
                                 @foreach($productrelated as $pro_res)
+                               
                                 @if(in_array($pro_res->id, $cookieitem) && $pro_res['productmediaget'] && isset($pro_res['productmediaget'][0]) && $pro_res->id != $cookieitem)
 
                                 @php $priceres = allprice($pro_res->id) @endphp
@@ -808,7 +809,7 @@
                                     <a class="dropdown-header" href="{{ route('product-front-detail', $pro_res['seo_utl']) }}">
                                     <img src="{{ asset('storage/'.$pro_res['productmediaget'][0]['image']) }}">
                                     </a>
-                                    <div class="multi-item-content" data-instance="{{ $iteration }}" >
+                                    <div class="multi-item-content" >
 
                                         @php $favorite = favorite($product->id); @endphp
 
@@ -854,7 +855,7 @@
                                 @endforeach
 
                                 @endif
-                                @endif
+                               
 
                             </div>
 
@@ -863,7 +864,7 @@
                     </div>
 
                 </div>
-
+ @endif
                 <div class="row">
 
                     <div class="col-12">

@@ -26,6 +26,8 @@ class WishListDetail extends Component
 
     public function getProducts($value='')
     {
+        $this->dispatchBrowserEvent('onContentChanged');
+
 		$this->product = Product::whereHas('favoriteget', function($q) {
 			return $q->where('user_id', Auth::user()->id);
 		})->with(['productmediaget','favoriteget'])->get();   
