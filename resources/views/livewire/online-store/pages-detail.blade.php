@@ -128,10 +128,10 @@
             </div>
         </article>
     </section>
-    <section class="full-width flex-wrap admin-body-width">
+    <section class="full-width flex-wrap admin-body-width" wire:ignore.self>
         <div class="page-bottom-btn">
             <button class="warning">Delete page</button>
-            <button wire:click.prevent="Updatepages()">Save</button>
+            <button wire:click="Updatepages()">Save</button>
         </div>
     </section>
 
@@ -146,8 +146,7 @@ editor.on('change', function (event) {
     })
      
 </script>
-</x-admin-layout>
-</div>
+
 <div id="duplicate-page" class="customer-modal-main">
     <div class="customer-modal-inner">
         <div class="customer-modal">
@@ -180,3 +179,5 @@ editor.on('change', function (event) {
         $('.search-engine-listing-card .card-middle').toggle();
     });
 </script>
+</x-admin-layout>
+</div>

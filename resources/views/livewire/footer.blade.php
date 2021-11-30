@@ -114,15 +114,11 @@
                     <div class="row">
                         <div class="col-12">
                             <ul>
+                                @foreach($pages as $row)
                                 <li>
-                                    <a href="#">Terms of Use</a>
+                                    <a href="{{ route('pages-front',$row->seo_url) }}">{{$row->title}}</a>
                                 </li>
-                                <li>
-                                    <a href="#">Privacy Policy</a>
-                                </li>
-                                <li>
-                                    <a href="#">fur Policy</a>
-                                </li>
+                                @endforeach
                                 <li>
                                     <a href="#">Interest-based Ads</a>
                                 </li>

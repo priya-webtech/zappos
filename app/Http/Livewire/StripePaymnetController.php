@@ -22,6 +22,10 @@ use App\Models\VariantStock;
 
 use App\Models\ProductVariant;
 
+use App\Models\CustomerAddress;
+
+use App\Models\Country;
+
 use Session;
 
 use Stripe;
@@ -32,11 +36,10 @@ use Illuminate\Support\Facades\Validator;
 
 class StripePaymnetController extends Component
 {
-    public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$firstname,$lastname,$streetname,$city,$country,$pincode,$mobile,$Taxes, $view,$discoutget, $orderID,$unit_number;
+    public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$firstname,$lastname,$streetname,$city,$country,$pincode,$mobile,$Taxes, $view,$discoutget,$billing_type,$orderID,$unit_number,$countries,$newaddress,$customerAddress;
 
 
     protected $rules = [
-
         'orderdetail.first_name' => ['required'],
         'orderdetail.last_name' => ['required'],
         'orderdetail.address' => ['required'],
@@ -46,14 +49,27 @@ class StripePaymnetController extends Component
         'orderdetail.pincode' => ['required'],
         'orderdetail.mobile' => [],
 
+
+        'customerAddress.first_name' => ['required'],
+        'customerAddress.last_name' => ['required'],
+        'customerAddress.address' => ['required'],
+        'customerAddress.apartment' => ['required'],
+        'customerAddress.city' => ['required'],
+        'customerAddress.country' => ['required'],
+        'customerAddress.postal_code' => ['required'],
+        'customerAddress.mobile_no' => [],
+
     ];
     public function mount($id)
     {
         $this->user_id =  Auth::user()->id;
-        
+        $this->countries = Country::all();
         $this->orderID = $id;
         $this->view = false;
         $this->orderdetail = Orders::where('id',$id)->first();
+       
+        $this->customerAddress = CustomerAddress::where('user_id',$this->user_id)->where('address_type','shipping_address')->where('is_billing_address','yes')->first();
+
         $this->discoutget = Cart::where('user_id', $this->user_id)->first();
         $this->Taxes = tax::where('id',1)->first();
         $this->ProductVariant = ProductVariant::get();
@@ -105,34 +121,111 @@ class StripePaymnetController extends Component
     {
 
         $this->validate([
-
-        'orderdetail.first_name' => ['required'],
-        'orderdetail.last_name' => ['required'],
-        'orderdetail.address' => ['required'],
-        'orderdetail.unit_number' => ['required'],
-        'orderdetail.city' => ['required'],
-        'orderdetail.country' => ['required'],
-        'orderdetail.pincode' => ['required'],
-        'orderdetail.mobile' => [],
-
-    ]);
-        
-        $paymentdetail = Orders::where('id', $id)->update(
-                    [
-                        'first_name' => $this->orderdetail['first_name'],
-                        'last_name' => $this->orderdetail['last_name'],
-                        'address' => $this->orderdetail['address'],
-                        'unit_number' => $this->orderdetail['unit_number'],
-                        'city' => $this->orderdetail['city'],
-                        'country' => $this->orderdetail['country'],
-                        'pincode' => $this->orderdetail['pincode'],
-                        'mobile' => $this->orderdetail['mobile'],
-                    ]
-                );
-        if($paymentdetail) {
-            $this->view = true;
-             Session::flash('shipp_success', 'Shipping Update Successfully!');
+            'customerAddress.first_name' => ['required'],
+            'customerAddress.last_name' => ['required'],
+            'customerAddress.address' => ['required'],
+            'customerAddress.apartment' => ['required'],
+            'customerAddress.city' => ['required'],
+            'customerAddress.country' => ['required'],
+            'customerAddress.postal_code' => ['required'],
+            'customerAddress.mobile_no' => ['between:10,12|numeric'],
+        ]);
+        if($this->billing_type == true){
+            $billing_value_type = 'yes';
+        }else{
+            $billing_value_type = 'no';
         }
+
+        if($this->newaddress == true){
+            $paymentdetail = Orders::where('id', $id)->update([
+                'first_name' => $this->customerAddress['first_name'],
+                'last_name' => $this->customerAddress['last_name'],
+                'address' => $this->customerAddress['address'],
+                'unit_number' => $this->customerAddress['apartment'],
+                'city' => $this->customerAddress['city'],
+                'country' => $this->customerAddress['country'],
+                'pincode' => $this->customerAddress['postal_code'],
+                'mobile' => $this->customerAddress['mobile_no'],
+                'billing_type' => $billing_value_type,
+            ]);
+
+            $bill_arr = [
+
+                'user_id' => $this->customerAddress['user_id'],
+                
+                'first_name' => $this->customerAddress['first_name'],
+
+                'last_name' => $this->customerAddress['last_name'],
+                 
+                'apartment' => $this->customerAddress['apartment'],
+              
+                'address' => $this->customerAddress['address'],
+
+                'city' => $this->customerAddress['city'],
+
+                'country' => $this->customerAddress['country'],
+                
+                'postal_code' => $this->customerAddress['postal_code'],
+                
+                'mobile_no' => $this->customerAddress['mobile_no'],
+                
+                'address_type' => 'shipping_address',
+               
+                'is_billing_address' => 'yes',
+            ];
+
+            CustomerAddress::create($bill_arr);
+
+            if($paymentdetail) {
+                $this->view = true;
+                 Session::flash('shipp_success', 'Shipping Update Successfully!');
+            }
+        }else{
+
+            $paymentdetail = Orders::where('id', $id)->update([
+                'first_name' => $this->customerAddress['first_name'],
+                'last_name' => $this->customerAddress['last_name'],
+                'address' => $this->customerAddress['address'],
+                'unit_number' => $this->customerAddress['apartment'],
+                'city' => $this->customerAddress['city'],
+                'country' => $this->customerAddress['country'],
+                'pincode' => $this->customerAddress['postal_code'],
+                'mobile' => $this->customerAddress['mobile_no'],
+                'billing_type' => $billing_value_type,
+            ]);
+
+            $bill_arr = 
+
+            CustomerAddress::where('id', $this->customerAddress['id'])->update([
+
+                'user_id' => $this->customerAddress['user_id'],
+                
+                'first_name' => $this->customerAddress['first_name'],
+
+                'last_name' => $this->customerAddress['last_name'],
+                 
+                'apartment' => $this->customerAddress['apartment'],
+              
+                'address' => $this->customerAddress['address'],
+
+                'city' => $this->customerAddress['city'],
+
+                'country' => $this->customerAddress['country'],
+                
+                'postal_code' => $this->customerAddress['postal_code'],
+                
+                'mobile_no' => $this->customerAddress['mobile_no'],
+                
+                'address_type' => 'shipping_address',
+               
+                'is_billing_address' => 'yes',
+            ]);
+            if($paymentdetail) {
+                $this->view = true;
+                 Session::flash('shipp_success', 'Shipping Update Successfully!');
+            }
+        }
+
     }
 
 
