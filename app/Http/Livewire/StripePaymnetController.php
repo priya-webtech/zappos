@@ -36,7 +36,7 @@ use Illuminate\Support\Facades\Validator;
 
 class StripePaymnetController extends Component
 {
-    public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$firstname,$lastname,$streetname,$city,$country,$pincode,$mobile,$Taxes, $view,$discoutget,$billing_type,$orderID,$unit_number,$countries,$newaddress,$customerAddress;
+    public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$firstname,$lastname,$streetname,$city,$country,$pincode,$mobile,$Taxes, $view,$discoutget,$billing_type,$orderID,$unit_number,$countries,$newaddress,$customerAddress,$first_name,$last_name,$address,$apartment,$postal_code,$mobile_no;
 
 
     protected $rules = [
@@ -120,16 +120,6 @@ class StripePaymnetController extends Component
     public function addshipping($id)
     {
 
-        $this->validate([
-            'customerAddress.first_name' => ['required'],
-            'customerAddress.last_name' => ['required'],
-            'customerAddress.address' => ['required'],
-            'customerAddress.apartment' => ['required'],
-            'customerAddress.city' => ['required'],
-            'customerAddress.country' => ['required'],
-            'customerAddress.postal_code' => ['required'],
-            'customerAddress.mobile_no' => ['between:10,12|numeric'],
-        ]);
         if($this->billing_type == true){
             $billing_value_type = 'yes';
         }else{
@@ -137,15 +127,27 @@ class StripePaymnetController extends Component
         }
 
         if($this->newaddress == true){
+
+            $this->validate([
+                'first_name' => ['required'],
+                'last_name' => ['required'],
+                'address' => ['required'],
+                'apartment' => ['required'],
+                'city' => ['required'],
+                'country' => ['required'],
+                'postal_code' => ['required'],
+                'mobile_no' => ['between:10,12|numeric'],
+            ]);
+
             $paymentdetail = Orders::where('id', $id)->update([
-                'first_name' => $this->customerAddress['first_name'],
-                'last_name' => $this->customerAddress['last_name'],
-                'address' => $this->customerAddress['address'],
-                'unit_number' => $this->customerAddress['apartment'],
-                'city' => $this->customerAddress['city'],
-                'country' => $this->customerAddress['country'],
-                'pincode' => $this->customerAddress['postal_code'],
-                'mobile' => $this->customerAddress['mobile_no'],
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'address' => $this->address,
+                'unit_number' => $this->apartment,
+                'city' => $this->city,
+                'country' => $this->country,
+                'pincode' => $this->postal_code,
+                'mobile' => $this->mobile_no,
                 'billing_type' => $billing_value_type,
             ]);
 
@@ -153,22 +155,14 @@ class StripePaymnetController extends Component
 
                 'user_id' => $this->customerAddress['user_id'],
                 
-                'first_name' => $this->customerAddress['first_name'],
-
-                'last_name' => $this->customerAddress['last_name'],
-                 
-                'apartment' => $this->customerAddress['apartment'],
-              
-                'address' => $this->customerAddress['address'],
-
-                'city' => $this->customerAddress['city'],
-
-                'country' => $this->customerAddress['country'],
-                
-                'postal_code' => $this->customerAddress['postal_code'],
-                
-                'mobile_no' => $this->customerAddress['mobile_no'],
-                
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,                 
+                'apartment' => $this->apartment,              
+                'address' => $this->address,
+                'city' => $this->city,
+                'country' => $this->country,                
+                'postal_code' => $this->postal_code,                
+                'mobile_no' => $this->mobile_no,                
                 'address_type' => 'shipping_address',
                
                 'is_billing_address' => 'yes',
@@ -181,6 +175,17 @@ class StripePaymnetController extends Component
                  Session::flash('shipp_success', 'Shipping Update Successfully!');
             }
         }else{
+
+            $this->validate([
+                'customerAddress.first_name' => ['required'],
+                'customerAddress.last_name' => ['required'],
+                'customerAddress.address' => ['required'],
+                'customerAddress.apartment' => ['required'],
+                'customerAddress.city' => ['required'],
+                'customerAddress.country' => ['required'],
+                'customerAddress.postal_code' => ['required'],
+                'customerAddress.mobile_no' => ['between:10,12|numeric'],
+            ]);
 
             $paymentdetail = Orders::where('id', $id)->update([
                 'first_name' => $this->customerAddress['first_name'],
@@ -222,7 +227,7 @@ class StripePaymnetController extends Component
             ]);
             if($paymentdetail) {
                 $this->view = true;
-                 Session::flash('shipp_success', 'Shipping Update Successfully!');
+                 Session::flash('shipp_success', 'New Shipping Created Successfully!');
             }
         }
 
