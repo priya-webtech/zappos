@@ -1,4 +1,3 @@
-<div>
 <div id="main_model">
     <div class="main-heder">
         <div class="first-container"></div>
@@ -782,7 +781,6 @@ function visibility4() {
 </div>
 
 
-</div>
 
 <script type="text/javascript">
     $("[type='number']").keypress(function (evt) {

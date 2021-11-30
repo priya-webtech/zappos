@@ -11,39 +11,63 @@ use Illuminate\Support\Facades\Auth;
 class WishListDetail extends Component
 {
 	public $product,$user_id;
+
+	protected $listeners = ['getProducts'];
+
 	public function mount()
 	{
 		$this->user_id = Auth::user()->id;
-		$this->product = Product::with('productmediaget')->with('favoriteget')->get();
-		
+		$this->getProducts();	
 	}
     public function render()
     {
         return view('livewire.front.wish-list-detail');
     }
 
-    public function UpdateWish($id,$productid){
+    public function getProducts($value='')
+    {
+		$this->product = Product::whereHas('favoriteget', function($q) {
+			return $q->where('user_id', Auth::user()->id);
+		})->with(['productmediaget','favoriteget'])->get();   
+	}
 
-    	if (Auth::check()) {
-    		$this->user_id =  Auth::user()->id;
-	        if($id == 0){
-	                $favorite_arr = [
-	                        
-	                        'product_id' => $productid,
+	public function UpdateWish($value, $product_id) {
 
-	                        'user_id' => $this->user_id,
+        if(!Auth::check()) {
 
-	                        'status' => '1',
-	                    ];
+             session()->flash('alert', 'You need to login');
 
-	                favorite::create($favorite_arr);
+        } else {
+           
+            if(!$value) {
 
-	            
-	        }else{
+                $favorite = favorite($product_id);
+               
+                $fav = favorite::findOrFail($favorite->id);
+                $fav->delete();
+                session()->flash('message', 'Item removed from WishList !!');
 
-	            $favorite  = favorite::where('id',$id)->delete();
+            } else {
 
-	            }
-	    }
+                 $favorite_arr = [
+                        
+                    'product_id' => $product_id,
+
+                    'user_id' => Auth::user()->id,
+
+                    'status' => 1,
+                    
+                    ];
+
+                favorite::create($favorite_arr);
+                session()->flash('message', 'Item added in Wishlist');
+
+            }
+            $this->getProducts();
+            $this->emit('getCart');
+
+        }
+       
     }
+
 }
