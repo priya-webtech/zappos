@@ -54,466 +54,476 @@
                                 <a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</a>
                             </div>
                             <div class="category-sidebar">
-                                <div class="cat-sidebar-list">
-                                    <div class="cat-title">Women's Sizes <i class="fa fa-angle-down" aria-hidden="true"></i></div>
-                                    <div class="cat-content">
-                                        <div class="cat-content-inner">
-                                            <div class="cat-size">
-                                                <div class="cat-size-box">1</div>
-                                                <div class="cat-size-box">1.5</div>
-                                                <div class="cat-size-box">2</div>
-                                                <div class="cat-size-box">2.5</div>
-                                                <div class="cat-size-box">3</div>
-                                                <div class="cat-size-box">3.5</div>
-                                                <div class="cat-size-box">4</div>
-                                                <div class="cat-size-box">4.5</div>
-                                                <div class="cat-size-box">5</div>
-                                                <div class="cat-size-box">5.5</div>
-                                                <div class="cat-size-box">6</div>
-                                                <div class="cat-size-box">6.5</div>
-                                                <div class="cat-size-box">7</div>
-                                                <div class="cat-size-box">7.5</div>
-                                                <div class="cat-size-box">8</div>
-                                                <div class="cat-size-box">8.5</div>
-                                                <div class="cat-size-box">9</div>
-                                                <div class="cat-size-box">9.5</div>
-                                                <div class="cat-size-box">10</div>
-                                                <div class="cat-size-box">10.5</div>
-                                                <div class="cat-size-box">11</div>
-                                                <div class="cat-size-box">11.5</div>
-                                                <div class="cat-size-box">12</div>
-                                                <div class="cat-size-box">12.5</div>
-                                                <div class="cat-size-box">13</div>
-                                                <div class="cat-size-box">13.5</div>
-                                                <div class="cat-size-box">14.5</div>
-                                                <div class="cat-size-box">15</div>
-                                                <div class="cat-size-box">15.5</div>
-                                                <div class="cat-size-box">16</div>
-                                            </div>
-                                        </div>
+                                <button class="filter-mb-btn">Filters <i class="fa fa-chevron-down" aria-hidden="true"></i></button>
+                                <div class="filter-sec">
+                                    <div class="cat-sidebar-list filter-mb-close">
+                                        <h4 class="h4">Fillter</h4>
+                                        <a class="filter-close">
+                                            <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path></svg>
+                                        </a>
                                     </div>
-                                </div>
-                                <div class="cat-sidebar-list">
-                                    <div class="cat-title">Men's Sizes <i class="fa fa-angle-down" aria-hidden="true"></i></div>
-                                    <div class="cat-content">
-                                        <div class="cat-content-inner">
-                                            <div class="cat-size">
-                                                <div class="cat-size-box">1</div>
-                                                <div class="cat-size-box">1.5</div>
-                                                <div class="cat-size-box">2</div>
-                                                <div class="cat-size-box">2.5</div>
-                                                <div class="cat-size-box">3</div>
-                                                <div class="cat-size-box">3.5</div>
-                                                <div class="cat-size-box">4</div>
-                                                <div class="cat-size-box">4.5</div>
-                                                <div class="cat-size-box">5</div>
-                                                <div class="cat-size-box">5.5</div>
-                                                <div class="cat-size-box">6</div>
-                                                <div class="cat-size-box">6.5</div>
-                                                <div class="cat-size-box">7</div>
-                                                <div class="cat-size-box">7.5</div>
-                                                <div class="cat-size-box">8</div>
-                                                <div class="cat-size-box">8.5</div>
-                                                <div class="cat-size-box">9</div>
-                                                <div class="cat-size-box">9.5</div>
-                                                <div class="cat-size-box">10</div>
-                                                <div class="cat-size-box">10.5</div>
-                                                <div class="cat-size-box">11</div>
-                                                <div class="cat-size-box">11.5</div>
-                                                <div class="cat-size-box">12</div>
-                                                <div class="cat-size-box">12.5</div>
-                                                <div class="cat-size-box">13</div>
-                                                <div class="cat-size-box">13.5</div>
-                                                <div class="cat-size-box">14.5</div>
-                                                <div class="cat-size-box">15</div>
-                                                <div class="cat-size-box">15.5</div>
-                                                <div class="cat-size-box">16</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cat-sidebar-list">
-                                    <div class="cat-title">Kid's Sizes <i class="fa fa-angle-down" aria-hidden="true"></i></div>
-                                    <div class="cat-content">
-                                        <div class="cat-content-inner">
-                                            <div class="cat-checkbox-list">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> 0 Infant(8) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> 0 Infant(8) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> 0 Infant(8) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> 0 Infant(8) </label>
+                                    <div class="cat-sidebar-list">
+                                        <div class="cat-title">Women's Sizes <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                        <div class="cat-content">
+                                            <div class="cat-content-inner">
+                                                <div class="cat-size">
+                                                    <div class="cat-size-box">1</div>
+                                                    <div class="cat-size-box">1.5</div>
+                                                    <div class="cat-size-box">2</div>
+                                                    <div class="cat-size-box">2.5</div>
+                                                    <div class="cat-size-box">3</div>
+                                                    <div class="cat-size-box">3.5</div>
+                                                    <div class="cat-size-box">4</div>
+                                                    <div class="cat-size-box">4.5</div>
+                                                    <div class="cat-size-box">5</div>
+                                                    <div class="cat-size-box">5.5</div>
+                                                    <div class="cat-size-box">6</div>
+                                                    <div class="cat-size-box">6.5</div>
+                                                    <div class="cat-size-box">7</div>
+                                                    <div class="cat-size-box">7.5</div>
+                                                    <div class="cat-size-box">8</div>
+                                                    <div class="cat-size-box">8.5</div>
+                                                    <div class="cat-size-box">9</div>
+                                                    <div class="cat-size-box">9.5</div>
+                                                    <div class="cat-size-box">10</div>
+                                                    <div class="cat-size-box">10.5</div>
+                                                    <div class="cat-size-box">11</div>
+                                                    <div class="cat-size-box">11.5</div>
+                                                    <div class="cat-size-box">12</div>
+                                                    <div class="cat-size-box">12.5</div>
+                                                    <div class="cat-size-box">13</div>
+                                                    <div class="cat-size-box">13.5</div>
+                                                    <div class="cat-size-box">14.5</div>
+                                                    <div class="cat-size-box">15</div>
+                                                    <div class="cat-size-box">15.5</div>
+                                                    <div class="cat-size-box">16</div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="cat-sidebar-list">
-                                    <div class="cat-title">Gender <i class="fa fa-angle-down" aria-hidden="true"></i></div>
-                                    <div class="cat-content">
-                                        <div class="cat-content-inner">
-                                            <div class="cat-checkbox-list">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Girls (13) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Boys (7) </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cat-sidebar-list">
-                                    <div class="cat-title">Brands <i class="fa fa-angle-down" aria-hidden="true"></i></div>
-                                    <div class="cat-content">
-                                        <form>
-                                            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                                        </form>
-                                        <div class="cat-content-inner">
-                                            <div class="cat-checkbox-list">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Slide (148) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Mules (295) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Massicon (145) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Bootie (58) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Slipper (18) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                    <div class="cat-sidebar-list">
+                                        <div class="cat-title">Men's Sizes <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                        <div class="cat-content">
+                                            <div class="cat-content-inner">
+                                                <div class="cat-size">
+                                                    <div class="cat-size-box">1</div>
+                                                    <div class="cat-size-box">1.5</div>
+                                                    <div class="cat-size-box">2</div>
+                                                    <div class="cat-size-box">2.5</div>
+                                                    <div class="cat-size-box">3</div>
+                                                    <div class="cat-size-box">3.5</div>
+                                                    <div class="cat-size-box">4</div>
+                                                    <div class="cat-size-box">4.5</div>
+                                                    <div class="cat-size-box">5</div>
+                                                    <div class="cat-size-box">5.5</div>
+                                                    <div class="cat-size-box">6</div>
+                                                    <div class="cat-size-box">6.5</div>
+                                                    <div class="cat-size-box">7</div>
+                                                    <div class="cat-size-box">7.5</div>
+                                                    <div class="cat-size-box">8</div>
+                                                    <div class="cat-size-box">8.5</div>
+                                                    <div class="cat-size-box">9</div>
+                                                    <div class="cat-size-box">9.5</div>
+                                                    <div class="cat-size-box">10</div>
+                                                    <div class="cat-size-box">10.5</div>
+                                                    <div class="cat-size-box">11</div>
+                                                    <div class="cat-size-box">11.5</div>
+                                                    <div class="cat-size-box">12</div>
+                                                    <div class="cat-size-box">12.5</div>
+                                                    <div class="cat-size-box">13</div>
+                                                    <div class="cat-size-box">13.5</div>
+                                                    <div class="cat-size-box">14.5</div>
+                                                    <div class="cat-size-box">15</div>
+                                                    <div class="cat-size-box">15.5</div>
+                                                    <div class="cat-size-box">16</div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="cat-sidebar-list">
-                                    <div class="cat-title">Price <i class="fa fa-angle-down" aria-hidden="true"></i></div>
-                                    <div class="cat-content">
-                                        <div class="cat-content-inner">
-                                            <div class="cat-checkbox-list">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="50" wire:model="amount_spent">
-                                                    <label class="form-check-label" for="defaultCheck1"> $50.00 and Under (11) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="100" wire:model="amount_spent">
-                                                    <label class="form-check-label" for="defaultCheck1"> $100.00 and Under (16) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="200" wire:model="amount_spent">
-                                                    <label class="form-check-label" for="defaultCheck1"> $200.00 and Under (16) </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cat-sidebar-list">
-                                    <div class="cat-title">Colors <i class="fa fa-angle-down" aria-hidden="true"></i></div>
-                                    <div class="cat-content">
-                                        <form>
-                                            <input class="form-control" type="search" placeholder="Search Colors" aria-label="Search">
-                                        </form>
-                                        <div class="cat-content-inner">
-                                            <div class="cat-checkbox-list">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Slide (148) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Mules (295) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Massicon (145) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Bootie (58) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Slipper (18) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                    <div class="cat-sidebar-list">
+                                        <div class="cat-title">Kid's Sizes <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                        <div class="cat-content">
+                                            <div class="cat-content-inner">
+                                                <div class="cat-checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> 0 Infant(8) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> 0 Infant(8) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> 0 Infant(8) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> 0 Infant(8) </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="cat-sidebar-list">
-                                    <div class="cat-title">Styles <i class="fa fa-angle-down" aria-hidden="true"></i></div>
-                                    <div class="cat-content">
-                                        <form>
-                                            <input class="form-control" type="search" placeholder="Search Styles" aria-label="Search">
-                                        </form>
-                                        <div class="cat-content-inner">
-                                            <div class="cat-checkbox-list">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Slide (148) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Mules (295) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Massicon (145) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Bootie (58) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Slipper (18) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                    <div class="cat-sidebar-list">
+                                        <div class="cat-title">Gender <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                        <div class="cat-content">
+                                            <div class="cat-content-inner">
+                                                <div class="cat-checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Girls (13) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Boys (7) </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="cat-sidebar-list">
-                                    <div class="cat-title">Features <i class="fa fa-angle-down" aria-hidden="true"></i></div>
-                                    <div class="cat-content">
-                                        <form>
-                                            <input class="form-control" type="search" placeholder="Search Features" aria-label="Search">
-                                        </form>
-                                        <div class="cat-content-inner">
-                                            <div class="cat-checkbox-list">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Slide (148) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Mules (295) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Massicon (145) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Bootie (58) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Slipper (18) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cat-sidebar-list">
-                                    <div class="cat-title">Materials <i class="fa fa-angle-down" aria-hidden="true"></i></div>
-                                    <div class="cat-content">
-                                        <form>
-                                            <input class="form-control" type="search" placeholder="Materials" aria-label="Search">
-                                        </form>
-                                        <div class="cat-content-inner">
-                                            <div class="cat-checkbox-list">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Slide (148) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Mules (295) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Massicon (145) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Bootie (58) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Slipper (18) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                    <div class="cat-sidebar-list">
+                                        <div class="cat-title">Brands <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                        <div class="cat-content">
+                                            <form>
+                                                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                                            </form>
+                                            <div class="cat-content-inner">
+                                                <div class="cat-checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Slide (148) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Mules (295) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Massicon (145) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Bootie (58) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Slipper (18) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="cat-sidebar-list">
-                                    <div class="cat-title">Linings <i class="fa fa-angle-down" aria-hidden="true"></i></div>
-                                    <div class="cat-content">
-                                        <form>
-                                            <input class="form-control" type="search" placeholder="Search Lining" aria-label="Search">
-                                        </form>
-                                        <div class="cat-content-inner">
-                                            <div class="cat-checkbox-list">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Slide (148) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Mules (295) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Massicon (145) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Bootie (58) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Slipper (18) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                    <div class="cat-sidebar-list">
+                                        <div class="cat-title">Price <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                        <div class="cat-content">
+                                            <div class="cat-content-inner">
+                                                <div class="cat-checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="50" wire:model="amount_spent">
+                                                        <label class="form-check-label" for="defaultCheck1"> $50.00 and Under (11) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="100" wire:model="amount_spent">
+                                                        <label class="form-check-label" for="defaultCheck1"> $100.00 and Under (16) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="200" wire:model="amount_spent">
+                                                        <label class="form-check-label" for="defaultCheck1"> $200.00 and Under (16) </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="cat-sidebar-list">
-                                    <div class="cat-title">Patterns <i class="fa fa-angle-down" aria-hidden="true"></i></div>
-                                    <div class="cat-content">
-                                        <form>
-                                            <input class="form-control" type="search" placeholder="Search Pattern" aria-label="Search">
-                                        </form>
-                                        <div class="cat-content-inner">
-                                            <div class="cat-checkbox-list">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Slide (148) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Mules (295) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Massicon (145) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Bootie (58) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Slipper (18) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                    <div class="cat-sidebar-list">
+                                        <div class="cat-title">Colors <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                        <div class="cat-content">
+                                            <form>
+                                                <input class="form-control" type="search" placeholder="Search Colors" aria-label="Search">
+                                            </form>
+                                            <div class="cat-content-inner">
+                                                <div class="cat-checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Slide (148) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Mules (295) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Massicon (145) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Bootie (58) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Slipper (18) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="cat-sidebar-list">
-                                    <div class="cat-title">Single Shoes <i class="fa fa-angle-down" aria-hidden="true"></i></div>
-                                    <div class="cat-content">
-                                        <form>
-                                            <input class="form-control" type="search" placeholder="Search Pattern" aria-label="Search">
-                                        </form>
-                                        <div class="cat-content-inner">
-                                            <div class="cat-checkbox-list">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                                    <label class="form-check-label" for="defaultCheck1"> Single Shoes </label>
+                                    <div class="cat-sidebar-list">
+                                        <div class="cat-title">Styles <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                        <div class="cat-content">
+                                            <form>
+                                                <input class="form-control" type="search" placeholder="Search Styles" aria-label="Search">
+                                            </form>
+                                            <div class="cat-content-inner">
+                                                <div class="cat-checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Slide (148) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Mules (295) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Massicon (145) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Bootie (58) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Slipper (18) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cat-sidebar-list">
+                                        <div class="cat-title">Features <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                        <div class="cat-content">
+                                            <form>
+                                                <input class="form-control" type="search" placeholder="Search Features" aria-label="Search">
+                                            </form>
+                                            <div class="cat-content-inner">
+                                                <div class="cat-checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Slide (148) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Mules (295) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Massicon (145) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Bootie (58) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Slipper (18) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cat-sidebar-list">
+                                        <div class="cat-title">Materials <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                        <div class="cat-content">
+                                            <form>
+                                                <input class="form-control" type="search" placeholder="Materials" aria-label="Search">
+                                            </form>
+                                            <div class="cat-content-inner">
+                                                <div class="cat-checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Slide (148) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Mules (295) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Massicon (145) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Bootie (58) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Slipper (18) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cat-sidebar-list">
+                                        <div class="cat-title">Linings <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                        <div class="cat-content">
+                                            <form>
+                                                <input class="form-control" type="search" placeholder="Search Lining" aria-label="Search">
+                                            </form>
+                                            <div class="cat-content-inner">
+                                                <div class="cat-checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Slide (148) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Mules (295) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Massicon (145) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Bootie (58) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Slipper (18) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cat-sidebar-list">
+                                        <div class="cat-title">Patterns <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                        <div class="cat-content">
+                                            <form>
+                                                <input class="form-control" type="search" placeholder="Search Pattern" aria-label="Search">
+                                            </form>
+                                            <div class="cat-content-inner">
+                                                <div class="cat-checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Slide (148) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Mules (295) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Massicon (145) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Bootie (58) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Slipper (18) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Barrlena (14) </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cat-sidebar-list">
+                                        <div class="cat-title">Single Shoes <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+                                        <div class="cat-content">
+                                            <form>
+                                                <input class="form-control" type="search" placeholder="Search Pattern" aria-label="Search">
+                                            </form>
+                                            <div class="cat-content-inner">
+                                                <div class="cat-checkbox-list">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                        <label class="form-check-label" for="defaultCheck1"> Single Shoes </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -571,7 +581,7 @@
                                     @php $result = favorite($rows->id); @endphp
                                     <?php $decodeA = json_decode($rows->collection); ?>
                                     @if(in_array($menuitems->multipleid, $decodeA) && $row_img[0]['product_id'] == $rows->id)
-                                    <div class="col-lg-3 col-md-4 cat-pd-col">
+                                    <div class="col-lg-3 col-md-4 col-sm-4 col-6 cat-pd-col">
                                         <div class="cat-pd-img">
                                             <a href="{{ route('product-front-detail', $rows->seo_utl) }}">
                                                 <img src="{{ asset('storage/'.$row_img[0]['image']) }}">

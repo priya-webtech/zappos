@@ -512,7 +512,7 @@
 
         @else
 
-            <ul class="navbar-nav navbar-nav-right mr-auto">
+            <ul class="navbar-nav navbar-nav-right mr-auto user-login-lbl">
                 <li class="nav-item dropdown">
 
                     <a class="nav-link dropdown-toggle f-bl" href="#" id="navbarDropdown" role="button"
