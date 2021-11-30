@@ -2,7 +2,7 @@
     {{-- Because she competes with no one, no one can compete with her. --}}
     <x-customer-layout>
         @php $symbol = CurrencySymbol(); @endphp
-    	<!-- category html start -->
+        <!-- category html start -->
 
         <div class="category-head" wire:ignore>
             <div class="container">
@@ -522,9 +522,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-9 col-md-8" wire:ignore>
+                    <div class="col-lg-9 col-md-8" >
                         <div class="category-right">
-                            <div class="your-selections" wire:ignore>
+                            <div class="your-selections" >
                                 <h4 class="h4">Your Selections</h4>
                                 <div class="scroller scroller-left"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></div>
                                 <div class="scroller scroller-right"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></div>
@@ -563,7 +563,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="cat-product-section" wire:ignore>
+                            <div class="cat-product-section">
                                 <div class="row">
                                     @foreach($Product as $rows)
                                     @foreach($Productmediass as $row_img)
@@ -578,7 +578,10 @@
                                             </a>
                                            
                                             @if(!empty($result))
-                                            <button class="cat-wishlist-btn {{$result['class']}} wish-list" wire:click="UpdateWish({{$result['id']}}, {{$result['product_id']}})"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
+                                            <button class="cat-wishlist-btn add-wishlist wish-list" wire:click="UpdateWish(false, {{$rows->id}})"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
+                                            @else
+                                            <button class="cat-wishlist-btn wish-list" wire:click="UpdateWish(true, {{$rows->id}})"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
+                                            
                                             @endif
 
                                             <?php if($rows->product_new != '0') { $saledecode = json_decode($rows->product_new); }?>

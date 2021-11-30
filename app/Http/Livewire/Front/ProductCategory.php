@@ -10,6 +10,9 @@ use Illuminate\Pagination\Paginator;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\tagsale;
+use Illuminate\Support\Facades\Auth;
+use App\Models\favorite;
+
 
 class ProductCategory extends Component
 {
@@ -18,6 +21,9 @@ class ProductCategory extends Component
 	public $menuitems,$getproduct,$tagsale,$Productmediass,$amount_spent,$filter_product;
 	//protected $paginationTheme = 'bootstrap';
 	public $perPage = 10;
+	
+	 protected $listeners = ['getProducts'];
+	 
 	public function mount($slug) {
 
 		$this->menuitems = MenuItems::where('link',$slug)->first();
@@ -29,18 +35,7 @@ class ProductCategory extends Component
 
 	public function render()
 	{
-		//$this->Product = Product::get();
-		$this->getproduct = Product::when($this->filter_product, function ($query, $filter_product) {
-
-            $query->where('title', 'LIKE', '%' . $filter_product . '%');
-
-            })
-
-        ->when($this->amount_spent, function ($query, $amount_spent) {
-
-            $query->where('price', '>', $amount_spent);
-
-        })->orderBy('title','DESC')->get();
+		$this->getProducts();
 
 
 		$offset = max(0, ($this->page - 1) * $this->perPage);
@@ -56,4 +51,58 @@ class ProductCategory extends Component
 		 return redirect('/product/'.$this->menuitems->link);	
 		}
 	}
+	
+	public function getProducts() {
+	    $this->getproduct = Product::when($this->filter_product, function ($query, $filter_product) {
+
+            $query->where('title', 'LIKE', '%' . $filter_product . '%');
+
+            })
+
+        ->when($this->amount_spent, function ($query, $amount_spent) {
+
+            $query->where('price', '>', $amount_spent);
+
+        })->orderBy('title','DESC')->get();
+	}
+	
+	
+    public function UpdateWish($value, $product_id) {
+
+        if(!Auth::check()) {
+
+             session()->flash('alert', 'You need to login');
+
+        } else {
+           
+            if(!$value) {
+
+                $favorite = favorite($product_id);
+               
+                favorite::where('id',$favorite->id)->delete();
+                session()->flash('message', 'Item removed from WishList !!');
+
+            } else {
+
+                 $favorite_arr = [
+                        
+                    'product_id' => $product_id,
+
+                    'user_id' => Auth::user()->id,
+
+                    'status' => 1,
+                    
+                    ];
+
+                favorite::create($favorite_arr);
+                session()->flash('message', 'Item added in Wishlist');
+
+            }
+
+            $this->getProducts();
+            $this->emit('getCart');
+
+        }
+       
+    }
 }
