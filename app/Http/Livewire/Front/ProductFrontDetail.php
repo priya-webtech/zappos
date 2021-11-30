@@ -58,7 +58,6 @@ class ProductFrontDetail extends Component
 
     public function mount($slug) {
 
-        $this->iteration = 1;
         // dump('mount');
         $this->variationID = null;
         $this->slug = $slug;
@@ -137,7 +136,6 @@ class ProductFrontDetail extends Component
 
         $this->reviewget = review::where('product_id',$this->product->id)->get();
         $this->productrelated = Product::with('productmediaget')->with('favoriteget')->get();
-        $this->iteration++;
 
 
 
