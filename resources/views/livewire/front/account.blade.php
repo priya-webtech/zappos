@@ -174,10 +174,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row street-unit-row">
-                                                    <div class="form-group">
-                                                        <label for="primaryVoiceNumber">Company Name</label>
-                                                        <input type="text" wire:model="editaddress.company" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Company Name" required wire:ignore.self>
+                                                <div class="row company-name-row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="primaryVoiceNumber">Company Name</label>
+                                                            <input type="text" wire:model="editaddress.company" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Company Name" required wire:ignore.self>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row street-unit-row">
@@ -235,9 +237,9 @@
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="site-btn blue-btn" style="border-color: red; background-color: white; color: red;" wire:click.prevent="deleteship({{$addressid}})" data-dismiss="modal">Delete</button>
+                                            <button type="button" class="site-btn red-btn mr-auto"wire:click.prevent="deleteship({{$addressid}})" data-dismiss="modal">Delete</button>
                                             <button type="button" class="site-btn blue-btn" data-dismiss="modal" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="site-btn blue-btn" wire:ignore.self wire:click.prevent="update({{$addressid}})">Save</button>
+                                            <button type="button" class="site-btn green-btn" wire:ignore.self wire:click.prevent="update({{$addressid}})">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -484,10 +486,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row street-unit-row">
-                                                    <div class="form-group">
-                                                        <label for="primaryVoiceNumber">Company Name</label>
-                                                        <input type="text" wire:model="editaddress.company" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Company Name" required wire:ignore.self>
+                                                <div class="row company-name-row">
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="primaryVoiceNumber">Company Name</label>
+                                                            <input type="text" wire:model="editaddress.company" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Company Name" required wire:ignore.self>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row street-unit-row">
@@ -545,9 +549,9 @@
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="site-btn blue-btn" style="border-color: red; background-color: white; color: red;" wire:click.prevent="deleteship({{$addressid}})" data-dismiss="modal">Delete</button>
+                                            <button type="button" class="site-btn red-btn mr-auto" style="border-color: red; background-color: white; color: red;" wire:click.prevent="deleteship({{$addressid}})" data-dismiss="modal">Delete</button>
                                             <button type="button" class="site-btn blue-btn" data-dismiss="modal" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="site-btn blue-btn" wire:ignore.self wire:click.prevent="acountupdate({{$addressid}})">Save</button>
+                                            <button type="button" class="site-btn green-btn" wire:ignore.self wire:click.prevent="acountupdate({{$addressid}})">Save</button>
                                         </div>
                                     </div>
                                 </div>

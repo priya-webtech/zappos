@@ -47,7 +47,7 @@
         <div class="category-sec">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-lg-3 col-md-4">
                         <div class="category-left">
                             <div class="category-login">
                                 <p>Login to see saved sizes</p>
@@ -522,7 +522,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-9" wire:ignore>
+                    <div class="col-lg-9 col-md-8" wire:ignore>
                         <div class="category-right">
                             <div class="your-selections" wire:ignore>
                                 <h4 class="h4">Your Selections</h4>
@@ -571,7 +571,7 @@
                                     @php $result = favorite($rows->id); @endphp
                                     <?php $decodeA = json_decode($rows->collection); ?>
                                     @if(in_array($menuitems->multipleid, $decodeA) && $row_img[0]['product_id'] == $rows->id)
-                                    <div class="col-md-3 cat-pd-col">
+                                    <div class="col-lg-3 col-md-4 cat-pd-col">
                                         <div class="cat-pd-img">
                                             <a href="{{ route('product-front-detail', $rows->seo_utl) }}">
                                                 <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
