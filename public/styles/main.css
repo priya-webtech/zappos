@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
 /**************************
-		Basic css
+        Basic css
 **************************/
 * {padding: 0px; margin: 0px;  font-family: 'Open Sans', sans-serif; }
 body { font-family: 'Open Sans', sans-serif; overflow-x: hidden; min-height: 100vh; color: #202223;}
@@ -30,7 +30,7 @@ input[type=checkbox]:focus {
 .h5, h5 {color: #003953; font-weight: bold; font-size: 16px; }
 
 /***************************
-		site button
+        site button
 ***************************/
 .site-btn {background-color: transparent; padding: 12px 25px; font-weight: bold; border-radius: 5px; display: inline-block; line-height: 20px; text-align: center; text-decoration: none !important; cursor: pointer; border: 2px solid transparent; font-size: 16px; color: #ffffff !important; }
 .site-btn:hover {color: #ffffff !important; }
@@ -69,7 +69,7 @@ input[type=checkbox]:focus {
 
 
 /**************************
-		Header css
+        Header css
 **************************/
 .header-top {background-color: #e5f1f8; border-bottom: 1px solid #dfdfdf; }
 header .header-top h1,header .header-top p,.contact-number{font-size: 14px; color: #003953; margin: 0px; }
@@ -271,15 +271,15 @@ button.signin-close-btn svg {fill: #003953; }
 .sign-up-container {left: 0; width: 50%; opacity: 0; z-index: 1; color: #003953; font-weight: 500; }
 .container.right-panel-active .sign-up-container {transform: translateX(100%); opacity: 1; z-index: 5; animation: show 0.6s; }
 @keyframes show {
-	0%, 49.99% {
-		opacity: 0;
-		z-index: 1;
-	}
-	
-	50%, 100% {
-		opacity: 1;
-		z-index: 5;
-	}
+    0%, 49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+    
+    50%, 100% {
+        opacity: 1;
+        z-index: 5;
+    }
 }
 
 
@@ -314,7 +314,7 @@ section#sign-in-form {display: none; }
 
 
 /*********************************
-			footer css
+            footer css
 **********************************/
 #footer {background-color: #003953; margin-top: 20px; }
 .footer-inner { font-size: 15px; padding: 80px 0 10px; color: #dfdfdf; }
@@ -322,8 +322,8 @@ section#sign-in-form {display: none; }
 .page-footer .newsletter-col .h4 {color: #003953; }
 #footer .newsletter-col p {color: #003953; }
 form.footer-input {display: flex; align-items: center; max-width: 400px; }
-.footer-input input {padding: 10px 15px; border-radius: 5px 0 0 5px; border: none; flex: 1 1 auto; }
-.footer-input button {padding: 10px 15px; border-radius: 0 5px 5px 0;}
+.footer-input input {padding: 10px 15px; border-radius: 5px 0 0 5px; border: none; flex: 1 1 auto; width: 100%;}
+.footer-input button {padding: 10px 15px; border-radius: 0 5px 5px 0;flex: 0 0 auto;}
 
 
 .page-footer .h4 {color: #fff; margin-bottom: 10px;}
@@ -345,7 +345,7 @@ form.footer-input {display: flex; align-items: center; max-width: 400px; }
 ul.footer-social {margin-top: 10px; display: inline-block;}
 
 /*****************************
-		home page css
+        home page css
 ******************************/
 .banner {padding-bottom: 40px}
 .banner img {width: 100%; }
@@ -361,14 +361,14 @@ ul.footer-social {margin-top: 10px; display: inline-block;}
 .home-cat-box figure::before {position: absolute; top: 0; left: -75%; z-index: 2; display: block; content: ''; width: 50%; height: 100%; background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%); background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%); -webkit-transform: skewX(-25deg); transform: skewX(-25deg); }
 .home-cat-box:hover figure::before {-webkit-animation: shine 1s; animation: shine 1s; }
 @-webkit-keyframes shine {
-	100% {
-		left: 125%;
-	}
+    100% {
+        left: 125%;
+    }
 }
 @keyframes shine {
-	100% {
-		left: 125%;
-	}
+    100% {
+        left: 125%;
+    }
 }
 
 
@@ -399,7 +399,7 @@ ul.footer-social {margin-top: 10px; display: inline-block;}
 .mini-banner-content .site-btn {margin-top: 20px; }
 
 /******************************
-		Product page css
+        Product page css
 ******************************/
 .single-pd-sec {padding-bottom: 50px; border-bottom: 1px solid #ddd; }
 .product-top-row {display: flex; align-items: center; justify-content: space-between; padding: 30px 0; }
@@ -539,7 +539,7 @@ ul.product-right-social li a:hover {background-color: #035d59; }
 
 
 /**********************************
-		category page css
+        category page css
 **********************************/
 .category-head {padding: 30px 0; }
 .category-head .col-12 {display: flex; align-items: center; justify-content: space-between; }
@@ -646,7 +646,7 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .page-pagination .page-item:last-child .page-link i {margin-left: 6px; }
 
 /*****************************************
-			Add Review page css
+            Add Review page css
 *****************************************/
 .add-review-sec .row {justify-content: center; }
 .add-review-sec {padding: 60px 0 40px;}
@@ -671,7 +671,7 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 
 
 /*****************************************
-			View Cart Page css
+            View Cart Page css
 *****************************************/
 .view-cart-sec {padding: 60px 0; }
 .my-cart-tbl {box-shadow: 0 0 6px 3px rgb(0 0 0 / 10%); width: 100%; border-radius: 5px;padding-bottom: 5px; background: #fff; }
@@ -720,7 +720,7 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 
 
 /***********************************
-		Checkout page css
+        Checkout page css
 ***********************************/
 .checkout-page-sec {padding: 40px 0 60px; }
 .checkout-page-sec .h1 {margin-bottom: 30px; }
@@ -771,7 +771,7 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .return-order-btn {color: #035d59; font-weight: bold; }
 
 /****************************************
-		Profile details page css
+        Profile details page css
 ****************************************/
 .modal-close-btn {opacity: 1; }
 .modal-close-btn svg {width: 20px; height: 20px;fill: #003953; }
@@ -871,7 +871,7 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .item-bought-slider.slick-initialized,.similar-items-slider.slick-initialized, .recently-viewed-slider.slick-initialized { display: block; }
 
 /********************************
-	  Favorite List page css
+      Favorite List page css
 ********************************/
 .favorite-list-sec {padding: 60px 0; }
 .favorite-list-sec .h1 {font-size: 36px; margin-bottom: 30px; font-weight: bold;}
@@ -879,7 +879,7 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .favorite-list-sec {padding: 50px 0 60px; }
 
 /**********************************
-		thank you page css
+        thank you page css
 **********************************/
 .thank-you-sec {text-align: center; padding: 60px 0 50px;color: #003953; }
 .thank-you-sec .h1 {margin: 15px 0 20px; font-weight: bold;font-size: 36px; }
@@ -889,7 +889,7 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .thank-you-sec .site-btn:hover i, .thank-you-sec .site-btn:hover svg {margin: 0 9px 0 -4px; }
 
 /*********************************
-		static page css
+        static page css
 *********************************/
 .static-page {font-size: 14px; padding: 50px 0 60px; }
 .static-page .h1 {font-size: 36px; font-weight: 600; margin-bottom: 25px;color: #003953; }
@@ -1080,7 +1080,7 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
     .favorite-list-sec .h1 {font-size: 30px; margin-bottom: 18px;}
 
     .product-top-row {flex-wrap: wrap; padding: 30px 0 0;}
-    .breadcrumb li.breadcrumb-item::before {padding: 0 4px; }
+    .breadcrumb li.breadcrumb-item::before {padding: 0 3px; }
     .product-sku { margin: 10px 0 15px auto;}
 
     .product-slider {height: 300px; }
@@ -1088,7 +1088,14 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
     .product-slider-nav .slick-slide {width: 70px !important; height: 62px; }
     .product-slider-nav img, .slider-nav iframe {padding: 4px; }
     .product-slider-for {width: calc(100% - 70px); }
+    
+    .product-review {padding-bottom: 20px; }
+    .reriew-img img { width: 114px; height: 90px;}
 
-    .reriew-img img { width: 140px; height: 100px;}
+}
 
+@media only screen and (max-width: 374px) { 
+    .pd-btn-group {flex-wrap: wrap; }
+    .pd-btn-group .add-collection-btn {margin-top: 5px !important; }
+    .breadcrumb li a {font-size: 12px; }
 }
