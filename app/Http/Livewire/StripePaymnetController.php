@@ -86,7 +86,9 @@ class StripePaymnetController extends Component
             $this->newaddress = ($this->orderdetail->new_address== 'yes') ? true : false;
             $this->view = true;
         } else {
-            $this->customerAddress = CustomerAddress::where('user_id',$this->user_id)->where('address_type','shipping_address')->where('default_address', true)->first();
+       
+            $this->customerAddress = CustomerAddress::where('user_id',$this->user_id)->where('address_type','shipping_address')->where('is_billing_address', 'yes')->first();
+
            
 
         }
