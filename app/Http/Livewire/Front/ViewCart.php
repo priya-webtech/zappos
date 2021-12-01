@@ -48,7 +48,7 @@ class ViewCart extends Component
 
         if (Auth::check()) {
             Cart::find($id)->delete();
-            return redirect(request()->header('Referer'));
+            // return redirect(request()->header('Referer'));
 
         } else {
             $cart = session()->get('cart');
@@ -63,8 +63,19 @@ class ViewCart extends Component
              session()->put('cart', $cart);
         }
         $this->getCart();
+        $this->emit('getCart');
     }
 
+    public function dehydrate($value='')
+    {
+        $this->discoutget = null;
+    }
+
+    public function hydrate($value='')
+    {
+        if(Auth::check())
+          $this->discoutget = Cart::with('promocode')->where('user_id', Auth::user()->id)->first();
+    }
 
     public function stockplusminus($cartid, $variantid = null)
     {
@@ -177,6 +188,7 @@ class ViewCart extends Component
 
             }
              $this->getCart();
+              $this->emit('getCart');
 
 
 

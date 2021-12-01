@@ -1,4 +1,3 @@
-<div>
 <div id="main_model">
     <div class="main-heder">
         <div class="first-container"></div>
@@ -512,7 +511,7 @@
 
         @else
 
-            <ul class="navbar-nav navbar-nav-right mr-auto">
+            <ul class="navbar-nav navbar-nav-right mr-auto user-login-lbl">
                 <li class="nav-item dropdown">
 
                     <a class="nav-link dropdown-toggle f-bl" href="#" id="navbarDropdown" role="button"
@@ -782,7 +781,6 @@ function visibility4() {
 </div>
 
 
-</div>
 
 <script type="text/javascript">
     $("[type='number']").keypress(function (evt) {

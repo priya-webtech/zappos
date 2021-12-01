@@ -66,9 +66,32 @@ class StripePaymnetController extends Component
         $this->countries = Country::all();
         $this->orderID = $id;
         $this->view = false;
-        $this->orderdetail = Orders::where('id',$id)->first();
+        $this->orderdetail = Orders::find($id);
+        $this->customerAddress = [];
+        $this->billing_type = false;
+            $this->newaddress = false;
+
+
+        if(!empty($this->orderdetail->address)) {
+
+            $this->customerAddress['first_name'] = $this->orderdetail->first_name;
+            $this->customerAddress['last_name'] = $this->orderdetail->last_name;
+            $this->customerAddress['address'] = $this->orderdetail->address;
+            $this->customerAddress['city'] = $this->orderdetail->city;
+            $this->customerAddress['country'] = $this->orderdetail->country;
+            $this->customerAddress['postal_code'] = $this->orderdetail->pincode;
+            $this->customerAddress['mobile_no'] = $this->orderdetail->mobile;
+            $this->customerAddress['apartment'] = $this->orderdetail->unit_number;
+            $this->billing_type = ($this->orderdetail->billing_type== 'yes') ? true : false;
+            $this->newaddress = ($this->orderdetail->new_address== 'yes') ? true : false;
+            $this->view = true;
+        } else {
        
-        $this->customerAddress = CustomerAddress::where('user_id',$this->user_id)->where('address_type','shipping_address')->where('is_billing_address','yes')->first();
+            $this->customerAddress = CustomerAddress::where('user_id',$this->user_id)->where('address_type','shipping_address')->where('is_billing_address', 'yes')->first();
+
+           
+
+        }
 
         $this->discoutget = Cart::where('user_id', $this->user_id)->first();
         $this->Taxes = tax::where('id',1)->first();
@@ -78,18 +101,8 @@ class StripePaymnetController extends Component
             $this->CartItem =  Cart::with(['media_product', 'product_detail'])->where('user_id',$this->user_id)->get();
         }
 
-        $order = Orders::find($this->orderID);
-
-        $this->fullname = $order->fullname;
-        $this->address = $order->address;
-        $this->city = $order->city;
-        $this->country = $order->country;
-        $this->pincode = $order->pincode;
-        $this->mobile = $order->mobile;
-
-        if(!empty($order->address)) {
-            $this->view = true;
-        }
+        
+       
     }
     public function render()
     {
@@ -120,63 +133,14 @@ class StripePaymnetController extends Component
     public function addshipping($id)
     {
 
-        if($this->billing_type == true){
+
+        if($this->billing_type){
             $billing_value_type = 'yes';
-        }else{
+        }else if(!$this->billing_type){
             $billing_value_type = 'no';
         }
 
-        if($this->newaddress == true){
-
-            $this->validate([
-                'first_name' => ['required'],
-                'last_name' => ['required'],
-                'address' => ['required'],
-                'apartment' => ['required'],
-                'city' => ['required'],
-                'country' => ['required'],
-                'postal_code' => ['required'],
-                'mobile_no' => ['between:10,12|numeric'],
-            ]);
-
-            $paymentdetail = Orders::where('id', $id)->update([
-                'first_name' => $this->first_name,
-                'last_name' => $this->last_name,
-                'address' => $this->address,
-                'unit_number' => $this->apartment,
-                'city' => $this->city,
-                'country' => $this->country,
-                'pincode' => $this->postal_code,
-                'mobile' => $this->mobile_no,
-                'billing_type' => $billing_value_type,
-            ]);
-
-            $bill_arr = [
-
-                'user_id' => $this->customerAddress['user_id'],
-                
-                'first_name' => $this->first_name,
-                'last_name' => $this->last_name,                 
-                'apartment' => $this->apartment,              
-                'address' => $this->address,
-                'city' => $this->city,
-                'country' => $this->country,                
-                'postal_code' => $this->postal_code,                
-                'mobile_no' => $this->mobile_no,                
-                'address_type' => 'shipping_address',
-               
-                'is_billing_address' => 'yes',
-            ];
-
-            CustomerAddress::create($bill_arr);
-
-            if($paymentdetail) {
-                $this->view = true;
-                 Session::flash('shipp_success', 'New Shipping Created Successfully!');
-            }
-        }else{
-
-            $this->validate([
+         $this->validate([
                 'customerAddress.first_name' => ['required'],
                 'customerAddress.last_name' => ['required'],
                 'customerAddress.address' => ['required'],
@@ -187,7 +151,7 @@ class StripePaymnetController extends Component
                 'customerAddress.mobile_no' => ['between:10,12|numeric'],
             ]);
 
-            $paymentdetail = Orders::where('id', $id)->update([
+         $paymentdetail = Orders::where('id', $id)->update([
                 'first_name' => $this->customerAddress['first_name'],
                 'last_name' => $this->customerAddress['last_name'],
                 'address' => $this->customerAddress['address'],
@@ -199,9 +163,38 @@ class StripePaymnetController extends Component
                 'billing_type' => $billing_value_type,
             ]);
 
-            $bill_arr = 
+        if($this->newaddress == true){
 
-            CustomerAddress::where('id', $this->customerAddress['id'])->update([
+            CustomerAddress::create([
+
+                'user_id' => Auth::user()->id,
+                
+                'first_name' => $this->customerAddress['first_name'],
+
+                'last_name' => $this->customerAddress['last_name'],
+                 
+                'apartment' => $this->customerAddress['apartment'],
+              
+                'address' => $this->customerAddress['address'],
+
+                'city' => $this->customerAddress['city'],
+
+                'country' => $this->customerAddress['country'],
+                
+                'postal_code' => $this->customerAddress['postal_code'],
+                
+                'mobile_no' => $this->customerAddress['mobile_no'],
+                
+                'address_type' => 'shipping_address',
+               
+                'is_billing_address' =>  $billing_value_type,
+
+
+            ]);
+
+        }else{
+
+            CustomerAddress::where('id', $this->customerAddress->id)->update([
 
                 'user_id' => $this->customerAddress['user_id'],
                 
@@ -223,13 +216,15 @@ class StripePaymnetController extends Component
                 
                 'address_type' => 'shipping_address',
                
-                'is_billing_address' => 'yes',
+                'is_billing_address' =>  $billing_value_type,
             ]);
-            if($paymentdetail) {
-                $this->view = true;
-                 Session::flash('shipp_success', 'Shipping Update Successfully!');
-            }
+            
         }
+
+        if($paymentdetail) {
+                $this->view = true;
+                 Session::flash('shipp_success', 'New Shipping Created Successfully!');
+            }
 
     }
 
@@ -241,7 +236,6 @@ class StripePaymnetController extends Component
 
         $getCartid = Orders::where('id',$id)->first();
         
-        dd($request->redirect_status);
             if($request->redirect_status == 'succeeded') {
                 $paymentdetail = Orders::where('id', $id)->update(
                     [
@@ -253,7 +247,7 @@ class StripePaymnetController extends Component
                 
             // Stock Minus Code
 
-               if($paymentdetail){
+               if($request->redirect_status == 'succeeded' && $paymentdetail){
 
                     $locatioinstock = VariantStock::All();
                     $getOrderitem = order_item::where('order_id',$id)->first();

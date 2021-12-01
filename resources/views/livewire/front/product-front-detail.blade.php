@@ -60,6 +60,7 @@
                         <div class="product-slider">
 
                             <div class="product-slider-nav" wire:ignore>
+                                @if(!empty($Productmedia))
                                 @foreach($Productmedia as $image)
                                 <div>
 
@@ -68,13 +69,14 @@
                                 </div>
 
                                 @endforeach
+                                @endif
 
                             </div>
 
 
 
                             <div class="product-slider-for" wire:ignore>
-
+@if(!empty($Productmedia))
                                  @foreach($Productmedia as $image)
 
                                 <div>
@@ -88,6 +90,7 @@
                                 </div>
 
                                 @endforeach
+                                @endif
 
                                 
 
@@ -166,7 +169,7 @@
 
                                     <div class="form-group">
 
-                                        @if(!empty($row->varient1))
+                                        @if(!empty($row->varient1) && !empty($varianttag))
 
                                         <div wire:ignore wire:key="first">
 
@@ -176,11 +179,11 @@
 
                                             <select name="attribute1"   class="form-control varition-change" id="varient1"  >
 
-                                                @foreach($product->variants->unique('attribute1') as $row)
+                                                @foreach($product->variants->unique('attribute1') as $row1)
 
-                                                    @if($row->attribute1 != "")
+                                                    @if($row1->attribute1 != "")
 
-                                                    <option wire:key="attr1_{{ $loop->index }}" wire:ignore.self>{{$row->attribute1}}</option> 
+                                                    <option wire:key="attr1_{{ $loop->index }}" wire:ignore.self>{{$row1->attribute1}}</option> 
 
                                                     @endif 
 
@@ -196,7 +199,7 @@
 
                                     <div class="form-group">
 
-                                        @if(!empty($row->varient2))
+                                        @if(!empty($row->varient2) && !empty($varianttag))
 
                                         <div wire:ignore wire:key="second">
 
@@ -205,11 +208,11 @@
                                             <select name="attribute2"  class="form-control varition-change"   id="varient2">
 
 
-                                                @foreach($product->variants->unique('attribute2') as $row)
+                                                @foreach($product->variants->unique('attribute2') as $row2)
 
-                                                    @if($row->attribute2 != "")
+                                                    @if($row2->attribute2 != "")
 
-                                                    <option value="{{$row->attribute2}}" wire:key="attr2_{{ $loop->index }}" wire:ignore>{{$row->attribute2}}</option> 
+                                                    <option value="{{$row->attribute2}}" wire:key="attr2_{{ $loop->index }}" wire:ignore>{{$row2->attribute2}}</option> 
 
                                                     @endif 
 
@@ -223,7 +226,7 @@
                                     </div>
                                     <div class="form-group">
 
-                                        @if(!empty($row->varient3))
+                                        @if(!empty($row->varient3) && !empty($varianttag))
 
                                         <div wire:ignore wire:key="third">
 
@@ -232,11 +235,11 @@
                                             <select name="attribute3"  class="form-control varition-change" id="varient3" >
 
 
-                                                @foreach($product->variants->unique('attribute3') as $row)
+                                                @foreach($product->variants->unique('attribute3') as $row3)
 
-                                                    @if($row->attribute3 != "")
+                                                    @if($row3->attribute3 != "")
 
-                                                    <option value="{{$row->attribute3}}" wire:key="attr3_{{ $loop->index }}" wire:ignore>{{$row->attribute3}}</option> 
+                                                    <option value="{{$row->attribute3}}" wire:key="attr3_{{ $loop->index }}" wire:ignore>{{$row3->attribute3}}</option> 
 
                                                     @endif 
 
@@ -691,7 +694,7 @@
                             <h3 class="h3">Recommended For You</h3>
 
                             <div class="similar-items-slider" wire:ignore>
-
+                                @if(!empty($productrelated))
                                 @foreach($productrelated as $rows)
 
                                 <?php $decodeA = json_decode($rows->collection);  
@@ -763,6 +766,7 @@
                                 @endif
 
                                 @endforeach
+                                @endif
 
                             </div>
 
@@ -781,7 +785,7 @@
                         </div>
                     </div>
                 </div> -->
-
+ @if(!empty($productrelated))
                 <div class="row">
 
                     <div class="col-12">
@@ -790,13 +794,14 @@
 
                             <h3 class="h3">Your Recently Viewed Items</h3>
 
-                            <div class="recently-viewed-slider" wire:ignore>
+                            <div class="recently-viewed-slider" wire:ignore.self>
 
                                 @if(Cookie::get('shopping_cart'))
 
                                 <?php $cookieitem = json_decode(Cookie::get('shopping_cart')); ?>
-
+                               
                                 @foreach($productrelated as $pro_res)
+                               
                                 @if(in_array($pro_res->id, $cookieitem) && $pro_res['productmediaget'] && isset($pro_res['productmediaget'][0]) && $pro_res->id != $cookieitem)
 
                                 @php $priceres = allprice($pro_res->id) @endphp
@@ -804,7 +809,7 @@
                                     <a class="dropdown-header" href="{{ route('product-front-detail', $pro_res['seo_utl']) }}">
                                     <img src="{{ asset('storage/'.$pro_res['productmediaget'][0]['image']) }}">
                                     </a>
-                                    <div class="multi-item-content">
+                                    <div class="multi-item-content" >
 
                                         @php $favorite = favorite($product->id); @endphp
 
@@ -812,7 +817,7 @@
                                      
                                         @if(!empty($favorite))
 
-                                         <a class="wish-list add-wishlist" wire:click="UpdateWish(false, {{$pro_res->id}})"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                                         <a class="wish-list add-wishlist" wire:click="UpdateWish(false, {{$pro_res->id}})"><i class="fa fa-heart-o" aria-hidden="true" ></i></a>
 
                                         
 
@@ -832,7 +837,7 @@
                                         <p class="multi-pd-title">GEL-Nimbus® 22</p>
 
                                         @if(!empty($priceres))
-                                        <p class="product-price @if(!empty($priceres['label'])) {{$priceres['label']}} @endif" >
+                                        <p class="product-price @if(!empty($priceres['label'])) {{$priceres['label']}} @endif">
                                         <span class="mrp-price">{{$symbol['currency']}}{{number_format($priceres['price'],2,'.',',')}}
                                         </span>
                                         @if(!empty($priceres['selling_price']))
@@ -850,6 +855,7 @@
                                 @endforeach
 
                                 @endif
+                               
 
                             </div>
 
@@ -858,7 +864,7 @@
                     </div>
 
                 </div>
-
+ @endif
                 <div class="row">
 
                     <div class="col-12">

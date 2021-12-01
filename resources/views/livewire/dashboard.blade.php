@@ -1,3 +1,4 @@
+<div>
 <x-customer-layout>
 
         <!-- banner start -->
@@ -195,3 +196,4 @@
         </div>
         <!-- home second section end -->
 </x-customer-layout>
+</div>

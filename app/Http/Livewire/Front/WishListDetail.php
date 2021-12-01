@@ -11,39 +11,65 @@ use Illuminate\Support\Facades\Auth;
 class WishListDetail extends Component
 {
 	public $product,$user_id;
+
+	protected $listeners = ['getProducts'];
+
 	public function mount()
 	{
 		$this->user_id = Auth::user()->id;
-		$this->product = Product::with('productmediaget')->with('favoriteget')->get();
-		
+		$this->getProducts();	
 	}
     public function render()
     {
         return view('livewire.front.wish-list-detail');
     }
 
-    public function UpdateWish($id,$productid){
+    public function getProducts($value='')
+    {
+        $this->dispatchBrowserEvent('onContentChanged');
 
-    	if (Auth::check()) {
-    		$this->user_id =  Auth::user()->id;
-	        if($id == 0){
-	                $favorite_arr = [
-	                        
-	                        'product_id' => $productid,
+		$this->product = Product::whereHas('favoriteget', function($q) {
+			return $q->where('user_id', Auth::user()->id);
+		})->with(['productmediaget','favoriteget'])->get();   
+	}
 
-	                        'user_id' => $this->user_id,
+	public function UpdateWish($value, $product_id) {
 
-	                        'status' => '1',
-	                    ];
+        if(!Auth::check()) {
 
-	                favorite::create($favorite_arr);
+             session()->flash('alert', 'You need to login');
 
-	            
-	        }else{
+        } else {
+           
+            if(!$value) {
 
-	            $favorite  = favorite::where('id',$id)->delete();
+                $favorite = favorite($product_id);
+               
+                $fav = favorite::findOrFail($favorite->id);
+                $fav->delete();
+                session()->flash('message', 'Item removed from WishList !!');
 
-	            }
-	    }
+            } else {
+
+                 $favorite_arr = [
+                        
+                    'product_id' => $product_id,
+
+                    'user_id' => Auth::user()->id,
+
+                    'status' => 1,
+                    
+                    ];
+
+                favorite::create($favorite_arr);
+                session()->flash('message', 'Item added in Wishlist');
+
+            }
+            $this->getProducts();
+            $this->emit('getCart');
+
+        }
+       
     }
+
 }

@@ -2,7 +2,14 @@
 /*********************************
 			Jasmin Js
 *********************************/
-
+$(document).ready(function(){
+	$(".filter-mb-btn").on( "click", function() {
+		$('body').addClass('filter-overlay');  
+	});
+	$(".filter-close").on( "click", function() {
+		$('body').removeClass('filter-overlay');  
+	});
+});
 // mobile login form
 
 $(document).ready(function(){
