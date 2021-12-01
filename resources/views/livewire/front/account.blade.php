@@ -969,11 +969,12 @@
                                 
                                 @php $i = 1;  $user_id = Auth::user()->id; @endphp
                                 @foreach($OrderItem as $row)
-                                @if($row['order'][0]['transactionid'] == "" && $row['user_id'] == $user_id)
+                            
+                                @if(!empty($row->order) && $row->order->transactionid == "" && $row->user_id == $user_id)
                                <?php $detailfetch = allprice($row->product_id); ?>
                                 <tr>
-                                    <td>{{$row['order'][0]['id']}}</td>
-                                    <td>{{$row['order'][0]['updated_at']}}</td>
+                                    <td>{{$row->order->id}}</td>
+                                    <td>{{$row->order->updated_at}}</td>
                                     <td class="od-pd-name">
                                         <span>Splendid</span>
                                         <h6>{{$row['order_product'][0]['title']}}</h6>

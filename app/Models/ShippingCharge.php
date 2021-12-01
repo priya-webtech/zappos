@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class ShippingCharge extends Model
 {
     use HasFactory;
-    protected $fillable = ['maxrate','minrate','maxcharge','mincharge'];
+    protected $guarded =[];
 }

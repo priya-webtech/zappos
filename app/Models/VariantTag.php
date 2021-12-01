@@ -19,6 +19,6 @@ class VariantTag extends Model
     
     protected $table = "variant_type";
 
-    protected $fillable = ['name'];
+    protected $guarded =[];
 
 }

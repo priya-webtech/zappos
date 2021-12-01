@@ -11,7 +11,7 @@ class CustomerAddress extends Model
     
     protected $table = "customer_address";
 
-    protected $fillable = ['id','user_id', 'first_name', 'last_name', 'company', 'address', 'apartment', 'city', 'country', 'mobile_no', 'postal_code', 'address_type', 'is_billing_address'];
+    protected $guarded =[];
 
 
 }

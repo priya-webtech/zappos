@@ -25,9 +25,7 @@ class page extends Model
     use HasRoles;
     use Uuids;
 
-    protected $fillable = [
-        'title','content','seo_title','seo_description','seo_url','visibility',
-    ];
+    protected $guarded =[];
 
     public function admin_menu_items()
     {

@@ -19,7 +19,7 @@ class VariantStock extends Model
     
     protected $table = "variant_stock";
 
-    protected $fillable = ['location_id','variant_main_id','product_id','stock'];
+    protected $guarded =[];
     
     public function product_variant()
     {

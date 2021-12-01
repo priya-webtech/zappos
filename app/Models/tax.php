@@ -9,7 +9,5 @@ class tax extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'rate',
-    ];
+   protected $guarded =[];
 }

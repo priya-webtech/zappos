@@ -19,8 +19,8 @@ class CollectionProduct extends Model
     
     protected $table = "collection_product";
 
-    protected $fillable = ['product_id','collection_id','product_name'];
-
+    protected $guarded =[];
+    
     public function collection_product()
     {
         return $this->hasOne(Product::class, 'id', 'product_id');
