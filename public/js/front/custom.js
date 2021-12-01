@@ -40,6 +40,14 @@ $(".modal-close-btn").on( "click", function() {
 	$('body').removeClass('modal-open2');  
 });
 
+// $(".edit-billing-add-btn").on( "click", function() {
+//    	$('#ShowAllbillingAddress').modal('hide');  
+//    	$('body').addClass('modal-open2');  
+// });
+// $(".modal-close-btn").on( "click", function() {
+// 	$('body').removeClass('modal-open2');  
+// });
+
 
 // Seach bar outside click autofill close js
 

@@ -58,7 +58,7 @@
             <div class="container">
                 <div class="primary-acc-info-title">
                     <h2 class="h2">Your Primary Account Information</h2>
-                    <a href="{{ route('favorite-detail') }}" class="site-btn"><i class="fa fa-heart-o" aria-hidden="true"></i> My Favorites</a>
+                    <a href="{{ route('favorite-detail') }}" class="site-btn green-btn"><i class="fa fa-heart-o" aria-hidden="true"></i> My Favorites</a>
 
                 </div>
                 <div class="row">
@@ -141,7 +141,7 @@
                                 </div>
                             </div>
                             @if($updateMode)
-                            <div class="modal" id="editShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+                            <div class="modal fade" id="editShippingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header proceed-cart-head">
@@ -192,7 +192,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Unit Number</label>
-                                                            <input type="number" wire:model="editaddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" wire:ignore.self required>
+                                                            <input type="number" wire:model="editaddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="12a" wire:ignore.self required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -200,7 +200,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="postalCode">Zip</label>
-                                                            <input type="number" wire:model="editaddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" wire:ignore.self required>
+                                                            <input type="number" wire:model="editaddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="1234 AB" wire:ignore.self required>
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -302,7 +302,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Unit Number</label>
-                                                            <input type="number" wire:model="apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" required>
+                                                            <input type="number" wire:model="apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="12a" required>
                                                             @if($errors->has('apartment'))
                                                                 <span class="text-danger">{{ $errors->first('apartment') }}</span>
                                                             @endif
@@ -313,7 +313,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="postalCode">Zip</label>
-                                                            <input type="number" wire:model="postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" wire:ignore.self placeholder="12345" required>
+                                                            <input type="number" wire:model="postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" wire:ignore.self placeholder="1234 AB" required>
                                                             @if($errors->has('postal_code'))
                                                                 <span class="text-danger">{{ $errors->first('postal_code') }}</span>
                                                             @endif
@@ -394,7 +394,7 @@
                                 <button type="button" class="site-link-btn" data-toggle="modal" data-target="#AddBillingAddress">ADD A billing address <i class="fa fa-angle-right" aria-hidden="true"></i></button>
                             </div>
                             <div class="modal fade" id="ShowAllbillingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
-                                <div class="modal-dialog alog-centered" role="document">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header proceed-cart-head ">
                                             <h4 class="h4 modal-title" id="exampleModalLabel">Edit Billing Address</h4>
@@ -438,7 +438,6 @@
                                                 </div>
                                                 <div class="sp-add-edit-btn">
                                                     <button type="button" class="btn site-btn blue-border-btn"  wire:click="billingedit({{$address['id']}})" >Edit</button>
-
                                                 </div>
                                             </div>
 
@@ -454,7 +453,7 @@
                                 </div>
                             </div>
                             @if($updateMode)
-                            <div class="modal" id="editbillingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+                            <div class="modal fade" id="editbillingAddress" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header proceed-cart-head">
@@ -504,7 +503,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Unit Number</label>
-                                                            <input type="number" wire:model="editaddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" wire:ignore.self required>
+                                                            <input type="number" wire:model="editaddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="12a" wire:ignore.self required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -512,7 +511,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="postalCode">Zip</label>
-                                                            <input type="number" wire:model="editaddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" wire:ignore.self required>
+                                                            <input type="number" wire:model="editaddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="1234 AB" wire:ignore.self required>
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -613,7 +612,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Unit Number</label>
-                                                            <input type="number" wire:model="bapartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" required>
+                                                            <input type="number" wire:model="bapartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="12a" required>
                                                             @if($errors->has('bapartment'))
                                                                 <span class="text-danger">{{ $errors->first('bapartment') }}</span>
                                                             @endif
@@ -624,7 +623,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="postalCode">Zip</label>
-                                                            <input type="number" wire:model="bpostal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" required>
+                                                            <input type="number" wire:model="bpostal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="1234 AB" required>
                                                             @if($errors->has('bpostal_code'))
                                                                 <span class="text-danger">{{ $errors->first('bpostal_code') }}</span>
                                                             @endif
@@ -953,6 +952,7 @@
                     @if($order)
                     <div class="shipping-details-card re-order-tbl">
                         <h3 class="panel-title">Order Details</h3>
+                        <div class="table-responsive">
                         <table>
                             <thead>
                                 <tr>
@@ -1007,6 +1007,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        </div>
                     </div>
                     @else
                      <p class="order-empty-msg">Your order history is empty.</p>
@@ -1033,6 +1034,7 @@
         window.livewire.on('deletebillingconfirm', () => {
              $('#ShowAllbillingAddress').modal('hide');
         });
+
         window.livewire.on('deleteconfirm', () => {
              $('#ShowAllShippingAddress').modal('hide');
         });

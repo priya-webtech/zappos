@@ -582,54 +582,56 @@
                                     <?php $decodeA = json_decode($rows->collection); ?>
                                     @if(in_array($menuitems->multipleid, $decodeA) && $row_img[0]['product_id'] == $rows->id)
                                     <div class="col-lg-3 col-md-4 col-sm-4 col-6 cat-pd-col">
-                                        <div class="cat-pd-img">
-                                            <a href="{{ route('product-front-detail', $rows->seo_utl) }}">
-                                                <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
-                                            </a>
-                                           
-                                            @if(!empty($result))
-                                            <button class="cat-wishlist-btn add-wishlist wish-list" wire:click="UpdateWish(false, {{$rows->id}})"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
-                                            @else
-                                            <button class="cat-wishlist-btn wish-list" wire:click="UpdateWish(true, {{$rows->id}})"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
-                                            
-                                            @endif
+                                        <div class="cat-col-inner">
+                                            <div class="cat-pd-img">
+                                                <a href="{{ route('product-front-detail', $rows->seo_utl) }}">
+                                                    <img src="{{ asset('storage/'.$row_img[0]['image']) }}">
+                                                </a>
+                                               
+                                                @if(!empty($result))
+                                                <button class="cat-wishlist-btn add-wishlist wish-list" wire:click="UpdateWish(false, {{$rows->id}})"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
+                                                @else
+                                                <button class="cat-wishlist-btn wish-list" wire:click="UpdateWish(true, {{$rows->id}})"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
+                                                
+                                                @endif
 
-                                            <?php if($rows->product_new != '0') { $saledecode = json_decode($rows->product_new); }?>
-                                            <div class="cat-pd-tag-gp">
-                                            @if(!empty($rows->product_new))
-                                            @foreach($tagsale as $row)
-                                            @if(in_array($row->id, $saledecode))
-                                            @foreach($saledecode as $sale)
-                                            @if($row->id == $sale) 
-                                            <span class="cat-pd-tag">{{$row->title}}</span>
-                                            @endif
-                                            @endforeach
-                                            @endif
-                                            @endforeach
-                                            @endif
+                                                <?php if($rows->product_new != '0') { $saledecode = json_decode($rows->product_new); }?>
+                                                <div class="cat-pd-tag-gp">
+                                                @if(!empty($rows->product_new))
+                                                @foreach($tagsale as $row)
+                                                @if(in_array($row->id, $saledecode))
+                                                @foreach($saledecode as $sale)
+                                                @if($row->id == $sale) 
+                                                <span class="cat-pd-tag">{{$row->title}}</span>
+                                                @endif
+                                                @endforeach
+                                                @endif
+                                                @endforeach
+                                                @endif
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="cat-pd-content">
-                                            <a href="{{ route('product-front-detail', $rows->seo_utl) }}">
-                                                <h6 class="h6">{{$rows->title}}</h6>
-                                                <p>{{$rows->title}}</p>
-                                            </a>
-                                            @if(!empty($priceres))
-                                            <p class="product-price @if(!empty($priceres['label'])) {{$priceres['label']}} @endif" >
-                                            <span class="mrp-price">{{$symbol['currency']}}{{number_format($priceres['price'],2,'.',',')}}
-                                            </span>
-                                            @if(!empty($priceres['selling_price']))
-                                            <span class="msrp-price"><s>MSRP: {{$symbol['currency']}}{{number_format($priceres['selling_price'],2,'.',',')}}</s></span>
-                                            @endif
-                                            </p>
-                                            @endif
-                                            <div class="cat-pd-review">
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <p><i class="fa fa-star" aria-hidden="true"></i></p>
-                                                <span>(595)</span>
+                                            <div class="cat-pd-content">
+                                                <a href="{{ route('product-front-detail', $rows->seo_utl) }}">
+                                                    <h6 class="h6">{{$rows->title}}</h6>
+                                                    <p>{{$rows->title}}</p>
+                                                </a>
+                                                @if(!empty($priceres))
+                                                <p class="product-price @if(!empty($priceres['label'])) {{$priceres['label']}} @endif" >
+                                                <span class="mrp-price">{{$symbol['currency']}}{{number_format($priceres['price'],2,'.',',')}}
+                                                </span>
+                                                @if(!empty($priceres['selling_price']))
+                                                <span class="msrp-price"><s>MSRP: {{$symbol['currency']}}{{number_format($priceres['selling_price'],2,'.',',')}}</s></span>
+                                                @endif
+                                                </p>
+                                                @endif
+                                                <div class="cat-pd-review">
+                                                    <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
+                                                    <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
+                                                    <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
+                                                    <p class="review-gold"><i class="fa fa-star" aria-hidden="true"></i></p>
+                                                    <p><i class="fa fa-star" aria-hidden="true"></i></p>
+                                                    <span>(595)</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
