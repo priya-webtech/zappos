@@ -103,5 +103,33 @@ use App\Models\Cart;
     }
   }
 
+   function user_permission($role_id,$privilege,$sub_privilege)
+
+    { 
+
+        $user = Auth::user();
+
+        $user_type = $user->type;
+
+        if($user_type == "super_admin" || $user_type == "admin"){
+
+            return 1;
+
+        }
+
+        $res = UserPermission::where(['deleted'=>'0','privilege'=>$privilege,'privilege_sub'=>$sub_privilege,'user_id'=>$role_id])->first();
+
+        if(!empty($res))
+
+        {
+
+            return 1;
+
+        }
+
+        return 0;
+
+    }
+
 
 ?>

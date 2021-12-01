@@ -15,92 +15,652 @@
             </div>
         </article>
     </section>
-    <div class="col s12">
-        <div class="container">
-            <form href="{{ route('Permissionsave.store') }}" name="permission" method="post">
-                <div class="form-group">
+<form method="POST" action="{{ route('role_save') }}" enctype="multipart/form-data">
+    @csrf
+    <div class="row">
+        <div class="col s12">
+            <div id="html-validations" class="card card-tabs">
+                <div class="card-content">
+                    <div class="card-title">
+                        <div class="row">
+                            <div class="col s12 m6 l10">
+                                <h4 class="card-title">User Role</h4>
+                            </div>
+                            <div class="col s12 m6 l2">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="html-view-validations">
+                            <input id="role_id" name="role_id" type="hidden" value="{{ isset($role_data->id) ? $role_data->id : '' }}">
+                            <div class="row">
+                                <div class="col l12">
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col m12 s12">
+                                    <div class="input-field">
+                                        <div><label for="title">Role Name *</label></div>
+                                        <input class="validate" placeholder="Name" required id="role_name" name="role_name" type="text" value="{{ isset($role_data->role_name) ? $role_data->role_name : '' }}">
+                                    </div>
+                                </div>
+                            </div>
 
-                    <table id="role_manage_privilege_table" class="table dt-responsive nowrap">
-
-                        <thead>
-
-                            <tr>
-
-                                <th>Role Name</th>
-
-                            </tr>
-
-                            <tr>
-                                <td>Order Main <input type="checkbox" value="order" name="Permission[]" wire:model="Permission"></td>
-                            </tr>
-                            <tr>
-                                <td>Orders <input type="checkbox" value="orderlist" name="Permission[]" wire:model="Permission"></td>
-                            </tr>
-                            <tr>
-                                <td>Drafts <input type="checkbox"  value="drafts" wire:model="Permission" name="Permission[]"></td>
-                            </tr>
-                            <tr>
-                                <td>Abandoned checkouts <input type="checkbox"  value="abandoned" name="Permission[]" wire:model="Permission"></td>
-                            </tr>
-                            <tr>
-                                <td>Products <input type="checkbox" wire:model="Permission" name="Permission[]" value="product"></td>
-                            </tr>
-                            <tr>
-                                <td>All Products <input type="checkbox" wire:model="Permission" name="Permission[]" value="allproduct"></td>
-                            </tr>
-                            <tr>
-                                <td>Inventory <input type="checkbox" wire:model="Permission" name="Permission[]" value="inventory"></td>
-                            </tr>
-                            <tr>
-                                <td>Collections <input type="checkbox" wire:model="Permission" name="Permission[]" value="collections"></td>
-                            </tr>
-                            <tr>
-                                <td>Gift Cards <input type="checkbox" wire:model="Permission" name="Permission[]" value="giftcards"></td>
-                            </tr>
-                            <tr>
-                                <td>Customers <input type="checkbox" wire:model="Permission" name="Permission[]" value="customers"></td>
-                            </tr>
-                            <tr>
-                                <td>Administrators <input type="checkbox" wire:model="Permission" name="Permission[]" value="administrators"></td>
-                            </tr>
-                            <tr>
-                                <td>Analytics <input type="checkbox" wire:model="Permission" name="Permission[]" value="analytics"></td>
-                            </tr>
-                            <tr>
-                                <td>Marketing <input type="checkbox" wire:model="Permission" name="Permission[]" value="marketing"></td>
-                            </tr>
-                            <tr>
-                                <td>Discounts <input type="checkbox" wire:model="Permission" name="Permission[]" value="discounts"></td>
-                            </tr>
-                            <tr>
-                                <td>Role Permission <input type="checkbox" wire:model="Permission" name="Permission[]" value="rolepermission"></td>
-                            </tr>
-                            <tr>
-                                <td>Online Store <input type="checkbox" wire:model="Permission" name="Permission[]" value="onlinestore"></td>
-                            </tr>
-                            <tr>
-                                <td>Blog posts <input type="checkbox" wire:model="Permission" name="Permission[]" value="blogposts"></td>
-                            </tr>
-                            <tr>
-                                <td>Pages <input type="checkbox" wire:model="Permission" name="Permission[]" value="pages"></td>
-                            </tr>
-                            <tr>
-                                <td>Navigation <input type="checkbox" wire:model="Permission" name="Permission[]" value="navigation"></td>
-                            </tr>
-                            <tr>
-                                <td>Preferences <input type="checkbox" wire:model="Permission" name="Permission[]" value="preferences"></td>
-                            </tr>
-                            <tr>
-                                <td>Settings <input type="checkbox" wire:model="Permission" name="Permission[]" value="settings"></td>
-                            </tr> 
-
-                        </thead>
-                    </table>    
-                    <button type="submit" name="Submit">Submit</button>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
+
+    <?php
+
+        $privilege_array = array(
+
+        'order_main'=>array(
+
+        'name'=>'Order Main',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'orderlist'=>array(
+
+        'name'=>'Orders',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'drafts'=>array(
+
+        'name'=>'Drafts',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'hotel'=>array(
+
+        'name'=>'Module Hotel',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'abandoned'=>array(
+
+        'name'=>'Abandoned checkouts',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'products'=>array(
+
+        'name'=>'Products',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'allproduct'=>array(
+
+        'name'=>'All Products',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'inventory'=>array(
+
+        'name'=>'Inventory',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+
+
+        'collections'=>array(
+
+        'name'=>'Collections',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'giftcards'=>array(
+
+        'name'=>'Gift Cards',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'customers'=>array(
+
+        'name'=>'Customers',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'administrators'=>array(
+
+        'name'=>'Administrators',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'analytics'=>array(
+
+        'name'=>'Analytics',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'marketing'=>array(
+
+        'name'=>'Marketing',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'discounts'=>array(
+
+        'name'=>'Discounts',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'rolepermission'=>array(
+
+        'name'=>'Role Permission',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'onlinestore'=>array(
+
+        'name'=>'Online Store',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'blogposts'=>array(
+
+        'name'=>'Blog posts',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'pages'=>array(
+
+        'name'=>'Pages',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'navigation'=>array(
+
+        'name'=>'Navigation',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        'preferences'=>array(
+
+        'name'=>'Preferences',
+
+        'item'=> array(
+
+        'list' => 'List (View)',
+
+        'create' => 'Create',
+
+        'update' => 'Update',
+
+        'delete' => 'Delete',
+
+        ),
+
+        ),
+
+        );
+
+        $Privilegearray = serialize($privilege_array);
+
+    ?>
+    <div class="row">
+
+        <div class="form-group">
+
+            <input type="hidden" value="{{!empty($role_id) ? $role_id : ''}}" name="role_id">
+
+            <table id="role_manage_privilege_table" class="table dt-responsive nowrap">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Role Name</th>
+
+                        <th>List</th>
+
+                        <th>Create</th>
+
+                        <th>Update</th>
+
+                        <th>Delete</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach($privilege_array as $Privilegearray_key => $Privilegearray_value)
+
+                    <tr>
+
+                        <td><?php echo $Privilegearray_value['name']; ?></td>
+
+                        <?php
+
+                        $item_array = isset($Privilegearray_value['item']) ? $Privilegearray_value['item'] : array();
+
+                        foreach ($item_array as $item_array_key => $item_array_value) {
+
+                        ?>
+
+                            <td>
+
+                                    <?php
+
+                                    $match_data_checked = "";
+
+                                    $match_data = $Privilegearray_key . '_' . $item_array_key;
+
+                                 /*   if (in_array($match_data, $privilege_user_selected)) {
+
+                                        $match_data_checked = "checked";
+
+                                    }*/
+
+                                    ?>
+                                    <input data-parent="<?php echo $Privilegearray_key; ?>" type="checkbox" name="assign_privilege[<?php echo $Privilegearray_key; ?>][<?php echo $item_array_key; ?>]" value="1" id="<?php echo $match_data; ?>" class="sub_item sub_item_<?php echo $Privilegearray_key ?> <?php echo $Privilegearray_key; ?>_<?php echo $item_array_key; ?>" data-value="<?php echo $item_array_key; ?>" <?php echo $match_data_checked; ?>>
+
+
+                            </td>
+
+                        <?php } ?>
+
+                    </tr>
+
+                    @endforeach
+
+                </tbody>
+
+            </table>
+
+            <div class="input-field text-right m-b-0">
+
+                <div class="input-field col s12">
+
+                    <button class="btn waves-effect waves-light right" type="submit" name="action">Submit</button>
+
+                    <button type="reset" class="btn btn-danger waves-effect waves-light"><span class="btn-label"><i class="material-icons right">clear</i></span> Reset</button>
+
+                </div>
+
+            </div>
+
+        </div>
+        
+    </div>
+</form>
+<script>
+
+ $(".parent_item").change(function() {
+
+        parent_data_value = $(this).attr('data-value');
+
+
+
+        if (this.checked) {
+
+            $('.sub_item_' + parent_data_value).prop("checked", true);
+
+        } else {
+
+            $('.sub_item_' + parent_data_value).prop("checked", false);
+
+        }
+
+        manage_list_chk(parent_data_value);
+
+    });
+
+    $(".sub_item").change(function() {
+
+        data_value = $(this).attr('data-value');
+
+        // console.log( data_value);
+
+        data_parent = $(this).attr('data-parent');
+
+        if (this.checked) {
+
+            if (data_value != 'list') {
+
+                $('.' + data_parent + '_list').prop("checked", true);
+
+                $('.' + data_parent + '_list').attr("disabled", true);
+
+            }
+
+        } else {
+
+            manage_list_chk(data_parent);
+
+        }
+
+    });
+
+    $('.sub_item').each(function() {
+
+        data_value = $(this).attr('data-value');
+
+        // console.log( data_value);
+
+        data_parent = $(this).attr('data-parent');
+
+        if (this.checked) {
+
+            if (data_value != 'list') {
+
+                $('.' + data_parent + '_list').prop("checked", true);
+
+                $('.' + data_parent + '_list').attr("disabled", true);
+
+            }
+
+        } else {
+
+            manage_list_chk(data_parent);
+
+        }
+
+    });
+
+
+
+    function manage_list_chk(data_parent) {
+
+        var anyBoxesChecked = false;
+
+        var parentBoxesChecked = false;
+
+        $('.sub_item_' + data_parent).each(function() {
+
+            sub_data_value = $(this).attr('data-value');
+
+            if ($(this).is(":checked")) {
+
+                if (sub_data_value != 'list') {
+
+                    anyBoxesChecked = true;
+
+                }
+
+                parentBoxesChecked = true;
+
+            }
+
+        });
+
+        console.log(parentBoxesChecked + '----' + data_parent);
+
+        if (anyBoxesChecked == false) {
+
+            $('.' + data_parent + '_list').attr("disabled", false);
+
+        } else {
+
+            $('.' + data_parent + '_list').attr("disabled", true);
+
+        }
+
+        if (parentBoxesChecked == false) {
+
+            $('#' + data_parent).prop("checked", false);
+
+        }
+
+    }
+
+
+
+</script>
+
 </x-admin-layout>
 </div>
 </div>

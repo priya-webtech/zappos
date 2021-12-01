@@ -3,9 +3,9 @@
     {{-- Stop trying to control. --}}
     <div class="static-page">
             <div class="container">
-                <h1 class="h1">static page title</h1>
+                <h1 class="h1">{{$pages->title}}</h1>
                 <div class="row">
-                    <div class="col-md-4">
+                   <!--  <div class="col-md-4">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="home">Hoe werkt gratis retourneren?</a>
@@ -27,7 +27,7 @@
                             </li>
                         </ul>
                     </div>
-
+ -->
                     <div class="col-md-8">
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab1" role="tabpanel">

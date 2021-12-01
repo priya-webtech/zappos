@@ -25,6 +25,6 @@ class Collection extends Model
     
     protected $table = "collection";
 
-    protected $fillable = ['title','description','collection_type','condition_match','condition_check','online_store','point_of_sale','image','status','seo_title','seo_description','seo_url'];
+    protected $guarded =[];
 
 }

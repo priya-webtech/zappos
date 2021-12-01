@@ -9,5 +9,5 @@ class review extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['user_id','product_id','overall','comfort','style','text','image','name','city','city'];
+   protected $guarded =[];
 }

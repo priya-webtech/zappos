@@ -9,5 +9,5 @@ class tagsale extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id','title','icon'];
+   protected $guarded =[];
 }

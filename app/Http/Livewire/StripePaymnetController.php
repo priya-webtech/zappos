@@ -172,7 +172,7 @@ class StripePaymnetController extends Component
 
             if($paymentdetail) {
                 $this->view = true;
-                 Session::flash('shipp_success', 'Shipping Update Successfully!');
+                 Session::flash('shipp_success', 'New Shipping Created Successfully!');
             }
         }else{
 
@@ -227,7 +227,7 @@ class StripePaymnetController extends Component
             ]);
             if($paymentdetail) {
                 $this->view = true;
-                 Session::flash('shipp_success', 'New Shipping Created Successfully!');
+                 Session::flash('shipp_success', 'Shipping Update Successfully!');
             }
         }
 
