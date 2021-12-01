@@ -83,11 +83,11 @@
 
                         <h3 class="panel-title">Shipping Details</h3>
                         <div class="form-check">
-                                <input type="checkbox" class="form-check-input" wire:model="newaddress" wire:ignore.self id="chknewaddress">
+                                <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="newaddress" wire:ignore.self>
                                 <label class="form-check-label" for="defaultAddress">Create New Address</label>
                             </div>
                         <div id="bydefultform"  wire:ignore.self>
-                            <form role="form" id="address-form" class="require-validation" wire:submit.prevent="addshipping({{$orderdetail->id}})" >
+                            <form role="form" id="address-form" class="require-validation"  >
                                 <input type="hidden" name="orderid" value="{{$orderdetail->id}}">
 
                                 <div class='form-row'>
@@ -127,7 +127,7 @@
                                         <div class="form-group">
                                             <label for="postalCode">Zip</label>
                                             <input type="number" wire:model="customerAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" wire:ignore.self>
-                                            @error('customerAddress.pincode') <span class="text-danger">{{ $message }}</span> @enderror
+                                            @error('customerAddress.postal_code') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
                                     <div class="col">
@@ -155,7 +155,7 @@
                                         <div class="form-group">
                                             <label for="primaryVoiceNumber">Phone</label>
                                             <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" wire:model="customerAddress.mobile_no" placeholder="123-456-7890" wire:ignore.self> 
-                                            @error('customerAddress.mobile') <span class="text-danger">{{ $message }}</span> @enderror
+                                            @error('customerAddress.mobile_no') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -172,8 +172,8 @@
                                 </div>
 
                                 <div class="form-check">
-                                    <input type="checkbox" wire:model="billing_type" class="form-check-input"  id="defaultAddress">
-                                    <label class="form-check-label" for="defaultAddress">Make this my primary billing address</label>
+                                    <input type="checkbox" wire:model="billing_type" class="form-check-input"  id="billing_type">
+                                    <label class="form-check-label" for="billing_type">Make this my primary billing address</label>
                                 </div>
                                 
 
@@ -181,117 +181,13 @@
 
                                     <div class="col-xs-12">
                                       
-                                        <button type="submit" class="site-btn blue-btn" wire:click.prevent="addshipping({{$orderdetail->id}})" wire:ignore.self>Submit</button>
+                                        <button class="site-btn blue-btn" wire:click.prevent="addshipping({{$orderdetail->id}})" wire:ignore.self>Submit</button>
 
                                     </div>
 
                                 </div>
 
                             </form>
-                        </div>
-
-                        <div id="newformshow"  wire:ignore.self>
-                        <form role="form" id="address-form" class="require-validation" wire:submit.prevent="addshipping({{$orderdetail->id}})" >
-                            <input type="hidden" name="orderid" value="{{$orderdetail->id}}">
-
-                            <div class='form-row'>
-                                <div class="col">
-                                    <div class='form-group required'>
-                                        <label class='control-label'>First Name</label> 
-                                        <input class='form-control' wire:model="first_name" name="firstname" placeholder="First Name" type='text' required wire:ignore.self>
-                                        @error('first_name') <span class="text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class='form-group required'>
-                                        <label class='control-label'>Last Name</label> 
-                                        <input class='form-control' wire:model="last_name" name="lastname" placeholder="Last Name" type='text' required wire:ignore.self>
-                                        @error('last_name') <span class="text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class='form-row street-unit-row'>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label class="control-label">Street Name</label>
-                                        <input type="text" class="form-control" wire:model="address" placeholder="Street Name" wire:ignore.self>
-                                        @error('address') <span class="text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="primaryVoiceNumber">Unit Number</label>
-                                        <input type="number" wire:model="apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" wire:ignore.self>
-                                        @error('unit_number') <span class="text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="postalCode">Zip</label>
-                                        <input type="number" wire:model="postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" wire:ignore.self>
-                                        @error('pincode') <span class="text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="City">City</label>
-                                        <input type="text" class="form-control" wire:model="city" id="City" aria-describedby="emailHelp" placeholder="Enter City" wire:ignore.self>
-                                        @error('city') <span class="text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="Country">Country</label>
-                                        <select class="form-control" id="Country" wire:model="country" wire:ignore.self>
-                                            <option value="">-- Select Countries --</option>
-                                            @foreach($countries as $row)
-                                            <option value="{{$row->name}}">{{$row->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('country') <span class="text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="primaryVoiceNumber">Phone</label>
-                                        <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" wire:model="mobile_no" placeholder="123-456-7890" wire:ignore.self> 
-                                        @error('mobile') <span class="text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class='form-row'>
-
-                                <div class='col-md-12 error form-group hide'>
-
-                                    <div class='alert-danger alert'>Please correct the errors and try
-
-                                        again.</div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="form-check">
-                                <input type="checkbox" wire:model="billing_type" class="form-check-input"  id="defaultAddress">
-                                <label class="form-check-label" for="defaultAddress">Make this my primary billing address</label>
-                            </div>
-                            
-
-                            <div class="row">
-
-                                <div class="col-xs-12">
-                                  
-                                    <button type="submit" class="site-btn blue-btn" wire:click.prevent="addshipping({{$orderdetail->id}})" wire:ignore.self>Submit</button>
-
-                                </div>
-
-                            </div>
-
-                        </form>
                         </div>
                     </div>
                     
@@ -424,7 +320,8 @@
                     </div>
                     <div class="my-cart-desc">
                         <span>Splendid</span>
-                        <h6>{{$cart['product_detail'][0]['title']}}</h6>
+            
+                        <h6>{{$cart->product_detail->title}}</h6>
                         @include('livewire.front.cartdetail')
                         @if(!empty($detailfetch))
                         <p>
@@ -551,6 +448,7 @@
                 </div>
             </div>
             @if($view)
+            <div class="payment-form">
             <form id="payment-form">
                 @csrf
                 <h3 class="panel-title">Payment</h3>
@@ -574,6 +472,7 @@
                 <!-- Used to display form errors. -->
                 <div id="error-message" role="alert"></div>
               </form>
+          </div>
               @endif
            
 
@@ -591,22 +490,7 @@
 
 @livewireScripts
   
-<script type="text/javascript">
-    $( window ).on( "load", function() {
-        $("#chknewaddress").click(function () {
-            if ($(this).is(":checked")) {
-                $("#newformshow").show();
-                $("#bydefultform").hide();
-            } else {
-                $("#newformshow").hide();
-                $("#bydefultform").show();
-            }
-        });
 
-        $("#newformshow").hide();
-        $("#bydefultform").show();
-    });
-</script>
 <script src="https://js.stripe.com/v3/"></script>
 <script type="text/javascript">
 
@@ -713,8 +597,10 @@ $(function() {
 
 });
 
- document.addEventListener('DOMContentLoaded', async () => {
+ document.addEventListener('DOMNodeInserted', function (e) {
     console.log('node added');
+     if ($(e.target).hasClass('payment-form')) {
+     
 
         const stripe = Stripe('pk_test_eEW1sG9Y0HvZ0SuSZsWts81500648362WW');
         const elements = stripe.elements();
@@ -762,7 +648,7 @@ $(function() {
                     name: accountholderName.value,
                 },
               },
-              return_url: `http://185.160.67.108/estore/public/thankyou/`+orderid,
+              return_url: `http://127.0.0.1:8000/thankyou/`+orderid,
             },
           );
           if(error) {
@@ -771,6 +657,7 @@ $(function() {
           }
           addMessage(`Payment (${paymentIntent.id}): ${paymentIntent.status}`);
         });
+    }
       });
 
 </script>
