@@ -184,12 +184,21 @@ class Header extends Component
         if (Auth::check()) {
 
             $this->CartItem =  Cart::with(['media_product', 'product_detail'])->where('user_id',Auth::user()->id)->get();
-            
+            if(!empty($this->CartItem))
+             $this->cartCount = $this->CartItem->sum('stock');
 
         } else {
             $this->CartItem  = session()->get('cart');
+                                            $stock = 0;
+                                if(!empty( $this->CartItem)) {
+
+                                    foreach ($this->CartItem as $item) {
+                                        $stock += $item['stock'];
+                                    }
+                                }
+                                 $this->cartCount = $stock;
         }
-         $this->cartCount = $this->CartItem->sum('stock');
+        
 
         $this->dispatchBrowserEvent('onCartChanged');
 
