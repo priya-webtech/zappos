@@ -13,46 +13,50 @@
             </div>
         </div>
         @if (Session::has('message'))
-
             <div class="alert alert-success text-center">
+                <div class="alert-success-modal">
+                    <div class="container">
+                        <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">close</a>
 
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-
-                <p>{{ Session::get('message') }}</p>
-
+                        <p class="success-msg"><img src="../assets/success.png">{{ Session::get('message') }}</p>
+                    </div>
+                </div>
             </div>
 
         @endif
         @if (Session::has('deleteshipmessage'))
-
             <div class="alert alert-danger text-center">
+                <div class="alert-success-modal">
+                    <div class="container">
 
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">close</a>
 
-                <p>{{ Session::get('deleteshipmessage') }}</p>
+                    <p class="delete-msg"><img src="../assets/delete-icon.png">{{ Session::get('deleteshipmessage') }}</p>
 
+                </div>
             </div>
+        </div>
 
         @endif  
         @if (Session::has('add_bill'))
             <div class="alert alert-success text-center">
-
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-
-                <p>{{ Session::get('add_bill') }}</p>
-
+                <div class="alert-success-modal">
+                    <div class="container">
+                        <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
+                        <p class="success-msg"><img src="../assets/success.png">{{ Session::get('add_bill') }}</p>
+                    </div>
+                </div>
             </div>
         @endif      
         @if (Session::has('add_shipp'))
-
             <div class="alert alert-success text-center">
-
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-
-                <p>{{ Session::get('add_shipp') }}</p>
-
+                <div class="alert-success-modal">
+                    <div class="container">
+                        <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
+                        <p class="success-msg"><img src="../assets/success.png">{{ Session::get('add_shipp') }}</p>
+                    </div>
+                </div>
             </div>
-
         @endif
         <div class="primary-acc-info">
             <div class="container">
@@ -96,11 +100,11 @@
                                         <div class="modal-body">
                                             @if (Session::has('editship'))
 
-                                                <div class="alert alert-success text-center">
+                                                <div class="alert alert-success alrt-no-modal text-center">
 
-                                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                                    <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
 
-                                                    <p>{{ Session::get('editship') }}</p>
+                                                    <p class="success-msg"><img src="../assets/success.png">{{ Session::get('editship') }}</p>
 
                                                 </div>
 
@@ -409,11 +413,11 @@
                                         <div class="modal-body">
                                             @if (Session::has('editbill'))
 
-                                                <div class="alert alert-success text-center">
+                                                <div class="alert alert-success alrt-no-modal text-center">
 
-                                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                                    <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
 
-                                                    <p>{{ Session::get('editbill') }}</p>
+                                                    <p class="success-msg"><img src="../assets/success.png">{{ Session::get('editbill') }}</p>
 
                                                 </div>
 
@@ -767,7 +771,7 @@
                                             </div>
                                             <div class="modal-footer">
 
-                                                <button type="submit" wire:click="UpdateUser('updatename')" data-dismiss="modal" class="site-btn blue-btn">Save Changes</button>
+                                                <button type="submit" wire:click="UpdateUser('updatename')" data-dismiss="modal" class="site-btn done-btn blue-btn">Save Changes</button>
                                             </div>
                                         </div>
                                     </div>
@@ -794,7 +798,7 @@
 
                                                         <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 
-                                                        <p>{{ Session::get('emailpassword') }}</p>
+                                                        <p class="delete-msg"><img src="../assets/delete-icon.png">{{ Session::get('emailpassword') }}</p>
 
                                                     </div>
 
@@ -855,7 +859,7 @@
 
                                                         <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 
-                                                        <p>{{ Session::get('oldpassworderror') }}</p>
+                                                        <p class="delete-msg"><img src="../assets/delete-icon.png">{{ Session::get('oldpassworderror') }}</p>
 
                                                     </div>
 

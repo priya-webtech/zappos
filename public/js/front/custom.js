@@ -36,7 +36,7 @@ $("#EditName, #ChangeEmail, #ChangePassword").on( "click", function() {
    	$('#LoginAndSecurity').modal('hide');  
    	$('body').addClass('modal-open2');  
 });
-$(".modal-close-btn").on( "click", function() {
+$(".modal-close-btn, .done-btn").on( "click", function() {
 	$('body').removeClass('modal-open2');  
 });
 
