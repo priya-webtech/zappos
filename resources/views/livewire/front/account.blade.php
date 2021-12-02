@@ -12,13 +12,13 @@
                 </div>
             </div>
         </div>
-        @if (Session::has('message'))
+        @if (Session::has('name_email_password_message'))
 
             <div class="alert alert-success text-center">
 
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 
-                <p>{{ Session::get('message') }}</p>
+                <p>{{ Session::get('name_email_password_message') }}</p>
 
             </div>
 
@@ -58,7 +58,7 @@
             <div class="container">
                 <div class="primary-acc-info-title">
                     <h2 class="h2">Your Primary Account Information</h2>
-                    <a href="{{ route('favorite-detail') }}" class="site-btn"><i class="fa fa-heart-o" aria-hidden="true"></i> My Favorites</a>
+                    <a href="{{ route('favorite-detail') }}" class="site-btn green-btn"><i class="fa fa-heart-o" aria-hidden="true"></i> My Favorites</a>
 
                 </div>
                 <div class="row">
@@ -109,13 +109,18 @@
                                             @foreach($customer['address'] as $address)
                                             <div class="sp-add-list">
                                                 <div class="sp-add-details">
+                                                    <span>@if($address['is_billing_address'] == 'yes')  <h2 style="color: green;">primery</h2> @endif</span>
                                                     <p>
                                                         <label>Name:</label>
                                                         <span>{{$address['first_name']}} {{$address['last_name']}}</span>
                                                     </p>
                                                     <p>
                                                         <label>Address:</label>
-                                                        <span>{{$address['address']}}, {{$address['apartment']}}, {{$address['postal_code']}}, {{$address['city']}}, {{$address['country']}}. </span>
+                                                        <span>@if(!empty($address['company'])) {{$address['company']}}, @endif {{$address['address']}}, {{$address['postal_code']}}, {{$address['city']}}, {{$address['country']}}. </span>
+                                                    </p>
+                                                    <p>
+                                                        <label>Unit Number:</label>
+                                                        <span>{{$address['apartment']}}</span>
                                                     </p>
                                                     <p>
                                                         <label>Phone:</label>
@@ -124,7 +129,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="sp-add-edit-btn">
-                                                    <button type="button" class="btn site-btn blue-border-btn" data-toggle="modal" data-target="#editShippingAddress" wire:click="shippingedit({{$address['id']}})" wire:ignore.self>Edit</button>
+                                                    <button type="button" class="btn site-btn blue-border-btn" data-toggle="modal" data-target="#editShippingAddress" wire:click="shippingedit({{$address['id']}})" wire:ignore>Edit</button>
 
                                                 </div>
                                             </div>
@@ -422,13 +427,18 @@
                                             @foreach($billing_address['address'] as $address)
                                             <div class="sp-add-list">
                                                 <div class="sp-add-details">
+                                                    <span>@if($address['is_billing_address'] == 'yes')  <h2 style="color: green;">primery</h2> @endif</span>
                                                     <p>
                                                         <label>Name:</label>
                                                         <span>{{$address['first_name']}} {{$address['last_name']}}</span>
                                                     </p>
                                                     <p>
                                                         <label>Address:</label>
-                                                        <span>{{$address['address']}}, {{$address['apartment']}}, {{$address['postal_code']}}, {{$address['city']}}, {{$address['country']}}. </span>
+                                                        <span>@if(!empty($address['company'])) {{$address['company']}}, @endif {{$address['address']}}, {{$address['postal_code']}}, {{$address['city']}}, {{$address['country']}}. </span>
+                                                    </p>
+                                                    <p>
+                                                        <label>Unit Number:</label>
+                                                        <span>{{$address['apartment']}}</span>
                                                     </p>
                                                     <p>
                                                         <label>Phone:</label>
@@ -694,7 +704,7 @@
                             <div class="acc-info-btn">
                                 <button type="button" class="site-link-btn" data-toggle="modal" data-target="#LoginAndSecurity">MANAGE ACCOUNT INFO <i class="fa fa-angle-right" aria-hidden="true"></i></button>
                                <!-- Login & security Modal -->
-                                <div class="modal fade" id="LoginAndSecurity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" wire:ignore>
+                                <div class="modal fade" id="LoginAndSecurity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" wire:ignore.self>
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -733,7 +743,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn site-btn green-btn">Done</button>
+                                                <button type="submit" data-dismiss="modal" class="btn site-btn green-btn">Done</button>
                                             </div>
                                         </div>
                                     </div>
@@ -767,6 +777,8 @@
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
+
+                                                <button type="submit" data-toggle="modal" data-target="#LoginAndSecurity" data-dismiss="modal" class="site-btn blue-btn">Back</button>
 
                                                 <button type="submit" wire:click="UpdateUser('updatename')" data-dismiss="modal" class="site-btn blue-btn">Save Changes</button>
                                             </div>
@@ -829,7 +841,7 @@
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-
+                                                <button type="submit" data-toggle="modal" data-target="#LoginAndSecurity" data-dismiss="modal" class="site-btn blue-btn">Back</button>
                                                 <button type="submit" wire:click="UpdateUser('updateemail')" class="site-btn blue-btn">Save Changes</button>
                                             </div>
                                         </div>
@@ -889,7 +901,7 @@
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
-
+                                                <button type="submit" data-toggle="modal" data-target="#LoginAndSecurity" data-dismiss="modal" class="site-btn blue-btn">Back</button>
                                                 <button type="submit" wire:click="UpdateUser('updatepassword')" class="site-btn blue-btn">Save Changes</button>
                                             </div>
                                         </div>
