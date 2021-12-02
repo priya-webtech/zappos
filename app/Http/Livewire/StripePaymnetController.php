@@ -156,6 +156,12 @@ class StripePaymnetController extends Component
             $shipping_value_type = 'no';
         }
 
+        if($this->newbillingaddress){
+            $billing_value_type = 'yes';
+        }else if(!$this->newbillingaddress){
+            $billing_value_type = 'no';
+        }
+
          $this->validate([
                 'customerAddress.first_name' => ['required'],
                 'customerAddress.last_name' => ['required'],
@@ -189,6 +195,17 @@ class StripePaymnetController extends Component
                 'pincode' => $this->customerAddress['postal_code'],
                 'mobile' => $this->customerAddress['mobile_no'],
                 'billing_type' => $shipping_value_type,
+
+                'b_first_name' => $this->customerbillingAddress['first_name'],
+                'b_last_name' => $this->customerbillingAddress['last_name'],
+                'b_address' => $this->customerbillingAddress['address'],
+                'b_company' => $this->customerbillingAddress['company'],
+                'b_unit_number' => $this->customerbillingAddress['apartment'],
+                'b_city' => $this->customerbillingAddress['city'],
+                'b_country' => $this->customerbillingAddress['country'],
+                'b_pincode' => $this->customerbillingAddress['postal_code'],
+                'b_mobile' => $this->customerbillingAddress['mobile_no'],
+                'b_billing_type' => $billing_value_type,
             ]);
 
         if($this->newaddress == true){
@@ -258,12 +275,6 @@ class StripePaymnetController extends Component
             
         }
 
-
-        if($this->newbillingaddress){
-            $billing_value_type = 'yes';
-        }else if(!$this->newbillingaddress){
-            $billing_value_type = 'no';
-        }
 
         if($this->newbillingaddress == true){
 
