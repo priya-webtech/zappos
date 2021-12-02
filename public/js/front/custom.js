@@ -352,6 +352,10 @@ function initializeCart()
 
 window.addEventListener('onCartChanged', () => {
     initializeCart();
+    setTimeout(function() {
+                $(".bg-cart").removeClass("my-cart-animate");
+            }, 1000);
+            $(".bg-cart").addClass("my-cart-animate");
 });
 
 

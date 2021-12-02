@@ -16,7 +16,7 @@ class Header extends Component
 {
     public $menu_arr = [];
     
-    public $CartItem,$ProductVariant,$varianttag,$filter_product,$getproduct,$discoutget, $user_id, $stockitem;
+    public $CartItem,$ProductVariant,$varianttag,$filter_product,$getproduct,$discoutget, $user_id, $cartCount;
 
     protected $listeners = ['getCart', 'DeleteCartProduct'];
 
@@ -25,34 +25,15 @@ class Header extends Component
     ];
     
     public function mount() {
+        $cartCount = 0;
         if (Auth::check()) {
             $this->user_id =  Auth::user()->id;
-           
             $this->discoutget = Cart::where('user_id', $this->user_id)->first();
 
         }
          $this->getCart();
        $this->ProductVariant = ProductVariant::all();
        $this->varianttag = VariantTag::All();
-
-
-    }
-    public function CartItem($value='')
-    {
-        $this->CartItem = $value;
-    }
-    public function render()
-    {
-
-        $this->dispatchBrowserEvent('onCartChanged');
-        $this->stockitem = 1;
-        
-        
-        $this->getproduct = Product::when($this->filter_product, function ($query, $filter_product) {
-
-            $query->where('title', 'LIKE', '%' . $filter_product . '%');
-
-            })->orderBy('title','DESC')->limit(5)->get();
 
         $menus = Menu::where('name','Main Menu')->with('items')->first();
 
@@ -103,6 +84,22 @@ class Header extends Component
             }
 
         }
+
+
+    }
+    public function CartItem($value='')
+    {
+        $this->CartItem = $value;
+    }
+    public function render()
+    {
+   
+        $this->getproduct = Product::when($this->filter_product, function ($query, $filter_product) {
+
+            $query->where('title', 'LIKE', '%' . $filter_product . '%');
+
+            })->orderBy('title','DESC')->limit(5)->get();
+
         return view('livewire.header');
     }
 
@@ -163,7 +160,6 @@ class Header extends Component
 
         if (Auth::check()) {
             Cart::find($id)->delete();
-            // return redirect(request()->header('Referer'));
 
         } else {
             $cart = session()->get('cart');
@@ -187,11 +183,17 @@ class Header extends Component
     {
         if (Auth::check()) {
 
-            $this->CartItem =  Cart::with(['media_product', 'product_detail'])->where('user_id',Auth::user()->id)->get()->toArray();
+            $this->CartItem =  Cart::with(['media_product', 'product_detail'])->where('user_id',Auth::user()->id)->get();
+            
 
         } else {
             $this->CartItem  = session()->get('cart');
         }
+         $this->cartCount = $this->CartItem->sum('stock');
+
+        $this->dispatchBrowserEvent('onCartChanged');
+
+
 
 
     }

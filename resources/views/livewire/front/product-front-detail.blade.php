@@ -212,7 +212,7 @@
 
                                                     @if($row2->attribute2 != "")
 
-                                                    <option value="{{$row->attribute2}}" wire:key="attr2_{{ $loop->index }}" wire:ignore>{{$row2->attribute2}}</option> 
+                                                    <option wire:key="attr2_{{ $loop->index }}" wire:ignore.self>{{$row2->attribute2}}</option> 
 
                                                     @endif 
 
@@ -239,7 +239,7 @@
 
                                                     @if($row3->attribute3 != "")
 
-                                                    <option value="{{$row->attribute3}}" wire:key="attr3_{{ $loop->index }}" wire:ignore>{{$row3->attribute3}}</option> 
+                                                    <option wire:key="attr3_{{ $loop->index }}" wire:ignore.self>{{$row3->attribute3}}</option> 
 
                                                     @endif 
 
@@ -263,7 +263,7 @@
 
                                 </div>
 
-                                <div class="pd-btn-group" wire:target="refresh">
+                                <div class="pd-btn-group">
 
                                     <button class="site-btn green-btn add-cart" id="variant_id" wire:ignore.self value="@if(!empty($row->id)){{$row->id}}@endif" wire:click="addCart($event.target.value)">Add to Cart</button>
 
@@ -982,13 +982,7 @@
 
         });
 
-        $(".add-cart").click(function () {
-            setTimeout(function() {
-                $(".bg-cart").removeClass("my-cart-animate");
-            }, 10000);
-            $(".bg-cart").addClass("my-cart-animate");
 
-        });
 
     </script>
 
