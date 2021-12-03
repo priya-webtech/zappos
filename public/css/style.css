@@ -8705,14 +8705,131 @@ ul.add-menu-item-tabs li.tabs {
     font-weight: 400;
 }
 
-
-
- @keyframes spin {
-     0% {
-         transform: rotate(0deg);
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
     }
-     100% {
-         transform: rotate(360deg);
+    100% {
+        transform: rotate(360deg);
     }
 }
- 
+
+/*tax page css*/
+.tax-list-tbl {
+    padding: 0;
+}
+.tax-list-tbl table tr {
+    background:transparent !Important;
+}
+.tax-list-tbl table th, .tax-list-tbl table td {
+    font-size: 14px;
+    padding: 16px 20px;
+}
+.tax-list-tbl table th {
+    font-weight: 600;
+ }
+.tax-col {
+    min-width: 60px;
+}
+.tax-list-tbl table th:last-child {
+    min-width: 60px;
+}
+.tax-cat-list span.tag {
+    border-radius: 10px;
+    line-height: 22px;
+    margin: 0;
+}
+.tax-cat-list span.tag {
+    border-radius: 10px;
+    line-height: 22px;
+    margin: 2px 4px 2px 0;
+    display: inline-block;
+}
+.tax-list-tbl button.link {
+    padding: 0;    
+    min-width: auto;
+    min-height: auto;}
+.tax-list-tbl svg {
+    width: 24px;
+    color: #454f5b;
+}
+.edit-tax {
+    position: relative;
+}
+.tax-list-sec .card {
+    overflow: visible;
+}
+.tax-list-tbl .filter-dropdown {
+    padding: 8px;
+    top: 45px;
+}
+.tax-list-tbl .filter-dropdown li {
+    padding: 0;
+}
+.tax-list-tbl .filter-dropdown li:last-child button.link {
+    color: #d82c0d;
+}
+.tax-list-tbl .filter-dropdown button.link {
+    padding: 10px 8px;
+    line-height: normal;
+    width: 100%;
+    text-align: left;
+    color: #202223;
+    border-radius: 4px;
+    text-decoration: none;
+}
+.tax-list-tbl .filter-dropdown button.link:hover {
+    background: #f6f6f7;
+}
+
+
+/*multi select option with checkbox css*/
+.multiselect {
+    position: relative;
+}
+.selectBox {
+    position: relative;
+}
+
+.selectBox select {
+    width: 100%;
+    color: #6d7175;
+}
+.form-field-list input[type="checkbox"] {
+    line-height: normal;
+    padding: 0;
+}
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#checkboxes {
+    display: none;
+    border: 1px #dadada solid;
+    position: absolute;
+    background: #fff;
+    padding: 12px 12px 8px;
+    right: 0;
+    left: 0;
+    top: 35px;
+    z-index: 1;
+}
+
+#checkboxes label {
+    display: block;
+    cursor: pointer;
+}
+.tax-cat-list {
+    margin-top: 6px;
+}
+.tax-select-row {
+    border-bottom: 1px solid #e1e3e5;
+    padding: 20px;
+}
+.tax-select-row:last-child {
+    border-bottom: none;
+}

@@ -937,82 +937,20 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 /*******************************************
         succses massage design css
 *******************************************/
-.alert-success, .alert-danger {
-    padding: 16px 0;
-    background-color: #5cb85c;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    box-shadow: 0px 3px 6px 3px rgb(0 0 0 / 18%);
-    z-index: 1;
-    border: none;
-    border-radius: 0;
-}
-.alert-danger {
-    background-color: #fff1f1;
-}
-.alert-success-modal {
-    background-color: transparent;
-    color: #155724;
-    border: none;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-}
-.alert-success a.close.site-btn, .alert-danger a.close.site-btn {
-    font-weight: 400;
-    font-size: 14px;
-    border-color: #fff;
-    padding: 6px 15px;
-    line-height: 18px;
-    letter-spacing: 0.05em;
-    opacity: 1;
-}
-.alert-danger a.close.site-btn {
-    color: #DC3545 !important;
-    border-color: #DC3545;
-    font-weight: 600;
-}
-.alert-success .success-msg, .alert-danger .delete-msg {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    font-size: 16px;
-    font-weight: 400;
-    color: #ffffff;
-}
-.alert-danger .delete-msg {
-    color: #DC3545;
-}
-.alert-success .success-msg img, .alert-danger .delete-msg img {
-    width: 35px;
-    height: 35px;
-    margin-right: 15px;
-    object-fit: contain;
-}
-.alert-danger .delete-msg img {
-    width: 28px;
-    height: 28px;
-    margin-right: 10px;
-}
-
-
-.alrt-no-modal {
-    position: initial;
-    padding: 15px 20px;
-}
-.alrt-no-modal .success-msg img, .alert-danger .delete-msg img {
-    width: 30px;
-    height: 30px;
-}
-.alrt-no-modal .success-msg {
-    font-size: 14px;
-}
-.alrt-no-modal a.close.site-btn {
-    font-size: 13px;
-}
+.alert-success, .alert-danger {padding: 16px 0; background-color: #5cb85c; position: fixed; top: 0; width: 100%; box-shadow: 0px 3px 6px 3px rgb(0 0 0 / 18%); z-index: 1; border: none; border-radius: 0; left: 0; right: 0; }
+.alert-danger {background-color: #fff1f1; }
+.alert-success-modal {background-color: transparent; color: #155724; border: none; margin: 0; }
+.alert-success-modal .container, .alert-danger-modal .container {display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; }
+.alert-success a.close.site-btn, .alert-danger a.close.site-btn {font-weight: 400; font-size: 14px; border-color: #fff; padding: 6px 15px; line-height: 18px; letter-spacing: 0.05em; opacity: 1; width: auto; }
+.alert-danger a.close.site-btn {color: #DC3545 !important; border-color: #DC3545; font-weight: 600; }
+.alert-success .success-msg, .alert-danger .delete-msg {display: flex; align-items: center; margin: 0; font-size: 16px; font-weight: 400; color: #ffffff; }
+.alert-danger .delete-msg {color: #DC3545; }
+.alert-success .success-msg img, .alert-danger .delete-msg img {width: 35px; height: 35px; margin-right: 15px; object-fit: contain; }
+.alert-danger .delete-msg img {width: 28px; height: 28px; margin-right: 10px; }
+.alrt-no-modal {position: initial; padding: 15px 20px; }
+.alrt-no-modal .success-msg img, .alert-danger .delete-msg img {width: 30px; height: 30px; }
+.alrt-no-modal .success-msg {font-size: 14px; }
+.alrt-no-modal a.close.site-btn {font-size: 13px; }
 
 /*********************************************
                 RESPONSIVE CSS
@@ -1068,7 +1006,8 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 
     #login-btn {font-size: 0; position: absolute; top: 82px; right: calc(10% + 44px); }
     #login-btn .mb-login-icon {display: block; font-size: 25px;}
-    .navbar-toggler-icon {background-image: url(http://127.0.0.1:8000/assets/mobile-menu.png) !important; background-size: 26px; }
+    .navbar-toggler-icon {background: transparent !important; }
+    .navbar-toggler-icon img {width: 26px; height: 26px; object-fit: contain; }
 
     .home-mini-banner {background-color: #e5f1f8; background-image: initial; }
     .mini-banner-content {max-width: 100%; padding: 50px 0; }

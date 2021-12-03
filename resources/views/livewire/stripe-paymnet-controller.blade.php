@@ -117,7 +117,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="primaryVoiceNumber">Unit Number</label>
-                                            <input type="number" wire:model="customerAddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" wire:ignore.self>
+                                            <input type="text" wire:model="customerAddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="12a" wire:ignore.self>
                                             @error('customerAddress.unit_number') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
@@ -126,7 +126,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="postalCode">Zip</label>
-                                            <input type="number" wire:model="customerAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" wire:ignore.self>
+                                            <input type="text" wire:model="customerAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="123 AB" wire:ignore.self>
                                             @error('customerAddress.postal_code') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
@@ -160,15 +160,14 @@
                                     </div>
                                 </div>
                                 <div class='form-row'>
-
-                                    <div class='col-md-12 error form-group hide'>
-
-                                        <div class='alert-danger alert'>Please correct the errors and try
-
-                                            again.</div>
-
+                                    <div class="alert alert-danger text-center">
+                                        <div class="alert-danger-modal">
+                                            <div class="container">
+                                                <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">close</a>
+                                                <p class="delete-msg">Please correct the errors and try again.</p>
+                                            </div>
+                                        </div>
                                     </div>
-
                                 </div>
 
                                 <div class="form-check">
