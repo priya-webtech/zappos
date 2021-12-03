@@ -77,7 +77,7 @@
                         </div>
 
                     @endif
-                    <form role="form" id="address-form" class="require-validation"  >
+                    <form role="form" id="address-form" class="require-validation">
 
                     <div class="shipping-details-card">
 
@@ -85,13 +85,13 @@
 
                         @if($newaddress == true)
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" disabled class="form-check-input" wire:model="newaddress" wire:ignore.self>
-                            <label class="form-check-label" for="defaultAddress">Create New Address</label>
+                            <input type="checkbox" id="defaultAddress" disabled class="form-check-input" wire:click="NewShippingAddress()" wire:model="newaddress" wire:ignore.self>
+                            <label class="form-check-label" for="defaultAddress">Create New Shipping Address</label>
                         </div>
                         @else
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="newaddress" wire:ignore.self>
-                            <label class="form-check-label" for="defaultAddress">Create New Address</label>
+                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:click="NewShippingAddress()" wire:model="newaddress" wire:ignore.self>
+                            <label class="form-check-label" for="defaultAddress">Create New Shipping Address</label>
                         </div>
                         @endif
                         <div id="bydefultform"  wire:ignore.self>
@@ -176,7 +176,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class='form-row'>
+                                <!-- <div class='form-row'>
 
                                     <div class='col-md-12 error form-group hide'>
 
@@ -186,7 +186,7 @@
 
                                     </div>
 
-                                </div>
+                                </div> -->
 
                                 <div class="form-check">
                                     <input type="checkbox" wire:model="billing_type" class="form-check-input"  id="billing_type">
@@ -198,18 +198,22 @@
 
                         <h3 class="panel-title">Billing Details</h3>
 
+                        <div class="form-check">
+                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="same_shipping" wire:click="SameShipping()" wire:ignore.self>
+                            <label class="form-check-label" for="defaultAddress">Same as Shipping Details</label>
+                        </div>
+
                         @if($newbillingaddress == true)
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" disabled class="form-check-input" wire:model="newbillingaddress" wire:ignore.self>
-                            <label class="form-check-label" for="defaultAddress">Create New Address</label>
+                            <input type="checkbox" id="defaultAddress" disabled class="form-check-input" wire:model="newbillingaddress" wire:click="NewBillingAddress" wire:ignore.self>
+                            <label class="form-check-label" for="defaultAddress">Create New Billing Address</label>
                         </div>
                         @else
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="newbillingaddress" wire:ignore.self>
-                            <label class="form-check-label" for="defaultAddress">Create New Address</label>
+                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="newbillingaddress" wire:click="NewBillingAddress" wire:ignore.self>
+                            <label class="form-check-label" for="defaultAddress">Create New Billing Address</label>
                         </div>
                         @endif
-
 
                             <input type="hidden" name="orderid" value="{{$orderdetail->id}}">
 
@@ -291,7 +295,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class='form-row'>
+                                <!-- <div class='form-row'>
 
                                     <div class='col-md-12 error form-group hide'>
 
@@ -301,7 +305,7 @@
 
                                     </div>
 
-                                </div>
+                                </div> -->
 
                                 <div class="form-check">
                                     <input type="checkbox" wire:model="primary_billing_type" class="form-check-input"  id="primary_billing_type">
