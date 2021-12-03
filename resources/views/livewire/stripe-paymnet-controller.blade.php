@@ -85,13 +85,13 @@
 
                         @if($newaddress == true)
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" disabled class="form-check-input" wire:click="NewShippingAddress()" wire:model="newaddress" <?php if($view) echo 'readonly'; ?>>
-                            <label class="form-check-label" for="defaultAddress">Create New Shipping Address</label>
+                            <input type="checkbox" id="create_new_shipping" disabled class="form-check-input" wire:click="NewShippingAddress()" wire:model="newaddress" <?php if($view) echo 'disabled'; ?>>
+                            <label class="form-check-label" for="create_new_shipping">Create New Shipping Address</label>
                         </div>
                         @else
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:click="NewShippingAddress()" wire:model="newaddress" <?php if($view) echo 'readonly'; ?>>
-                            <label class="form-check-label" for="defaultAddress">Create New Shipping Address</label>
+                            <input type="checkbox" id="create_new_shipping1" class="form-check-input" wire:click="NewShippingAddress()" wire:model="newaddress" <?php if($view) echo 'disabled'; ?>>
+                            <label class="form-check-label" for="create_new_shipping1">Create New Shipping Address</label>
                         </div>
                         @endif
                         <div id="bydefultform"  wire:ignore.self>
@@ -189,7 +189,7 @@
                                 </div> -->
 
                                 <div class="form-check">
-                                    <input type="checkbox" wire:model="billing_type" class="form-check-input"  id="billing_type" <?php if($view) echo 'readonly'; ?>>
+                                    <input type="checkbox" wire:model="billing_type" class="form-check-input"  id="billing_type" <?php if($view) echo 'disabled'; ?>>
                                     <label class="form-check-label" for="billing_type">Make this my primary Shipping address</label>
                                 </div>       
                         </div>
@@ -199,19 +199,19 @@
                         <h3 class="panel-title">Billing Details</h3>
 
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="same_shipping" wire:click="SameShipping()" wire:ignore.self>
-                            <label class="form-check-label" for="defaultAddress">Same as Shipping Details</label>
+                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="same_shipping" wire:click="SameShipping()" <?php if($view) echo 'disabled'; ?>>
+                            <label class="form-check-label" for="defaultAddress" >Same as Shipping Details</label>
                         </div>
 
                         @if($newbillingaddress == true)
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" disabled class="form-check-input" wire:model="newbillingaddress" wire:click="NewBillingAddress" <?php if($view) echo 'readonly'; ?>>
-                            <label class="form-check-label" for="defaultAddress">Create New Billing Address</label>
+                            <input type="checkbox" id="create_new_billing" disabled class="form-check-input" wire:model="newbillingaddress" wire:click="NewBillingAddress" <?php if($view) echo 'disabled'; ?>>
+                            <label class="form-check-label" for="create_new_billing">Create New Billing Address</label>
                         </div>
                         @else
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="newbillingaddress" wire:click="NewBillingAddress" <?php if($view) echo 'readonly'; ?>>
-                            <label class="form-check-label" for="defaultAddress">Create New Billing Address</label>
+                            <input type="checkbox" id="create_new_billing1" class="form-check-input" wire:model="newbillingaddress" wire:click="NewBillingAddress" <?php if($view) echo 'disabled'; ?>>
+                            <label class="form-check-label" for="create_new_billing1">Create New Billing Address</label>
                         </div>
                         @endif
 
@@ -311,7 +311,7 @@
                                 </div> -->
 
                                 <div class="form-check">
-                                    <input type="checkbox" wire:model="primary_billing_type" class="form-check-input"  id="primary_billing_type" <?php if($view) echo 'readonly'; ?>>
+                                    <input type="checkbox" wire:model="primary_billing_type" class="form-check-input"  id="primary_billing_type" <?php if($view) echo 'disabled'; ?>>
                                     <label class="form-check-label" for="billing_address_type">Make this my primary billing address</label>
                                 </div>
                                 @endif

@@ -176,7 +176,7 @@ class StripePaymnetController extends Component
         }
         else{
 
-            $this->customerAddress = CustomerAddress::where('user_id',$this->user_id)->where('address_type','shipping_address')->where('is_billing_address', 'yes')->first();
+            $this->customerAddress = CustomerAddress::where('user_id',Auth::user()->id)->where('address_type','shipping_address')->where('is_billing_address', 'yes')->first();
 
 
             // Shipping Address Manager
@@ -219,7 +219,7 @@ class StripePaymnetController extends Component
         }
         else{
 
-            $this->customerbillingAddress = CustomerAddress::where('user_id',$this->user_id)->where('address_type','billing_address')->where('is_billing_address', 'yes')->first(); 
+            $this->customerbillingAddress = CustomerAddress::where('user_id',Auth::user()->id)->where('address_type','billing_address')->where('is_billing_address', 'yes')->first(); 
 
             // Billing Address Manager 
             if(!empty($this->customerbillingAddress)) {
@@ -331,7 +331,7 @@ class StripePaymnetController extends Component
 
         }else {
         
-            $this->customerbillingAddress = CustomerAddress::where('user_id',$this->user_id)->where('address_type','billing_address')->where('is_billing_address', 'yes')->first(); 
+            $this->customerbillingAddress = CustomerAddress::where('user_id',Auth::user()->id)->where('address_type','billing_address')->where('is_billing_address', 'yes')->first(); 
 
             // Billing Address Manager 
             if(!empty($this->customerbillingAddress)) {
