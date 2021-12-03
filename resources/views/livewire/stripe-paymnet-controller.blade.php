@@ -215,6 +215,8 @@
                         </div>
                         @endif
 
+                        @if($same_shipping ==  false)
+
                             <input type="hidden" name="orderid" value="{{$orderdetail->id}}">
 
                                 <div class='form-row'>
@@ -312,7 +314,7 @@
                                     <input type="checkbox" wire:model="primary_billing_type" class="form-check-input"  id="primary_billing_type" <?php if($view) echo 'readonly'; ?>>
                                     <label class="form-check-label" for="billing_address_type">Make this my primary billing address</label>
                                 </div>
-                                
+                                @endif
 
                                 <div class="row">
 

@@ -236,7 +236,26 @@ class StripePaymnetController extends Component
 
     public function SameShipping(){
 
-        if($this->same_shipping == true) {
+        
+
+    }
+    public function addshipping($id)
+    {
+
+        if($this->billing_type){
+            $shipping_value_type = 'yes';
+        }else if(!$this->billing_type){
+            $shipping_value_type = 'no';
+        }
+
+        if($this->newbillingaddress){
+            $billing_value_type = 'yes';
+        }else if(!$this->newbillingaddress){
+            $billing_value_type = 'no';
+        }
+
+
+         if($this->same_shipping == true) {
                       
             if($this->billing_type){
                 $shipping_value_type = 'yes';
@@ -254,8 +273,9 @@ class StripePaymnetController extends Component
                 'customerAddress.country' => ['required'],
                 'customerAddress.postal_code' => ['required'],
                 'customerAddress.mobile_no' => ['between:10,12|numeric'],
-
             ]);
+
+
 
             if($this->newaddress == true){
 
@@ -326,32 +346,7 @@ class StripePaymnetController extends Component
 
         }
 
-    }
-    public function addshipping($id)
-    {
-
-        if($this->billing_type){
-            $shipping_value_type = 'yes';
-        }else if(!$this->billing_type){
-            $shipping_value_type = 'no';
-        }
-
-        if($this->newbillingaddress){
-            $billing_value_type = 'yes';
-        }else if(!$this->newbillingaddress){
-            $billing_value_type = 'no';
-        }
-
          $this->validate([
-                'customerAddress.first_name' => ['required'],
-                'customerAddress.last_name' => ['required'],
-                'customerAddress.address' => ['required'],
-                'customerAddress.company' => ['required'],
-                'customerAddress.apartment' => ['required'],
-                'customerAddress.city' => ['required'],
-                'customerAddress.country' => ['required'],
-                'customerAddress.postal_code' => ['required'],
-                'customerAddress.mobile_no' => ['between:10,12|numeric'],
 
                 'customerbillingAddress.first_name' => ['required'],
                 'customerbillingAddress.last_name' => ['required'],
