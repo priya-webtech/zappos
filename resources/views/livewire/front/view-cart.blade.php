@@ -8,7 +8,7 @@
                             <a href="#" class="site-link-btn"><i class="fa fa-angle-left" aria-hidden="true"></i> Continue Shopping</a>
                         </div>
                     </div>
-                    <div class="col-9">
+                    <div class="col-xl-9 col-lg-8">
                         <div class="my-cart-tbl">
                             <table class="table">
                                 <thead>
@@ -146,19 +146,25 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="add-cart-select">               
+                                            <div class="add-cart-select">
+                                                    <span class="mb-tbl-title">
+                                                        Quantity
+                                                    </span>
                                                 <div class="total-item-select">
                                                     @if(Auth::check())
-                                                                         <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$key}})" name="stockitem" type="number" min="1" wire:ignore.self>
-                                                                    @else
-                                                                         <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['product_id']}}, {{$cart['varientid']}})" name="stockitem" type="number" min="1" wire:ignore.self>
-                                                                    @endif
+                                                        <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$key}})" name="stockitem" type="number" min="1" wire:ignore.self>
+                                                    @else
+                                                        <input wire:model="CartItem.{{$key}}.stock" wire:click="stockplusminus({{$cart['product_id']}}, {{$cart['varientid']}})" name="stockitem" type="number" min="1" wire:ignore.self>
+                                                    @endif
                                                         
                                                 </div>
                                             </div>
                                         </div>
                                         </td>
                                         <td>
+                                            <span class="mb-tbl-title">
+                                                Price
+                                            </span>
                                             <span class="cart-pd-price">
                                             {{$symbol['currency']}}{{$detailfetch['selling_price']}}
                                             @if(!$detailfetch['selling_price'])
@@ -311,7 +317,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-xl-3 col-lg-4">
                         <div class="checkout-right">
 
                             <div class="offer-code">

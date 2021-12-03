@@ -36,9 +36,17 @@ $("#EditName, #ChangeEmail, #ChangePassword").on( "click", function() {
    	$('#LoginAndSecurity').modal('hide');  
    	$('body').addClass('modal-open2');  
 });
-$(".modal-close-btn").on( "click", function() {
+$(".modal-close-btn, .done-btn").on( "click", function() {
 	$('body').removeClass('modal-open2');  
 });
+
+// $(".edit-billing-add-btn").on( "click", function() {
+//    	$('#ShowAllbillingAddress').modal('hide');  
+//    	$('body').addClass('modal-open2');  
+// });
+// $(".modal-close-btn").on( "click", function() {
+// 	$('body').removeClass('modal-open2');  
+// });
 
 
 // Seach bar outside click autofill close js
@@ -344,6 +352,10 @@ function initializeCart()
 
 window.addEventListener('onCartChanged', () => {
     initializeCart();
+    setTimeout(function() {
+                $(".bg-cart").removeClass("my-cart-animate");
+            }, 1000);
+            $(".bg-cart").addClass("my-cart-animate");
 });
 
 

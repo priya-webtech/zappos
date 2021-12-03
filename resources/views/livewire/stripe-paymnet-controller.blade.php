@@ -3,7 +3,7 @@
     {{-- In work, do what you enjoy. --}}
     <!DOCTYPE html>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+<!--     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" /> -->
 
    
 
@@ -57,7 +57,7 @@
 
     <div class="row">
 
-        <div class="col-md-8">
+        <div class="col-lg-8 col-12">
 
             <div class="panel credit-card-box">
 
@@ -139,7 +139,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="postalCode">Zip</label>
@@ -155,7 +155,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="Country">Country</label>
@@ -331,7 +331,7 @@
 
         
 
-        <div class="col-md-4">
+        <div class="col-lg-4 col-12">
             <div class="review-shipping-sec">
                 <h3 class="panel-title">Item Review and Shipping</h3>
                 @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; $subtotal3 = 0; $subtotal4 = 0; $subtotal5 = 0; $subtotal6 = 0; @endphp
