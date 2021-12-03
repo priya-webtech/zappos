@@ -654,4 +654,9 @@ class StripePaymnetController extends Component
          return view('livewire.front.thankyou');
 
     }
+
+    public function editshipping()
+    {
+        $this->view = false;
+    }
 }

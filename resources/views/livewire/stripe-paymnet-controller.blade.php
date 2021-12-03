@@ -85,12 +85,12 @@
 
                         @if($newaddress == true)
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" disabled class="form-check-input" wire:click="NewShippingAddress()" wire:model="newaddress" wire:ignore.self>
+                            <input type="checkbox" id="defaultAddress" disabled class="form-check-input" wire:click="NewShippingAddress()" wire:model="newaddress" <?php if($view) echo 'readonly'; ?>>
                             <label class="form-check-label" for="defaultAddress">Create New Shipping Address</label>
                         </div>
                         @else
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:click="NewShippingAddress()" wire:model="newaddress" wire:ignore.self>
+                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:click="NewShippingAddress()" wire:model="newaddress" <?php if($view) echo 'readonly'; ?>>
                             <label class="form-check-label" for="defaultAddress">Create New Shipping Address</label>
                         </div>
                         @endif
@@ -102,14 +102,14 @@
                                     <div class="col">
                                         <div class='form-group required'>
                                             <label class='control-label'>First Name</label> 
-                                            <input class='form-control' wire:model="customerAddress.first_name" name="firstname" placeholder="First Name" type='text' required wire:ignore.self>
+                                            <input class='form-control' wire:model="customerAddress.first_name" name="firstname" placeholder="First Name" type='text' required  <?php if($view) echo 'readonly'; ?> >
                                             @error('customerAddress.first_name') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class='form-group required'>
                                             <label class='control-label'>Last Name</label> 
-                                            <input class='form-control' wire:model="customerAddress.last_name" name="lastname" placeholder="Last Name" type='text' required wire:ignore.self>
+                                            <input class='form-control' wire:model="customerAddress.last_name" name="lastname" placeholder="Last Name" type='text' required <?php if($view) echo 'readonly'; ?>>
                                             @error('customerAddress.last_name') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
@@ -118,7 +118,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="control-label">Company Name</label>
-                                            <input type="text" class="form-control" wire:model="customerAddress.company" placeholder="Company Name" wire:ignore.self>
+                                            <input type="text" class="form-control" wire:model="customerAddress.company" placeholder="Company Name" <?php if($view) echo 'readonly'; ?>>
                                             @error('customerAddress.company') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
@@ -127,14 +127,14 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="control-label">Street Name</label>
-                                            <input type="text" class="form-control" wire:model="customerAddress.address" placeholder="Street Name" wire:ignore.self>
+                                            <input type="text" class="form-control" wire:model="customerAddress.address" placeholder="Street Name" <?php if($view) echo 'readonly'; ?>>
                                             @error('customerAddress.address') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="primaryVoiceNumber">Unit Number</label>
-                                            <input type="number" wire:model="customerAddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" wire:ignore.self>
+                                            <input type="number" wire:model="customerAddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" <?php if($view) echo 'readonly'; ?>>
                                             @error('customerAddress.unit_number') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
@@ -143,14 +143,14 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="postalCode">Zip</label>
-                                            <input type="number" wire:model="customerAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" wire:ignore.self>
+                                            <input type="number" wire:model="customerAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" <?php if($view) echo 'readonly'; ?>>
                                             @error('customerAddress.postal_code') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="City">City</label>
-                                            <input type="text" class="form-control" wire:model="customerAddress.city" id="City" aria-describedby="emailHelp" placeholder="Enter City" wire:ignore.self>
+                                            <input type="text" class="form-control" wire:model="customerAddress.city" id="City" aria-describedby="emailHelp" placeholder="Enter City" <?php if($view) echo 'readonly'; ?>>
                                             @error('customerAddress.city') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
@@ -159,7 +159,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="Country">Country</label>
-                                            <select class="form-control" id="Country" wire:model="customerAddress.country" wire:ignore.self>
+                                            <select class="form-control" id="Country" wire:model="customerAddress.country" <?php if($view) echo 'readonly'; ?>>
                                                 <option value="">-- Select Countries --</option>
                                                 @foreach($countries as $row)
                                                 <option value="{{$row->name}}">{{$row->name}}</option>
@@ -171,7 +171,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="primaryVoiceNumber">Phone</label>
-                                            <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" wire:model="customerAddress.mobile_no" placeholder="123-456-7890" wire:ignore.self> 
+                                            <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" wire:model="customerAddress.mobile_no" placeholder="123-456-7890" <?php if($view) echo 'readonly'; ?>> 
                                             @error('customerAddress.mobile_no') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
@@ -189,7 +189,7 @@
                                 </div> -->
 
                                 <div class="form-check">
-                                    <input type="checkbox" wire:model="billing_type" class="form-check-input"  id="billing_type">
+                                    <input type="checkbox" wire:model="billing_type" class="form-check-input"  id="billing_type" <?php if($view) echo 'readonly'; ?>>
                                     <label class="form-check-label" for="billing_type">Make this my primary Shipping address</label>
                                 </div>       
                         </div>
@@ -205,12 +205,12 @@
 
                         @if($newbillingaddress == true)
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" disabled class="form-check-input" wire:model="newbillingaddress" wire:click="NewBillingAddress" wire:ignore.self>
+                            <input type="checkbox" id="defaultAddress" disabled class="form-check-input" wire:model="newbillingaddress" wire:click="NewBillingAddress" <?php if($view) echo 'readonly'; ?>>
                             <label class="form-check-label" for="defaultAddress">Create New Billing Address</label>
                         </div>
                         @else
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="newbillingaddress" wire:click="NewBillingAddress" wire:ignore.self>
+                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="newbillingaddress" wire:click="NewBillingAddress" <?php if($view) echo 'readonly'; ?>>
                             <label class="form-check-label" for="defaultAddress">Create New Billing Address</label>
                         </div>
                         @endif
@@ -221,14 +221,14 @@
                                     <div class="col">
                                         <div class='form-group required'>
                                             <label class='control-label'>First Name</label> 
-                                            <input class='form-control' wire:model="customerbillingAddress.first_name" name="firstname" placeholder="First Name" type='text' required wire:ignore.self>
+                                            <input class='form-control' wire:model="customerbillingAddress.first_name" name="firstname" placeholder="First Name" type='text' required <?php if($view) echo 'readonly'; ?>>
                                             @error('customerbillingAddress.first_name') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class='form-group required'>
                                             <label class='control-label'>Last Name</label> 
-                                            <input class='form-control' wire:model="customerbillingAddress.last_name" name="lastname" placeholder="Last Name" type='text' required wire:ignore.self>
+                                            <input class='form-control' wire:model="customerbillingAddress.last_name" name="lastname" placeholder="Last Name" type='text' required <?php if($view) echo 'readonly'; ?>>
                                             @error('customerbillingAddress.last_name') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
@@ -237,7 +237,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="control-label">Company Name</label>
-                                            <input type="text" class="form-control" wire:model="customerbillingAddress.company" placeholder="Company Name" wire:ignore.self>
+                                            <input type="text" class="form-control" wire:model="customerbillingAddress.company" placeholder="Company Name" <?php if($view) echo 'readonly'; ?>>
                                             @error('customerbillingAddress.company') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
@@ -246,14 +246,14 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label class="control-label">Street Name</label>
-                                            <input type="text" class="form-control" wire:model="customerbillingAddress.address" placeholder="Street Name" wire:ignore.self>
+                                            <input type="text" class="form-control" wire:model="customerbillingAddress.address" placeholder="Street Name" <?php if($view) echo 'readonly'; ?>>
                                             @error('customerbillingAddress.address') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="primaryVoiceNumber">Unit Number</label>
-                                            <input type="number" wire:model="customerbillingAddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" wire:ignore.self>
+                                            <input type="number" wire:model="customerbillingAddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" <?php if($view) echo 'readonly'; ?>>
                                             @error('customerbillingAddress.unit_number') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
@@ -262,14 +262,14 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="postalCode">Zip</label>
-                                            <input type="number" wire:model="customerbillingAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" wire:ignore.self>
+                                            <input type="number" wire:model="customerbillingAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" <?php if($view) echo 'readonly'; ?>>
                                             @error('customerbillingAddress.postal_code') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="City">City</label>
-                                            <input type="text" class="form-control" wire:model="customerbillingAddress.city" id="City" aria-describedby="emailHelp" placeholder="Enter City" wire:ignore.self>
+                                            <input type="text" class="form-control" wire:model="customerbillingAddress.city" id="City" aria-describedby="emailHelp" placeholder="Enter City" <?php if($view) echo 'readonly'; ?>>
                                             @error('customerbillingAddress.city') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
@@ -278,7 +278,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="Country">Country</label>
-                                            <select class="form-control" id="Country" wire:model="customerbillingAddress.country" wire:ignore.self>
+                                            <select class="form-control" id="Country" wire:model="customerbillingAddress.country" <?php if($view) echo 'readonly'; ?>>
                                                 <option value="">-- Select Countries --</option>
                                                 @foreach($countries as $row)
                                                 <option value="{{$row->name}}">{{$row->name}}</option>
@@ -290,7 +290,8 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="primaryVoiceNumber">Phone</label>
-                                            <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" wire:model="customerbillingAddress.mobile_no" placeholder="123-456-7890" wire:ignore.self> 
+                                            <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" wire:model="customerbillingAddress.mobile_no" placeholder="123-456-7890" <?php if($view) echo 'readonly'; ?>> 
+
                                             @error('customerbillingAddress.mobile_no') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
@@ -308,7 +309,7 @@
                                 </div> -->
 
                                 <div class="form-check">
-                                    <input type="checkbox" wire:model="primary_billing_type" class="form-check-input"  id="primary_billing_type">
+                                    <input type="checkbox" wire:model="primary_billing_type" class="form-check-input"  id="primary_billing_type" <?php if($view) echo 'readonly'; ?>>
                                     <label class="form-check-label" for="billing_address_type">Make this my primary billing address</label>
                                 </div>
                                 
@@ -317,11 +318,20 @@
 
                                     <div class="col-xs-12">
                                       
-                                        <button class="site-btn blue-btn" wire:click.prevent="addshipping({{$orderdetail->id}})" wire:ignore.self>Submit</button>
+                                        <button class="site-btn blue-btn" wire:click.prevent="addshipping({{$orderdetail->id}})" <?php if($view) echo 'disabled'; ?>>Submit</button>
 
                                     </div>
 
                                 </div>
+                                @if($view)
+                                <div class="row">
+                                     <div class="col-xs-12">
+                                      
+                                       <button class="site-btn blue-btn" wire:click.prevent="editshipping()">Edit</button>
+
+                                    </div>
+                                </div>
+                                @endif
 
                             </div>
                         </div>
