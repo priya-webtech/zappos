@@ -110,12 +110,12 @@ class Account extends Component
     		$shippingAddress = 'shipping_address';
             $is_billing_address = 'yes';
 
-    	}else{
-            $shippingAddress = 'shipping_address';
-    		$is_billing_address = 'no';
-    	}
-    	
-    	$ship_arr = [
+            CustomerAddress::where('user_id',$this->user_id)->where('address_type','shipping_address')->update([ 
+
+                'is_billing_address' => 'no',
+            ]);
+
+            $ship_arr = [
 
                     'user_id' => $this->user_id,
                     
@@ -144,6 +144,42 @@ class Account extends Component
 
 
         CustomerAddress::create($ship_arr);
+
+    	}else{
+            $shippingAddress = 'shipping_address';
+    		$is_billing_address = 'no';
+
+            $ship_arr = [
+
+                    'user_id' => $this->user_id,
+                    
+                    'first_name' => $this->first_name,
+
+                    'last_name' => $this->last_name,
+                    
+                    'address' => $this->address,
+                    
+                    'apartment' => $this->apartment,
+                    
+                    'city' => $this->city,
+                    
+                    'company' => $this->company,
+
+                    'country' => $this->country,
+                    
+                    'postal_code' => $this->postal_code,
+                    
+                    'mobile_no' => $this->mobile_no,
+                    
+                    'address_type' => $shippingAddress,
+                   
+                    'is_billing_address' => $is_billing_address,
+                ];
+
+
+        CustomerAddress::create($ship_arr);
+    	}
+    	
      
         $this->emit('AddNewShippingAddresshide');
         session()->flash('add_shipp', 'shipping Address Added !!');
@@ -174,12 +210,12 @@ class Account extends Component
             $billing_address = 'billing_address';
             $is_billing_address = 'yes';
 
-        }else{
-            $billing_address = 'billing_address';
-            $is_billing_address = 'no';
-        }
-        
-        $bill_arr = [
+            CustomerAddress::where('user_id',$this->user_id)->where('address_type','billing_address')->update([ 
+
+                'is_billing_address' => 'no',
+            ]);
+
+            $bill_arr = [
 
                     'user_id' => $this->user_id,
                     
@@ -207,6 +243,40 @@ class Account extends Component
                 ];
 
         CustomerAddress::create($bill_arr);
+
+        }else{
+            $billing_address = 'billing_address';
+            $is_billing_address = 'no';
+
+            $bill_arr = [
+
+                'user_id' => $this->user_id,
+                
+                'first_name' => $this->bfirst_name,
+
+                'last_name' => $this->blast_name,
+                
+                'address' => $this->baddress,
+                
+                'apartment' => $this->bapartment,
+                
+                'city' => $this->bcity,
+                
+                'company' => $this->bcompany,
+
+                'country' => $this->bcountry,
+                
+                'postal_code' => $this->bpostal_code,
+                
+                'mobile_no' => $this->bmobile_no,
+                
+                'address_type' => $billing_address,
+               
+                'is_billing_address' => $is_billing_address,
+            ];
+        }
+        
+        
         $this->mount();
         $this->emit('AddBillingAddresshide'); // Close modal "deleteconfirm"
 
@@ -264,37 +334,68 @@ class Account extends Component
         if($this->baddress_type == true){
             $shippingAddress = 'billing_address';
              $is_billing_address = 'yes';
+
+             CustomerAddress::where('id',$id)->update([
+
+                'first_name' => $this->editaddress->first_name,
+
+                'last_name' => $this->editaddress->last_name,
+                
+                'address' => $this->editaddress->address,
+                
+                'apartment' => $this->editaddress->apartment,
+                
+                'city' => $this->editaddress->city,
+                
+                'company' => $this->editaddress->company,
+
+                'country' => $this->editaddress->country,
+                
+                'postal_code' => $this->editaddress->postal_code,
+                
+                'mobile_no' => $this->editaddress->mobile_no,
+                
+                'address_type' => $shippingAddress,
+                
+                'is_billing_address' => $is_billing_address,
+            ]);
+
+             CustomerAddress::where('id','!=',$id)->where('user_id',$this->user_id)->where('address_type','billing_address')->update([ 
+
+                'is_billing_address' => 'no',
+            ]);
+
         }else{
             $shippingAddress = 'billing_address';
              $is_billing_address = 'no';
+
+              CustomerAddress::where('id',$id)->update([
+
+                'first_name' => $this->editaddress->first_name,
+
+                'last_name' => $this->editaddress->last_name,
+                
+                'address' => $this->editaddress->address,
+                
+                'apartment' => $this->editaddress->apartment,
+                
+                'city' => $this->editaddress->city,
+                
+                'company' => $this->editaddress->company,
+
+                'country' => $this->editaddress->country,
+                
+                'postal_code' => $this->editaddress->postal_code,
+                
+                'mobile_no' => $this->editaddress->mobile_no,
+                
+                'address_type' => $shippingAddress,
+                
+                'is_billing_address' => $is_billing_address,
+            ]);
         }
 
-
-        CustomerAddress::where('id',$id)->update([
-
-
-            'first_name' => $this->editaddress->first_name,
-
-            'last_name' => $this->editaddress->last_name,
-            
-            'address' => $this->editaddress->address,
-            
-            'apartment' => $this->editaddress->apartment,
-            
-            'city' => $this->editaddress->city,
-            
-            'company' => $this->editaddress->company,
-
-            'country' => $this->editaddress->country,
-            
-            'postal_code' => $this->editaddress->postal_code,
-            
-            'mobile_no' => $this->editaddress->mobile_no,
-            
-            'address_type' => $shippingAddress,
-            
-            'is_billing_address' => $is_billing_address,
-        ]);
+        
         $this->mount();
         session()->flash('editbill', 'Record Updated !!');
     }
@@ -319,13 +420,8 @@ class Account extends Component
         if($this->address_type == true){
             $shippingAddress = 'shipping_address';
             $is_billing_address = 'yes';
-        }else{
-            $shippingAddress = 'shipping_address';
-            $is_billing_address = 'no';
-        }
 
-
-        CustomerAddress::where('id',$id)->update([
+            CustomerAddress::where('id',$id)->update([
 
 
             'first_name' => $this->editaddress->first_name,
@@ -350,6 +446,44 @@ class Account extends Component
             
             'is_billing_address' => $is_billing_address,
         ]);
+
+            CustomerAddress::where('id','!=',$id)->where('user_id',$this->user_id)->where('address_type','shipping_address')->update([ 
+
+                'is_billing_address' => 'no',
+            ]);
+        }else{
+            $shippingAddress = 'shipping_address';
+            $is_billing_address = 'no';
+
+            CustomerAddress::where('id',$id)->update([
+
+
+            'first_name' => $this->editaddress->first_name,
+
+            'last_name' => $this->editaddress->last_name,
+            
+            'address' => $this->editaddress->address,
+            
+            'apartment' => $this->editaddress->apartment,
+            
+            'city' => $this->editaddress->city,
+            
+            'company' => $this->editaddress->company,
+
+            'country' => $this->editaddress->country,
+            
+            'postal_code' => $this->editaddress->postal_code,
+            
+            'mobile_no' => $this->editaddress->mobile_no,
+            
+            'address_type' => $shippingAddress,
+            
+            'is_billing_address' => $is_billing_address,
+        ]);
+        }
+
+
+        
         $this->mount();
         session()->flash('editship', 'Record Updated !!');
 
@@ -377,7 +511,7 @@ class Account extends Component
 
     		]);
 
-    		session()->flash('message', 'Name Updated!!');
+    		session()->flash('name_email_password_message', 'Record Updated!!');
     	}
 
     		
@@ -393,6 +527,7 @@ class Account extends Component
 				if($this->email == $this->reemail){
 					if(Hash::check($this->password, $this->UserDetail->password)) {
 						User::where('id',$this->user_id)->update(['email' => $this->email]);
+                        session()->flash('name_email_password_message', 'Record Updated!!');
 					}else{
 						//dd('Invalid password');
 						session()->flash('emailpassword', 'Password Invalid !!');
@@ -419,6 +554,7 @@ class Account extends Component
 					$hashedPassword = Hash::make($this->newpassword);
 					User::where('id',$this->user_id)->update(['password' => $hashedPassword]);
 					//dd('change');
+                    session()->flash('name_email_password_message', 'Record Updated!!');
 				}else{
 					//dd('Not same Email');
 					session()->flash('message', 'Not Same Email Address !!');

@@ -36,12 +36,13 @@ use Illuminate\Support\Facades\Validator;
 
 class StripePaymnetController extends Component
 {
-    public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$firstname,$lastname,$streetname,$city,$country,$pincode,$mobile,$Taxes, $view,$discoutget,$billing_type,$orderID,$unit_number,$countries,$newaddress,$customerAddress,$first_name,$last_name,$address,$apartment,$postal_code,$mobile_no;
-
+    public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$firstname,$lastname,$streetname,$city,$country,$pincode,$mobile,$Taxes, $view,$discoutget,$billing_type,$orderID,$unit_number,$countries,$newaddress,$customerAddress,$customerbillingAddress,$first_name,$last_name,$address,$apartment,$postal_code,$mobile_no,$newbillingaddress,$primary_billing_type,$same_shipping;
+    public $isDisabled;
 
     protected $rules = [
         'orderdetail.first_name' => ['required'],
         'orderdetail.last_name' => ['required'],
+        'orderdetail.company' => ['required'],
         'orderdetail.address' => ['required'],
         'orderdetail.unit_number' => ['required'],
         'orderdetail.city' => ['required'],
@@ -49,15 +50,25 @@ class StripePaymnetController extends Component
         'orderdetail.pincode' => ['required'],
         'orderdetail.mobile' => [],
 
-
         'customerAddress.first_name' => ['required'],
         'customerAddress.last_name' => ['required'],
         'customerAddress.address' => ['required'],
+        'customerAddress.company' => ['required'],
         'customerAddress.apartment' => ['required'],
         'customerAddress.city' => ['required'],
         'customerAddress.country' => ['required'],
         'customerAddress.postal_code' => ['required'],
         'customerAddress.mobile_no' => [],
+
+        'customerbillingAddress.first_name' => ['required'],
+        'customerbillingAddress.last_name' => ['required'],
+        'customerbillingAddress.address' => ['required'],
+        'customerbillingAddress.company' => ['required'],
+        'customerbillingAddress.apartment' => ['required'],
+        'customerbillingAddress.city' => ['required'],
+        'customerbillingAddress.country' => ['required'],
+        'customerbillingAddress.postal_code' => ['required'],
+        'customerbillingAddress.mobile_no' => [],
 
     ];
     public function mount($id)
@@ -68,30 +79,41 @@ class StripePaymnetController extends Component
         $this->view = false;
         $this->orderdetail = Orders::find($id);
         $this->customerAddress = [];
+        $this->customerbillingAddress = [];
         $this->billing_type = false;
+        $this->primary_billing_type = false;
+        $this->newaddress = false;
+        $this->newbillingaddress = false;
+        $this->same_shipping = false;
+
+        $this->customerAddress = CustomerAddress::where('user_id',$this->user_id)->where('address_type','shipping_address')->where('is_billing_address', 'yes')->first();
+
+
+        $this->customerbillingAddress = CustomerAddress::where('user_id',$this->user_id)->where('address_type','billing_address')->where('is_billing_address', 'yes')->first(); 
+
+        // Shipping Address Manager
+        if(!empty($this->customerAddress)) {
+            $this->billing_type = ($this->customerAddress->is_billing_address == 'yes') ? true : false;
             $this->newaddress = false;
-
-
-        if(!empty($this->orderdetail->address)) {
-
-            $this->customerAddress['first_name'] = $this->orderdetail->first_name;
-            $this->customerAddress['last_name'] = $this->orderdetail->last_name;
-            $this->customerAddress['address'] = $this->orderdetail->address;
-            $this->customerAddress['city'] = $this->orderdetail->city;
-            $this->customerAddress['country'] = $this->orderdetail->country;
-            $this->customerAddress['postal_code'] = $this->orderdetail->pincode;
-            $this->customerAddress['mobile_no'] = $this->orderdetail->mobile;
-            $this->customerAddress['apartment'] = $this->orderdetail->unit_number;
-            $this->billing_type = ($this->orderdetail->billing_type== 'yes') ? true : false;
-            $this->newaddress = ($this->orderdetail->new_address== 'yes') ? true : false;
             $this->view = true;
         } else {
        
-            $this->customerAddress = CustomerAddress::where('user_id',$this->user_id)->where('address_type','shipping_address')->where('is_billing_address', 'yes')->first();
-
-           
+            $this->newaddress = true;
 
         }
+
+        // Billing Address Manager 
+        if(!empty($this->customerbillingAddress)) {
+            $this->primary_billing_type = ($this->customerbillingAddress->is_billing_address == 'yes') ? true : false;
+            $this->newbillingaddress = false;
+            $this->view = true;
+        } else {
+       
+            $this->newbillingaddress = true;
+
+        }
+
+
 
         $this->discoutget = Cart::where('user_id', $this->user_id)->first();
         $this->Taxes = tax::where('id',1)->first();
@@ -106,8 +128,6 @@ class StripePaymnetController extends Component
     }
     public function render()
     {
-
-
         // $stripe = new \Stripe\StripeClient('sk_test_ngkOUeScv0ATVVwLqg88ZdBv00ZX79AIQ8');
         // try {
         //   $paymentIntent = $stripe->paymentIntents->create([
@@ -127,23 +147,127 @@ class StripePaymnetController extends Component
         //   return redirect()->back()->with('message', $e->getError()->message);
         // }
 
+    }
+
+    public function NewShippingAddress(){
+
+
+        if($this->newaddress == true) {
+                 
+            $this->customerAddress['first_name'] = '';
+
+            $this->customerAddress['last_name'] = '';
+
+            $this->customerAddress['apartment'] = '';
+
+            $this->customerAddress['address'] = '';
+
+            $this->customerAddress['company'] = '';
+
+            $this->customerAddress['city'] = '';
+
+            $this->customerAddress['country'] = '';
+
+            $this->customerAddress['postal_code'] = '';
+
+            $this->customerAddress['mobile_no'] = '';
+
+            $this->primary_billing_type = '';                
+        }
+        else{
+
+            $this->customerAddress = CustomerAddress::where('user_id',Auth::user()->id)->where('address_type','shipping_address')->where('is_billing_address', 'yes')->first();
+
+
+            // Shipping Address Manager
+            if(!empty($this->customerAddress)) {
+                $this->billing_type = ($this->customerAddress->is_billing_address == 'yes') ? true : false;
+                $this->newaddress = false;
+                $this->view = true;
+            } else {
+           
+                $this->newaddress = true;
+
+            }
+        }
+    }
+
+    public function NewBillingAddress(){
+
+    
+        if($this->newbillingaddress == true) {
+                 
+            $this->customerbillingAddress['first_name'] = '';
+
+            $this->customerbillingAddress['last_name'] = '';
+
+            $this->customerbillingAddress['apartment'] = '';
+
+            $this->customerbillingAddress['address'] = '';
+
+            $this->customerbillingAddress['company'] = '';
+
+            $this->customerbillingAddress['city'] = '';
+
+            $this->customerbillingAddress['country'] = '';
+
+            $this->customerbillingAddress['postal_code'] = '';
+
+            $this->customerbillingAddress['mobile_no'] = '';
+
+            $this->billing_type = '';                
+        }
+        else{
+
+            $this->customerbillingAddress = CustomerAddress::where('user_id',Auth::user()->id)->where('address_type','billing_address')->where('is_billing_address', 'yes')->first(); 
+
+            // Billing Address Manager 
+            if(!empty($this->customerbillingAddress)) {
+                $this->primary_billing_type = ($this->customerbillingAddress->is_billing_address == 'yes') ? true : false;
+                $this->newbillingaddress = false;
+                $this->view = true;
+            } else {
+           
+                $this->newbillingaddress = true;
+
+            }
+        }
+    }
+
+    public function SameShipping(){
+
         
-     
+
     }
     public function addshipping($id)
     {
 
-
         if($this->billing_type){
-            $billing_value_type = 'yes';
+            $shipping_value_type = 'yes';
         }else if(!$this->billing_type){
+            $shipping_value_type = 'no';
+        }
+
+        if($this->newbillingaddress){
+            $billing_value_type = 'yes';
+        }else if(!$this->newbillingaddress){
             $billing_value_type = 'no';
         }
 
-         $this->validate([
+
+         if($this->same_shipping == true) {
+                      
+            if($this->billing_type){
+                $shipping_value_type = 'yes';
+            }else if(!$this->billing_type){
+                $shipping_value_type = 'no';
+            }
+
+           $checkvalidation = $this->validate([
                 'customerAddress.first_name' => ['required'],
                 'customerAddress.last_name' => ['required'],
                 'customerAddress.address' => ['required'],
+                'customerAddress.company' => ['required'],
                 'customerAddress.apartment' => ['required'],
                 'customerAddress.city' => ['required'],
                 'customerAddress.country' => ['required'],
@@ -151,19 +275,120 @@ class StripePaymnetController extends Component
                 'customerAddress.mobile_no' => ['between:10,12|numeric'],
             ]);
 
+
+
+            if($this->newaddress == true){
+
+                $this->customerbillingAddress['first_name'] = $this->customerAddress['first_name'];
+
+                $this->customerbillingAddress['last_name'] = $this->customerAddress['last_name'];
+                 
+                $this->customerbillingAddress['apartment'] = $this->customerAddress['apartment'];
+              
+                $this->customerbillingAddress['address'] = $this->customerAddress['address'];
+                
+                $this->customerbillingAddress['company'] = $this->customerAddress['company'];
+
+                $this->customerbillingAddress['city'] = $this->customerAddress['city'];
+
+                $this->customerbillingAddress['country'] = $this->customerAddress['country'];
+                
+                $this->customerbillingAddress['postal_code'] = $this->customerAddress['postal_code'];
+                
+                $this->customerbillingAddress['mobile_no'] = $this->customerAddress['mobile_no'];
+                
+                $this->customerbillingAddress['address_type'] = 'billing_address';
+               
+                $this->primary_billing_type =  $shipping_value_type;
+
+            }else{
+
+
+                $this->customerbillingAddress['user_id'] = $this->customerAddress['user_id'];
+
+                $this->customerbillingAddress['first_name'] = $this->customerAddress['first_name'];
+
+                $this->customerbillingAddress['last_name'] = $this->customerAddress['last_name'];
+                 
+                $this->customerbillingAddress['apartment'] = $this->customerAddress['apartment'];
+              
+                $this->customerbillingAddress['address'] = $this->customerAddress['address'];
+                
+                $this->customerbillingAddress['company'] = $this->customerAddress['company'];
+
+                $this->customerbillingAddress['city'] = $this->customerAddress['city'];
+
+                $this->customerbillingAddress['country'] = $this->customerAddress['country'];
+                
+                $this->customerbillingAddress['postal_code'] = $this->customerAddress['postal_code'];
+                
+                $this->customerbillingAddress['mobile_no'] = $this->customerAddress['mobile_no'];
+                
+                $this->customerbillingAddress['address_type'] = 'billing_address';
+               
+                $this->primary_billing_type =  $shipping_value_type;    
+            } 
+
+        }else {
+        
+            $this->customerbillingAddress = CustomerAddress::where('user_id',Auth::user()->id)->where('address_type','billing_address')->where('is_billing_address', 'yes')->first(); 
+
+            // Billing Address Manager 
+            if(!empty($this->customerbillingAddress)) {
+                $this->primary_billing_type = ($this->customerbillingAddress->is_billing_address == 'yes') ? true : false;
+                $this->newbillingaddress = false;
+                $this->view = true;
+            } else {
+           
+                $this->newbillingaddress = true;
+
+            }
+
+        }
+
+         $this->validate([
+
+                'customerbillingAddress.first_name' => ['required'],
+                'customerbillingAddress.last_name' => ['required'],
+                'customerbillingAddress.address' => ['required'],
+                'customerbillingAddress.company' => ['required'],
+                'customerbillingAddress.apartment' => ['required'],
+                'customerbillingAddress.city' => ['required'],
+                'customerbillingAddress.country' => ['required'],
+                'customerbillingAddress.postal_code' => ['required'],
+                'customerbillingAddress.mobile_no' => ['between:10,12|numeric'],
+            ]);
+
          $paymentdetail = Orders::where('id', $id)->update([
                 'first_name' => $this->customerAddress['first_name'],
                 'last_name' => $this->customerAddress['last_name'],
                 'address' => $this->customerAddress['address'],
+                'company' => $this->customerAddress['company'],
                 'unit_number' => $this->customerAddress['apartment'],
                 'city' => $this->customerAddress['city'],
                 'country' => $this->customerAddress['country'],
                 'pincode' => $this->customerAddress['postal_code'],
                 'mobile' => $this->customerAddress['mobile_no'],
-                'billing_type' => $billing_value_type,
+                'billing_type' => $shipping_value_type,
+
+                'b_first_name' => $this->customerbillingAddress['first_name'],
+                'b_last_name' => $this->customerbillingAddress['last_name'],
+                'b_address' => $this->customerbillingAddress['address'],
+                'b_company' => $this->customerbillingAddress['company'],
+                'b_unit_number' => $this->customerbillingAddress['apartment'],
+                'b_city' => $this->customerbillingAddress['city'],
+                'b_country' => $this->customerbillingAddress['country'],
+                'b_pincode' => $this->customerbillingAddress['postal_code'],
+                'b_mobile' => $this->customerbillingAddress['mobile_no'],
+                'b_billing_type' => $billing_value_type,
             ]);
 
         if($this->newaddress == true){
+
+            CustomerAddress::where('user_id',Auth::user()->id)->where('address_type','shipping_address')->update([ 
+
+                'is_billing_address' => 'no',
+            ]);
 
             CustomerAddress::create([
 
@@ -176,6 +401,8 @@ class StripePaymnetController extends Component
                 'apartment' => $this->customerAddress['apartment'],
               
                 'address' => $this->customerAddress['address'],
+                
+                'company' => $this->customerAddress['company'],
 
                 'city' => $this->customerAddress['city'],
 
@@ -187,7 +414,7 @@ class StripePaymnetController extends Component
                 
                 'address_type' => 'shipping_address',
                
-                'is_billing_address' =>  $billing_value_type,
+                'is_billing_address' =>  $shipping_value_type,
 
 
             ]);
@@ -205,6 +432,8 @@ class StripePaymnetController extends Component
                 'apartment' => $this->customerAddress['apartment'],
               
                 'address' => $this->customerAddress['address'],
+                
+                'address' => $this->customerAddress['company'],
 
                 'city' => $this->customerAddress['city'],
 
@@ -215,6 +444,74 @@ class StripePaymnetController extends Component
                 'mobile_no' => $this->customerAddress['mobile_no'],
                 
                 'address_type' => 'shipping_address',
+               
+                'is_billing_address' =>  $shipping_value_type,
+            ]);
+            
+        }
+
+
+        if($this->newbillingaddress == true){
+
+            CustomerAddress::where('user_id',Auth::user()->id)->where('address_type','billing_address')->update([ 
+
+                'is_billing_address' => 'no',
+            ]);
+
+            CustomerAddress::create([
+
+                'user_id' => Auth::user()->id,
+                
+                'first_name' => $this->customerbillingAddress['first_name'],
+
+                'last_name' => $this->customerbillingAddress['last_name'],
+                 
+                'apartment' => $this->customerbillingAddress['apartment'],
+              
+                'address' => $this->customerbillingAddress['address'],
+                
+                'company' => $this->customerbillingAddress['company'],
+
+                'city' => $this->customerbillingAddress['city'],
+
+                'country' => $this->customerbillingAddress['country'],
+                
+                'postal_code' => $this->customerbillingAddress['postal_code'],
+                
+                'mobile_no' => $this->customerbillingAddress['mobile_no'],
+                
+                'address_type' => 'billing_address',
+               
+                'is_billing_address' =>  $billing_value_type,
+
+
+            ]);
+
+        }else{
+
+            CustomerAddress::where('id', $this->customerbillingAddress->id)->update([
+
+                'user_id' => $this->customerbillingAddress['user_id'],
+                
+                'first_name' => $this->customerbillingAddress['first_name'],
+
+                'last_name' => $this->customerbillingAddress['last_name'],
+                 
+                'apartment' => $this->customerbillingAddress['apartment'],
+              
+                'address' => $this->customerbillingAddress['address'],
+                
+                'address' => $this->customerbillingAddress['company'],
+
+                'city' => $this->customerbillingAddress['city'],
+
+                'country' => $this->customerbillingAddress['country'],
+                
+                'postal_code' => $this->customerbillingAddress['postal_code'],
+                
+                'mobile_no' => $this->customerbillingAddress['mobile_no'],
+                
+                'address_type' => 'billing_address',
                
                 'is_billing_address' =>  $billing_value_type,
             ]);
@@ -351,5 +648,10 @@ class StripePaymnetController extends Component
     
          return view('livewire.front.thankyou');
 
+    }
+
+    public function editshipping()
+    {
+        $this->view = false;
     }
 }
