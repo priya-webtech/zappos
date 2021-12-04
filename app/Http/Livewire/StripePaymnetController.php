@@ -133,6 +133,7 @@ class StripePaymnetController extends Component
             $this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
 
             $this->Product = Product::with('productmediaget')->with('favoriteget')->orderBy('id','asc')->limit(6)->get();
+            redirect('/');
           return view('livewire.dashboard');
 
         }
@@ -870,8 +871,8 @@ class StripePaymnetController extends Component
 
              Session::flash('success', 'Payment pending!');
          }
-    
-         return view('livewire.front.thankyou');
+        
+         return redirect(route('front-user-detail'));
 
     }
 

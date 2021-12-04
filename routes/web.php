@@ -14,6 +14,7 @@ use App\Http\Livewire;
 |
 */
 Route::middleware(['checkRole'])->group(function () {
+    
     Route::get('/', Livewire\Dashboard::class)->name('home');
     // Route::get('/signin', [Livewire\Admin\Dashboard::class, 'checkLogin'])->name('admin.login');
     // Route::get('/login', function (){

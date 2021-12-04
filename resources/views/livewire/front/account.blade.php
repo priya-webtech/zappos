@@ -991,8 +991,9 @@
                                 
                                 @php $i = 1;  $user_id = Auth::user()->id; @endphp
                                 @foreach($OrderItem as $row)
-                            
-                                @if(!empty($row->order) && $row->order->transactionid == "" && $row->user_id == $user_id)
+                               
+                                @if(!empty($row['order']) && $row['order']['transactionid'] != "" && $row['user_id'] == $user_id)
+
                                <?php $detailfetch = allprice($row->product_id); ?>
                                 <tr>
                                     <td>{{$row->order->id}}</td>
@@ -1020,7 +1021,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        Pending 
+                                        {{$row->order->paymentstatus}} 
                                     </td>
                                     <td>
                                         <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
