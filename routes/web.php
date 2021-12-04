@@ -168,9 +168,9 @@ Route::middleware(['checkRole'])->group(function () {
             Route::get('/add-to-cart', [Livewire\Front\ProductFrontDetail::class, 'addCart'])->name('add-to-cart');
             Route::get('/delete-cart-product', [Livewire\Header::class, 'DeleteCartProduct'])->name('delete-cart-product');
             Route::post('/add-order', [Livewire\Front\CheckoutInsertOrder::class, 'checkoutInsert'])->name('add-order');
-            Route::get('/payment/{id?}', Livewire\StripePaymnetController::class)->name('payment');
-            Route::post('/payment', [Livewire\StripePaymnetController::class, 'stripePost'])->name('stripe-post');
-            Route::get('/thankyou/{id?}', [Livewire\StripePaymnetController::class, 'thankYou'])->name('thankyou');
+            Route::get('/checkout', Livewire\StripePaymnetController::class)->name('front-checkout');
+            Route::post('/checkout', [Livewire\StripePaymnetController::class, 'stripePost'])->name('stripe-post');
+            Route::get('/thankyou', [Livewire\StripePaymnetController::class, 'thankYou'])->name('thankyou');
             Route::get('/thankyousuccess', Livewire\Front\Thankyou::class)->name('thankyou-redirect');
 
             /*Account*/

@@ -9,16 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class order_item extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'order_id',
-        'order_uid',
-        'user_id',
-        'product_id',
-        'varition_id',
-        'price',
-        'stock',
-        'total',
-    ];
+    protected $guarded =[];
 
     public function order_product()
     {
