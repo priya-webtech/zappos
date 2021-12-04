@@ -18,6 +18,8 @@ use App\Models\tax;
 
 use App\Models\order_item;
 
+use App\Models\OrderShipping;
+
 use App\Models\VariantStock;
 
 use App\Models\ProductVariant;
@@ -25,6 +27,10 @@ use App\Models\ProductVariant;
 use App\Models\CustomerAddress;
 
 use App\Models\Country;
+
+use App\Models\favorite;
+
+use App\Models\ProductMedia;
 
 use Session;
 
@@ -36,19 +42,10 @@ use Illuminate\Support\Facades\Validator;
 
 class StripePaymnetController extends Component
 {
-    public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$firstname,$lastname,$streetname,$city,$country,$pincode,$mobile,$Taxes, $view,$discoutget,$billing_type,$orderID,$unit_number,$countries,$newaddress,$customerAddress,$customerbillingAddress,$first_name,$last_name,$address,$apartment,$postal_code,$mobile_no,$newbillingaddress,$primary_billing_type,$same_shipping;
+    public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$firstname,$lastname,$streetname,$city,$country,$pincode,$mobile,$Taxes, $view,$discoutget,$billing_type,$orderID,$unit_number,$countries,$newaddress,$customerAddress,$customerbillingAddress,$first_name,$last_name,$address,$apartment,$postal_code,$mobile_no,$newbillingaddress,$primary_billing_type,$same_shipping,$product,$Productmediass;
     public $isDisabled;
 
     protected $rules = [
-        'orderdetail.first_name' => ['required'],
-        'orderdetail.last_name' => ['required'],
-        'orderdetail.company' => ['required'],
-        'orderdetail.address' => ['required'],
-        'orderdetail.unit_number' => ['required'],
-        'orderdetail.city' => ['required'],
-        'orderdetail.country' => ['required'],
-        'orderdetail.pincode' => ['required'],
-        'orderdetail.mobile' => [],
 
         'customerAddress.first_name' => ['required'],
         'customerAddress.last_name' => ['required'],
@@ -71,13 +68,12 @@ class StripePaymnetController extends Component
         'customerbillingAddress.mobile_no' => [],
 
     ];
-    public function mount($id)
+    public function mount()
     {
         $this->user_id =  Auth::user()->id;
         $this->countries = Country::all();
-        $this->orderID = $id;
-        $this->view = false;
-        $this->orderdetail = Orders::find($id);
+    
+        $this->orderdetail = OrderShipping::where('user_id',$this->user_id)->orderBy('id', 'DESC')->first();
         $this->customerAddress = [];
         $this->customerbillingAddress = [];
         $this->billing_type = false;
@@ -95,7 +91,7 @@ class StripePaymnetController extends Component
         if(!empty($this->customerAddress)) {
             $this->billing_type = ($this->customerAddress->is_billing_address == 'yes') ? true : false;
             $this->newaddress = false;
-            $this->view = true;
+          
         } else {
        
             $this->newaddress = true;
@@ -106,7 +102,7 @@ class StripePaymnetController extends Component
         if(!empty($this->customerbillingAddress)) {
             $this->primary_billing_type = ($this->customerbillingAddress->is_billing_address == 'yes') ? true : false;
             $this->newbillingaddress = false;
-            $this->view = true;
+      
         } else {
        
             $this->newbillingaddress = true;
@@ -128,25 +124,18 @@ class StripePaymnetController extends Component
     }
     public function render()
     {
-        // $stripe = new \Stripe\StripeClient('sk_test_ngkOUeScv0ATVVwLqg88ZdBv00ZX79AIQ8');
-        // try {
-        //   $paymentIntent = $stripe->paymentIntents->create([
-        //     'payment_method_types' => ['ideal'],
-        //     'amount' => $this->orderdetail->netamout *100 ,
-        //     'currency' => 'eur',
-        //     'metadata' => ['order_id' => $this->orderdetail->id]
-        //   ]);
-
+        $this->user_id =  Auth::user()->id;
+        $this->Cart = Cart::where('user_id',$this->user_id)->first();
+        
+        if(!empty($this->Cart)){
           return view('livewire.stripe-paymnet-controller');
+        }else{
+            $this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
 
+            $this->Product = Product::with('productmediaget')->with('favoriteget')->orderBy('id','asc')->limit(6)->get();
+          return view('livewire.dashboard');
 
-        // } catch (\Stripe\Exception\ApiErrorException $e) {
-        //     // dd($e->getError()->message);
-        //   http_response_code(400);
-        //   error_log($e->getError()->message); 
-        //   return redirect()->back()->with('message', $e->getError()->message);
-        // }
-
+        }
     }
 
     public function NewShippingAddress(){
@@ -172,7 +161,8 @@ class StripePaymnetController extends Component
 
             $this->customerAddress['mobile_no'] = '';
 
-            $this->primary_billing_type = '';                
+            $this->primary_billing_type = '';        
+
         }
         else{
 
@@ -183,7 +173,6 @@ class StripePaymnetController extends Component
             if(!empty($this->customerAddress)) {
                 $this->billing_type = ($this->customerAddress->is_billing_address == 'yes') ? true : false;
                 $this->newaddress = false;
-                $this->view = true;
             } else {
            
                 $this->newaddress = true;
@@ -225,7 +214,6 @@ class StripePaymnetController extends Component
             if(!empty($this->customerbillingAddress)) {
                 $this->primary_billing_type = ($this->customerbillingAddress->is_billing_address == 'yes') ? true : false;
                 $this->newbillingaddress = false;
-                $this->view = true;
             } else {
            
                 $this->newbillingaddress = true;
@@ -347,6 +335,15 @@ class StripePaymnetController extends Component
         }
 
          $this->validate([
+                'customerAddress.first_name' => ['required'],
+                'customerAddress.last_name' => ['required'],
+                'customerAddress.address' => ['required'],
+                'customerAddress.company' => ['required'],
+                'customerAddress.apartment' => ['required'],
+                'customerAddress.city' => ['required'],
+                'customerAddress.country' => ['required'],
+                'customerAddress.postal_code' => ['required'],
+                'customerAddress.mobile_no' => ['between:10,12|numeric'],
 
                 'customerbillingAddress.first_name' => ['required'],
                 'customerbillingAddress.last_name' => ['required'],
@@ -359,7 +356,7 @@ class StripePaymnetController extends Component
                 'customerbillingAddress.mobile_no' => ['between:10,12|numeric'],
             ]);
 
-         $paymentdetail = Orders::where('id', $id)->update([
+         $paymentdetail = OrderShipping::where('id', $id)->update([
                 'first_name' => $this->customerAddress['first_name'],
                 'last_name' => $this->customerAddress['last_name'],
                 'address' => $this->customerAddress['address'],
@@ -526,28 +523,102 @@ class StripePaymnetController extends Component
     }
 
 
-    public function thankYou($id, Request $request)
+    public function thankYou(Request $request)
 
     {
-
-
-        $getCartid = Orders::where('id',$id)->first();
         
             if($request->redirect_status == 'succeeded') {
-                $paymentdetail = Orders::where('id', $id)->update(
-                    [
-                        'transactionid' => $request->get('payment_intent'),
+                $user_id =  Auth::user()->id;
 
-                        'paymentstatus' => 'success'
-                    ]
-                );
+                    $ordershipping = OrderShipping::where('user_id',$user_id)->first();
+
+                    $this->Cart = Cart::where('user_id',$user_id)->get();
+
+                     $Order_insert = orders::insert(
+                        $order_arr = [
+
+
+                                'user_id' => $user_id,
+                                
+                                'uuid' => '1',
+                                
+                                'transactionid' => $request->get('payment_intent'),
+
+                                'netamout' => $ordershipping['netamout'],
+
+                                'paymentstatus' => 'success',
+                                
+                                'first_name' => $ordershipping['first_name'],
+
+                                'last_name' => $ordershipping['last_name'],
+
+                                'address' => $ordershipping['address'],
+                                'company' => $ordershipping['company'],
+                                'unit_number' => $ordershipping['unit_number'],
+                                'city' => $ordershipping['city'],
+                                'country' => $ordershipping['country'],
+                                'pincode' => $ordershipping['pincode'],
+                                'mobile' => $ordershipping['mobile'],
+                                'billing_type' => $ordershipping['billing_type'],
+                                'b_first_name' => $ordershipping['b_first_name'],
+                                'b_last_name' => $ordershipping['b_last_name'],
+                                'b_address' => $ordershipping['b_address'],
+                                'b_company' => $ordershipping['b_company'],
+                                'b_unit_number' => $ordershipping['b_unit_number'],
+                                'b_city' => $ordershipping['b_city'],
+                                'b_country' => $ordershipping['b_country'],
+                                'b_pincode' => $ordershipping['b_pincode'],
+                                'b_mobile' => $ordershipping['b_mobile'],
+                                'b_billing_type' => $ordershipping['b_billing_type'],
+
+                            ]
+                        );
+
+
+                    if($Order_insert){
+                    // Insert Record Order Item
+                        $this->lastorderid = Orders::where('user_id',$user_id)->orderBy('id', 'DESC')->first();
+
+                        $insert_order_item =[];
+                        foreach($this->Cart as $res) {         
+                            if($res) {
+                                $totalamout = ($res->price * $res->stock);
+                                $order_item_arr = [
+
+                                    'order_id' => $this->lastorderid['id'],
+                                    
+                                    'order_uid' => $this->lastorderid['uuid'],
+                                    
+                                    'user_id' => $res->user_id,
+
+                                    'product_id' => $res->product_id,
+
+                                    'varition_id' => $res->varientid,
+                                    
+                                    'price' => $res->price,
+                                    
+                                    'stock' => $res->stock,
+                                    
+                                    'total' => $totalamout,
+
+            
+
+                                ];
+                                $insert_order_item[] = $order_item_arr;
+                            }               
+                        }
+                    }
+
+                    $Orderitemvalue =  order_item::insert($insert_order_item);
                 
             // Stock Minus Code
 
-               if($request->redirect_status == 'succeeded' && $paymentdetail){
+               if($request->redirect_status == 'succeeded' && $Order_insert){
+
+                    $lastorderid = Orders::where('user_id',$user_id)->orderBy('id', 'DESC')->first();
 
                     $locatioinstock = VariantStock::All();
-                    $getOrderitem = order_item::where('order_id',$id)->first();
+                    $getOrderitem = order_item::where('order_id',$lastorderid->id)->first();
                     $Cart = Cart::where('user_id',$getOrderitem->user_id)->get();
                     $Product = Product::All();
 
@@ -609,8 +680,9 @@ class StripePaymnetController extends Component
 
             // Cart Empty
             if($paymentdetail){
+                $lastorderid = Orders::where('user_id',$user_id)->orderBy('id', 'DESC')->first();
 
-                $getOrderitem = order_item::where('order_id',$id)->first();
+                $getOrderitem = order_item::where('order_id',$lastorderid->id)->first();
 
                 Cart::where('user_id',$getOrderitem->user_id)->delete();
             }
@@ -622,13 +694,89 @@ class StripePaymnetController extends Component
         // Failed Status
          if ($request->redirect_status == 'failed') {
 
-             $paymentdetail = Orders::where('id', $id)->update(
-                    [
-                        'transactionid' => $request->get('payment_intent'),
+             $user_id =  Auth::user()->id;
 
-                        'paymentstatus' => 'failed'
-                    ]
-                );
+                    $ordershipping = OrderShipping::where('user_id',$user_id)->first();
+
+                    $this->Cart = Cart::where('user_id',$user_id)->get();
+
+                     $Order_insert = orders::insert(
+                        $order_arr = [
+
+
+                                'user_id' => $user_id,
+                                
+                                'uuid' => '1',
+                                
+                                'transactionid' => $request->get('payment_intent'),
+
+                                'netamout' => $ordershipping['netamout'],
+
+                                'paymentstatus' => 'failed',
+                                
+                                'first_name' => $ordershipping['first_name'],
+
+                                'last_name' => $ordershipping['last_name'],
+                                
+                                'address' => $ordershipping['address'],
+
+                                'company' => $ordershipping['company'],
+                                'unit_number' => $ordershipping['unit_number'],
+                                'city' => $ordershipping['city'],
+                                'country' => $ordershipping['country'],
+                                'pincode' => $ordershipping['pincode'],
+                                'mobile' => $ordershipping['mobile'],
+                                'billing_type' => $ordershipping['billing_type'],
+                                'b_first_name' => $ordershipping['b_first_name'],
+                                'b_last_name' => $ordershipping['b_last_name'],
+                                'b_address' => $ordershipping['b_address'],
+                                'b_company' => $ordershipping['b_company'],
+                                'b_unit_number' => $ordershipping['b_unit_number'],
+                                'b_city' => $ordershipping['b_city'],
+                                'b_country' => $ordershipping['b_country'],
+                                'b_pincode' => $ordershipping['b_pincode'],
+                                'b_mobile' => $ordershipping['b_mobile'],
+                                'b_billing_type' => $ordershipping['b_billing_type'],
+
+                            ]
+                        );
+
+
+                    if($Order_insert){
+                    // Insert Record Order Item
+                        $this->lastorderid = Orders::where('user_id',$user_id)->orderBy('id', 'DESC')->first();
+
+                        $insert_order_item =[];
+                        foreach($this->Cart as $res) {         
+                            if($res) {
+                                $totalamout = ($res->price * $res->stock);
+                                $order_item_arr = [
+
+                                    'order_id' => $this->lastorderid['id'],
+                                    
+                                    'order_uid' => $this->lastorderid['uuid'],
+                                    
+                                    'user_id' => $res->user_id,
+
+                                    'product_id' => $res->product_id,
+
+                                    'varition_id' => $res->varientid,
+                                    
+                                    'price' => $res->price,
+                                    
+                                    'stock' => $res->stock,
+                                    
+                                    'total' => $totalamout,
+
+            
+
+                                ];
+                                $insert_order_item[] = $order_item_arr;
+                            }               
+                        }
+                    }
+
+                    $Orderitemvalue =  order_item::insert($insert_order_item);
 
                Session::flash('success', 'Payment failed!');
 
@@ -636,13 +784,90 @@ class StripePaymnetController extends Component
 
          if ($request->redirect_status == 'pending') {
 
-             $paymentdetail = Orders::where('id', $id)->update(
-                    [
-                        'transactionid' => $request->get('payment_intent'),
+             $user_id =  Auth::user()->id;
 
-                        'paymentstatus' => 'pending'
-                    ]
-                );
+                    $ordershipping = OrderShipping::where('user_id',$user_id)->first();
+
+                    $this->Cart = Cart::where('user_id',$user_id)->get();
+
+                     $Order_insert = orders::insert(
+                        $order_arr = [
+
+
+                                'user_id' => $user_id,
+                                
+                                'uuid' => '1',
+                                
+                                'transactionid' => $request->get('payment_intent'),
+
+                                'netamout' => $ordershipping['netamout'],
+
+                                'paymentstatus' => 'pending',
+                                
+                                'first_name' => $ordershipping['first_name'],
+
+                                'last_name' => $ordershipping['last_name'],
+                                
+                                'address' => $ordershipping['address'],
+                                
+                                'company' => $ordershipping['company'],
+                                'unit_number' => $ordershipping['unit_number'],
+                                'city' => $ordershipping['city'],
+                                'country' => $ordershipping['country'],
+                                'pincode' => $ordershipping['pincode'],
+                                'mobile' => $ordershipping['mobile'],
+                                'billing_type' => $ordershipping['billing_type'],
+                                'b_first_name' => $ordershipping['b_first_name'],
+                                'b_last_name' => $ordershipping['b_last_name'],
+                                'b_address' => $ordershipping['b_address'],
+                                'b_company' => $ordershipping['b_company'],
+                                'b_unit_number' => $ordershipping['b_unit_number'],
+                                'b_city' => $ordershipping['b_city'],
+                                'b_country' => $ordershipping['b_country'],
+                                'b_pincode' => $ordershipping['b_pincode'],
+                                'b_mobile' => $ordershipping['b_mobile'],
+                                'b_billing_type' => $ordershipping['b_billing_type'],
+
+                            ]
+                        );
+
+
+                    if($Order_insert){
+                    // Insert Record Order Item
+                        $this->lastorderid = Orders::where('user_id',$user_id)->orderBy('id', 'DESC')->first();
+
+                        $insert_order_item =[];
+                        foreach($this->Cart as $res) {         
+                            if($res) {
+                                $totalamout = ($res->price * $res->stock);
+                                $order_item_arr = [
+
+                                    'order_id' => $this->lastorderid['id'],
+                                    
+                                    'order_uid' => $this->lastorderid['uuid'],
+                                    
+                                    'user_id' => $res->user_id,
+
+                                    'product_id' => $res->product_id,
+
+                                    'varition_id' => $res->varientid,
+                                    
+                                    'price' => $res->price,
+                                    
+                                    'stock' => $res->stock,
+                                    
+                                    'total' => $totalamout,
+
+            
+
+                                ];
+                                $insert_order_item[] = $order_item_arr;
+                            }               
+                        }
+                    }
+
+                    $Orderitemvalue =  order_item::insert($insert_order_item);
+
              Session::flash('success', 'Payment pending!');
          }
     

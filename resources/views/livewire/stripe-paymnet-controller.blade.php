@@ -83,14 +83,14 @@
 
                         <h3 class="panel-title">Shipping Details</h3>
 
-                        @if($newaddress == true)
+                        @if($newaddress == true && empty($customerAddress))
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" disabled class="form-check-input" wire:click="NewShippingAddress()" wire:model="newaddress" <?php if($view) echo 'readonly'; ?>>
+                            <input type="checkbox" id="defaultAddress" disabled class="form-check-input" wire:click="NewShippingAddress()" wire:model="newaddress">
                             <label class="form-check-label" for="defaultAddress">Create New Shipping Address</label>
                         </div>
                         @else
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:click="NewShippingAddress()" wire:model="newaddress" <?php if($view) echo 'readonly'; ?>>
+                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:click="NewShippingAddress()" wire:model="newaddress">
                             <label class="form-check-label" for="defaultAddress">Create New Shipping Address</label>
                         </div>
                         @endif
@@ -203,14 +203,14 @@
                             <label class="form-check-label" for="defaultAddress">Same as Shipping Details</label>
                         </div>
 
-                        @if($newbillingaddress == true)
+                        @if($newbillingaddress == true && empty($this->customerbillingAddress))
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" disabled class="form-check-input" wire:model="newbillingaddress" wire:click="NewBillingAddress" <?php if($view) echo 'readonly'; ?>>
+                            <input type="checkbox" id="defaultAddress" disabled class="form-check-input" wire:model="newbillingaddress" wire:click="NewBillingAddress">
                             <label class="form-check-label" for="defaultAddress">Create New Billing Address</label>
                         </div>
                         @else
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="newbillingaddress" wire:click="NewBillingAddress" <?php if($view) echo 'readonly'; ?>>
+                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="newbillingaddress" wire:click="NewBillingAddress">
                             <label class="form-check-label" for="defaultAddress">Create New Billing Address</label>
                         </div>
                         @endif
@@ -595,36 +595,33 @@
             </div>
             @if($view)
 
-            <div class="viewcart-checkout">
-            <div class="vc-inner">
-            <div class="payment-form">
-            <form id="payment-form">
-                @csrf
-                <h3 class="panel-title">Payment</h3>
-                <label for="name"> Account Holder Name</label>
-                <div class="account-name-row">
-                    <input id="acholdername" value="" required>
-                </div>
-                <label for="ideal-bank-element" class="bank-name">iDEAL Bank</label>
+              <div class="viewcart-checkout stripe-payment">
+                <div class="vc-inner">
+                    <div class="payment-form">
+                        <form id="payment-form">
+                            @csrf
+                            <h3 class="panel-title">Payment</h3>
+                          
+                            <label for="ideal-bank-element" class="bank-name">iDEAL Bank</label>
 
-                <div class="account-name-row">
+                            <div class="account-name-row">
 
-                     <div id="ideal-bank-element">
-                      <!-- A Stripe Element will be inserted here. -->
+                                 <div id="ideal-bank-element">
+                                  <!-- A Stripe Element will be inserted here. -->
+                                </div>
+
+                                
+                            </div>
+                             <div class="account-name-row">
+                                <button  onclick="payment()">Pay {{$symbol['currency']}}{{number_format($gst_Total,2,".",",")}}</button>
+                            </div>
+                            <!-- Used to display form errors. -->
+                            <div id="error-message" role="alert"></div>
+                        </form>
                     </div>
-
-                    
                 </div>
-                 <div class="account-name-row">
-                <button type="submit">Pay {{$symbol['currency']}}{{number_format($gst_Total,2,".",",")}}</button>
             </div>
-                <!-- Used to display form errors. -->
-                <div id="error-message" role="alert"></div>
-              </form>
-          </div>
-      </div>
-      </div>
-              @endif
+            @endif
            
 
               <div id="messages" role="alert" style="display: none;"></div>
@@ -647,131 +644,19 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script type="text/javascript">
 
-$(function() {
-    var $form = $(".require-validation");
 
-    $('form.require-validation').bind('submit', function(e) {
+function payment() {
 
-        var $form         = $(".require-validation"),
-
-        inputSelector = ['input[type=email]', 'input[type=password]',
-
-                         'input[type=text]', 'input[type=file]',
-
-                         'textarea'].join(', '),
-
-        $inputs       = $form.find('.required').find(inputSelector),
-
-        $errorMessage = $form.find('div.error'),
-
-        valid         = true;
-
-        $errorMessage.addClass('hide');
-
-  
-
-        $('.has-error').removeClass('has-error');
-
-        $inputs.each(function(i, el) {
-
-          var $input = $(el);
-
-          if ($input.val() === '') {
-
-            $input.parent().addClass('has-error');
-
-            $errorMessage.removeClass('hide');
-
-            e.preventDefault();
-
-          }
-
-        });
-
-   
-
-        if (!$form.data('cc-on-file')) {
-
-          e.preventDefault();
-
-          Stripe.setPublishableKey($form.data('stripe-publishable-key'));
-
-          Stripe.createToken({
-
-            number: $('.card-number').val(),
-
-            cvc: $('.card-cvc').val(),
-
-            exp_month: $('.card-expiry-month').val(),
-
-            exp_year: $('.card-expiry-year').val()
-
-          }, stripeResponseHandler);
-
-        }
-
-  
-
-  });
-
-  
-
-  function stripeResponseHandler(status, response) {
-
-
-        if (response.error) {
-
-            $('.error')
-
-                .removeClass('hide')
-
-                .find('.alert')
-
-                .text(response.error.message);
-
-        } else {
-
-            /* token contains id, last4, and card type */
-
-            var token = response['id'];
-
-               
-
-            $form.find('input[type=text]').empty();
-
-            $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-
-            $form.get(0).submit();
-
-        }
-
-    }
-  
-
-});
-
- document.addEventListener('DOMNodeInserted', function (e) {
-    console.log('node added');
-     if ($(e.target).hasClass('payment-form')) {
-     
-
-        const stripe = Stripe('pk_test_eEW1sG9Y0HvZ0SuSZsWts81500648362WW');
-        const elements = stripe.elements();
-        var accountholderName = document.getElementById('acholdername');
+    console.log('payament');
+     const stripe = Stripe('pk_test_eEW1sG9Y0HvZ0SuSZsWts81500648362WW');
+      const elements = stripe.elements();
 
         const idealBank = elements.create('idealBank');
         idealBank.mount('#ideal-bank-element');
 
 
-        const paymentForm = document.querySelector('#payment-form');
-        paymentForm.addEventListener('submit', async (e) => {
-
-          // Avoid a full page POST request.
-          e.preventDefault();
-          var orderid = '<?= $orderdetail->id ?>';
           var app_url = '<?= env('APP_URL') ?>';
           // Customer inputs
-          const nameInput = document.querySelector('#acholdername');
           const amounts = '<?= $gst_Total ?>';
 
            <?php
@@ -786,31 +671,46 @@ $(function() {
                     'payment_method_types' => ['ideal'],
                     'amount' => $amt *100 ,
                     'currency' => 'eur',
-                    'metadata' => ['order_id' => $orderdetail->id]
                   ]);
+
                
              ?>
 
 
           // Confirm the payment that was created server side:
-          const {error, paymentIntent} = await stripe.confirmIdealPayment(
+          const {error, paymentIntent} =  stripe.confirmIdealPayment(
             '<?= $paymentIntent->client_secret; ?>', {
               payment_method: {
                 ideal: idealBank,
                 billing_details: {
-                    name: accountholderName.value,
                 },
               },
-                return_url: `http://185.160.67.108/estore/public/thankyou/`+orderid,            },
+                return_url: `http://127.0.0.1:8000/thankyou/`,            },
           );
           if(error) {
-            addMessage(error.message);
+            console.log(error.message);
             return;
           }
-          addMessage(`Payment (${paymentIntent.id}): ${paymentIntent.status}`);
-        });
-    }
-      });
+          console.log(`Payment (${paymentIntent.id}): ${paymentIntent.status}`);
+
+}
+
+
+ $(document).on('DOMNodeInserted', function (e) {
+   
+     if ($(e.target).hasClass('stripe-payment')) {
+     
+
+        const stripe = Stripe('pk_test_eEW1sG9Y0HvZ0SuSZsWts81500648362WW');
+        const elements = stripe.elements();
+
+        const idealBank = elements.create('idealBank');
+        idealBank.mount('#ideal-bank-element');
+
+       }
+    });
+
+
 
 </script>
 

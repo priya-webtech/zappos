@@ -18,6 +18,8 @@ use App\Models\ProductVariant;
 
 use App\Models\order_item;
 
+use App\Models\OrderShipping;
+
 use Illuminate\Http\Request;
 
 class CheckoutInsertOrder extends Component
@@ -45,16 +47,13 @@ class CheckoutInsertOrder extends Component
 
         $user_id =  Auth::user()->id;
         $this->Cart = Cart::where('user_id',$user_id)->get();
-        // foreach($this->Cart as $res){
-        //     $totalamout = $res->price * $res->stock;
-        //     $netamout += $totalamout;
-        // }  
 
-
-         $Order_insert = Orders::insert(
+        $Deleteoldshipping =  OrderShipping::where('user_id',$user_id)->delete();
+        
+        if($Deleteoldshipping){
+         $Order_insert = OrderShipping::insert(
             $order_arr = [
 
-                    'uuid' => '1',
 
                     'user_id' => $user_id,
                     
@@ -67,7 +66,9 @@ class CheckoutInsertOrder extends Component
                 ]
             );
 
-            if($Order_insert){
+           return redirect(route('front-checkout'));
+        }
+            /*if($Order_insert){
                 // Insert Record Order Item
                 $this->lastorderid = Orders::orderBy('id', 'DESC')->first();
 
@@ -101,9 +102,7 @@ class CheckoutInsertOrder extends Component
                 }
             }
 
-           $Orderitemvalue =  order_item::insert($insert_order_item);
+           $Orderitemvalue =  order_item::insert($insert_order_item);*/
 
-
-            return redirect(route('payment',$this->lastorderid['id']));
     }
 }
