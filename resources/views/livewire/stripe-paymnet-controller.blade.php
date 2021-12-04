@@ -92,6 +92,7 @@
                         <div class="form-check">
                             <input type="checkbox" id="defaultAddress" class="form-check-input" wire:click="NewShippingAddress()" wire:model="newaddress">
                             <label class="form-check-label" for="defaultAddress">Create New Shipping Address</label>
+
                         </div>
                         @endif
                         <div id="bydefultform"  wire:ignore.self>
@@ -134,6 +135,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="primaryVoiceNumber">Unit Number</label>
+                                            <input type="text" wire:model="customerAddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="12a" wire:ignore.self>
                                             <input type="number" wire:model="customerAddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" <?php if($view) echo 'readonly'; ?>>
                                             @error('customerAddress.unit_number') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
@@ -143,6 +145,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="postalCode">Zip</label>
+                                            <input type="text" wire:model="customerAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="123 AB" wire:ignore.self>
                                             <input type="number" wire:model="customerAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" <?php if($view) echo 'readonly'; ?>>
                                             @error('customerAddress.postal_code') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
@@ -176,6 +179,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class='form-row'>
+                                    <div class="alert alert-danger text-center">
+                                        <div class="alert-danger-modal">
+                                            <div class="container">
+                                                <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">close</a>
+                                                <p class="delete-msg">Please correct the errors and try again.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <!-- <div class='form-row'>
 
                                     <div class='col-md-12 error form-group hide'>
@@ -189,7 +201,7 @@
                                 </div> -->
 
                                 <div class="form-check">
-                                    <input type="checkbox" wire:model="billing_type" class="form-check-input"  id="billing_type" <?php if($view) echo 'readonly'; ?>>
+                                    <input type="checkbox" wire:model="billing_type" class="form-check-input"  id="billing_type" <?php if($view) echo 'disabled'; ?>>
                                     <label class="form-check-label" for="billing_type">Make this my primary Shipping address</label>
                                 </div>       
                         </div>
@@ -199,8 +211,8 @@
                         <h3 class="panel-title">Billing Details</h3>
 
                         <div class="form-check">
-                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="same_shipping" wire:click="SameShipping()" wire:ignore.self>
-                            <label class="form-check-label" for="defaultAddress">Same as Shipping Details</label>
+                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="same_shipping" wire:click="SameShipping()" <?php if($view) echo 'disabled'; ?>>
+                            <label class="form-check-label" for="defaultAddress" >Same as Shipping Details</label>
                         </div>
 
                         @if($newbillingaddress == true && empty($this->customerbillingAddress))
@@ -212,6 +224,7 @@
                         <div class="form-check">
                             <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="newbillingaddress" wire:click="NewBillingAddress">
                             <label class="form-check-label" for="defaultAddress">Create New Billing Address</label>
+
                         </div>
                         @endif
 
@@ -311,7 +324,7 @@
                                 </div> -->
 
                                 <div class="form-check">
-                                    <input type="checkbox" wire:model="primary_billing_type" class="form-check-input"  id="primary_billing_type" <?php if($view) echo 'readonly'; ?>>
+                                    <input type="checkbox" wire:model="primary_billing_type" class="form-check-input"  id="primary_billing_type" <?php if($view) echo 'disabled'; ?>>
                                     <label class="form-check-label" for="billing_address_type">Make this my primary billing address</label>
                                 </div>
                                 @endif

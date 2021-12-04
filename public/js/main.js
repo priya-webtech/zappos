@@ -22,3 +22,26 @@ $(document).ready(function(){
 	// $('.multiple-select').select2();
 
 });
+
+
+// Taxes Overrides page js
+$(document).ready(function() {
+	$(".edit-tax-dropdown").hide();
+    $(".edit-tax button").click(function() { 
+       $(".edit-tax-dropdown").toggle();
+	});
+});
+
+// multiple select option with checkboxes js
+var expanded = false;
+
+function showCheckboxes() {
+  var checkboxes = document.getElementById("checkboxes");
+  if (!expanded) {
+    checkboxes.style.display = "block";
+    expanded = true;
+  } else {
+    checkboxes.style.display = "none";
+    expanded = false;
+  }
+}

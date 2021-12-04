@@ -20,6 +20,10 @@
                     <div class="container">
                         <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">close</a>
 
+                        <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('message') }}</p>
+                    </div>
+                </div>
+
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 
                 <p>{{ Session::get('name_email_password_message') }}</p>
@@ -30,16 +34,13 @@
         @endif
         @if (Session::has('deleteshipmessage'))
             <div class="alert alert-danger text-center">
-                <div class="alert-success-modal">
+                <div class="alert-danger-modal">
                     <div class="container">
-
-                    <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">close</a>
-
-                    <p class="delete-msg"><img src="../assets/delete-icon.png">{{ Session::get('deleteshipmessage') }}</p>
-
+                        <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">close</a>
+                        <p class="delete-msg"><img src="{{ url('assets/delete-icon.png') }}">{{ Session::get('deleteshipmessage') }}</p>
+                    </div>
                 </div>
             </div>
-        </div>
 
         @endif  
         @if (Session::has('add_bill'))
@@ -47,7 +48,7 @@
                 <div class="alert-success-modal">
                     <div class="container">
                         <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
-                        <p class="success-msg"><img src="../assets/success.png">{{ Session::get('add_bill') }}</p>
+                        <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('add_bill') }}</p>
                     </div>
                 </div>
             </div>
@@ -57,7 +58,7 @@
                 <div class="alert-success-modal">
                     <div class="container">
                         <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
-                        <p class="success-msg"><img src="../assets/success.png">{{ Session::get('add_shipp') }}</p>
+                        <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('add_shipp') }}</p>
                     </div>
                 </div>
             </div>
@@ -108,7 +109,7 @@
 
                                                     <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
 
-                                                    <p class="success-msg"><img src="../assets/success.png">{{ Session::get('editship') }}</p>
+                                                    <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('editship') }}</p>
 
                                                 </div>
 
@@ -117,7 +118,7 @@
                                             @foreach($customer['address'] as $address)
                                             <div class="sp-add-list">
                                                 <div class="sp-add-details">
-                                                    <span>@if($address['is_billing_address'] == 'yes')  <h2 style="color: green;">primary</h2> @endif</span>
+                                                    <span class="primary-tag">@if($address['is_billing_address'] == 'yes')  <span><img src="{{ url('assets/success.png') }}"> primary</span> @endif</span>
                                                     <p>
                                                         <label>Name:</label>
                                                         <span>{{$address['first_name']}} {{$address['last_name']}}</span>
@@ -205,7 +206,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Unit Number</label>
-                                                            <input type="number" wire:model="editaddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="12a" wire:ignore.self required>
+                                                            <input type="text" wire:model="editaddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="12a" wire:ignore.self required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -213,7 +214,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="postalCode">Zip</label>
-                                                            <input type="number" wire:model="editaddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="1234 AB" wire:ignore.self required>
+                                                            <input type="text" wire:model="editaddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="123 AB" wire:ignore.self required>
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -315,7 +316,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Unit Number</label>
-                                                            <input type="number" wire:model="apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="12a" required>
+                                                            <input type="text" wire:model="apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="12a" required>
                                                             @if($errors->has('apartment'))
                                                                 <span class="text-danger">{{ $errors->first('apartment') }}</span>
                                                             @endif
@@ -326,7 +327,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="postalCode">Zip</label>
-                                                            <input type="number" wire:model="postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" wire:ignore.self placeholder="1234 AB" required>
+                                                            <input type="text" wire:model="postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" wire:ignore.self placeholder="123 AB" required>
                                                             @if($errors->has('postal_code'))
                                                                 <span class="text-danger">{{ $errors->first('postal_code') }}</span>
                                                             @endif
@@ -426,7 +427,7 @@
 
                                                     <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
 
-                                                    <p class="success-msg"><img src="../assets/success.png">{{ Session::get('editbill') }}</p>
+                                                    <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('editbill') }}</p>
 
                                                 </div>
 
@@ -435,7 +436,7 @@
                                             @foreach($billing_address['address'] as $address)
                                             <div class="sp-add-list">
                                                 <div class="sp-add-details">
-                                                    <span>@if($address['is_billing_address'] == 'yes')  <h2 style="color: green;">primary</h2> @endif</span>
+                                                    <span class="primary-tag">@if($address['is_billing_address'] == 'yes')  <span><img src="{{ url('assets/success.png') }}"> primary</span> @endif</span>
                                                     <p>
                                                         <label>Name:</label>
                                                         <span>{{$address['first_name']}} {{$address['last_name']}}</span>
@@ -521,7 +522,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Unit Number</label>
-                                                            <input type="number" wire:model="editaddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="12a" wire:ignore.self required>
+                                                            <input type="text" wire:model="editaddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="12a" wire:ignore.self required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -529,7 +530,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="postalCode">Zip</label>
-                                                            <input type="number" wire:model="editaddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="1234 AB" wire:ignore.self required>
+                                                            <input type="text" wire:model="editaddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="123 AB" wire:ignore.self required>
                                                         </div>
                                                     </div>
                                                     <div class="col">
@@ -630,7 +631,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="primaryVoiceNumber">Unit Number</label>
-                                                            <input type="number" wire:model="bapartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="12a" required>
+                                                            <input type="text" wire:model="bapartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="12a" required>
                                                             @if($errors->has('bapartment'))
                                                                 <span class="text-danger">{{ $errors->first('bapartment') }}</span>
                                                             @endif
@@ -641,7 +642,7 @@
                                                     <div class="col">
                                                         <div class="form-group">
                                                             <label for="postalCode">Zip</label>
-                                                            <input type="number" wire:model="bpostal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="1234 AB" required>
+                                                            <input type="text" wire:model="bpostal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="123 AB" required>
                                                             @if($errors->has('bpostal_code'))
                                                                 <span class="text-danger">{{ $errors->first('bpostal_code') }}</span>
                                                             @endif
@@ -815,7 +816,7 @@
 
                                                         <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 
-                                                        <p class="delete-msg"><img src="../assets/delete-icon.png">{{ Session::get('emailpassword') }}</p>
+                                                        <p class="delete-msg"><img src="{{ url('assets/delete-icon.png') }}">{{ Session::get('emailpassword') }}</p>
 
                                                     </div>
 
@@ -876,7 +877,7 @@
 
                                                         <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 
-                                                        <p class="delete-msg"><img src="../assets/delete-icon.png">{{ Session::get('oldpassworderror') }}</p>
+                                                        <p class="delete-msg"><img src="{{ url('assets/delete-icon.png') }}">{{ Session::get('oldpassworderror') }}</p>
 
                                                     </div>
 

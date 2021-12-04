@@ -6,3 +6,4 @@
 		$(this).siblings('.title').removeClass('link');
 	});
 	/*End of Hover image in banner*/
+
