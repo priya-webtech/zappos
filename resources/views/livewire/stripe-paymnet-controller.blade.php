@@ -657,16 +657,12 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script type="text/javascript">
 
+    const stripe = Stripe('pk_test_eEW1sG9Y0HvZ0SuSZsWts81500648362WW');
+    const elements = stripe.elements();
+    const idealBank = elements.create('idealBank');
+
 
 function payment() {
-
-    console.log('payament');
-     const stripe = Stripe('pk_test_eEW1sG9Y0HvZ0SuSZsWts81500648362WW');
-      const elements = stripe.elements();
-
-        const idealBank = elements.create('idealBank');
-        idealBank.mount('#ideal-bank-element');
-
 
           var app_url = '<?= env('APP_URL') ?>';
           // Customer inputs
@@ -688,6 +684,7 @@ function payment() {
 
                
              ?>
+             console.log('here');
 
 
           // Confirm the payment that was created server side:
@@ -698,13 +695,9 @@ function payment() {
                 billing_details: {
                 },
               },
-                return_url: `http://127.0.0.1:8000/thankyou/`,            },
+                return_url: `http://185.160.67.108/estore/public/thankyou/`,            },
           );
-          if(error) {
-            console.log(error.message);
-            return;
-          }
-          console.log(`Payment (${paymentIntent.id}): ${paymentIntent.status}`);
+          
 
 }
 
@@ -714,10 +707,9 @@ function payment() {
      if ($(e.target).hasClass('stripe-payment')) {
      
 
-        const stripe = Stripe('pk_test_eEW1sG9Y0HvZ0SuSZsWts81500648362WW');
-        const elements = stripe.elements();
+       
 
-        const idealBank = elements.create('idealBank');
+      
         idealBank.mount('#ideal-bank-element');
 
        }
