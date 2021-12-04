@@ -291,6 +291,7 @@
 
                                             <label for="postalCode">Zip</label>
 
+
                                             <input type="number" wire:model="customerAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" <?php if($view) echo 'readonly'; ?>>
 
                                             @error('customerAddress.postal_code') <span class="text-danger">{{ $message }}</span> @enderror
@@ -1391,10 +1392,11 @@ function payment() {
                 },
 
               },
-
-                return_url: `http://127.0.0.1:8000/thankyou/`,            },
+          return_url: `http://185.160.67.108/estore/public/thankyou/`,            },
 
           );
+
+     
 
 }
 
@@ -1403,8 +1405,6 @@ function payment() {
 
 
  $(document).on('DOMNodeInserted', function (e) {
-
-   
 
      if ($(e.target).hasClass('stripe-payment')) {
       

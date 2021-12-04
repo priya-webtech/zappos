@@ -735,6 +735,7 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .credit-card-box label {font-weight: 600; font-size: 14px;}
 .credit-card-box input, .credit-card-box textarea {box-shadow: none; margin-bottom: 5px; }
 .credit-card-box textarea {min-height: 100px;}
+.checkout-page-sec .shipping-details-card {margin-bottom: 20px; }
 .shipping-details-card {padding: 25px; box-shadow: 0 0 6px 2px rgb(0 0 0 / 10%); border-radius: 10px; }
 .checkout-page-sec .panel-title { font-size: 20px; font-weight: 600; margin-bottom: 20px; display: block; color: #003953; }
 .checkout-page-sec .site-btn { width: 100%; }
