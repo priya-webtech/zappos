@@ -50,7 +50,7 @@ class CheckoutInsertOrder extends Component
 
         $Deleteoldshipping =  OrderShipping::where('user_id',$user_id)->delete();
         
-        if($Deleteoldshipping){
+        if($this->Cart){
          $Order_insert = OrderShipping::insert(
             $order_arr = [
 
