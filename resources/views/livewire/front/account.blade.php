@@ -118,7 +118,7 @@
                                             @foreach($customer['address'] as $address)
                                             <div class="sp-add-list">
                                                 <div class="sp-add-details">
-                                                    <span>@if($address['is_billing_address'] == 'yes')  <h2 style="color: green;">primary</h2> @endif</span>
+                                                    <span class="primary-tag">@if($address['is_billing_address'] == 'yes')  <span><img src="{{ url('assets/success.png') }}"> primary</span> @endif</span>
                                                     <p>
                                                         <label>Name:</label>
                                                         <span>{{$address['first_name']}} {{$address['last_name']}}</span>
@@ -436,7 +436,7 @@
                                             @foreach($billing_address['address'] as $address)
                                             <div class="sp-add-list">
                                                 <div class="sp-add-details">
-                                                    <span>@if($address['is_billing_address'] == 'yes')  <h2 style="color: green;">primary</h2> @endif</span>
+                                                    <span class="primary-tag">@if($address['is_billing_address'] == 'yes')  <span><img src="{{ url('assets/success.png') }}"> primary</span> @endif</span>
                                                     <p>
                                                         <label>Name:</label>
                                                         <span>{{$address['first_name']}} {{$address['last_name']}}</span>

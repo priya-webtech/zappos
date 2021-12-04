@@ -878,6 +878,25 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .product-slider-for.slick-initialized, .product-slider-nav.slick-initialized, .wear-it-With-slider.slick-initialized,
 .item-bought-slider.slick-initialized,.similar-items-slider.slick-initialized, .recently-viewed-slider.slick-initialized, .favorite-list-slider.slick-initialized { display: block; }
 
+.primary-tag span {
+    font-size: 13px;
+    font-weight: 600;
+    background-color: #5cb85c;
+    text-transform: capitalize;
+    color: #fff;
+    padding: 3px 10px;
+    display: inline-flex;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    line-height: 18px;
+    align-items: center;
+}
+.primary-tag img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    margin-right: 6px;
+}
 
 input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {-webkit-appearance: none; -moz-appearance: none; appearance: none; margin: 0; }
 
