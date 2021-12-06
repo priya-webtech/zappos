@@ -1247,6 +1247,8 @@
                                   <!-- A Stripe Element will be inserted here. -->
 
                                 </div>
+                                <span id="ideal-bank-error" class="text-danger"></span>
+
 
 
 
@@ -1330,9 +1332,14 @@
 
 
 
+
 function payment() {
+    if($("#ideal-bank-element").length > 0 && $("#ideal-bank-element")[0].classList.length > 0 && $("#ideal-bank-element")[0].classList[1] =='StripeElement--empty') {
+          
 
+            document.getElementById("ideal-bank-error").innerHTML=  "Please select bank";  
 
+        } else {
 
           var app_url = '<?= env('APP_URL') ?>';
 
@@ -1398,7 +1405,7 @@ function payment() {
           return_url: `http://127.0.0.1:8000/thankyou/`,            },
 
           );
-
+}
      
 
 }
