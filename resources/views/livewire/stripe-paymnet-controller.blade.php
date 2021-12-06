@@ -1392,7 +1392,7 @@ function payment() {
                 },
 
               },
-          return_url: `http://185.160.67.108/estore/public/thankyou/`,            },
+          return_url: `http://127.0.0.1:8000/thankyou/`,            },
 
           );
 

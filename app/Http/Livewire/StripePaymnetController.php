@@ -231,13 +231,13 @@ class StripePaymnetController extends Component
     public function addshipping($id)
     {
 
-        if($this->billing_type){
+        if($this->billing_type == true){
             $shipping_value_type = 'yes';
         }else if(!$this->billing_type){
             $shipping_value_type = 'no';
         }
 
-        if($this->newbillingaddress){
+        if($this->primary_billing_type == true){
             $billing_value_type = 'yes';
         }else if(!$this->newbillingaddress){
             $billing_value_type = 'no';
@@ -246,7 +246,7 @@ class StripePaymnetController extends Component
 
          if($this->same_shipping == true) {
                       
-            if($this->billing_type){
+            if($this->billing_type == true){
                 $shipping_value_type = 'yes';
             }else if(!$this->billing_type){
                 $shipping_value_type = 'no';
