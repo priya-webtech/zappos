@@ -7,7 +7,7 @@
         <div class="header-btn-group">
             <a class="link" data-toggle="modal" data-target="#export" >Export</a>
             <a class="link" data-toggle="modal" data-target="#import">Import</a>
-            <a class="button green-btn" href="{{ route('create-role-permission') }}">User Role</a>
+            <a class="button green-btn" href="{{ route('user-creates') }}">User Manage</a>
         </div>
     </div>
 
