@@ -120,7 +120,7 @@
 
                     <div style="text-align: right;">
 
-                        <button id="save_product" wire:click="UserSave()" name="save_product" class="ml-4" type="submit">
+                        <button id="save_product" wire:click="UserSave()" name="save_product" class="ml-4">
 
                             {{ __('Save') }}
 
