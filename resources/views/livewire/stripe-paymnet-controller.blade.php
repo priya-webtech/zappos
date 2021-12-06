@@ -166,7 +166,7 @@
 
                         <h3 class="panel-title">Shipping Details</h3>
 
-
+                        @if(!$editMode)
 
                         @if($newaddress == true && empty($customerAddress))
 
@@ -190,6 +190,7 @@
 
                         </div>
 
+                        @endif
                         @endif
 
                         <div id="bydefultform"  wire:ignore.self>
@@ -420,17 +421,18 @@
                         <h3 class="panel-title">Billing Details</h3>
 
 
-
+                        @if(empty($this->orderdetail->b_addr_id))
                         <div class="form-check">
 
-                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="same_shipping" wire:click="SameShipping()" <?php if($view) echo 'disabled'; ?>>
+                            <input type="checkbox" id="same_shipping" class="form-check-input" wire:model="same_shipping" wire:click="SameShipping()" <?php if($view) echo 'disabled'; ?>>
 
-                            <label class="form-check-label" for="defaultAddress" >Same as Shipping Details</label>
+                            <label class="form-check-label" for="same_shipping" >Same as Shipping Details</label>
 
                         </div>
+                        @endif
 
 
-
+                        @if(!$editMode)
                         @if($newbillingaddress == true && empty($this->customerbillingAddress))
 
                         <div class="form-check">
@@ -453,6 +455,7 @@
 
                         </div>
 
+                        @endif
                         @endif
 
 
@@ -665,9 +668,9 @@
 
                                     <div class="col-xs-12">
 
-                                      
+                          
 
-                                        <button class="site-btn blue-btn" wire:click.prevent="addshipping({{$orderdetail->id}})" <?php if($view) echo 'disabled'; ?>>Submit</button>
+                                        <button class="site-btn blue-btn" wire:click.prevent="addshipping({{$orderdetail->id}})" <?php if($view) echo 'disabled'; ?>> @if($editMode) Update @else Submit @endif</button>
 
 
 
