@@ -298,6 +298,7 @@ class StripePaymnetController extends Component
 
         if($this->same_shipping == true) {
 
+
            $checkvalidation = $this->validate([
                 'customerAddress.first_name' => ['required'],
                 'customerAddress.last_name' => ['required'],

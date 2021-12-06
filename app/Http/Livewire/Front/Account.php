@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Hash;
 class Account extends Component
 {
 	protected $listeners = ['mount'];
-	public $user_id,$editupdate,$customer,$Taxes,$UserDetail,$email,$reemail,$password,$repassword,$newpassword,$currpassword,$countries,$first_name,$last_name,$city,$address,$apartment,$company,$country,$postal_code,$mobile_no,$address_type,$order,$OrderItem,$EditShippingAddress,$editaddress,$addressid;
+	public $user_id,$editupdate,$customer,$Taxes,$UserDetail,$email,$reemail,$password,$repassword,$newpassword,$currpassword,$countries,$first_name,$last_name,$city,$address,$apartment,$company,$country,$postal_code,$mobile_no,$address_type,$order,$OrderItem,$EditShippingAddress,$editaddress,$addressid,$showItem;
 
     public $bfirst_name,$blast_name,$bcity,$baddress,$bapartment,$bcompany,$bcountry,$bpostal_code,$bmobile_no,$baddress_type,$customer_billing,$billing_address,$billingaddressvalue = 'billingaddress',$shippingaddressvalue ='shippingaddress';
 
@@ -48,7 +48,11 @@ class Account extends Component
         $this->updateMode= false;
 		if (Auth::check()) {
             $this->ManageUser();
-            $this->OrderItem = order_item::with('order_product')->with('order')->with('media_product')->get();
+            $this->order = Orders::where('transactionid','!=','0' )->where('user_id',$this->user_id)->get();
+            $this->OrderItem = order_item::where('user_id',$this->user_id)->get();
+            $this->Taxes = tax::where('id',1)->first();
+            $this->showItem = order_item::with('order_product')->with('media_product')->where('user_id',$this->user_id)->get();
+
         }
 	}
     public function render()

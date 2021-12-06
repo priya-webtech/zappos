@@ -199,8 +199,9 @@
                             <h4 class="fs-12  fw-6 mb-0">SHIPPING ADDRESS</h4>
                             <button class="link" onclick="document.getElementById('add-address-modal').style.display='block'">Edit</button>
                         </div>
-                        @if(!empty($order->fullname))
-                        <p><span>{{$order->fullname}} <br> {{$order->address}} <br> {{$order->city}}<br> {{$order->country}}<br> {{$order->pincode}}<br> {{$order->mobile}}</span> <a href="#"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M15 2a1 1 0 0 1 1 1v13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16.5V3a1 1 0 1 1 2 0v1a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V3a1 1 0 0 1 1-1zm-4 2H9a1 1 0 1 1 0-2h2a1 1 0 1 1 0 2z"></path></svg></a></p>
+                        @if(!empty($order))
+
+                        <p><span>{{$order->first_name}} <br> {{$order->company}} <br> {{$order->address}} <br> {{$order->city}}<br> {{$order->country}}<br> {{$order->pincode}}<br> {{$order->mobile}}</span> <a href="#"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M15 2a1 1 0 0 1 1 1v13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16.5V3a1 1 0 1 1 2 0v1a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V3a1 1 0 0 1 1-1zm-4 2H9a1 1 0 1 1 0-2h2a1 1 0 1 1 0 2z"></path></svg></a></p>
                         @endif
                     </div>
                     
@@ -208,7 +209,7 @@
                         <div class="header-title">
                             <h4 class="fs-12  fw-6 mb-0">BILLING ADDRESS</h4>
                         </div>
-                        <p>Same as shipping address</p>
+                        <p><span>{{$order->b_first_name}} <br> {{$order->b_company}} <br> {{$order->b_address}} <br> {{$order->b_city}}<br> {{$order->b_country}}<br> {{$order->b_pincode}}<br> {{$order->b_mobile}}</span> <a href="#"></a></p>
                     </div>
                 </div>
                 <div class="card">
