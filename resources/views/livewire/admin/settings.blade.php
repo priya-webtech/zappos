@@ -34,7 +34,7 @@
 
                                     <div class="setting-details">
 
-                                        <a href="{{ route('setting.general-setting') }}"><label>General</label>
+                                        <a href="{{ route('setting-general') }}"><label>General</label>
                                         <p>View & Update your store Detail</p>
 
                                     </div>

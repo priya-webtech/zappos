@@ -13,7 +13,7 @@
                     <h4 class="mb-0 fw-5">Orders #{{$order->id}} <span class="tag grey"><span class="round-circle"></span>Paid</span> <span class="tag yellow"><span class="border-circle"></span>Unfulfilled</span><p class="header-leble">25 May 2021 at 7:30 from Draft Orders</p></h4>
                 </div>
                 <div class="product-header-btn">
-                    <button class="button link">Refund</button>
+                    <a href="{{route('order-refund')}}" class="button link">Refund</a>
                     <button class="button link" onclick="document.getElementById('unable-to-edit-order-modal').style.display='block'">Edit</button>
                     <button class="button link head-arrow-btn">More actions <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button>
                     <div class="pagination">
