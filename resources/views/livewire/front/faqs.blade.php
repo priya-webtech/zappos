@@ -4,7 +4,7 @@
             <div class="container">
                 <h1 class="h1">static page title</h1>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 static-col">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="home">Hoe werkt gratis retourneren?</a>
@@ -27,7 +27,7 @@
                         </ul>
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-8 static-col">
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab1" role="tabpanel">
                                 <h4 class="h4">What is Lorem Ipsum?</h4>
