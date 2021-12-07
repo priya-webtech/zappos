@@ -4,6 +4,7 @@ namespace App\Http\Livewire\AdminUser;
 
 use Livewire\Component;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserCreate extends Component
 {
@@ -15,29 +16,28 @@ class UserCreate extends Component
     }
 
     public function UserSave(){
+    	$this->validate([
+            'first_name' => ['required'],
+            'last_name' => ['required'],
+            'role' => ['required'],
+            'password' => ['required'],
+            'email' => ['required']
+        ]);
 
     	$customer_arr = [
 
-            'first_name' => $request['customer_first_name'],
+            'first_name' => $this->first_name,
 
-            'last_name' => $request['customer_last_name'],
+            'last_name' => $this->last_name,
 
-            'mobile_number' => $request['customer_mobile_number'],
+            'role' => $this->roleuser,
 
-            'email' => $request['customer_email'],
+            'email' => $this->email,
 
-            'password' => Hash::make($pw),
-
-            'status' => 'invited'
+            'password' => Hash::make($this->password),
 
         ];
 
-
-
-        /*add customer*/
-
         $user = User::create($customer_arr);
-        
-    	dd('hello');
     }
 }
