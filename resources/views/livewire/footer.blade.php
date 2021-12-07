@@ -44,7 +44,7 @@
                         <div class="col-12 p-0 footer-inner-col">
                             <h4 class="h4">Customer Service</h4>
                             <ul class="list-unstyled">
-                                <li><a href="#">FAQs</a></li>
+                                <li><a href="{{route('faqs')}}">FAQs</a></li>
                                 <li><a href="#">Contact Info</a></li>
                                 <li><a href="#">Shipping and return</a></li>
                                 <li><a href="#">About proposition</a></li>

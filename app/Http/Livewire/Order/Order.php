@@ -17,7 +17,7 @@ class Order extends Component
     public function mount() {
 
        $this->order = Orders::with('user')->where('transactionid','!=','0' )->get();
-       $this->OrderItem = order_item::All();
+       $this->OrderItem = order_item::get();
 
     }
 

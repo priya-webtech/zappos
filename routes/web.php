@@ -14,6 +14,7 @@ use App\Http\Livewire;
 |
 */
 Route::middleware(['checkRole'])->group(function () {
+    
     Route::get('/', Livewire\Dashboard::class)->name('home');
     // Route::get('/signin', [Livewire\Admin\Dashboard::class, 'checkLogin'])->name('admin.login');
     // Route::get('/login', function (){
@@ -102,16 +103,22 @@ Route::middleware(['checkRole'])->group(function () {
             Route::get('/admin/draft-orders/detail', Livewire\Order\DraftOrdersDetail::class)->name('draft-orders-detail');
             Route::get('/admin/checkouts', Livewire\Order\Checkout::class)->name('checkout-list');
             Route::get('/admin/checkouts/detail', Livewire\Order\CheckoutDetail::class)->name('checkout-detail');
+            
+            Route::get('/admin/detail/refund', Livewire\Order\Refund::class)->name('order-refund');
 
             //Discount
             Route::get('/admin/discounts/new', Livewire\Discount\DiscountCreate::class)->name('discount-creates');
             Route::get('/admin/discounts', Livewire\Discount\DiscountList::class)->name('discount-list');
             Route::get('/admin/discounts/{id?}', Livewire\Discount\DiscountDetail::class)->name('discount-detail');
             
+            //AdminUsers 
+            Route::get('/admin/user/new', Livewire\AdminUser\UserCreate::class)->name('user-creates');
+            Route::get('/admin/User', Livewire\AdminUser\UserList::class)->name('user-list');
+            Route::get('/admin/user/{id?}', Livewire\AdminUser\UserDetail::class)->name('user-detail');
 
             //settings
             Route::get('/admin/settings', Livewire\Admin\Settings::class)->name('settings');
-            Route::get('/admin/setting/general-setting', Livewire\Setting\GeneralSetting::class)->name('setting.general-setting');
+            Route::get('/admin/setting/general', Livewire\Setting\GeneralSetting::class)->name('setting-general');
             Route::get('/admin/setting/sender-email', Livewire\Setting\SenderEmail::class)->name('sender-email');
             Route::get('/admin/email_templates/order_confirmation/edit', Livewire\Setting\OrderConfirmation::class)->name('order-confirmation');
             Route::post('/admin/setting/update', [Livewire\Setting\GeneralSetting::class, 'updatestore'])->name('setting.update');
@@ -141,7 +148,7 @@ Route::middleware(['checkRole'])->group(function () {
             Route::get('/admin/setting/locations/add', Livewire\Setting\LocationCreate::class)->name('locations-create');
             Route::get('/admin/setting/locations/{id?}', Livewire\Setting\LocationsDetail::class)->name('locations-detail');
             Route::get('/admin/setting/account', Livewire\Setting\Account::class)->name('account');
-            Route::get('/admin/setting/general', Livewire\Setting\General::class)->name('general');
+           // Route::get('/admin/setting/general', Livewire\Setting\General::class)->name('general');
             Route::get('/admin/setting/payments/alternative-providers', Livewire\Setting\AlternativeProviders::class)->name('alternative-providers');
             Route::get('/admin/setting/payments/alternative-providers/detail', Livewire\Setting\AlternativeProvidersDetail::class)->name('alternative-providers-detail');
             
@@ -198,6 +205,8 @@ Route::middleware(['checkRole'])->group(function () {
             ->name('password.update.front');
 
     Route::get('/account/viewcart/detail', Livewire\Front\ViewCart::class)->name('view-cart');
+   
+    Route::get('/faqs', Livewire\Front\faqs::class)->name('faqs');
     
 
     

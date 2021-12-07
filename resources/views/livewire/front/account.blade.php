@@ -970,7 +970,7 @@
                         <a href="#" class="site-btn text-right">Return Items</a>
                     </div>
                 </div>
-                <div class="your-order-details">
+                <div class="your-order-details" wire:ignore.self>
                     @if($order)
                     <div class="shipping-details-card re-order-tbl">
                         <h3 class="panel-title">Order Details</h3>
@@ -980,54 +980,132 @@
                                 <tr>
                                     <th>order number</th>
                                     <th>date</th>
-                                    <th>Product name</th>
                                     <th>quantity</th>
-                                    <th>Price</th>
+                                    <th>Total</th>
                                     <th>status</th>
-                                    <th></th>
+                                    <th>Return</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 
                                 @php $i = 1;  $user_id = Auth::user()->id; @endphp
-                                @foreach($OrderItem as $row)
-                            
-                                @if(!empty($row->order) && $row->order->transactionid == "" && $row->user_id == $user_id)
+                                @if(!empty($order))
+                                @foreach($order as $row)
+
                                <?php $detailfetch = allprice($row->product_id); ?>
                                 <tr>
-                                    <td>{{$row->order->id}}</td>
-                                    <td>{{$row->order->updated_at}}</td>
-                                    <td class="od-pd-name">
-                                        <span>Splendid</span>
-                                        <h6>{{$row['order_product'][0]['title']}}</h6>
-                                    </td>
+                                    <td>{{$row->id}}</td>
+                                    <td>{{$row->updated_at}}</td>
                                     <td>
+
+                                        <?php $itemcount = 0; $i = 1; ?>
+                               
+                                        @foreach($OrderItem as $item)
+                                            @if($item->order_id == $row->id)
+                                                <?php $itemcount = $i++;  ?>
+                                            @endif
+                                        @endforeach
                                         <div class="add-cart-select">               
                                             <div class="total-item-select">
-                                                <input value="1" name="stockitem" type="number">
+                                                <input value="{{$itemcount}}" name="stockitem" type="number">
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="od-pd-price">
-                                        @if(!empty($detailfetch))
-                                        <span>
-                                            <b>Sale:</b> 
-                                            <span class="red-color">{{$symbol['currency']}}{{number_format($detailfetch['price'],2,'.',',')}}</span>
-                                        </span>
-                                        @if(!empty($detailfetch['selling_price']))
-                                        <span class="grey-color"><b>MSRP:</b> {{$symbol['currency']}}{{number_format($detailfetch['selling_price'],2,'.',',')}}</span>
-                                        @endif
-                                        @endif
+                                    <td class="od-pd-price">{{$symbol['currency']}}{{number_format($row->netamout,2,'.',',')}} </span>
                                     </td>
                                     <td>
-                                        Pending 
+                                        {{$row->paymentstatus}} 
                                     </td>
                                     <td>
                                         <a class="return-order-btn" href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Return Order</a>
                                     </td>
+                                    <td>
+                                        <a  href="#" data-toggle="modal" data-target="#ShowOrderItems-{{$row['id']}}">show</a>
+                                    </td>
                                 </tr>
-                                @endif
+
+                                <div class="modal fade" id="ShowOrderItems-{{$row['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header proceed-cart-head">
+                                                <h4 class="h4 modal-title" id="exampleModalLabel">Show Item</h4>
+                                                <button type="button" class="close modal-close-btn" data-dismiss="modal" onclick="document.getElementById('ShowAllShippingAddress').style.display='none'" aria-label="Close">
+                                                <span aria-hidden="true">
+                                                    <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                                                        <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+                                                    </svg>
+                                                </span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @if($showItem)
+                                                @foreach($showItem as $item)
+                                                @if($item->order_id == $row['id'])
+                                                <div class="unfulfilled-product-sec">
+                                                    <div class="unful-pd-img">
+                                                        <p class="unful-img"><sapn class="inful-count">{{$item['stock']}}</sapn><img src="{{ url('storage/'.$item['media_product'][0]['image']) }}"></p>
+                                                        <a href="#">{{$item['order_product'][0]['title']}}</a>
+                                                    </div>
+                                                    <p class="unful-pd-price">
+                                                        <span>{{$symbol['currency']}}{{number_format($item['price'],2,".",",")}} × {{$item['stock']}}</span>
+                                                        <span>{{$symbol['currency']}}{{number_format($item['total'],2,".",",")}}</span>
+                                                    </p>
+                                                </div>
+
+                                                <ul>
+                                                    <?php $Stock_sum = 0; ?>
+                                                    <?php $Stock_sum  += $item['stock']; ?>
+                                                    <?php 
+                                                     $gst = $Taxes->rate;
+                                                     $netamount = $row->netamout;
+                                                     $GetGst = ($gst/100)+1;
+                                                     $withoutgstaount = $netamount / $GetGst;
+
+                                                     $gst_include =  ($withoutgstaount*$gst) / 100;
+                                                     //$gst_amount = ($netamount + $gst_include);
+
+                                                    ?>
+                                                    <li>
+                                                        <span>Subtotal(excluding GST)</span>
+                                                        <span>{{$Stock_sum}} item</span>
+                                                        <span>{{$symbol['currency']}}{{round($withoutgstaount,2) }}</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>Tax</span>
+                                                        <span>IGST {{$gst}}%</span>
+                                                        <span>{{$symbol['currency']}}{{round($gst_include,2) }}</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>Subtotal(including GST)</span>
+                                                        <span>{{$Stock_sum}} item</span>
+                                                        <span>{{$symbol['currency']}}{{ round($netamount,2) }}</span>
+                                                    </li>
+                                                    
+                                                    <li>
+                                                        <span class="fw-6">Total</span>
+                                                        <span class="fw-6"></span>
+                                                        <span class="fw-6">{{$symbol['currency']}}{{ round($netamount,2) }}</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>Paid by customer</span>
+                                                        <span></span>
+                                                        <span>{{$symbol['currency']}}{{ round($netamount,2) }}</span>
+                                                    </li>
+                                                </ul>
+                                                @endif
+                                                @endforeach
+
+                                                @endif
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="site-btn blue-btn" data-dismiss="modal" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 @endforeach
+                                @endif
                             </tbody>
                         </table>
                         </div>

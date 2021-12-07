@@ -166,7 +166,7 @@
 
                         <h3 class="panel-title">Shipping Details</h3>
 
-
+                        @if(!$editMode)
 
                         @if($newaddress == true && empty($customerAddress))
 
@@ -190,6 +190,7 @@
 
                         </div>
 
+                        @endif
                         @endif
 
                         <div id="bydefultform"  wire:ignore.self>
@@ -272,7 +273,6 @@
 
                                             <label for="primaryVoiceNumber">Unit Number</label>
 
-                                            <input type="text" wire:model="customerAddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="12a" wire:ignore.self>
 
                                             <input type="number" wire:model="customerAddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" <?php if($view) echo 'readonly'; ?>>
 
@@ -292,7 +292,6 @@
 
                                             <label for="postalCode">Zip</label>
 
-                                            <input type="text" wire:model="customerAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="123 AB" wire:ignore.self>
 
                                             <input type="number" wire:model="customerAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" <?php if($view) echo 'readonly'; ?>>
 
@@ -422,17 +421,18 @@
                         <h3 class="panel-title">Billing Details</h3>
 
 
-
+                        @if(empty($this->orderdetail->b_addr_id))
                         <div class="form-check">
 
-                            <input type="checkbox" id="defaultAddress" class="form-check-input" wire:model="same_shipping" wire:click="SameShipping()" <?php if($view) echo 'disabled'; ?>>
+                            <input type="checkbox" id="same_shipping" class="form-check-input" wire:model="same_shipping" wire:click="SameShipping()" <?php if($view) echo 'disabled'; ?>>
 
-                            <label class="form-check-label" for="defaultAddress" >Same as Shipping Details</label>
+                            <label class="form-check-label" for="same_shipping" >Same as Shipping Details</label>
 
                         </div>
+                        @endif
 
 
-
+                        @if(!$editMode)
                         @if($newbillingaddress == true && empty($this->customerbillingAddress))
 
                         <div class="form-check">
@@ -455,6 +455,7 @@
 
                         </div>
 
+                        @endif
                         @endif
 
 
@@ -667,9 +668,9 @@
 
                                     <div class="col-xs-12">
 
-                                      
+                          
 
-                                        <button class="site-btn blue-btn" wire:click.prevent="addshipping({{$orderdetail->id}})" <?php if($view) echo 'disabled'; ?>>Submit</button>
+                                        <button class="site-btn blue-btn" wire:click.prevent="addshipping({{$orderdetail->id}})" <?php if($view) echo 'disabled'; ?>> @if($editMode) Update @else Submit @endif</button>
 
 
 
@@ -1246,6 +1247,8 @@
                                   <!-- A Stripe Element will be inserted here. -->
 
                                 </div>
+                                <span id="ideal-bank-error" class="text-danger"></span>
+
 
 
 
@@ -1329,9 +1332,14 @@
 
 
 
+
 function payment() {
+    if($("#ideal-bank-element").length > 0 && $("#ideal-bank-element")[0].classList.length > 0 && $("#ideal-bank-element")[0].classList[1] =='StripeElement--empty') {
+          
 
+            document.getElementById("ideal-bank-error").innerHTML=  "Please select bank";  
 
+        } else {
 
           var app_url = '<?= env('APP_URL') ?>';
 
@@ -1394,14 +1402,11 @@ function payment() {
                 },
 
               },
-
-                return_url: `http://185.160.67.108/estore/public/thankyou/`,            },
+          return_url: `http://127.0.0.1:8000/thankyou/`,            },
 
           );
-
-          
-
-
+}
+     
 
 }
 
@@ -1411,18 +1416,7 @@ function payment() {
 
  $(document).on('DOMNodeInserted', function (e) {
 
-   
-
      if ($(e.target).hasClass('stripe-payment')) {
-
-     
-
-
-
-       
-
-
-
       
 
         idealBank.mount('#ideal-bank-element');
