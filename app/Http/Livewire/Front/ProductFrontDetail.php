@@ -57,9 +57,9 @@ class ProductFrontDetail extends Component
 
     public function dehydrate()
     {
-        $this->product = null;
+      
         $this->favoritevalue  = null;
-
+        $this->getProduct();
     }
 
     public function hydrate()

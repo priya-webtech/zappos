@@ -1,12 +1,11 @@
 <div>
 	<x-admin-layout>
     {{-- Do your work, then step back. --}}
-
-    <form name="role" enctype="multipart/form-data">
-
+    <div wire:ignore>
+    <form name="role">
         <!-- Add Product Form Area -->
 
-        <section class="full-width flex-wrap admin-body-width add-customer-cont-sec" wire:ignore>
+        <section class="full-width flex-wrap admin-body-width add-customer-cont-sec">
 
             <article class="full-width">
 
@@ -62,7 +61,7 @@
                                     	<option value="2">Admin</option>
                                     </select>
 
-                                    @error('role') <span class="text-danger">{{ $message }}</span>@enderror
+                                    @error('roleuser') <span class="text-danger">{{ $message }}</span>@enderror
 
                                 </div>
 
@@ -120,9 +119,9 @@
 
                     <div style="text-align: right;">
 
-                        <button id="save_product" wire:click="UserSave()" name="save_product" class="ml-4">
+                        <button wire:click="UserSave" class="ml-4">
 
-                            {{ __('Save') }}
+                           save
 
                         </button>
 
@@ -139,5 +138,6 @@
         </section>
 
     </form>
+ </div>
 </x-admin-layout>
 </div>

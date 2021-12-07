@@ -118,7 +118,8 @@ Route::middleware(['checkRole'])->group(function () {
 
             //settings
             Route::get('/admin/settings', Livewire\Admin\Settings::class)->name('settings');
-            Route::get('/admin/setting/general', Livewire\Setting\GeneralSetting::class)->name('setting-general');
+            Route::get('/admin/setting/general', Livewire\Setting\General::class)->name('setting-general');
+             Route::get('/admin/setting/generalss', Livewire\Setting\GeneralSetting::class)->name('general');
             Route::get('/admin/setting/sender-email', Livewire\Setting\SenderEmail::class)->name('sender-email');
             Route::get('/admin/email_templates/order_confirmation/edit', Livewire\Setting\OrderConfirmation::class)->name('order-confirmation');
             Route::post('/admin/setting/update', [Livewire\Setting\GeneralSetting::class, 'updatestore'])->name('setting.update');
