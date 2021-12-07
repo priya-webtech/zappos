@@ -79,7 +79,13 @@ class Details extends Component
 
         $this->countries = Country::all();
 
-        $this->tags = Tag::whereNotIn('label', explode(',',$this->customerData['detail']['tags']))->get();
+        if($this->customerData['detail']) {
+
+            if(isset($this->customerData['detail']['tags'])) {
+                        $this->tags = Tag::whereNotIn('label', explode(',',$this->customerData['detail']['tags']))->get();
+
+            }
+
 
         
 
@@ -112,6 +118,7 @@ class Details extends Component
 
 
         }
+    }
 
     }
 
