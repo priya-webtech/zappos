@@ -1,11 +1,11 @@
-$(document).ready(function() {
-   $(".admin_bar li").click(function() {
-      // remove classes from all
-      $(".admin_bar li").removeClass("active");
-      // add class to the one we clicked
-      $(this).addClass("active");
-   });
-});
+// $(document).ready(function() {
+//    $(".admin_bar li").click(function() {
+//       // remove classes from all
+//       $(".admin_bar li").removeClass("active");
+//       // add class to the one we clicked
+//       $(this).addClass("active");
+//    });
+// });
 
 
 $(document).ready(function(){

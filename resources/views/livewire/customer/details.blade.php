@@ -504,7 +504,7 @@
 
                         </div>
 
-                        @if($customerData['detail']['collect_tax'])
+                        @if(isset($customerData['detail']['collect_tax']))
 
                         <p>No exemptions</p>
 
@@ -528,7 +528,7 @@
 
                      </div>
 
-                     @if($customerData['detail']['agreed_to_receive_marketing_mails'])
+                     @if(isset($customerData['detail']['agreed_to_receive_marketing_mails']))
 
                      <span class="tag grey">subscribed</span>
 
@@ -556,12 +556,14 @@
 
                   
                      <datalist id="tagss">
+                        @if(!empty($tags))
 
                         @foreach($tags as $tag)
 
                              <option class="tag_added" value="{{$tag->label}}">
 
                          @endforeach
+                         @endif
 
                         </datalist>
 
