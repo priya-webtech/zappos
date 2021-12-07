@@ -18,16 +18,11 @@
             <div class="alert alert-success text-center">
                 <div class="alert-success-modal">
                     <div class="container">
+<!--                         <p class="success-msg">{{ Session::get('message') }}</p> -->
+                        <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('name_email_password_message') }}</p>
                         <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">close</a>
-
-                        <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('message') }}</p>
                     </div>
                 </div>
-
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-
-                <p>{{ Session::get('name_email_password_message') }}</p>
-
 
             </div>
 
@@ -36,8 +31,8 @@
             <div class="alert alert-danger text-center">
                 <div class="alert-danger-modal">
                     <div class="container">
-                        <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">close</a>
                         <p class="delete-msg"><img src="{{ url('assets/delete-icon.png') }}">{{ Session::get('deleteshipmessage') }}</p>
+                        <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">close</a>
                     </div>
                 </div>
             </div>
@@ -47,8 +42,8 @@
             <div class="alert alert-success text-center">
                 <div class="alert-success-modal">
                     <div class="container">
-                        <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
                         <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('add_bill') }}</p>
+                        <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
                     </div>
                 </div>
             </div>
@@ -57,8 +52,8 @@
             <div class="alert alert-success text-center">
                 <div class="alert-success-modal">
                     <div class="container">
-                        <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
                         <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('add_shipp') }}</p>
+                        <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
                     </div>
                 </div>
             </div>
@@ -107,9 +102,8 @@
 
                                                 <div class="alert alert-success alrt-no-modal text-center">
 
-                                                    <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
-
                                                     <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('editship') }}</p>
+                                                    <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
 
                                                 </div>
 
@@ -425,9 +419,8 @@
 
                                                 <div class="alert alert-success alrt-no-modal text-center">
 
-                                                    <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
-
                                                     <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('editbill') }}</p>
+                                                    <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
 
                                                 </div>
 
@@ -812,11 +805,11 @@
                                             <div class="modal-body">
                                                 @if (Session::has('emailpassword'))
 
-                                                    <div class="alert alert-danger text-center">
-
-                                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                                    <div class="alert alert-danger alrt-no-modal text-center">
 
                                                         <p class="delete-msg"><img src="{{ url('assets/delete-icon.png') }}">{{ Session::get('emailpassword') }}</p>
+
+                                                        <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
 
                                                     </div>
 
@@ -873,11 +866,11 @@
                                             <div class="modal-body">
                                                 @if (Session::has('oldpassworderror'))
 
-                                                    <div class="alert alert-danger text-center">
-
-                                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                                    <div class="alert alert-danger alrt-no-modal text-center">
 
                                                         <p class="delete-msg"><img src="{{ url('assets/delete-icon.png') }}">{{ Session::get('oldpassworderror') }}</p>
+
+                                                        <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
 
                                                     </div>
 

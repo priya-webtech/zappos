@@ -963,20 +963,23 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 /*******************************************
         succses massage design css
 *******************************************/
-.alert-success, .alert-danger {padding: 16px 0; background-color: #5cb85c; position: fixed; top: 0; width: 100%; box-shadow: 0px 3px 6px 3px rgb(0 0 0 / 18%); z-index: 1; border: none; border-radius: 0; left: 0; right: 0; }
-.alert-danger {background-color: #fff1f1; }
-.alert-success-modal {background-color: transparent; color: #155724; border: none; margin: 0; }
-.alert-success-modal .container, .alert-danger-modal .container {display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; }
-.alert-success a.close.site-btn, .alert-danger a.close.site-btn {font-weight: 400; font-size: 14px; border-color: #fff; padding: 6px 15px; line-height: 18px; letter-spacing: 0.05em; opacity: 1; width: auto; }
+.alert-success, .alert-danger {padding: 16px 0; position: fixed; top: 0; width: 100%; z-index: 1; border: none; border-radius: 0; left: 0; right: 0; height: 100%; display: flex; align-items: center; justify-content: center; background-color: rgba(0,0,0,.6); }
+.alert-success-modal, .alert-danger-modal {background-color: #5cb85c; color: #155724; border: none; margin: 0; padding: 35px 20px; border-radius: 10px; }
+.alert-danger-modal {background-color: #ffffff; }
+.alert-success a.close.site-btn, .alert-danger a.close.site-btn {font-weight: 400; font-size: 14px; border-color: #fff; padding: 6px 15px; line-height: 18px; letter-spacing: 0.05em; opacity: 1; float: none; margin-top: 22px; }
 .alert-danger a.close.site-btn {color: #DC3545 !important; border-color: #DC3545; font-weight: 600; }
-.alert-success .success-msg, .alert-danger .delete-msg {display: flex; align-items: center; margin: 0; font-size: 16px; font-weight: 400; color: #ffffff; }
+.alert-success .success-msg, .alert-danger .delete-msg { margin: 0; font-size: 16px; font-weight: 400; color: #ffffff; }
 .alert-danger .delete-msg {color: #DC3545; }
-.alert-success .success-msg img, .alert-danger .delete-msg img {width: 35px; height: 35px; margin-right: 15px; object-fit: contain; }
-.alert-danger .delete-msg img {width: 28px; height: 28px; margin-right: 10px; }
-.alrt-no-modal {position: initial; padding: 15px 20px; }
-.alrt-no-modal .success-msg img, .alert-danger .delete-msg img {width: 30px; height: 30px; }
-.alrt-no-modal .success-msg {font-size: 14px; }
-.alrt-no-modal a.close.site-btn {font-size: 13px; }
+.alert-success .success-msg img, .alert-danger .delete-msg img {width: 44px; height: 44px; object-fit: contain; display: block; margin: 0px auto 12px; }
+.alert-danger .delete-msg img {width: 36px; height: 36px;}
+
+.alrt-no-modal {position: initial; padding: 15px 20px; justify-content: space-between;background: #5cb85c;}
+.alrt-no-modal .success-msg, .alrt-no-modal .delete-msg {font-size: 14px; display: flex; align-items: center;}
+.alrt-no-modal .success-msg img, .alrt-no-modal .delete-msg img {width: 32px; height: 32px; margin-right: 12px; margin-bottom: 0; }
+.alrt-no-modal a.close.site-btn {font-size: 13px; margin: 0; }
+
+.alert-danger.alrt-no-modal {margin: -20px -20px 20px -20px; width: calc(100% + 40px); background-color: #ffefef; border-bottom: 1px solid #e9ecef; }
+.alrt-no-modal .success-msg img, .alrt-no-modal .delete-msg img {width: 24px; height: 24px; }
 
 /*********************************************
                 RESPONSIVE CSS
