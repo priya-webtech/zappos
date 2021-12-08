@@ -20,6 +20,7 @@ class CreateRole extends Component
             'name' => ['required'],
         ]);
         
+    	$role_data = [
             'name' => $this->role_name,
             'guard_name' => 'webbgui',
         ];
