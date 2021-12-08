@@ -121,14 +121,23 @@
                 </span>
                 <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing" id="myTable" wire:ignore.self>
                     <tbody id="product-name">
-
                         <tr>
-                            <th></th>
+                            <th>no.</th>
                             <th>Role Name</th>
                             <th>Action</th>
                         </tr>
 
-          
+                        @if($role)
+                        @php $i = 1; @endphp
+                        @foreach($role as $row)
+                        <tr>
+                            <td>{{$i}}</td>
+                            <td><a href="{{ route('update-role', $row->id) }}"> {{$row->name}}</a></td>
+                            <td>{{$row->created_at}}</td>
+                        </tr>
+                        @php $i++; @endphp
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
 
