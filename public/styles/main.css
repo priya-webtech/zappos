@@ -699,7 +699,7 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .my-cart-quantity select {padding: 6px 10px; border-radius: 5px; border: 1px solid #ddd; font-size: 14px; }
 
 .viewcart-tbl-btn {display: flex; justify-content: flex-end; flex-direction: column; align-items: flex-end; }
-.viewcart-tbl-btn a {position: relative; display: inline-flex; align-items: center; color: #ed2939 !important; font-size: 15px; border-radius: 5px; cursor: pointer; font-weight: 600; line-height: 20px; margin-bottom: 8px; }
+.viewcart-tbl-btn a {position: relative; display: inline-flex; align-items: center; color: #ed2939 !important; font-size: 15px; border-radius: 5px; cursor: pointer; font-weight: 600; line-height: 20px; margin-bottom: 8px; text-transform: lowercase;}
 .viewcart-tbl-btn a::before {content: ""; border-bottom: 1px solid #000; position: absolute; bottom: 0; right: 0; width: calc(100% - 4px); }
 .viewcart-tbl-btn a.add-wishlist::before {border-color: #ed2939; }
 .viewcart-tbl-btn a.remove-btn::before {border-color: #003953; }

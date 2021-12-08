@@ -15,7 +15,7 @@
 
         @if (Session::has('name_email_password_message'))
 
-            <div class="alert alert-success text-center">
+            <div class="alert alert-success alert-msg-modal text-center">
                 <div class="alert-success-modal">
                     <div class="container">
 <!--                         <p class="success-msg">{{ Session::get('message') }}</p> -->
@@ -28,7 +28,7 @@
 
         @endif
         @if (Session::has('deleteshipmessage'))
-            <div class="alert alert-danger text-center">
+            <div class="alert alert-danger alert-msg-modal text-center">
                 <div class="alert-danger-modal">
                     <div class="container">
                         <p class="delete-msg"><img src="{{ url('assets/delete-icon.png') }}">{{ Session::get('deleteshipmessage') }}</p>
@@ -39,7 +39,7 @@
 
         @endif  
         @if (Session::has('add_bill'))
-            <div class="alert alert-success text-center">
+            <div class="alert alert-success alert-msg-modal text-center">
                 <div class="alert-success-modal">
                     <div class="container">
                         <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('add_bill') }}</p>
@@ -49,7 +49,7 @@
             </div>
         @endif      
         @if (Session::has('add_shipp'))
-            <div class="alert alert-success text-center">
+            <div class="alert alert-success alert-msg-modal text-center">
                 <div class="alert-success-modal">
                     <div class="container">
                         <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('add_shipp') }}</p>
@@ -100,7 +100,7 @@
                                         <div class="modal-body">
                                             @if (Session::has('editship'))
 
-                                                <div class="alert alert-success alrt-no-modal text-center">
+                                                <div class="alert alert-success alert-msg-modal alrt-no-modal text-center">
 
                                                     <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('editship') }}</p>
                                                     <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
@@ -417,7 +417,7 @@
                                         <div class="modal-body">
                                             @if (Session::has('editbill'))
 
-                                                <div class="alert alert-success alrt-no-modal text-center">
+                                                <div class="alert alert-success alert-msg-modal alrt-no-modal text-center">
 
                                                     <p class="success-msg"><img src="{{ url('assets/success.png') }}">{{ Session::get('editbill') }}</p>
                                                     <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
@@ -805,7 +805,7 @@
                                             <div class="modal-body">
                                                 @if (Session::has('emailpassword'))
 
-                                                    <div class="alert alert-danger alrt-no-modal text-center">
+                                                    <div class="alert alert-danger alert-msg-modal alrt-no-modal text-center">
 
                                                         <p class="delete-msg"><img src="{{ url('assets/delete-icon.png') }}">{{ Session::get('emailpassword') }}</p>
 
@@ -866,7 +866,7 @@
                                             <div class="modal-body">
                                                 @if (Session::has('oldpassworderror'))
 
-                                                    <div class="alert alert-danger alrt-no-modal text-center">
+                                                    <div class="alert alert-danger alert-msg-modal alrt-no-modal text-center">
 
                                                         <p class="delete-msg"><img src="{{ url('assets/delete-icon.png') }}">{{ Session::get('oldpassworderror') }}</p>
 
