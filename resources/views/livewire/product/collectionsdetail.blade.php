@@ -347,7 +347,9 @@
     </section>
     <section class="full-width flex-wrap admin-body-width">
         <div class="page-bottom-btn">
+            @if(user_permission('collections','delete'))
             <button class="button warning">Delete collection</button>
+            @endif
             <button wire:click.prevent="update('main-change', event.target.value)" class="button">Save</button>
         </div>
     </section>

@@ -1233,9 +1233,9 @@
             <p class="mb-0 d-flex">
 
                 <button class="secondary secondary-brd-btn">Archive product</button>
-
+                @if(user_permission('allproduct','delete'))
                 <a class="warning" data-toggle="modal" data-target="#delete-variant-product">Delete product</a>
-
+                @endif
             </p>
 
             <input type="button" class="button save-button" wire:click="updateDetail" value="Save">

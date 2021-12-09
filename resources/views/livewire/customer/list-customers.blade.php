@@ -16,7 +16,9 @@
         <div class="header-btn-group">
             <a class="link" data-toggle="modal" data-target="#export" >Export</a>
             <a class="link" data-toggle="modal" data-target="#import">Import customers</a>
+            @if(user_permission('customers','create'))
             <a class="button green-btn" href="{{ route('customer.create') }}">Add customer</a>
+            @endif
         </div>
     </div>
 
@@ -381,8 +383,17 @@
 
                             </td>
 
-                             <td><a href="{{route('customer.details', $customer->uuid)}}"
-                                   class="tc-black fw-6">{{$customer->first_name}} {{$customer->last_name}}</a>
+                             <td>
+
+                                @if(user_permission('customers','update'))
+                                <a href="{{route('customer.details', $customer->uuid)}}"
+                                   class="tc-black fw-6">
+                                   {{$customer->first_name}} {{$customer->last_name}}
+                                </a>
+                                @else
+                                    <p>{{$customer->first_name}} {{$customer->last_name}}</p>
+                                @endif
+
                                    <br>{{$customer->uuid}}
                                 <br>@if(!empty($customer->address) && count($customer->address) > 0){{$customer->address[0]->city}}, {{$customer->address[0]->country}}@endif
                                 <br>@if(!empty($customer->detail->note))<span class="table-note"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M11.379 0a1.5 1.5 0 0 1 1.06.44l4.122 4.12A1.5 1.5 0 0 1 17 5.622V18.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 3 18.5v-17A1.5 1.5 0 0 1 4.5 0h6.879zM6 5h4v2H6V5zm8 4v2H6V9h8zm-8 6v-2h7v2H6z"></path></svg>{{$customer->detail->note}}</span>@endif

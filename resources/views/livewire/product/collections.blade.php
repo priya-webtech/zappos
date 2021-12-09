@@ -5,7 +5,9 @@
                 <div class="page_header d-flex  align-item-center">
                     <h4 class="mb-0 fw-5">Collections</h4>
                 </div>
+                @if(user_permission('collections','create'))
                 <a class="button green-btn" href="{{ route('collections-create') }}">Create collection</a>
+                @endif
             </div>
         </article>
     </section> 
@@ -165,7 +167,11 @@
                                     @endif
                                 </td></a>
                                 <td class="product-table-item">
-                                    <a class="tc-black fw-6" href="{{ route('collections-detail', $row->uuid) }}">{{$row->title}}</a>
+                                    @if(user_permission('collections','update'))
+                                        <a class="tc-black fw-6" href="{{ route('collections-detail', $row->uuid) }}">{{$row->title}}</a>
+                                    @else
+                                        <p>{{$row->title}}</p>
+                                    @endif
                                 </td>
                                 <td class="type-table-item"></td>
                             </tr>

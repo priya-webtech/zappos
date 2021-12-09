@@ -123,12 +123,21 @@
                     <tbody id="product-name">
 
                         <tr>
-                            <th></th>
+                            <th>Id</th>
                             <th>Role Name</th>
                             <th>Action</th>
                         </tr>
-
-          
+                        @if($role)
+                        <?php $i = 1; ?>
+                        @foreach($role as $row)
+                        <tr>
+                            <td>{{$i}}</td>
+                            <td><a class="tc-black fw-6" href="{{ route('updaterolepermission', $row->id) }}">{{$row->name}}</a></td>
+                            <td>-</td>
+                        </tr>
+                        <?php $i++; ?>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
 
