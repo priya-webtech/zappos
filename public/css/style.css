@@ -344,13 +344,11 @@ code {
 }
 .admin_bar ul li .sub_items {
     padding-left: 0;
-/*    padding-bottom: 8px;*/
+    padding-bottom: 0;
     overflow: hidden;
     max-height: 0;
-    transition: all 1s ease-out;
-    -webkit-transition: all 1s ease-out;
 }
-.admin_bar ul li a:hover ~ .sub_items, .admin_bar ul li a ~ .sub_items:hover {
+.admin_bar ul li.active a ~ .sub_items, .admin_bar ul li.active a ~ .sub_items {
     overflow: visible;
     max-height: 100%;
     transition: all 1s ease-out;
@@ -368,6 +366,14 @@ code {
  article.full-width {
      margin: 0;
 }
+
+.width100 {
+    width: 100%;
+}
+.min-width100 {
+    min-width: 100%;
+}
+
 /************** MY CUSTOM TYPOGRAPHY **************************************/
  .d-flex {
      display: flex;
@@ -8842,4 +8848,54 @@ ul.add-menu-item-tabs li.tabs {
 }
 .tax-select-row:last-child {
     border-bottom: none;
+}
+/*****Order Refund page css******/
+input[type=number]::-webkit-inner-spin-button {
+  opacity: 1;
+}
+.max-number-input {
+    position: relative !important;
+    display: inline-block;
+    margin-right: 50px !important;
+}
+.max-number-input input {
+    padding: 0 0 0 12px;
+    line-height: 32px;
+    max-width: 110px;
+}
+.max-number-input span {
+    position: absolute;
+    top: 5px;
+    right: 25px;
+    font-size: 14px;
+    line-height: 24px;
+    color: #6d7175;
+    min-width: auto;
+    margin: 0;
+}
+.more-actions-dp {
+    position: relative;
+}
+.more-actions-dp .filter-dropdown {
+    padding: 8px;
+    top: 35px;
+    right: -72px;
+}
+.more-actions-dp .filter-dropdown li {
+    display: block;
+    padding: 0;
+}
+.more-actions-dp .filter-dropdown .link {
+    padding: 10px 8px;
+    width: 100%;
+    min-height: auto;
+    color: #202223;
+    display: flex;
+    align-items: center;
+}
+.more-actions-dp ul button.link svg {
+    width: 20px;
+    height: 20px;
+    color: #5c5f62;
+    margin-right: 12px;
 }

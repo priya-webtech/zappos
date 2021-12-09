@@ -40,6 +40,10 @@ $(document).ready(function() {
     $(".edit-tax button").click(function() { 
        $(".edit-tax-dropdown").toggle();
 	});
+	$(".more-actions-dp .filter-dropdown").hide();
+    $(".more-actions-dp button").click(function() { 
+       $(".more-actions-dp .filter-dropdown").toggle();
+	});
 });
 
 // multiple select option with checkboxes js
