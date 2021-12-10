@@ -48,12 +48,12 @@
                                         <?php 
                                         $json_decodes = json_decode($result->collection);
 
-                                        foreach ($json_decodes as $key1 => $value) {
+                                       
                                          foreach ($Collection as $key => $colle_row) {
-                                        if($colle_row->id == $value){
+                                        if($colle_row->id == $json_decodes){
                                         ?>
                                         <span class="tag grey">{{$colle_row->title}}</span>
-                                        <?php } } } ?>
+                                        <?php } }  ?>
                                     </td>
                                     <td>
                                         {{$result->rate}}%
