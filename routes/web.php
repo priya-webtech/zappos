@@ -159,7 +159,7 @@ Route::middleware(['checkRole'])->group(function () {
             Route::get('/admin/update-role/{id?}', Livewire\Role\UpdateRole::class)->name('update-role');
             Route::get('/admin/role-permission', Livewire\RolePermission\ManageRolePermission::class)->name('role-permission');
             Route::get('/admin/create-role-permission', Livewire\RolePermission\CreateRolePermission::class)->name('create-role-permission');
-            Route::get('/admin/update-role-permission/{id?}', Livewire\RolePermission\UpdateRolePermission::class)->name('updaterolepermission');
+            Route::get('/admin/update-role-permission/{id?}', Livewire\RolePermission\UpdateRolePermission::class, 'save')->name('updaterolepermission');
             Route::post('/admin/role_save', [Livewire\RolePermission\CreateRolePermission::class, 'save'])->name('role_save');
             
             //settings
