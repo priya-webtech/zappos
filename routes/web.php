@@ -144,6 +144,7 @@ Route::middleware(['checkRole'])->group(function () {
             Route::post('/admin/setting/tagsale/store', [Livewire\Setting\TagsaleCreate::class, 'storeTagsale'])->name('tagsale-store');
             Route::get('/admin/setting/metafields', Livewire\Setting\Metafields::class)->name('metafields'); 
             Route::get('/admin/setting/taxes', Livewire\Setting\Taxes::class)->name('taxes');
+            Route::post('/admin/setting/addtax', [Livewire\Setting\Plan::class, 'taxStore'])->name('addtax');
             Route::get('/admin/setting/plan', Livewire\Setting\Plan::class)->name('plan');
             Route::get('/admin/setting/locations', Livewire\Setting\Locations::class)->name('locations');
             Route::get('/admin/setting/locations/add', Livewire\Setting\LocationCreate::class)->name('locations-create');
