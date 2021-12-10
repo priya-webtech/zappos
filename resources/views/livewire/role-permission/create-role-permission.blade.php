@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div id="html-view-validations">
-                            <input id="role_id" name="role_id" type="hidden" value="{{ isset($role_data->id) ? $role_data->id : '' }}">
+                         
                             <div class="row">
                                 <div class="col l12">
                                     @if ($errors->any())
@@ -49,7 +49,12 @@
                                 <div class="col m12 s12">
                                     <div class="input-field">
                                         <div><label for="title">Role Name *</label></div>
-                                        <input class="validate" placeholder="Name" required id="role_name" name="role_name" type="text" value="{{ isset($role_data->role_name) ? $role_data->role_name : '' }}">
+                                        <select name="role_id">
+                                            <option value="">-- Select Option --</option>
+                                            @foreach($role_data as $row)
+                                            <option value="{{ ($row->id) ? $row->id : $row->id }}">{{$row->name}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -453,8 +458,7 @@
 
         <div class="form-group">
 
-            <input type="hidden" value="{{!empty($role_id) ? $role_id : ''}}" name="role_id">
-
+          
             <table id="role_manage_privilege_table" class="table dt-responsive nowrap">
 
                 <thead>

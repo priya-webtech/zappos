@@ -5,7 +5,9 @@
                 <div class="page_header d-flex align-item-center justify-content-space-between full-width mb-2">
                     <h4 class="mb-0 fw-5">Pages</h4>
                     <div class="header-btn-group">
+                        @if(user_permission('pages','create'))
                         <a class="button green-btn" href="{{ route('pages-create') }}">Add Page</a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -138,7 +140,11 @@
                                     <div class="row"><label><input type="checkbox" class="checkbox" name="selectedproducts" value="117" wire:model.lazy="selectedproducts"></label></div>
                                 </td>
                                 <td>
+                                    @if(user_permission('pages','update'))
                                     <a href="{{ route('pages-detail', $result->uuid) }}" class="black-color fw-6">{{$result->title}}</a>
+                                    @else
+                                    <p><b>{{$result->title}}</b></p>
+                                    @endif
                                     <p class="text-grey mb-0">{!!$result->content!!}</p>
                                 </td>
                                 <td class="ta-right">

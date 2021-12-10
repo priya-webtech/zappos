@@ -6,7 +6,9 @@
         <div class="header-btn-group">
             <a class="link" data-toggle="modal" data-target="#export" >Export</a>
             <a class="link" data-toggle="modal" data-target="#import">Import</a>
+             @if(user_permission('allproduct','create'))
             <a class="button green-btn" href="{{ route('products.create') }}">Add Product</a>
+            @endif
         </div>
     </div>
 
@@ -241,7 +243,11 @@
                                 @endforeach
                             </td>
                             <td class="product-table-item">
+                                @if(user_permission('allproduct','update'))
                                 <a class="tc-black fw-6" href="{{ route('product-detail', $row->uuid) }}">{{$row->title}}</a>
+                                @else
+                                <p>{{$row->title}}</p>
+                                @endif
                             </td>
                             <td class="subscribed-label status-table-item">
                                 <p class="tag green order-filed">

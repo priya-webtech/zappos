@@ -6,6 +6,7 @@ use App\Models\ProductVariant;
 use App\Models\VariantTag;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\rolepermission;
   
 
   function CurrencySymbol(){
@@ -103,10 +104,11 @@ use App\Models\Cart;
     }
   }
 
-   function user_permission($role_id,$privilege,$sub_privilege)
+   function user_permission($privilege,$sub_privilege)
 
     { 
 
+        $role_id = Auth::user()->role;
         $user = Auth::user();
 
         $user_type = $user->type;
@@ -117,7 +119,7 @@ use App\Models\Cart;
 
         }
 
-        $res = UserPermission::where(['deleted'=>'0','privilege'=>$privilege,'privilege_sub'=>$sub_privilege,'user_id'=>$role_id])->first();
+        $res = rolepermission::where(['deleted'=>'0','privilege'=>$privilege,'privilege_sub'=>$sub_privilege,'user_id'=>$role_id])->first();
 
         if(!empty($res))
 

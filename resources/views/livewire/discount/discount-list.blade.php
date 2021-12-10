@@ -6,7 +6,9 @@
                 <div class="page_header d-flex  align-item-center">
                     <h4 class="mb-0 fw-5">Discount</h4>
                 </div>
-                <a class="button green-btn" href="{{ route('discount-creates') }}">Create Discount</a>
+                @if(user_permission('discounts','create'))
+                    <a class="button green-btn" href="{{ route('discount-creates') }}">Create Discount</a>
+                @endif
             </div>
         </article>
     </section> 
@@ -100,39 +102,32 @@
                                     </div>
                                 </th>
                             </tr>
+                            @if(!empty($discountlist))
+                            @foreach($discountlist as $row)
                             <tr>
                                 <td>
                                     <div class="row"><label><input type="checkbox" class="checkbox" name="selectedproducts" value="117" wire:model.lazy="selectedproducts"></label></div>
                                 </td>
                                 <td class="product-table-item">
-                                    <a class="tc-black fw-6">T31JX0W377CG</a>
+                                    @if(user_permission('discounts','update'))
+                                    <a class="tc-black fw-6" href="{{ route('discount-detail', $row->id) }}">{{$row->code}}</a>
                                     <p class="mb-0">10% off Home page • Minimum purchase of $20.00 • One use per customer</p>
+                                    @else
+                                    <p>{{$row->code}}</p>
+                                    <p class="mb-0">10% off Home page • Minimum purchase of $20.00 • One use per customer</p>
+                                    @endif
                                 </td>
                                 <td >
                                     <p class="tag green order-filed"> Active </p> 
                                 </td>
                                 <td class="ta-right">0/10 used</td>
                                 <td class="ta-right">
-                                    <span class="text-grey  pr-3">From 6 Nov 20</span>
+                                    <span class="text-grey  pr-3">From {{$row->start_date}} {{$row->end_date}}</span>
                                 </td>
-                            </tr>
-
-
-                            @if(!empty($discountlist))
-                            @foreach($discountlist as $row)
-                            <tr>
-                                <td>
-                                    <div class="row"><label><input type="checkbox" name="option6a"></label></div>
-                                </td>
-                                <td class="product-table-item">
-                                    <a class="tc-black fw-6" href="{{ route('discount-detail', $row->id) }}">{{$row->code}}</a>
-                                </td>
-                                <td class="product-table-item">{{$row->start_date}}</td>
-                                <td class="product-table-item">{{$row->end_date}}</td>
-                               
                             </tr>
                             @endforeach
                             @endif
+
                         </tbody>
                     </table>
                 </div>

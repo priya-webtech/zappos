@@ -11,9 +11,9 @@
                 <div class="page_header d-flex  align-item-center mb-3 justify-content-space-between full-width mb-2">
 
                     <h4 class="mb-0 fw-5">Navigation</h4>
-
+                    @if(user_permission('navigation','create'))
                     <a class="button green-btn" href="{{route('menu')}}">Add Menu</a>
-
+                    @endif
                 </div>
 
             </div>
@@ -72,9 +72,15 @@
 
                                         <tr>
 
-                                            <td><a href="{{route('menu-item', $menu->id)}}"
+                                            <td>
+                                                @if(user_permission('navigation','update'))
+                                                <a href="{{route('menu-item', $menu->id)}}"
 
-                                                   class="tc-black fw-4">{{$menu->name}}</a></td>
+                                                   class="tc-black fw-4">{{$menu->name}}</a>
+                                                @else
+                                                {{$menu->name}}
+                                                @endif
+                                            </td>
 
                                             <td> {{implode(", ", $menu->items->pluck('label')->toArray())}}</td>
 
