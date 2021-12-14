@@ -672,6 +672,13 @@ code {
  .pl-16{
     padding-left: 16px;
 }
+
+.tbl-pd20 {
+    padding: 0 20px !important;
+}
+.vrl-middle {
+    vertical-align: middle !important;
+}
 /************* FONT SIZE TYPOGRAPHY ******************************************/
  .fs-12{
     font-size: 12px;
