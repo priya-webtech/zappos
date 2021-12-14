@@ -243,6 +243,7 @@
                             <img src="{{ url('assets/delete-icon.png') }}">
                             {{ session('alert') }}
                         </p>
+                        <a href="#" class="close site-btn" data-dismiss="alert" aria-label="close">Close</a>
                     </div>
                 </div>
             </div>
