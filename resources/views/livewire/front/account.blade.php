@@ -985,8 +985,6 @@
                                 @php $i = 1;  $user_id = Auth::user()->id; @endphp
                                 @if(!empty($order))
                                 @foreach($order as $row)
-
-                               <?php $detailfetch = allprice($row->product_id); ?>
                                 <tr>
                                     <td>{{$row->id}}</td>
                                     <td>{{$row->updated_at}}</td>
@@ -1034,6 +1032,7 @@
                                             <div class="modal-body">
                                                 @if($showItem)
                                                 @foreach($showItem as $item)
+                                                <?php $detailfetch = allprice($item->product_id); ?>
                                                 @if($item->order_id == $row['id'])
                                                 <div class="unfulfilled-product-sec">
                                                     <div class="unful-pd-img">

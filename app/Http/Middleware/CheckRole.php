@@ -28,10 +28,10 @@ class CheckRole
             if(!str_contains($request->url(),'/logout'))
             {
                 if(str_contains($request->url(),'/admin') && !Auth::user()->hasRole('admin')) {
-                    return redirect('/');
+                    return redirect('/admin');
                 }
                 if(!str_contains($request->url(),'/admin') && !Auth::user()->hasRole('customer')) {
-                    return redirect('/admin');
+                    return redirect('/');
                 }
             }
 

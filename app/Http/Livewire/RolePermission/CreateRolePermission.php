@@ -27,6 +27,7 @@ class CreateRolePermission extends Component
             'role_id' => 'required',
         ];
 
+
 /*        
         if($request->role_id==null){
             $role=role::create(

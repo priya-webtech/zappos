@@ -208,7 +208,7 @@ Route::middleware(['checkRole'])->group(function () {
 
     Route::get('/account/viewcart/detail', Livewire\Front\ViewCart::class)->name('view-cart');
    
-    Route::get('/faqs', Livewire\Front\faqs::class)->name('faqs');
+    Route::get('/faqs', Livewire\Front\Faqs::class)->name('faqs');
     
 
     
