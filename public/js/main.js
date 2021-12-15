@@ -8,7 +8,6 @@
 
 $(document).ready(function(){
   $('.admin_bar ul li').each(function() {
-    // $(this).find('.sub_items').parents('li').addClass('menu-dropdown');
     $(this).find('.sub_items').parents('li').prepend("<a class='nav-arrow'></a>");
   });
 });
