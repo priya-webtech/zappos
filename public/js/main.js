@@ -1,24 +1,20 @@
-// $(document).ready(function() {
-//    $(".admin_bar li").click(function() {
-//       // remove classes from all
-//       $(".admin_bar li").removeClass("active");
-//       // add class to the one we clicked
-//       $(this).addClass("active");
-//    });
-// });
+// $('.admin_bar ul li').removeClass('menu-dropdown');
+// $(this).parent().addClass('menu-dropdown');
+
+// $('.sub_items').hide(300);
+// $(this).parent().find('.sub_items').show(300);
+
+
 
 $(document).ready(function(){
   $('.admin_bar ul li').each(function() {
-    $(this).find('.sub_items').parents('li').addClass('menu-dropdown');
+    // $(this).find('.sub_items').parents('li').addClass('menu-dropdown');
     $(this).find('.sub_items').parents('li').prepend("<a class='nav-arrow'></a>");
   });
 });
 $(document).ready(function(){
-	$('.sub_items').hide();
-	$('.nav-arrow').click(function(){
-		// $(this).parent().siblings().removeClass('drop-open');
-		$('.sub_items').hide(300);
-		$(this).parent().find('.sub_items').toggle(300);
+	$('.nav-arrow').on('click', function() {
+		$(this).parent().toggleClass('menu-dropdown').siblings().removeClass('menu-dropdown');
 	});
 });
 $(document).ready(function(){
