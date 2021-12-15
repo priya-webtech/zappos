@@ -342,18 +342,18 @@ code {
  .admin_bar ul li.active a svg {
      color: #007b5c;
 }
-.admin_bar ul li .sub_items {
+/*.admin_bar ul li .sub_items {
     padding-left: 0;
     padding-bottom: 0;
     overflow: hidden;
     max-height: 0;
 }
-.admin_bar ul li.active a ~ .sub_items, .admin_bar ul li.active a ~ .sub_items {
+.admin_bar ul li.drop-open .sub_items {
     overflow: visible;
     max-height: 100%;
     transition: all 1s ease-out;
     -webkit-transition: all 1s ease-out;
-}
+}*/
  .admin_bar ul li .sub_items li a {
      font-size: 14px;
      padding: 6px 12px 6px 48px;
@@ -373,7 +373,23 @@ code {
 .min-width100 {
     min-width: 100%;
 }
-
+.admin_bar ul li {
+    position: relative;
+}
+.admin_bar ul li a.nav-arrow {
+    position: absolute;
+    right: 10px;
+    background-image: url(../assets/images/arrow-down.png);
+    display: block;
+    background-size: 100%;
+    top: 10px;
+    cursor: cell;
+    z-index: 2;
+    padding: 0;
+    margin: 0;
+    width: 14px;
+    height: 14px;
+}
 /************** MY CUSTOM TYPOGRAPHY **************************************/
  .d-flex {
      display: flex;
@@ -806,6 +822,14 @@ code {
  .mr-auto{
      margin-right: auto;
 }
+/***************************Float*****************************/
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+
 /************* TABLE TYPOGRAPHY ******************************************/
  table.one-bg tbody tr:nth-child(2n+1){
      background: transparent;

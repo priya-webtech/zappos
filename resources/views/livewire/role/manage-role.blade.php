@@ -122,9 +122,9 @@
                 <table class="one-bg border-every-row fs-14 fw-3 tc-black01 comman-th product-listing" id="myTable" wire:ignore.self>
                     <tbody id="product-name">
                         <tr>
-                            <th>no.</th>
-                            <th>Role Name</th>
-                            <th>Action</th>
+                            <th class="fw-6">no.</th>
+                            <th class="fw-6">Role Name</th>
+                            <th class="fw-6">Action</th>
                         </tr>
 
                         @if($role)

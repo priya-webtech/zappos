@@ -123,16 +123,16 @@
                     <tbody id="product-name">
 
                         <tr>
-                            <th>Id</th>
-                            <th>Role Name</th>
-                            <th>Action</th>
+                            <th class="fw-6">Id</th>
+                            <th class="fw-6">Role Name</th>
+                            <th class="fw-6">Action</th>
                         </tr>
                         @if($role)
                         <?php $i = 1; ?>
                         @foreach($role as $row)
                         <tr>
                             <td>{{$i}}</td>
-                            <td class="tbl-pd20"><a class="tc-black fw-6 card-padding0" href="{{ route('updaterolepermission', $row->id) }}">{{$row->name}}</a></td>
+                            <td class="tbl-pd20"><a class="tc-black blue-color card-padding0" href="{{ route('updaterolepermission', $row->id) }}">{{$row->name}}</a></td>
                             <td class="tbl-pd20 vrl-middle">-</td>
                         </tr>
                         <?php $i++; ?>

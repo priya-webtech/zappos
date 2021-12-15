@@ -15,9 +15,9 @@
             </div>
         </article>
     </section>
-    <div class="full-width flex-wrap admin-body-width">
+    <section class="full-width flex-wrap bd_none admin-body-width">
         <article class="full-width">
-            <div class="columns ten">
+            <div class="columns">
                 <form method="POST" action="{{ route('role_save') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
@@ -27,7 +27,7 @@
                                     <div class="card-title">
                                         <div class="row">
                                             <div class="col s12 m6 l10">
-                                                <h4 class="card-title">User Role</h4>
+                                                <h4 class="fs-18 mb-0 fw-6">User Role</h4>
                                             </div>
                                             <div class="col s12 m6 l2">
                                             </div>
@@ -48,10 +48,10 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row row-mb-0">
                                                 <div class="col m12 s12">
                                                     <div class="input-field">
-                                                        <div><label for="title">Role Name *</label></div>
+                                                        <div><label class="lbl-mb-4" for="title">Role Name *</label></div>
                                                         <select name="role_id">
                                                             <option value="">-- Select Option --</option>
                                                             @foreach($role_data as $row)
@@ -457,96 +457,98 @@
                         $Privilegearray = serialize($privilege_array);
 
                     ?>
-                    <div class="row">
+                    <div class="card">
+                        <div class="row">
 
-                        <div class="form-group">
+                            <div class="form-group">
 
-                          
-                            <table id="role_manage_privilege_table" class="table dt-responsive nowrap">
+                              
+                                <table id="role_manage_privilege_table fs-14" class="table dt-responsive nowrap">
 
-                                <thead>
+                                    <thead class="fs-14">
 
-                                    <tr>
+                                        <tr>
 
-                                        <th>Role Name</th>
+                                            <th class="fw-6">Role Name</th>
 
-                                        <th>List</th>
+                                            <th class="fw-6">List</th>
 
-                                        <th>Create</th>
+                                            <th class="fw-6">Create</th>
 
-                                        <th>Update</th>
+                                            <th class="fw-6">Update</th>
 
-                                        <th>Delete</th>
+                                            <th class="fw-6">Delete</th>
 
-                                    </tr>
+                                        </tr>
 
-                                </thead>
+                                    </thead>
 
-                                <tbody>
+                                    <tbody class="fs-14">
 
-                                    @foreach($privilege_array as $Privilegearray_key => $Privilegearray_value)
+                                        @foreach($privilege_array as $Privilegearray_key => $Privilegearray_value)
 
-                                    <tr>
+                                        <tr>
 
-                                        <td><?php echo $Privilegearray_value['name']; ?></td>
+                                            <td><?php echo $Privilegearray_value['name']; ?></td>
 
-                                        <?php
+                                            <?php
 
-                                        $item_array = isset($Privilegearray_value['item']) ? $Privilegearray_value['item'] : array();
+                                            $item_array = isset($Privilegearray_value['item']) ? $Privilegearray_value['item'] : array();
 
-                                        foreach ($item_array as $item_array_key => $item_array_value) {
+                                            foreach ($item_array as $item_array_key => $item_array_value) {
 
-                                        ?>
+                                            ?>
 
-                                            <td>
+                                                <td>
 
-                                                    <?php
+                                                        <?php
 
-                                                    $match_data_checked = "";
+                                                        $match_data_checked = "";
 
-                                                    $match_data = $Privilegearray_key . '_' . $item_array_key;
+                                                        $match_data = $Privilegearray_key . '_' . $item_array_key;
 
-                                                 /*   if (in_array($match_data, $privilege_user_selected)) {
+                                                     /*   if (in_array($match_data, $privilege_user_selected)) {
 
-                                                        $match_data_checked = "checked";
+                                                            $match_data_checked = "checked";
 
-                                                    }*/
+                                                        }*/
 
-                                                    ?>
-                                                    <input data-parent="<?php echo $Privilegearray_key; ?>" type="checkbox" name="assign_privilege[<?php echo $Privilegearray_key; ?>][<?php echo $item_array_key; ?>]" value="1" id="<?php echo $match_data; ?>" class="sub_item sub_item_<?php echo $Privilegearray_key ?> <?php echo $Privilegearray_key; ?>_<?php echo $item_array_key; ?>" data-value="<?php echo $item_array_key; ?>" <?php echo $match_data_checked; ?>>
+                                                        ?>
+                                                        <input data-parent="<?php echo $Privilegearray_key; ?>" type="checkbox" name="assign_privilege[<?php echo $Privilegearray_key; ?>][<?php echo $item_array_key; ?>]" value="1" id="<?php echo $match_data; ?>" class="sub_item sub_item_<?php echo $Privilegearray_key ?> <?php echo $Privilegearray_key; ?>_<?php echo $item_array_key; ?>" data-value="<?php echo $item_array_key; ?>" <?php echo $match_data_checked; ?>>
 
 
-                                            </td>
+                                                </td>
 
-                                        <?php } ?>
+                                            <?php } ?>
 
-                                    </tr>
+                                        </tr>
 
-                                    @endforeach
+                                        @endforeach
 
-                                </tbody>
+                                    </tbody>
 
-                            </table>
+                                </table>
 
-                            <div class="input-field text-right m-b-0">
+                                <div class="input-field text-right m-b-0">
 
-                                <div class="input-field col s12">
+                                    <div class="input-field mt-3">
 
-                                    <button class="btn waves-effect waves-light right" type="submit" name="action">Submit</button>
+                                        <button type="reset" class="button secondary fw-6 fs-14"><span class="btn-label">Clear</span> Reset</button>
+                                        <button class="button green-btn fw-6 fs-14" type="submit" name="action">Submit</button>
 
-                                    <button type="reset" class="btn btn-danger waves-effect waves-light"><span class="btn-label"><i class="material-icons right">clear</i></span> Reset</button>
+
+                                    </div>
 
                                 </div>
 
                             </div>
-
+                            
                         </div>
-                        
                     </div>
                 </form>
             </div>
         </article>
-    </div>
+    </section>
 <script>
 
  $(".parent_item").change(function() {
