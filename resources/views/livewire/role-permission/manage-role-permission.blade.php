@@ -119,16 +119,25 @@
                 </div>
                 <span>
                 </span>
-                <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th product-listing" id="myTable" wire:ignore.self>
+                <table class="one-bg border-every-row fs-14 fw-3 tc-black01 comman-th product-listing" id="myTable" wire:ignore.self>
                     <tbody id="product-name">
 
                         <tr>
-                            <th></th>
-                            <th>Role Name</th>
-                            <th>Action</th>
+                            <th class="fw-6">Id</th>
+                            <th class="fw-6">Role Name</th>
+                            <th class="fw-6">Action</th>
                         </tr>
-
-          
+                        @if($role)
+                        <?php $i = 1; ?>
+                        @foreach($role as $row)
+                        <tr>
+                            <td>{{$i}}</td>
+                            <td class="tbl-pd20"><a class="tc-black blue-color card-padding0" href="{{ route('updaterolepermission', $row->id) }}">{{$row->name}}</a></td>
+                            <td class="tbl-pd20 vrl-middle">-</td>
+                        </tr>
+                        <?php $i++; ?>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
 

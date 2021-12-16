@@ -20,9 +20,9 @@ class Taxes extends Component
         return view('livewire.setting.taxes');
     }
     
-    public function taxStore()
+    public function taxStore(Request $request)
     {
-
+        dd($Request);
         tax::where('id', 1)->update([
 
             'rate' => $this->taxes['rate'],

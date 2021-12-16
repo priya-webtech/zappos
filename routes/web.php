@@ -118,7 +118,8 @@ Route::middleware(['checkRole'])->group(function () {
 
             //settings
             Route::get('/admin/settings', Livewire\Admin\Settings::class)->name('settings');
-            Route::get('/admin/setting/general', Livewire\Setting\GeneralSetting::class)->name('setting-general');
+            Route::get('/admin/setting/general', Livewire\Setting\General::class)->name('setting-general');
+             Route::get('/admin/setting/generalss', Livewire\Setting\GeneralSetting::class)->name('general');
             Route::get('/admin/setting/sender-email', Livewire\Setting\SenderEmail::class)->name('sender-email');
             Route::get('/admin/email_templates/order_confirmation/edit', Livewire\Setting\OrderConfirmation::class)->name('order-confirmation');
             Route::post('/admin/setting/update', [Livewire\Setting\GeneralSetting::class, 'updatestore'])->name('setting.update');
@@ -143,6 +144,7 @@ Route::middleware(['checkRole'])->group(function () {
             Route::post('/admin/setting/tagsale/store', [Livewire\Setting\TagsaleCreate::class, 'storeTagsale'])->name('tagsale-store');
             Route::get('/admin/setting/metafields', Livewire\Setting\Metafields::class)->name('metafields'); 
             Route::get('/admin/setting/taxes', Livewire\Setting\Taxes::class)->name('taxes');
+            Route::post('/admin/setting/addtax', [Livewire\Setting\Plan::class, 'taxStore'])->name('addtax');
             Route::get('/admin/setting/plan', Livewire\Setting\Plan::class)->name('plan');
             Route::get('/admin/setting/locations', Livewire\Setting\Locations::class)->name('locations');
             Route::get('/admin/setting/locations/add', Livewire\Setting\LocationCreate::class)->name('locations-create');
@@ -155,10 +157,10 @@ Route::middleware(['checkRole'])->group(function () {
             //Role Permission 
             Route::get('/admin/role', Livewire\Role\ManageRole::class)->name('role');
             Route::get('/admin/create-role', Livewire\Role\CreateRole::class)->name('create-role');
-            Route::get('/admin/update-role', Livewire\Role\UpdateRole::class)->name('update-role');
+            Route::get('/admin/update-role/{id?}', Livewire\Role\UpdateRole::class)->name('update-role');
             Route::get('/admin/role-permission', Livewire\RolePermission\ManageRolePermission::class)->name('role-permission');
             Route::get('/admin/create-role-permission', Livewire\RolePermission\CreateRolePermission::class)->name('create-role-permission');
-            Route::get('/admin/update-role-permission', Livewire\RolePermission\UpdateRolePermission::class)->name('update-role-permission');
+            Route::get('/admin/update-role-permission/{id?}', Livewire\RolePermission\UpdateRolePermission::class, 'save')->name('updaterolepermission');
             Route::post('/admin/role_save', [Livewire\RolePermission\CreateRolePermission::class, 'save'])->name('role_save');
             
             //settings

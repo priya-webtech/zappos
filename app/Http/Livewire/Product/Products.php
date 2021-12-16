@@ -32,7 +32,7 @@ class Products extends Component
 {
     use WithFileUploads, WithPagination;
 
-    public $getproduct,$VariantStock, $productVariant ,$variationValue,$Productmediass,$date_of_order, $date_added_as_customer, $abandoned_checkout, $customer_language, $location, $countries, $save_filter,$filter_product,
+    public $getproduct,$VariantStock, $productVariant ,$variationValue,$Productmediass,$date_of_order, $date_added_as_customer, $abandoned_checkout, $customer_language, $location, $countries, $save_filter,$filter_product,$user_id,
 
         $filter_tabs, $active_tab, $sort_by, $export, $export_as, $selected_file;
 
@@ -42,6 +42,8 @@ class Products extends Component
 
     public function mount()
     {
+
+        $this->user_id = Auth::user()->role;
         $this->getProduct();
     }
 

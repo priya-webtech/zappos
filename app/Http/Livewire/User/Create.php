@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\User;
 
 use App\Models\User;
+use App\Models\role;
 use App\Notifications\SendDetailNotification;
 use Dotenv\Util\Str;
 use Illuminate\Support\Facades\Auth;
@@ -20,11 +21,13 @@ class Create extends Component
     public $mobile_number = '', $selected_id;
     protected $listeners = ['store', 'edit', 'update', 'delete'];
     public $updateMode = false;
-    public $role;
+    public $role,$getrole;
     public $auth_key = '';
 
     public function mount()
     {
+        $this->getrole = role::get();
+
         if (Route::currentRouteName() == 'customers') {
             $this->role = 'customer';
         } else {
@@ -44,6 +47,7 @@ class Create extends Component
         $this->last_name = '';
         $this->email = '';
         $this->mobile_number = '';
+        $this->role = '';
     }
 
     public function edit($id)
@@ -53,6 +57,7 @@ class Create extends Component
 
         $this->first_name = $record->first_name;
         $this->last_name = $record->last_name;
+        $this->role = $record->role;
         $this->email = $record->email;
         $this->mobile_number = $record->mobile_number;
 
@@ -97,11 +102,13 @@ class Create extends Component
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
+            'role' => $this->role,
             'mobile_number' => $this->mobile_number,
         ];
         Validator::make($user_data, [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
+            'role' => ['required'],
             'mobile_number' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ])->validate();

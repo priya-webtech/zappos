@@ -9,11 +9,11 @@ use Illuminate\Http\Request;
 
 class CreateRolePermission extends Component
 {
-
+    public $role_data;
 
     public function mount(){
 
-        // $this->role_data = role::where('id', $id)->first();
+        $this->role_data = role::get();
     }
     public function render()
     {
@@ -24,10 +24,10 @@ class CreateRolePermission extends Component
     {
 
         $user_validation = [
-            'role_name' => 'required',
+            'role_id' => 'required',
         ];
 
-        
+/*        
         if($request->role_id==null){
             $role=role::create(
 
@@ -46,11 +46,11 @@ class CreateRolePermission extends Component
                 
                 ]
             );
-        }
+        }*/
 
         $assign_privilege_array = $request->assign_privilege;
 
-        $user_id = $role->id;
+        $user_id = $request->role_id;
         $manage_privilege_array = array();
         if (count($assign_privilege_array) != 0) {
             foreach ($assign_privilege_array as $assign_privilege_array_key => $assign_privilege_array_val) {

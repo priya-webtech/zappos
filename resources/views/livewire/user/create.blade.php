@@ -42,6 +42,19 @@
                                     <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required wire:model="email"  />
                                     @error('email') <span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
+                                <!-- Role -->
+                                <div class="row field_style1 mb-2">
+                                    <label>Role</label>
+                                    <select class="block mt-1 w-full" wire:model="role">
+                                        <option value="">Select role</option>
+                                        @if($getrole)
+                                        @foreach($getrole as $row)
+                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                    @error('role') <span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
                                 <!-- Phone Number -->
                                 <div class="row field_style1 mb-2">
                                     <label>Phone Number</label>

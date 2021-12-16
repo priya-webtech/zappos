@@ -15,7 +15,33 @@
                 <div class="product-header-btn">
                     <a href="{{route('order-refund')}}" class="button link">Refund</a>
                     <button class="button link" onclick="document.getElementById('unable-to-edit-order-modal').style.display='block'">Edit</button>
-                    <button class="button link head-arrow-btn">More actions <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button>
+                    <div class="more-actions-dp">
+                        <button class="button link head-arrow-btn">More actions <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button>
+                        <ul class="filter-dropdown">
+                            <li>
+                                <button class="link">
+                                    <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M7.5 2A1.5 1.5 0 0 0 6 3.5V13a1 1 0 0 0 1 1h9.5a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 16.5 2h-9zm-4 4H4v10h10v.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 16.5v-9A1.5 1.5 0 0 1 3.5 6z"></path></svg>
+                                    Duplicate
+                                </button>
+                                <button class="link">
+                                    <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M7.5 2A1.5 1.5 0 0 0 6 3.5V13a1 1 0 0 0 1 1h9.5a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 16.5 2h-9zm-4 4H4v10h10v.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 16.5v-9A1.5 1.5 0 0 1 3.5 6z"></path></svg>
+                                    Cancel order
+                                </button>
+                                <button class="link">
+                                    <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M4.5 3A1.5 1.5 0 0 0 3 4.5V6h14V4.5A1.5 1.5 0 0 0 15.5 3h-11zM4 15.5A1.5 1.5 0 0 0 5.5 17h9a1.5 1.5 0 0 0 1.5-1.5V8H4v7.5zM7 11h6v2H7v-2z"></path></svg>
+                                    Archive
+                                </button>
+                                <button class="link">
+                                    <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M14 11h2V9h-2v2zM7 7h6V4H7v3zm0 9h6v-2H7v2zm8-9V3.5A1.5 1.5 0 0 0 13.5 2h-7A1.5 1.5 0 0 0 5 3.5V7H3.5A1.5 1.5 0 0 0 2 8.5v6A1.5 1.5 0 0 0 3.5 16H5v.5A1.5 1.5 0 0 0 6.5 18h7a1.5 1.5 0 0 0 1.5-1.5V16h1.5a1.5 1.5 0 0 0 1.5-1.5v-6A1.5 1.5 0 0 0 16.5 7H15z"></path></svg>
+                                    Print packing slips
+                                </button>
+                                <button class="link">
+                                    <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M17.928 9.628C17.837 9.399 15.611 4 10 4S2.162 9.399 2.07 9.628a1.017 1.017 0 0 0 0 .744C2.163 10.601 4.389 16 10 16s7.837-5.399 7.928-5.628a1.017 1.017 0 0 0 0-.744zM10 14a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-6a2 2 0 1 0 .002 4.001A2 2 0 0 0 9.999 8z"></path></svg>
+                                    View order status page
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="pagination">
                         <span class="button-group">
                             <button class="secondary icon-prev"></button>

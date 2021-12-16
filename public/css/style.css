@@ -312,7 +312,7 @@ code {
      opacity: 0;
      border-radius: 0 4px 4px 0;
 }
- .admin_bar ul li.active a:before{
+ .admin_bar ul li.active > a:before{
      opacity:1;
 }
  .admin_bar ul li .sub_items li a::before {
@@ -332,31 +332,23 @@ code {
  .admin_bar ul li a i {
      margin-right: 5px;
 }
- .admin_bar ul li a:hover, .admin_bar ul li.active a{
+ .admin_bar ul li > a:hover, .admin_bar ul li.active > a{
      background-color: #edeeef;
 }
- .admin_bar ul li.active a{
+ .admin_bar ul li.active > a{
      background-color: #edeeef;
      color: #007b5c;
 }
- .admin_bar ul li.active a svg {
+ .admin_bar ul li.active > a svg {
      color: #007b5c;
 }
-.admin_bar ul li .sub_items {
-    padding-left: 0;
-/*    padding-bottom: 8px;*/
-    overflow: hidden;
-    max-height: 0;
-    transition: all 1s ease-out;
-    -webkit-transition: all 1s ease-out;
+.admin_bar ul li ul.sub_items {
+    display: none;
 }
-.admin_bar ul li a:hover ~ .sub_items, .admin_bar ul li a ~ .sub_items:hover {
-    overflow: visible;
-    max-height: 100%;
-    transition: all 1s ease-out;
-    -webkit-transition: all 1s ease-out;
+.admin_bar ul li.menu-dropdown ul.sub_items {
+    display: block;
 }
- .admin_bar ul li .sub_items li a {
+.admin_bar ul li .sub_items li a {
      font-size: 14px;
      padding: 6px 12px 6px 48px;
      font-weight: 500;
@@ -365,8 +357,43 @@ code {
  .admin_bar ul li .sub_items li.active a {
      color: #007b5c;
 }
+.admin_bar ul li.menu-dropdown li a {
+    background: transparent;
+}
  article.full-width {
      margin: 0;
+}
+
+.width100 {
+    width: 100%;
+}
+.min-width100 {
+    min-width: 100%;
+}
+.admin_bar ul li {
+    position: relative;
+}
+.admin_bar ul li a.nav-arrow {
+    position: absolute;
+    right: 15px;
+    background-image: url(../assets/images/arrow-down.png);
+    display: block;
+    background-size: 100%;
+    top: 10px;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 2;
+    padding: 0;
+    margin: 0;
+    width: 14px;
+    height: 14px;
+    transition: initial;
+}
+.admin_bar ul li.menu-dropdown a.nav-arrow {
+    transform: rotate(180deg);
+}
+.admin_bar ul li a.nav-arrow::before {
+    display: none;
 }
 /************** MY CUSTOM TYPOGRAPHY **************************************/
  .d-flex {
@@ -666,6 +693,13 @@ code {
  .pl-16{
     padding-left: 16px;
 }
+
+.tbl-pd20 {
+    padding: 0 20px !important;
+}
+.vrl-middle {
+    vertical-align: middle !important;
+}
 /************* FONT SIZE TYPOGRAPHY ******************************************/
  .fs-12{
     font-size: 12px;
@@ -793,6 +827,14 @@ code {
  .mr-auto{
      margin-right: auto;
 }
+/***************************Float*****************************/
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+
 /************* TABLE TYPOGRAPHY ******************************************/
  table.one-bg tbody tr:nth-child(2n+1){
      background: transparent;
@@ -8842,4 +8884,54 @@ ul.add-menu-item-tabs li.tabs {
 }
 .tax-select-row:last-child {
     border-bottom: none;
+}
+/*****Order Refund page css******/
+input[type=number]::-webkit-inner-spin-button {
+  opacity: 1;
+}
+.max-number-input {
+    position: relative !important;
+    display: inline-block;
+    margin-right: 50px !important;
+}
+.max-number-input input {
+    padding: 0 0 0 12px;
+    line-height: 32px;
+    max-width: 110px;
+}
+.max-number-input span {
+    position: absolute;
+    top: 5px;
+    right: 25px;
+    font-size: 14px;
+    line-height: 24px;
+    color: #6d7175;
+    min-width: auto;
+    margin: 0;
+}
+.more-actions-dp {
+    position: relative;
+}
+.more-actions-dp .filter-dropdown {
+    padding: 8px;
+    top: 35px;
+    right: -72px;
+}
+.more-actions-dp .filter-dropdown li {
+    display: block;
+    padding: 0;
+}
+.more-actions-dp .filter-dropdown .link {
+    padding: 10px 8px;
+    width: 100%;
+    min-height: auto;
+    color: #202223;
+    display: flex;
+    align-items: center;
+}
+.more-actions-dp ul button.link svg {
+    width: 20px;
+    height: 20px;
+    color: #5c5f62;
+    margin-right: 12px;
 }

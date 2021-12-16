@@ -373,3 +373,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
            
 
+setTimeout(function() {
+    $(".alert-msg-modal").addClass("close-msg");
+}, 5000);

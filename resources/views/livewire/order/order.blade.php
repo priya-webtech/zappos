@@ -6,7 +6,9 @@
             <h4 class="mb-0 fw-5">Orders</h4>
             <div class="header-btn-group">
                 <a class="link" data-toggle="modal" data-target="#export" >Export</a>
+                @if(user_permission('orderlist','create'))
                 <a class="button green-btn" href="{{ route('draft-orders-create') }}">Create order</a>
+                @endif
             </div>
         </div>
     </section>
@@ -238,7 +240,17 @@
                                {{$row->updated_at}}
                             </td>
                             <td>
-                               <a class="tc-black fw-6" href="{{ route('order-detail', $row->id) }}"> <button class="link">@if($row['user']){{$row['user'][0]['first_name']}}@endif <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button></a>
+                               @if(user_permission('orderlist','update'))
+                               <a class="tc-black fw-6" href="{{ route('order-detail', $row->id) }}"> 
+                                    <button class="link">@if($row['user']){{$row['user'][0]['first_name']}}@endif 
+                                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg>
+                                    </button>
+                                </a>
+                                @else
+                                    <button class="link">@if($row['user']){{$row['user'][0]['first_name']}}@endif 
+                                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg>
+                                    </button>
+                                @endif
                             </td>
                             <td>
                                 <p>{{$symbol['currency']}}{{$row->netamout}}</p>

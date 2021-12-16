@@ -1,6 +1,7 @@
+<div>
 <x-admin-layout>
 <!-- Main Menu page end -->
-    <section class="full-width flex-wrap admin-body-width navigation-header">
+    <section class="full-width flex-wrap admin-body-width navigation-header" wire:ignore>
         <article class="full-width">
             <div class="columns customers-details-heading">
                 <div class="page_header d-flex  align-item-center mb-3">
@@ -16,7 +17,7 @@
             </div>
         </article>
     </section>
-    <section class="full-width flex-wrap bd_none admin-body-width tax-list-sec">
+    <section class="full-width flex-wrap bd_none admin-body-width tax-list-sec" wire:ignore>
         <article class="full-width">
             <div class="columns">
                 <div class="card card-pd-0">
@@ -38,18 +39,24 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if($taxes)
+                                @foreach($taxes as $result)
                                 <tr>
                                     <td>1</td>
-                                    <td>Netherlands</td>
+                                    <td>{{$result->country}}</td>
                                     <td class="tax-cat-list">
-                                        <span class="tag grey">Fashion</span>
-                                        <span class="tag grey">Mobiles</span>
-                                        <span class="tag grey">Books</span>
-                                        <span class="tag grey">Groceries</span>
-                                        <span class="tag grey">Food</span>
+                                        <?php 
+                                        $json_decodes = json_decode($result->collection);
+
+                                       
+                                         foreach ($Collection as $key => $colle_row) {
+                                        if($colle_row->id == $json_decodes){
+                                        ?>
+                                        <span class="tag grey">{{$colle_row->title}}</span>
+                                        <?php } }  ?>
                                     </td>
                                     <td>
-                                        18%
+                                        {{$result->rate}}%
                                     </td>
                                     <td class="edit-tax ta-right">
                                         <button class="link">
@@ -65,6 +72,8 @@
                                         </ul>
                                     </td>
                                 </tr>
+                                @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -72,7 +81,7 @@
             </div>
         </article>
     </section>
-    <div id="add-shipping-override" class="customer-modal-main" style="display: none;">
+    <div id="add-shipping-override" class="customer-modal-main" style="display: none;" wire:ignore>
         <div class="customer-modal-inner">
             <div class="customer-modal">
                 <div class="modal-header">
@@ -83,7 +92,8 @@
                         </svg>
                     </a>
                 </div>
-                <form class="mb-0">
+                <form class="mb-0" method="POST" action="{{ route('addtax') }}">
+                    @csrf
                     <div class="modal-body card-pd-0 ta-left">
                         <div class="tax-select-row">
                             <div class="row row-mb-0">
@@ -97,20 +107,18 @@
                                             <div class="overSelect"></div>
                                         </div>
                                         <div id="checkboxes">
-                                            <label><input type="checkbox">Fashion</label>
-                                            <label><input type="checkbox">Mobiles</label>
-                                            <label><input type="checkbox">Books</label>
-                                            <label><input type="checkbox">Groceries</label>
-                                            <label><input type="checkbox">Food</label>
+                                            @foreach($Collection as $row)
+                                            <label><input type="checkbox" value="{{$row->id}}" name="collection[]">{{$row->title}}</label>
+                                            @endforeach
                                         </div>
                                     </div>
-                                    <div class="tax-cat-list">
+                                    <!-- <div class="tax-cat-list">
                                         <span class="tag grey">Fashion</span>
                                         <span class="tag grey">Mobiles</span>
                                         <span class="tag grey">Books</span>
                                         <span class="tag grey">Groceries</span>
                                         <span class="tag grey">Food</span>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -121,15 +129,13 @@
                                         <div class="columns nine">
                                             <label>Country</label>
                                             <select>
-                                                <option>Netherlands</option>
-                                                <option>Belgium</option>
-                                                <option>India</option>
+                                                <option value="Netherlands" name="country">Netherlands</option>
                                             </select>
                                         </div>
                                         <div class="columns three">
                                             <label>Tax Rate</label>
                                             <div class="parentage-icon">
-                                                <input type="text" value="5">
+                                                <input type="text" name="rate">
                                             </div>
                                         </div>
                                     </div>
@@ -139,14 +145,14 @@
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="button secondary" onclick="document.getElementById('add-shipping-override').style.display='none'">Cancel</button>
-                        <button type="submit" class="button secondary" disabled="disabled">Add override</button>
+                        <input type="submit" class="button secondary" name="submit" value="Add override">
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <div id="edit-shipping-override" class="customer-modal-main" style="display: none;">
+    <div id="edit-shipping-override" class="customer-modal-main" style="display: none;" wire:ignore>
         <div class="customer-modal-inner">
             <div class="customer-modal">
                 <div class="modal-header">
@@ -171,11 +177,9 @@
                                             <div class="overSelect"></div>
                                         </div>
                                         <div id="checkboxes">
-                                            <label><input type="checkbox">Fashion</label>
-                                            <label><input type="checkbox">Mobiles</label>
-                                            <label><input type="checkbox">Books</label>
-                                            <label><input type="checkbox">Groceries</label>
-                                            <label><input type="checkbox">Food</label>
+                                            @foreach($Collection as $row)
+                                            <label><input type="checkbox">{{$row->title}}</label>
+                                            @endforeach
                                         </div>
                                     </div>
                                     <div class="tax-cat-list">
@@ -220,3 +224,4 @@
         </div>
     </div>
 </x-admin-layout>
+</div>
