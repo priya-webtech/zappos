@@ -25,7 +25,7 @@ class CheckRole
                 return redirect('/');
             }
 
-            if(!str_contains($request->url(),'/logout'))
+            if(!str_contains($request->url(),'/logout') && !str_contains($request->url(),'/livewire'))
             {
                 if(str_contains($request->url(),'/admin') && !Auth::user()->hasRole('admin')) {
                     return redirect('/');
