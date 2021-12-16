@@ -74,6 +74,9 @@ class Detail extends Component
             } 
         }
         
+        if(!empty($this->product['product_new']) && gettype($this->product['product_new'])== 'string') {
+           $this->product['product_new'] =  json_decode($this->product['product_new']);
+        }  
         return view('livewire.product.detail');
     }
 
@@ -113,6 +116,10 @@ class Detail extends Component
 
             $this->product['outofstock'] = false;
 
+        }
+
+        if(!empty($this->product['product_new'])) {
+           $this->product['product_new'] =  json_decode($this->product['product_new']);
         }
        
     }
