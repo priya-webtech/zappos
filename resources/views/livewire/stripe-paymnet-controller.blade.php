@@ -22,10 +22,75 @@
 
 
 
+
+
+
+
+   
+
+
+
+
+
+
+
     <style type="text/css">
 
-        .panel-title {display: inline;font-weight: bold;}
-        .display-table {display: table;}
+
+
+
+
+
+
+        .panel-title {
+
+
+
+
+
+
+
+        display: inline;
+
+
+
+
+
+
+
+        font-weight: bold;
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+        .display-table {
+
+
+
+
+
+
+
+            display: table;
+
+
+
+
+
+
+
+        }
 
 
 
@@ -100,37 +165,673 @@
     </style>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 @php $symbol = CurrencySymbol(); @endphp
 
 
+@php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; $subtotal3 = 0; $subtotal4 = 0; $subtotal5 = 0; $subtotal6 = 0; @endphp
+
+
+
+                @if(!empty($CartItem))
+
+
+
+                @foreach($CartItem as $key => $cart)
+
+
+
+                <?php 
+
+
+
+                $detailfetch = allprice($cart->product_id);
+
+
+
+                $symbol = CurrencySymbol();
+
+
+                if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0) 
+
+
+
+                {
+
+
+
+                    $decodeproduct = json_decode($discoutget['promocode'][0]['apply_c_p']);
+
+
+
+                    if ($discoutget['promocode'][0]['applyto'] == 3 && in_array($cart->product_id, $decodeproduct))
+
+
+
+                    {
+
+
+
+                        if($discoutget['promocode'][0]['type'] == 2){
+
+
+                            if($detailfetch['selling_price']){
+
+
+
+                              $subtotal3 += $cart['stock'] * $detailfetch['selling_price'];
+
+
+
+                            }else
+
+
+
+                            {
+
+
+
+                              $subtotal4 += $cart['stock'] * $cart['price'];
+
+
+
+                               
+
+
+
+                            }
+
+
+
+                           
+
+
+
+                        }
+
+
+
+                        if($discoutget['promocode'][0]['type'] == 1){
 
 
 
 
+
+
+
+                            if($detailfetch['selling_price']){
+
+
+
+                              $subtotal3 += $cart['stock'] * $detailfetch['selling_price'];
+
+
+
+                            }else
+
+
+
+                            {
+
+
+
+                              $subtotal4 += $cart['stock'] * $cart['price'];
+
+
+
+                               
+
+
+
+                            }
+
+
+
+                        }
+
+
+
+                    }
+
+
+
+                    elseif ($discoutget['promocode'][0]['applyto'] == 2){
+
+
+
+                        $categoryget = json_decode($detailfetch['product']['collection']);
+
+
+
+                 
+
+
+
+                        foreach ($categoryget as $key => $value) {
+
+
+
+                           if(in_array($value, $decodeproduct)){
+
+
+
+
+
+
+
+                            if($discoutget['promocode'][0]['type'] == 2){
+
+
+
+                                if($detailfetch['selling_price']){
+
+
+
+                                  $subtotal3 += $cart['stock'] * $detailfetch['selling_price'];
+
+
+
+                                }else
+
+
+
+                                {
+
+
+
+                                  $subtotal4 += $cart['stock'] * $cart['price'];
+
+
+
+                                   
+
+
+
+                                }
+
+
+
+                               
+
+
+
+                            }
+
+
+
+                            if($discoutget['promocode'][0]['type'] == 1){
+
+
+
+
+
+
+
+                                if($detailfetch['selling_price']){
+
+
+
+                                  $subtotal3 += $cart['stock'] * $detailfetch['selling_price'];
+
+
+
+                                }else
+
+
+
+                                {
+
+
+
+                                  $subtotal4 += $cart['stock'] * $cart['price'];
+
+
+
+                                   
+
+
+
+                                }
+
+
+
+                                
+
+
+
+                            }
+
+
+
+                           }else{
+
+
+
+                                if($detailfetch['selling_price']){
+
+
+
+
+
+
+
+                                 $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
+
+
+
+                                }else
+
+
+
+                                {
+
+
+
+                                  $subtotal2 += $cart['stock'] * $cart['price'];
+
+
+
+                                }
+
+
+
+
+
+
+
+                           }
+
+
+
+                        }
+
+
+
+                    }else{
+
+
+
+
+
+
+
+                        if($detailfetch['selling_price']){
+
+
+
+
+
+
+
+                         $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
+
+
+
+                        }else
+
+
+
+                        {
+
+
+
+
+
+
+
+                          $subtotal2 += $cart['stock'] * $cart['price'];
+
+
+
+                        }
+
+
+
+
+
+
+
+                    }
+
+
+
+                }
+
+
+
+
+
+
+
+                else
+
+
+
+                {
+
+
+
+
+
+
+
+                    if($detailfetch['selling_price']){
+
+
+
+
+
+
+
+                     $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
+
+
+
+                    }else
+
+
+
+                    {
+
+
+
+
+
+
+
+                      $subtotal2 += $cart['stock'] * $cart['price'];
+
+
+
+                    }
+
+
+
+
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+                if(!empty($detailfetch['discount'])){
+
+
+
+                  $discountrate += $detailfetch['discount'] * $cart['stock'];
+
+
+
+                }
+
+               ?>
+
+
+@endforeach
+@endif
+<?php 
+        if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0) 
+
+        {
+
+
+
+            if ($discoutget['promocode'][0]['applyto'] == 3)
+
+
+
+            {
+
+
+
+                if($discoutget['promocode'][0]['type'] == 2){
+
+
+
+                $promocode = $discoutget['promocode'][0]['discount_value'];
+
+
+
+                $sumproduct = $subtotal4 + $subtotal3;
+
+
+
+                $subtotal5 = $sumproduct - $promocode;
+
+
+
+                }
+
+
+
+                if($discoutget['promocode'][0]['type'] == 1){
+
+
+
+                $promocode = $discoutget['promocode'][0]['discount_value'];
+
+
+
+                $sumproduct = $subtotal4 + $subtotal3;
+
+
+
+                $saveprofit = ($sumproduct * $promocode / 100);
+
+
+
+                $subtotal5 = $sumproduct - $saveprofit;
+
+
+
+                }
+
+
+
+            }
+
+
+
+            if ($discoutget['promocode'][0]['applyto'] == 2)
+
+
+
+            {
+
+
+
+                if($discoutget['promocode'][0]['type'] == 2){
+
+
+
+                $promocode = $discoutget['promocode'][0]['discount_value'];
+
+
+
+                $sumproduct = $subtotal4 + $subtotal3;
+
+
+
+                $subtotal5 = $sumproduct - $promocode;
+
+
+
+                }
+
+
+
+                if($discoutget['promocode'][0]['type'] == 1){
+
+
+
+                $promocode = $discoutget['promocode'][0]['discount_value'];
+
+
+
+                $sumproduct = $subtotal4 + $subtotal3;
+
+
+
+                $saveprofit = ($sumproduct * $promocode / 100);
+
+
+
+                $subtotal5 = $sumproduct - $saveprofit;
+
+
+
+                }
+
+
+
+            }
+
+
+
+        }
+
+
+
+
+
+
+
+        $subtotal6 = $subtotal1 + $subtotal2;
+
+
+
+
+
+
+
+        $subtotal = $subtotal6 + $subtotal5;
+
+
+
+            
+
+
+
+
+
+
+
+        if (!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['applyto'] == 3)
+
+
+
+        {
+
+
+
+        //discount apply
+
+            if($discoutget['promocode'][0]['type'] == 2){
+
+                 $promocode = $discoutget['promocode'][0]['discount_value'];
+
+
+
+                $total = ($subtotal - $discountrate) - $promocode;
+
+            }
+
+            if($discoutget['promocode'][0]['type'] == 1){
+
+                $total = $subtotal - $discountrate;
+
+            }
+
+        }
+
+        elseif (!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['applyto'] == 2) {
+
+            if($discoutget['promocode'][0]['type'] == 2){
+
+                $total = $subtotal - $discountrate;
+            }
+
+
+            if($discoutget['promocode'][0]['type'] == 1){
+
+                $total = $subtotal - $discountrate;
+
+            }
+
+        }
+
+        else{
+
+
+            if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['type'] == 2){
+
+
+
+                $promocode = $discoutget['promocode'][0]['discount_value'];
+
+
+
+                $total = ($subtotal - $discountrate) - $promocode;
+
+
+            }
+
+
+
+            if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['type'] == 1){
+
+
+
+                $promocode = $discoutget['promocode'][0]['discount_value'];
+
+
+
+                $percetage_discount = $subtotal - $discountrate;
+
+
+
+                $saveprofit = ($percetage_discount * $promocode / 100);
+
+
+
+                $total = $percetage_discount - $saveprofit;
+
+
+            }
+
+            else
+            {
+
+                $total = $subtotal - $discountrate;
+
+            }
+
+        }
+
+        $gst = $Taxes->rate;
+
+        $GetGst = ($gst/100)+1;
+
+        $withoutgstaount = $total / $GetGst;
+
+
+        $gst_include =  ($withoutgstaount*$gst) / 100;
+
+        $gst_Total =  $total;
+
+?>
 
 <div class="checkout-page-sec">
 
-
-
-
-
-
-
 <div class="container">
-
 
     <h1 class="h1">Checkout<br/> </h1>
 
@@ -158,345 +859,28 @@
 
                     @endif
 
-                @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; $subtotal3 = 0; $subtotal4 = 0; $subtotal5 = 0; $subtotal6 = 0; @endphp
+                    @if($view)
 
-                @if(!empty($CartItem))
+                        <div class="row">
 
-                @foreach($CartItem as $key => $cart)
 
-                <?php 
-                $detailfetch = allprice($cart->product_id);
 
-                $symbol = CurrencySymbol();
+                             <div class="col-xs-12">
 
-                if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0) 
-                {
-                   $decodeproduct = json_decode($discoutget['promocode'][0]['apply_c_p']);
+                               <button class="site-btn blue-btn" wire:click.prevent="editshipping()">Edit</button>
 
-                   if ($discoutget['promocode'][0]['applyto'] == 3 && in_array($cart->product_id, $decodeproduct))
-                    {
-                        if($discoutget['promocode'][0]['type'] == 2){
 
-                            if($detailfetch['selling_price']){
+                            </div>
 
-                              $subtotal3 += $cart['stock'] * $detailfetch['selling_price'];
 
-                            }else{
 
-                              $subtotal4 += $cart['stock'] * $cart['price'];
+                        </div>
 
-                            }
-                        }
+                    @endif
 
-                        if($discoutget['promocode'][0]['type'] == 1){
+                    @if($view)
 
-                            if($detailfetch['selling_price']){
-
-                              $subtotal3 += $cart['stock'] * $detailfetch['selling_price'];
-
-                            }else{
-
-                              $subtotal4 += $cart['stock'] * $cart['price'];
-                            }
-                        }
-                    }
-
-                    elseif ($discoutget['promocode'][0]['applyto'] == 2){
-
-                        $categoryget = json_decode($detailfetch['product']['collection']);
-
-                        foreach ($categoryget as $key => $value) {
-
-                           if(in_array($value, $decodeproduct)){
-
-                            if($discoutget['promocode'][0]['type'] == 2){
-
-                                if($detailfetch['selling_price']){
-
-                                  $subtotal3 += $cart['stock'] * $detailfetch['selling_price'];
-
-                                }else{
-
-                                  $subtotal4 += $cart['stock'] * $cart['price'];
-
-                                }
-                            }
-
-                            if($discoutget['promocode'][0]['type'] == 1){
-
-                                if($detailfetch['selling_price']){
-
-                                  $subtotal3 += $cart['stock'] * $detailfetch['selling_price'];
-
-                                }else{
-                                  $subtotal4 += $cart['stock'] * $cart['price'];
-
-                                }
-                            }
-
-                           }else{
-
-                                if($detailfetch['selling_price']){
-
-                                $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
-
-                                }else{
-                                  $subtotal2 += $cart['stock'] * $cart['price'];
-                                }
-                            }
-                        }
-
-                    }else{
-
-                        if($detailfetch['selling_price']){
-
-                         $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
-
-                        }else{
-
-                          $subtotal2 += $cart['stock'] * $cart['price'];
-                        }
-                    }
-                }
-                else{
-                    if($detailfetch['selling_price']){
-
-                     $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
-
-                    }else{
-                      $subtotal2 += $cart['stock'] * $cart['price'];
-
-                    }
-
-                }
-
-                if(!empty($detailfetch['discount'])){
-
-                  $discountrate += $detailfetch['discount'] * $cart['stock'];
-                }
-            ?>
-            <?php 
-
-                if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0) 
-
-                {
-
-                    if ($discoutget['promocode'][0]['applyto'] == 3)
-
-
-
-                    {
-
-
-
-                        if($discoutget['promocode'][0]['type'] == 2){
-
-
-
-                        $promocode = $discoutget['promocode'][0]['discount_value'];
-
-
-
-                        $sumproduct = $subtotal4 + $subtotal3;
-
-
-
-                        $subtotal5 = $sumproduct - $promocode;
-
-
-
-                        }
-
-
-
-                        if($discoutget['promocode'][0]['type'] == 1){
-
-
-
-                        $promocode = $discoutget['promocode'][0]['discount_value'];
-
-
-
-                        $sumproduct = $subtotal4 + $subtotal3;
-
-
-
-                        $saveprofit = ($sumproduct * $promocode / 100);
-
-
-
-                        $subtotal5 = $sumproduct - $saveprofit;
-
-
-
-                        }
-
-
-
-                    }
-
-
-
-                    if ($discoutget['promocode'][0]['applyto'] == 2)
-
-
-
-                    {
-
-
-
-                        if($discoutget['promocode'][0]['type'] == 2){
-
-
-
-                        $promocode = $discoutget['promocode'][0]['discount_value'];
-
-
-
-                        $sumproduct = $subtotal4 + $subtotal3;
-
-
-
-                        $subtotal5 = $sumproduct - $promocode;
-
-
-
-                        }
-
-
-
-                        if($discoutget['promocode'][0]['type'] == 1){
-
-
-
-                        $promocode = $discoutget['promocode'][0]['discount_value'];
-
-
-
-                        $sumproduct = $subtotal4 + $subtotal3;
-
-
-
-                        $saveprofit = ($sumproduct * $promocode / 100);
-
-
-
-                        $subtotal5 = $sumproduct - $saveprofit;
-
-
-
-                        }
-
-
-
-                    }
-
-
-
-                }
-
-
-                $subtotal6 = $subtotal1 + $subtotal2;
-
-                $subtotal = $subtotal6 + $subtotal5;
-
-                if (!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['applyto'] == 3)
-
-                {
-
-                //discount apply
-
-                    if($discoutget['promocode'][0]['type'] == 2){
-
-                         $promocode = $discoutget['promocode'][0]['discount_value'];
-
-
-
-                        $total = ($subtotal - $discountrate) - $promocode;
-
-
-
-
-
-
-
-                    }
-
-
-
-                    if($discoutget['promocode'][0]['type'] == 1){
-
-                        $total = $subtotal - $discountrate;
-
-                    }
-
-                }
-
-                elseif (!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['applyto'] == 2) {
-
-                    if($discoutget['promocode'][0]['type'] == 2){
-                        $total = $subtotal - $discountrate;
-
-                    }
-
-                    if($discoutget['promocode'][0]['type'] == 1){
-
-                        $total = $subtotal - $discountrate;
-
-                    }
-
-                }
-
-                else{
-
-                    if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['type'] == 2){
-
-
-
-                        $promocode = $discoutget['promocode'][0]['discount_value'];
-
-
-
-                        $total = ($subtotal - $discountrate) - $promocode;
-
-                    }
-
-                    if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['type'] == 1){
-
-                        $promocode = $discoutget['promocode'][0]['discount_value'];
-
-                        $percetage_discount = $subtotal - $discountrate;
-
-                        $saveprofit = ($percetage_discount * $promocode / 100);
-
-                        $total = $percetage_discount - $saveprofit;
-                    }
-                    else{
-
-                        $total = $subtotal - $discountrate;
-                    }
-                }
-
-                $gst = $Taxes->rate;
-
-                $GetGst = ($gst/100)+1;
-
-                $withoutgstaount = $total / $GetGst;
-
-
-                $gst_include =  ($withoutgstaount*$gst) / 100;
-
-
-
-                $gst_Total =  $total;
-
-
-
-            ?>
-
-            @if($view)
-
-              <div class="viewcart-checkout stripe-payment">
+            <div class="viewcart-checkout stripe-payment">
 
 
 
@@ -506,43 +890,17 @@
 
                     <div class="payment-form">
 
-
-
                         <form id="payment-form">
-
-
 
                             @csrf
 
-
-
                             <h3 class="panel-title">Payment</h3>
-
-
-
-                          
-
-
 
                             <label for="ideal-bank-element" class="bank-name">iDEAL Bank</label>
 
-
-
-
-
-
-
                             <div class="account-name-row">
 
-
-
-
-
-
-
                                  <div id="ideal-bank-element">
-
-
 
                                   <!-- A Stripe Element will be inserted here. -->
 
@@ -551,17 +909,6 @@
                                 </div>
 
                                 <span id="ideal-bank-error" class="text-danger"></span>
-
-
-
-
-
-
-
-
-
-                                
-
 
 
                             </div>
@@ -598,7 +945,11 @@
 
                 </div>
 
+
+
             </div>
+
+
 
             @endif
 
@@ -606,9 +957,8 @@
                     @if(!$view)
                     <div class="shipping-details-card">
 
+
                         <h3 class="panel-title">Shipping Details</h3>
-
-
 
                         @if(!$editMode)
 
@@ -1119,13 +1469,22 @@
 
                     </div>
 
+
+
                     <div class="shipping-details-card">
 
+
                         <h3 class="panel-title">Billing Details</h3>
+
+
+
+
 
                         @if(!$editMode)
 
                         @if($newbillingaddress == true && empty($this->customerbillingAddress))
+
+
 
                         <div class="form-check">
 
@@ -1137,9 +1496,15 @@
 
                             <label class="form-check-label" for="defaultAddress">Create New Billing Address</label>
 
+
+
                         </div>
 
+
+
                         @else
+
+
 
                         <div class="form-check">
 
@@ -1151,270 +1516,169 @@
 
                             <label class="form-check-label" for="defaultAddress">Create New Billing Address</label>
 
+
                         </div>
 
+
+
                         @endif
 
                         @endif
+
 
                         @if($same_shipping ==  false)
 
-                            <input type="hidden" name="orderid" value="{{$orderdetail->id}}">
+                        <input type="hidden" name="orderid" value="{{$orderdetail->id}}">
 
-                            <div class='form-row'>
-
-                                <div class="col">
-
-
-                                    <div class='form-group required'>
+                        <div class='form-row'>
 
 
 
-                                        <label class='control-label'>First Name</label> 
+                            <div class="col">
 
 
 
-                                        <input class='form-control' wire:model="customerbillingAddress.first_name" name="firstname" placeholder="First Name" type='text' required <?php if($view) echo 'readonly'; ?>>
+                                <div class='form-group required'>
 
 
 
-                                        @error('customerbillingAddress.first_name') <span class="text-danger">{{ $message }}</span> @enderror
+                                    <label class='control-label'>First Name</label> 
 
 
 
-                                    </div>
+                                    <input class='form-control' wire:model="customerbillingAddress.first_name" name="firstname" placeholder="First Name" type='text' required <?php if($view) echo 'readonly'; ?>>
 
 
 
-                                </div>
-
-
-
-                                <div class="col">
-
-
-
-                                    <div class='form-group required'>
-
-
-
-                                        <label class='control-label'>Last Name</label> 
-
-
-
-                                        <input class='form-control' wire:model="customerbillingAddress.last_name" name="lastname" placeholder="Last Name" type='text' required <?php if($view) echo 'readonly'; ?>>
-
-
-
-                                        @error('customerbillingAddress.last_name') <span class="text-danger">{{ $message }}</span> @enderror
-
-
-
-                                    </div>
+                                    @error('customerbillingAddress.first_name') <span class="text-danger">{{ $message }}</span> @enderror
 
 
 
                                 </div>
+
+
 
                             </div>
 
-                            <div class='form-row'>
+
+
+                            <div class="col">
 
 
 
-                                <div class="col">
+                                <div class='form-group required'>
 
 
 
-                                    <div class="form-group">
+                                    <label class='control-label'>Last Name</label> 
 
 
 
-                                        <label class="control-label">Company Name</label>
+                                    <input class='form-control' wire:model="customerbillingAddress.last_name" name="lastname" placeholder="Last Name" type='text' required <?php if($view) echo 'readonly'; ?>>
 
 
 
-                                        <input type="text" class="form-control" wire:model="customerbillingAddress.company" placeholder="Company Name" <?php if($view) echo 'readonly'; ?>>
-
-
-
-                                        @error('customerbillingAddress.company') <span class="text-danger">{{ $message }}</span> @enderror
-
-
-
-                                    </div>
+                                    @error('customerbillingAddress.last_name') <span class="text-danger">{{ $message }}</span> @enderror
 
 
 
                                 </div>
+
+
 
                             </div>
 
-                            <div class='form-row street-unit-row'>
+
+
+                        </div>
 
 
 
-                                <div class="col">
+                        <div class='form-row'>
 
 
 
-                                    <div class="form-group">
+                            <div class="col">
 
 
 
-                                        <label class="control-label">Street Name</label>
+                                <div class="form-group">
 
 
 
-                                        <input type="text" class="form-control" wire:model="customerbillingAddress.address" placeholder="Street Name" <?php if($view) echo 'readonly'; ?>>
+                                    <label class="control-label">Company Name</label>
 
 
 
-                                        @error('customerbillingAddress.address') <span class="text-danger">{{ $message }}</span> @enderror
+                                    <input type="text" class="form-control" wire:model="customerbillingAddress.company" placeholder="Company Name" <?php if($view) echo 'readonly'; ?>>
 
 
 
-                                    </div>
-
-
-
-                                </div>
-
-
-
-                                <div class="col">
-
-
-
-                                    <div class="form-group">
-
-
-
-                                        <label for="primaryVoiceNumber">Unit Number</label>
-
-
-
-                                        <input type="number" wire:model="customerbillingAddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" <?php if($view) echo 'readonly'; ?>>
-
-
-
-                                        @error('customerbillingAddress.unit_number') <span class="text-danger">{{ $message }}</span> @enderror
-
-
-
-                                    </div>
+                                    @error('customerbillingAddress.company') <span class="text-danger">{{ $message }}</span> @enderror
 
 
 
                                 </div>
+
+
 
                             </div>
 
-                            <div class="row">
+
+
+                        </div>
 
 
 
-                                <div class="col">
+                        <div class='form-row street-unit-row'>
 
 
 
-                                    <div class="form-group">
+                            <div class="col">
 
 
 
-                                        <label for="postalCode">Zip</label>
+                                <div class="form-group">
 
 
 
-                                        <input type="text" wire:model="customerbillingAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" <?php if($view) echo 'readonly'; ?>>
+                                    <label class="control-label">Street Name</label>
 
 
 
-                                        @error('customerbillingAddress.postal_code') <span class="text-danger">{{ $message }}</span> @enderror
+                                    <input type="text" class="form-control" wire:model="customerbillingAddress.address" placeholder="Street Name" <?php if($view) echo 'readonly'; ?>>
 
 
 
-                                    </div>
-
-
-
-                                </div>
-
-
-
-                                <div class="col">
-
-
-
-                                    <div class="form-group">
-
-
-
-                                        <label for="City">City</label>
-
-
-
-                                        <input type="text" class="form-control" wire:model="customerbillingAddress.city" id="City" aria-describedby="emailHelp" placeholder="Enter City" <?php if($view) echo 'readonly'; ?>>
-
-
-
-                                        @error('customerbillingAddress.city') <span class="text-danger">{{ $message }}</span> @enderror
-
-
-
-                                    </div>
+                                    @error('customerbillingAddress.address') <span class="text-danger">{{ $message }}</span> @enderror
 
 
 
                                 </div>
+
+
 
                             </div>
 
-                            <div class="row">
+
+
+                            <div class="col">
 
 
 
-                                <div class="col">
+                                <div class="form-group">
 
 
 
-                                    <div class="form-group">
+                                    <label for="primaryVoiceNumber">Unit Number</label>
 
 
 
-                                        <label for="Country">Country</label>
+                                    <input type="number" wire:model="customerbillingAddress.apartment" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" placeholder="Unit Number" <?php if($view) echo 'readonly'; ?>>
 
 
 
-                                        <select class="form-control" id="Country" wire:model="customerbillingAddress.country" <?php if($view) echo 'readonly'; ?>>
-
-
-
-                                            <option value="">-- Select Countries --</option>
-
-
-
-                                            @foreach($countries as $row)
-
-
-
-                                            <option value="{{$row->name}}">{{$row->name}}</option>
-
-
-
-                                            @endforeach
-
-
-
-                                        </select>
-
-
-
-                                        @error('customerbillingAddress.country') <span class="text-danger">{{ $message }}</span> @enderror
-
-
-
-                                    </div>
+                                    @error('customerbillingAddress.unit_number') <span class="text-danger">{{ $message }}</span> @enderror
 
 
 
@@ -1422,103 +1686,645 @@
 
 
 
-                                <div class="col">
+                            </div>
 
 
 
-                                    <div class="form-group">
+                        </div>
 
 
 
-                                        <label for="primaryVoiceNumber">Phone</label>
+                        <div class="row">
 
 
 
-                                        <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" wire:model="customerbillingAddress.mobile_no" placeholder="123-456-7890" <?php if($view) echo 'readonly'; ?>> 
+                            <div class="col">
 
 
 
+                                <div class="form-group">
 
 
 
-
-                                        @error('customerbillingAddress.mobile_no') <span class="text-danger">{{ $message }}</span> @enderror
-
+                                    <label for="postalCode">Zip</label>
 
 
-                                    </div>
+
+                                    <input type="text" wire:model="customerbillingAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" <?php if($view) echo 'readonly'; ?>>
+
+
+
+                                    @error('customerbillingAddress.postal_code') <span class="text-danger">{{ $message }}</span> @enderror
 
 
 
                                 </div>
 
-                            </div>
 
-                            <div class="form-check">
-
-
-
-                                <input type="checkbox" wire:model="primary_billing_type" class="form-check-input"  id="primary_billing_type" <?php if($view) echo 'disabled'; ?>>
-
-
-
-                                <label class="form-check-label" for="billing_address_type">Make this my primary billing address</label>
 
                             </div>
 
-                            @endif
 
-                            <div class="row">
 
-                                <div class="col-xs-12">
+                            <div class="col">
 
-                                    <button class="site-btn blue-btn" wire:click.prevent="addshipping({{$orderdetail->id}})" <?php if($view) echo 'disabled'; ?>> @if($editMode) Update @else Submit @endif</button>
+
+
+                                <div class="form-group">
+
+
+
+                                    <label for="City">City</label>
+
+
+
+                                    <input type="text" class="form-control" wire:model="customerbillingAddress.city" id="City" aria-describedby="emailHelp" placeholder="Enter City" <?php if($view) echo 'readonly'; ?>>
+
+
+
+                                    @error('customerbillingAddress.city') <span class="text-danger">{{ $message }}</span> @enderror
+
+
 
                                 </div>
 
+
+
                             </div>
 
-                    </div>
-                    @endif
 
-                    @if($view)
+
+                        </div>
+
+
+
+                        <div class="row">
+
+
+
+                            <div class="col">
+
+
+
+                                <div class="form-group">
+
+
+
+                                    <label for="Country">Country</label>
+
+
+
+                                    <select class="form-control" id="Country" wire:model="customerbillingAddress.country" <?php if($view) echo 'readonly'; ?>>
+
+
+
+                                        <option value="">-- Select Countries --</option>
+
+
+
+                                        @foreach($countries as $row)
+
+
+
+                                        <option value="{{$row->name}}">{{$row->name}}</option>
+
+
+
+                                        @endforeach
+
+
+
+                                    </select>
+
+
+
+                                    @error('customerbillingAddress.country') <span class="text-danger">{{ $message }}</span> @enderror
+
+
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+                            <div class="col">
+
+
+
+                                <div class="form-group">
+
+
+
+                                    <label for="primaryVoiceNumber">Phone</label>
+
+
+
+                                    <input type="number" class="form-control" id="primaryVoiceNumber" aria-describedby="emailHelp" wire:model="customerbillingAddress.mobile_no" placeholder="123-456-7890" <?php if($view) echo 'readonly'; ?>> 
+
+
+
+
+
+
+
+                                    @error('customerbillingAddress.mobile_no') <span class="text-danger">{{ $message }}</span> @enderror
+
+
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+                        <div class="form-check">
+
+
+
+                            <input type="checkbox" wire:model="primary_billing_type" class="form-check-input"  id="primary_billing_type" <?php if($view) echo 'disabled'; ?>>
+
+
+
+                            <label class="form-check-label" for="billing_address_type">Make this my primary billing address</label>
+
+
+
+                        </div>
+
+
+
+                        @endif
 
                         <div class="row">
 
                             <div class="col-xs-12">
 
-                               <button class="site-btn blue-btn" wire:click.prevent="editshipping()">Edit</button>
+                                <button class="site-btn blue-btn" wire:click.prevent="addshipping({{$orderdetail->id}})" <?php if($view) echo 'disabled'; ?>> @if($editMode) Update @else Submit @endif</button>
+
                             </div>
 
                         </div>
 
+                    </div>
                     @endif
 
                 </div>
 
-            </div>
-            
+            </div>            
 
         </div>        
 
 
         <div class="col-lg-4 col-12">
 
+
+
             <div class="review-shipping-sec">
+
+
 
                 <h3 class="panel-title">Item Review and Shipping</h3>
 
+
+
+                @php $subtotal = 0;  $subtotal1 = 0;  $subtotal2 = 0; $discountrate = 0; $total = 0; $subtotal3 = 0; $subtotal4 = 0; $subtotal5 = 0; $subtotal6 = 0; @endphp
+
+
+
+                @if(!empty($CartItem))
+
+
+
+                @foreach($CartItem as $key => $cart)
+
+
+
+                <?php 
+
+
+
+                $detailfetch = allprice($cart->product_id);
+
+
+
+                $symbol = CurrencySymbol();
+
+
+                if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0) 
+
+
+
+                {
+
+
+
+                    $decodeproduct = json_decode($discoutget['promocode'][0]['apply_c_p']);
+
+
+
+                    if ($discoutget['promocode'][0]['applyto'] == 3 && in_array($cart->product_id, $decodeproduct))
+
+
+
+                    {
+
+
+
+                        if($discoutget['promocode'][0]['type'] == 2){
+
+
+                            if($detailfetch['selling_price']){
+
+
+
+                              $subtotal3 += $cart['stock'] * $detailfetch['selling_price'];
+
+
+
+                            }else
+
+
+
+                            {
+
+
+
+                              $subtotal4 += $cart['stock'] * $cart['price'];
+
+
+
+                               
+
+
+
+                            }
+
+
+
+                           
+
+
+
+                        }
+
+
+
+                        if($discoutget['promocode'][0]['type'] == 1){
+
+
+
+
+
+
+
+                            if($detailfetch['selling_price']){
+
+
+
+                              $subtotal3 += $cart['stock'] * $detailfetch['selling_price'];
+
+
+
+                            }else
+
+
+
+                            {
+
+
+
+                              $subtotal4 += $cart['stock'] * $cart['price'];
+
+
+
+                               
+
+
+
+                            }
+
+
+
+                        }
+
+
+
+                    }
+
+
+
+                    elseif ($discoutget['promocode'][0]['applyto'] == 2){
+
+
+
+                        $categoryget = json_decode($detailfetch['product']['collection']);
+
+
+
+                 
+
+
+
+                        foreach ($categoryget as $key => $value) {
+
+
+
+                           if(in_array($value, $decodeproduct)){
+
+
+
+
+
+
+
+                            if($discoutget['promocode'][0]['type'] == 2){
+
+
+
+                                if($detailfetch['selling_price']){
+
+
+
+                                  $subtotal3 += $cart['stock'] * $detailfetch['selling_price'];
+
+
+
+                                }else
+
+
+
+                                {
+
+
+
+                                  $subtotal4 += $cart['stock'] * $cart['price'];
+
+
+
+                                   
+
+
+
+                                }
+
+
+
+                               
+
+
+
+                            }
+
+
+
+                            if($discoutget['promocode'][0]['type'] == 1){
+
+
+
+
+
+
+
+                                if($detailfetch['selling_price']){
+
+
+
+                                  $subtotal3 += $cart['stock'] * $detailfetch['selling_price'];
+
+
+
+                                }else
+
+
+
+                                {
+
+
+
+                                  $subtotal4 += $cart['stock'] * $cart['price'];
+
+
+
+                                   
+
+
+
+                                }
+
+
+
+                                
+
+
+
+                            }
+
+
+
+                           }else{
+
+
+
+                                if($detailfetch['selling_price']){
+
+
+
+
+
+
+
+                                 $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
+
+
+
+                                }else
+
+
+
+                                {
+
+
+
+                                  $subtotal2 += $cart['stock'] * $cart['price'];
+
+
+
+                                }
+
+
+
+
+
+
+
+                           }
+
+
+
+                        }
+
+
+
+                    }else{
+
+
+
+
+
+
+
+                        if($detailfetch['selling_price']){
+
+
+
+
+
+
+
+                         $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
+
+
+
+                        }else
+
+
+
+                        {
+
+
+
+
+
+
+
+                          $subtotal2 += $cart['stock'] * $cart['price'];
+
+
+
+                        }
+
+
+
+
+
+
+
+                    }
+
+
+
+                }
+
+
+
+
+
+
+
+                else
+
+
+
+                {
+
+
+
+
+
+
+
+                    if($detailfetch['selling_price']){
+
+
+
+
+
+
+
+                     $subtotal1 += $cart['stock'] * $detailfetch['selling_price'];
+
+
+
+                    }else
+
+
+
+                    {
+
+
+
+
+
+
+
+                      $subtotal2 += $cart['stock'] * $cart['price'];
+
+
+
+                    }
+
+
+
+
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+                if(!empty($detailfetch['discount'])){
+
+
+
+                  $discountrate += $detailfetch['discount'] * $cart['stock'];
+
+
+
+                }
+
+               ?>
+
+
                 <div class="my-cart-pd-details">
+
+
 
                     <div class="my-cart-img">
 
+
+
                         <a class="dropdown-header" href="#">
+
+
 
                             <img src="{{ url('storage/'.$cart['media_product'][0]['image']) }}">
 
+
+
                         </a>
 
+
+
                     </div>
+
+
 
                     <div class="my-cart-desc">
 
@@ -1590,6 +2396,342 @@
 
             </div>
 
+
+
+            <?php 
+
+
+
+                if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0) 
+
+
+
+                {
+
+
+
+                    if ($discoutget['promocode'][0]['applyto'] == 3)
+
+
+
+                    {
+
+
+
+                        if($discoutget['promocode'][0]['type'] == 2){
+
+
+
+                        $promocode = $discoutget['promocode'][0]['discount_value'];
+
+
+
+                        $sumproduct = $subtotal4 + $subtotal3;
+
+
+
+                        $subtotal5 = $sumproduct - $promocode;
+
+
+
+                        }
+
+
+
+                        if($discoutget['promocode'][0]['type'] == 1){
+
+
+
+                        $promocode = $discoutget['promocode'][0]['discount_value'];
+
+
+
+                        $sumproduct = $subtotal4 + $subtotal3;
+
+
+
+                        $saveprofit = ($sumproduct * $promocode / 100);
+
+
+
+                        $subtotal5 = $sumproduct - $saveprofit;
+
+
+
+                        }
+
+
+
+                    }
+
+
+
+                    if ($discoutget['promocode'][0]['applyto'] == 2)
+
+
+
+                    {
+
+
+
+                        if($discoutget['promocode'][0]['type'] == 2){
+
+
+
+                        $promocode = $discoutget['promocode'][0]['discount_value'];
+
+
+
+                        $sumproduct = $subtotal4 + $subtotal3;
+
+
+
+                        $subtotal5 = $sumproduct - $promocode;
+
+
+
+                        }
+
+
+
+                        if($discoutget['promocode'][0]['type'] == 1){
+
+
+
+                        $promocode = $discoutget['promocode'][0]['discount_value'];
+
+
+
+                        $sumproduct = $subtotal4 + $subtotal3;
+
+
+
+                        $saveprofit = ($sumproduct * $promocode / 100);
+
+
+
+                        $subtotal5 = $sumproduct - $saveprofit;
+
+
+
+                        }
+
+
+
+                    }
+
+
+
+                }
+
+
+
+
+
+
+
+                $subtotal6 = $subtotal1 + $subtotal2;
+
+
+
+
+
+
+
+                $subtotal = $subtotal6 + $subtotal5;
+
+
+
+                    
+
+
+
+
+
+
+
+                if (!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['applyto'] == 3)
+
+
+
+                {
+
+
+
+                //discount apply
+
+
+
+                    if($discoutget['promocode'][0]['type'] == 2){
+
+
+
+                        
+
+
+
+                         $promocode = $discoutget['promocode'][0]['discount_value'];
+
+
+
+                        $total = ($subtotal - $discountrate) - $promocode;
+
+
+
+
+
+
+
+                    }
+
+
+
+                    if($discoutget['promocode'][0]['type'] == 1){
+
+
+
+                      
+
+
+
+                        $total = $subtotal - $discountrate;
+
+
+
+
+
+
+
+
+
+
+
+                    
+
+
+
+                    }
+
+
+
+                }
+
+
+
+                elseif (!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['applyto'] == 2) {
+
+
+
+
+
+
+
+                    if($discoutget['promocode'][0]['type'] == 2){
+
+
+
+                        
+
+
+
+                        $total = $subtotal - $discountrate;
+                    }
+
+
+                    if($discoutget['promocode'][0]['type'] == 1){
+
+                        $total = $subtotal - $discountrate;
+
+                    }
+
+                }
+
+                else{
+
+
+                    if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['type'] == 2){
+
+
+
+                        $promocode = $discoutget['promocode'][0]['discount_value'];
+
+
+
+                        $total = ($subtotal - $discountrate) - $promocode;
+
+
+                    }
+
+
+
+                    if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0 && $discoutget['promocode'][0]['type'] == 1){
+
+
+
+                        $promocode = $discoutget['promocode'][0]['discount_value'];
+
+
+
+                        $percetage_discount = $subtotal - $discountrate;
+
+
+
+                        $saveprofit = ($percetage_discount * $promocode / 100);
+
+
+
+                        $total = $percetage_discount - $saveprofit;
+
+
+                    }
+
+
+
+                    else
+
+
+
+                    {
+
+
+
+                        $total = $subtotal - $discountrate;
+
+
+
+                    }
+
+
+
+                }
+
+
+
+
+
+
+
+                 $gst = $Taxes->rate;
+
+
+
+                $GetGst = ($gst/100)+1;
+
+                $withoutgstaount = $total / $GetGst;
+
+
+                $gst_include =  ($withoutgstaount*$gst) / 100;
+
+
+
+                $gst_Total =  $total;
+
+
+
+            ?>
+
+
+
             <div class="viewcart-checkout">
 
 
@@ -1641,7 +2783,7 @@
             </div>
 
 
-              <div id="messages" role="alert" style="display: none;"></div>
+            <div id="messages" role="alert" style="display: none;"></div>
 
 
 
