@@ -606,7 +606,6 @@
                     @if(!$view)
                     <div class="shipping-details-card">
 
-
                         <h3 class="panel-title">Shipping Details</h3>
 
 
