@@ -279,13 +279,7 @@
 
 
                     <form role="form" id="address-form" class="require-validation">
-
-
-
-
-
-
-
+                    
                     <div class="shipping-details-card">
 
 
@@ -552,7 +546,7 @@
 
 
 
-                                            <input type="number" wire:model="customerAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" <?php if($view) echo 'readonly'; ?>>
+                                            <input type="text" wire:model="customerAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" <?php if($view) echo 'readonly'; ?>>
 
 
 
@@ -785,12 +779,27 @@
 
 
                         </div>
+                        @if(empty($this->orderdetail->b_addr_id))
+
+                        <div class="form-check">
 
 
+
+                            <input type="checkbox" id="same_shipping" class="form-check-input" wire:model="same_shipping" wire:click="SameShipping()" <?php if($view) echo 'disabled'; ?>>
+
+
+
+                            <label class="form-check-label" for="same_shipping" >Billing detail same as shipping detail</label>
+
+
+
+                        </div>
+
+                        @endif
+
+                        </div>
 
                     </div>
-
-                </div>
 
 
 
@@ -803,28 +812,6 @@
 
 
                         <h3 class="panel-title">Billing Details</h3>
-
-
-
-
-
-                        @if(empty($this->orderdetail->b_addr_id))
-
-                        <div class="form-check">
-
-
-
-                            <input type="checkbox" id="same_shipping" class="form-check-input" wire:model="same_shipping" wire:click="SameShipping()" <?php if($view) echo 'disabled'; ?>>
-
-
-
-                            <label class="form-check-label" for="same_shipping" >Same as Shipping Details</label>
-
-
-
-                        </div>
-
-                        @endif
 
 
 
@@ -1082,7 +1069,7 @@
 
 
 
-                                            <input type="number" wire:model="customerbillingAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" <?php if($view) echo 'readonly'; ?>>
+                                            <input type="text" wire:model="customerbillingAddress.postal_code" class="form-control" id="postalCode" aria-describedby="emailHelp" placeholder="12345" <?php if($view) echo 'readonly'; ?>>
 
 
 
@@ -1217,55 +1204,6 @@
                                 </div>
 
 
-
-                                <!-- <div class='form-row'>
-
-
-
-
-
-
-
-                                    <div class='col-md-12 error form-group hide'>
-
-
-
-
-
-
-
-                                        <div class='alert-danger alert'>Please correct the errors and try
-
-
-
-
-
-
-
-                                            again.</div>
-
-
-
-
-
-
-
-                                    </div>
-
-
-
-
-
-
-
-                                </div> -->
-
-
-
-
-
-
-
                                 <div class="form-check">
 
 
@@ -1336,18 +1274,7 @@
 
                                      <div class="col-xs-12">
 
-
-
-                                      
-
-
-
                                        <button class="site-btn blue-btn" wire:click.prevent="editshipping()">Edit</button>
-
-
-
-
-
 
 
                                     </div>
@@ -1375,27 +1302,9 @@
 
 
                     </div>
-
-
-
-
-
-
+                    
 
                 </div>        
-
-
-
-
-
-
-
-        
-
-
-
-
-
 
 
         <div class="col-lg-4 col-12">
@@ -1431,15 +1340,6 @@
 
 
                 $symbol = CurrencySymbol();
-
-
-
-
-
-
-
-
-
 
 
                 if(!empty($discoutget->promocode) && count($discoutget->promocode) > 0) 
@@ -2324,21 +2224,14 @@
 
                 $GetGst = ($gst/100)+1;
 
-
-
                 $withoutgstaount = $total / $GetGst;
-
-
-
-
-
 
 
                 $gst_include =  ($withoutgstaount*$gst) / 100;
 
 
 
-                $gst_Total = $gst_include + $total;
+                $gst_Total =  $total;
 
 
 
@@ -2399,12 +2292,6 @@
 
 
             @if($view)
-
-
-
-
-
-
 
               <div class="viewcart-checkout stripe-payment">
 
@@ -2536,42 +2423,11 @@
 
         </div>
 
-
-
-
-
-
-
         </div>
-
-
-
-
-
-
 
     </div>
 
-
-
-
-
-
-
-      
-
-
-
-
-
-
-
 </div>
-
-
-
-
-
 
 
 </div>
@@ -2770,7 +2626,7 @@ function payment() {
 
               }, 
 
-          return_url: `http://185.160.67.108/estore/public/thankyou/`,            },
+          return_url: `http://127.0.0.1:8000/thankyou/`,            },
 
 
 

@@ -40,7 +40,7 @@
 
                   <div class="page_header d-flex  align-item-center mb-3">
 
-                     <a href="http://185.160.67.108/estore/public/admin/customers">
+                     <a href="{{ route('customers') }}">
 
                         <button class="secondary icon-arrow-left mr-2">
 
@@ -635,6 +635,74 @@
 
          </section>
 
+         <section class="full-width flex-wrap admin-body-width">
+
+              <div class="page-bottom-btn">
+
+                  <p class="mb-0 d-flex">
+
+                      <a class="warning" data-toggle="modal" data-target="#delete-variant-product">Delete customer</a>
+                  </p>
+
+              </div>
+              
+         </section>
+
+
+         <div wire:ignore id="delete-variant-product"  class="customer-modal-main" style="z-index: 999999;">
+
+            <div class="customer-modal-inner">
+
+               <div class="customer-modal">
+
+                  <div class="modal-header">
+
+                     <h2>Delete</h2>
+
+                     <span data-dismiss="modal" class="modal-close-btn">
+
+                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+
+                           <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+
+                        </svg>
+
+                     </span>
+
+                  </div>
+
+                  <div class="modal-body">
+
+                     <div class="row">
+
+                        <div class="form-field-list">
+
+                              <label>Are you sure to want to delete?</label>
+
+                        </div>
+
+                     </div>
+
+                  </div>
+
+                  <div class="modal-footer" >
+
+                     <div class="button-col">
+
+                        <button class="button secondary" data-dismiss="modal">Cancel</button>
+
+                        <button class="button" data-dismiss="modal"  wire:click.prevent="deletecustomer">Yes, Delete</button>
+
+                     </div>
+
+                  </div>
+
+               </div>
+
+            </div>
+
+         </div>
+
          <div wire:ignore.self id="customer-overview-modal" class="customer-modal-main" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
             <div class="customer-modal-inner">
@@ -871,7 +939,7 @@
 
          <!-- Modal -->
 
-          <div wire:ignore id="delete-address"  class="customer-modal-main" style="z-index: 999999;">
+         <div wire:ignore id="delete-address"  class="customer-modal-main" style="z-index: 999999;">
 
             <div class="customer-modal-inner">
 
@@ -909,11 +977,9 @@
 
                   <div class="modal-footer">
 
-
-
                      <div class="button-col">
 
-                        <button class="button secondary" wire:click="resetInputFields()">Cancel</button>
+                        <button class="button secondary" data-dismiss="modal">Cancel</button>
 
                         <button class="button" data-dismiss="modal" data-toggle="modal" onclick="document.getElementById('edit-address-modal').style.display = 'none'"  wire:click.prevent="delete()">Yes, Delete</button>
 
@@ -927,7 +993,6 @@
 
          </div>
 
-        
 
          <div wire:ignore.self id="edit-address-modal" class="customer-modal-main">
 
@@ -1608,6 +1673,7 @@
 
          </div>
 
+         
          
 
          <!--/Erase personal data modal-->

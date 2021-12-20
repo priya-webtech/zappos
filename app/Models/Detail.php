@@ -1,4 +1,7 @@
 <?php
+
+
+
 namespace App\Http\Livewire\Customer;
 
 
@@ -21,11 +24,11 @@ use Illuminate\Support\Str;
 
 
 
-class Details extends Component
+class Detail extends Component
 
 {
 
-    public $uuid, $customer, $countries, $tags, $customerData, $first_name, $last_name ,$address_id, $collect_tax, $agreed_to_receive_marketing_mails, $customerAddress = [], $customerBillingAddress = [], $address;
+    public $uuid, $customer, $countries, $tags, $customerData, $address_id, $collect_tax, $agreed_to_receive_marketing_mails, $customerAddress;
 
 
 
@@ -36,7 +39,9 @@ class Details extends Component
      protected $rules = [
 
         'customerData.detail.collect_tax' => [],
-        
+
+       
+
         'customerData.detail.email_marketing_status' => [],
 
         'customerData.first_name'=> [],
@@ -73,19 +78,17 @@ class Details extends Component
 
     {
 
-        $this->customer = User::with(['detail','address'])->where('uuid',$this->uuid)->first()->toArray();
+        $this->customer = User::with(['detail','address'=>function($query) {
+
+            $query->where('address_type','shipping_address');
+
+        }])->where('uuid',$this->uuid)->first()->toArray();
 
         $this->customerData = $this->customer;
 
         $this->countries = Country::all();
 
-        if($this->customerData['detail']) {
-
-            if(isset($this->customerData['detail']['tags'])) {
-                        $this->tags = Tag::whereNotIn('label', explode(',',$this->customerData['detail']['tags']))->get();
-
-            }
-
+        $this->tags = Tag::all(['label']);
 
         
 
@@ -118,7 +121,6 @@ class Details extends Component
 
 
         }
-    }
 
     }
 
@@ -128,38 +130,39 @@ class Details extends Component
 
     {
 
-        return view('livewire.customer.details');
+        return view('livewire.customer.detail');
 
     }
 
 
 
     public function store()
+
     {
-        $data = $this->customerBillingAddress;
 
-        if(empty($this->customerBillingAddress->country)) {
 
-            $data['country'] = $this->countries[0]->name;
 
-        }
+        $data = $this->customerAddress;
 
         $data['user_id'] = $this->customerData['id'];
 
-        $data['address_type'] = 'billing_address';
+         CustomerAddress::create($data);
 
-        $data['is_billing_address'] = 'no';
-
-        CustomerAddress::create($data);
-
-        $this->resetInputFields();
 
 
         session()->flash('message', 'Address Created Successfully.');
 
 
 
-        $this->initial();
+        $this->resetInputFields();
+
+
+
+        //check
+
+        $this->emit('userStore'); // Close model to using to jquery
+
+
 
     }
 
@@ -171,8 +174,6 @@ class Details extends Component
 
         $this->customerAddress = CustomerAddress::where('id',$id)->first()->toArray();
 
-        $this->address = $this->customerAddress;
-
         $this->address_id = $id;
 
         
@@ -180,13 +181,14 @@ class Details extends Component
     }
 
 
+
+
+
     public function delete()
 
     {
 
         CustomerAddress::find($this->address_id)->delete();
-
-        $this->initial();
 
     }
 
@@ -199,30 +201,16 @@ class Details extends Component
         if($flag == 'customer-note')
 
         {
-            $checknote = CustomerDetail::where('user_id',$this->customerData['id'])->first();
 
-            if($checknote){
-                 CustomerDetail::where('user_id', $this->customerData['id'])->update([
+
+
+            CustomerDetail::where('user_id', $this->customerData['id'])->update([
 
                     'note' => $this->customerData['detail']['note']
 
                 ]);
-            }else{
-                $customer_detail_arr = [
 
-                    'user_id' => $this->customerData['id'],
-                    
-                    'collect_tax' => 'no',
-                    
-                    'agreed_to_receive_marketing_mails' => 'no',
-
-                    'note' => $this->customerData['detail']['note']
-
-                ];
-
-                CustomerDetail::create($customer_detail_arr);
-            }
-           
+        
 
             session()->flash('message', 'Users Updated Successfully.');
 
@@ -270,7 +258,7 @@ class Details extends Component
 
                     'email'         => $this->customerData['email'],
 
-                    'mobile_number' => $params
+                    'mobile_number' => $this->customerData['mobile_number']
 
                 ]
 
@@ -356,57 +344,45 @@ class Details extends Component
 
             if (!empty($params)) {
 
+                $tags = trim(strtolower($params));
 
+                $tags_arr = explode(" ", $tags);
 
-                CustomerDetail::where('user_id', $this->customerData['id'])->update(['tags'  => $params]);
-
-                session()->flash('message', 'Users Updated Successfully.');
-
-            
-
-            }
+                $tags_str  = implode(',', $tags_arr);
 
 
 
-        }
 
-        if($flag == 'tag-change')
 
-        {
-
-            if (!empty($params)) {
-
-                $params = ucfirst(trim($params));
+                CustomerDetail::where('user_id', $this->customerData['id'])->update(['tags'  => $tags_str]);
 
 
 
-                $customer_tags = explode(',', $this->customerData['detail']['tags']);
+                $create_tag = [];
+
+                foreach ($tags_arr as $tag) {
+
+                    $tag = trim($tag);
+
+                    $exist = Tag::where('label', $tag)->first();
 
 
-
-                if(!in_array($params, $customer_tags)) 
-
-                {
-
-
-
-                    $tags = empty($this->customerData['detail']['tags']) ? $params : $this->customerData['detail']['tags'].','.$params;
-
-                    CustomerDetail::where('user_id', $this->customerData['id'])->update(['tags'  => $tags]);
-
-                    $exist = Tag::where('label',  $params)->first();
 
                     if (empty($exist)) {
 
-                        Tag::insert(['label'=>$params]);
+                        $create_tag[] = ['label'=>$tag];
 
                     }
 
                 }
 
-                
+                Tag::insert($create_tag);
+
+
 
                 session()->flash('message', 'Users Updated Successfully.');
+
+                // $this->customer = $this->customerData;
 
             
 
@@ -416,61 +392,19 @@ class Details extends Component
 
         }
 
-        if($flag == 'remove-tag')
-
-        {
-
-            if (!empty($params)) {
+                $this->initial();
 
 
-
-                $customer_tags = explode(',', $this->customerData['detail']['tags']);
-
-                if (($key = array_search($params, $customer_tags)) !== false) {
-
-                    unset($customer_tags[$key]);
-
-                }
-
-                $customer_tags = implode(',', $customer_tags);
-
-                CustomerDetail::where('user_id', $this->customerData['id'])->update(['tags'  => $customer_tags]);
-
-               
-
-                session()->flash('message', 'Users Updated Successfully.');
-
-            
-
-            }
-
-
-
-        }
-
-        $this->initial();
 
 
 
     }
 
-    public function deletecustomer(){
-        $this->initial();
-            
-        $deleteuser = User::find($this->customer['id'])->delete();
-        if($deleteuser)
-        {
-            CustomerAddress::where('user_id',$this->customer['id'])->delete();
-            CustomerDetail::where('user_id',$this->customer['id'])->delete();
 
-            return redirect(route('customers'));
-        }
-        
-    }
 
     public function resetInputFields() {
 
-         $this->customerAddress = $this->address;
+         $this->customerData = $this->customer;
 
     }
 

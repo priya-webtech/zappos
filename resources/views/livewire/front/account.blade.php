@@ -994,12 +994,12 @@
                                
                                         @foreach($OrderItem as $item)
                                             @if($item->order_id == $row->id)
-                                                <?php $itemcount = $i++;  ?>
+                                                <?php $itemcount += $item->stock;  ?>
                                             @endif
                                         @endforeach
                                         <div class="add-cart-select">               
                                             <div class="total-item-select">
-                                                <input value="{{$itemcount}}" name="stockitem" type="number">
+                                                <input value="{{$itemcount}}" name="stockitem" type="text" readonly>
                                             </div>
                                         </div>
                                     </td>

@@ -29,7 +29,7 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->from('prajapativishal999991@gmail.com')->subject('Thank you message')->view('livewire.dashboard')->with('data',$this->data);
+        return $this->from('prajapativishal999991@gmail.com')->subject('Thank you message')->view('livewire.thank-mail')->with('data',$this->data);
         //return $this->view('view.name');
     }
 }
