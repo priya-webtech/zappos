@@ -11,6 +11,8 @@ use App\Models\CustomerDetail;
 
 use App\Models\CustomerAddress;
 
+use App\Models\Orders;
+
 use App\Models\Tag;
 
 use App\Models\User;
@@ -25,7 +27,7 @@ class Details extends Component
 
 {
 
-    public $uuid, $customer, $countries, $tags, $customerData, $first_name, $last_name ,$address_id, $collect_tax, $agreed_to_receive_marketing_mails, $customerAddress = [], $customerBillingAddress = [], $address;
+    public $uuid, $customer, $countries, $tags, $customerData, $first_name, $last_name ,$address_id, $collect_tax, $agreed_to_receive_marketing_mails, $customerAddress = [], $customerBillingAddress = [], $address,$order;
 
 
 
@@ -74,7 +76,8 @@ class Details extends Component
     {
 
         $this->customer = User::with(['detail','address'])->where('uuid',$this->uuid)->first()->toArray();
-
+        
+        $this->order = orders::where('user_id',$this->customer['id'])->orderBy('id', 'DESC')->first();
         $this->customerData = $this->customer;
 
         $this->countries = Country::all();
