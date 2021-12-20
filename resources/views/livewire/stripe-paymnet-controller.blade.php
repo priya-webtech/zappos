@@ -859,33 +859,10 @@
 
                     @endif
 
-                    @if($view)
-
-                        <div class="row">
-
-
-
-                             <div class="col-xs-12">
-
-                               <button class="site-btn blue-btn" wire:click.prevent="editshipping()">Edit</button>
-
-
-                            </div>
-
-
-
-                        </div>
-
-                    @endif
 
                     @if($view)
 
             <div class="viewcart-checkout stripe-payment">
-
-
-
-                <div class="vc-inner">
-
 
 
                     <div class="payment-form">
@@ -897,8 +874,9 @@
                             <h3 class="panel-title">Payment</h3>
 
                             <label for="ideal-bank-element" class="bank-name">iDEAL Bank</label>
+                            <div class="account-select">
 
-                            <div class="account-name-row">
+                            <div class="account-name-row account-select-drop">
 
                                  <div id="ideal-bank-element">
 
@@ -915,7 +893,7 @@
 
 
 
-                             <div class="account-name-row">
+                             <div class="account-name-row account-select-btn">
 
 
 
@@ -923,6 +901,7 @@
 
 
 
+                            </div>
                             </div>
 
 
@@ -942,16 +921,30 @@
                     </div>
 
 
-
-                </div>
-
-
-
             </div>
 
 
 
             @endif
+
+                    @if($view)
+
+                        <div class="row edit-chk-btn">
+
+
+
+                             <div class="col-xs-12">
+
+                               <button class="site-btn blue-btn" wire:click.prevent="editshipping()">Edit</button>
+
+
+                            </div>
+
+
+
+                        </div>
+
+                    @endif
 
                     <form role="form" id="address-form" class="require-validation">
                     @if(!$view)
@@ -1865,7 +1858,7 @@
 
                         <div class="row">
 
-                            <div class="col-xs-12">
+                            <div class="col-12">
 
                                 <button class="site-btn blue-btn" wire:click.prevent="addshipping({{$orderdetail->id}})" <?php if($view) echo 'disabled'; ?>> @if($editMode) Update @else Submit @endif</button>
 

@@ -742,9 +742,12 @@ select#categorySortBy {background-image: url(http://127.0.0.1:8000/assets/down-a
 .shipping-details-card {padding: 25px; box-shadow: 0 0 6px 2px rgb(0 0 0 / 10%); border-radius: 10px; }
 .checkout-page-sec .panel-title { font-size: 20px; font-weight: 600; margin-bottom: 20px; display: block; color: #003953; }
 .checkout-page-sec .site-btn { width: 100%; }
+.edit-chk-btn {margin: 20px 0 0; float: right; }
 
-#payment-form {box-shadow: 0 0 6px 2px rgb(0 0 0 / 10%); padding: 20px 20px 20px; margin-top: 20px; border-radius: 10px; }
-.account-name-row {display: flex; align-items: center; margin-bottom: 10px; }
+#payment-form {box-shadow: 0 0 6px 2px rgb(0 0 0 / 10%); padding: 20px 20px 20px; border-radius: 10px; }
+.account-select {display: flex; align-items: center; margin-bottom: 10px; }
+.account-select-drop {flex: 1 1 auto; }
+.account-select-btn {flex: 0 0 auto; }
 .account-name-row input {width: 100%; border: 1px solid #ccc; border-radius: 4px; padding: 10px 15px; }
 .account-name-row .bank-name {flex: 0 0 auto; margin-left: 10px; }
 #ideal-bank-element {width: 100%; padding: 14px 15px; height: 46px; border: 1px solid #ccc; border-radius: 4px; }
