@@ -20,6 +20,7 @@ input[type=checkbox]:focus {
 }
 
 
+
 /*img {width: 100%;}*/
 
 .form-control:focus {box-shadow: none; border-color: #e4d518; }
