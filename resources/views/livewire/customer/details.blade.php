@@ -144,7 +144,7 @@
                                          }else if($interval->h > 1){
                                              return $interval->h.' hours ago';
                                          }else{
-                                             if($interval->i > 0 and $interval->i < 2){
+                                             if($interval->i > 0 and $interval->i < 60){
                                                  return $interval->i.' minute ago';
                                              }else if($interval->i > 1){
                                                  return $interval->i.' minutes ago';

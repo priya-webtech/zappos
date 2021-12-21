@@ -222,7 +222,8 @@ Route::middleware(['checkRole'])->group(function () {
 
             Route::get('/admin/discounts/{id?}', Livewire\Discount\DiscountDetail::class)->name('discount-detail');
 
-            
+            //Marketing 
+            Route::get('/admin/marketing', Livewire\Marketing\Marketing::class)->name('marketing');
 
             //AdminUsers 
 
