@@ -46,6 +46,34 @@
                                 </div>
                             </article>
                             <div class="row mb-0">
+                                <div class="columns six row field_style1 mb-2">
+                                    <label>Add Logo</label>
+                                    <div class="avatar-upload">
+                                        <div class="avatar-edit">
+                                            <input type='file' id="logoUpload" accept=".png, .jpg, .jpeg" />
+                                            <label for="logoUpload">Add Logo</label>
+                                        </div>
+                                        <div class="avatar-preview">
+                                            <div id="logoPreview" style="background-image: url();">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="columns six row field_style1 mb-2">
+                                    <label>Add favicon</label>
+                                    <div class="avatar-upload">
+                                        <div class="avatar-edit">
+                                            <input type='file' id="favUpload" accept=".png, .jpg, .jpeg" />
+                                            <label for="favUpload">Add Logo</label>
+                                        </div>
+                                        <div class="avatar-preview">
+                                            <div id="favPreview" style="background-image: url();">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-0">
                                 <label>Store industry</label>
                                 <select>
                                     <option value="beauty">Beauty</option>

@@ -342,11 +342,15 @@ code {
  .admin_bar ul li.active > a svg {
      color: #007b5c;
 }
-.admin_bar ul li ul.sub_items {
-    display: none;
-}
 .admin_bar ul li.menu-dropdown ul.sub_items {
-    display: block;
+    max-height: 100%;
+    transition: max-height 0.5s ease-in;
+}
+
+.admin_bar ul li ul.sub_items {
+    max-height: 0;
+    transition: max-height 0.5s ease-out;
+    overflow: hidden;
 }
 .admin_bar ul li .sub_items li a {
      font-size: 14px;
@@ -6931,6 +6935,66 @@ code {
      border: .1rem solid #c4cdd5;
      border-radius: 3px !important;
 }
+
+.avatar-upload {
+    position: relative;
+    display: inline-block;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.avatar-upload .avatar-edit input {
+    display: none;
+}
+
+.avatar-upload .avatar-preview {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-image: url(/assets/images/upload-icon.png);
+    background-position: center center;
+    background-size: 45px;
+    background-repeat: no-repeat;
+}
+.avatar-upload .avatar-preview > div {
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.avatar-edit {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.add-customer-part .card .avatar-edit label {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0;
+}
+.avatar-upload .avatar-edit input + label:hover {
+    background: rgba(0,0,0,.5);
+    border-color: #d6d6d6;
+    font-size: 13px;
+}
+
+
+
+
+
+
 /*settings gift cards page css*/
  .select-color-list {
      display: flex;
