@@ -122,6 +122,41 @@
 
                               <button class="link">Last Order</button>
 
+                              <?php
+
+                                 function date_duration($date){
+                                     $date1 = new DateTime($date);
+                                     $date2 = new DateTime();
+                                     $interval = $date1->diff($date2);
+                                     if($interval->y > 0 and $interval->y < 2){
+                                         return $interval->y.' year ago';
+                                     }else if($interval->y > 1){
+                                         return $interval->y.' years ago';
+                                     }else if($interval->m > 0 and $interval->m < 2){
+                                         return $interval->m.' month ago';
+                                     }else if($interval->m > 1){
+                                         return $interval->m.' months ago';
+                                     }else if($interval->d > 1){
+                                         return $interval->d.' days ago';
+                                     }else{
+                                         if($interval->h > 0 and $interval->h < 2){
+                                             return $interval->h.' hour ago';
+                                         }else if($interval->h > 1){
+                                             return $interval->h.' hours ago';
+                                         }else{
+                                             if($interval->i > 0 and $interval->i < 60){
+                                                 return $interval->i.' minute ago';
+                                             }else if($interval->i > 1){
+                                                 return $interval->i.' minutes ago';
+                                             }else{
+                                                 return 'Just now';
+                                             }
+                                         }
+                                     }
+                                 }
+
+                                 echo date_duration($order['updated_at']);
+                              ?>
                               <h4 class="fs-16 fw-6 mb-0">2 months ago</h4>
 
                               <p>From Draft Orders</p>

@@ -293,7 +293,8 @@
                 </select>
                 <div class="pagination">
 
-                 {{$product->links() }}
+                 {!! $product->links() !!}
+                
 
                 </div>
             </div>
@@ -303,6 +304,10 @@
 
 
 <script>
+
+    <?php if (!empty(var)) {
+        # code...
+    } ?>
 
     $(document).mouseup(function (e) {
     var people, asc1 = 1,
