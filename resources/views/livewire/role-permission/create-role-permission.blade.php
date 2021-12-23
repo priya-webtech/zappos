@@ -26,15 +26,16 @@
                                 <div class="card-content">
                                     <div class="card-title">
                                         <div class="row">
-                                            <div class="col s12 m6 l10">
+                                            <div class="col s12 m6 l10 d-flex align-center">
                                                 <h4 class="fs-18 mb-0 fw-6">User Role</h4>
+                                                <a class="link ml-auto blue-color create-new-role-btn">Create New Role</a>
+                                                <a class="link ml-auto blue-color select-role-btn">Select Role</a>
                                             </div>
                                             <div class="col s12 m6 l2">
                                             </div>
                                         </div>
                                     </div>
                                     <div id="html-view-validations">
-                                         
                                             <div class="row">
                                                 <div class="col l12">
                                                     @if ($errors->any())
@@ -48,7 +49,11 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="row row-mb-0">
+                                            <div class="row create-role-field mb-0">
+                                                <label class="lbl-mb-4">Create New Role</label>
+                                                <input type="text">
+                                            </div>
+                                            <div class="row row-mb-0 role-name-field">
                                                 <div class="col m12 s12">
                                                     <div class="input-field">
                                                         <div><label class="lbl-mb-4" for="title">Role Name *</label></div>
@@ -669,7 +674,22 @@
 
     }
 
-
+    $(document).ready(function() {
+        $('.create-role-field').hide();
+        $('.select-role-btn').hide();
+        $('.create-new-role-btn').on('click', function(event) {
+            $('.create-role-field').show();
+            $('.role-name-field').hide();
+            $('.select-role-btn').show();
+            $('.create-new-role-btn').hide();
+        });
+        $('.select-role-btn').on('click', function(event) {
+            $('.create-new-role-btn').show();
+            $('.select-role-btn').hide();
+            $('.create-role-field').hide();
+            $('.role-name-field').show();
+        });
+    });
 
 </script>
 
