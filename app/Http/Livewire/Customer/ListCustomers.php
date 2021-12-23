@@ -168,7 +168,7 @@ class ListCustomers extends Component
 
             $query->whereHas('detail', function ($q) use ($tagged_with) {
 
-                return $q->where('tags', 'LIKE', '%' . $tagged_with . ',%');
+                return $q->where('tags', 'LIKE', '%' . $tagged_with . '%');
 
             });
 

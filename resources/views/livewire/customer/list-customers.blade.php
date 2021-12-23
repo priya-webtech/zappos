@@ -399,9 +399,12 @@
                                 <br>@if(!empty($customer->detail->note))<span class="table-note"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path fill-rule="evenodd" d="M11.379 0a1.5 1.5 0 0 1 1.06.44l4.122 4.12A1.5 1.5 0 0 1 17 5.622V18.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 3 18.5v-17A1.5 1.5 0 0 1 4.5 0h6.879zM6 5h4v2H6V5zm8 4v2H6V9h8zm-8 6v-2h7v2H6z"></path></svg>{{$customer->detail->note}}</span>@endif
                             </td>
 
-                            <td class="subscribed-label">@if(!empty($customer->detail) && $customer->detail->agreed_to_receive_marketing_mails == 'yes')
-
-                                    <p class="tag green order-filed"> Subscribed </p>@endif</td>
+                            <td class="subscribed-label">
+                                @if(!empty($customer->email_verified_at))
+                                    <p class="tag green order-filed"> Verified </p>
+                                @else
+                                     <p class="tag green order-filed"> Unverified </p>
+                                @endif</td>
 
                             <td><p class="order-filed">0 orders</p></td>
 

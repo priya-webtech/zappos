@@ -16,7 +16,7 @@
 			<tbody>
 				<tr>
 					<td>
-						<img src="thumbs-up.png" style="width: 7em; height: 7em; ">
+						<img src="{{ URL::asset('mail-img/thumbs-up.png') }}" style="width: 7em; height: 7em; ">
 					</td>
 				</tr>
 				<tr>
@@ -36,7 +36,7 @@
 				</tr>
 				<tr>
 					<td style="text-align: center; padding: 3em 15px 0; ">
-						<img src="zappos-logo.svg" style="width: 8em; margin-bottom: 0.4em;">
+						<img src="{{ URL::asset('mail-img/zappos-logo.svg') }}" style="width: 8em; margin-bottom: 0.4em;">
 						<span style=" width: 100%; display: block;"> © 2020-2021 - Company Name</span>
 					</td>
 				</tr>

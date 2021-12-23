@@ -987,71 +987,60 @@
 
                      <div class="card-middle">
 
-
-
                         <div class="header-title">
 
-
-
-                           <h4 class="fs-12  fw-6 mb-0">DEFAULT ADDRESS </h4>
-
-
+                           <h4 class="fs-12  fw-6 mb-0">BILLING DEFAULT ADDRESS </h4>
 
                            <button class="link" data-toggle="modal" data-target="#manage-address-modal">Manage</button>
 
-
-
                         </div>
-
-
 
                         @if(!empty($customerData['address']))
 
-
-
                            @foreach($customerData['address'] as $row)
 
-
-
-                           @if($row['address_type'] == 'shipping_address')
-
-
+                           @if($row['address_type'] == 'billing_address')
 
                            <p>{{$row['address']}} <br> {{$row['apartment']}} <br> {{$row['postal_code']}}&nbsp;{{$row['city']}} <br> {{$row['country']}}</p>
 
-
-
-                           
-
-
-
                            @endif
-
-
 
                            @endforeach
 
-
-
                         @endif
 
-
-
-
-
-
-
-
-
-
-
                         <button class="link" data-toggle="modal" data-target="#add-address-modal">Add different billing address</button>
-
-
 
                      </div>
 
 
+                     <div class="card-middle">
+
+                        <div class="header-title">
+
+                           <h4 class="fs-12  fw-6 mb-0">SHIPPING DEFAULT ADDRESS </h4>
+
+                           <button class="link" data-toggle="modal" data-target="#manage-shipping-address-modal">Manage</button>
+
+                        </div>
+
+                        @if(!empty($customerData['address']))
+
+                           @foreach($customerData['address'] as $row)
+
+                           @if($row['address_type'] == 'shipping_address')
+
+                           <p>{{$row['address']}} <br> {{$row['apartment']}} <br> {{$row['postal_code']}}&nbsp;{{$row['city']}} <br> {{$row['country']}}</p>
+
+                           @endif
+
+                           @endforeach
+
+                        @endif
+
+                        <button class="link" data-toggle="modal" data-target="#add-shipping-address-modal">Add different shipping address</button>
+
+                     </div>
 
                      <div class="card-footer">
 
@@ -1722,7 +1711,7 @@
 
 
 
-                     <h2>Manage addresses</h2>
+                     <h2>Manage Billing addresses</h2>
 
 
 
@@ -1761,8 +1750,7 @@
                      <div class="manage-address-list">
 
 
-
-                        @if($address['address_type'] == 'shipping_address')<h5>DEFAULT ADDRESS</h5>@endif
+                        @if($address['address_type'] == 'billing_address')<h5>DEFAULT BILLING ADDRESS</h5>
 
 
 
@@ -1796,11 +1784,120 @@
 
                         </div>
 
-
+                        @endif
 
                      </div>
 
 
+
+                     @endforeach
+
+
+
+                  </div>
+
+
+
+               </div>
+
+
+
+            </div>
+
+
+
+         </div>
+
+         <div wire:ignore.self id="manage-shipping-address-modal" class="customer-modal-main">
+
+
+
+            <div class="customer-modal-inner">
+
+
+
+               <div class="customer-modal">
+
+
+
+                  <div class="modal-header">
+
+
+
+                     <h2>Manage Shipping addresses</h2>
+
+
+
+                     <span data-dismiss="modal" class="modal-close-btn">
+
+
+
+                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+
+
+
+                           <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+
+
+
+                        </svg>
+
+
+
+                     </span>
+
+
+
+                  </div>
+
+
+
+                  <div class="modal-body">
+
+
+
+                  @foreach($customerData['address'] as $address)
+
+                     @if($address['address_type'] == 'shipping_address')
+                     <div class="manage-address-list">
+
+                        <h5>DEFAULT SHIPPING ADDRESS</h5>
+
+
+
+                        <p>{{$address['address']}}</p>
+
+
+
+                        <p>{{$address['apartment']}}</p>
+
+
+
+                        <p>{{$address['postal_code']}}&nbsp;{{$address['city']}}</p>
+
+
+
+                        <p>{{$address['country']}}</p>
+
+
+
+                        <div class="manage-add-btn">
+
+
+
+                           <button class="link" data-toggle="modal" data-dismiss="modal" data-target="#edit-address-modal" wire:click="EditShippingAddress({{ $address['id'] }})">Edit address</button>
+
+
+
+                           <!-- <button class="button secondary">Make default</button> -->
+
+
+
+                        </div>
+
+                     </div>
+
+                     @endif
 
                      @endforeach
 
@@ -2050,302 +2147,136 @@
 
          <div wire:ignore.self id="edit-address-modal" class="customer-modal-main">
 
-
-
             <div class="customer-modal-inner">
-
-
 
                <div class="customer-modal">
 
-
-
                   <div class="modal-header">
-
-
 
                      <h2>Edit address</h2>
 
-
-
                      <span data-dismiss="modal" class="modal-close-btn">
-
-
 
                         <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
 
-
-
                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
-
-
 
                         </svg>
 
-
-
                      </span>
 
-
-
                   </div>
-
-
-
                   <div class="modal-body">
-
-
 
                      <form>
 
-
-
                         @csrf
-
-
 
                         <input type="hidden" wire:model="address_id">
 
-
-
-                       
-
                         <div class="row">
 
-
-
                            <div class="form-field-list">
-
-
-
-                           
-
-
 
                                <label>First Name</label>
 
-
-
-                           
-
-
-
                                <input type="text" wire:model="customerAddress.first_name">
-
-
-
-                           
-
-
 
                            </div>
 
-
-
-                           
-
-
-
                            <div class="form-field-list">
-
-
-
-                           
-
-
 
                                <label>Last Name</label>
 
-
-
-                           
-
-
-
                                <input type="text" wire:model="customerAddress.last_name">
-
-
-
-                           
-
-
 
                            </div>
 
-
-
                         </div>
-
-
 
                         <div class="row">
 
-
-
                            <div class="form-field-list">
-
-
 
                               <label>Company</label>
 
-
-
                               <input type="text" wire:model.lazy="customerAddress.company">
-
-
 
                            </div>
 
-
-
                         </div>
-
-
 
                         <div class="row">
 
-
-
                            <div class="form-field-list">
-
-
 
                               <label>Street Name</label>
 
-
-
                               <input type="text" name="address" wire:model.lazy="customerAddress.address">
-
-
 
                            </div>
 
-
-
                         </div>
-
-
 
                         <div class="row">
 
-
-
                            <div class="form-field-list">
-
-
 
                               <label>Unit Number</label>
 
-
-
                               <input type="text" name="apartment" wire:model.lazy="customerAddress.apartment">
-
-
 
                            </div>
 
-
-
                         </div>
-
-
 
                         <div class="row">
 
-
-
                            <div class="form-field-list">
-
-
 
                               <label>City</label>
 
-
-
                               <input type="text" name="city" wire:model.lazy="customerAddress.city">
-
-
 
                            </div>
 
-
-
                         </div>
-
-
 
                         <div class="row three-column-row">
 
-
-
                            <div class="form-field-list">
-
-
 
                               <label>Country/region</label>
 
-
-
                               <select name="country" wire:model.lazy="customerAddress.country">
-
-
 
                                  @foreach($countries as $country)
 
-
-
                                  <option value="{{$country->name}}">
-
-
 
                                     {{$country->name}}
 
-
-
                                  </option>
-
-
 
                                  @endforeach
 
-
-
                               </select>
-
-
 
                            </div>
 
-
-
-
                            <div class="form-field-list">
-
-
 
                               <label>Zip</label>
 
-
-
                               <input type="text" name="postal_code" wire:model.lazy="customerAddress.postal_code">
-
-
 
                            </div>
 
-
-
                         </div>
-
-
 
                         <div class="row">
 
-
-
                            <div class="form-field-list">
-
-
 
                                <label>Phone number</label>
 
@@ -2369,8 +2300,8 @@
 
                       
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" wire:ignore.self id="defaultAddress" wire:model="customerAddress.is_billing_address" >
-                            <label class="form-check-label" for="defaultAddress">Make this my primary shipping address</label>
+                            <input type="checkbox" class="form-check-input" wire:ignore.self id="defaultAddress" wire:model="edit_billing_address" <?php if($customerAddress && $customerAddress['is_billing_address'] == 'yes') {echo "checked";} ?>>
+                            <label class="form-check-label" for="defaultAddress">Make this my primary billing address</label>
                         </div>
 
 
@@ -2386,7 +2317,7 @@
 
 
 
-                     @if(!empty($customerAddress)&& !empty($customerAddress['address_type']) && $customerAddress['address_type'] != 'shipping_address')
+                     @if(!empty($customerAddress)&& !empty($customerAddress['address_type']) )
 
 
 
@@ -2410,97 +2341,53 @@
 
 
 
-                        <button class="button secondary" wire:click="resetInputFields()">Cancel</button>
+                        <button class="button secondary" data-dismiss="modal" wire:click="resetInputFields()">Cancel</button>
 
 
 
-                        <button class="button" data-dismiss="modal" data-toggle="modal" wire:click.prevent="update('Address-change')">Save</button>
-
-
+                        <button class="button" data-dismiss="modal" data-toggle="modal" wire:click.prevent="update('Address-change-billing')">Save</button>
 
                      </div>
 
-
-
                   </div>
-
-
 
                </div>
 
-
-
             </div>
-
-
 
          </div>
 
-
-
          <div wire:ignore id="add-address-modal" class="customer-modal-main">
-
-
 
             <div class="customer-modal-inner">
 
-
-
                <div class="customer-modal">
-
-
 
                   <div class="modal-header">
 
-
-
                      <h2>Add new address</h2>
-
-
 
                      <span data-dismiss="modal" class="modal-close-btn">
 
-
-
                         <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
-
-
 
                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
 
-
-
                         </svg>
-
-
 
                      </span>
 
-
-
                   </div>
-
-
 
                   <div class="modal-body">
 
-
-
                      <form>
-
-
 
                         @csrf
 
-
-
                         <input type="hidden" wire:model="customer.id">
 
-
-
                         <div class="row">
-
-
 
                            <div class="form-field-list">
 
@@ -2772,6 +2659,327 @@
 
 
                      <button class="button"  data-dismiss="modal" wire:click.prevent="store()">Save</button>
+
+
+
+                  </div>
+
+
+
+               </div>
+
+
+
+            </div>
+
+
+
+         </div>
+
+
+
+         <div wire:ignore id="add-shipping-address-modal" class="customer-modal-main">
+
+            <div class="customer-modal-inner">
+
+               <div class="customer-modal">
+
+                  <div class="modal-header">
+
+                     <h2>Add new address</h2>
+
+                     <span data-dismiss="modal" class="modal-close-btn">
+
+                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+
+                           <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+
+                        </svg>
+
+                     </span>
+
+                  </div>
+
+                  <div class="modal-body">
+
+                     <form>
+
+                        @csrf
+
+                        <input type="hidden" wire:model="customer.id">
+
+                        <div class="row">
+
+                           <div class="form-field-list">
+
+
+
+                           
+
+
+
+                               <label>First Name</label>
+
+
+
+                           
+
+
+
+                               <input type="text" wire:model="customerBillingAddress.first_name">
+
+
+
+                           
+
+
+
+                           </div>
+
+
+
+                           
+
+
+
+                           <div class="form-field-list">
+
+
+
+                           
+
+
+
+                               <label>Last Name</label>
+
+
+
+                           
+
+
+
+                               <input type="text" wire:model="customerBillingAddress.last_name">
+
+
+
+                           
+
+
+
+                           </div>
+
+
+
+                        </div>
+
+
+
+                        <div class="row">
+
+
+
+                           <div class="form-field-list">
+
+
+
+                              <label>Company</label>
+
+
+
+                              <input type="text" wire:model.lazy="customerBillingAddress.company">
+
+
+
+                           </div>
+
+
+
+                        </div>
+
+
+
+                        <div class="row">
+
+
+
+                           <div class="form-field-list">
+
+
+
+                              <label>Street Name</label>
+
+
+
+                              <input type="text" wire:model.lazy="customerBillingAddress.address">
+
+
+
+                           </div>
+
+
+
+                        </div>
+
+
+
+                        <div class="row">
+
+
+
+                           <div class="form-field-list">
+
+
+
+                              <label>Unit Number</label>
+
+
+
+                              <input type="text" wire:model.lazy="customerBillingAddress.apartment">
+
+
+
+                           </div>
+
+
+
+                        </div>
+
+
+
+                        <div class="row">
+
+
+
+                           <div class="form-field-list">
+
+
+
+                              <label>City</label>
+
+
+
+                              <input type="text" wire:model.lazy="customerBillingAddress.city">
+
+
+
+                           </div>
+
+
+
+                        </div>
+
+
+
+                        <div class="row three-column-row">
+
+
+
+                           <div class="form-field-list">
+
+
+
+                              <label>Country/region</label>
+
+
+
+                              <select wire:model.lazy="customerBillingAddress.country">
+
+
+
+                                 @foreach($countries as $country)
+
+
+
+                                 <option value="{{$country->name}}">{{$country->name}}</option>
+
+
+
+                                 @endforeach
+
+
+
+                              </select>
+
+
+
+                           </div>
+
+
+
+                           <div class="form-field-list">
+
+
+
+                              <label>Zip</label>
+
+
+
+                              <input type="text" wire:model.lazy="customerBillingAddress.postal_code">
+
+
+
+                           </div>
+
+
+
+                        </div>
+
+
+
+                         <div class="row">
+
+
+
+                           <div class="form-field-list">
+
+
+
+                               <label>Phone number</label>
+
+
+
+                               <div class="cd-phone-field">
+
+
+
+
+
+                                   <input class="rounded-md shadow-sm block mt-1 w-full displaycode" id="customer_mobile_number" type="" name="phone" wire:model="customerBillingAddress.mobile_no">
+
+
+
+                               </div>
+
+                           </div>
+
+
+
+                        </div> 
+
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" wire:ignore.self wire:model="shipping_address_type" id="defaultAddress">
+                            <label class="form-check-label" for="defaultAddress">Make this my primary shipping address</label>
+                        </div>
+
+
+
+                     </form>
+
+
+
+                  </div>
+
+
+
+                  <div class="modal-footer">
+
+
+
+                     <button class="modal-close-btn" data-dismiss="modal">Cancel</button>
+
+
+
+                     <button class="button"  data-dismiss="modal" wire:click.prevent="storeshippping()">Save</button>
 
 
 

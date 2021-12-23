@@ -60,7 +60,7 @@ class Details extends Component
 
 
 
-    public $uuid, $customer, $countries, $tags, $customerData, $first_name, $last_name ,$address_id, $collect_tax, $agreed_to_receive_marketing_mails, $customerAddress = [], $customerBillingAddress = [], $address,$address_type,$order,$order_item;
+    public $uuid, $customer, $countries, $tags, $customerData, $first_name, $last_name ,$address_id, $collect_tax, $agreed_to_receive_marketing_mails, $customerAddress = [], $customerBillingAddress = [], $address,$address_type,$shipping_address_type,$order,$order_item,$edit_billing_address;
 
 
 
@@ -266,6 +266,7 @@ class Details extends Component
         }
 
         if($this->address_type == true){
+            CustomerAddress::where('user_id', $this->customerData['id'])->update(['is_billing_address' => 'no' ]);
             $is_billing_address = 'yes';
         }else{
             $is_billing_address = 'no';
@@ -308,62 +309,51 @@ class Details extends Component
     }
 
 
-
-
-
-
-
-    public function EditAddress($id)
-
-
+    public function storeshippping()
 
     {
+        $data = $this->customerBillingAddress;
 
+        if(empty($this->customerBillingAddress->country)) {
 
-
-        $this->customerAddress = CustomerAddress::where('id',$id)->first()->toArray();
-
-
-
-        $this->address = $this->customerAddress;
-
-        if($this->customerAddress['is_billing_address'] == 'yes') {
-
-
-
-            $this->customerAddress['is_billing_address'] = true;
-
-        } else {
-
-            $this->customerAddress['is_billing_address'] = false;
-
+            $data['country'] = $this->countries[0]->name;
         }
 
+        if($this->shipping_address_type == true){
+            CustomerAddress::where('user_id', $this->customerData['id'])->update(['is_billing_address' => 'no' ]);
 
+            $is_billing_address = 'yes';
+        }else{
+            $is_billing_address = 'no';
+        }
 
-        $this->address_id = $id;
-
-
-
-        
-
-
-
-    }
-
+        $data['user_id'] = $this->customerData['id'];
 
 
 
-
-    public function delete()
-
-
-
-    {
+        $data['address_type'] = 'shipping_address';
 
 
 
-        CustomerAddress::find($this->address_id)->delete();
+        $data['is_billing_address'] = $is_billing_address;
+
+
+
+        CustomerAddress::create($data);
+
+
+
+        $this->resetInputFields();
+
+
+
+
+
+        session()->flash('message', 'Address Created Successfully.');
+
+
+
+
 
 
 
@@ -379,23 +369,42 @@ class Details extends Component
 
 
 
+    public function EditAddress($id)
+    {
+        $this->customerAddress = CustomerAddress::where('id',$id)->first()->toArray();
+
+        $this->address = $this->customerAddress;
+
+        $this->address_id = $id;
+
+    }
+
+    public function EditShippingAddress($id)
+    {
+        $this->customerAddress = CustomerAddress::where('id',$id)->first()->toArray();
+
+        $this->address = $this->customerAddress;
+
+        $this->address_id = $id;
+
+    }
+    
+
+    public function delete()
+    {
+        CustomerAddress::find($this->address_id)->delete();
+
+        $this->initial();
+    }
+
     public function update($flag, $params = null)
-
-
 
     {
 
-
-
         if($flag == 'customer-note')
-
-
-
         {
 
             $checknote = CustomerDetail::where('user_id',$this->customerData['id'])->first();
-
-
 
             if($checknote){
 
@@ -453,12 +462,6 @@ class Details extends Component
 
         }
 
-
-
-        
-
-
-
         if($flag == 'Address-change')
         {
 
@@ -477,31 +480,51 @@ class Details extends Component
 
             }
 
+        }
 
+        if($flag == 'Address-change-billing')
+        {
+
+            if ($this->address_id) {
+
+                if($this->edit_billing_address == true){
+
+                    CustomerAddress::where('user_id', $this->customerData['id'])->update(['is_billing_address' => 'no' ]);
+
+                    $is_billing_address = 'yes';
+
+                    $user = CustomerAddress::find($this->address_id);
+
+                    $user->update(['is_billing_address' => 'yes' ]);
+
+                }else{
+                    $is_billing_address = 'no';
+                    CustomerAddress::where('user_id', $this->customerData['id'])->update(['is_billing_address' => 'no' ]);
+                }
+
+
+
+                $user = CustomerAddress::find($this->address_id);
+
+                $user->update($this->customerAddress);
+
+
+                session()->flash('message', 'Address Updated Successfully.');
+
+                // $this->customer = $this->customerData;
+
+            }
 
         }
 
 
-
-
-
-
-
         if($flag == 'email-change')
-
-
 
         {
 
-
-
             User::where('id', $this->customerData['id'])->update(
 
-
-
                 [
-
-
 
                     'first_name'    => $this->customerData['first_name'],
 
@@ -511,12 +534,7 @@ class Details extends Component
 
                     'mobile_number' => $this->customerData['mobile_number']
 
-
-
                 ]
-
-
-
             );
 
 
