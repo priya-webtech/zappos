@@ -1472,7 +1472,7 @@
 
 
 
-
+                        @if($same_shipping ==  false)
                         @if(!$editMode)
 
                         @if($newbillingaddress == true && empty($this->customerbillingAddress))
@@ -1519,7 +1519,7 @@
                         @endif
 
 
-                        @if($same_shipping ==  false)
+                       
 
                         <input type="hidden" name="orderid" value="{{$orderdetail->id}}">
 

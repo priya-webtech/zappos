@@ -28,6 +28,9 @@ use Livewire\WithPagination;
 
 use Maatwebsite\Excel\Facades\Excel;
 
+use Illuminate\Pagination\LengthAwarePaginator;
+
+
 class Products extends Component
 {
     use WithFileUploads, WithPagination;
@@ -60,11 +63,17 @@ class Products extends Component
 
         }
 
-        $offset = max(0, ($this->page - 1) * $this->perPage);
+        $items = $this->getproduct->forPage($this->page, $this->perPage);
 
-        $items = $this->getproduct->slice($offset, $this->perPage + 1);
+        $paginator = new LengthAwarePaginator($items, $this->getproduct->count(), $this->perPage, $this->page);
 
-        $paginator  = new Paginator($items, $this->perPage, $this->page);
+        
+
+        // $offset = max(0, ($this->page - 1) * $this->perPage);
+
+        // $items = $this->getproduct->slice($offset, $this->perPage + 1);
+
+        // $paginator  = new Paginator($items, $this->perPage, $this->page);
        // $paginator = Product::query()->paginate($this->perPage);
         return view('livewire.product.products', ['product'=> $paginator]);
     } 

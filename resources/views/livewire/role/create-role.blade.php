@@ -11,46 +11,49 @@
                                     <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M17 9H5.414l3.293-3.293a.999.999 0 1 0-1.414-1.414l-5 5a.999.999 0 0 0 0 1.414l5 5a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L5.414 11H17a1 1 0 1 0 0-2z"></path></svg>
                                 </button>
                             </a>
-                            <h4 class="mb-0 fw-5">Create Role</h4>
+                            <h4 class="mb-0 fw-5">Add staff</h4>
+                        </div>
+                        <div class="header-btn-group">
+                            <a class="button green-btn">Add Permission</a>
                         </div>
                     </div>
                 </article>
             </section>
 
-            <section class="full-width flex-wrap admin-body-width" wire:ignore>
-
+            <section class="full-width flex-wrap admin-body-width">
                 <article class="full-width">
-
                     <div class="columns ten">
-
+                        <h3 class="fw-6 fs-16 d-flex align-item-center justify-content-space-between lh-normal lbl-mb-4">Staff</h3>
+                        <p>Give staff access to your store by sending them an invitation. If you’re working with a designer, developer, or marketer, find out how to <a class="td-underline" href="#"> give collaborator access to your store.</a></p>
                         <div class="card">
-
-                            <!-- Name -->
-
                             <article class="full-width">
-
-                                <div class="columns row">
-
-                                    <label class="lbl-mb-4">Role Name</label>
-
-                                    <input id="role_name" wire:model="role_name" class="block mt-1 w-full" type="text" name="role_name" autofocus />
-
-                                    @error('role_name') <span class="text-danger">{{ $message }}</span>@enderror
-
+                                <div class="columns six row mb-2">
+                                    <label class="lbl-mb-4">First Name</label>
+                                    <input type="text">
                                 </div>
-
+                                <div class="columns six row mb-2">
+                                    <label class="lbl-mb-4">Last Name</label>
+                                    <input type="text">
+                                </div>
                             </article>
-
+                            <p class="text-grey">Enter the staff member's first and last name as they appear on their government-issued ID.</p>
+                            <div class="row">
+                                <label class="lbl-mb-4">Email</label>
+                                <input type="Email">
+                            </div>
+                            <div class="row mb-0">
+                                <label class="lbl-mb-4">Store industry</label>
+                                <select>
+                                    <option>Manager</option>
+                                    <option>Employee</option>
+                                    <option>TL</option>
+                                    <option>User</option>
+                                </select>
+                            </div>
                         </div>
-
-                        <a wire:click="roleSave" class="button green-btn float-right" wire:ignore>save</a>
-
                     </div>
-
                 </article>
-
             </section>
-
         </form>
     </div>
 </x-admin-layout>

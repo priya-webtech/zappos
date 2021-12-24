@@ -1,11 +1,40 @@
-// $('.admin_bar ul li').removeClass('menu-dropdown');
-// $(this).parent().addClass('menu-dropdown');
+/*****admin logo and favicon upload jquery******/
+/*logo upload js*/
+$(document).ready(function(){
+	function readURL(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function(e) {
+	            $('#logoPreview').css('background-image', 'url('+e.target.result +')');
+	            $('#logoPreview').hide();
+	            $('#logoPreview').fadeIn(650);
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	$("#logoUpload").change(function() {
+	    readURL(this);
+	});
+});
+/*fav upload js*/
+$(document).ready(function(){
+	function readURL(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function(e) {
+	            $('#favPreview').css('background-image', 'url('+e.target.result +')');
+	            $('#favPreview').hide();
+	            $('#favPreview').fadeIn(650);
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	$("#favUpload").change(function() {
+	    readURL(this);
+	});
+});
 
-// $('.sub_items').hide(300);
-// $(this).parent().find('.sub_items').show(300);
-
-
-
+/******admin menu js start******/
 $(document).ready(function(){
   $('.admin_bar ul li').each(function() {
     $(this).find('.sub_items').parents('li').prepend("<a class='nav-arrow'></a>");
@@ -16,6 +45,9 @@ $(document).ready(function(){
 		$(this).parent().toggleClass('menu-dropdown').siblings().removeClass('menu-dropdown');
 	});
 });
+
+/******End******/
+
 $(document).ready(function(){
 	$('.tabs li a').click(function(){
 		var id = $(this).attr("data-id");
@@ -67,5 +99,7 @@ function showCheckboxes() {
     expanded = false;
   }
 }
+
+
 
 

@@ -34,6 +34,9 @@ use Livewire\WithPagination;
 
 use Maatwebsite\Excel\Facades\Excel;
 
+use Illuminate\Pagination\LengthAwarePaginator;
+
+
 
 
 class ListCustomers extends Component
@@ -98,15 +101,20 @@ class ListCustomers extends Component
 
         }
 
-        
+                
 
-       // $perPage = 10;
+        $items = $this->customers->forPage($this->page, $this->perPage);
 
-        $offset = max(0, ($this->page - 1) * $this->perPage);
+        $paginator = new LengthAwarePaginator($items, $this->customers->count(), $this->perPage, $this->page);
 
-        $items = $this->customers->slice($offset, $this->perPage + 1);
 
-        $paginator  = new Paginator($items, $this->perPage, $this->page);
+
+
+        // $offset = max(0, ($this->page - 1) * $this->perPage);
+
+        // $items = $this->customers->slice($offset, $this->perPage + 1);
+
+        // $paginator  = new Paginator($items, $this->perPage, $this->page);
         
       //  $paginator  = User::query()->paginate($this->perPage);
 
