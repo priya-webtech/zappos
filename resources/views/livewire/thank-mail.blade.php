@@ -31,7 +31,7 @@
 				</tr>
 				<tr>
 					<td>
-						<button style=" background-color: #035d59; border: none; color: #fff; padding: 15px 25px; display: inline-block; font-size: 1.02em; font-weight: 500; border-radius: 8px; margin-top: 1em; line-height: 22px;cursor: pointer; letter-spacing: 0.02em; text-transform: uppercase;">Login</button>
+						<a href="{{ route('home') }}"><button style=" background-color: #035d59; border: none; color: #fff; padding: 15px 25px; display: inline-block; font-size: 1.02em; font-weight: 500; border-radius: 8px; margin-top: 1em; line-height: 22px;cursor: pointer; letter-spacing: 0.02em; text-transform: uppercase;">Login</button></a>
 					</td>
 				</tr>
 				<tr>

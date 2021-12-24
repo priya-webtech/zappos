@@ -1,22 +1,16 @@
 <div>
    <div class="loading-overlay" wire:loading.flex wire:target="resetInputFields,update,EditAddress,delete, store">
 
-
-
       <div class="page-loading"></div>
 
-
-
    </div>
-
-
 
    {{-- The Master doesn't talk, he acts. --}}
 
 
 
    <x-admin-layout>
-
+@php $symbol = CurrencySymbol(); @endphp
 
 
       <div wire:key="alert" :id="1">
@@ -226,7 +220,7 @@
                         </div>
 
 
-
+                         @if($order)
                         <div class="order-details">
 
 
@@ -308,8 +302,7 @@
                                  
 
                               ?>
-
-                              <h4 class="fs-16 fw-6 mb-0">@if($order)<?php echo date_duration($order['updated_at']) ?>@endif</h4>
+                              <h4 class="fs-16 fw-6 mb-0"><?php echo date_duration($order['updated_at']) ?></h4>
 
 
 
@@ -319,7 +312,18 @@
 
                            </div>
 
+                           <?php $Stock_sum = 1; ?>
+                              @foreach($OrderItemstock as $item)
+                              @if($item->order_id == $order->id)
+                              <?php $TotalStock  = $Stock_sum++; ?>
+                              @endif
+                              @endforeach
+                              <?php 
+                               $gst = $Taxes->rate;
+                               $netamount = $order->netamout;
 
+                               $avrageTotal = $netamount/$TotalStock;
+                           ?>
 
                            <div class="columns four">
 
@@ -329,11 +333,11 @@
 
 
 
-                              <h4 class="fs-16 fw-6 mb-0">US$165.20</h4>
+                              <h4 class="fs-16 fw-6 mb-0">US{{$symbol['currency']}}{{number_format($netamount,2,'.',',')}}</h4>
 
 
 
-                              <p>4 orders</p>
+                              <p>{{$TotalStock}} orders</p>
 
 
 
@@ -349,16 +353,16 @@
 
 
 
-                              <h4 class="fs-16 fw-6 mb-0">US$41.30</h4>
+                              <h4 class="fs-16 fw-6 mb-0">US{{$symbol['currency']}}{{number_format($avrageTotal,2,'.',',')}}</h4>
 
 
 
                            </div>
 
 
-
                         </div>
 
+                     @endif
 
 
                      </div>
@@ -473,7 +477,7 @@
 
 
 
-                  <div class="order-tracking">
+                  <div class="order-tracking" wire:ignore>
 
 
 
@@ -481,7 +485,7 @@
 
 
 
-                        <textarea placeholder="Leave a comment..."></textarea>
+                        <textarea wire:model='messagetext' placeholder="Leave a comment..."></textarea>
 
 
 
@@ -569,7 +573,7 @@
 
 
 
-                           <button class="secondary post-btn">Post</button>
+                           <button class="secondary post-btn" wire:click.prevent="customercommentpost">Post</button>
 
 
 
@@ -592,255 +596,6 @@
                         <div class="order-tracking-list">
 
 
-
-                           <div class="order-msg-date">
-
-
-
-                              2 JULY
-
-
-
-                           </div>
-
-
-
-                           <div class="order-tracking-msg completed-status">
-
-
-
-                              <span>You added a note to this customer.</span>
-
-
-
-                              <span class="order-msg-time">13:52</span>
-
-
-
-                           </div>
-
-
-
-                           <div class="order-msg-date">
-
-
-
-                              26 APRIL
-
-
-
-                           </div>
-
-
-
-                           <div class="order-tracking-msg">
-
-
-
-                              <span>Order Confirmation email for order #1036 sent to this customer (demo@webkul.com).</span>
-
-
-
-                              <span class="order-msg-time">1:20</span>
-
-
-
-                           </div>
-
-
-
-                           <div class="order-tracking-msg completed-status">
-
-
-
-                              <span>You created order #1036 for this customer from draft order #D18.</span>
-
-
-
-                              <span class="order-msg-time">1:20</span>
-
-
-
-                           </div>
-
-
-
-                           <div class="order-msg-date">
-
-
-
-                              23 APRIL
-
-
-
-                           </div>
-
-
-
-                           <div class="order-tracking-msg">
-
-
-
-                              <span>Order Confirmation email for order #1033 sent to this customer (demo@webkul.com).</span>
-
-
-
-                              <span class="order-msg-time">2:26</span>
-
-
-
-                           </div>
-
-
-
-                           <div class="order-tracking-msg completed-status">
-
-
-
-                              <span>You created order #1033 for this customer from draft order #D15.</span>
-
-
-
-                              <span class="order-msg-time">2:26</span>
-
-
-
-                           </div>
-
-
-
-                           <div class="order-msg-date">
-
-
-
-                              16 APRIL
-
-
-
-                           </div>
-
-
-
-                           <div class="order-tracking-msg">
-
-
-
-                              <span>Order Confirmation email for order #1031 sent to this customer (demo@webkul.com).</span>
-
-
-
-                              <span class="order-msg-time">3:23</span>
-
-
-
-                           </div>
-
-
-
-                           <div class="order-tracking-msg completed-status">
-
-
-
-                              <span>Prashant mishra created order #1031 for this customer from draft order #D13.</span>
-
-
-
-                              <span class="order-msg-time">3:23</span>
-
-
-
-                           </div>
-
-
-
-                           <div class="order-msg-date">
-
-
-
-                              6 NOVEMBER
-
-
-
-                           </div>
-
-
-
-                           <div class="order-tracking-msg">
-
-
-
-                              <span>You sent a refund notification email for order #1014 to this customer (demo@webkul.com).</span>
-
-
-
-                              <span class="order-msg-time">1:11</span>
-
-
-
-                           </div>
-
-
-
-                           <div class="order-tracking-msg">
-
-
-
-                              <span>You sent a return instructions email for order #1014 to this customer (demo@webkul.com).</span>
-
-
-
-                              <span class="order-msg-time">1:10</span>
-
-
-
-                           </div>
-
-
-
-                           <div class="order-msg-date">
-
-
-
-                              14 OCTOBER
-
-
-
-                           </div>
-
-
-
-                           <div class="order-tracking-msg">
-
-
-
-                              <span>Order Confirmation email for order #1014 sent to this customer (demo@webkul.com).</span>
-
-
-
-                              <span class="order-msg-time">23:57</span>
-
-
-
-                           </div>
-
-
-
-                           <div class="order-tracking-msg completed-status">
-
-
-
-                              <span>You created order #1014 for this customer from draft order #D2.</span>
-
-
-
-                              <span class="order-msg-time">23:57</span>
-
-
-
-                           </div>
-
-
-
                            <div class="order-msg-date">
 
 
@@ -851,53 +606,57 @@
 
                            </div>
 
-
-
+                         @if($ordercomment)
+                           @foreach($ordercomment as $value)
                            <div class="order-tracking-msg">
-
-
-
-                              <span>Order Confirmation email for order #1008 sent to this customer (demo@webkul.com).</span>
-
-
-
-                              <span class="order-msg-time">0:14</span>
-
-
+                              <span>This customer placed order #{{$value->id}}.</span>
+                              <span class="order-msg-time"><?php echo date("h:i", strtotime($value['updated_at'])); ?></span>
 
                            </div>
+                           @endforeach
+                        @endif
 
 
-
+                           @if($commentget)
+                           @foreach($commentget as $value)
                            <div class="order-tracking-msg">
 
+                              <span>{{$value->message}}</span>
 
-
-                              <span>This customer placed order #1008 on Online Store (checkout #13021690626163).</span>
-
-
-
-                              <span class="order-msg-time">0:14</span>
-
-
+                              <span class="order-msg-time"><?php echo date("h:i", strtotime($value['updated_at'])); ?></span>
 
                            </div>
+                           @endforeach
+                           @endif
 
-
-
+                           @if($customer['email_verified_at'] != "")
                            <div class="order-tracking-msg">
 
+                              <span>Customer verified.</span>
 
+                              <span class="order-msg-time"><?php echo date("h,i", strtotime($customer['updated_at'])); ?></span>
 
+                           </div>
+                           @endif
+                           @if($customer)
+                           <div class="order-tracking-msg">
+
+                              <span>verification Meessage Send.</span>
+
+                              <span class="order-msg-time"><?php echo date("h:i", strtotime($customer['updated_at'])); ?></span>
+
+                           </div>
+                           @endif
+
+                            @if($customer)
+                           <div class="order-tracking-msg">
+                              
                               <span>Customer was created.</span>
 
-
-
-                              <span class="order-msg-time">0:13</span>
-
-
+                              <span class="order-msg-time"><?php echo date("h:i", strtotime($customer['updated_at'])); ?></span>
 
                            </div>
+                           @endif
 
 
 
@@ -956,9 +715,9 @@
                         <button class="link">{{$customer['email']}}</button>
 
 
+                       @if($customer['mobile_number'])<p>{{$customer['mobile_number']}}</p> @endif
 
                         <button class="link">
-
 
 
                            <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
@@ -999,9 +758,18 @@
 
                            @foreach($customerData['address'] as $row)
 
-                           @if($row['address_type'] == 'billing_address')
+                           @if($row['address_type'] == 'billing_address' && $row['is_billing_address'] == 'yes')
 
-                           <p>{{$row['address']}} <br> {{$row['apartment']}} <br> {{$row['postal_code']}}&nbsp;{{$row['city']}} <br> {{$row['country']}}</p>
+                           <p>
+                             <label>Address:</label>
+                             <span>@if(!empty($row['apartment'])) {{$row['apartment']}}, @endif @if(!empty($row['company'])) {{$row['company']}}, @endif {{$row['address']}}, {{$row['postal_code']}}, {{$row['city']}}, {{$row['country']}}. </span>
+                           </p>
+                           <p>
+                             <label>Phone:</label>
+
+                             <span>{{$row['mobile_no']}}</span>
+                           </p>
+                          
 
                            @endif
 
@@ -1028,9 +796,17 @@
 
                            @foreach($customerData['address'] as $row)
 
-                           @if($row['address_type'] == 'shipping_address')
+                           @if($row['address_type'] == 'shipping_address' && $row['is_billing_address'] == 'yes')
 
-                           <p>{{$row['address']}} <br> {{$row['apartment']}} <br> {{$row['postal_code']}}&nbsp;{{$row['city']}} <br> {{$row['country']}}</p>
+                           <p>
+                             <label>Address:</label>
+                             <span>@if(!empty($row['apartment'])) {{$row['apartment']}}, @endif @if(!empty($row['company'])) {{$row['company']}}, @endif {{$row['address']}}, {{$row['postal_code']}}, {{$row['city']}}, {{$row['country']}}. </span>
+                           </p>
+                           <p>
+                             <label>Phone:</label>
+
+                             <span>{{$row['mobile_no']}}</span>
+                           </p>
 
                            @endif
 

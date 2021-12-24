@@ -10,111 +10,53 @@ namespace App\Http\Livewire\Customer;
 
 use Livewire\Component;
 
-
-
 use App\Models\Country;
-
-
 
 use App\Models\CustomerDetail;
 
-
+use App\Models\tax;
 
 use App\Models\CustomerAddress;
 
-
+use App\Models\CustomerComment;
 
 use App\Models\Orders;
 
-
-
 use App\Models\order_item;
-
-
 
 use App\Models\Tag;
 
-
-
 use App\Models\User;
-
-
 
 use Illuminate\Http\Request;
 
-
-
 use Illuminate\Support\Str;
 
-
-
-
-
-
-
 class Details extends Component
-
-
-
 {
 
-
-
-    public $uuid, $customer, $countries, $tags, $customerData, $first_name, $last_name ,$address_id, $collect_tax, $agreed_to_receive_marketing_mails, $customerAddress = [], $customerBillingAddress = [], $address,$address_type,$shipping_address_type,$order,$order_item,$edit_billing_address;
-
-
-
-
-
-
+    public $uuid, $customer, $countries, $tags, $customerData, $first_name, $last_name ,$address_id, $collect_tax, $agreed_to_receive_marketing_mails, $customerAddress = [], $customerBillingAddress = [], $address,$address_type,$shipping_address_type,$order,$order_item,$edit_billing_address,$messagetext,$commentget,$ordercomment,$OrderItemstock;
 
     protected $listeners = ['update'];
-
-
-
-
-
-
-
      protected $rules = [
-
-
 
         'customerData.detail.collect_tax' => [],
 
-        
-
         'customerData.detail.email_marketing_status' => [],
-
-
 
         'customerData.first_name'=> [],
 
-
-
         'customerData.last_name'=> [],
-
-
 
         'customerData.email'=> [],
 
-
-
         'customerData.mobile_number'=> [],
-
-
 
         'customerData.detail.note' => [],
 
-
-
         'customerData.detail.agreed_to_receive_marketing_mails' => [],
 
-
-
         'customerData.detail.tags' => [],
-
-
 
     ];
 
@@ -149,48 +91,34 @@ class Details extends Component
 
 
     public function initial()
-
-
-
     {
 
-
-
         $this->customer = User::with(['detail','address'])->where('uuid',$this->uuid)->first()->toArray();
-
-        
+       
+        $this->commentget = CustomerComment::where('user_id',$this->customer['id'])->get();
 
         $this->order = orders::where('user_id',$this->customer['id'])->orderBy('id', 'DESC')->first();
-
         
+        $this->ordercomment = orders::where('user_id',$this->customer['id'])->orderBy('id', 'DESC')->get();
 
         $this->order_item = order_item::with('order_product')->with('media_product')->where('user_id',$this->customer['id'])->orderBy('id', 'DESC')->first();
 
+        $this->OrderItemstock = order_item::where('order_id',$this->order['id'])->get();
 
+        $this->Taxes = tax::where('id',1)->first();
 
         $this->customerData = $this->customer;
 
-
-
         $this->countries = Country::all();
 
-
-
         if($this->customerData['detail']) {
-
-
 
             if(isset($this->customerData['detail']['tags'])) {
 
                         $this->tags = Tag::whereNotIn('label', explode(',',$this->customerData['detail']['tags']))->get();
-
-
-
             }
 
         if($this->customerData['detail']['collect_tax'] == 'yes') {
-
-
 
             $this->customerData['detail']['collect_tax'] = true;
 
@@ -202,39 +130,19 @@ class Details extends Component
 
         if($this->customerData['detail']['agreed_to_receive_marketing_mails'] == 'yes') {
 
-
-
             $this->customerData['detail']['agreed_to_receive_marketing_mails'] = true;
-
 
         } else {
 
-
-
             $this->customerData['detail']['agreed_to_receive_marketing_mails'] = false;
-
         }
 
     }
 
-
-
     }
 
-
-
-
-
-
-
     public function render()
-
-
-
     {
-
-
-
         return view('livewire.customer.details');
 
 
@@ -388,6 +296,25 @@ class Details extends Component
         $this->address_id = $id;
 
     }
+
+    public function customercommentpost()
+    {
+
+        $Comment_arr = [
+
+            'user_id' => $this->customerData['id'],
+            
+            'message' => $this->messagetext,
+        ];
+
+
+        CustomerComment::create($Comment_arr);
+
+        $this->messagetext = '';
+
+        session()->flash('message', 'Post Created.');
+
+    }
     
 
     public function delete()
@@ -537,99 +464,38 @@ class Details extends Component
                 ]
             );
 
-
-
-        
-
-
-
             session()->flash('message', 'Users Updated Successfully.');
 
-
-
             // $this->customer = $this->customerData;
-
-
-
         }
 
-
-
-
-
-
-
         if($flag == 'collect_tax')
-
-
-
         {
-
-
 
             if ($this->customerData['detail']['collect_tax'] == 'no') {
 
-
-
                 $tax = 'yes';
-
-
-
             } 
-
-
-
             else {
-
-
 
                 $tax = 'no';
 
-
-
             }
-
-
 
                 CustomerDetail::where('user_id', $this->customerData['id'])->update([
 
-
-
                     'collect_tax' =>  $tax
-
-
 
                 ]);
 
 
-
-        
-
-
-
             // $this->customer = $this->customerData;
-
-
-
-
-
-
 
             session()->flash('message', 'Users Updated Successfully.');
 
-
-
         }
 
-
-
-
-
-
-
         if($flag == 'email_marketing_status')
-
-
 
         {
 

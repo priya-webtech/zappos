@@ -190,21 +190,19 @@ class ListCustomers extends Component
 
             if ($account_status == 'Disabled account') {
 
-                $query->onlyTrashed();
+                $query->whereNull('email_verified_at');
 
             } else {
 
-                if ($account_status == 'Active account') $query->where('status', 'active');
+                if ($account_status == 'Active account') $query->where('email_verified_at','!=', '');
 
-                if ($account_status == 'Disabled account') $query->where('status', 'disabled');
+                if ($account_status == 'Disabled account') $query->whereNull('email_verified_at');
 
-                if ($account_status == 'Invited to create account') $query->where('status', 'invited');
+               /* if ($account_status == 'Invited to create account') $query->where('status', 'invited');
 
-                if ($account_status == 'Declined account invitation') $query->where('status', 'declined');
+                if ($account_status == 'Declined account invitation') $query->where('status', 'declined');*/
 
             }
-
- 
 
         })->when($this->customer_language, function ($query, $customer_language) {
 

@@ -190,7 +190,7 @@
 
                                                     for="disabled-account">Disabled account</label></li>
 
-                                        <li><input wire:model="account_status" value="Invited to create account"
+                                       <!--  <li><input wire:model="account_status" value="Invited to create account"
 
                                                    id="invited-create account" type="radio" class="change-filter">
 
@@ -204,7 +204,7 @@
 
                                             <label for="declined-account-invitation">Declined account invitation</label>
 
-                                        </li>
+                                        </li> -->
 
                                         <li><a class="clear-btn" type="button" wire:click="removeFilter(2)">Clear</a>
 
