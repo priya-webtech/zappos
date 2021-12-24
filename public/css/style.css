@@ -22,6 +22,9 @@ body{
  .lh-normal {
      line-height: normal;
 }
+.m-height-auto {
+    min-height: auto;
+}
  section .card p {
     color: #202223;
 }
@@ -969,6 +972,9 @@ code {
      color: #202223;
 }
 /******* Media Upload ********************************/
+::-webkit-file-upload-button {
+    cursor: pointer;
+}
  .file_upload_area {
      min-height: 200px;
      border: 2px dashed #8c9196;
@@ -979,6 +985,7 @@ code {
      position: relative;
      transition: 0.3s;
      cursor: pointer;
+}
 }
  .file_upload_area:hover{
      background-color: #f6f6f7;
@@ -1949,7 +1956,7 @@ code {
      display: flex;
      flex-wrap: wrap;
      justify-content: flex-end;
-     align-items: flex-end;
+     align-items: center;
      padding: .4rem;
      border: .1rem solid #c9cccf;
      background: rgb(255 255 255);
@@ -2186,10 +2193,13 @@ code {
      left: 50%;
      transform: translate(-50%, -50%);
 }
- .comment-box textarea {
-     min-height: 46px;
-     line-height: 24px;
-     padding: 10px 12px;
+.comment-box textarea {
+    min-height: 36px;
+    line-height: 20px;
+    padding: 7px 8px;
+    border: none;
+    box-shadow: none;
+    flex: 1 1 0;
 }
  .add-note-textarea {
      position:relative;
@@ -6936,26 +6946,48 @@ code {
      border-radius: 3px !important;
 }
 
+
+
 .avatar-upload {
     position: relative;
     display: inline-block;
     border-radius: 4px;
     overflow: hidden;
+    width: 100%;
+    border: 1px dashed #8c9196;
+}
+.avatar-edit {
+    text-align: center;
+    padding: 20px;
+}
+.avatar-upload .avatar-edit input[type="file" i] {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+.avatar-edit img {
+    width: 40px;
+    height: 40px;
+    display: block;
+    margin: 0 auto;
+}
+.avatar-edit button {
+    margin: 8px 0;
+    line-height: 20px;
+}
+.add-customer-part .card .avatar-edit label {
+    color: #6d7175;
+    font-size: 12px;
+    line-height: normal;
 }
 .avatar-upload .avatar-edit input {
     display: none;
-}
-
-.avatar-upload .avatar-preview {
-    width: 100px;
-    height: 100px;
-    position: relative;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    background-image: url(/assets/images/upload-icon.png);
-    background-position: center center;
-    background-size: 45px;
-    background-repeat: no-repeat;
 }
 .avatar-upload .avatar-preview > div {
     width: 100%;
@@ -6963,26 +6995,10 @@ code {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-}
-.avatar-edit {
     position: absolute;
-    z-index: 1;
     top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-.add-customer-part .card .avatar-edit label {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-weight: 600;
-    font-size: 0;
+    background-color: #fff;
+    display: none;
 }
 .avatar-upload .avatar-edit input + label:hover {
     background: rgba(0,0,0,.5);
@@ -8998,4 +9014,32 @@ input[type=number]::-webkit-inner-spin-button {
     height: 20px;
     color: #5c5f62;
     margin-right: 12px;
+}
+
+/*Users and permissions page css*/
+.card-img {
+    width: 40px;
+    height: 40px;
+}
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.staff-card .ssd-local-delivery {
+    margin: 0 20px;
+    padding-right: 0;
+    padding-left: 16px;
+}
+.staff-img {
+    color: #3d2800;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffc96b;
+    font-size: 20px;
+    font-weight: 400;
+    border-radius: 100%;
 }

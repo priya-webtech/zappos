@@ -162,8 +162,8 @@
                             </button>
                             <button class="secondary post-btn">Post</button>
                         </div>
-                        <p>Only you and other staff can see comments</p>
                     </div>
+                    <p class="ta-right pt-8 pb-8">Only you and other staff can see comments</p>
                     <div class="order-tracking-details">
                         <div class="order-tracking-list">
                             <div class="order-msg-date">

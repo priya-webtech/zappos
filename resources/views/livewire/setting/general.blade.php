@@ -47,11 +47,13 @@
                             </article>
                             <div class="row mb-0">
                                 <div class="columns six row field_style1 mb-2">
-                                    <label>Add Logo</label>
+                                    <label>Add logo for admin panel</label>
                                     <div class="avatar-upload">
                                         <div class="avatar-edit">
                                             <input type='file' id="logoUpload" accept=".png, .jpg, .jpeg" />
-                                            <label for="logoUpload">Add Logo</label>
+                                            <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                            <button class="secondary">Add logo</button>
+                                            <label for="logoUpload">or drop files to upload</label>
                                         </div>
                                         <div class="avatar-preview">
                                             <div id="logoPreview" style="background-image: url();">
@@ -60,11 +62,13 @@
                                     </div>
                                 </div>
                                 <div class="columns six row field_style1 mb-2">
-                                    <label>Add favicon</label>
+                                    <label>add favicon for admin panel</label>
                                     <div class="avatar-upload">
                                         <div class="avatar-edit">
                                             <input type='file' id="favUpload" accept=".png, .jpg, .jpeg" />
-                                            <label for="favUpload">Add Logo</label>
+                                            <img src="{{ url('assets/images/upload-icon.svg') }}">
+                                            <button class="secondary">Add favicon</button>
+                                            <label for="favUpload">or drop files to upload</label>
                                         </div>
                                         <div class="avatar-preview">
                                             <div id="favPreview" style="background-image: url();">
