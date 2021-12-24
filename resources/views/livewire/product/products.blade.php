@@ -10,7 +10,7 @@
             <a class="button green-btn" href="{{ route('products.create') }}">Add Product</a>
             @endif
         </div>
-    </div>
+    </div> 
 
     <div class="columns product_listing_columns pdpage-checkbox has-sections card ml-0" wire:ignore.self>
         <ul class="tabs">
