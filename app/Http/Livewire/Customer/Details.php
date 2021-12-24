@@ -35,7 +35,7 @@ use Illuminate\Support\Str;
 class Details extends Component
 {
 
-    public $uuid, $customer, $countries, $tags, $customerData, $first_name, $last_name ,$address_id, $collect_tax, $agreed_to_receive_marketing_mails, $customerAddress = [], $customerBillingAddress = [], $address,$address_type,$shipping_address_type,$order,$order_item,$edit_billing_address,$messagetext,$commentget,$ordercomment,$OrderItemstock;
+    public $uuid, $customer, $countries, $tags, $Taxes, $customerData, $first_name, $last_name ,$address_id, $collect_tax, $agreed_to_receive_marketing_mails, $customerAddress = [], $customerBillingAddress = [], $address,$address_type,$shipping_address_type,$order,$order_item,$edit_billing_address,$messagetext,$commentget,$ordercomment,$OrderItemstock;
 
     protected $listeners = ['update'];
      protected $rules = [
@@ -102,7 +102,7 @@ class Details extends Component
         $this->ordercomment = orders::where('user_id',$this->customer['id'])->orderBy('id', 'DESC')->get();
 
         $this->order_item = order_item::with('order_product')->with('media_product')->where('user_id',$this->customer['id'])->orderBy('id', 'DESC')->first();
-
+        
         $this->OrderItemstock = order_item::where('order_id',$this->order['id'])->get();
 
         $this->Taxes = tax::where('id',1)->first();

@@ -4,16 +4,44 @@ namespace App\Http\Livewire\RolePermission;
 
 use Livewire\Component;
 use App\Models\rolepermission;
+use App\Models\User;
 use App\Models\role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CreateRolePermission extends Component
 {
-    public $role_data;
+    public $role_data,$roll_id,$privilege_user_selected=[];
 
     public function mount(){
+        $privilege_user_selected = array();
+        if (!empty($user_data)) {
+            foreach ($user_data as $privilege_user_data_val) {
+                $this->privilege_user_selected[] = $privilege_user_data_val->privilege . '_' . $privilege_user_data_val->privilege_sub;
+            }
+        }
 
+         
         $this->role_data = role::get();
+    }
+
+    public function edit()
+    {   
+        $id = $this->roll_id;
+        $per = User::where('id', $id)->first();
+        $user_data = rolepermission::where('user_id', $id)->get();
+        $privilege_user_selected = array();
+        if (!empty($user_data)) {
+            foreach ($user_data as $privilege_user_data_val) {
+                $this->privilege_user_selected[] = $privilege_user_data_val->privilege . '_' . $privilege_user_data_val->privilege_sub;
+            }
+        }
+      //  return view('livewire.role-permission.create-role-permission', compact(['per', 'privilege_user_selected']));
+        // $iti_list = Itineraries::all();
+        // $testimonials = Testimoial::all();
+        // $result=NationalPark::where('id',$id)->get();
+        // $result=$result[0];
+        // return view('admin.national_parks.update',compact('result', 'iti_list', 'testimonials'));
     }
     public function render()
     {
@@ -23,35 +51,28 @@ class CreateRolePermission extends Component
     public function save(Request $request)
     {
 
-        $user_validation = [
-            'role_id' => 'required',
+
+        if($request->role_name){
+       
+        $role_data = [
+            'name' => $request->role_name,
+            'guard_name' => 'web',
         ];
 
+        $role = role::create($role_data);
 
-/*        
-        if($request->role_id==null){
-            $role=role::create(
+        $new_role_id = role::orderBy('id', 'DESC')->first();
 
-                [
-                    'name'  => $request->role_name,
-                    'guard_name'  => 'web',
-                ]
-            );
+        $user_id = $new_role_id['id'];
+        }else
+        {
+            
+            $user_id = $request->role_id;
         }
-        else{
-             $role=role::findOrFail($request->role_id);
-             $role->update(
-                 [
-                  'name'  => $request->role_name,
-                  'guard_name'  => 'web',
-                
-                ]
-            );
-        }*/
+
 
         $assign_privilege_array = $request->assign_privilege;
 
-        $user_id = $request->role_id;
         $manage_privilege_array = array();
         if (count($assign_privilege_array) != 0) {
             foreach ($assign_privilege_array as $assign_privilege_array_key => $assign_privilege_array_val) {
