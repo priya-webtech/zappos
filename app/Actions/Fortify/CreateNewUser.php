@@ -8,6 +8,8 @@ namespace App\Actions\Fortify;
 
 use App\Models\User;
 
+use App\Models\CustomerDetail;
+
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\Session;
@@ -74,11 +76,15 @@ class CreateNewUser implements CreatesNewUsers
 
             ]);
 
+            CustomerDetail::create([
+                'user_id' => $user->id,
+            ]);
+
             $user->assignRole('customer');
 
             session()->flash('success', 'Email verification mail is sent');
 
-         //   $user->sendEmailVerificationNotification();
+           $user->sendEmailVerificationNotification();
 
 
 
