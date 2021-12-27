@@ -18,6 +18,7 @@ class CreateRole extends Component
 	public $first_name = '';
     public $last_name = '';
     public $email = '';
+    public $role_value = '';
     public $mobile_number = '', $selected_id;
     protected $listeners = ['store', 'edit', 'update', 'delete'];
     public $updateMode = false;
@@ -50,13 +51,16 @@ class CreateRole extends Component
     }
     public function store()
     {
+
+        
         $user_data = [
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
-            'role' => $this->role,
+            'role' => $this->role_value,
             'mobile_number' => $this->mobile_number,
         ];
+
         Validator::make($user_data, [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
@@ -71,7 +75,7 @@ class CreateRole extends Component
             $user_data['email_verified_at'] = now();
         }
         $user = User::create($user_data);
-        $user->assignRole($this->role);
+        //$user->assignRole($this->role);
         $this->resetCreateForm();
         $user['pw'] = $pw;
         // $this->sendLoginDetail($user);

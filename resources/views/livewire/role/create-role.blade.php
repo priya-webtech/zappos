@@ -6,10 +6,10 @@
                 <article class="full-width">
                     <div class="columns customers-details-heading">
                         <div class="page_header d-flex  align-item-center">
-                            <a href="{{ route('role') }}">
-                                <button class="secondary icon-arrow-left mr-2">
+                            <a href="{{ route('role') }}" class="secondary icon-arrow-left mr-2">
+                                
                                     <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M17 9H5.414l3.293-3.293a.999.999 0 1 0-1.414-1.414l-5 5a.999.999 0 0 0 0 1.414l5 5a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L5.414 11H17a1 1 0 1 0 0-2z"></path></svg>
-                                </button>
+                                
                             </a>
                             <h4 class="mb-0 fw-5">Add staff</h4>
                         </div>
@@ -46,7 +46,7 @@
                                     @error('email') <span class="text-danger">{{ $message }}</span>@enderror                            </div>
                             <div class="row mb-0">
                                 <label class="lbl-mb-4">Store industry</label>
-                                <select wire:model="role">
+                                <select wire:model="role_value">
                                     <option value="">Select role</option>
                                     @if($getrole)
                                     @foreach($getrole as $row)
@@ -54,7 +54,7 @@
                                     @endforeach
                                     @endif
                                 </select>
-                                 @error('role') <span class="text-danger">{{ $message }}</span>@enderror
+                                 @error('role_value') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="row field_style1 mb-2">
                                 <label>Phone Number</label>

@@ -40,7 +40,7 @@
                                     A
                                 </div>
                                 <div class="ssd-local-delivery-tittle">
-                                    <a class="fs-14 fw-4 mb-0 lh-normal">{{$user->first_name}} {{$user->last_name}}</a>
+                                    <a class="fs-14 fw-4 mb-0 lh-normal" wire:click.prevent="UpdateVarient('add-varient-type')">{{$user->first_name}} {{$user->last_name}}</a>
                                     <p class="mb-0">Invitation sent</p>
                                 </div>
                                 <p class="mb-0 ml-auto">Limited permissions</p>
