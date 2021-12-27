@@ -114,42 +114,38 @@
                                 <label>Legal name of company</label>
                                 <input type="text" value="Webkul">
                             </div>
-                            <div class="row">
-                                <label>Phone</label>
-                                <input type="text" value="09999999999">
-                            </div>
-                            <div class="row">
-                                <label>Address</label>
-                                <input type="text" value="A-67">
-                            </div>
-                            <div class="row">
-                                <label>Apartment, suite, etc.</label>
-                                <input type="text" value="91-C">
-                            </div>
-                            <div class="row">
-                                <label>City</label>
-                                <input type="text" value="Noida">
-                            </div>
-                            <article class="full-width three-col-row">
+                            <article class="full-width">
+                                <div class="columns nine row field_style1 mb-2">
+                                    <label>Street Name</label>
+                                    <input type="text" value="Street Name">
+                                </div>
+                                <div class="columns three row field_style1 mb-2">
+                                    <label>Unit Number</label>
+                                    <input type="text" value="12a">
+                                </div>
+                            </article>
+                            <article class="full-width">
                                 <div class="columns six row field_style1 mb-2">
-                                    <label>Country/region</label>
-                                    <select>
-                                        <option>india</option>
-                                        <option>usa</option>
-                                        <option>aus</option>
+                                    <label>Zip</label>
+                                    <input type="text" value="123 AB">
+                                </div>
+                                <div class="columns six row field_style1 mb-2">
+                                    <label>City</label>
+                                    <input type="text" value="Enter City">
+                                </div>
+                            </article>
+                            <article class="full-width">
+                                <div class="columns six row field_style1 mb-2">
+                                    <label>Country</label>
+                                    <select id="Country">
+                                        <option value="Afghanistan">Afghanistan</option>
+                                        <option value="Brazil">Brazil</option>
+                                        <option value="France">France</option>
                                     </select>
                                 </div>
                                 <div class="columns six row field_style1 mb-2">
-                                    <label>State</label>
-                                    <select>
-                                        <option>gujarat</option>
-                                        <option>bihar</option>
-                                        <option>asham</option>
-                                    </select>
-                                </div>
-                                <div class="columns six row field_style1 mb-2">
-                                    <label>PIN code</label>
-                                    <input type="text" value="201301">
+                                    <label>Phone</label>
+                                    <input type="text" value="123-456-7890">
                                 </div>
                             </article>
                         </div>

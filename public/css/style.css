@@ -4207,6 +4207,9 @@ code {
      display: flex;
      margin: 0;
 }
+.edit-quantity-available .sendButton {
+    flex: 0 0 auto;
+}
  .add-set-tab button {
      background: transparent;
      color: #202223;
