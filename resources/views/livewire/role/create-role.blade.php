@@ -6,10 +6,10 @@
                 <article class="full-width">
                     <div class="columns customers-details-heading">
                         <div class="page_header d-flex  align-item-center">
-                            <a href="{{ route('role') }}" class="secondary icon-arrow-left mr-2">
-                                
+                            <a href="{{ route('role') }}">
+                               <button class="secondary icon-arrow-left mr-2">
                                     <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M17 9H5.414l3.293-3.293a.999.999 0 1 0-1.414-1.414l-5 5a.999.999 0 0 0 0 1.414l5 5a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L5.414 11H17a1 1 0 1 0 0-2z"></path></svg>
-                                
+                                </button>
                             </a>
                             <h4 class="mb-0 fw-5">Add staff</h4>
                         </div>
@@ -44,8 +44,8 @@
                                 <label class="lbl-mb-4">Email</label>
                                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required wire:model="email"  />
                                     @error('email') <span class="text-danger">{{ $message }}</span>@enderror                            </div>
-                            <div class="row mb-0">
-                                <label class="lbl-mb-4">Store industry</label>
+                            <div class="row">
+                                <label class="lbl-mb-4">Select role</label>
                                 <select wire:model="role_value">
                                     <option value="">Select role</option>
                                     @if($getrole)
@@ -65,22 +65,13 @@
                     </div>
                 </article>
             </section>
-            <section class="full-width flex-wrap">
-            <article class="full-width">
-                <div class="columns one mb-0"></div>
-                <div class="columns seven mb-0"></div>
-                <div class="columns three m-0">
-                    <div style="text-align: right;">
-                       
-                            <x-jet-button class="ml-4" wire:click.prevent="$emit('store')">
-                                {{ __('Save') }}
-                            </x-jet-button>
-                      
-                    </div>
+            <section class="full-width flex-wrap admin-body-width">
+                <div class="page-bottom-btn">
+                    <x-jet-button class="button green-btn ml-auto" wire:click.prevent="$emit('store')">
+                        {{ __('Save') }}
+                    </x-jet-button>
                 </div>
-                <div class="columns one mb-0"></div>
-            </article>
-        </section>
+            </section>
         </form>
     </div>
 </x-admin-layout>

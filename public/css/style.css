@@ -9046,3 +9046,24 @@ input[type=number]::-webkit-inner-spin-button {
     font-weight: 400;
     border-radius: 100%;
 }
+
+/*Role and permition page css*/
+.info-row {
+    display: flex;
+    margin-top: 4px;
+}
+.info-row label {
+    margin-right: 8px;
+    font-weight: 600;
+    width: 125px;
+}
+.role-permission-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.role-permission-list span.tag {
+    font-weight: 500;
+    color: #202223;
+    padding: 4px 12px;
+    margin-right: 8px;
+}
