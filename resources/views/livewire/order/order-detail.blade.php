@@ -18,7 +18,7 @@
                     <div class="more-actions-dp">
                         <button class="button link head-arrow-btn">More actions <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button>
                         <ul class="filter-dropdown">
-                            <li>
+                            <li> 
                                 <button class="link">
                                     <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M7.5 2A1.5 1.5 0 0 0 6 3.5V13a1 1 0 0 0 1 1h9.5a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 16.5 2h-9zm-4 4H4v10h10v.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 16.5v-9A1.5 1.5 0 0 1 3.5 6z"></path></svg>
                                     Duplicate
@@ -107,28 +107,28 @@
                         <li>
                             <span>Subtotal(excluding GST)</span>
                             <span>{{$Stock_sum}} item</span>
-                            <span>{{$symbol['currency']}}{{round($withoutgstaount,2) }}</span>
+                            <span>{{$symbol['currency']}}{{number_format($withoutgstaount,2,'.',',')}}</span>
                         </li>
                         <li>
                             <span>Tax</span>
                             <span>IGST {{$gst}}%</span>
-                            <span>{{$symbol['currency']}}{{round($gst_include,2) }}</span>
+                            <span>{{$symbol['currency']}}{{number_format($gst_include,2,'.',',')}}</span>
                         </li>
                         <li>
                             <span>Subtotal(including GST)</span>
                             <span>{{$Stock_sum}} item</span>
-                            <span>{{$symbol['currency']}}{{ round($netamount,2) }}</span>
+                            <span>{{$symbol['currency']}}{{number_format($netamount,2,'.',',')}}</span>
                         </li>
                         
                         <li>
                             <span class="fw-6">Total</span>
                             <span class="fw-6"></span>
-                            <span class="fw-6">{{$symbol['currency']}}{{ round($netamount,2) }}</span>
+                            <span class="fw-6">{{$symbol['currency']}}{{number_format($netamount,2,'.',',')}}</span>
                         </li>
                         <li>
                             <span>Paid by customer</span>
                             <span></span>
-                            <span>{{$symbol['currency']}}{{ round($netamount,2) }}</span>
+                            <span>{{$symbol['currency']}}{{number_format($netamount,2,'.',',')}}</span>
                         </li>
                     </ul>
                 </div>
@@ -136,9 +136,9 @@
                     <h3 class="fs-16 fw-6 mb-0">Timeline</h3>
                     <label><input type="checkbox" name="option2a" checked="checked">Show comments</label>
                 </div>
-                <div class="order-tracking">
+                <div class="order-tracking" wire:ignore>
                     <div class="row add-note-textarea comment-box mb-0">
-                        <textarea placeholder="Leave a comment..."></textarea>
+                        <textarea wire:model='messagetext' placeholder="Leave a comment..."></textarea>
                         <div class="comment-button">
                             <button class="secondary">
                                 <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
@@ -160,7 +160,7 @@
                                     <path d="M5.243 20a5.228 5.228 0 0 1-3.707-1.533A5.213 5.213 0 0 1 0 14.759c0-1.402.546-2.719 1.536-3.708l9.515-9.519a5.25 5.25 0 0 1 8.553 1.7A5.21 5.21 0 0 1 20 5.24a5.208 5.208 0 0 1-1.535 3.708l-4.258 4.26a3.124 3.124 0 0 1-5.092-1.012A3.098 3.098 0 0 1 8.879 11c0-.835.324-1.619.914-2.208l4.5-4.501a1 1 0 1 1 1.414 1.414l-4.5 4.501a1.112 1.112 0 0 0-.328.794A1.114 1.114 0 0 0 12 12.12c.297 0 .582-.118.793-.327l4.258-4.26A3.223 3.223 0 0 0 18 5.24c0-.866-.337-1.681-.949-2.293a3.248 3.248 0 0 0-4.586 0L2.95 12.465A3.224 3.224 0 0 0 2 14.76c0 .866.338 1.68.95 2.293a3.248 3.248 0 0 0 4.586 0l1.757-1.758a1 1 0 1 1 1.414 1.414L8.95 18.467A5.236 5.236 0 0 1 5.243 20z"></path>
                                 </svg>
                             </button>
-                            <button class="secondary post-btn">Post</button>
+                            <button class="secondary post-btn" wire:click.prevent="ordercommentpost">Post</button>
                         </div>
                     </div>
                     <p class="ta-right pt-8 pb-8">Only you and other staff can see comments</p>
@@ -169,7 +169,15 @@
                             <div class="order-msg-date">
                                25 MAY
                             </div>
-                            <div class="order-tracking-msg completed-status tracking-details-btn-main">
+                            @if($commentget)
+                            @foreach($commentget as $row)
+                            <div class="order-tracking-msg completed-status">
+                                <span>{{$row->message}}</span>
+                                <span class="order-msg-time"><?php echo date("h:i", strtotime($row['updated_at'])); ?></span>
+                            </div>
+                            @endforeach
+                            @endif
+                           <!--  <div class="order-tracking-msg completed-status tracking-details-btn-main">
                                 <div class="tracking-details-btn">
                                     <span>Order confirmation email was sent to John Doe (johndoe@webkul.com).</span>
                                     <span class="order-msg-time">7:30</span>
@@ -183,7 +191,7 @@
                             <div class="order-tracking-msg completed-status">
                                 <span>Jameelll Ahmaddd created this order for John Doe from draft order <a href="#">#D25</a>.<p>Taxes are calculated by</p></span>
                                 <span class="order-msg-time">7:30</span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -198,7 +206,7 @@
                     </div>
                 </div>
                 <div class="card od-customer-card">
-                    @if($order['user'])
+                    @if(!empty($order['user'][0]))
                     <div class="card-header">
                         <div class="header-title">
                             <h3 class="fs-16 fw-6 mb-0">Customer</h3>
@@ -212,11 +220,14 @@
                             <h4 class="fs-12  fw-6 mb-0">CONTACT INFORMATION </h4>
                             <button class="link" onclick="document.getElementById('edit-contact-informatio-modal').style.display='block'">Edit</button>
                         </div>
+                        
+                        @if(!empty($order['user'][0]))
                         <p><a href="#" onclick="document.getElementById('contact-customer-modal').style.display='block'">@if($order['user']){{$order['user'][0]['email']}}@endif</a> <a href="#"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M15 2a1 1 0 0 1 1 1v13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16.5V3a1 1 0 1 1 2 0v1a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V3a1 1 0 0 1 1-1zm-4 2H9a1 1 0 1 1 0-2h2a1 1 0 1 1 0 2z"></path></svg></a></p>
                         @if($order['user'][0]['mobile_number'])
                         <p class="text-grey">{{$order['user'][0]['mobile_number']}}</p>
                         @else
                         <p class="text-grey">No phone number</p>
+                        @endif
                         @endif
                     </div>
                     

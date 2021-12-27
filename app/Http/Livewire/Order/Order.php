@@ -8,21 +8,35 @@ use App\Models\Orders;
 
 use App\Models\order_item;
 
+use Livewire\WithPagination;
+
+use Illuminate\Pagination\LengthAwarePaginator;
+
+
 
 class Order extends Component
 {
 
-    public $order,$OrderItem;
+	use WithPagination;
+
+    public $OrderItem;
+
+    public $perPage = 10;
+
 
     public function mount() {
 
-       $this->order = Orders::with('user')->where('transactionid','!=','0' )->get();
        $this->OrderItem = order_item::get();
 
     }
 
     public function render()
     {
-        return view('livewire.order.order');
+    	
+		$orders = Orders::with('user')->where('transactionid','!=','0' )->get();
+        $items = $orders->forPage($this->page, $this->perPage);
+        $paginator = new LengthAwarePaginator($items, $orders->count(), $this->perPage, $this->page);
+        
+        return view('livewire.order.order', ['order' => $paginator]);
     }
 }

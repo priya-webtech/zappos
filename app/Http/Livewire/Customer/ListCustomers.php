@@ -34,6 +34,9 @@ use Livewire\WithPagination;
 
 use Maatwebsite\Excel\Facades\Excel;
 
+use Illuminate\Pagination\LengthAwarePaginator;
+
+
 
 
 class ListCustomers extends Component
@@ -98,15 +101,20 @@ class ListCustomers extends Component
 
         }
 
-        
+                
 
-       // $perPage = 10;
+        $items = $this->customers->forPage($this->page, $this->perPage);
 
-        $offset = max(0, ($this->page - 1) * $this->perPage);
+        $paginator = new LengthAwarePaginator($items, $this->customers->count(), $this->perPage, $this->page);
 
-        $items = $this->customers->slice($offset, $this->perPage + 1);
 
-        $paginator  = new Paginator($items, $this->perPage, $this->page);
+
+
+        // $offset = max(0, ($this->page - 1) * $this->perPage);
+
+        // $items = $this->customers->slice($offset, $this->perPage + 1);
+
+        // $paginator  = new Paginator($items, $this->perPage, $this->page);
         
       //  $paginator  = User::query()->paginate($this->perPage);
 
@@ -168,7 +176,7 @@ class ListCustomers extends Component
 
             $query->whereHas('detail', function ($q) use ($tagged_with) {
 
-                return $q->where('tags', 'LIKE', '%' . $tagged_with . ',%');
+                return $q->where('tags', 'LIKE', '%' . $tagged_with . '%');
 
             });
 
@@ -190,21 +198,19 @@ class ListCustomers extends Component
 
             if ($account_status == 'Disabled account') {
 
-                $query->onlyTrashed();
+                $query->whereNull('email_verified_at');
 
             } else {
 
-                if ($account_status == 'Active account') $query->where('status', 'active');
+                if ($account_status == 'Active account') $query->where('email_verified_at','!=', '');
 
-                if ($account_status == 'Disabled account') $query->where('status', 'disabled');
+                if ($account_status == 'Disabled account') $query->whereNull('email_verified_at');
 
-                if ($account_status == 'Invited to create account') $query->where('status', 'invited');
+               /* if ($account_status == 'Invited to create account') $query->where('status', 'invited');
 
-                if ($account_status == 'Declined account invitation') $query->where('status', 'declined');
+                if ($account_status == 'Declined account invitation') $query->where('status', 'declined');*/
 
             }
-
- 
 
         })->when($this->customer_language, function ($query, $customer_language) {
 

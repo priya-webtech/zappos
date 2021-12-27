@@ -5,7 +5,7 @@
         <article class="full-width">
             <div class="columns customers-details-heading">
                 <div class="page_header d-flex  align-item-center">
-                    <a href="{{ route('role-permission') }}">
+                    <a href="{{ route('create-role') }}">
                         <button class="secondary icon-arrow-left mr-2">
                             <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M17 9H5.414l3.293-3.293a.999.999 0 1 0-1.414-1.414l-5 5a.999.999 0 0 0 0 1.414l5 5a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L5.414 11H17a1 1 0 1 0 0-2z"></path></svg>
                         </button>
@@ -28,8 +28,8 @@
                                         <div class="row">
                                             <div class="col s12 m6 l10 d-flex align-center">
                                                 <h4 class="fs-18 mb-0 fw-6">User Role</h4>
-                                                <a class="link ml-auto blue-color create-new-role-btn">Create New Role</a>
-                                                <a class="link ml-auto blue-color select-role-btn">Select Role</a>
+                                                <a class="link ml-auto blue-color create-new-role-btn"  wire:ignore.self>Create New Role</a>
+                                                <a class="link ml-auto blue-color select-role-btn" wire:ignore.self>Select Role</a>
                                             </div>
                                             <div class="col s12 m6 l2">
                                             </div>
@@ -49,18 +49,18 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="row create-role-field mb-0">
+                                            <div class="row create-role-field mb-0"  wire:ignore.self>
                                                 <label class="lbl-mb-4">Create New Role</label>
-                                                <input type="text">
+                                                <input type="text" name="role_name">
                                             </div>
-                                            <div class="row row-mb-0 role-name-field">
+                                            <div class="row row-mb-0 role-name-field" wire:ignore.self>
                                                 <div class="col m12 s12">
                                                     <div class="input-field">
                                                         <div><label class="lbl-mb-4" for="title">Role Name *</label></div>
-                                                        <select name="role_id">
+                                                        <select name="role_id" wire:model="roll_id" wire:change="edit">
                                                             <option value="">-- Select Option --</option>
                                                             @foreach($role_data as $row)
-                                                            <option value="{{ ($row->id) ? $row->id : $row->id }}">{{$row->name}}</option>
+                                                            <option  value="{{ ($row->id) ? $row->id : $row->id }}">{{$row->name}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -488,7 +488,7 @@
 
                                     </thead>
 
-                                    <tbody class="fs-14">
+                                    <tbody class="fs-14" wire:ignore.self>
 
                                         @foreach($privilege_array as $Privilegearray_key => $Privilegearray_value)
 
@@ -512,14 +512,14 @@
 
                                                         $match_data = $Privilegearray_key . '_' . $item_array_key;
 
-                                                     /*   if (in_array($match_data, $privilege_user_selected)) {
+                                                       if (in_array($match_data, $privilege_user_selected)) {
 
                                                             $match_data_checked = "checked";
 
-                                                        }*/
+                                                        }
 
                                                         ?>
-                                                        <input data-parent="<?php echo $Privilegearray_key; ?>" type="checkbox" name="assign_privilege[<?php echo $Privilegearray_key; ?>][<?php echo $item_array_key; ?>]" value="1" id="<?php echo $match_data; ?>" class="sub_item sub_item_<?php echo $Privilegearray_key ?> <?php echo $Privilegearray_key; ?>_<?php echo $item_array_key; ?>" data-value="<?php echo $item_array_key; ?>" <?php echo $match_data_checked; ?>>
+                                                        <input wire:ignore.self data-parent="<?php echo $Privilegearray_key; ?>" type="checkbox" name="assign_privilege[<?php echo $Privilegearray_key; ?>][<?php echo $item_array_key; ?>]" value="1" id="<?php echo $match_data; ?>" class="sub_item sub_item_<?php echo $Privilegearray_key ?> <?php echo $Privilegearray_key; ?>_<?php echo $item_array_key; ?>" data-value="<?php echo $item_array_key; ?>" <?php echo $match_data_checked; ?>>
 
 
                                                 </td>

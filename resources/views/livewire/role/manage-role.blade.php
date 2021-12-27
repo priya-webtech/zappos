@@ -31,79 +31,22 @@
                     </div>
                     <div class="card card-pd-0">
                         <div class="card-header title-pb-0">
-                            <h3 class="fw-6 fs-16 d-flex align-item-center justify-content-space-between lh-normal mb-0">Staff (7 of 15) <a class="fs-14 fw-4" href="#">Add staff</a></h3>
+                            <h3 class="fw-6 fs-16 d-flex align-item-center justify-content-space-between lh-normal mb-0">Staff (7 of 15) <a class="fs-14 fw-4" href="{{ route('create-role') }}">Add staff</a></h3>
                         </div>
                         <div class="card-middle bd_none card-pd-0 staff-card">
+                            @foreach($users as $user)
                             <div class="ssd-local-delivery">
                                 <div class="staff-img">
                                     A
                                 </div>
                                 <div class="ssd-local-delivery-tittle">
-                                    <a class="fs-14 fw-4 mb-0 lh-normal">Ajay</a>
+                                    <a class="fs-14 fw-4 mb-0 lh-normal">{{$user->first_name}} {{$user->last_name}}</a>
                                     <p class="mb-0">Invitation sent</p>
                                 </div>
                                 <p class="mb-0 ml-auto">Limited permissions</p>
                             </div>
-                            <div class="ssd-local-delivery">
-                                <div class="staff-img">
-                                    S
-                                </div>
-                                <div class="ssd-local-delivery-tittle">
-                                    <a class="fs-14 fw-4 mb-0 lh-normal">sunil-shop3 Admin</a>
-                                    <p class="mb-0">Last login was Tuesday, 2 February, 2021 3:45 pm IST</p>
-                                </div>
-                                <p class="mb-0 ml-auto">Limited permissions</p>
-                            </div>
-                            <div class="ssd-local-delivery">
-                                <div class="staff-img">
-                                    J
-                                </div>
-                                <div class="ssd-local-delivery-tittle">
-                                    <a class="fs-14 fw-4 mb-0 lh-normal">Jameelll Ahmaddd</a>
-                                    <p class="mb-0">Last login was Tuesday, 25 May, 2021 1:16 pm IST</p>
-                                </div>
-                                <p class="mb-0 ml-auto">Limited permissions</p>
-                            </div>
-                            <div class="ssd-local-delivery">
-                                <div class="staff-img">
-                                    T
-                                </div>
-                                <div class="ssd-local-delivery-tittle">
-                                    <a class="fs-14 fw-4 mb-0 lh-normal">Tanya Goel</a>
-                                    <p class="mb-0">Last login was Wednesday, 22 December, 2021 11:16 am IST</p>
-                                </div>
-                                <p class="mb-0 ml-auto">Limited permissions</p>
-                            </div>
-                            <div class="ssd-local-delivery">
-                                <div class="staff-img">
-                                    A
-                                </div>
-                                <div class="ssd-local-delivery-tittle">
-                                    <a class="fs-14 fw-4 mb-0 lh-normal">Anchit Makkar</a>
-                                    <p class="mb-0">Last login was Sunday, 26 September, 2021 1:39 pm IST</p>
-                                </div>
-                                <p class="mb-0 ml-auto">Limited permissions</p>
-                            </div>
-                            <div class="ssd-local-delivery">
-                                <div class="staff-img">
-                                    K
-                                </div>
-                                <div class="ssd-local-delivery-tittle">
-                                    <a class="fs-14 fw-4 mb-0 lh-normal">khushbu sharma</a>
-                                    <p class="mb-0">Last login was Monday, 22 February, 2021 6:32 pm IST</p>
-                                </div>
-                                <p class="mb-0 ml-auto">Limited permissions</p>
-                            </div>
-                            <div class="ssd-local-delivery">
-                                <div class="staff-img">
-                                    R
-                                </div>
-                                <div class="ssd-local-delivery-tittle">
-                                    <a class="fs-14 fw-4 mb-0 lh-normal">Rishabh Sharma</a>
-                                    <p class="mb-0">Last login was Wednesday, 14 April, 2021 9:24 pm IST</p>
-                                </div>
-                                <p class="mb-0 ml-auto">Limited permissions</p>
-                            </div>
+                            @endforeach
+                            
                         </div>
                     </div>
                 </div>

@@ -303,7 +303,7 @@
 
                                     <div class="setting-details">
 
-                                        <label>Users and permissions</label>
+                                        <a href="{{ route('role') }}"> <label>Users and permissions</label> </a>
 
                                         <p>Manage what users can see or do in your store</p>
 

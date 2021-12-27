@@ -238,6 +238,10 @@ class Create extends Component
 
             $customer_address_arr = [
 
+                'first_name' => $request['customer_first_name'],
+
+                'last_name' => $request['customer_last_name'],
+
                 'company' => $request['customer_address_company'],
 
                 'address' => $request['customer_address_address'],
@@ -267,6 +271,10 @@ class Create extends Component
 
 
                 $customer_billing_address_arr = [
+
+                    'first_name' => $request['customer_first_name'],
+
+                    'last_name' => $request['customer_last_name'],
 
                     'company' => $request['customer_address_company'],
 
