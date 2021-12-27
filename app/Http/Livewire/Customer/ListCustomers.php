@@ -16,6 +16,10 @@ use App\Models\Filter;
 
 use App\Models\User;
 
+use App\Models\order_item;
+
+use App\Models\orders;
+
 use Carbon\Carbon;
 
 use Carbon\Language;
@@ -51,7 +55,7 @@ class ListCustomers extends Component
 
         $date_of_order, $date_added_as_customer, $abandoned_checkout, $customer_language, $location, $countries, $save_filter,
 
-        $filter_tabs, $active_tab, $sort_by, $export, $export_as, $selected_file;
+        $filter_tabs, $active_tab, $sort_by, $export, $export_as, $selected_file, $orderget, $order_item;
 
     public $filter = [], $languages = [];
 
@@ -130,7 +134,9 @@ class ListCustomers extends Component
 
         $this->filter = [];
 
-
+        $this->order_item = order_item::with('order_product')->with('media_product')->orderBy('id', 'DESC')->get();
+        
+        $this->orderget = orders::get();
 
         $this->customers = User::with(['detail', 'address' => function ($q) {
 

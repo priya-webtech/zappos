@@ -54,7 +54,7 @@ Route::middleware(['checkRole'])->group(function () {
 
         Route::middleware(['guest'])->group(function () {
 
-            Route::get('/admin', Livewire\Admin\Dashboard::class);
+            Route::get('/admin', Livewire\Admin\Dashboard::class)->name('admin-dashboard');
 
             //users
 

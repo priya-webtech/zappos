@@ -7,7 +7,7 @@
             </div>
         @endif
     </div>
-
+@php $symbol = CurrencySymbol(); @endphp
 <section class="full-width flex-wrap admin-full-width list-customers">
 
     <div class="page_header d-flex align-item-center justify-content-space-between full-width mb-2">
@@ -406,9 +406,22 @@
                                      <p class="tag green order-filed"> Unverified </p>
                                 @endif</td>
 
-                            <td><p class="order-filed">0 orders</p></td>
+                            <?php $itemcount = 0; $i = 1; ?>
 
-                            <td><p class="spent-filed">US$0.00 spent</p></td>
+                            @foreach($order_item as $item)
+                                @if($item->user_id == $customer->id)
+                                    <?php $itemcount = $i++;  ?>
+                                @endif
+                            @endforeach
+                            <td><p class="order-filed">{{$itemcount}} orders</p></td>
+
+                            <?php $amount_spent = 0; ?>
+                            @foreach($orderget as $res)
+                                @if($res->user_id == $customer->id)
+                                    <?php $amount_spent += $res['netamout'];  ?>
+                                @endif
+                            @endforeach
+                            <td><p class="spent-filed">US{{$symbol['currency']}}{{number_format($amount_spent,2,'.',',')}} spent</p></td>
 
                         </tr>
 
