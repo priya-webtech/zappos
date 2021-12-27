@@ -2,15 +2,25 @@
 <x-admin-layout>
 <section class="full-width flex-wrap admin-full-width list-customers" wire:ignore.self>
     <div class="page_header d-flex align-item-center justify-content-space-between full-width mb-2">
+
         <h4 class="mb-0 fw-5">Products</h4>
+
         <div class="header-btn-group">
+
             <a class="link" data-toggle="modal" data-target="#export" >Export</a>
+
             <a class="link" data-toggle="modal" data-target="#import">Import</a>
+
              @if(user_permission('allproduct','create'))
+
             <a class="button green-btn" href="{{ route('products.create') }}">Add Product</a>
+
             @endif
+
         </div>
+
     </div> 
+
 
     <div class="columns product_listing_columns pdpage-checkbox has-sections card ml-0" wire:ignore.self>
         <ul class="tabs">
