@@ -2935,11 +2935,11 @@ code {
 }
 .pd-pagination-sec .pagination {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     margin: 0;
     margin-left: -75px;
 }
-.pd-pagination-sec .pagination span {
+/*.pd-pagination-sec .pagination span {
     padding: 0;
     border: none;
 }
@@ -2953,7 +2953,40 @@ code {
 .pd-pagination-sec .pagination nav span:last-child button {
     border-radius: 0 4px 4px 0;
 }
-
+*/
+.pd-pagination-sec .pagination nav span span span span, .pd-pagination-sec .pagination nav span span button {
+    border: 1px solid #8c9196;
+    display: inline-flex;
+    box-shadow: none;
+    outline: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px !important;
+    background: transparent;
+    color: #202223;
+    padding: 0;
+    margin: 0 2px;
+}
+.pd-pagination-sec .pagination nav span span span span:hover, .pd-pagination-sec .pagination nav span span button:hover {
+    background: #f6f6f7;
+    color: #202223;
+}
+.pd-pagination-sec .pagination nav span span button svg {
+    width: 22px;
+    height: 22px;
+    color: #006e52;
+}
+.pd-pagination-sec .pagination nav span span span span {
+    height: 34px;
+    width: 34px;
+    background: #006e52;
+    color: #fff;
+    border-color: #006e52;
+}
+.pd-pagination-sec .pagination nav div > span {
+    display: flex;
+    align-items: center;
+}
 
 
 /* product details page css */
@@ -9057,13 +9090,6 @@ input[type=number]::-webkit-inner-spin-button {
     font-weight: 600;
     width: 125px;
 }
-.role-permission-list {
-    display: flex;
-    flex-wrap: wrap;
-}
-.role-permission-list span.tag {
-    font-weight: 500;
-    color: #202223;
-    padding: 4px 12px;
-    margin-right: 8px;
+.role-permission-list input[type="checkbox"]:checked:after {
+    filter: initial;
 }

@@ -284,18 +284,18 @@
                         @endforeach</span>
                     </tbody>
                 </table>
-                <hr>
-                <select wire:model="perPage">
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                </select>
-                <div class="pagination">
+                <div class="pd-pagination-sec">
+                    <select wire:model="perPage">
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                    <div class="pagination">
 
-                 {!! $product->links() !!}
-                
-
+                     {!! $product->links() !!}
+                   
+                    </div>
                 </div>
             </div>
         </div>
