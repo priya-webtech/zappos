@@ -64,9 +64,7 @@ class CreateRolePermission extends Component
         $new_role_id = role::orderBy('id', 'DESC')->first();
 
         $user_id = $new_role_id['id'];
-        }else
-        {
-            
+        }else{
             $user_id = $request->role_id;
         }
 
