@@ -229,7 +229,7 @@
 
 
 
-                              <button class="link">Last Order</button>
+                             <a href="{{route('order-detail', $order->id)}}"> <button class="link">Last Order</button></a>
 
 
 
@@ -397,7 +397,7 @@
 
 
 
-                                 <button class="link">Order #<?php echo $order['id']; ?></button>
+                                <a href="{{route('order-detail', $order->id)}}"> <button class="link">Order #<?php echo $order['id']; ?></button> </a>
 
 
 
@@ -436,7 +436,7 @@
 
 
 
-                              <button class="link">View all orders</button>
+                              <a href="{{route('order-list')}}"><button class="link">View all orders</button></a>
 
 
 
@@ -1782,7 +1782,7 @@
 
 
 
-                     <button class="button secondary" wire:click="resetInputFields()">Cancel</button>
+                     <button class="button secondary" wire:click="resetInputFields()" data-dismiss="modal">Cancel</button>
 
 
 

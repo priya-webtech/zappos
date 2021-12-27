@@ -3,7 +3,7 @@
         <div class="hidden_desktop">
             <div class="open_side_menu mr-2 fs-20"><i class="fas fa-bars"></i></div>
         </div>
-        <a href="#" class="site_title">Demo Estore</a>
+        <a href="{{ route('admin-dashboard') }}" class="site_title">Demo Estore</a>
     </div>
     <div class="header_site_search hidden_mobile">
         <form name="panel_search" id="panel_search" method="post">

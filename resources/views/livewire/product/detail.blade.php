@@ -1293,7 +1293,7 @@
 
                      <div class="button-col">
 
-                        <button class="button secondary" data-dismiss="modal">Cancel</button>
+                        <button class="button secondary" data-dismiss="modal" data-dismiss="modal">Cancel</button>
 
                         <button class="button" data-dismiss="modal"  wire:click.prevent="deleteproduct({{$product->id}})">Yes, Delete</button>
 
@@ -1336,7 +1336,7 @@
 
                 <div class="modal-footer">
 
-                    <button class="button secondary">Cancel</button>
+                    <button class="button secondary" data-dismiss="modal">Cancel</button>
 
                     <button class="button green-btn">Done</button>
 
@@ -1406,7 +1406,7 @@
 
                 <div class="modal-footer">
 
-                    <button class="button secondary">Cancel</button>
+                    <button class="button secondary" data-dismiss="modal">Cancel</button>
 
                     <button class="button green-btn">Done</button>
 
@@ -1444,7 +1444,7 @@
 
                 <div class="modal-footer">
 
-                    <button class="button secondary">Cancel</button>
+                    <button class="button secondary" data-dismiss="modal">Cancel</button>
 
                     <button class="button green-btn">Save</button>
 
@@ -1528,7 +1528,7 @@
 
                 <div class="modal-footer">
 
-                    <button class="button secondary">Cancel</button>
+                    <button class="button secondary" data-dismiss="modal">Cancel</button>
 
                     <button class="button green-btn">Duplicate product</button>
 
@@ -1564,7 +1564,7 @@
 
                 <div class="modal-footer">
 
-                    <button class="button secondary">Cancel</button>
+                    <button class="button secondary" data-dismiss="modal">Cancel</button>
 
                     <button class="button warning">Leave page</button>
 
@@ -1613,7 +1613,7 @@
 
             <div class="modal-footer">
 
-                <a class="button secondary">Cancel</a>
+                <a class="button secondary" data-dismiss="modal">Cancel</a>
 
                 <a class="button green-btn" wire:click.prevent="UpdateVarient('update-location')">Done</a>
 
@@ -1852,7 +1852,7 @@
 
                 <div class="modal-footer">
 
-                    <button class="button secondary">Cancel</button>
+                    <button class="button secondary" data-dismiss="modal">Cancel</button>
 
                 </div>
 
@@ -1927,7 +1927,7 @@
 
                 <div class="modal-footer">
 
-                    <button class="button secondary"  wire:click="closeModel('edit-quantities-details-modal')" >Cancel</button>
+                    <button class="button secondary"  wire:click="closeModel('edit-quantities-details-modal')" data-dismiss="modal">Cancel</button>
 
                     <button class="button secondary green-btn"  wire:click="closeModel('edit-quantities-details-modal')" >Done</button>
 
@@ -2002,7 +2002,7 @@
 
                 <div class="modal-footer">
 
-                    <button class="button secondary">Cancel</button>
+                    <button class="button secondary" data-dismiss="modal">Cancel</button>
 
                     <button class="button green-btn">Done</button>
 
@@ -2068,7 +2068,7 @@
 
                 <div class="modal-footer">
 
-                    <button class="button secondary">Cancel</button>
+                    <button class="button secondary" data-dismiss="modal">Cancel</button>
 
                     <button class="button green-btn" onclick="document.getElementById('variants-edit-skus-modal').style.display='none'">Done</button>
 
@@ -2134,7 +2134,7 @@
 
                 <div class="modal-footer">
 
-                    <button class="button secondary">Cancel</button>
+                    <button class="button secondary" data-dismiss="modal">Cancel</button>
 
                     <button class="button green-btn" onclick="document.getElementById('variants-edit-skus-modal').style.display='none'">Done</button>
 
@@ -2214,7 +2214,7 @@
 
                 <div class="modal-footer">
 
-                    <button class="button secondary">Cancel</button>
+                    <button class="button secondary" data-dismiss="modal">Cancel</button>
 
                     <button class="button green-btn" onclick="document.getElementById('edit-hs-codes-modal').style.display='none'">Done</button>
 
@@ -2282,7 +2282,7 @@
 
                 <div class="modal-footer">
 
-                    <button class="button secondary">Cancel</button>
+                    <button class="button secondary" data-dismiss="modal">Cancel</button>
 
                     <button class="button green-btn">Done</button>
 
@@ -2478,7 +2478,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="button secondary">Cancel</button>
+                    <button class="button secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>

@@ -52,7 +52,6 @@ class CreateRole extends Component
     public function store()
     {
 
-        
         $user_data = [
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
@@ -75,12 +74,12 @@ class CreateRole extends Component
             $user_data['email_verified_at'] = now();
         }
         $user = User::create($user_data);
-        //$user->assignRole($this->role);
+        //y$user->assignRole($this->role);
         $this->resetCreateForm();
         $user['pw'] = $pw;
         // $this->sendLoginDetail($user);
 
-        if ($this->role == 'admin') {
+        if ($this->role == '1') {
             session()->flash('message', 'User created.');
             $this->users = User::role('admin')->get();
         } else {
