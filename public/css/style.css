@@ -3055,6 +3055,13 @@ code {
  .Polaris-TextStyle--variationSubdued_1segu {
      color: #6d7175;
 }
+.organization-card button#tag-creation-btn {
+    padding: 4px 12px;
+    min-height: auto;
+    line-height: 22px;
+    margin: 8px 0 0;
+    float: right;
+}
  .organization-card button {
      padding: 0;
      background: #ffffff;
