@@ -103,7 +103,9 @@ class Details extends Component
 
         $this->order_item = order_item::with('order_product')->with('media_product')->where('user_id',$this->customer['id'])->orderBy('id', 'DESC')->first();
         
+        if($this->order){
         $this->OrderItemstock = order_item::where('order_id',$this->order['id'])->get();
+        }
 
         $this->Taxes = tax::where('id',1)->first();
 

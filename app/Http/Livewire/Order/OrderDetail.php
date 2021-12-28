@@ -20,12 +20,12 @@ use App\Models\tax;
 
 class OrderDetail extends Component
 {
-    public $order,$OrderItem,$Taxes,$messagetext;
+    public $order,$OrderItem,$Taxes,$messagetext,$commentget;
 
     public function mount($id) {
 
        $this->order = Orders::with('user')->Where('id', $id)->first();
-
+    
        $this->commentget = ProductComment::where('order_id',$this->order['id'])->get();
 
        $this->Taxes = tax::where('id',1)->first();

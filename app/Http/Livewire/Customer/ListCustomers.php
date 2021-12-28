@@ -18,7 +18,7 @@ use App\Models\User;
 
 use App\Models\order_item;
 
-use App\Models\orders;
+use App\Models\Orders;
 
 use Carbon\Carbon;
 
@@ -136,7 +136,7 @@ class ListCustomers extends Component
 
         $this->order_item = order_item::with('order_product')->with('media_product')->orderBy('id', 'DESC')->get();
         
-        $this->orderget = orders::get();
+        $this->orderget = Orders::get(); 
 
         $this->customers = User::with(['detail', 'address' => function ($q) {
 
