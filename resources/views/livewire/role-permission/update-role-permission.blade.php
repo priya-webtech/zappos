@@ -1,6 +1,13 @@
 <div>
     <div>
         <x-admin-layout>
+            <div wire:key="alert" :id="1">
+                @if (session()->has('message'))
+                <div class="alert alert-success">
+                   {{ session('message') }}
+                </div>
+                @endif
+            </div>
             <form name="role">
                 <section class="full-width admin-body-width flex-wrap admin-full-width inventory-heading">
                     <article class="full-width">
@@ -14,34 +21,73 @@
                         </div>
                     </article>
                 </section>
-                <section class="full-width flex-wrap admin-body-width">
+                <section class="full-width flex-wrap admin-body-width" wire:ignore>
                     <article class="full-width">
                         <div class="columns ten">
                             <div class="card card-pd-0">
                                 <div class="card-header">
                                     <h3 class="fs-16 fw-6 lh-normal">Your Details</h3>
-                                    @if($per)
+                                @if($per)
                                     <div class="info-row">
                                         <label>First Name</label>
-                                        <span>{{$per->first_name}}</span>
+                                        <input type="text" wire:model="per.first_name">
                                     </div>
                                     <div class="info-row">
                                         <label>Last Name</label>
-                                        <span>{{$per->last_name}}</span>
+                                        <input type="text" wire:model="per.last_name">
                                     </div>
+                                    <div class="info-row">
+                                        <label>Phone Number</label>
+                                        <input type="number" wire:model="per.mobile_number" required>
+                                    </div>
+                                    @if($role)
+                                    <div class="info-row">
+                                     <label>Role</label>
+                                     <select name="role" wire:model="per.role">
+                                        <option value="">-- Select Option --</option>
+                                        @if($role_data)
+                                        @foreach($role_data as $row)
+                                        <option  value="{{ ($row->id) ? $row->id : $row->id }}"  @if($row->id == $role->id) selected  @endif>{{$row->name}}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                    </div>
+                                    @else
+                                    @if($role_data)
+                                    <div class="info-row">
+                                     <label>Role</label>
+                                     <select name="role" wire:model="per.role">
+                                        <option value="">-- Select Option --</option>
+                                        @if($role_data)
+                                        @foreach($role_data as $row)
+                                        <option  value="{{ ($row->id) ? $row->id : $row->id }}">{{$row->name}}</option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                    </div>
+                                    @endif
+                                    
+                                    @endif
+
                                     <div class="info-row">
                                         <label>Email</label>
                                         <span>{{$per->email}}</span>
                                     </div>
-                                    <div class="info-row">
-                                        <label>Role</label>
-                                        <span>{{$role->name}}</span>
+                                    
+                                @endif
+                                </div>
+
+
+                                <div class="input-field text-right m-b-0">
+
+                                    <div class="input-field mt-3">
+
+                                        <button class="button red-btn fw-6 fs-14" type="submit" wire:click.prevent="DeleteUser({{$per->id}})" name="action">Delete</button>
+                                        <button class="button green-btn fw-6 fs-14" type="submit" wire:click.prevent="UpdateUser({{$per->id}})" name="action">update</button>
+
+
                                     </div>
-                                    <div class="info-row">
-                                        <label>Phone Number</label>
-                                        <span>{{$per->mobile_number}}</span>
-                                    </div>
-                                    @endif
+
                                 </div>
 
                                 <?php

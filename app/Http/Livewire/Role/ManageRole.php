@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
+use Livewire\WithPagination;
 use Laravel\Jetstream\Jetstream;
 
 class ManageRole extends Component
@@ -23,12 +24,12 @@ class ManageRole extends Component
     public $updateMode = false;
     public $role,$getrole;
     public $auth_key = '';
-    public $users;
+  //  public $users;
 
 	public function mount()
     {
         $this->getrole = role::get();
-        $this->users = User::role('admin')->get();
+       // $this->users = User::get();
         if (Route::currentRouteName() == 'customers') {
             $this->role = 'customer';
         } else {
@@ -38,7 +39,9 @@ class ManageRole extends Component
     }
     public function render()
     {
-        return view('livewire.role.manage-role');
+        return view('livewire.role.manage-role',[
+            'users' => User::paginate(10)
+        ]);
     }
 
      private function resetCreateForm()
