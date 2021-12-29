@@ -24,7 +24,7 @@
 
                             <div class="full-width setting-sec">
 
-                                <div class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('setting-general') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -34,14 +34,14 @@
 
                                     <div class="setting-details">
 
-                                        <a href="{{ route('setting-general') }}"><label>General</label>
+                                        <label>General</label>
                                         <p>View & Update your store Detail</p>
 
                                     </div>
 
-                                </div>
+                                </a>
 
-                                <div class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('notifications') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -51,15 +51,15 @@
 
                                     <div class="setting-details">
 
-                                        <a href="{{ route('notifications') }}"><label>Notifications</label></a>
+                                        <label>Notifications</label>
 
                                         <p>Manage notifications sent to you and your customers</p>
 
                                     </div>
 
-                                </div>
+                                </a>
 
-                                <div class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('languages') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -69,15 +69,15 @@
 
                                     <div class="setting-details">
 
-                                        <a href="{{ route('languages') }}"><label>Store languages</label></a>
+                                        <label>Store languages</label>
 
                                         <p>Manage the languages your customers can view on your store</p>
 
                                     </div>
 
-                                </div>
+                                </a>
 
-                                <div class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('payments') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -87,15 +87,15 @@
 
                                     <div class="setting-details">
 
-                                        <a href="{{ route('payments') }}"><label>Payments</label></a>
+                                        <label>Payments</label>
 
                                         <p>Enable and manage your store's payment providers</p>
 
                                     </div>
 
-                                </div>
+                                </a>
 
-                                <div class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('gift-cards') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -105,15 +105,15 @@
 
                                     <div class="setting-details">
 
-                                        <a href="{{ route('gift-cards') }}"><label>Gift cards</label></a>
+                                        <label>Gift cards</label>
 
                                         <p>Enable Apple Wallet passes and set gift card expiry dates</p>
 
                                     </div>
 
-                                </div>
+                                </a>
 
-                                <div class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('billing') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -123,15 +123,15 @@
 
                                     <div class="setting-details">
 
-                                        <a href="{{ route('billing') }}"><label>Billing</label></a>
+                                        <label>Billing</label>
 
                                         <p>Manage your billing information and view your invoices</p>
 
                                     </div>
 
-                                </div>
+                                </a>
 
-                                <div class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('checkout') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -141,15 +141,15 @@
 
                                     <div class="setting-details">
 
-                                        <a href="{{ route('checkout') }}"><label>Checkout</label></a>
+                                        <label>Checkout</label>
 
                                         <p>Customize your online checkout process</p>
 
                                     </div>
 
-                                </div>
+                                </a>
 
-                                <div class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('files') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -159,15 +159,15 @@
 
                                     <div class="setting-details">
 
-                                        <a href="{{ route('files') }}"><label>Files</label></a>
+                                        <label>Files</label>
 
                                         <p>Upload images, videos, and documents</p>
 
                                     </div>
 
-                                </div>
+                                </a>
 
-                                <div class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('legal') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -177,15 +177,15 @@
 
                                     <div class="setting-details">
 
-                                        <a href="{{ route('legal') }}"><label>Legal</label></a>
+                                        <label>Legal</label>
 
                                         <p>Manage your store's legal pages</p>
 
                                     </div>
 
-                                </div>
+                                </a>
 
-                                <div class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('shipping') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -195,15 +195,15 @@
 
                                     <div class="setting-details">
 
-                                        <a href="{{ route('shipping') }}"><label>Shipping and delivery</label></a>
+                                        <label>Shipping and delivery</label>
 
                                         <p>Manage how you ship orders to customers</p>
 
                                     </div>
 
-                                </div>
+                                </a>
 
-                                <div class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('Channels') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -213,15 +213,15 @@
 
                                     <div class="setting-details">
 
-                                        <a href="{{ route('Channels') }}"><label>Sales channels</label></a>
+                                        <label>Sales channels</label>
 
                                         <p>Manage the channels you use to sell your products and services</p>
 
                                     </div>
 
-                                </div>
+                                </a>
 
-                                <div class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('metafields') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -231,15 +231,15 @@
 
                                     <div class="setting-details">
 
-                                        <a href="{{ route('metafields') }}"><label>Metafields</label></a>
+                                        <label>Metafields</label>
 
                                         <p>Extend your store by adding new fields</p>
 
                                     </div>
 
-                                </div>
+                                </a>
 
-                                <div class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('taxes') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -249,15 +249,15 @@
 
                                     <div class="setting-details">
 
-                                       <a href="{{ route('taxes') }}"> <label>Taxes</label> </a>
+                                       <label>Taxes</label>
 
                                         <p>Manage how your store charges taxes</p>
 
                                     </div>
 
-                                </div>
+                                </a>
 
-                                <div class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('plan') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -267,15 +267,15 @@
 
                                     <div class="setting-details">
 
-                                        <a href="{{ route('plan') }}"> <label>Plan</label> </a>
+                                        <label>Plan</label>
 
                                         <p>Manage and view your Shopify plan</p>
 
                                     </div>
 
-                                </div>
+                                </a>
 
-                                <div class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('locations') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -285,15 +285,15 @@
 
                                     <div class="setting-details">
 
-                                        <a href="{{ route('locations') }}"> <label>Locations</label> </a>
+                                        <label>Locations</label>
 
                                         <p>Manage the places you stock inventory, fulfill orders, and sell products</p>
 
                                     </div>
 
-                                </div>
+                                </a>
 
-                                <div class="settings-option row field_style1 mb-2">
+                                <a href="{{ route('role') }}" class="settings-option row field_style1 mb-2">
 
                                     <div class="setting-icon">
 
@@ -303,13 +303,13 @@
 
                                     <div class="setting-details">
 
-                                        <a href="{{ route('role') }}"> <label>Users and permissions</label> </a>
+                                        <label>Users and permissions</label>
 
                                         <p>Manage what users can see or do in your store</p>
 
                                     </div>
 
-                                </div>
+                                </a>
 
                             </div>
 

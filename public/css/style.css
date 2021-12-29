@@ -1069,13 +1069,14 @@ code {
      flex-wrap: wrap;
 }
  .settings-option {
-     display: flex;
-     align-items: self-start;
-     padding: 16px;
-     margin-bottom: 0;
-     border-radius: 3px;
-     width: calc(33.33% - 32px);
-     float: left;
+    display: flex;
+    align-items: self-start;
+    padding: 16px;
+    margin-bottom: 0;
+    border-radius: 3px;
+    width: calc(33.33% - 32px);
+    float: left;
+    cursor: pointer;
 }
  .settings-option:hover {
      background-color: #f4f6f8;
@@ -1104,9 +1105,10 @@ code {
      color: #919eab;
 }
  .setting-details label {
-     color: #006fbb;
-     font-weight: 600;
-     margin-bottom: 0;
+    color: #006fbb;
+    font-weight: 600;
+    margin-bottom: 0;
+    cursor: pointer;
 }
  .setting-details p {
      color: #6d7175 !important;
