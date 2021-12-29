@@ -13,10 +13,17 @@ class StripeDetail extends Component
 
     public function mount()
     {
-       	$data = DB::table('stripe_key_detail')->first();
-       	$this->stripe_publishable_key = $data->stripe_publishable_key;
-       	$this->stripe_secret_key = $data->stripe_secret_key;
+    	$this->stripe_publishable_key = '';
+       	$this->stripe_secret_key = '';
 
+       	$data = DB::table('stripe_key_detail')->first();
+
+       	if(!empty($data)) {
+       		$this->stripe_publishable_key = $data->stripe_publishable_key;
+       		$this->stripe_secret_key = $data->stripe_secret_key;
+
+       	}
+       	
     }
 
     public function render()
