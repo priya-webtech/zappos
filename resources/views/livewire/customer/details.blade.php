@@ -311,7 +311,7 @@
 
 
                            </div>
-
+                            @if($OrderItemstock)
                            <?php $Stock_sum = 1; ?>
                               @foreach($OrderItemstock as $item)
                               @if($item->order_id == $order->id)
@@ -333,7 +333,7 @@
 
 
 
-                              <h4 class="fs-16 fw-6 mb-0">US{{$symbol['currency']}}{{number_format($netamount,2,'.',',')}}</h4>
+                              <h4 class="fs-16 fw-6 mb-0">{{$symbol['currency']}}{{number_format($netamount,2,'.',',')}}</h4>
 
 
 
@@ -353,7 +353,7 @@
 
 
 
-                              <h4 class="fs-16 fw-6 mb-0">US{{$symbol['currency']}}{{number_format($avrageTotal,2,'.',',')}}</h4>
+                              <h4 class="fs-16 fw-6 mb-0">{{$symbol['currency']}}{{number_format($avrageTotal,2,'.',',')}}</h4>
 
 
 
@@ -361,7 +361,7 @@
 
 
                         </div>
-
+                      @endif
                      @endif
 
 
@@ -416,7 +416,7 @@
 
                            @php $priceres = allprice($order_item['order_product'][0]['id']) @endphp
 
-                           <p class="mb-0">US${{number_format($priceres['price'],2,'.',',')}} from Draft Orders</p>
+                           <p class="mb-0">${{number_format($priceres['price'],2,'.',',')}} from Draft Orders</p>
 
 
 

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CreateRolePermission extends Component
 {
-    public $role_data,$roll_id,$privilege_user_selected=[];
+    public $role_data,$roll_id,$privilege_user_selected=[],$getroleid;
 
     public function mount(){
         $privilege_user_selected = array();
@@ -28,6 +28,7 @@ class CreateRolePermission extends Component
     public function edit()
     {   
         $id = $this->roll_id;
+        $this->getroleid = $this->roll_id;
         $per = User::where('id', $id)->first();
         $user_data = rolepermission::where('user_id', $id)->get();
         $privilege_user_selected = array();
@@ -42,6 +43,25 @@ class CreateRolePermission extends Component
         // $result=NationalPark::where('id',$id)->get();
         // $result=$result[0];
         // return view('admin.national_parks.update',compact('result', 'iti_list', 'testimonials'));
+    }
+
+    public function DeleteRole($id){
+
+        $Role_delete = role::where('id', $id)->delete();
+        $permission_delete = rolepermission::where('user_id', $id)->delete();
+
+        $userupdate = User::where('role', $id)->get();
+
+        foreach ($userupdate as $key => $value) {
+            User::where('id', $value->id)->update(['role'  => ""]);
+        }
+        
+
+
+        session()->flash('message', 'Role Deleted Successfully!!');
+
+        return redirect(route('create-role-permission'));
+
     }
     public function render()
     {

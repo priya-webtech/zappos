@@ -1,5 +1,12 @@
 <div>
     <x-admin-layout>
+        <div wire:key="alert" :id="1">
+                @if (session()->has('message'))
+                <div class="alert alert-success">
+                   {{ session('message') }}
+                </div>
+                @endif
+            </div>
         <section class="full-width flex-wrap admin-body-width">
             <article class="full-width">
                 <div class="columns customers-details-heading">
@@ -31,23 +38,26 @@
                     </div>
                     <div class="card card-pd-0">
                         <div class="card-header title-pb-0">
-                            <h3 class="fw-6 fs-16 d-flex align-item-center justify-content-space-between lh-normal mb-0">Staff (7 of 15) <a class="fs-14 fw-4" href="{{ route('create-role') }}">Add staff</a></h3>
+                            <h3 class="fw-6 fs-16 d-flex align-item-center justify-content-space-between lh-normal mb-0">Staff ({{($users->currentPage()-1) * $users->perPage()+(count($users) ? 1:0)}} <!-- - {{($users->currentPage()-1)*$users->perPage()+count($users)}} --> of {{count($users)}}) <a class="fs-14 fw-4" href="{{ route('create-role') }}">Add staff</a></h3>
                         </div>
                         <div class="card-middle bd_none card-pd-0 staff-card">
                             @foreach($users as $user)
+                           <?php  $firstStringCharacter = substr($user->first_name, 0, 1); ?>
                             <div class="ssd-local-delivery">
                                 <div class="staff-img">
-                                    A
+                                    {{$firstStringCharacter}}
                                 </div>
                                 <div class="ssd-local-delivery-tittle">
-                                    <a class="fs-14 fw-4 mb-0 lh-normal" wire:click.prevent="UpdateVarient('add-varient-type')">{{$user->first_name}} {{$user->last_name}}</a>
+                                    <a class="fs-14 fw-4 mb-0 lh-normal" href="{{route('updaterolepermission', $user->id) }}">{{$user->first_name}} {{$user->last_name}}</a>
                                     <p class="mb-0">Invitation sent</p>
                                 </div>
                                 <p class="mb-0 ml-auto">Limited permissions</p>
                             </div>
                             @endforeach
+
                             
                         </div>
+                        {{ $users->links() }}
                     </div>
                 </div>
             </article>

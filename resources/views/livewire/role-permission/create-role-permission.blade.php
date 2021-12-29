@@ -1,6 +1,13 @@
 <div>
     <div>
     <x-admin-layout>
+    <div wire:key="alert" :id="1">
+        @if (session()->has('message'))
+        <div class="alert alert-success">
+           {{ session('message') }}
+        </div>
+        @endif
+    </div>
     <section class="full-width admin-body-width flex-wrap admin-full-width inventory-heading">
         <article class="full-width">
             <div class="columns customers-details-heading">
@@ -59,9 +66,11 @@
                                                         <div><label class="lbl-mb-4" for="title">Role Name *</label></div>
                                                         <select name="role_id" wire:model="roll_id" wire:change="edit">
                                                             <option value="">-- Select Option --</option>
+                                                            @if($role_data)
                                                             @foreach($role_data as $row)
                                                             <option  value="{{ ($row->id) ? $row->id : $row->id }}">{{$row->name}}</option>
                                                             @endforeach
+                                                            @endif
                                                         </select>
                                                     </div>
                                                 </div>
@@ -488,7 +497,7 @@
                                     </thead>
 
                                     <tbody class="fs-14" wire:ignore.self>
-
+                                        @if($privilege_array)
                                         @foreach($privilege_array as $Privilegearray_key => $Privilegearray_value)
 
                                         <tr>
@@ -528,7 +537,7 @@
                                         </tr>
 
                                         @endforeach
-
+                                        @endif
                                     </tbody>
 
                                 </table>
@@ -536,10 +545,11 @@
                                 <div class="input-field text-right m-b-0">
 
                                     <div class="input-field mt-3">
-
+                                        @if($getroleid)
+                                        <button class="button green-btn fw-6 fs-14" type="submit" wire:click.prevent="DeleteRole({{$getroleid}})" name="action">Delete</button>
+                                        @endif
                                         <button type="reset" class="button secondary fw-6 fs-14"><span class="btn-label">Clear</span> Reset</button>
                                         <button class="button green-btn fw-6 fs-14" type="submit" name="action">Submit</button>
-
 
                                     </div>
 
