@@ -40,10 +40,14 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
 
+use Illuminate\Support\Facades\DB;
+
+
 class StripePaymnetController extends Component
 {
     public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$firstname,$lastname,$streetname,$city,$country,$pincode,$mobile,$Taxes, $view,$discoutget,$billing_type,$orderID,$unit_number,$countries,$newaddress,$customerAddress,$customerbillingAddress,$first_name,$last_name,$address,$apartment,$postal_code,$mobile_no,$newbillingaddress,$primary_billing_type,$same_shipping,$product,$Productmediass;
     public $isDisabled, $editMode;
+    public $stripe_publishable_key, $stripe_secret_key;
 
     protected $rules = [
 
@@ -172,19 +176,25 @@ class StripePaymnetController extends Component
     }
     public function render()
     {
-        $this->user_id =  Auth::user()->id;
-        $this->Cart = Cart::where('user_id',$this->user_id)->first();
-        
-        if(!empty($this->Cart)){
-          return view('livewire.stripe-paymnet-controller');
-        }else{
-            $this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
+        if (!Auth::check() && empty( $this->CartItem)) {
+              $this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
 
             $this->Product = Product::with('productmediaget')->with('favoriteget')->orderBy('id','asc')->limit(6)->get();
             redirect('/');
           return view('livewire.dashboard');
-
         }
+        
+            $data = DB::table('stripe_key_detail')->first();
+            if(empty($data)) {
+                Session::flash('alert', 'You can not do Payment!');
+            } else {
+                $this->stripe_publishable_key = $data->stripe_publishable_key;
+                $this->stripe_secret_key = $data->stripe_secret_key;
+
+                return view('livewire.stripe-paymnet-controller');
+            }
+
+        
     }
 
     public function NewShippingAddress(){

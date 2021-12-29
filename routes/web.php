@@ -379,6 +379,8 @@ Route::middleware(['checkRole'])->group(function () {
 
             Route::get('/userdetail', Livewire\Front\Account::class)->name('front-user-detail');
 
+            Route::get('/admin/stripe-detail', Livewire\StripeDetail::class)->name('user-detail');
+
 
 
         });
