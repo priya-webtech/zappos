@@ -1,6 +1,8 @@
 <html>
 
-
+@php 
+$value = \App\Models\preference::where(['id' => 1])->first();
+@endphp
 
 <head>
 
@@ -13,13 +15,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
+    <meta name="description" content="{{$value->meta_description}}">
 
+    <meta name="title" content="{{$value->meta_title}}">
 
-
+    <link rel="icon" href="{{ asset('storage/'.$value['social_img']) }}" type="image/jpg">
 
 
     <title>{{ config('app.name', 'Shoes, Sneaker, Clothes &amp; Clothing') }}</title>

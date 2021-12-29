@@ -38,7 +38,7 @@
                     </div>
                     <div class="card card-pd-0">
                         <div class="card-header title-pb-0">
-                            <h3 class="fw-6 fs-16 d-flex align-item-center justify-content-space-between lh-normal mb-0">Staff ({{($users->currentPage()-1) * $users->perPage()+(count($users) ? 1:0)}} <!-- - {{($users->currentPage()-1)*$users->perPage()+count($users)}} --> of {{count($users)}}) <a class="fs-14 fw-4" href="{{ route('create-role') }}">Add staff</a></h3>
+                            <h3 class="fw-6 fs-16 d-flex align-item-center justify-content-space-between lh-normal mb-0">Staff ({{($users->currentPage()-1) * $users->perPage()+(count($users) ? 1:0)}} - {{($users->currentPage()-1)*$users->perPage()+count($users)}} of {{count($Customerget)}}) <a class="fs-14 fw-4" href="{{ route('create-role') }}">Add staff</a></h3>
                         </div>
                         <div class="card-middle bd_none card-pd-0 staff-card">
                             @foreach($users as $user)

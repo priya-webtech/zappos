@@ -11,5 +11,5 @@ class favorite extends Model
 	public $table="favorites";
     use HasFactory;
 
-  protected $guarded =[];
+    protected $guarded =[];
 }

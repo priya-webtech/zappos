@@ -1,3 +1,4 @@
+<div>
 <x-admin-layout>
     <section class="full-width flex-wrap admin-body-width without-border-head">
         <article class="full-width">
@@ -15,7 +16,7 @@
             </div>
         </article>
     </section>
-    <section class="full-width flex-wrap admin-body-width setting-general-sec">
+    <section class="full-width flex-wrap admin-body-width setting-general-sec" wire:ignore>
         <article class="full-width">
             <div class="columns ten">
                 <article class="full-width add-customer-part bd_none">
@@ -27,7 +28,7 @@
                         <div class="card">
                             <div class="row">
                                 <label>Store name</label>
-                                <input type="text" value="delivery-boy-demo">
+                                <input type="text" wire:model="getgeneral.store_name" value="delivery-boy-demo">
                             </div>
                             <article class="full-width">
                                 <div class="columns six row field_style1 mb-2">
@@ -37,7 +38,7 @@
                                 </div>
                                 <div class="columns six row field_style1 mb-2">
                                     <label>Sender email</label>
-                                    <input type="text" value="shopifydev@webkul.com">
+                                    <input type="text" wire:model="getgeneral.contact_email" value="shopifydev@webkul.com">
                                     <p class="text-grey mb-0">Your customers will see this address if you email them.</p>
                                     <div class="general-alrt-msg">
                                         <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zM9 9a1 1 0 0 0 2 0V7a1 1 0 1 0-2 0v2zm0 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"></path></svg>
@@ -251,3 +252,4 @@
         </div>
     </section>
 </x-admin-layout>
+</div>
