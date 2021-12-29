@@ -869,7 +869,7 @@
 
                         <form id="payment-form">
 
-                            @csrf
+                        
 
                             <h3 class="panel-title">Payment</h3>
 
@@ -2827,9 +2827,8 @@
 
 
 
-
-
-    const stripe = Stripe('pk_test_eEW1sG9Y0HvZ0SuSZsWts81500648362WW');
+var public_key  = '<?= $stripe_publishable_key ?>';
+    const stripe = Stripe(public_key);
 
 
 
@@ -2907,7 +2906,7 @@ function payment() {
 
 
 
-                  $stripe = new \Stripe\StripeClient('sk_test_ngkOUeScv0ATVVwLqg88ZdBv00ZX79AIQ8');
+                  $stripe = new \Stripe\StripeClient($stripe_secret_key);
 
 
 

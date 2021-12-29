@@ -1,4 +1,12 @@
+<div>
 <x-admin-layout>
+     <div wire:key="alert">
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
+    </div>
     <section class="full-width flex-wrap admin-body-width">
         <article class="full-width">
             <div class="columns">
@@ -120,10 +128,38 @@
                 </div>
             </div>
         </article>
+        <article class="full-width sec-border">
+            <div class="columns one-third">
+                <div class="card card-transparent-bg">
+                    <div class="card-title">
+                        <h3 class="fs-16 fw-6 mb-0">Stripe Detail</h3>
+                    </div>
+                    <p class="mb-0 text-grey">After a customer's payment method is authorized, it needs to be captured so that the sale can be processed. Choose between
+                    <a class="arrow-with-link" href="#">automatic and manual capture <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M14 13v1a1 1 0 0 1-1 1H6c-.575 0-1-.484-1-1V7a1 1 0 0 1 1-1h1c1.037 0 1.04 1.5 0 1.5-.178.005-.353 0-.5 0v6h6V13c0-1 1.5-1 1.5 0zm-3.75-7.25A.75.75 0 0 1 11 5h4v4a.75.75 0 0 1-1.5 0V7.56l-3.22 3.22a.75.75 0 1 1-1.06-1.06l3.22-3.22H11a.75.75 0 0 1-.75-.75z"></path></svg></a></p> 
+                </div>
+            </div>
+            <div class="columns two-thirds setting-order-card">
+                <div class="card">
+                    <div class="setting-single-col">
+                         <label><span class="fw-6">Stripe Publishable key</span>
+                                            <input id="stripe_publishable_key" class="block mt-1 w-full" type="text" wire:model="stripe_publishable_key" />
+                                            @error('stripe_publishable_key') <span class="text-danger">{{ $message }}</span>@enderror 
+                                        </label>
+                       
+                    </div>
+                    <div class="setting-single-col">
+                         <label><span class="fw-6">Stripe Secret key</span>
+                                            <input id="stripe_secret_key" class="block mt-1 w-full" type="text" wire:model="stripe_secret_key" />
+                                            @error('stripe_secret_key') <span class="text-danger">{{ $message }}</span>@enderror
+                                        </label>
+                    </div>
+                </div>
+            </div>
+        </article>
     </section>
     <section class="full-width flex-wrap admin-body-width create-collection-footer">
         <div class="page-bottom-btn">
-            <button disabled="disabled" class="button">Save</button>
+            <button  wire:click="save" class="button">Save</button>
         </div>
     </section>
 </x-admin-layout>
@@ -279,4 +315,4 @@
         $('.variants-option-dropdown').toggle();
     });
 </script>
-
+</div>
