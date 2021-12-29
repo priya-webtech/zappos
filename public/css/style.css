@@ -1,4 +1,4 @@
-body{
+ body{
      margin: 0;
 }
  body, input, select, textarea, label {
@@ -117,6 +117,11 @@ body{
      left: 100%;
      top: 36px;
      display: none;
+}
+.input-icon-remove input[type="number"]::-webkit-inner-spin-button, .input-icon-remove input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 /************ ADMIN PANEL HEADER ***************************************/
  .admin_panel_header {
@@ -1165,6 +1170,7 @@ code {
      font-size: 14px;
      font-weight: 600;
      color: #ffffff !important;
+     line-height: 20px;
 }
  .button.green-btn:hover {
      background: #006e52;
@@ -4120,6 +4126,7 @@ code {
      color: #fff !important;
      border: none;
      box-shadow: none;
+     line-height: 20px;
 }
  .page-bottom-btn .button.red-btn:hover {
      background: #bc2200 !important;
@@ -9101,4 +9108,24 @@ input[type=number]::-webkit-inner-spin-button {
 }
 .role-permission-list input[type="checkbox"]:checked:after {
     filter: initial;
+}
+.view-role-email {
+    width: auto;
+    display: block;
+    vertical-align: middle;
+    padding: 7px 10px;
+    background-color: #fff;
+    border: 0.1rem solid #c4cdd5;
+    box-shadow: 0 0 0 1px transparent, 0 1px 0 0 rgb(22 29 37 / 5%);
+    border-radius: 0.3rem;
+    font-size: 14px;
+}
+.page_header a button.icon-arrow-left::after {
+    display: none;
+}
+.page_header a button.icon-arrow-left svg {
+    width: 20px;
+    height: 20px;
+    color: #5c5f62;
+    fill: #5c5f62;
 }
