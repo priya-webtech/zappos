@@ -598,58 +598,24 @@
                            
 
                            @if($commentget)
+                             @foreach($commentget as $key => $value)
+                             
+                              <?php $dateshow = date("dS M Y", strtotime($key)); ?>
 
-                          
-                           @foreach($commentget as $key => $value)
-                           
-                            <?php $dateshow = date("dS M Y", strtotime($key)); ?>
-
-                             <div class="order-msg-date">
-                                <?php echo $dateshow; ?>
-                             </div>
+                               <div class="order-msg-date">
+                                  <?php echo $dateshow; ?>
+                               </div>
                               @foreach($value as  $row)  
-                             <div class="order-tracking-msg">
+                               <div class="order-tracking-msg">
 
-                                <span>{{$row['message']}}</span>
+                                  <span>{{$row['message']}}</span>
 
-                                <span class="order-msg-time"><?php echo date("h:i", strtotime($row['updated_at'])); ?></span>
+                                  <span class="order-msg-time"><?php echo date("h:i", strtotime($row['updated_at'])); ?></span>
 
-                             </div>
-                       
-                           @endforeach
-                           @endforeach
+                               </div>
+                              @endforeach
+                             @endforeach
                            @endif
-
-                           @if($customer['email_verified_at'] != "")
-                           <div class="order-tracking-msg">
-
-                              <span>Customer verified.</span>
-
-                              <span class="order-msg-time"><?php echo date("h,i", strtotime($customer['updated_at'])); ?></span>
-
-                           </div>
-                           @endif
-                           @if($customer)
-                           <div class="order-tracking-msg">
-
-                              <span>verification Meessage Send.</span>
-
-                              <span class="order-msg-time"><?php echo date("h:i", strtotime($customer['updated_at'])); ?></span>
-
-                           </div>
-                           @endif
-
-                            @if($customer)
-                           <div class="order-tracking-msg">
-                              
-                              <span>Customer was created.</span>
-
-                              <span class="order-msg-time"><?php echo date("h:i", strtotime($customer['updated_at'])); ?></span>
-
-                           </div>
-                           @endif
-
-
 
                         </div>
 

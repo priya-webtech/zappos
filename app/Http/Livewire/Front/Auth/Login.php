@@ -163,7 +163,7 @@ class Login extends Component
 
                     'user_id' => $user->id,
                     
-                    'message' => 'A Reset password link has been sent to your Email address',
+                    'message' => 'User Requested Password reset',
                 ];
 
 
@@ -305,10 +305,6 @@ class Login extends Component
 
         event(new PasswordReset($user));
 
-
-
-        return redirect('/')->with('success', 'Your password has been reset!');
-
         $Comment_arr = [
 
                     'user_id' => $user->id,
@@ -318,6 +314,10 @@ class Login extends Component
 
 
         CustomerComment::create($Comment_arr);
+
+        return redirect('/')->with('success', 'Your password has been reset!');
+
+        
 
 
     }                                      

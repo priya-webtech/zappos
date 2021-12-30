@@ -84,18 +84,27 @@ class CreateNewUser implements CreatesNewUsers
 
 
             $user->assignRole('customer');
-            $Comment_arr = [
+            $Comment_arr1 = [
 
                     'user_id' => $user->id,
                     
-                    'message' => 'This customer placed order #'.$lastorderid->id,
+                    'message' => 'Customer was created.',
                 ];
 
 
-            CustomerComment::create($Comment_arr);
+            CustomerComment::create($Comment_arr1);
+            $Comment_arr2 = [
+
+                    'user_id' => $user->id,
+                    
+                    'message' => 'verification Meessage Send.',
+                ];
+
+
+            CustomerComment::create($Comment_arr2);
             session()->flash('success', 'Email verification mail is sent');
 
-           $user->sendEmailVerificationNotification();
+          // $user->sendEmailVerificationNotification();
 
 
 
