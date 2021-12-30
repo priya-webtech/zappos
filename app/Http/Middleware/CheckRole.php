@@ -22,17 +22,30 @@ class CheckRole
         if(Auth::check()) {
             if(str_contains($request->url(),'/forgot-password') || str_contains($request->url(),'/reset-password'))
             {
+                
                 return redirect('/');
             }
 
             if(!str_contains($request->url(),'/logout') && !str_contains($request->url(),'/livewire'))
             {
-                if(str_contains($request->url(),'/admin') && !Auth::user()->hasRole('admin')) {
-                    return redirect('/admin');
+
+                if(Auth::user()->hasRole('admin')) {
+                   
+                    if(!str_contains($request->url(),'/admin')) {
+
+                        return redirect('/admin');
+                    }
+
                 }
-                if(!str_contains($request->url(),'/admin') && !Auth::user()->hasRole('customer')) {
-                    return redirect('/');
+                if(Auth::user()->hasRole('customer')) {
+                    if(str_contains($request->url(),'/admin')) {
+                        return redirect('/');
+                    }
+
                 }
+
+
+              
             }
 
         } 

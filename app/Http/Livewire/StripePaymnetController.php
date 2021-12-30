@@ -42,10 +42,14 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
 
+use Illuminate\Support\Facades\DB;
+
+
 class StripePaymnetController extends Component
 {
     public $Cart,$CartItem,$ProductVariant,$varianttag,$orderdetail,$singleCart,$firstname,$lastname,$streetname,$city,$country,$pincode,$mobile,$Taxes, $view,$discoutget,$billing_type,$orderID,$unit_number,$countries,$newaddress,$customerAddress,$customerbillingAddress,$first_name,$last_name,$address,$apartment,$postal_code,$mobile_no,$newbillingaddress,$primary_billing_type,$same_shipping,$product,$Productmediass;
-    public $isDisabled, $editMode;
+    public $isDisabled, $editMode, $Product;
+    public $stripe_publishable_key, $stripe_secret_key;
 
     protected $rules = [
 
@@ -167,6 +171,18 @@ class StripePaymnetController extends Component
         $this->varianttag = VariantTag::All();
         if (Auth::check()) {
             $this->CartItem =  Cart::with(['media_product', 'product_detail'])->where('user_id',$this->user_id)->get();
+            if(empty($this->CartItem)) {
+                session()->flash('alert', 'Cart is empty!');
+
+                return redirect()->to('/');
+            }
+             $data = DB::table('stripe_key_detail')->first();
+            if(empty($data)) {
+                session()->flash('alert', 'You can not do Payment!');
+                return redirect()->to('/account/viewcart/detail');
+            } 
+             $this->stripe_publishable_key = $data->stripe_publishable_key;
+                $this->stripe_secret_key = $data->stripe_secret_key;
         }
 
         
@@ -174,19 +190,9 @@ class StripePaymnetController extends Component
     }
     public function render()
     {
-        $this->user_id =  Auth::user()->id;
-        $this->Cart = Cart::where('user_id',$this->user_id)->first();
+
+        return view('livewire.stripe-paymnet-controller');    
         
-        if(!empty($this->Cart)){
-          return view('livewire.stripe-paymnet-controller');
-        }else{
-            $this->Productmediass = ProductMedia::all()->groupBy('product_id')->toArray();
-
-            $this->Product = Product::with('productmediaget')->with('favoriteget')->orderBy('id','asc')->limit(6)->get();
-            redirect('/');
-          return view('livewire.dashboard');
-
-        }
     }
 
     public function NewShippingAddress(){

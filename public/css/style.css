@@ -118,6 +118,11 @@ body{
      top: 36px;
      display: none;
 }
+.input-icon-remove input[type="number"]::-webkit-inner-spin-button, .input-icon-remove input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
 /************ ADMIN PANEL HEADER ***************************************/
  .admin_panel_header {
      display: flex;
@@ -345,15 +350,21 @@ code {
  .admin_bar ul li.active > a svg {
      color: #007b5c;
 }
-.admin_bar ul li.menu-dropdown ul.sub_items {
-    max-height: 100%;
-    transition: max-height 0.5s ease-in;
-}
 
 .admin_bar ul li ul.sub_items {
     max-height: 0;
     transition: max-height 0.5s ease-out;
     overflow: hidden;
+}
+.admin_bar ul li.active ul.sub_items {
+    max-height: 100%;
+    transition: max-height 0.5s ease-in;
+}
+.admin_bar ul li.active ul.sub_items li a {
+    background: transparent;
+}
+.admin_bar ul li.active ul.sub_items li a::before {
+    display: none;
 }
 .admin_bar ul li .sub_items li a {
      font-size: 14px;
@@ -363,9 +374,6 @@ code {
 }
  .admin_bar ul li .sub_items li.active a {
      color: #007b5c;
-}
-.admin_bar ul li.menu-dropdown li a {
-    background: transparent;
 }
  article.full-width {
      margin: 0;
@@ -396,7 +404,7 @@ code {
     height: 14px;
     transition: initial;
 }
-.admin_bar ul li.menu-dropdown a.nav-arrow {
+.admin_bar ul li.active a.nav-arrow {
     transform: rotate(180deg);
 }
 .admin_bar ul li a.nav-arrow::before {
@@ -1069,13 +1077,14 @@ code {
      flex-wrap: wrap;
 }
  .settings-option {
-     display: flex;
-     align-items: self-start;
-     padding: 16px;
-     margin-bottom: 0;
-     border-radius: 3px;
-     width: calc(33.33% - 32px);
-     float: left;
+    display: flex;
+    align-items: self-start;
+    padding: 16px;
+    margin-bottom: 0;
+    border-radius: 3px;
+    width: calc(33.33% - 32px);
+    float: left;
+    cursor: pointer;
 }
  .settings-option:hover {
      background-color: #f4f6f8;
@@ -1104,9 +1113,10 @@ code {
      color: #919eab;
 }
  .setting-details label {
-     color: #006fbb;
-     font-weight: 600;
-     margin-bottom: 0;
+    color: #006fbb;
+    font-weight: 600;
+    margin-bottom: 0;
+    cursor: pointer;
 }
  .setting-details p {
      color: #6d7175 !important;
@@ -1163,6 +1173,7 @@ code {
      font-size: 14px;
      font-weight: 600;
      color: #ffffff !important;
+     line-height: 20px;
 }
  .button.green-btn:hover {
      background: #006e52;
@@ -4118,6 +4129,7 @@ code {
      color: #fff !important;
      border: none;
      box-shadow: none;
+     line-height: 20px;
 }
  .page-bottom-btn .button.red-btn:hover {
      background: #bc2200 !important;
@@ -9099,4 +9111,24 @@ input[type=number]::-webkit-inner-spin-button {
 }
 .role-permission-list input[type="checkbox"]:checked:after {
     filter: initial;
+}
+.view-role-email {
+    width: auto;
+    display: block;
+    vertical-align: middle;
+    padding: 7px 10px;
+    background-color: #fff;
+    border: 0.1rem solid #c4cdd5;
+    box-shadow: 0 0 0 1px transparent, 0 1px 0 0 rgb(22 29 37 / 5%);
+    border-radius: 0.3rem;
+    font-size: 14px;
+}
+.page_header a button.icon-arrow-left::after {
+    display: none;
+}
+.page_header a button.icon-arrow-left svg {
+    width: 20px;
+    height: 20px;
+    color: #5c5f62;
+    fill: #5c5f62;
 }
