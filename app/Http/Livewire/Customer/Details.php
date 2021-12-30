@@ -95,8 +95,11 @@ class Details extends Component
 
         $this->customer = User::with(['detail','address'])->where('uuid',$this->uuid)->first()->toArray();
        
-        $this->commentget = CustomerComment::where('user_id',$this->customer['id'])->get();
-
+        $this->commentget = CustomerComment::where('user_id',$this->customer['id'])->orderBy('id', 'DESC')->get()->groupBy(function($data) {
+            return $data->updated_at->format('Y-m-d');
+        })->toArray();
+     
+ 
         $this->order = orders::where('user_id',$this->customer['id'])->orderBy('id', 'DESC')->first();
         
         $this->ordercomment = orders::where('user_id',$this->customer['id'])->orderBy('id', 'DESC')->get();

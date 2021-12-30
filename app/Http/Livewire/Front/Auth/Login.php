@@ -34,6 +34,8 @@ use Carbon\Carbon;
 
 use App\Models\User;
 
+use App\Models\CustomerComment;
+
 use App\Actions\Fortify\PasswordValidationRules;
 
 use Illuminate\Auth\Events\PasswordReset;
@@ -104,6 +106,7 @@ class Login extends Component
 
     {
 
+
         session()->flash('screen', 'forgot-password');
 
 
@@ -154,9 +157,33 @@ class Login extends Component
 
         if ($this->sendResetEmail($request->email, $token)) {
 
+
+
+            $Comment_arr = [
+
+                    'user_id' => $user->id,
+                    
+                    'message' => 'A Reset password link has been sent to your Email address',
+                ];
+
+
+            CustomerComment::create($Comment_arr);
+
             return redirect()->back()->with('status', trans('A Reset link has been sent to your Email address.'));
 
+            
+
         } else {
+
+            $Comment_arr = [
+
+                    'user_id' => $user->id,
+                    
+                    'message' => 'A Network Error occurred. Please try again',
+                ];
+
+
+            CustomerComment::create($Comment_arr);
 
             return redirect()->back()->withErrors(['network_error' => trans('A Network Error occurred. Please try again.')]);
 
@@ -192,7 +219,15 @@ class Login extends Component
 
             $user->notify(new ResetPassword($token));
 
+            $Comment_arr = [
 
+                    'user_id' => $user->id,
+                    
+                    'message' => 'Send Reset Email Link',
+                ];
+
+
+                CustomerComment::create($Comment_arr);
 
             return true;
 
@@ -274,6 +309,15 @@ class Login extends Component
 
         return redirect('/')->with('success', 'Your password has been reset!');
 
+        $Comment_arr = [
+
+                    'user_id' => $user->id,
+                    
+                    'message' => 'Your password has been reset',
+                ];
+
+
+        CustomerComment::create($Comment_arr);
 
 
     }                                      

@@ -34,11 +34,20 @@ class Reverification extends Component
     
     public function Resendmail(Request $request)
     {
-        dd($request->email);
+        
          $user = User::where('email', $request->email)->first();
         $user->sendEmailVerificationNotification();
 
-          return redirect()->back();
+        $Comment_arr = [
+
+            'user_id' => $user->id,
+            
+            'message' => 'Resend Email Mail',
+        ];
+
+        CustomerComment::create($Comment_arr);
+        
+         return redirect()->back();
 
     }                                      
 }

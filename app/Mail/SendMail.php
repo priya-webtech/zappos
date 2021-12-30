@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\CustomerComment;
 
 class SendMail extends Mailable
 {
@@ -29,7 +30,17 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->from('prajapativishal999991@gmail.com')->subject('Thank you message')->view('livewire.thank-mail')->with('data',$this->data);
+        return $this->from('zappos@gmail.com')->subject('Thank you message')->view('livewire.thank-mail')->with('data',$this->data);
+
+        $Comment_arr = [
+
+                    'user_id' => $user_id,
+                    
+                    'message' => 'Customer verified.',
+                ];
+
+
+        CustomerComment::create($Comment_arr);
         //return $this->view('view.name');
     }
 }

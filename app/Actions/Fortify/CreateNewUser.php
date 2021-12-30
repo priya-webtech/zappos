@@ -8,6 +8,8 @@ namespace App\Actions\Fortify;
 
 use App\Models\User;
 
+use App\Models\CustomerComment;
+
 use App\Models\CustomerDetail;
 
 use Illuminate\Support\Facades\Hash;
@@ -80,8 +82,17 @@ class CreateNewUser implements CreatesNewUsers
                 'user_id' => $user->id,
             ]);
 
-            $user->assignRole('customer');
 
+            $user->assignRole('customer');
+            $Comment_arr = [
+
+                    'user_id' => $user->id,
+                    
+                    'message' => 'This customer placed order #'.$lastorderid->id,
+                ];
+
+
+            CustomerComment::create($Comment_arr);
             session()->flash('success', 'Email verification mail is sent');
 
            $user->sendEmailVerificationNotification();

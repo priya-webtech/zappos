@@ -595,36 +595,28 @@
                         <div class="order-tracking-list">
 
 
-                           <div class="order-msg-date">
-
-
-
-                              11 MAY 2020
-
-
-
-                           </div>
-
-                         @if($ordercomment)
-                           @foreach($ordercomment as $value)
-                           <div class="order-tracking-msg">
-                              <span>This customer placed order #{{$value->id}}.</span>
-                              <span class="order-msg-time"><?php echo date("h:i", strtotime($value['updated_at'])); ?></span>
-
-                           </div>
-                           @endforeach
-                        @endif
-
+                           
 
                            @if($commentget)
-                           @foreach($commentget as $value)
-                           <div class="order-tracking-msg">
 
-                              <span>{{$value->message}}</span>
+                          
+                           @foreach($commentget as $key => $value)
+                           
+                            <?php $dateshow = date("dS M Y", strtotime($key)); ?>
 
-                              <span class="order-msg-time"><?php echo date("h:i", strtotime($value['updated_at'])); ?></span>
+                             <div class="order-msg-date">
+                                <?php echo $dateshow; ?>
+                             </div>
+                              @foreach($value as  $row)  
+                             <div class="order-tracking-msg">
 
-                           </div>
+                                <span>{{$row['message']}}</span>
+
+                                <span class="order-msg-time"><?php echo date("h:i", strtotime($row['updated_at'])); ?></span>
+
+                             </div>
+                       
+                           @endforeach
                            @endforeach
                            @endif
 
