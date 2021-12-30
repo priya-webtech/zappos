@@ -41,8 +41,8 @@ $(document).ready(function(){
   });
 });
 $(document).ready(function(){
-	$('.nav-arrow').on('click', function() {
-		$(this).parent().toggleClass('menu-dropdown').siblings().removeClass('menu-dropdown');
+	$('.nav-dropdown').on('click', function() {
+		$(this).parent().toggleClass('active').siblings().removeClass('active');
 	});
 });
 
