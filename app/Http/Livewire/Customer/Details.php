@@ -22,9 +22,13 @@ use App\Models\CustomerComment;
 
 use App\Models\Orders;
 
+use Illuminate\Support\Facades\Validator;
+
 use App\Models\order_item;
 
 use App\Models\Tag;
+
+use Livewire\WithFileUploads;
 
 use App\Models\User;
 
@@ -35,7 +39,9 @@ use Illuminate\Support\Str;
 class Details extends Component
 {
 
-    public $uuid, $customer, $countries, $tags, $Taxes, $customerData, $first_name, $last_name ,$address_id, $collect_tax, $agreed_to_receive_marketing_mails, $customerAddress = [], $customerBillingAddress = [], $address,$address_type,$shipping_address_type,$order,$order_item,$edit_billing_address,$messagetext,$commentget,$ordercomment,$OrderItemstock;
+    use WithFileUploads;
+
+    public $uuid, $customer, $countries, $tags, $Taxes, $customerData, $first_name, $last_name ,$address_id, $collect_tax, $agreed_to_receive_marketing_mails, $customerAddress = [], $customerBillingAddress = [], $address,$address_type,$shipping_address_type,$order,$order_item,$edit_billing_address,$messagetext,$commentget,$ordercomment,$OrderItemstock, $social_img;
 
     protected $listeners = ['update'];
      protected $rules = [
@@ -148,6 +154,8 @@ class Details extends Component
 
     public function render()
     {
+
+        $this->initial();
         return view('livewire.customer.details');
 
 
@@ -305,11 +313,38 @@ class Details extends Component
     public function customercommentpost()
     {
 
+    /*    $this->validate([
+            'messagetext' => ['required']
+        ]);*/
+
+        date_default_timezone_set("Europe/Amsterdam");
+
+        if($this->social_img){
+
+            $photo = $this->social_img;
+            $path_url = $photo->storePublicly('commentgeImage','public');
+            
+            $image = $path_url;
+        }
+        else{
+            $image = '';
+        }
+
+        if($this->messagetext)
+        {
+          $messagevalue  = $this->messagetext;
+        }else{
+
+          $messagevalue = '';
+        }
+
         $Comment_arr = [
 
             'user_id' => $this->customerData['id'],
             
-            'message' => $this->messagetext,
+            'message' => $messagevalue,
+            
+            'image' => $image,
         ];
 
 
@@ -317,7 +352,10 @@ class Details extends Component
 
         $this->messagetext = '';
 
+        $this->initial();
+
         session()->flash('message', 'Post Created.');
+
 
     }
     
@@ -777,12 +815,9 @@ class Details extends Component
         if($deleteuser)
 
         {
-
             CustomerAddress::where('user_id',$this->customer['id'])->delete();
 
             CustomerDetail::where('user_id',$this->customer['id'])->delete();
-
-
 
             return redirect(route('customers'));
 

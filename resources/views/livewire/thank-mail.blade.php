@@ -26,7 +26,7 @@
 				</tr>
 				<tr>
 					<td>
-						<p>Welcome messages are vital for educating customers and motivate them to take the right actions. It helps as a stepwise guide to proceed to use the product or service in the proper way. </p>
+						<p>{{$MailMessage->discripation}}</p>
 					</td>
 				</tr>
 				<tr>

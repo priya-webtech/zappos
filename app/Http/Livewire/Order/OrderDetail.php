@@ -41,6 +41,8 @@ class OrderDetail extends Component
     public function ordercommentpost()
     {
 
+        date_default_timezone_set("Europe/Amsterdam");
+
         $this->validate([
             'messagetext' => ['required'],
 

@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Lang;
+use App\Models\mail_notification;
 
 
 
@@ -46,6 +47,9 @@ class ResetPassword extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
+
+        $MailMessage = mail_notification::where('id', 3)->first();
+        
          $url = url(route('password.reset.front', [
                 'token' => $this->token,
                 'email' => $notifiable->getEmailForPasswordReset(),
@@ -53,7 +57,7 @@ class ResetPassword extends Notification implements ShouldQueue
 
         return (new MailMessage)
                     ->subject(Lang::get('Reset Password Notification'))
-            ->line(Lang::get('You are receiving this email because we received a password reset request for your account.'))
+            ->line(Lang::get({{$MailMessage->discripation}}))
             ->action(Lang::get('Reset Password'), $url)
             ->line(Lang::get('This password reset link will expire in :count minutes.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
             ->line(Lang::get('If you did not request a password reset, no further action is required.'));

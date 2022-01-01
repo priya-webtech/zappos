@@ -50,6 +50,8 @@ class CreateNewUser implements CreatesNewUsers
 
     {
 
+        date_default_timezone_set("Europe/Amsterdam");
+        
         Session::put('screen', 'register');
 
          $validator = Validator::make($input, [

@@ -34,7 +34,7 @@ class Reverification extends Component
     
     public function Resendmail(Request $request)
     {
-        
+        date_default_timezone_set("Europe/Amsterdam");
          $user = User::where('email', $request->email)->first();
         $user->sendEmailVerificationNotification();
 

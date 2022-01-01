@@ -1,4 +1,19 @@
+<div>
+
 <x-admin-layout>
+    <div wire:key="alert">
+
+     @if (session()->has('message'))
+
+     <div class="alert alert-success">
+
+        {{ session('message') }}
+
+     </div>
+
+     @endif
+
+    </div>
     <section class="full-width flex-wrap admin-body-width add-variant-header">
         <article class="full-width">
             <div class="columns customers-details-heading">
@@ -146,27 +161,54 @@
                         </li>
                     </ul>
                 </div>
-                <div class="card">
+                <div class="card" >
                     <div class="header-title">
                         <h3 class="fs-16 fw-6 mb-0">Customer</h3>
                     </div>
                     <ul class="setting-order-listing">
+                        @if($notification)
+                        @foreach($notification as $key => $row)
+                        @if($row->notification_id == 1)
                         <li>
-                            <a href="#">Customer account invite</a>
-                            <p>Sent to the customer with account activation instructions. You can edit this email before you send it.</p>
+                            <a class="link" onclick="document.getElementById('Changenotificationvalue-{{$row->id}}').style.display='block'">{{$row->title}}</a>
+                            <p>{{$row->discripation}}</p>
                         </li>
-                        <li>
-                            <a href="#">Customer account welcome</a>
-                            <p>Sent automatically to the customer when they complete their account activation.</p>
-                        </li>
-                        <li>
-                            <a href="#">Customer account password reset</a>
-                            <p>Sent automatically to the customer when they ask to reset their accounts password.</p>
-                        </li>
-                        <li>
-                            <a href="#">Contact customer</a>
-                            <p>Sent to the customer when you contact them from the orders or customers page. You can edit this email before you send it.</p>
-                        </li>
+
+                        <div id="Changenotificationvalue-{{$row->id}}" class="customer-modal-main" wire:ignore.self>
+                            <div class="customer-modal-inner">
+                                <div class="customer-modal">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="myModalLabel">Change Notification</h4>
+                                        <button type="button" class="close modal-close-btn" onclick="document.getElementById('Changenotificationvalue-{{$row->id}}').style.display='none'" aria-label="Close">
+                                            <span aria-hidden="true">
+                                                <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                                                    <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+                                                </svg>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form autocomplete="off">
+                                            <div class="form-group">
+                                                <label>Title: {{$row->title}}</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Descripation:</label>
+                                                <textarea wire:model="notification.{{ $key }}.discripation" class="form-control required" name="descripationn" id="descripationn"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" data-toggle="modal" data-target="#LoginAndSecurity" onclick="document.getElementById('Changenotificationvalue-{{$row->id}}').style.display='none'"class="site-btn blue-btn">Back</button>
+                                        <button type="submit" onclick="document.getElementById('Changenotificationvalue-{{$row->id}}').style.display='none'" wire:click="Update('usernotify',{{$row->id}})" class="site-btn blue-btn">Save Changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                        @endforeach
+                        @endif
                     </ul>
                 </div>
                 <div class="card">
@@ -287,8 +329,17 @@
             </div>
         </article>
     </section>
-</x-admin-layout>
 
+ <script>
+     const editor = CKEDITOR.replace('descripationn');
+     editor.on('change', function (event) {
+        // console.log(event.editor.getData())
+        @this.set('descripation', event.editor.getData());
+    })
+     
+</script>
+</x-admin-layout>
+</div>
 <!--Staff order notifications modal-->
 <div id="add-recipient-modal" class="customer-modal-main">
     <div class="customer-modal-inner">

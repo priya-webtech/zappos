@@ -105,7 +105,7 @@ class Login extends Component
     public function sendPasswordResetLink(Request $request)
 
     {
-
+        date_default_timezone_set("Europe/Amsterdam");
 
         session()->flash('screen', 'forgot-password');
 
@@ -201,6 +201,8 @@ class Login extends Component
 
     {
 
+        date_default_timezone_set("Europe/Amsterdam");
+
         //Retrieve the user from the database
 
         $user = User::where('email', $email)->first();
@@ -255,7 +257,7 @@ class Login extends Component
 
     {
 
-
+        date_default_timezone_set("Europe/Amsterdam");
 
          $request->validate([
 

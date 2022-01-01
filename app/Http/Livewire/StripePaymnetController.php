@@ -542,6 +542,8 @@ class StripePaymnetController extends Component
     public function thankYou(Request $request)
 
     {
+
+        date_default_timezone_set("Europe/Amsterdam");
         
             if($request->redirect_status == 'succeeded') {
                 $user_id =  Auth::user()->id;
