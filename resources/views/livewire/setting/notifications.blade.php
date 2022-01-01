@@ -171,10 +171,10 @@
                         @if($row->notification_id == 1)
                         <li>
                             <a class="link" onclick="document.getElementById('Changenotificationvalue-{{$row->id}}').style.display='block'">{{$row->title}}</a>
-                            <p>{{$row->discripation}}</p>
+                            <p>{!! $row->static_des !!}</p>
                         </li>
 
-                        <div id="Changenotificationvalue-{{$row->id}}" class="customer-modal-main" wire:ignore.self>
+                        <div id="Changenotificationvalue-{{$row->id}}" class="customer-modal-main" wire:ignore>
                             <div class="customer-modal-inner">
                                 <div class="customer-modal">
                                     <div class="modal-header">
@@ -195,17 +195,18 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Descripation:</label>
-                                                <textarea wire:model="notification.{{ $key }}.discripation" class="form-control required" name="descripationn" id="descripationn"></textarea>
+                                                <textarea wire:ignore wire:model.debounce.lazy="notification.{{ $key }}.discripation" class="form-control" required name="discripation-{{$row->id}}" id="discripation-{{$row->id}}"></textarea>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" data-toggle="modal" data-target="#LoginAndSecurity" onclick="document.getElementById('Changenotificationvalue-{{$row->id}}').style.display='none'"class="site-btn blue-btn">Back</button>
-                                        <button type="submit" onclick="document.getElementById('Changenotificationvalue-{{$row->id}}').style.display='none'" wire:click="Update('usernotify',{{$row->id}})" class="site-btn blue-btn">Save Changes</button>
+                                        <button type="submit" onclick="document.getElementById('Changenotificationvalue-{{$row->id}}').style.display='none'" wire:click="Update('usernotify')" class="site-btn blue-btn">Save Changes</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
                         @endif
                         @endforeach
                         @endif
@@ -330,13 +331,18 @@
         </article>
     </section>
 
- <script>
-     const editor = CKEDITOR.replace('descripationn');
-     editor.on('change', function (event) {
-        // console.log(event.editor.getData())
-        @this.set('descripation', event.editor.getData());
-    })
-     
+
+@livewireScripts
+<script>
+     var areas = Array('discripation-1', 'discripation-2', 'discripation-3');
+    $.each(areas, function (i, area) {
+    const editor = CKEDITOR.replace(area);
+    editor.on('change', function (event) {
+            // console.log(event.editor.getData())
+    @this.set('notification.'+i+'.discripation', event.editor.getData());
+        })
+    }); 
+
 </script>
 </x-admin-layout>
 </div>

@@ -16,7 +16,7 @@
             <tbody>
                 <tr>
                     <td>
-                        <img src="{{ asset('storage/mail-img/rotation-lock-blue.png') }}" style="width: 7em; height: 7em; ">
+                        <img src="{{ asset('storage/mailimg/rotation-lock-blue.png') }}" style="width: 7em; height: 7em; ">
                     </td>
                 </tr>
                 <tr>
@@ -25,17 +25,17 @@
 
                         @if (! empty($greeting))
 
-                            <h1 style=" margin: 0 0 0.2em; font-size: 2.2em; font-weight: bold; line-height: 1.2em;color: #003953;"># {{ $greeting }}</h1>
+                            <!--<h1 style=" margin: 0 0 0.2em; font-size: 2.2em; font-weight: bold; line-height: 1.2em;color: #003953;"># {{ $greeting }}</h1>-->
 
                             @else
 
                             @if ($level === 'error')
 
-                            <h1 style=" margin: 0 0 0.2em; font-size: 2.2em; font-weight: bold; line-height: 1.2em;color: #003953;"># @lang('Whoops!')</h1>
+                            <!--<h1 style=" margin: 0 0 0.2em; font-size: 2.2em; font-weight: bold; line-height: 1.2em;color: #003953;"># @lang('Whoops!')</h1>-->
 
                             @else
 
-                            <h1 style=" margin: 0 0 0.2em; font-size: 2.2em; font-weight: bold; line-height: 1.2em;color: #003953;"># @lang('Hello!')</h1>
+                            <!--<h1 style=" margin: 0 0 0.2em; font-size: 2.2em; font-weight: bold; line-height: 1.2em;color: #003953;"># @lang('Hello!')</h1>-->
 
                             @endif
 
@@ -107,35 +107,39 @@
                     </td>
                 </tr>
                 <tr>
+                    
                     <td>
-                        {{-- Subcopy --}}
-
-                            @isset($actionText)
-
-                            @slot('subcopy')
-
-                            @lang(
-
-                                "Ifffff you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-
-                                'into your web browser:',
-
-                                [
-
-                                    'actionText' => $actionText,
-
-                                ]
-
-                            ) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
-
-                            @endslot
-
-                        @endisset
+                    @component('mail::message')
+                                    {{-- Subcopy --}}
+                    
+                    @isset($actionText)
+                    
+                    @slot('subcopy')
+                    
+                    @lang(
+                    
+                        "Ifffff you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
+                    
+                        'into your web browser:',
+                    
+                        [
+                    
+                            'actionText' => $actionText,
+                    
+                        ]
+                    
+                    ) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
+                    
+                    @endslot
+                    
+                    @endisset
+                    @endcomponent
                     </td>
                 </tr>
+
                 <tr>
                     <td style="text-align: center; padding: 3em 15px 0; ">
-                        <img src="{{ asset('storage/mailimg/twitter.png') }}" style="width: 8em; margin-bottom: 0.4em;">
+                        <img src="{{ asset('storage/mailimg/zappos-logo.png') }}" style="width: 8em; margin-bottom: 0.4em;">
                         <span style=" width: 100%; display: block;"> © 2021-2022 - zappos</span>
                     </td>
                 </tr>

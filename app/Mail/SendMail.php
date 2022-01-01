@@ -30,7 +30,7 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        date_default_timezone_set("Europe/Amsterdam");
+        /*date_default_timezone_set("Europe/Amsterdam");
 
         $Comment_arr = [
 
@@ -40,7 +40,7 @@ class SendMail extends Mailable
                 ];
 
 
-        CustomerComment::create($Comment_arr);
+        CustomerComment::create($Comment_arr);*/
         
         return $this->from('zappos@gmail.com')->subject('Thank you message')->view('livewire.thank-mail')->with('data',$this->data);
 

@@ -12,9 +12,10 @@ class Notifications extends Component
 
 	protected $rules = [
 
-		'notification.*.discripation' => '',
+		'notification.*.discripation' => ['required'],
 
     ];
+
 
 	public function mount()
 	{
@@ -24,15 +25,15 @@ class Notifications extends Component
     {
         return view('livewire.setting.notifications');
     }
-    public function Update($flag,$id)
+    public function Update($flag)
     {
     	 if($flag == 'usernotify'){
 
     	 foreach ($this->notification as $key => $value) {
 	        $id = $this->notification[$key]['id'];
 	        $variationValue = mail_notification::query()->findOrFail($id);
-
 	            if ($id) {
+	            	
 	               $variationValue->update([
 	                   'discripation' => $this->notification[$key]['discripation'],
 
