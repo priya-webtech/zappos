@@ -45,51 +45,16 @@
                 <tr>
                     <td>
                         {{-- Intro Lines --}}
-
+                        
                         @foreach ($introLines as $line)
 
-                       <p> {{ $line }} </p>
+                       <p> {!! $line !!} </p>
 
                         @endforeach
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        {{-- Action Button --}}
-
-                        @isset($actionText)
-
-                        <?php
-
-                            switch ($level) {
-
-                                case 'success':
-
-                                case 'error':
-
-                                    $color = $level;
-
-                                    break;
-
-                                default:
-
-                                    $color = 'primary';
-
-                            }
-
-                        ?>
-
-                        @component('mail::button', ['url' => $actionUrl, 'color' => $color])
-
-                        {{ $actionText }}
-
-                        @endcomponent
-
-                        @endisset
-
-                    </td>
-                </tr>
-                <tr>
+               
+               <!--  <tr>
                     <td>
                         {{-- Salutation --}}
 
@@ -105,10 +70,12 @@
 
                         @endif
                     </td>
-                </tr>
-                <tr>
+                </tr> -->
+              <!--   <tr>
                     
                     <td>
+                        
+                        
                     @component('mail::message')
                                     {{-- Subcopy --}}
                     
@@ -118,7 +85,7 @@
                     
                     @lang(
                     
-                        "Ifffff you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
+                        "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
                     
                         'into your web browser:',
                     
@@ -135,7 +102,7 @@
                     @endisset
                     @endcomponent
                     </td>
-                </tr>
+                </tr> -->
 
                 <tr>
                     <td style="text-align: center; padding: 3em 15px 0; ">

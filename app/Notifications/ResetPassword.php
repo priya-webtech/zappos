@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Lang;
 use App\Models\mail_notification;
+use App\Models\User;
 
 
 
@@ -49,14 +50,21 @@ class ResetPassword extends Notification implements ShouldQueue
     {
 
         $MailMessage = mail_notification::where('id', 3)->first();
-        
-         $url = url(route('password.reset.front', [
+        $userdata = User::where('email', $notifiable->getEmailForPasswordReset())->first();
+        $MailMessage->discripation = str_replace('{name}', $userdata->first_name .' '. $userdata->last_name, $MailMessage->discripation);
+        $url = url(route('password.reset.front', [
                 'token' => $this->token,
                 'email' => $notifiable->getEmailForPasswordReset(),
             ], false));
 
+        
+        $MailMessage->discripation = str_replace('{reset_button}', '<a href='.$url.' rel="noopener" class="button button-primary" target="_blank">Reset Password</a>', $MailMessage->discripation);
+        
+        $MailMessage->discripation = str_replace('{reset_live_url}', '"If you are having trouble clicking the \":actionText\" button, copy and paste the URL below\n"."into your web browser:",<span class="break-all">'.$url.'</span>', $MailMessage->discripation);
+         
+
         return (new MailMessage)
-                    ->subject(Lang::get('Reset Password Notification'))
+            ->subject(Lang::get('Reset Password Notification'))
             ->line(Lang::get($MailMessage->discripation))
             ->action(Lang::get('Reset Password'), $url)
             ->line(Lang::get('This password reset link will expire in :count minutes.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
