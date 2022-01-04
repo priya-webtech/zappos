@@ -388,23 +388,20 @@ code {
 .admin_bar ul li {
     position: relative;
 }
-.admin_bar ul li a.nav-arrow {
-    position: absolute;
-    right: 15px;
+.admin_bar ul li a.nav-dropdown {
+    position: relative;
+}
+.admin_bar ul li a.nav-dropdown::after {
     background-image: url(../assets/images/arrow-down.png);
+    content: "";
+    position: absolute;
     display: block;
     background-size: 100%;
-    top: 10px;
-    background-color: transparent;
-    cursor: pointer;
-    z-index: 2;
-    padding: 0;
-    margin: 0;
     width: 14px;
     height: 14px;
-    transition: initial;
+    right: 10px;
 }
-.admin_bar ul li.active a.nav-arrow {
+.admin_bar ul li.active a.nav-dropdown::after {
     transform: rotate(180deg);
 }
 .admin_bar ul li a.nav-arrow::before {
