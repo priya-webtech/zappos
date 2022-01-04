@@ -17,6 +17,7 @@ use App\Models\ProductComment;
 use App\Models\ProductVariant;
 
 use App\Models\tax;
+use Illuminate\Support\Facades\Validator;
 
 class OrderDetail extends Component
 {
@@ -25,8 +26,10 @@ class OrderDetail extends Component
     public function mount($id) {
 
        $this->order = Orders::with('user')->Where('id', $id)->first();
-    
-       $this->commentget = ProductComment::where('order_id',$this->order['id'])->get();
+
+       $this->commentget = ProductComment::where('order_id',$this->order['id'])->orderBy('id', 'DESC')->get()->groupBy(function($data) {
+            return $data->updated_at->format('Y-m-d');
+        })->toArray();
 
        $this->Taxes = tax::where('id',1)->first();
 
@@ -37,6 +40,13 @@ class OrderDetail extends Component
 
     public function ordercommentpost()
     {
+
+        date_default_timezone_set("Europe/Amsterdam");
+
+        $this->validate([
+            'messagetext' => ['required'],
+
+        ]);
 
         $Comment_arr = [
 

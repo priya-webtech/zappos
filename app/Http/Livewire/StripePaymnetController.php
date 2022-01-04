@@ -18,6 +18,8 @@ use App\Models\tax;
 
 use App\Models\order_item;
 
+use App\Models\CustomerComment;
+
 use App\Models\OrderShipping;
 
 use App\Models\VariantStock;
@@ -540,6 +542,8 @@ class StripePaymnetController extends Component
     public function thankYou(Request $request)
 
     {
+
+        date_default_timezone_set("Europe/Amsterdam");
         
             if($request->redirect_status == 'succeeded') {
                 $user_id =  Auth::user()->id;
@@ -698,6 +702,16 @@ class StripePaymnetController extends Component
 
                 $getOrderitem = order_item::where('order_id',$lastorderid->id)->first();
 
+                $Comment_arr = [
+
+                    'user_id' => $user_id,
+                    
+                    'message' => 'This customer placed order #'.$lastorderid->id,
+                ];
+
+
+                CustomerComment::create($Comment_arr);
+
                 Cart::where('user_id',$getOrderitem->user_id)->delete();
             }
 
@@ -792,6 +806,16 @@ class StripePaymnetController extends Component
 
                     $Orderitemvalue =  order_item::insert($insert_order_item);
 
+                    $Comment_arr = [
+
+                    'user_id' => $user_id,
+                    
+                    'message' => 'This customer placed order failed #'.$lastorderid->id,
+                ];
+
+
+                CustomerComment::create($Comment_arr);
+
                Session::flash('success', 'Payment failed!');
 
          }
@@ -881,6 +905,16 @@ class StripePaymnetController extends Component
                     }
 
                     $Orderitemvalue =  order_item::insert($insert_order_item);
+
+                    $Comment_arr = [
+
+                    'user_id' => $user_id,
+                    
+                    'message' => 'This customer placed order Pendding #'.$lastorderid->id,
+                ];
+
+
+                CustomerComment::create($Comment_arr);
 
              Session::flash('success', 'Payment pending!');
          }

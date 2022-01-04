@@ -239,9 +239,9 @@ Route::middleware(['checkRole'])->group(function () {
 
             Route::get('/admin/settings', Livewire\Admin\Settings::class)->name('settings');
 
-            Route::get('/admin/setting/general', Livewire\Setting\General::class)->name('setting-general');
+            Route::get('/admin/setting/generalss', Livewire\Setting\General::class)->name('general');
 
-             Route::get('/admin/setting/generalss', Livewire\Setting\GeneralSetting::class)->name('general');
+             Route::get('/admin/setting/general', Livewire\Setting\GeneralSetting::class)->name('setting-general');
 
             Route::get('/admin/setting/sender-email', Livewire\Setting\SenderEmail::class)->name('sender-email');
 
@@ -303,7 +303,7 @@ Route::middleware(['checkRole'])->group(function () {
 
             Route::get('/admin/setting/account', Livewire\Setting\Account::class)->name('account');
 
-           // Route::get('/admin/setting/general', Livewire\Setting\General::class)->name('general');
+           
 
             Route::get('/admin/setting/payments/alternative-providers', Livewire\Setting\AlternativeProviders::class)->name('alternative-providers');
 

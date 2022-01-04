@@ -139,6 +139,7 @@
                 <div class="order-tracking" wire:ignore>
                     <div class="row add-note-textarea comment-box mb-0">
                         <textarea wire:model='messagetext' placeholder="Leave a comment..."></textarea>
+                        @error('messagetext') <span class="error">{{ $message }}</span> @enderror
                         <div class="comment-button">
                             <button class="secondary">
                                 <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
@@ -170,28 +171,24 @@
                                25 MAY
                             </div>
                             @if($commentget)
-                            @foreach($commentget as $row)
-                            <div class="order-tracking-msg completed-status">
-                                <span>{{$row->message}}</span>
-                                <span class="order-msg-time"><?php echo date("h:i", strtotime($row['updated_at'])); ?></span>
-                            </div>
-                            @endforeach
-                            @endif
-                           <!--  <div class="order-tracking-msg completed-status tracking-details-btn-main">
-                                <div class="tracking-details-btn">
-                                    <span>Order confirmation email was sent to John Doe (johndoe@webkul.com).</span>
-                                    <span class="order-msg-time">7:30</span>
-                                </div>
-                                <button class="secondary order-tracking-btn">Resend email</button>
-                            </div>
-                            <div class="order-tracking-msg completed-status">
-                                <span>Jameelll Ahmaddd manually marked this order as paid.</span>
-                                <span class="order-msg-time">7:30</span>
-                            </div>
-                            <div class="order-tracking-msg completed-status">
-                                <span>Jameelll Ahmaddd created this order for John Doe from draft order <a href="#">#D25</a>.<p>Taxes are calculated by</p></span>
-                                <span class="order-msg-time">7:30</span>
-                            </div> -->
+                             @foreach($commentget as $key => $value)
+                             
+                              <?php $dateshow = date("dS M Y", strtotime($key)); ?>
+
+                               <div class="order-msg-date">
+                                  <?php echo $dateshow; ?>
+                               </div>
+                              @foreach($value as  $row)  
+                               <div class="order-tracking-msg">
+
+                                  <span>{{$row['message']}}</span>
+
+                                  <span class="order-msg-time"><?php echo date("h:i", strtotime($row['updated_at'])); ?></span>
+
+                               </div>
+                              @endforeach
+                             @endforeach
+                           @endif
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,8 @@ namespace App\Actions\Fortify;
 
 use App\Models\User;
 
+use App\Models\CustomerComment;
+
 use App\Models\CustomerDetail;
 
 use Illuminate\Support\Facades\Hash;
@@ -48,6 +50,8 @@ class CreateNewUser implements CreatesNewUsers
 
     {
 
+        date_default_timezone_set("Europe/Amsterdam");
+        
         Session::put('screen', 'register');
 
          $validator = Validator::make($input, [
@@ -80,11 +84,29 @@ class CreateNewUser implements CreatesNewUsers
                 'user_id' => $user->id,
             ]);
 
-            $user->assignRole('customer');
 
+            $user->assignRole('customer');
+            $Comment_arr1 = [
+
+                    'user_id' => $user->id,
+                    
+                    'message' => 'Customer was created.',
+                ];
+
+
+            CustomerComment::create($Comment_arr1);
+            $Comment_arr2 = [
+
+                    'user_id' => $user->id,
+                    
+                    'message' => 'verification Meessage Send.',
+                ];
+
+
+            CustomerComment::create($Comment_arr2);
             session()->flash('success', 'Email verification mail is sent');
 
-           $user->sendEmailVerificationNotification();
+          // $user->sendEmailVerificationNotification();
 
 
 

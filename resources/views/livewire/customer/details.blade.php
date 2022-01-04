@@ -10,6 +10,7 @@
 
 
    <x-admin-layout>
+
 @php $symbol = CurrencySymbol(); @endphp
 
 
@@ -482,11 +483,11 @@
 
                      <div class="row add-note-textarea comment-box mb-0">
 
+                        <textarea wire:model='messagetext' onkeyup="if(this.value.length > 0) document.getElementById('start_button').disabled = false; else document.getElementById('start_button').disabled = true;" placeholder="Leave a comment..."></textarea>
 
-
-                        <textarea wire:model='messagetext' placeholder="Leave a comment..."></textarea>
-
-
+                       <!--  @if($errors->has('messagetext'))
+                            <span class="text-danger">{{ $errors->first('messagetext') }}</span>
+                        @endif -->
 
                         <div class="comment-button">
 
@@ -554,7 +555,7 @@
 
                            <button class="secondary">
 
-
+                             <input type='file' wire:model="social_img" onkeyup="if(this.value.length > 0) document.getElementById('start_button').disabled = false; else document.getElementById('start_button').disabled = true;" id="social_img">
 
                               <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
 
@@ -570,9 +571,7 @@
 
                            </button>
 
-
-
-                           <button class="secondary post-btn" wire:click.prevent="customercommentpost">Post</button>
+                           <button class="button green-btn postbuttone" id="start_button" disabled wire:click.prevent="customercommentpost">Post</button>
 
 
 
@@ -595,69 +594,31 @@
                         <div class="order-tracking-list">
 
 
-                           <div class="order-msg-date">
-
-
-
-                              11 MAY 2020
-
-
-
-                           </div>
-
-                         @if($ordercomment)
-                           @foreach($ordercomment as $value)
-                           <div class="order-tracking-msg">
-                              <span>This customer placed order #{{$value->id}}.</span>
-                              <span class="order-msg-time"><?php echo date("h:i", strtotime($value['updated_at'])); ?></span>
-
-                           </div>
-                           @endforeach
-                        @endif
-
+                           
 
                            @if($commentget)
-                           @foreach($commentget as $value)
-                           <div class="order-tracking-msg">
+                             @foreach($commentget as $key => $value)
+                             
+                              <?php $dateshow = date("dS M Y", strtotime($key)); ?>
 
-                              <span>{{$value->message}}</span>
+                               <div class="order-msg-date">
+                                  <?php echo $dateshow; ?>
+                               </div>
+                              @foreach($value as  $row)  
+                               <div class="order-tracking-msg">
+                                  @if($row['message'])
+                                  <span>{{$row['message']}}</span>
+                                  @endif
+                                  
+                                  @if($row['image'])
+                                  <img src="{{ asset('storage/'.$row['image']) }}" width="50px" height="50px">
+                                  @endif
+                                  <span class="order-msg-time"><?php echo date("g:i a", strtotime($row['updated_at'])); ?></span>
 
-                              <span class="order-msg-time"><?php echo date("h:i", strtotime($value['updated_at'])); ?></span>
-
-                           </div>
-                           @endforeach
+                               </div>
+                              @endforeach
+                             @endforeach
                            @endif
-
-                           @if($customer['email_verified_at'] != "")
-                           <div class="order-tracking-msg">
-
-                              <span>Customer verified.</span>
-
-                              <span class="order-msg-time"><?php echo date("h,i", strtotime($customer['updated_at'])); ?></span>
-
-                           </div>
-                           @endif
-                           @if($customer)
-                           <div class="order-tracking-msg">
-
-                              <span>verification Meessage Send.</span>
-
-                              <span class="order-msg-time"><?php echo date("h:i", strtotime($customer['updated_at'])); ?></span>
-
-                           </div>
-                           @endif
-
-                            @if($customer)
-                           <div class="order-tracking-msg">
-                              
-                              <span>Customer was created.</span>
-
-                              <span class="order-msg-time"><?php echo date("h:i", strtotime($customer['updated_at'])); ?></span>
-
-                           </div>
-                           @endif
-
-
 
                         </div>
 
@@ -3334,6 +3295,18 @@
 
          </script>
 
+         <script type="text/javascript">
+          $(document).ready(
+            function(){
+                $('input:file').change(
+                    function(){
+                        if ($(this).val()) {
+                            $('.postbuttone').attr('disabled',false); 
+                        } 
+                    }
+                    );
+            });
+         </script>
 
 
          <script type="text/javascript">
@@ -3751,11 +3724,27 @@
 
          </script>
 
+         <script type="text/javascript">
+    document.getElementById('readUrl').addEventListener('change', function(){
+      if (this.files[0] ) {
+        var picture = new FileReader();
+        picture.readAsDataURL(this.files[0]);
+        picture.addEventListener('load', function(event) {
+          document.getElementById('uploadedImage').setAttribute('src', event.target.result);
+          document.getElementById('uploadedImage').style.display = 'block';
+        });
+      }
+    });
+</script>
+
+         <script type="text/javascript">
+          $('#myEmoji').emojioneArea({
+            pickerPosition:'right'
+          });
+        </script>
 
 
       </div>
-
-
 
    </x-admin-layout>
 

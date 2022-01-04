@@ -1,5 +1,6 @@
+<div>
 <x-admin-layout>
-    <section class="full-width flex-wrap admin-full-width">
+    <section class="full-width flex-wrap admin-full-width" wire:ignore>
         <article class="full-width">
             <div class="columns">
                 <div class="page_header justify-content-space-between d-flex align-item-center">
@@ -12,7 +13,7 @@
                         <h4 class="mb-0 fw-5">Files</h4>
                     </div>
                     <div class="header-btn-group file-upload-head-btn">
-                        <input type="file" id="myfile" name="myfile">
+                        <input type="file" wire:model="uploadfile" id="myfile" multiple name="myfile">
                         <label>Upload files</label>
                     </div>
                 </div>
@@ -164,90 +165,93 @@
                                 <th>Size</th>
                                 <th>Link</th>
                             </tr>
+                            <?php
+                                // Snippet from PHP Share: http://www.phpshare.org
+
+                                    function formatSizeUnits($bytes)
+                                    {
+                                        if ($bytes >= 1073741824)
+                                        {
+                                            $bytes = number_format($bytes / 1073741824, 2) . ' GB';
+                                        }
+                                        elseif ($bytes >= 1048576)
+                                        {
+                                            $bytes = number_format($bytes / 1048576, 2) . ' MB';
+                                        }
+                                        elseif ($bytes >= 1024)
+                                        {
+                                            $bytes = number_format($bytes / 1024, 2) . ' KB';
+                                        }
+                                        elseif ($bytes > 1)
+                                        {
+                                            $bytes = $bytes . ' bytes';
+                                        }
+                                        elseif ($bytes == 1)
+                                        {
+                                            $bytes = $bytes . ' byte';
+                                        }
+                                        else
+                                        {
+                                            $bytes = '0 bytes';
+                                        }
+
+                                        return $bytes;
+                                }
+                                ?>
+                            @if($getfile)
+                            @foreach($getfile as $row)
+
+                            <?php $size = Storage::size('public//files/'.$row['image']); 
+                                  $pathinfo = pathinfo(storage_path($row['image']));
+                                   $time = date_format($row['updated_at'], 'G:IA');
+                                   $date = date_format($row['updated_at'], 'Y-m-d');
+                            ?>
                             <tr>
                                 <td>
                                     <div class="row"><label><input type="checkbox" name="option6a"></label></div>
                                 </td>
-                                <td class="product-img" onclick="document.getElementById('file-img-preview-modal').style.display='block'">
-                                    <img src="http://185.160.67.108/estore/public/storage/collection/7n4mt06HgHWSmGFMc1oZ2slkitG6DaF7AFtGbbr8.jpg">
+                                <td class="product-img" onclick="document.getElementById('file-img-preview-modal-{{$row->id}}').style.display='block'">
+                                    <img src="{{ asset('storage/files/'.$row['image']) }}">
                                 </td>
                                 <td class="type-table-item">
-                                    <p class="lbl-mb-4">Capture2</p>
-                                    <p class="lbl-mb-4 text-grey">PNG</p>
+                                    <p class="lbl-mb-4">{{ $pathinfo['filename']}}</p>
+                                    <p class="lbl-mb-4 text-grey">{{$pathinfo['extension']}}</p>
                                 </td>
                                 <td class="file-date-add">
-                                    Today at 8:44 AM
+                                    {{$date}} at {{$time}}
                                 </td>
                                 <td class="file-size">
-                                    98.5 KB
+                                    <?php echo formatSizeUnits($size); ?>
                                 </td>
                                 <td class="file-link">
-                                    <button class="secondary"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M6.534 18a4.507 4.507 0 0 1-3.208-1.329 4.54 4.54 0 0 1 0-6.414l1.966-1.964a.999.999 0 1 1 1.414 1.414L4.74 11.671a2.54 2.54 0 0 0 0 3.586c.961.959 2.631.958 3.587 0l1.966-1.964a1 1 0 1 1 1.415 1.414l-1.966 1.964A4.503 4.503 0 0 1 6.534 18zm7.467-6a.999.999 0 0 1-.707-1.707l1.966-1.964a2.54 2.54 0 0 0 0-3.586c-.961-.959-2.631-.957-3.587 0L9.707 6.707a1 1 0 1 1-1.415-1.414l1.966-1.964A4.503 4.503 0 0 1 13.466 2c1.211 0 2.351.472 3.208 1.329a4.541 4.541 0 0 1 0 6.414l-1.966 1.964a.997.997 0 0 1-.707.293zm-6.002 1a.999.999 0 0 1-.707-1.707l4.001-4a1 1 0 1 1 1.415 1.414l-4.001 4a1 1 0 0 1-.708.293z"></path></svg></button>
+                                   <a href="{{ asset('storage/files/'.$row['image']) }}" target="_blank"><button class="secondary"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M6.534 18a4.507 4.507 0 0 1-3.208-1.329 4.54 4.54 0 0 1 0-6.414l1.966-1.964a.999.999 0 1 1 1.414 1.414L4.74 11.671a2.54 2.54 0 0 0 0 3.586c.961.959 2.631.958 3.587 0l1.966-1.964a1 1 0 1 1 1.415 1.414l-1.966 1.964A4.503 4.503 0 0 1 6.534 18zm7.467-6a.999.999 0 0 1-.707-1.707l1.966-1.964a2.54 2.54 0 0 0 0-3.586c-.961-.959-2.631-.957-3.587 0L9.707 6.707a1 1 0 1 1-1.415-1.414l1.966-1.964A4.503 4.503 0 0 1 13.466 2c1.211 0 2.351.472 3.208 1.329a4.541 4.541 0 0 1 0 6.414l-1.966 1.964a.997.997 0 0 1-.707.293zm-6.002 1a.999.999 0 0 1-.707-1.707l4.001-4a1 1 0 1 1 1.415 1.414l-4.001 4a1 1 0 0 1-.708.293z"></path></svg></button></a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <div class="row"><label><input type="checkbox" name="option6a"></label></div>
-                                </td>
-                                <td class="product-img">
-                                    <img src="http://185.160.67.108/estore/public/storage/collection/7n4mt06HgHWSmGFMc1oZ2slkitG6DaF7AFtGbbr8.jpg">
-                                </td>
-                                <td class="type-table-item">
-                                    <p class="lbl-mb-4">Capture2</p>
-                                    <p class="lbl-mb-4 text-grey">PNG</p>
-                                </td>
-                                <td class="file-date-add">
-                                    Today at 8:44 AM
-                                </td>
-                                <td class="file-size">
-                                    98.5 KB
-                                </td>
-                                <td class="file-link">
-                                    <button class="secondary"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M6.534 18a4.507 4.507 0 0 1-3.208-1.329 4.54 4.54 0 0 1 0-6.414l1.966-1.964a.999.999 0 1 1 1.414 1.414L4.74 11.671a2.54 2.54 0 0 0 0 3.586c.961.959 2.631.958 3.587 0l1.966-1.964a1 1 0 1 1 1.415 1.414l-1.966 1.964A4.503 4.503 0 0 1 6.534 18zm7.467-6a.999.999 0 0 1-.707-1.707l1.966-1.964a2.54 2.54 0 0 0 0-3.586c-.961-.959-2.631-.957-3.587 0L9.707 6.707a1 1 0 1 1-1.415-1.414l1.966-1.964A4.503 4.503 0 0 1 13.466 2c1.211 0 2.351.472 3.208 1.329a4.541 4.541 0 0 1 0 6.414l-1.966 1.964a.997.997 0 0 1-.707.293zm-6.002 1a.999.999 0 0 1-.707-1.707l4.001-4a1 1 0 1 1 1.415 1.414l-4.001 4a1 1 0 0 1-.708.293z"></path></svg></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="row"><label><input type="checkbox" name="option6a"></label></div>
-                                </td>
-                                <td class="product-img">
-                                    <img src="http://185.160.67.108/estore/public/storage/collection/7n4mt06HgHWSmGFMc1oZ2slkitG6DaF7AFtGbbr8.jpg">
-                                </td>
-                                <td class="type-table-item">
-                                    <p class="lbl-mb-4">Capture2</p>
-                                    <p class="lbl-mb-4 text-grey">PNG</p>
-                                </td>
-                                <td class="file-date-add">
-                                    Today at 8:44 AM
-                                </td>
-                                <td class="file-size">
-                                    98.5 KB
-                                </td>
-                                <td class="file-link">
-                                    <button class="secondary"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M6.534 18a4.507 4.507 0 0 1-3.208-1.329 4.54 4.54 0 0 1 0-6.414l1.966-1.964a.999.999 0 1 1 1.414 1.414L4.74 11.671a2.54 2.54 0 0 0 0 3.586c.961.959 2.631.958 3.587 0l1.966-1.964a1 1 0 1 1 1.415 1.414l-1.966 1.964A4.503 4.503 0 0 1 6.534 18zm7.467-6a.999.999 0 0 1-.707-1.707l1.966-1.964a2.54 2.54 0 0 0 0-3.586c-.961-.959-2.631-.957-3.587 0L9.707 6.707a1 1 0 1 1-1.415-1.414l1.966-1.964A4.503 4.503 0 0 1 13.466 2c1.211 0 2.351.472 3.208 1.329a4.541 4.541 0 0 1 0 6.414l-1.966 1.964a.997.997 0 0 1-.707.293zm-6.002 1a.999.999 0 0 1-.707-1.707l4.001-4a1 1 0 1 1 1.415 1.414l-4.001 4a1 1 0 0 1-.708.293z"></path></svg></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="row"><label><input type="checkbox" name="option6a"></label></div>
-                                </td>
-                                <td class="product-img">
-                                    <img src="http://185.160.67.108/estore/public/storage/collection/7n4mt06HgHWSmGFMc1oZ2slkitG6DaF7AFtGbbr8.jpg">
-                                </td>
-                                <td class="type-table-item">
-                                    <p class="lbl-mb-4">Capture2</p>
-                                    <p class="lbl-mb-4 text-grey">PNG</p>
-                                </td>
-                                <td class="file-date-add">
-                                    Today at 8:44 AM
-                                </td>
-                                <td class="file-size">
-                                    98.5 KB
-                                </td>
-                                <td class="file-link">
-                                    <button class="secondary"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M6.534 18a4.507 4.507 0 0 1-3.208-1.329 4.54 4.54 0 0 1 0-6.414l1.966-1.964a.999.999 0 1 1 1.414 1.414L4.74 11.671a2.54 2.54 0 0 0 0 3.586c.961.959 2.631.958 3.587 0l1.966-1.964a1 1 0 1 1 1.415 1.414l-1.966 1.964A4.503 4.503 0 0 1 6.534 18zm7.467-6a.999.999 0 0 1-.707-1.707l1.966-1.964a2.54 2.54 0 0 0 0-3.586c-.961-.959-2.631-.957-3.587 0L9.707 6.707a1 1 0 1 1-1.415-1.414l1.966-1.964A4.503 4.503 0 0 1 13.466 2c1.211 0 2.351.472 3.208 1.329a4.541 4.541 0 0 1 0 6.414l-1.966 1.964a.997.997 0 0 1-.707.293zm-6.002 1a.999.999 0 0 1-.707-1.707l4.001-4a1 1 0 1 1 1.415 1.414l-4.001 4a1 1 0 0 1-.708.293z"></path></svg></button>
-                                </td>
-                            </tr>
+
+                            <!-- file image Preview modal start-->
+                            <div id="file-img-preview-modal-{{$row->id}}" class="customer-modal-main">
+                                <div class="customer-modal-inner">
+                                    <div class="customer-modal">
+                                        <div class="modal-header">
+                                            <h2>Preview</h2>
+                                            <span onclick="document.getElementById('file-img-preview-modal-{{$row->id}}').style.display='none'" class="modal-close-btn">
+                                                <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                                                    <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <div class="modal-body ta-left">
+                                            <img src="{{ asset('storage/files/'.$row['image']) }}">                
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="button secondary" onclick="document.getElementById('file-img-preview-modal-{{$row->id}}').style.display='none'">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- file image Preview modal end-->
+                            @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -255,27 +259,7 @@
         </div>
     </section>
 
-<!-- file image Preview modal start-->
-<div id="file-img-preview-modal" class="customer-modal-main">
-    <div class="customer-modal-inner">
-        <div class="customer-modal">
-            <div class="modal-header">
-                <h2>Preview</h2>
-                <span onclick="document.getElementById('file-img-preview-modal').style.display='none'" class="modal-close-btn">
-                    <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
-                        <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
-                    </svg>
-                </span>
-            </div>
-            <div class="modal-body ta-left">
-                <img src="http://185.160.67.108/estore/public/storage/collection/7n4mt06HgHWSmGFMc1oZ2slkitG6DaF7AFtGbbr8.jpg">                
-            </div>
-            <div class="modal-footer">
-                <button class="button secondary">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- file image Preview modal end-->
+
 
 </x-admin-layout>
+</div>

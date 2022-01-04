@@ -17,6 +17,7 @@ class CreateCustomerCommentsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->text('message')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

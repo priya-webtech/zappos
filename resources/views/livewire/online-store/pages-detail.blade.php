@@ -24,7 +24,7 @@
                             </svg>
                         </button>
                     </a>
-                    <h4 class="mb-0 fw-5">Seller Profile</h4>
+                    <h4 class="mb-0 fw-5">{{$page->title}}</h4>
                 </div>
                 <div class="product-header-btn">
                     <button class="button link" onclick="document.getElementById('duplicate-page').style.display='block'"><svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M7.5 2A1.5 1.5 0 0 0 6 3.5V13a1 1 0 0 0 1 1h9.5a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 16.5 2h-9zm-4 4H4v10h10v.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 16.5v-9A1.5 1.5 0 0 1 3.5 6z"></path></svg> Duplicate</button>
