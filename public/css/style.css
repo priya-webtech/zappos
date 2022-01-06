@@ -9136,3 +9136,12 @@ input[type=number]::-webkit-inner-spin-button {
     padding-right: 0;
     padding-bottom: 0;
 }
+.marketing-table th, .marketing-table td {
+    width: auto !important;
+}
+.marketing-table th:first-child, .marketing-table td:first-child {
+    width: 56px !important;
+}
+table.marketing-table .order-filed, table.marketing-table .order-filed {
+    width: auto;
+}

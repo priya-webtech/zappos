@@ -24,7 +24,7 @@
                     </article>
                 </div>
                 <!-- Order Table -->
-                <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th">
+                <table class="one-bg border-every-row fs-14 fw-3 table-padding-side0 tc-black01 comman-th marketing-table">
                     <tbody>
                         <tr>
                             <th>
@@ -83,10 +83,25 @@
                             </td>
                             <td>Sent automatically to the customer after they place their order.</td>
                             <td class="subscribed-label">
-                                <p class="tag green order-filed"> Unverified </p>
+                                <p class="tag green order-filed"> Active </p>
                             </td>
                             <td class="ta-right">
                                 <p class="order-filed pr-3">04/01/2022</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row"><label><input type="checkbox" class="checkbox" name="customer" value="87"></label></div>
+                            </td>
+                            <td>
+                                <a href="#">email template 2</a>
+                            </td>
+                            <td>Sent automatically to the customer after they place their order.</td>
+                            <td class="subscribed-label">
+                                <p class="tag grey order-filed"> Draft </p>
+                            </td>
+                            <td class="ta-right">
+                                <p class="order-filed pr-3">06/01/2022</p>
                             </td>
                         </tr>
                     </tbody>
