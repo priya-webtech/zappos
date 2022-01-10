@@ -35,11 +35,11 @@ $(document).ready(function(){
 });
 
 /******admin menu js start******/
-$(document).ready(function(){
-  $('.admin_bar ul li').each(function() {
-    $(this).find('.sub_items').parents('li').prepend("<a class='nav-arrow'></a>");
-  });
-});
+// $(document).ready(function(){
+//   $('.admin_bar ul li').each(function() {
+//     $(this).find('.sub_items').parents('li').prepend("<a class='nav-arrow'></a>");
+//   });
+// });
 $(document).ready(function(){
 	$('.nav-dropdown').on('click', function() {
 		$(this).parent().toggleClass('active').siblings().removeClass('active');
