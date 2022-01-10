@@ -10,12 +10,6 @@ class Notifications extends Component
 {
 	public $notification,$descripation;
 
-	protected $rules = [
-
-		'notification.*.discripation' => ['required'],
-
-    ];
-
 
 	public function mount()
 	{

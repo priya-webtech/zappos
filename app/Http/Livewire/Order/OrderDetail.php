@@ -23,6 +23,9 @@ class OrderDetail extends Component
 {
     public $order,$OrderItem,$Taxes,$messagetext,$commentget;
 
+    protected $rules = [
+        'order.paymentstatus' => 'required',
+    ];
     public function mount($id) {
 
        $this->order = Orders::with('user')->Where('id', $id)->first();
@@ -38,6 +41,14 @@ class OrderDetail extends Component
 
     }
 
+    public function OrderUpdate()
+    {
+        if($this->order['paymentstatus']){
+        Orders::where('id', $this->order['id'])->update(['paymentstatus'  => $this->order['paymentstatus']]);
+        $this->order = Orders::with('user')->Where('id', $this->order['id'])->first();
+        session()->flash('message', 'Status Updated Successfully.');
+        }
+    }
     public function ordercommentpost()
     {
 

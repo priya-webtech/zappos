@@ -427,25 +427,9 @@
 
 
                                                             }else
-
-
-
                                                             {
-
-
-
                                                               $subtotal4 += $cart['stock'] * $cart['price'];
-
-
-
-                                                               
-
-
-
                                                             }
-
-
-
                                                         }
 
 
@@ -3080,20 +3064,14 @@ function visibility4() {
 
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@if(!empty(Session::get('error_code')) && Session::get('error_code') == 5)
+<script>
+$(function() {
+    $('#sign-in-form').modal('show');
+   // $('#myModal').modal('show');
+});
+</script>
+@endif
 
 <script type="text/javascript">
 

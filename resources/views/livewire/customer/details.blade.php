@@ -477,11 +477,11 @@
 
 
 
-                  <div class="order-tracking" wire:ignore>
+                  <div class="order-tracking">
 
 
 
-                     <div class="row add-note-textarea comment-box mb-0">
+                     <div class="row add-note-textarea comment-box mb-0" wire:ignore>
 
                         <textarea wire:model='messagetext' onkeyup="if(this.value.length > 0) document.getElementById('start_button').disabled = false; else document.getElementById('start_button').disabled = true;" placeholder="Leave a comment..."></textarea>
 
@@ -590,11 +590,7 @@
                      <div class="order-tracking-details">
 
 
-
                         <div class="order-tracking-list">
-
-
-                           
 
                            @if($commentget)
                              @foreach($commentget as $key => $value)

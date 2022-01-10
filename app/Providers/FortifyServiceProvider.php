@@ -146,7 +146,7 @@ class FortifyServiceProvider extends ServiceProvider
 
               //  $user->sendEmailVerificationNotification();
 
-                return redirect()->back();
+                return redirect()->back()->with('error_code', 5);
 
             }
 

@@ -30,15 +30,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
-    protected $fillable = [
-        'first_name',
-        'last_name',
-        'mobile_number',
-        'email',
-        'role',
-        'password',
-        'email_verified_at'
-    ];
+    protected $guarded =[];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -76,6 +68,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function address() {
         return $this->hasMany(CustomerAddress::class,'user_id','id');
+    }
+
+    public function orders() {
+        return $this->hasMany(Orders::class,'user_id','id');
     }
 
     public function routeNotificationFor()

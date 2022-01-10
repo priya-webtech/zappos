@@ -170,42 +170,11 @@
                         @foreach($notification as $key => $row)
                         @if($row->notification_id == 1)
                         <li>
-                            <a class="link" onclick="document.getElementById('Changenotificationvalue-{{$row->id}}').style.display='block'">{{$row->title}}</a>
+                            <!-- <a class="link" onclick="document.getElementById('Changenotificationvalue-{{$row->id}}').style.display='block'">{{$row->title}}</a> -->
+                            <a href="{{route('notifications-detail', $row->id)}}"
+                                   class="tc-black fw-6">{{$row->title}}</a> 
                             <p>{!! $row->static_des !!}</p>
                         </li>
-
-                        <div id="Changenotificationvalue-{{$row->id}}" class="customer-modal-main" wire:ignore>
-                            <div class="customer-modal-inner">
-                                <div class="customer-modal">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title" id="myModalLabel">Change Notification</h4>
-                                        <button type="button" class="close modal-close-btn" onclick="document.getElementById('Changenotificationvalue-{{$row->id}}').style.display='none'" aria-label="Close">
-                                            <span aria-hidden="true">
-                                                <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
-                                                    <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-
-                                        <form autocomplete="off">
-                                            <div class="form-group">
-                                                <label>Title: {{$row->title}}</label>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Descripation:</label>
-                                                <textarea wire:ignore wire:model.debounce.lazy="notification.{{ $key }}.discripation" class="form-control" required name="discripation-{{$row->id}}" id="discripation-{{$row->id}}"></textarea>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" data-toggle="modal" data-target="#LoginAndSecurity" onclick="document.getElementById('Changenotificationvalue-{{$row->id}}').style.display='none'"class="site-btn blue-btn">Back</button>
-                                        <button type="submit" onclick="document.getElementById('Changenotificationvalue-{{$row->id}}').style.display='none'" wire:click="Update('usernotify')" class="site-btn blue-btn">Save Changes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         
                         @endif
                         @endforeach

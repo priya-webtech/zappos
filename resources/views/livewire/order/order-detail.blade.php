@@ -1,5 +1,18 @@
 <div>
 <x-admin-layout>
+<div wire:key="alert">
+
+@if (session()->has('message'))
+
+<div class="alert alert-success">
+
+{{ session('message') }}
+
+</div>
+
+@endif
+
+</div>
 @php $symbol = CurrencySymbol(); @endphp
     <section class="full-width admin-body-width flex-wrap admin-full-width inventory-heading">
         <article class="full-width">
@@ -17,7 +30,7 @@
                     <button class="button link" onclick="document.getElementById('unable-to-edit-order-modal').style.display='block'">Edit</button>
                     <div class="more-actions-dp">
                         <button class="button link head-arrow-btn">More actions <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m5 8 5 5 5-5H5z"></path></svg></button>
-                        <ul class="filter-dropdown">
+                        <ul class="filter-dropdown" wire:ignore>
                             <li> 
                                 <button class="link">
                                     <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="M7.5 2A1.5 1.5 0 0 0 6 3.5V13a1 1 0 0 0 1 1h9.5a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 16.5 2h-9zm-4 4H4v10h10v.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 16.5v-9A1.5 1.5 0 0 1 3.5 6z"></path></svg>
@@ -202,6 +215,23 @@
                         <p class="mb-0">No notes from customer</p>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label>Reason</label>
+                            <select wire:model="order.paymentstatus">
+                                <option value="" disabled="">Select Option</option>
+                                <option value="pending">Pendding</option>
+                                <option value="processing">Processing</option>
+                                <option value="shipped">Shipped</option>
+                                <option value="fulfilled">fulfilled</option>
+                            </select>
+                        </div>
+                        <div class="ta-right">
+                            <button class="button green-btn ta-right" wire:click="OrderUpdate()">Save</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="card od-customer-card">
                     @if(!empty($order['user'][0]))
                     <div class="card-header">
@@ -363,7 +393,7 @@
 </div>
 
 <!--Hold fulfillment modal-->
-<div id="add-note-modal" class="customer-modal-main">
+<div id="add-note-modal" class="customer-modal-main" wire:ignore>
     <div class="customer-modal-inner">
         <input type="hidden">
         <div class="customer-modal">

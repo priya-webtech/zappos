@@ -60,6 +60,10 @@ class ListCustomers extends Component
     public $filter = [], $languages = [];
 
      public $perPage = 10;
+     
+     public $exact_orders, $more_than_orders, $less_than_orders;
+     
+     public $exact_amount, $more_than_amount, $less_than_amount;
 
     
 
@@ -144,7 +148,7 @@ class ListCustomers extends Component
 
 
 
-        }])->when($this->email_status, function ($query, $email_status) {
+        }])->withCount('orders')->when($this->email_status, function ($query, $email_status) {
 
 
 
@@ -226,21 +230,31 @@ class ListCustomers extends Component
 
          
 
-        })->when($this->amount_spent, function ($query, $amount_spent) {
+        })->when($this->more_than_amount, function ($query, $more_than_amount) {
 
+            $this->filter[4] = 'More than '. $more_than_amount. ' amount';
 
+        })->when($this->less_than_amount, function ($query, $less_than_amount) {
 
-            $this->filter[4] = $amount_spent;
+            $this->filter[12] = 'Less than '. $less_than_amount. ' amount';
 
-         
+        })->when($this->exact_amount, function ($query, $exact_amount) {
 
-        })->when($this->number_of_orders, function ($query, $number_of_orders) {
+            $this->filter[13] = 'Exact '. $exact_amount. ' amount';
+            
+        })
+        
+        ->when($this->more_than_orders, function ($query, $more_than_orders) {
 
+            $this->filter[5] = 'More than '. $more_than_orders. ' orders';
 
+        })->when($this->less_than_orders, function ($query, $less_than_orders) {
 
-            $this->filter[5] = $number_of_orders;
+            $this->filter[10] = 'Less than '. $less_than_orders. ' orders';
 
-           
+        })->when($this->exact_orders, function ($query, $exact_orders) {
+
+            $this->filter[11] = 'Exact '. $exact_orders. ' orders';
 
         })->when($this->date_of_order, function ($query, $date_of_order) {
 
@@ -248,7 +262,27 @@ class ListCustomers extends Component
 
             $this->filter[6] = 'Ordered in last  ' . $date_of_order;
 
-            
+            $days = explode(' ', $date_of_order); 
+
+            if ($days[1] == "month") {
+
+                $query->whereHas('orders', function ($q) use ($days) {
+
+                    return $q->whereDate('created_at', '>', Carbon::now()->subMonths($days[0])->toDateString());
+
+                });
+
+            }
+
+            if ($days[1] == "days") {
+
+                $query->whereHas('orders', function ($q) use ($days){
+
+                    $q->whereDate('created_at', '>', Carbon::now()->subMonths($days[0])->toDateString());
+
+                });
+
+            }
 
         })->when($this->date_added_as_customer, function ($query, $date_added_as_customer) {
 
@@ -456,11 +490,18 @@ class ListCustomers extends Component
 
             case 4:
 
-                $this->amount_spent = null; break;
+                $this->amount_spent = null;
+                $this->more_than_amount = null;
+                $this->less_than_amount = null;
+                $this->exact_amount = null;
+                break;
 
             case 5:
 
-                $this->number_of_orders = null; break;
+                $this->number_of_orders = null;
+                $this->more_than_orders = null;
+                $this->less_than_orderss = null;
+                $this->exact_orders = null;  break;
 
             case 6:
 
@@ -520,11 +561,11 @@ class ListCustomers extends Component
 
                 case 4:
 
-                    if (isset($tab['data'][4])) $this->amount_spent = $tab['data'][4];
+                    if (isset($tab['data'][4])) $this->amount_spent = $tab['data'][4]; $this->more_than_amount = $tab['data'][6];
 
                 case 5:
 
-                    if (isset($tab['data'][5])) $this->number_of_orders = $tab['data'][5];
+                    if (isset($tab['data'][5])) $this->number_of_orders = $tab['data'][5]; $this->more_than_orders = $tab['data'][5];
 
                 case 6:
 
@@ -541,6 +582,22 @@ class ListCustomers extends Component
                 case 9:
 
                     if (isset($tab['data'][9])) $this->location = $tab['data'][9];
+
+                case 10:
+
+                    if (isset($tab['data'][10])) $this->less_than_orders = $tab['data'][10];
+
+                case 11:
+
+                    if (isset($tab['data'][11])) $this->exact_orders = $tab['data'][11];
+
+                case 12:
+
+                    if (isset($tab['data'][12])) $this->less_than_amount = $tab['data'][12];
+
+                case 13:
+
+                    if (isset($tab['data'][13])) $this->exact_amount = $tab['data'][13];
 
             }
 
@@ -588,7 +645,17 @@ class ListCustomers extends Component
 
         $this->amount_spent = null;
 
-        $this->number_of_orders = null;
+        $this->more_than_amount = null;
+        
+        $this->less_than_amount = null;
+        
+        $this->exact_amount = null;
+        
+        $this->more_than_orders = null;
+        
+        $this->less_than_orders = null;
+        
+        $this->exact_orders = null;
 
         $this->date_of_order = null;
 

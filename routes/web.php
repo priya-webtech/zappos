@@ -250,6 +250,8 @@ Route::middleware(['checkRole'])->group(function () {
             Route::post('/admin/setting/update', [Livewire\Setting\GeneralSetting::class, 'updatestore'])->name('setting.update');
 
             Route::get('/admin/setting/notifications', Livewire\Setting\Notifications::class)->name('notifications');
+          
+            Route::get('/admin/setting/notifications/{id?}', Livewire\Setting\NotificationDetail::class)->name('notifications-detail');
 
             Route::get('/admin/setting/languages', Livewire\Setting\Languages::class)->name('languages');
 

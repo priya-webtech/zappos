@@ -158,8 +158,6 @@ class Details extends Component
         $this->initial();
         return view('livewire.customer.details');
 
-
-
     }
 
 
@@ -313,10 +311,6 @@ class Details extends Component
     public function customercommentpost()
     {
 
-    /*    $this->validate([
-            'messagetext' => ['required']
-        ]);*/
-
         date_default_timezone_set("Europe/Amsterdam");
 
         if($this->social_img){
@@ -351,11 +345,11 @@ class Details extends Component
         CustomerComment::create($Comment_arr);
 
         $this->messagetext = '';
+        $this->social_img = '';
 
         $this->initial();
 
         session()->flash('message', 'Post Created.');
-
 
     }
     

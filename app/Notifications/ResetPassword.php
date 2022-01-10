@@ -57,10 +57,19 @@ class ResetPassword extends Notification implements ShouldQueue
                 'email' => $notifiable->getEmailForPasswordReset(),
             ], false));
 
+         $imageget = asset("storage/mailimg/rotation-lock-blue.png"); 
+        
+         $zappos_logo = asset("storage/mailimg/zappos-logo.png"); 
+
+           
+        $MailMessage->discripation = str_replace('{image_reset}', '<tr><td><img src='.$imageget.' style="width: 7em; height: 7em; "></td></tr>', $MailMessage->discripation);
+       
+        $MailMessage->discripation = str_replace('{image_footer}', '<tr><td style="text-align: center; padding: 3em 15px 0; "><img src='.$zappos_logo.' style="width: 8em; margin-bottom: 0.4em;"></td></tr>', $MailMessage->discripation);
+
         
         $MailMessage->discripation = str_replace('{reset_button}', '<a href='.$url.' rel="noopener" class="button button-primary" target="_blank">Reset Password</a>', $MailMessage->discripation);
         
-        $MailMessage->discripation = str_replace('{reset_live_url}', '"If you are having trouble clicking the \":actionText\" button, copy and paste the URL below\n"."into your web browser:",<span class="break-all">'.$url.'</span>', $MailMessage->discripation);
+        $MailMessage->discripation = str_replace('{reset_live_url}', '"If you are having trouble clicking the button, copy and paste the URL below"."into your web browser:",<span class="break-all">'.$url.'</span>', $MailMessage->discripation);
          
 
         return (new MailMessage)

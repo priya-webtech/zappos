@@ -564,7 +564,7 @@ class StripePaymnetController extends Component
 
                                 'netamout' => $ordershipping['netamout'],
 
-                                'paymentstatus' => 'success',
+                                'paymentstatus' => 'pending',
                                 
                                 'first_name' => $ordershipping['first_name'],
 

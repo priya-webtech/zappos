@@ -16,11 +16,6 @@
             <tbody>
                 <tr>
                     <td>
-                        <img src="{{ asset('storage/mailimg/rotation-lock-blue.png') }}" style="width: 7em; height: 7em; ">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
                         {{-- Greeting --}}
 
                         @if (! empty($greeting))
@@ -103,13 +98,6 @@
                     @endcomponent
                     </td>
                 </tr> -->
-
-                <tr>
-                    <td style="text-align: center; padding: 3em 15px 0; ">
-                        <img src="{{ asset('storage/mailimg/zappos-logo.png') }}" style="width: 8em; margin-bottom: 0.4em;">
-                        <span style=" width: 100%; display: block;"> © 2021-2022 - zappos</span>
-                    </td>
-                </tr>
             </tbody>
         </table>
                 

@@ -182,13 +182,13 @@
 
                                                    id="active-account" type="radio" class="change-filter">
 
-                                            <label for="active-account">Active account</label></li>
+                                            <label for="active-account">Verified account</label></li>
 
                                         <li><input wire:model="account_status" value="Disabled account"
 
                                                    id="disabled-account" type="radio" class="change-filter"> <label
 
-                                                    for="disabled-account">Disabled account</label></li>
+                                                    for="disabled-account">Unverified account</label></li>
 
                                        <!--  <li><input wire:model="account_status" value="Invited to create account"
 
@@ -374,6 +374,22 @@
 
                 <span>@foreach($users as $customer)
 
+
+                    @if(
+                    (!empty($more_than_orders) && $customer->orders->count() > $more_than_orders) || 
+                    (!empty($less_than_orders) && $customer->orders->count() < $less_than_orders) || 
+                    (!empty($exact_orders) && $customer->orders->count() == $exact_orders) || 
+                    (empty($more_than_orders) && empty($less_than_orders) && empty($exact_orders) && $customer->orders->count() != -1) 
+                    
+                    )
+
+                    @if(
+                        (!empty($more_than_amount) && $customer->orders->sum('netamout') > $more_than_amount) || 
+                    (!empty($less_than_amount) && $customer->orders->sum('netamout') < $less_than_amount) || 
+                    (!empty($exact_amount) && $customer->orders->sum('netamout') == $exact_amount) || 
+                    (empty($more_than_amount) && empty($less_than_amount) && empty($exact_amount) && $customer->orders->sum('netamout') != -1)
+                    )
+
                         <tr>
 
                             <td>
@@ -424,10 +440,12 @@
                             <td><p class="spent-filed">{{$symbol['currency']}}{{number_format($amount_spent,2,'.',',')}} spent</p></td>
 
                         </tr>
-
+                    @endif
+                    @endif
                     @endforeach</span>
 
             </table>
+            @if((empty($more_than_orders) && empty($less_than_orders) && empty($exact_orders)))
 
             <div class="pd-pagination-sec">
                 <select wire:model="perPage">
@@ -443,13 +461,14 @@
 
                 </div>
             </div>
+            @endif
             </div>
 
         </div>
 
     </div>
 
-    <div class="filter_more_filters filter-sidebar" style="text-align: left;display: none;" wire:ignore.self>
+    <div class="filter_more_filters filter-sidebar" id="filter_more_filters" style="text-align: left;display: none;" wire:ignore.self>
 
         <div class="filter-inner">
 
@@ -760,8 +779,37 @@
                     </label>
 
                     
-
+                    
                     <ul class="filter_amount_spent" style="list-style-type: none" wire:ignore.self>
+
+
+
+                        <li><input  id="more_than_this_amount" type="checkbox" class="change-filter"/> <label
+
+                                    for="more_than_this_number">More than this number</label>
+                                <input id="more_than_this_amount_input" type="number" wire:model="more_than_amount" value="{{$amount_spent}}" style="display:none;" wire:ignore.self/>
+                                </li>
+
+                        <li><input id="less_than_this_amount" type="checkbox" class="change-filter"/> <label
+
+                                    for="less_than_this_number">Less than this
+
+                                number</label>
+                                <input id="less_than_this_amount_input" type="number" wire:model="less_than_amount" value="{{$amount_spent}}" style="display:none;" wire:ignore.self/>
+                                </li>
+
+                        <li><input id="this_exact_amount" type="checkbox" class="change-filter"/> <label
+
+                                    for="this_exact_number">This
+
+                                exact number</label>
+                                <input type="number" id="this_exact_amount_input" wire:model="exact_amount" value="{{$amount_spent}}" style="display:none;" wire:ignore.self/>
+                                </li>
+
+                        <li><a class="clear-btn" type="button" wire:click="removeFilter(4)">Clear</a></li>
+
+                    </ul>
+                   <!-- <ul class="filter_amount_spent" style="list-style-type: none" wire:ignore.self>
 
 
 
@@ -791,7 +839,7 @@
 
                         <li><a class="clear-btn" type="button" wire:click="removeFilter(4)">Clear</a></li>
 
-                    </ul>
+                    </ul>-->
 
                 </div>
 
@@ -837,29 +885,27 @@
 
 
 
-                        <li><input wire:model="number_of_orders" value="More than {{$number_of_orders}} orders"
+                        <li><input  id="more_than_this_number" type="checkbox" class="change-filter"/> <label
 
-                                   id="active-account" type="checkbox" class="change-filter"/> <label
+                                    for="more_than_this_number">More than this number</label>
+                                <input id="more_than_this_number_input" type="number" wire:model="more_than_orders" value="{{$number_of_orders}}" style="display:none;" wire:ignore.self/>
+                                </li>
 
-                                    for="active-account">More than this
+                        <li><input id="less_than_this_number" type="checkbox" class="change-filter"/> <label
 
-                                number</label></li>
+                                    for="less_than_this_number">Less than this
 
-                        <li><input wire:model="number_of_orders" value="Less than {{$number_of_orders}} orders"
+                                number</label>
+                                <input id="less_than_this_number_input" type="number" wire:model="less_than_orders" value="{{$number_of_orders}}" style="display:none;" wire:ignore.self/>
+                                </li>
 
-                                   id="disabled-account" type="checkbox" class="change-filter"/> <label
+                        <li><input id="this_exact_number" type="checkbox" class="change-filter"/> <label
 
-                                    for="disabled-account">Less than this
+                                    for="this_exact_number">This
 
-                                number</label></li>
-
-                        <li><input wire:model="number_of_orders" value="{{$number_of_orders}} orders"
-
-                                   id="invited-create account" type="checkbox" class="change-filter"/> <label
-
-                                    for="invited-create account">This
-
-                                exact number</label></li>
+                                exact number</label>
+                                <input type="number" id="this_exact_number_input" wire:model="exact_orders" value="{{$number_of_orders}}" style="display:none;" wire:ignore.self/>
+                                </li>
 
                         <li><a class="clear-btn" type="button" wire:click="removeFilter(5)">Clear</a></li>
 
@@ -1171,7 +1217,7 @@
 
                     <li>
 
-                        <button class="button green-btn">Done</button>
+                        <button class="button green-btn" id="close_filter">Done</button>
 
                     </li>
 
@@ -1741,8 +1787,74 @@
 
 
 // custome upload file js
-
 $(document).ready(function() {
+    $('#close_filter').click(function() {
+    
+        var x = document.getElementById("filter_more_filters");
+
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+           x.style.display = "none";
+            
+          }
+    });
+
+    $('#less_than_this_number').change(function() {
+        var x = document.getElementById("less_than_this_number_input");
+
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
+          }
+    });
+    $('#more_than_this_number').change(function() {
+       var x = document.getElementById("more_than_this_number_input");
+
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
+          }
+    });
+    $('#this_exact_number').change(function() {
+        var x = document.getElementById("this_exact_number_input");
+
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
+          }
+    });
+    
+    $('#less_than_this_amount').change(function() {
+        var x = document.getElementById("less_than_this_amount_input");
+
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
+          }
+    });
+    $('#more_than_this_amount').change(function() {
+       var x = document.getElementById("more_than_this_amount_input");
+
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
+          }
+    }); 
+    $('#this_exact_amount').change(function() {
+        var x = document.getElementById("this_exact_amount_input");
+
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          } else {
+            x.style.display = "none";
+          }
+    });
     $('input[type="file"]').on('click', function() {
         $(".file_names").html("");
       })
