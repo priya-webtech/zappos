@@ -2366,6 +2366,8 @@ code {
      background: #d82c0d;
      box-shadow: none !important;
      line-height: 20px;
+     color: #ffffff;
+
 }
  .button.warning:hover {
      background: #bc2200;
@@ -2397,11 +2399,11 @@ code {
      display: flex;
 }
  .cd-phone-field #customer_phone_code {
-     min-width: 62px;
-     max-width: 62px;
+     min-width: 50%;
+     max-width: 50%;
      width: auto;
      padding: 0 28px 0 8px;
-     margin-left: 4px;
+     margin-right: 4px;
 }
  .modal-body button.button.secondary {
      font-weight: 600;
@@ -9144,4 +9146,12 @@ input[type=number]::-webkit-inner-spin-button {
 }
 table.marketing-table .order-filed, table.marketing-table .order-filed {
     width: auto;
+}
+
+.rag-row {
+    display: flex;
+}
+.rag-row #tag-creation-btn {
+    flex: 0 0 auto;
+    margin-left: 4px;
 }

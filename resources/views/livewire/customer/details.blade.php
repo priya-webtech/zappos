@@ -1,20 +1,40 @@
 <div>
+
    <div class="loading-overlay" wire:loading.flex wire:target="resetInputFields,update,EditAddress,delete, store">
+
+
 
       <div class="page-loading"></div>
 
+
+
    </div>
+
+
 
    {{-- The Master doesn't talk, he acts. --}}
 
 
 
+
+
+
+
    <x-admin-layout>
+
+
 
 @php $symbol = CurrencySymbol(); @endphp
 
 
+
+
+
       <div wire:key="alert" :id="1">
+
+
+
+
 
 
 
@@ -22,7 +42,15 @@
 
 
 
+
+
+
+
          <div class="alert alert-success">
+
+
+
+
 
 
 
@@ -30,7 +58,15 @@
 
 
 
+
+
+
+
          </div>
+
+
+
+
 
 
 
@@ -38,7 +74,15 @@
 
 
 
+
+
+
+
       </div>
+
+
+
+
 
 
 
@@ -46,7 +90,15 @@
 
 
 
+
+
+
+
           
+
+
+
+
 
 
 
@@ -54,7 +106,15 @@
 
 
 
+
+
+
+
             <article class="full-width">
+
+
+
+
 
 
 
@@ -62,7 +122,15 @@
 
 
 
+
+
+
+
                <div class="columns customers-details-heading">
+
+
+
+
 
 
 
@@ -70,7 +138,15 @@
 
 
 
+
+
+
+
                      <a href="{{ route('customers') }}">
+
+
+
+
 
 
 
@@ -78,7 +154,15 @@
 
 
 
+
+
+
+
                            <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+
+
+
+
 
 
 
@@ -86,11 +170,23 @@
 
 
 
+
+
+
+
                            </svg>
 
 
 
+
+
+
+
                         </button>
+
+
+
+
 
 
 
@@ -98,11 +194,23 @@
 
 
 
+
+
+
+
                      <h4 class="mb-0 fw-5">Customer Detail Page</h4>
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -110,7 +218,15 @@
 
 
 
+
+
+
+
                      <span class="button-group">
+
+
+
+
 
 
 
@@ -118,7 +234,15 @@
 
 
 
+
+
+
+
                      <button class="secondary icon-next"></button>
+
+
+
+
 
 
 
@@ -126,7 +250,15 @@
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -134,11 +266,23 @@
 
 
 
+
+
+
+
             </article>
 
 
 
+
+
+
+
          </section>
+
+
+
+
 
 
 
@@ -146,7 +290,15 @@
 
 
 
+
+
+
+
             <article class="full-width">
+
+
+
+
 
 
 
@@ -154,7 +306,15 @@
 
 
 
+
+
+
+
                   <div class="details-first-card">
+
+
+
+
 
 
 
@@ -162,7 +322,15 @@
 
 
 
+
+
+
+
                         <div class="card-top">
+
+
+
+
 
 
 
@@ -170,7 +338,15 @@
 
 
 
+
+
+
+
                            <p class="addres">
+
+
+
+
 
 
 
@@ -178,7 +354,15 @@
 
 
 
+
+
+
+
                               @if(!empty($customer['address']))
+
+
+
+
 
 
 
@@ -186,7 +370,15 @@
 
 
 
+
+
+
+
                               {{$customer['address'][0]['city']}}&nbsp;{{$customer['address'][0]['country']}}
+
+
+
+
 
 
 
@@ -194,7 +386,15 @@
 
 
 
+
+
+
+
                            </p>
+
+
+
+
 
 
 
@@ -202,7 +402,15 @@
 
 
 
-                                 <label>Customer Note<button style="float:right;" class="link" data-toggle="modal" data-target="#manage-note-modal" >Manage</button></label>
+
+
+
+
+                                 <label class="d-flex align-center justify-content-space-between">Customer Note<button style="float:right;" class="link card-padding0 m-height-auto" data-toggle="modal" data-target="#manage-note-modal" >Manage</button></label>
+
+
+
+
 
 
 
@@ -210,7 +418,15 @@
 
 
 
+
+
+
+
                                  <!-- <button class="button save-note" disabled wire:click.prevent="update('customer-note')">Submit</button> -->
+
+
+
+
 
 
 
@@ -218,15 +434,31 @@
 
 
 
+
+
+
+
                         </div>
 
 
+
+
+
                          @if($order)
+
                         <div class="order-details">
 
 
 
+
+
+
+
                            <div class="columns four">
+
+
+
+
 
 
 
@@ -234,76 +466,153 @@
 
 
 
+
+
+
+
                               <?php
+
+
+
+
 
 
 
                                  function date_duration($date){
 
+
+
                                      $date1 = new DateTime($date);
+
+
 
                                      $date2 = new DateTime();
 
+
+
                                      $interval = $date1->diff($date2);
+
+
 
                                      if($interval->y > 0 and $interval->y < 2){
 
+
+
                                          return $interval->y.' year ago';
+
+
 
                                      }else if($interval->y > 1){
 
+
+
                                          return $interval->y.' years ago';
+
+
 
                                      }else if($interval->m > 0 and $interval->m < 2){
 
+
+
                                          return $interval->m.' month ago';
+
+
 
                                      }else if($interval->m > 1){
 
+
+
                                          return $interval->m.' months ago';
+
+
 
                                      }else if($interval->d > 1){
 
+
+
                                          return $interval->d.' days ago';
+
+
 
                                      }else{
 
+
+
                                          if($interval->h > 0 and $interval->h < 2){
+
+
 
                                              return $interval->h.' hour ago';
 
+
+
                                          }else if($interval->h > 1){
+
+
 
                                              return $interval->h.' hours ago';
 
+
+
                                          }else{
+
+
 
                                              if($interval->i > 0 and $interval->i < 60){
 
+
+
                                                  return $interval->i.' minute ago';
+
+
 
                                              }else if($interval->i > 1){
 
+
+
                                                  return $interval->i.' minutes ago';
+
+
 
                                              }else{
 
+
+
                                                  return 'Just now';
+
+
 
                                              }
 
+
+
                                          }
 
+
+
                                      }
+
+
 
                                  }
 
 
 
+
+
+
+
                                  
 
+
+
                               ?>
+
                               <h4 class="fs-16 fw-6 mb-0"><?php echo date_duration($order['updated_at']) ?></h4>
+
+
+
+
 
 
 
@@ -311,22 +620,45 @@
 
 
 
+
+
+
+
                            </div>
+
                             @if($OrderItemstock)
+
                            <?php $Stock_sum = 1; ?>
+
                               @foreach($OrderItemstock as $item)
+
                               @if($item->order_id == $order->id)
+
                               <?php $TotalStock  = $Stock_sum++; ?>
+
                               @endif
+
                               @endforeach
+
                               <?php 
+
                                $gst = $Taxes->rate;
+
                                $netamount = $order->netamout;
 
+
+
                                $avrageTotal = $netamount/$TotalStock;
+
                            ?>
 
+
+
                            <div class="columns four">
+
+
+
+
 
 
 
@@ -334,7 +666,15 @@
 
 
 
+
+
+
+
                               <h4 class="fs-16 fw-6 mb-0">{{$symbol['currency']}}{{number_format($netamount,2,'.',',')}}</h4>
+
+
+
+
 
 
 
@@ -342,7 +682,15 @@
 
 
 
+
+
+
+
                            </div>
+
+
+
+
 
 
 
@@ -350,7 +698,15 @@
 
 
 
+
+
+
+
                               <p>Average order value</p>
+
+
+
+
 
 
 
@@ -358,23 +714,47 @@
 
 
 
+
+
+
+
                            </div>
 
 
+
+
+
                         </div>
+
                       @endif
+
                      @endif
+
+
+
 
 
                      </div>
 
 
 
+
+
+
+
                   </div>
 
 
+
+
+
                   @if($order)
+
                   <div class="details-first-card last-order-placed">
+
+
+
+
 
 
 
@@ -382,7 +762,15 @@
 
 
 
+
+
+
+
                         <div class="card-top">
+
+
+
+
 
 
 
@@ -390,7 +778,15 @@
 
 
 
+
+
+
+
                            <div class="order-placed-details">
+
+
+
+
 
 
 
@@ -398,14 +794,29 @@
 
 
 
+
+
+
+
                                 <a href="{{route('order-detail', $order->id)}}"> <button class="link">Order #<?php echo $order['id']; ?></button> </a>
+
+
+
+
 
 
 
                                  <span class="tag yellow"><span class="round"></span>Unfulfilled</span>
 
 
+
+
+
                               </p>
+
+
+
+
 
 
 
@@ -413,11 +824,23 @@
 
 
 
+
+
+
+
                            </div>
+
+
 
                            @php $priceres = allprice($order_item['order_product'][0]['id']) @endphp
 
+
+
                            <p class="mb-0">${{number_format($priceres['price'],2,'.',',')}} from Draft Orders</p>
+
+
+
+
 
 
 
@@ -425,7 +848,15 @@
 
 
 
+
+
+
+
                         </div>
+
+
+
+
 
 
 
@@ -433,7 +864,15 @@
 
 
 
+
+
+
+
                            <div class="order-placed-btn">
+
+
+
+
 
 
 
@@ -441,7 +880,15 @@
 
 
 
+
+
+
+
                               <button class="button green-btn">Create order</button>
+
+
+
+
 
 
 
@@ -449,7 +896,15 @@
 
 
 
+
+
+
+
                         </div>
+
+
+
+
 
 
 
@@ -457,11 +912,23 @@
 
 
 
+
+
+
+
                   </div>
+
+
 
                   @endif
 
+
+
                   <div class="timeline-sec">
+
+
+
+
 
 
 
@@ -469,7 +936,15 @@
 
 
 
+
+
+
+
                      <label><input type="checkbox" name="option2a" checked="checked">Show comments</label>
+
+
+
+
 
 
 
@@ -477,19 +952,39 @@
 
 
 
-                  <div class="order-tracking" wire:ignore>
 
 
 
-                     <div class="row add-note-textarea comment-box mb-0">
+
+                  <div class="order-tracking">
+
+
+
+
+
+
+
+                     <div class="row add-note-textarea comment-box mb-0" wire:ignore>
+
+
 
                         <textarea wire:model='messagetext' onkeyup="if(this.value.length > 0) document.getElementById('start_button').disabled = false; else document.getElementById('start_button').disabled = true;" placeholder="Leave a comment..."></textarea>
 
+
+
                        <!--  @if($errors->has('messagetext'))
+
                             <span class="text-danger">{{ $errors->first('messagetext') }}</span>
+
                         @endif -->
 
+
+
                         <div class="comment-button">
+
+
+
+
 
 
 
@@ -497,7 +992,15 @@
 
 
 
+
+
+
+
                               <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+
+
+
+
 
 
 
@@ -505,7 +1008,15 @@
 
 
 
+
+
+
+
                               </svg>
+
+
+
+
 
 
 
@@ -513,11 +1024,23 @@
 
 
 
+
+
+
+
                            <button class="secondary">
 
 
 
+
+
+
+
                               <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+
+
+
+
 
 
 
@@ -525,7 +1048,15 @@
 
 
 
+
+
+
+
                               </svg>
+
+
+
+
 
 
 
@@ -533,11 +1064,23 @@
 
 
 
+
+
+
+
                            <button class="secondary">
 
 
 
+
+
+
+
                               <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+
+
+
+
 
 
 
@@ -545,7 +1088,15 @@
 
 
 
+
+
+
+
                               </svg>
+
+
+
+
 
 
 
@@ -553,11 +1104,23 @@
 
 
 
+
+
+
+
                            <button class="secondary">
+
+
 
                              <input type='file' wire:model="social_img" onkeyup="if(this.value.length > 0) document.getElementById('start_button').disabled = false; else document.getElementById('start_button').disabled = true;" id="social_img">
 
+
+
                               <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+
+
+
+
 
 
 
@@ -565,17 +1128,35 @@
 
 
 
+
+
+
+
                               </svg>
+
+
+
+
 
 
 
                            </button>
 
+
+
                            <button class="button green-btn postbuttone" id="start_button" disabled wire:click.prevent="customercommentpost">Post</button>
 
 
 
+
+
+
+
                         </div>
+
+
+
+
 
 
 
@@ -583,7 +1164,15 @@
 
 
 
+
+
+
+
                      </div>
+
+
+
+
 
 
 
@@ -591,36 +1180,65 @@
 
 
 
+
+
                         <div class="order-tracking-list">
 
 
-                           
 
                            @if($commentget)
+
                              @foreach($commentget as $key => $value)
+
                              
+
                               <?php $dateshow = date("dS M Y", strtotime($key)); ?>
 
+
+
                                <div class="order-msg-date">
+
                                   <?php echo $dateshow; ?>
+
                                </div>
+
                               @foreach($value as  $row)  
+
                                <div class="order-tracking-msg">
+
                                   @if($row['message'])
+
                                   <span>{{$row['message']}}</span>
+
                                   @endif
+
                                   
+
                                   @if($row['image'])
+
                                   <img src="{{ asset('storage/'.$row['image']) }}" width="50px" height="50px">
+
                                   @endif
+
                                   <span class="order-msg-time"><?php echo date("g:i a", strtotime($row['updated_at'])); ?></span>
 
+
+
                                </div>
+
                               @endforeach
+
                              @endforeach
+
                            @endif
 
+
+
                         </div>
+
+
+
+
 
 
 
@@ -628,11 +1246,23 @@
 
 
 
+
+
+
+
                   </div>
 
 
 
+
+
+
+
                </div>
+
+
+
+
 
 
 
@@ -640,7 +1270,15 @@
 
 
 
+
+
+
+
                   <div class="card">
+
+
+
+
 
 
 
@@ -648,7 +1286,15 @@
 
 
 
+
+
+
+
                         <div class="header-title">
+
+
+
+
 
 
 
@@ -656,133 +1302,201 @@
 
 
 
+
+
+
+
                            <button class="link" data-toggle="modal" data-target="#customer-overview-modal" >Edit</button>
 
 
 
+
+
+
+
                         </div>
 
 
 
-                        <p class="mb-0">
 
 
 
-                        <p>{{$customer['first_name'].' '.$customer['last_name']}}</p>
-
-
-
+                        <p class="mb-0">{{$customer['first_name'].' '.$customer['last_name']}}</p>
+                        <p class="mb-0"><i>No phone number</i></p>
+                        <p class="mb-0 d-flex justify-content-space-between align-item-center">
                         <button class="link">{{$customer['email']}}</button>
-
-
-                       @if($customer['mobile_number'])<p>{{$customer['mobile_number']}}</p> @endif
-
+                        @if($customer['mobile_number'])<p class="mb-0">{{$customer['mobile_number']}}</p> @endif
                         <button class="link">
-
-
-                           <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
-
-
-
+                           <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true" style="width: 20px; height: 20px;">
                               <path d="M15 2a1 1 0 0 1 1 1v13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 16.5V3a1 1 0 1 1 2 0v1a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V3a1 1 0 0 1 1-1zm-4 2H9a1 1 0 1 1 0-2h2a1 1 0 1 1 0 2z"></path>
-
-
-
                            </svg>
-
-
-
                         </button>
-
-
-
                         </p>
-
-
-
                      </div>
 
 
 
                      <div class="card-middle">
 
+
+
                         <div class="header-title">
 
-                           <h4 class="fs-12  fw-6 mb-0">BILLING DEFAULT ADDRESS </h4>
 
-                           <button class="link" data-toggle="modal" data-target="#manage-address-modal">Manage</button>
-
-                        </div>
-
-                        @if(!empty($customerData['address']))
-
-                           @foreach($customerData['address'] as $row)
-
-                           @if($row['address_type'] == 'billing_address' && $row['is_billing_address'] == 'yes')
-
-                           <p>
-                             <label>Address:</label>
-                             <span>@if(!empty($row['apartment'])) {{$row['apartment']}}, @endif @if(!empty($row['company'])) {{$row['company']}}, @endif {{$row['address']}}, {{$row['postal_code']}}, {{$row['city']}}, {{$row['country']}}. </span>
-                           </p>
-                           <p>
-                             <label>Phone:</label>
-
-                             <span>{{$row['mobile_no']}}</span>
-                           </p>
-                          
-
-                           @endif
-
-                           @endforeach
-
-                        @endif
-
-                        <button class="link" data-toggle="modal" data-target="#add-address-modal">Add different billing address</button>
-
-                     </div>
-
-
-                     <div class="card-middle">
-
-                        <div class="header-title">
 
                            <h4 class="fs-12  fw-6 mb-0">SHIPPING DEFAULT ADDRESS </h4>
 
+
+
                            <button class="link" data-toggle="modal" data-target="#manage-shipping-address-modal">Manage</button>
+
+
 
                         </div>
 
+
+
                         @if(!empty($customerData['address']))
+
+
 
                            @foreach($customerData['address'] as $row)
 
+
+
                            @if($row['address_type'] == 'shipping_address' && $row['is_billing_address'] == 'yes')
 
+
+
                            <p>
+
                              <label>Address:</label>
+
                              <span>@if(!empty($row['apartment'])) {{$row['apartment']}}, @endif @if(!empty($row['company'])) {{$row['company']}}, @endif {{$row['address']}}, {{$row['postal_code']}}, {{$row['city']}}, {{$row['country']}}. </span>
+
                            </p>
+
                            <p>
+
                              <label>Phone:</label>
 
+
+
                              <span>{{$row['mobile_no']}}</span>
+
                            </p>
+
+
 
                            @endif
 
+
+
                            @endforeach
+
+
 
                         @endif
 
-                        <button class="link" data-toggle="modal" data-target="#add-shipping-address-modal">Add different shipping address</button>
+
+
+                        <button class="link" data-toggle="modal" data-target="#add-shipping-address-modal">Add shipping address</button>
+                        <label class="mt-1 d-flex"><input type="checkbox" name="option2a" checked="checked">Shipping address is same as billing address</label>
+
 
                      </div>
+
+
+
+                     <div class="card-middle">
+
+
+
+                        <div class="header-title">
+
+
+
+                           <h4 class="fs-12  fw-6 mb-0">BILLING DEFAULT ADDRESS </h4>
+
+
+
+                           <button class="link" data-toggle="modal" data-target="#manage-address-modal">Manage</button>
+
+
+
+                        </div>
+
+
+
+                        @if(!empty($customerData['address']))
+
+
+
+                           @foreach($customerData['address'] as $row)
+
+
+
+                           @if($row['address_type'] == 'billing_address' && $row['is_billing_address'] == 'yes')
+
+
+
+                           <p>
+
+                             <label>Address:</label>
+
+                             <span>@if(!empty($row['apartment'])) {{$row['apartment']}}, @endif @if(!empty($row['company'])) {{$row['company']}}, @endif {{$row['address']}}, {{$row['postal_code']}}, {{$row['city']}}, {{$row['country']}}. </span>
+
+                           </p>
+
+                           <p>
+
+                             <label>Phone:</label>
+
+
+
+                             <span>{{$row['mobile_no']}}</span>
+
+                           </p>
+
+                          
+
+
+
+                           @endif
+
+
+
+                           @endforeach
+
+
+
+                        @endif
+
+
+
+                        <button class="link" data-toggle="modal" data-target="#add-address-modal">Add billing address</button>
+
+
+
+                     </div>
+
+
+
+
 
                      <div class="card-footer">
 
 
 
+
+
+
+
                         <div class="header-title">
+
+
+
+
 
 
 
@@ -790,7 +1504,15 @@
 
 
 
+
+
+
+
                            <button class="link" data-toggle="modal" data-target="#edit-tax-exemption" >Manage</button>
+
+
+
+
 
 
 
@@ -798,7 +1520,15 @@
 
 
 
+
+
+
+
                         @if(isset($customerData['detail']['collect_tax']))
+
+
+
+
 
 
 
@@ -806,7 +1536,15 @@
 
 
 
+
+
+
+
                         @else
+
+
+
+
 
 
 
@@ -814,7 +1552,15 @@
 
 
 
+
+
+
+
                         @endif
+
+
+
+
 
 
 
@@ -822,7 +1568,15 @@
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -830,7 +1584,15 @@
 
 
 
+
+
+
+
                      <div class="header-title">
+
+
+
+
 
 
 
@@ -838,11 +1600,23 @@
 
 
 
+
+
+
+
                         <button class="link" data-toggle="modal" data-target="#edit-email-marketing-status">Edit status</button>
 
 
 
+
+
+
+
                      </div>
+
+
+
+
 
 
 
@@ -850,7 +1624,15 @@
 
 
 
+
+
+
+
                      <span class="tag grey">subscribed</span>
+
+
+
+
 
 
 
@@ -858,7 +1640,15 @@
 
 
 
+
+
+
+
                      <span class="tag grey">Not subscribed</span>
+
+
+
+
 
 
 
@@ -866,7 +1656,15 @@
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -874,7 +1672,15 @@
 
 
 
+
+
+
+
                      <div class="header-title">
+
+
+
+
 
 
 
@@ -882,11 +1688,23 @@
 
 
 
+
+
+
+
                         <button class="link"  data-toggle="modal" data-target="#view-all-tags" id="update-all-tags">View all tags</button>
 
 
 
+
+
+
+
                      </div>
+
+
+
+
 
 
 
@@ -894,85 +1712,35 @@
 
 
 
+
+
+
+                     <div class="rag-row">
                      <input list="tagss" onkeyup="enableTagSaveBtn(this.value)" type="text" placeholder="VIP, sale, shopper, etc.">
-
-
-
-                  
-
                      <datalist id="tagss">
-
                         @if(!empty($tags))
-
-
-
                         @foreach($tags as $tag)
-
-
-
                              <option class="tag_added" value="{{$tag->label}}">
-
-
-
                          @endforeach
-
                          @endif
-
-
-
-                        </datalist>
-
-
-
-                     <button class="button green-btn" id="tag-creation-btn" data-dismiss="modal" value="" style="display:none;" wire:click.prevent="update('tag-change', $event.target.value)">Save</button><br><br>
-
-
-
+                     </datalist>
+                     <button class="button" id="tag-creation-btn" data-dismiss="modal" value=""  disabled="disabled" wire:click.prevent="update('tag-change', $event.target.value)">Save</button>
+                     </div>
+                     <br><br>
                      @if(!empty($customerData['detail']['tags']))
-
-
-
                      <?php $customerTags = explode(',', $customerData['detail']['tags']); ?>
-
-
-
                         <div class="customer-detail-select-tags">
-
-
-
-
-
-
-
                         @foreach($customerTags as $detail_tag)
-
-
-
-
-
-
-
                         <span class="tag grey fs-13">
-
-
-
                            {{$detail_tag}}
-
-
-
                            <button type="button"  wire:click="update('remove-tag', '{{$detail_tag}}')">
-
-
-
                               <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true"><path d="m11.414 10 4.293-4.293a.999.999 0 1 0-1.414-1.414L10 8.586 5.707 4.293a.999.999 0 1 0-1.414 1.414L8.586 10l-4.293 4.293a.999.999 0 1 0 1.414 1.414L10 11.414l4.293 4.293a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L11.414 10z"></path>
-
-
-
                               </svg>
-
-
-
                            </button> 
+
+
+
+
 
 
 
@@ -980,11 +1748,23 @@
 
 
 
+
+
+
+
                         @endforeach
 
 
 
+
+
+
+
                      </div>
+
+
+
+
 
 
 
@@ -992,7 +1772,15 @@
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -1000,7 +1788,15 @@
 
 
 
+
+
+
+
                      <div class="privacy-card-sec pd-20">
+
+
+
+
 
 
 
@@ -1008,7 +1804,15 @@
 
 
 
+
+
+
+
                         <h4 class="fs-12  fw-6 mb-0">TAX SETTINGS</h4>
+
+
+
+
 
 
 
@@ -1016,11 +1820,23 @@
 
 
 
+
+
+
+
                         <button class="fw-5 secondary">Request customer data</button>
 
 
 
+
+
+
+
                      </div>
+
+
+
+
 
 
 
@@ -1028,7 +1844,15 @@
 
 
 
+
+
+
+
                         <h4 class="fs-12  fw-6 mb-0">ERASE PERSONAL DATA</h4>
+
+
+
+
 
 
 
@@ -1036,7 +1860,15 @@
 
 
 
+
+
+
+
                         <button class="fw-5 secondary" data-toggle="modal" data-target="#erase-personal-data">Erase personal data</button>
+
+
+
+
 
 
 
@@ -1044,7 +1876,15 @@
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -1052,11 +1892,23 @@
 
 
 
+
+
+
+
             </article>
 
 
 
+
+
+
+
          </section>
+
+
+
+
 
 
 
@@ -1064,7 +1916,15 @@
 
 
 
+
+
+
+
               <div class="page-bottom-btn">
+
+
+
+
 
 
 
@@ -1072,17 +1932,37 @@
 
 
 
+
+
+
+
                       <a class="warning" data-toggle="modal" data-target="#delete-variant-product">Delete customer</a>
+
+
 
                   </p>
 
 
 
+
+
+
+
               </div>
+
+
 
               
 
+
+
          </section>
+
+
+
+
+
+
 
 
 
@@ -1092,7 +1972,15 @@
 
 
 
+
+
+
+
             <div class="customer-modal-inner">
+
+
+
+
 
 
 
@@ -1100,7 +1988,15 @@
 
 
 
+
+
+
+
                   <div class="modal-header">
+
+
+
+
 
 
 
@@ -1108,7 +2004,15 @@
 
 
 
+
+
+
+
                      <span data-dismiss="modal" class="modal-close-btn">
+
+
+
+
 
 
 
@@ -1116,7 +2020,15 @@
 
 
 
+
+
+
+
                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+
+
+
+
 
 
 
@@ -1124,11 +2036,23 @@
 
 
 
+
+
+
+
                      </span>
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -1136,7 +2060,15 @@
 
 
 
+
+
+
+
                      <div class="row">
+
+
+
+
 
 
 
@@ -1144,7 +2076,15 @@
 
 
 
+
+
+
+
                               <label>Are you sure to want to delete?</label>
+
+
+
+
 
 
 
@@ -1152,11 +2092,23 @@
 
 
 
+
+
+
+
                      </div>
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -1164,11 +2116,23 @@
 
 
 
+
+
+
+
                      <div class="button-col">
 
 
 
+
+
+
+
                         <button class="button secondary" data-dismiss="modal">Cancel</button>
+
+
+
+
 
 
 
@@ -1176,7 +2140,15 @@
 
 
 
+
+
+
+
                      </div>
+
+
+
+
 
 
 
@@ -1184,7 +2156,15 @@
 
 
 
+
+
+
+
                </div>
+
+
+
+
 
 
 
@@ -1192,7 +2172,15 @@
 
 
 
+
+
+
+
          </div>
+
+
+
+
 
 
 
@@ -1200,7 +2188,15 @@
 
 
 
+
+
+
+
             <div class="customer-modal-inner">
+
+
+
+
 
 
 
@@ -1208,7 +2204,15 @@
 
 
 
+
+
+
+
                   <div class="modal-header">
+
+
+
+
 
 
 
@@ -1216,7 +2220,15 @@
 
 
 
+
+
+
+
                      <span data-dismiss="modal" class="modal-close-btn">
+
+
+
+
 
 
 
@@ -1224,7 +2236,15 @@
 
 
 
+
+
+
+
                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+
+
+
+
 
 
 
@@ -1232,7 +2252,15 @@
 
 
 
+
+
+
+
                      </span>
+
+
+
+
 
 
 
@@ -1240,7 +2268,15 @@
 
 
 
+
+
+
+
                   <div class="modal-body">
+
+
+
+
 
 
 
@@ -1248,7 +2284,15 @@
 
 
 
+
+
+
+
                         @csrf
+
+
+
+
 
 
 
@@ -1256,11 +2300,23 @@
 
 
 
+
+
+
+
                         <div class="row">
 
 
 
+
+
+
+
                            <div class="form-field-list">
+
+
+
+
 
 
 
@@ -1268,7 +2324,15 @@
 
 
 
+
+
+
+
                               <input type="text" name="first_name" wire:model.lazy="customerData.first_name" wire:ignore.self>
+
+
+
+
 
 
 
@@ -1276,7 +2340,15 @@
 
 
 
+
+
+
+
                            <div class="form-field-list">
+
+
+
+
 
 
 
@@ -1284,7 +2356,15 @@
 
 
 
+
+
+
+
                               <input type="text" name="last_name" wire:model.lazy="customerData.last_name" wire:ignore.self>
+
+
+
+
 
 
 
@@ -1292,7 +2372,15 @@
 
 
 
+
+
+
+
                         </div>
+
+
+
+
 
 
 
@@ -1300,7 +2388,15 @@
 
 
 
+
+
+
+
                            <div class="form-field-list">
+
+
+
+
 
 
 
@@ -1308,7 +2404,15 @@
 
 
 
+
+
+
+
                               <input type="email" name="email" wire:model.lazy="customerData.email">
+
+
+
+
 
 
 
@@ -1316,7 +2420,15 @@
 
 
 
+
+
+
+
                         </div>
+
+
+
+
 
 
 
@@ -1324,6 +2436,10 @@
 
 
 
+
+
+
+
                         <div class="row">
 
 
@@ -1332,7 +2448,19 @@
 
 
 
+
+
+
+
+
+
+
+
                            <div class="form-field-list">
+
+
+
+
 
 
 
@@ -1340,50 +2468,24 @@
 
 
 
+
+
+
+
                               <div class="cd-phone-field">
-
-
-                                 <input class="rounded-md shadow-sm block mt-1 w-full"  id="customer_mobile_number" type="text" name="customer_mobile_number" autofocus="autofocus" autocomplete="customerData.mobile_number" name="mobile_number" wire:model.lazy="customerData.mobile_number">
-
-
-
-
-
-
-
                                  <select name="customer_phone_code" class="country-drop" id="customer_phone_code">
-
-
-
                                     @foreach($countries as $country)
-
-
-
                                     <option value="{{$country->phone_code}}">{{$country->name}}
-
-
-
                                        ({{$country->phone_code}})
-
-
-
                                     </option>
-
-
-
                                     @endforeach
-
-
-
                                  </select>
-
-
-
-
-
-
-
+                                 <input class="rounded-md shadow-sm block mt-1 w-full"  id="customer_mobile_number" type="text" name="customer_mobile_number" autofocus="autofocus" autocomplete="customerData.mobile_number" name="mobile_number" wire:model.lazy="customerData.mobile_number">
                               </div>
+
+
+
+
 
 
 
@@ -1391,7 +2493,15 @@
 
 
 
+
+
+
+
                         </div>
+
+
+
+
 
 
 
@@ -1399,11 +2509,23 @@
 
 
 
+
+
+
+
                   </div>
 
 
 
+
+
+
+
                   <div class="modal-footer">
+
+
+
+
 
 
 
@@ -1411,7 +2533,15 @@
 
 
 
+
+
+
+
                      <button class="button green-btn email-change-btn" data-dismiss="modal" value=""   wire:click.prevent="update('email-change', $event.target.value)">Save</button>
+
+
+
+
 
 
 
@@ -1419,7 +2549,15 @@
 
 
 
+
+
+
+
                </div>
+
+
+
+
 
 
 
@@ -1427,7 +2565,15 @@
 
 
 
+
+
+
+
          </div>
+
+
+
+
 
 
 
@@ -1435,7 +2581,15 @@
 
 
 
+
+
+
+
             <div class="customer-modal-inner">
+
+
+
+
 
 
 
@@ -1443,7 +2597,15 @@
 
 
 
+
+
+
+
                   <div class="modal-header">
+
+
+
+
 
 
 
@@ -1451,7 +2613,15 @@
 
 
 
+
+
+
+
                      <span data-dismiss="modal" class="modal-close-btn">
+
+
+
+
 
 
 
@@ -1459,7 +2629,15 @@
 
 
 
+
+
+
+
                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+
+
+
+
 
 
 
@@ -1467,7 +2645,15 @@
 
 
 
+
+
+
+
                      </span>
+
+
+
+
 
 
 
@@ -1475,7 +2661,15 @@
 
 
 
+
+
+
+
                   <div class="modal-body">
+
+
+
+
 
 
 
@@ -1483,10 +2677,21 @@
 
 
 
+
+
+
+
                      <div class="manage-address-list">
 
 
+
+
+
                         @if($address['address_type'] == 'billing_address')<h5>DEFAULT BILLING ADDRESS</h5>
+
+
+
+
 
 
 
@@ -1494,7 +2699,15 @@
 
 
 
+
+
+
+
                         <p>{{$address['apartment']}}</p>
+
+
+
+
 
 
 
@@ -1502,11 +2715,23 @@
 
 
 
+
+
+
+
                         <p>{{$address['country']}}</p>
 
 
 
+
+
+
+
                         <div class="manage-add-btn">
+
+
+
+
 
 
 
@@ -1514,15 +2739,31 @@
 
 
 
+
+
+
+
                            <!-- <button class="button secondary">Make default</button> -->
+
+
+
+
 
 
 
                         </div>
 
+
+
                         @endif
 
+
+
                      </div>
+
+
+
+
 
 
 
@@ -1530,7 +2771,15 @@
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -1538,13 +2787,27 @@
 
 
 
+
+
+
+
             </div>
+
+
+
+
 
 
 
          </div>
 
+
+
          <div wire:ignore.self id="manage-shipping-address-modal" class="customer-modal-main">
+
+
+
+
 
 
 
@@ -1552,11 +2815,23 @@
 
 
 
+
+
+
+
                <div class="customer-modal">
 
 
 
+
+
+
+
                   <div class="modal-header">
+
+
+
+
 
 
 
@@ -1564,7 +2839,15 @@
 
 
 
+
+
+
+
                      <span data-dismiss="modal" class="modal-close-btn">
+
+
+
+
 
 
 
@@ -1572,7 +2855,15 @@
 
 
 
+
+
+
+
                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+
+
+
+
 
 
 
@@ -1580,7 +2871,15 @@
 
 
 
+
+
+
+
                      </span>
+
+
+
+
 
 
 
@@ -1588,16 +2887,33 @@
 
 
 
+
+
+
+
                   <div class="modal-body">
+
+
+
+
 
 
 
                   @foreach($customerData['address'] as $address)
 
+
+
                      @if($address['address_type'] == 'shipping_address')
+
                      <div class="manage-address-list">
 
+
+
                         <h5>DEFAULT SHIPPING ADDRESS</h5>
+
+
+
+
 
 
 
@@ -1605,7 +2921,15 @@
 
 
 
+
+
+
+
                         <p>{{$address['apartment']}}</p>
+
+
+
+
 
 
 
@@ -1613,7 +2937,15 @@
 
 
 
+
+
+
+
                         <p>{{$address['country']}}</p>
+
+
+
+
 
 
 
@@ -1621,7 +2953,15 @@
 
 
 
+
+
+
+
                            <button class="link" data-toggle="modal" data-dismiss="modal" data-target="#edit-address-modal" wire:click="EditShippingAddress({{ $address['id'] }})">Edit address</button>
+
+
+
+
 
 
 
@@ -1629,13 +2969,27 @@
 
 
 
+
+
+
+
                         </div>
+
+
 
                      </div>
 
+
+
                      @endif
 
+
+
                      @endforeach
+
+
+
+
 
 
 
@@ -1643,7 +2997,15 @@
 
 
 
+
+
+
+
                </div>
+
+
+
+
 
 
 
@@ -1651,7 +3013,15 @@
 
 
 
+
+
+
+
          </div>
+
+
+
+
 
 
 
@@ -1659,7 +3029,15 @@
 
 
 
+
+
+
+
             <div class="customer-modal-inner">
+
+
+
+
 
 
 
@@ -1667,7 +3045,15 @@
 
 
 
+
+
+
+
                   <div class="modal-header">
+
+
+
+
 
 
 
@@ -1675,7 +3061,15 @@
 
 
 
+
+
+
+
                      <span data-dismiss="modal" class="modal-close-btn" wire:click="resetInputFields()">
+
+
+
+
 
 
 
@@ -1683,7 +3077,15 @@
 
 
 
+
+
+
+
                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+
+
+
+
 
 
 
@@ -1691,7 +3093,15 @@
 
 
 
+
+
+
+
                      </span>
+
+
+
+
 
 
 
@@ -1699,11 +3109,23 @@
 
 
 
+
+
+
+
                   <div class="modal-body">
 
 
 
+
+
+
+
                       
+
+
+
+
 
 
 
@@ -1711,11 +3133,23 @@
 
 
 
+
+
+
+
                         <div class="row">
 
 
 
+
+
+
+
                            <div class="form-field-list">
+
+
+
+
 
 
 
@@ -1723,11 +3157,23 @@
 
 
 
+
+
+
+
                            </div>
 
 
 
+
+
+
+
                         </div>
+
+
+
+
 
 
 
@@ -1735,7 +3181,15 @@
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -1743,7 +3197,15 @@
 
 
 
+
+
+
+
                      <button class="button secondary" wire:click="resetInputFields()" data-dismiss="modal">Cancel</button>
+
+
+
+
 
 
 
@@ -1751,7 +3213,15 @@
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -1759,11 +3229,23 @@
 
 
 
+
+
+
+
             </div>
 
 
 
+
+
+
+
          </div>
+
+
+
+
 
 
 
@@ -1771,7 +3253,15 @@
 
 
 
+
+
+
+
          <div wire:ignore id="delete-address"  class="customer-modal-main" style="z-index: 999999;">
+
+
+
+
 
 
 
@@ -1779,11 +3269,23 @@
 
 
 
+
+
+
+
                <div class="customer-modal">
 
 
 
+
+
+
+
                   <div class="modal-header">
+
+
+
+
 
 
 
@@ -1791,7 +3293,15 @@
 
 
 
+
+
+
+
                      <span data-dismiss="modal" class="modal-close-btn">
+
+
+
+
 
 
 
@@ -1799,7 +3309,15 @@
 
 
 
+
+
+
+
                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+
+
+
+
 
 
 
@@ -1807,7 +3325,15 @@
 
 
 
+
+
+
+
                      </span>
+
+
+
+
 
 
 
@@ -1815,7 +3341,15 @@
 
 
 
+
+
+
+
                   <div class="modal-body">
+
+
+
+
 
 
 
@@ -1823,7 +3357,15 @@
 
 
 
+
+
+
+
                         <div class="form-field-list">
+
+
+
+
 
 
 
@@ -1831,7 +3373,15 @@
 
 
 
+
+
+
+
                         </div>
+
+
+
+
 
 
 
@@ -1839,7 +3389,15 @@
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -1847,7 +3405,15 @@
 
 
 
+
+
+
+
                      <div class="button-col">
+
+
+
+
 
 
 
@@ -1855,7 +3421,15 @@
 
 
 
+
+
+
+
                         <button class="button" data-dismiss="modal" data-toggle="modal" onclick="document.getElementById('edit-address-modal').style.display = 'none'"  wire:click.prevent="delete()">Yes, Delete</button>
+
+
+
+
 
 
 
@@ -1863,7 +3437,15 @@
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -1871,867 +3453,310 @@
 
 
 
+
+
+
+
             </div>
 
 
 
+
+
+
+
          </div>
+
+
+
+
+
+
 
 
 
 
 
          <div wire:ignore.self id="edit-address-modal" class="customer-modal-main">
-
             <div class="customer-modal-inner">
-
                <div class="customer-modal">
-
                   <div class="modal-header">
-
                      <h2>Edit address</h2>
-
                      <span data-dismiss="modal" class="modal-close-btn">
-
                         <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
-
                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
-
                         </svg>
-
                      </span>
-
                   </div>
                   <div class="modal-body">
-
                      <form>
-
                         @csrf
-
                         <input type="hidden" wire:model="address_id">
-
                         <div class="row">
-
                            <div class="form-field-list">
-
-                               <label>First Name</label>
-
-                               <input type="text" wire:model="customerAddress.first_name">
-
+                              <label>First Name</label>
+                              <input type="text" wire:model="customerAddress.first_name">
                            </div>
-
                            <div class="form-field-list">
-
-                               <label>Last Name</label>
-
-                               <input type="text" wire:model="customerAddress.last_name">
-
+                              <label>Last Name</label>
+                              <input type="text" wire:model="customerAddress.last_name">
                            </div>
-
                         </div>
-
                         <div class="row">
-
                            <div class="form-field-list">
-
                               <label>Company</label>
-
                               <input type="text" wire:model.lazy="customerAddress.company">
-
                            </div>
-
                         </div>
-
                         <div class="row">
-
-                           <div class="form-field-list">
-
+                           <div class="form-field-list" style="min-width: 70%;">
                               <label>Street Name</label>
-
                               <input type="text" name="address" wire:model.lazy="customerAddress.address">
-
                            </div>
-
-                        </div>
-
-                        <div class="row">
-
                            <div class="form-field-list">
-
                               <label>Unit Number</label>
-
                               <input type="text" name="apartment" wire:model.lazy="customerAddress.apartment">
-
                            </div>
-
                         </div>
-
                         <div class="row">
-
                            <div class="form-field-list">
-
-                              <label>City</label>
-
-                              <input type="text" name="city" wire:model.lazy="customerAddress.city">
-
-                           </div>
-
-                        </div>
-
-                        <div class="row three-column-row">
-
-                           <div class="form-field-list">
-
-                              <label>Country/region</label>
-
-                              <select name="country" wire:model.lazy="customerAddress.country">
-
-                                 @foreach($countries as $country)
-
-                                 <option value="{{$country->name}}">
-
-                                    {{$country->name}}
-
-                                 </option>
-
-                                 @endforeach
-
-                              </select>
-
-                           </div>
-
-                           <div class="form-field-list">
-
                               <label>Zip</label>
-
                               <input type="text" name="postal_code" wire:model.lazy="customerAddress.postal_code">
-
                            </div>
-
-                        </div>
-
-                        <div class="row">
-
                            <div class="form-field-list">
-
-                               <label>Phone number</label>
-
-
-
-                               <div class="cd-phone-field">
-
-
-
-                                   <input class="rounded-md shadow-sm block mt-1 w-full displaycode" id="customer_mobile_number" type="" name="phone" wire:model="customerAddress.mobile_no">
-
-
-
-                               </div>
-
+                              <label>City</label>
+                              <input type="text" name="city" wire:model.lazy="customerAddress.city">
                            </div>
-
-
-
                         </div>
-
-                      
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" wire:ignore.self id="defaultAddress" wire:model="edit_billing_address" <?php if($customerAddress && $customerAddress['is_billing_address'] == 'yes') {echo "checked";} ?>>
-                            <label class="form-check-label" for="defaultAddress">Make this my primary billing address</label>
+                        <div class="row">
+                           <div class="form-field-list">
+                              <label>Country</label>
+                              <select name="country" wire:model.lazy="customerAddress.country">
+                                 @foreach($countries as $country)
+                                 <option value="{{$country->name}}">
+                                    {{$country->name}}
+                                 </option>
+                                 @endforeach
+                              </select>
+                           </div>
+                           <div class="form-field-list">
+                              <label>Phone</label>
+                              <div class="cd-phone-field input-icon-remove">
+                                 <input class="displaycode" id="customer_mobile_number" type="number" name="phone" wire:model="customerAddress.mobile_no">
+                               </div>
+                           </div>
                         </div>
-
-
+                        <div class="row">
+                           <div class="form-field-list">
+                              <div class="form-check pl-3 pr-3">
+                                 <div class="row row-mb-0">
+                                    <input type="checkbox" class="form-check-input" wire:ignore.self id="defaultAddress" wire:model="edit_billing_address" <?php if($customerAddress && $customerAddress['is_billing_address'] == 'yes') {echo "checked";} ?>>
+                                    <label class="form-check-label" for="defaultAddress">Make this my primary billing address</label>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
                      </form>
-
-
-
                   </div>
-
-
-
                   <div class="modal-footer">
-
-
-
                      @if(!empty($customerAddress)&& !empty($customerAddress['address_type']) )
-
-
-
                      <div class="button-col">
-
-
-
                         <button class="button warning link" data-toggle="modal" data-target="#delete-address" >Delete address</button>
-
-
-
                      </div>
-
-
-
                      @endif
-
-
-
                      <div class="button-col">
-
-
-
                         <button class="button secondary" data-dismiss="modal" wire:click="resetInputFields()">Cancel</button>
-
-
-
-                        <button class="button" data-dismiss="modal" data-toggle="modal" wire:click.prevent="update('Address-change-billing')">Save</button>
-
+                        <button class="button green-btn" data-dismiss="modal" data-toggle="modal" wire:click.prevent="update('Address-change-billing')">Save</button>
                      </div>
-
                   </div>
-
                </div>
-
             </div>
-
          </div>
+
 
          <div wire:ignore id="add-address-modal" class="customer-modal-main">
-
             <div class="customer-modal-inner">
-
                <div class="customer-modal">
-
                   <div class="modal-header">
-
                      <h2>Add new address</h2>
-
                      <span data-dismiss="modal" class="modal-close-btn">
-
                         <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
-
                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
-
                         </svg>
-
                      </span>
-
                   </div>
-
                   <div class="modal-body">
-
                      <form>
-
                         @csrf
-
                         <input type="hidden" wire:model="customer.id">
-
                         <div class="row">
-
                            <div class="form-field-list">
-
-
-
-                           
-
-
-
-                               <label>First Name</label>
-
-
-
-                           
-
-
-
-                               <input type="text" wire:model="customerBillingAddress.first_name">
-
-
-
-                           
-
-
-
+                              <label>First Name</label>
+                              <input type="text" wire:model="customerBillingAddress.first_name">
                            </div>
-
-
-
-                           
-
-
-
                            <div class="form-field-list">
-
-
-
-                           
-
-
-
-                               <label>Last Name</label>
-
-
-
-                           
-
-
-
-                               <input type="text" wire:model="customerBillingAddress.last_name">
-
-
-
-                           
-
-
-
+                              <label>Last Name</label>
+                              <input type="text" wire:model="customerBillingAddress.last_name">
                            </div>
-
-
-
                         </div>
-
-
-
                         <div class="row">
-
-
-
                            <div class="form-field-list">
-
-
-
                               <label>Company</label>
-
-
-
                               <input type="text" wire:model.lazy="customerBillingAddress.company">
-
-
-
                            </div>
-
-
-
                         </div>
-
-
-
                         <div class="row">
-
-
-
-                           <div class="form-field-list">
-
-
-
+                           <div class="form-field-list" style="min-width: 70%;">
                               <label>Street Name</label>
-
-
-
                               <input type="text" wire:model.lazy="customerBillingAddress.address">
-
-
-
                            </div>
-
-
-
-                        </div>
-
-
-
-                        <div class="row">
-
-
-
                            <div class="form-field-list">
-
-
-
                               <label>Unit Number</label>
-
-
-
                               <input type="text" wire:model.lazy="customerBillingAddress.apartment">
-
-
-
                            </div>
-
-
-
                         </div>
-
-
-
                         <div class="row">
-
-
-
                            <div class="form-field-list">
-
-
-
-                              <label>City</label>
-
-
-
-                              <input type="text" wire:model.lazy="customerBillingAddress.city">
-
-
-
-                           </div>
-
-
-
-                        </div>
-
-
-
-                        <div class="row three-column-row">
-
-
-
-                           <div class="form-field-list">
-
-
-
-                              <label>Country/region</label>
-
-
-
-                              <select wire:model.lazy="customerBillingAddress.country">
-
-
-
-                                 @foreach($countries as $country)
-
-
-
-                                 <option value="{{$country->name}}">{{$country->name}}</option>
-
-
-
-                                 @endforeach
-
-
-
-                              </select>
-
-
-
-                           </div>
-
-
-
-                           <div class="form-field-list">
-
-
-
                               <label>Zip</label>
-
-
-
                               <input type="text" wire:model.lazy="customerBillingAddress.postal_code">
-
-
-
                            </div>
-
-
-
-                        </div>
-
-
-
-                         <div class="row">
-
-
-
                            <div class="form-field-list">
-
-
-
-                               <label>Phone number</label>
-
-
-
-                               <div class="cd-phone-field">
-
-
-
-
-
-                                   <input class="rounded-md shadow-sm block mt-1 w-full displaycode" id="customer_mobile_number" type="" name="phone" wire:model="customerBillingAddress.mobile_no">
-
-
-
-                               </div>
-
+                              <label>City</label>
+                              <input type="text" wire:model.lazy="customerBillingAddress.city">
                            </div>
-
-
-
-                        </div> 
-
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" wire:ignore.self wire:model="address_type" id="defaultAddress">
-                            <label class="form-check-label" for="defaultAddress">Make this my primary shipping address</label>
                         </div>
-
-
-
+                        <div class="row">
+                           <div class="form-field-list">
+                              <label>Country</label>
+                              <select wire:model.lazy="customerBillingAddress.country">
+                                 @foreach($countries as $country)
+                                 <option value="{{$country->name}}">{{$country->name}}</option>
+                                 @endforeach
+                              </select>
+                           </div>
+                           <div class="form-field-list">
+                              <label>Phone</label>
+                              <div class="cd-phone-field input-icon-remove">
+                                   <input type="number" class="displaycode" id="customer_mobile_number" name="phone" wire:model="customerBillingAddress.mobile_no">
+                               </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="form-field-list">
+                              <div class="form-check pl-3 pr-3">
+                                 <div class="row row-mb-0">
+                                 <input type="checkbox" class="form-check-input" wire:ignore.self wire:model="address_type" id="defaultAddress">
+                                 <label class="form-check-label" for="defaultAddress">Make this my primary shipping address</label>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
                      </form>
-
-
-
                   </div>
-
-
-
                   <div class="modal-footer">
-
-
-
                      <button class="modal-close-btn" data-dismiss="modal">Cancel</button>
-
-
-
                      <button class="button"  data-dismiss="modal" wire:click.prevent="store()">Save</button>
-
-
-
                   </div>
-
-
-
                </div>
-
-
-
             </div>
-
-
-
          </div>
+
+
+
+
 
 
 
          <div wire:ignore id="add-shipping-address-modal" class="customer-modal-main">
-
             <div class="customer-modal-inner">
-
                <div class="customer-modal">
-
                   <div class="modal-header">
-
                      <h2>Add new address</h2>
-
                      <span data-dismiss="modal" class="modal-close-btn">
-
                         <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
-
                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
-
                         </svg>
-
                      </span>
-
                   </div>
-
                   <div class="modal-body">
-
                      <form>
-
                         @csrf
-
                         <input type="hidden" wire:model="customer.id">
-
                         <div class="row">
-
                            <div class="form-field-list">
-
-
-
-                           
-
-
-
                                <label>First Name</label>
-
-
-
-                           
-
-
-
                                <input type="text" wire:model="customerBillingAddress.first_name">
-
-
-
-                           
-
-
-
                            </div>
-
-
-
-                           
-
-
-
                            <div class="form-field-list">
-
-
-
-                           
-
-
-
                                <label>Last Name</label>
-
-
-
-                           
-
-
-
                                <input type="text" wire:model="customerBillingAddress.last_name">
-
-
-
-                           
-
-
-
                            </div>
-
-
-
                         </div>
-
-
-
                         <div class="row">
-
-
-
                            <div class="form-field-list">
-
-
-
                               <label>Company</label>
-
-
-
                               <input type="text" wire:model.lazy="customerBillingAddress.company">
-
-
-
                            </div>
-
-
-
                         </div>
-
-
-
                         <div class="row">
-
-
-
-                           <div class="form-field-list">
-
-
-
+                           <div class="form-field-list" style="min-width: 70%;">
                               <label>Street Name</label>
-
-
-
                               <input type="text" wire:model.lazy="customerBillingAddress.address">
-
-
-
                            </div>
-
-
-
-                        </div>
-
-
-
-                        <div class="row">
-
-
-
                            <div class="form-field-list">
-
-
-
                               <label>Unit Number</label>
-
-
-
                               <input type="text" wire:model.lazy="customerBillingAddress.apartment">
-
-
-
                            </div>
-
-
-
                         </div>
-
-
-
                         <div class="row">
-
-
-
                            <div class="form-field-list">
-
-
-
-                              <label>City</label>
-
-
-
-                              <input type="text" wire:model.lazy="customerBillingAddress.city">
-
-
-
-                           </div>
-
-
-
-                        </div>
-
-
-
-                        <div class="row three-column-row">
-
-
-
-                           <div class="form-field-list">
-
-
-
-                              <label>Country/region</label>
-
-
-
-                              <select wire:model.lazy="customerBillingAddress.country">
-
-
-
-                                 @foreach($countries as $country)
-
-
-
-                                 <option value="{{$country->name}}">{{$country->name}}</option>
-
-
-
-                                 @endforeach
-
-
-
-                              </select>
-
-
-
-                           </div>
-
-
-
-                           <div class="form-field-list">
-
-
-
                               <label>Zip</label>
-
-
-
                               <input type="text" wire:model.lazy="customerBillingAddress.postal_code">
-
-
-
                            </div>
-
-
-
-                        </div>
-
-
-
-                         <div class="row">
-
-
-
                            <div class="form-field-list">
-
-
-
-                               <label>Phone number</label>
-
-
-
-                               <div class="cd-phone-field">
-
-
-
-
-
-                                   <input class="rounded-md shadow-sm block mt-1 w-full displaycode" id="customer_mobile_number" type="" name="phone" wire:model="customerBillingAddress.mobile_no">
-
-
-
-                               </div>
-
+                              <label>City</label>
+                              <input type="text" wire:model.lazy="customerBillingAddress.city">
                            </div>
-
-
-
-                        </div> 
-
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" wire:ignore.self wire:model="shipping_address_type" id="defaultAddress">
-                            <label class="form-check-label" for="defaultAddress">Make this my primary shipping address</label>
                         </div>
-
-
-
+                        <div class="row">
+                           <div class="form-field-list">
+                              <label>Country</label>
+                              <select wire:model.lazy="customerBillingAddress.country">
+                                 @foreach($countries as $country)
+                                 <option value="{{$country->name}}">{{$country->name}}</option>
+                                 @endforeach
+                              </select>
+                           </div>
+                           <div class="form-field-list">
+                              <label>Phone</label>
+                              <div class="cd-phone-field input-icon-remove">
+                                   <input type="number" class="displaycode" id="customer_mobile_number" type="" name="phone" wire:model="customerBillingAddress.mobile_no">
+                               </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="form-field-list">
+                              <div class="form-check pl-3 pr-3">
+                                 <div class="row row-mb-0">
+                                     <input type="checkbox" class="form-check-input" wire:ignore.self wire:model="shipping_address_type" id="defaultAddress">
+                                     <label class="form-check-label" for="defaultAddress">Make this my primary shipping address</label>
+                                 </div>
+                              </div>
+                           </div>
+                        </div> 
                      </form>
-
-
-
                   </div>
-
-
-
                   <div class="modal-footer">
-
-
-
                      <button class="modal-close-btn" data-dismiss="modal">Cancel</button>
-
-
-
                      <button class="button"  data-dismiss="modal" wire:click.prevent="storeshippping()">Save</button>
-
-
-
                   </div>
-
-
-
                </div>
-
-
-
             </div>
-
-
-
          </div>
+
+
+
+
 
 
 
@@ -2739,7 +3764,15 @@
 
 
 
+
+
+
+
             <div class="customer-modal-inner">
+
+
+
+
 
 
 
@@ -2747,7 +3780,15 @@
 
 
 
+
+
+
+
                   <div class="modal-header">
+
+
+
+
 
 
 
@@ -2755,7 +3796,15 @@
 
 
 
+
+
+
+
                      <span data-dismiss="modal" class="modal-close-btn">
+
+
+
+
 
 
 
@@ -2763,7 +3812,15 @@
 
 
 
+
+
+
+
                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+
+
+
+
 
 
 
@@ -2771,7 +3828,15 @@
 
 
 
+
+
+
+
                      </span>
+
+
+
+
 
 
 
@@ -2779,7 +3844,15 @@
 
 
 
+
+
+
+
                   <div class="modal-body">
+
+
+
+
 
 
 
@@ -2787,7 +3860,15 @@
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -2795,7 +3876,15 @@
 
 
 
+
+
+
+
                      <button class="button secondary" wire:click="resetInputFields()">Cancel</button>
+
+
+
+
 
 
 
@@ -2803,7 +3892,15 @@
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -2811,7 +3908,15 @@
 
 
 
+
+
+
+
             </div>
+
+
+
+
 
 
 
@@ -2819,7 +3924,15 @@
 
 
 
+
+
+
+
          <!--Edit email marketing status-->
+
+
+
+
 
 
 
@@ -2827,7 +3940,15 @@
 
 
 
+
+
+
+
             <div class="customer-modal-inner">
+
+
+
+
 
 
 
@@ -2835,7 +3956,15 @@
 
 
 
+
+
+
+
                   <div class="modal-header">
+
+
+
+
 
 
 
@@ -2843,7 +3972,15 @@
 
 
 
+
+
+
+
                      <span data-dismiss="modal" class="modal-close-btn">
+
+
+
+
 
 
 
@@ -2851,7 +3988,15 @@
 
 
 
+
+
+
+
                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+
+
+
+
 
 
 
@@ -2859,7 +4004,15 @@
 
 
 
+
+
+
+
                      </span>
+
+
+
+
 
 
 
@@ -2867,7 +4020,15 @@
 
 
 
+
+
+
+
                   <div class="modal-body">
+
+
+
+
 
 
 
@@ -2875,7 +4036,15 @@
 
 
 
+
+
+
+
                         <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+
+
+
+
 
 
 
@@ -2883,7 +4052,15 @@
 
 
 
+
+
+
+
                         </svg>
+
+
+
+
 
 
 
@@ -2891,7 +4068,15 @@
 
 
 
+
+
+
+
                      </div>
+
+
+
+
 
 
 
@@ -2899,11 +4084,23 @@
 
 
 
+
+
+
+
                   </div>
 
 
 
+
+
+
+
                   <div class="modal-footer">
+
+
+
+
 
 
 
@@ -2911,7 +4108,15 @@
 
 
 
+
+
+
+
                      <button class="button" data-dismiss="modal" wire:click.prevent="$emit('update', 'email_marketing_status')">Save</button>
+
+
+
+
 
 
 
@@ -2919,7 +4124,15 @@
 
 
 
+
+
+
+
                </div>
+
+
+
+
 
 
 
@@ -2927,7 +4140,15 @@
 
 
 
+
+
+
+
          </div>
+
+
+
+
 
 
 
@@ -2935,7 +4156,15 @@
 
 
 
+
+
+
+
          <!--View all tags modal-->
+
+
+
+
 
 
 
@@ -2943,7 +4172,15 @@
 
 
 
+
+
+
+
             <div class="customer-modal-inner">
+
+
+
+
 
 
 
@@ -2951,11 +4188,23 @@
 
 
 
+
+
+
+
                <div class="customer-modal">
 
 
 
+
+
+
+
                   <div class="modal-header">
+
+
+
+
 
 
 
@@ -2963,7 +4212,15 @@
 
 
 
+
+
+
+
                      <span data-dismiss="modal" class="modal-close-btn">
+
+
+
+
 
 
 
@@ -2971,7 +4228,15 @@
 
 
 
+
+
+
+
                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+
+
+
+
 
 
 
@@ -2979,7 +4244,15 @@
 
 
 
+
+
+
+
                      </span>
+
+
+
+
 
 
 
@@ -2987,7 +4260,15 @@
 
 
 
+
+
+
+
                   <div class="modal-body">
+
+
+
+
 
 
 
@@ -2995,7 +4276,15 @@
 
 
 
+
+
+
+
                         <h4>APPLIED TAGS</h4>
+
+
+
+
 
 
 
@@ -3003,7 +4292,15 @@
 
 
 
+
+
+
+
                               <span class="selected_tags"></span>
+
+
+
+
 
 
 
@@ -3011,7 +4308,15 @@
 
 
 
+
+
+
+
                               <input  id="tags" wire:model="customerData.detail.tags" class="block mt-1 w-full" type="hidden" style="width: fit-content;" autofocus />
+
+
+
+
 
 
 
@@ -3019,7 +4324,15 @@
 
 
 
+
+
+
+
                            <!--  <input id="customer_tags" class="block mt-1 w-full" type="text" style="width: fit-content;"  value="" wire:model.lazy="customerData.detail.tags" wire:ignore.self name="customer_detail_tags" autofocus  />
+
+
+
+
 
 
 
@@ -3027,7 +4340,15 @@
 
 
 
+
+
+
+
                      </div>
+
+
+
+
 
 
 
@@ -3035,7 +4356,15 @@
 
 
 
+
+
+
+
                         <div class="all-tags-title">
+
+
+
+
 
 
 
@@ -3043,7 +4372,15 @@
 
 
 
+
+
+
+
                            <!-- <div class="short-tags">
+
+
+
+
 
 
 
@@ -3051,7 +4388,15 @@
 
 
 
+
+
+
+
                               <span class="button-group">
+
+
+
+
 
 
 
@@ -3059,7 +4404,15 @@
 
 
 
+
+
+
+
                               <button class="secondary short-tags-btn">Most recent</button>
+
+
+
+
 
 
 
@@ -3067,11 +4420,23 @@
 
 
 
+
+
+
+
                            </div> -->
 
 
 
+
+
+
+
                         </div>
+
+
+
+
 
 
 
@@ -3079,7 +4444,15 @@
 
 
 
+
+
+
+
                            @if(!empty($tags))
+
+
+
+
 
 
 
@@ -3087,7 +4460,15 @@
 
 
 
+
+
+
+
                                  <button class="secondary tag_added" value="{{$tag->label}}">{{$tag->label}}</button>
+
+
+
+
 
 
 
@@ -3095,7 +4476,15 @@
 
 
 
+
+
+
+
                            @endif
+
+
+
+
 
 
 
@@ -3103,7 +4492,15 @@
 
 
 
+
+
+
+
                      </div>
+
+
+
+
 
 
 
@@ -3111,11 +4508,23 @@
 
 
 
+
+
+
+
                   <div class="modal-footer">
 
 
 
+
+
+
+
                      <button class="button secondary">Cancel</button>
+
+
+
+
 
 
 
@@ -3123,7 +4532,15 @@
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -3131,11 +4548,23 @@
 
 
 
+
+
+
+
             </div>
 
 
 
+
+
+
+
          </div>
+
+
+
+
 
 
 
@@ -3143,7 +4572,15 @@
 
 
 
+
+
+
+
          <!--Erase personal data modal-->
+
+
+
+
 
 
 
@@ -3151,7 +4588,15 @@
 
 
 
+
+
+
+
             <div class="customer-modal-inner">
+
+
+
+
 
 
 
@@ -3159,7 +4604,15 @@
 
 
 
+
+
+
+
                   <div class="modal-header">
+
+
+
+
 
 
 
@@ -3167,7 +4620,15 @@
 
 
 
+
+
+
+
                      <span data-dismiss="modal" class="modal-close-btn">
+
+
+
+
 
 
 
@@ -3175,7 +4636,15 @@
 
 
 
+
+
+
+
                            <path d="m11.414 10 6.293-6.293a1 1 0 1 0-1.414-1.414L10 8.586 3.707 2.293a1 1 0 0 0-1.414 1.414L8.586 10l-6.293 6.293a1 1 0 1 0 1.414 1.414L10 11.414l6.293 6.293A.998.998 0 0 0 18 17a.999.999 0 0 0-.293-.707L11.414 10z"></path>
+
+
+
+
 
 
 
@@ -3183,11 +4652,23 @@
 
 
 
+
+
+
+
                      </span>
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -3195,7 +4676,15 @@
 
 
 
+
+
+
+
                      <p>You can send a request to Shopify to erase any information that can be used to identify this customer, including:</p>
+
+
+
+
 
 
 
@@ -3203,7 +4692,15 @@
 
 
 
+
+
+
+
                         <li>Name</li>
+
+
+
+
 
 
 
@@ -3211,7 +4708,15 @@
 
 
 
+
+
+
+
                         <li>Email</li>
+
+
+
+
 
 
 
@@ -3219,7 +4724,15 @@
 
 
 
+
+
+
+
                         <li>Credit card number</li>
+
+
+
+
 
 
 
@@ -3227,7 +4740,15 @@
 
 
 
+
+
+
+
                      <p>The customer’s orders will still be visible for business reporting purposes. You’ll receive a confirmation email when the data is erased on <b>30 Oct 2021.</b> You can cancel the process until that date.</p>
+
+
+
+
 
 
 
@@ -3235,7 +4756,15 @@
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -3243,7 +4772,15 @@
 
 
 
+
+
+
+
                      <button class="button secondary">Cancel</button>
+
+
+
+
 
 
 
@@ -3251,7 +4788,15 @@
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -3259,7 +4804,15 @@
 
 
 
+
+
+
+
             </div>
+
+
+
+
 
 
 
@@ -3267,9 +4820,19 @@
 
 
 
-         
+
+
+
 
          
+
+
+
+         
+
+
+
+
 
 
 
@@ -3277,7 +4840,15 @@
 
 
 
+
+
+
+
          <script type="text/javascript">
+
+
+
+
 
 
 
@@ -3285,7 +4856,15 @@
 
 
 
+
+
+
+
             //     $('#edit-email-marketing-status').modal('hide');
+
+
+
+
 
 
 
@@ -3293,23 +4872,47 @@
 
 
 
+
+
+
+
          </script>
 
+
+
          <script type="text/javascript">
+
           $(document).ready(
+
             function(){
+
                 $('input:file').change(
+
                     function(){
+
                         if ($(this).val()) {
+
                             $('.postbuttone').attr('disabled',false); 
+
                         } 
+
                     }
+
                     );
+
             });
+
          </script>
 
 
+
+
+
          <script type="text/javascript">
+
+
+
+
 
 
 
@@ -3317,11 +4920,23 @@
 
 
 
+
+
+
+
             $(document).ready(function () {
 
 
 
+
+
+
+
                var mobile = $('#customer_mobile_number').val();
+
+
+
+
 
 
 
@@ -3333,7 +4948,19 @@
 
 
 
+
+
+
+
+
+
+
+
                 if(mobile.indexOf(' ') > -1) {
+
+
+
+
 
 
 
@@ -3341,7 +4968,15 @@
 
 
 
+
+
+
+
                     mobile = split_arr[1];
+
+
+
+
 
 
 
@@ -3349,7 +4984,23 @@
 
 
 
+
+
+
+
                $('#customer_phone_code').val(split_arr[0]);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3369,7 +5020,19 @@
 
 
 
+
+
+
+
+
+
+
+
                 var mobile = $('#customer_mobile_number').val();
+
+
+
+
 
 
 
@@ -3381,7 +5044,19 @@
 
 
 
+
+
+
+
+
+
+
+
                 if(mobile.indexOf(' ') > -1) {
+
+
+
+
 
 
 
@@ -3389,7 +5064,15 @@
 
 
 
+
+
+
+
                     mobile = split_arr[1];
+
+
+
+
 
 
 
@@ -3397,7 +5080,15 @@
 
 
 
+
+
+
+
                 $('#customer_mobile_number').val($(this).val()+' '+mobile);
+
+
+
+
 
 
 
@@ -3405,11 +5096,23 @@
 
 
 
+
+
+
+
             });
 
 
 
+
+
+
+
             
+
+
+
+
 
 
 
@@ -3417,7 +5120,15 @@
 
 
 
+
+
+
+
             
+
+
+
+
 
 
 
@@ -3425,7 +5136,15 @@
 
 
 
+
+
+
+
             
+
+
+
+
 
 
 
@@ -3433,7 +5152,15 @@
 
 
 
+
+
+
+
             
+
+
+
+
 
 
 
@@ -3441,11 +5168,29 @@
 
 
 
+
+
+
+
             
 
 
 
+
+
+
+
             });
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3459,7 +5204,15 @@
 
 
 
+
+
+
+
                document.getElementsByClassName('selected_tags')[0].innerHTML = '';
+
+
+
+
 
 
 
@@ -3467,7 +5220,15 @@
 
 
 
+
+
+
+
                var exist = '';
+
+
+
+
 
 
 
@@ -3479,7 +5240,19 @@
 
 
 
+
+
+
+
+
+
+
+
                for (var i = 0; i < exist_tags.length; i++) {
+
+
+
+
 
 
 
@@ -3487,7 +5260,15 @@
 
 
 
+
+
+
+
                      if(i == 0) {
+
+
+
+
 
 
 
@@ -3499,7 +5280,19 @@
 
 
 
+
+
+
+
+
+
+
+
                      } else {
+
+
+
+
 
 
 
@@ -3511,7 +5304,19 @@
 
 
 
+
+
+
+
+
+
+
+
                      }
+
+
+
+
 
 
 
@@ -3519,11 +5324,23 @@
 
 
 
+
+
+
+
                    }
 
 
 
+
+
+
+
                }
+
+
+
+
 
 
 
@@ -3535,7 +5352,19 @@
 
 
 
+
+
+
+
+
+
+
+
             });
+
+
+
+
 
 
 
@@ -3543,7 +5372,15 @@
 
 
 
+
+
+
+
                 console.log('tag-added');
+
+
+
+
 
 
 
@@ -3555,11 +5392,27 @@
 
 
 
+
+
+
+
+
+
+
+
                 $('#customer_tags').first().val(exist+','+this.innerText);
 
 
 
+
+
+
+
             
+
+
+
+
 
 
 
@@ -3567,7 +5420,15 @@
 
 
 
+
+
+
+
                 $(this).hide();          
+
+
+
+
 
 
 
@@ -3575,11 +5436,23 @@
 
 
 
+
+
+
+
             });
 
 
 
+
+
+
+
             
+
+
+
+
 
 
 
@@ -3587,11 +5460,23 @@
 
 
 
+
+
+
+
             
 
 
 
+
+
+
+
             
+
+
+
+
 
 
 
@@ -3599,11 +5484,27 @@
 
 
 
+
+
+
+
                
 
 
 
+
+
+
+
                var tag_arr = $('#customer_tags').val().split(',');
+
+
+
+
+
+
+
+
 
 
 
@@ -3619,7 +5520,19 @@
 
 
 
+
+
+
+
+
+
+
+
                var filtered = tag_arr.filter(function ( el) {
+
+
+
+
 
 
 
@@ -3627,7 +5540,15 @@
 
 
 
+
+
+
+
                      return el;
+
+
+
+
 
 
 
@@ -3635,7 +5556,15 @@
 
 
 
+
+
+
+
                });
+
+
+
+
 
 
 
@@ -3643,7 +5572,15 @@
 
 
 
+
+
+
+
                elem.closest('.tag').remove();
+
+
+
+
 
 
 
@@ -3655,7 +5592,19 @@
 
 
 
+
+
+
+
+
+
+
+
                $('.select-tag-list').append('<button class="secondary tag_added" value="'+ removedtag +'">'+removedtag+'</button>&nbsp;');
+
+
+
+
 
 
 
@@ -3663,7 +5612,19 @@
 
 
 
+
+
+
+
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -3675,7 +5636,15 @@
 
 
 
+
+
+
+
                $('.'+class_name).addClass('green-btn').prop('disabled', false);
+
+
+
+
 
 
 
@@ -3683,7 +5652,15 @@
 
 
 
+
+
+
+
             function enableTagSaveBtn(val) {
+
+
+
+
 
 
 
@@ -3691,11 +5668,23 @@
 
 
 
+
+
+
+
                if(val != '') {
 
 
 
+
+
+
+
                   elem.show();
+
+
+
+
 
 
 
@@ -3707,7 +5696,19 @@
 
 
 
+
+
+
+
+
+
+
+
                } else {
+
+
+
+
 
 
 
@@ -3715,38 +5716,77 @@
 
 
 
+
+
+
+
                }
+
+
+
+
 
 
 
             }
 
 
+
+
+
          </script>
 
-         <script type="text/javascript">
-    document.getElementById('readUrl').addEventListener('change', function(){
-      if (this.files[0] ) {
-        var picture = new FileReader();
-        picture.readAsDataURL(this.files[0]);
-        picture.addEventListener('load', function(event) {
-          document.getElementById('uploadedImage').setAttribute('src', event.target.result);
-          document.getElementById('uploadedImage').style.display = 'block';
-        });
-      }
-    });
-</script>
+
 
          <script type="text/javascript">
+
+    document.getElementById('readUrl').addEventListener('change', function(){
+
+      if (this.files[0] ) {
+
+        var picture = new FileReader();
+
+        picture.readAsDataURL(this.files[0]);
+
+        picture.addEventListener('load', function(event) {
+
+          document.getElementById('uploadedImage').setAttribute('src', event.target.result);
+
+          document.getElementById('uploadedImage').style.display = 'block';
+
+        });
+
+      }
+
+    });
+
+</script>
+
+
+
+         <script type="text/javascript">
+
           $('#myEmoji').emojioneArea({
+
             pickerPosition:'right'
+
           });
+
         </script>
+
+
+
 
 
       </div>
 
+
+
    </x-admin-layout>
+
+
+
+
 
 
 
